@@ -48,7 +48,7 @@ const Navbar = () => {
             <Link to="/insurance" className="font-medium text-gray-700 hover:text-fintech-purple transition-colors">
               Insurance
             </Link>
-            <Link to="#loans" className="font-medium text-gray-700 hover:text-fintech-purple transition-colors">
+            <Link to="/loans" className="font-medium text-gray-700 hover:text-fintech-purple transition-colors">
               Loans
             </Link>
             <Link to="#about" className="font-medium text-gray-700 hover:text-fintech-purple transition-colors">
@@ -87,7 +87,7 @@ const Navbar = () => {
                 Insurance
               </Link>
               <Link
-                to="#loans"
+                to="/loans"
                 className="font-medium text-gray-700 hover:text-fintech-purple transition-colors"
                 onClick={() => setIsOpen(false)}
               >
