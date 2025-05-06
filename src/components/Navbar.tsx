@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { cn } from '@/lib/utils';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -33,26 +34,26 @@ const Navbar = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center">
-            <a href="/" className="text-2xl font-bold">
+            <Link to="/" className="text-2xl font-bold">
               <span className="gradient-text">Money</span>
               <span className="text-fintech-blue">Bharat</span>
-            </a>
+            </Link>
           </div>
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center gap-8">
-            <a href="#mutual-funds" className="font-medium text-gray-700 hover:text-fintech-purple transition-colors">
+            <Link to="/mutual-funds" className="font-medium text-gray-700 hover:text-fintech-purple transition-colors">
               Mutual Funds
-            </a>
-            <a href="#insurance" className="font-medium text-gray-700 hover:text-fintech-purple transition-colors">
+            </Link>
+            <Link to="#insurance" className="font-medium text-gray-700 hover:text-fintech-purple transition-colors">
               Insurance
-            </a>
-            <a href="#loans" className="font-medium text-gray-700 hover:text-fintech-purple transition-colors">
+            </Link>
+            <Link to="#loans" className="font-medium text-gray-700 hover:text-fintech-purple transition-colors">
               Loans
-            </a>
-            <a href="#about" className="font-medium text-gray-700 hover:text-fintech-purple transition-colors">
+            </Link>
+            <Link to="#about" className="font-medium text-gray-700 hover:text-fintech-purple transition-colors">
               About Us
-            </a>
+            </Link>
             <Button className="bg-gradient-to-r from-fintech-purple to-fintech-blue hover:opacity-90">
               Get Started
             </Button>
@@ -71,34 +72,34 @@ const Navbar = () => {
         {isOpen && (
           <div className="md:hidden mt-4 bg-white shadow-lg rounded-lg p-4 absolute left-4 right-4">
             <div className="flex flex-col gap-4">
-              <a
-                href="#mutual-funds"
+              <Link
+                to="/mutual-funds"
                 className="font-medium text-gray-700 hover:text-fintech-purple transition-colors"
                 onClick={() => setIsOpen(false)}
               >
                 Mutual Funds
-              </a>
-              <a
-                href="#insurance"
+              </Link>
+              <Link
+                to="#insurance"
                 className="font-medium text-gray-700 hover:text-fintech-purple transition-colors"
                 onClick={() => setIsOpen(false)}
               >
                 Insurance
-              </a>
-              <a
-                href="#loans"
+              </Link>
+              <Link
+                to="#loans"
                 className="font-medium text-gray-700 hover:text-fintech-purple transition-colors"
                 onClick={() => setIsOpen(false)}
               >
                 Loans
-              </a>
-              <a
-                href="#about"
+              </Link>
+              <Link
+                to="#about"
                 className="font-medium text-gray-700 hover:text-fintech-purple transition-colors"
                 onClick={() => setIsOpen(false)}
               >
                 About Us
-              </a>
+              </Link>
               <Button className="bg-gradient-to-r from-fintech-purple to-fintech-blue hover:opacity-90 w-full">
                 Get Started
               </Button>
