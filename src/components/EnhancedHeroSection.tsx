@@ -30,7 +30,7 @@ const EnhancedHeroSection = () => {
       </div>
       
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
           {/* Left content */}
           <motion.div className="order-2 lg:order-1 space-y-8" initial={{
           opacity: 0,
@@ -134,7 +134,7 @@ const EnhancedHeroSection = () => {
                 }} transition={{
                   delay: 0.3,
                   duration: 0.8
-                }} className="glass-card p-5 rounded-2xl bg-white/80 backdrop-blur-md shadow-xl border border-white/30 w-[280px] md:w-[320px]">
+                }} className="glass-card p-5 rounded-2xl bg-white/80 backdrop-blur-md shadow-xl border border-white/30 w-[280px] md:w-[320px] my-0 mx-0">
                     <div className="text-center mb-4">
                       <h3 className="font-bold text-lg text-gray-800">Your Investment Dashboard</h3>
                     </div>
