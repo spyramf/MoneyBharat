@@ -1,36 +1,26 @@
-
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { TextRotate } from "@/components/ui/text-rotate";
 import Floating, { FloatingElement } from "@/components/ui/parallax-floating";
-
-const financialImages = [
-  {
-    url: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2426&auto=format&fit=crop&ixlib=rb-4.0.3",
-    title: "Financial charts and graphs",
-  },
-  {
-    url: "https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.0.3",
-    title: "Financial planning",
-  },
-  {
-    url: "https://images.unsplash.com/photo-1579621970588-a35d0e7ab9b6?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.0.3",
-    title: "Mobile banking",
-  },
-  {
-    url: "https://images.unsplash.com/photo-1567427017947-545c5f8d16ad?q=80&w=2358&auto=format&fit=crop&ixlib=rb-4.0.3",
-    title: "Investment tracking",
-  },
-  {
-    url: "https://images.unsplash.com/photo-1434626881859-194d67b2b86f?q=80&w=2338&auto=format&fit=crop&ixlib=rb-4.0.3",
-    title: "Handshake business deal",
-  },
-];
-
+const financialImages = [{
+  url: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2426&auto=format&fit=crop&ixlib=rb-4.0.3",
+  title: "Financial charts and graphs"
+}, {
+  url: "https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.0.3",
+  title: "Financial planning"
+}, {
+  url: "https://images.unsplash.com/photo-1579621970588-a35d0e7ab9b6?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.0.3",
+  title: "Mobile banking"
+}, {
+  url: "https://images.unsplash.com/photo-1567427017947-545c5f8d16ad?q=80&w=2358&auto=format&fit=crop&ixlib=rb-4.0.3",
+  title: "Investment tracking"
+}, {
+  url: "https://images.unsplash.com/photo-1434626881859-194d67b2b86f?q=80&w=2338&auto=format&fit=crop&ixlib=rb-4.0.3",
+  title: "Handshake business deal"
+}];
 const EnhancedHeroSection = () => {
-  return (
-    <section className="relative overflow-hidden min-h-[90vh] flex items-center py-16 md:py-0">
+  return <section className="relative overflow-hidden min-h-[90vh] flex items-center py-16 md:py-0">
       {/* Dynamic background elements */}
       <div className="absolute inset-0 -z-10">
         <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-fintech-purple/5 via-fintech-blue/10 to-transparent"></div>
@@ -42,12 +32,15 @@ const EnhancedHeroSection = () => {
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left content */}
-          <motion.div 
-            className="order-2 lg:order-1 space-y-8"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
+          <motion.div className="order-2 lg:order-1 space-y-8" initial={{
+          opacity: 0,
+          y: 20
+        }} animate={{
+          opacity: 1,
+          y: 0
+        }} transition={{
+          duration: 0.6
+        }}>
             <div className="inline-block px-4 py-1.5 bg-gradient-to-r from-fintech-purple/20 to-fintech-blue/20 rounded-full">
               <p className="text-sm font-medium text-gray-700">
                 <span className="text-fintech-purple font-bold mr-2">New</span> 
@@ -58,21 +51,11 @@ const EnhancedHeroSection = () => {
             <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight">
               Build Your{" "}
               <span className="inline-block">
-                <TextRotate
-                  texts={[
-                    "Wealth",
-                    "Future",
-                    "Dreams",
-                    "Legacy",
-                    "Portfolio",
-                    "Security"
-                  ]}
-                  mainClassName="inline-block bg-gradient-to-r from-fintech-purple to-fintech-blue bg-clip-text text-transparent"
-                  staggerDuration={0.05}
-                  staggerFrom="first"
-                  rotationInterval={3000}
-                  transition={{ type: "spring", damping: 30, stiffness: 400 }}
-                />
+                <TextRotate texts={["Wealth", "Future", "Dreams", "Legacy", "Portfolio", "Security"]} mainClassName="inline-block bg-gradient-to-r from-fintech-purple to-fintech-blue bg-clip-text text-transparent" staggerDuration={0.05} staggerFrom="first" rotationInterval={3000} transition={{
+                type: "spring",
+                damping: 30,
+                stiffness: 400
+              }} />
               </span>{" "}
               <br />
               <span className="bg-gradient-to-r from-fintech-orange to-fintech-purple bg-clip-text text-transparent">
@@ -139,15 +122,19 @@ const EnhancedHeroSection = () => {
           {/* Right content - Interactive showcase */}
           <div className="order-1 lg:order-2 h-[450px] md:h-[550px] relative">
             <div className="absolute inset-0">
-              <Floating sensitivity={-0.5} className="w-full h-full">
+              <Floating sensitivity={-0.5} className="w-full h-full py-[100px]">
                 {/* Main central card */}
                 <FloatingElement depth={0.2} className="top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                  <motion.div 
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 0.3, duration: 0.8 }}
-                    className="glass-card p-5 rounded-2xl bg-white/80 backdrop-blur-md shadow-xl border border-white/30 w-[280px] md:w-[320px]"
-                  >
+                  <motion.div initial={{
+                  opacity: 0,
+                  scale: 0.9
+                }} animate={{
+                  opacity: 1,
+                  scale: 1
+                }} transition={{
+                  delay: 0.3,
+                  duration: 0.8
+                }} className="glass-card p-5 rounded-2xl bg-white/80 backdrop-blur-md shadow-xl border border-white/30 w-[280px] md:w-[320px]">
                     <div className="text-center mb-4">
                       <h3 className="font-bold text-lg text-gray-800">Your Investment Dashboard</h3>
                     </div>
@@ -209,91 +196,109 @@ const EnhancedHeroSection = () => {
                 
                 {/* Floating images */}
                 <FloatingElement depth={1.5} className="top-[10%] left-[5%]">
-                  <motion.div
-                    className="w-32 h-32 md:w-40 md:h-40 rotate-[-5deg] shadow-xl rounded-xl overflow-hidden"
-                    initial={{ opacity: 0, x: -50 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.4, duration: 0.8 }}
-                    whileHover={{ scale: 1.05 }}
-                  >
-                    <img
-                      src={financialImages[0].url}
-                      alt={financialImages[0].title}
-                      className="w-full h-full object-cover"
-                    />
+                  <motion.div className="w-32 h-32 md:w-40 md:h-40 rotate-[-5deg] shadow-xl rounded-xl overflow-hidden" initial={{
+                  opacity: 0,
+                  x: -50
+                }} animate={{
+                  opacity: 1,
+                  x: 0
+                }} transition={{
+                  delay: 0.4,
+                  duration: 0.8
+                }} whileHover={{
+                  scale: 1.05
+                }}>
+                    <img src={financialImages[0].url} alt={financialImages[0].title} className="w-full h-full object-cover" />
                   </motion.div>
                 </FloatingElement>
                 
                 <FloatingElement depth={0.8} className="bottom-[15%] left-[10%]">
-                  <motion.div
-                    className="w-36 h-28 md:w-44 md:h-36 rotate-[8deg] shadow-xl rounded-xl overflow-hidden"
-                    initial={{ opacity: 0, x: -50, y: 50 }}
-                    animate={{ opacity: 1, x: 0, y: 0 }}
-                    transition={{ delay: 0.6, duration: 0.8 }}
-                    whileHover={{ scale: 1.05 }}
-                  >
-                    <img
-                      src={financialImages[1].url}
-                      alt={financialImages[1].title}
-                      className="w-full h-full object-cover"
-                    />
+                  <motion.div className="w-36 h-28 md:w-44 md:h-36 rotate-[8deg] shadow-xl rounded-xl overflow-hidden" initial={{
+                  opacity: 0,
+                  x: -50,
+                  y: 50
+                }} animate={{
+                  opacity: 1,
+                  x: 0,
+                  y: 0
+                }} transition={{
+                  delay: 0.6,
+                  duration: 0.8
+                }} whileHover={{
+                  scale: 1.05
+                }}>
+                    <img src={financialImages[1].url} alt={financialImages[1].title} className="w-full h-full object-cover" />
                   </motion.div>
                 </FloatingElement>
                 
                 <FloatingElement depth={1.2} className="top-[5%] right-[10%]">
-                  <motion.div
-                    className="w-28 h-36 md:w-36 md:h-44 rotate-[12deg] shadow-xl rounded-xl overflow-hidden"
-                    initial={{ opacity: 0, x: 50 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.5, duration: 0.8 }}
-                    whileHover={{ scale: 1.05 }}
-                  >
-                    <img
-                      src={financialImages[2].url}
-                      alt={financialImages[2].title}
-                      className="w-full h-full object-cover"
-                    />
+                  <motion.div className="w-28 h-36 md:w-36 md:h-44 rotate-[12deg] shadow-xl rounded-xl overflow-hidden" initial={{
+                  opacity: 0,
+                  x: 50
+                }} animate={{
+                  opacity: 1,
+                  x: 0
+                }} transition={{
+                  delay: 0.5,
+                  duration: 0.8
+                }} whileHover={{
+                  scale: 1.05
+                }}>
+                    <img src={financialImages[2].url} alt={financialImages[2].title} className="w-full h-full object-cover" />
                   </motion.div>
                 </FloatingElement>
                 
                 <FloatingElement depth={0.9} className="bottom-[10%] right-[5%]">
-                  <motion.div
-                    className="w-32 h-40 md:w-40 md:h-48 rotate-[-10deg] shadow-xl rounded-xl overflow-hidden"
-                    initial={{ opacity: 0, x: 50, y: 50 }}
-                    animate={{ opacity: 1, x: 0, y: 0 }}
-                    transition={{ delay: 0.7, duration: 0.8 }}
-                    whileHover={{ scale: 1.05 }}
-                  >
-                    <img
-                      src={financialImages[3].url}
-                      alt={financialImages[3].title}
-                      className="w-full h-full object-cover"
-                    />
+                  <motion.div className="w-32 h-40 md:w-40 md:h-48 rotate-[-10deg] shadow-xl rounded-xl overflow-hidden" initial={{
+                  opacity: 0,
+                  x: 50,
+                  y: 50
+                }} animate={{
+                  opacity: 1,
+                  x: 0,
+                  y: 0
+                }} transition={{
+                  delay: 0.7,
+                  duration: 0.8
+                }} whileHover={{
+                  scale: 1.05
+                }}>
+                    <img src={financialImages[3].url} alt={financialImages[3].title} className="w-full h-full object-cover" />
                   </motion.div>
                 </FloatingElement>
                 
                 {/* Floating stats cards */}
                 <FloatingElement depth={1.7} className="top-[30%] right-[25%]">
-                  <motion.div 
-                    className="bg-white/90 backdrop-blur-sm p-3 rounded-lg shadow-lg border border-gray-100"
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 0.9, duration: 0.8 }}
-                    whileHover={{ scale: 1.05 }}
-                  >
+                  <motion.div className="bg-white/90 backdrop-blur-sm p-3 rounded-lg shadow-lg border border-gray-100" initial={{
+                  opacity: 0,
+                  scale: 0.8
+                }} animate={{
+                  opacity: 1,
+                  scale: 1
+                }} transition={{
+                  delay: 0.9,
+                  duration: 0.8
+                }} whileHover={{
+                  scale: 1.05
+                }}>
                     <p className="text-xs text-gray-500">Annual Returns</p>
                     <p className="font-bold text-green-600 text-lg">+18.7%</p>
                   </motion.div>
                 </FloatingElement>
                 
                 <FloatingElement depth={1.3} className="bottom-[35%] left-[25%]">
-                  <motion.div 
-                    className="bg-white/90 backdrop-blur-sm p-3 rounded-lg shadow-lg border border-gray-100"
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 1.0, duration: 0.8 }}
-                    whileHover={{ scale: 1.05 }}
-                  >
+                  <motion.div className="bg-white/90 backdrop-blur-sm p-3 rounded-lg shadow-lg border border-gray-100" initial={{
+                  opacity: 0,
+                  scale: 0.8
+                }} animate={{
+                  opacity: 1,
+                  scale: 1
+                }} transition={{
+                  delay: 1.0,
+                  duration: 0.8
+                }} whileHover={{
+                  scale: 1.05
+                }}>
                     <div className="flex items-center gap-2">
                       <div className="w-6 h-6 rounded-full bg-gradient-to-r from-fintech-orange to-fintech-purple flex items-center justify-center text-white text-xs font-bold">₹</div>
                       <p className="font-bold text-sm">Instant Loans</p>
@@ -306,12 +311,16 @@ const EnhancedHeroSection = () => {
         </div>
         
         {/* Stats bar */}
-        <motion.div 
-          className="mt-8 md:mt-12 grid grid-cols-3 gap-4 max-w-4xl mx-auto"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 1.0 }}
-        >
+        <motion.div className="mt-8 md:mt-12 grid grid-cols-3 gap-4 max-w-4xl mx-auto" initial={{
+        opacity: 0,
+        y: 20
+      }} animate={{
+        opacity: 1,
+        y: 0
+      }} transition={{
+        duration: 0.6,
+        delay: 1.0
+      }}>
           <div className="text-center p-4 rounded-xl bg-gradient-to-br from-fintech-purple/10 to-fintech-blue/10">
             <p className="text-3xl font-bold gradient-text">₹500Cr+</p>
             <p className="text-gray-600 text-sm">Assets Managed</p>
@@ -326,8 +335,6 @@ const EnhancedHeroSection = () => {
           </div>
         </motion.div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default EnhancedHeroSection;
