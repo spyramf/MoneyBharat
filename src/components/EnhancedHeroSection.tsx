@@ -48,7 +48,7 @@ const EnhancedHeroSection = () => {
               </p>
             </div>
             
-            <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight text-justify">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-left xl:text-5xl">
               Build Your{" "}
               <span className="inline-block">
                 <TextRotate texts={["Wealth", "Future", "Dreams", "Legacy", "Portfolio", "Security"]} mainClassName="inline-block bg-gradient-to-r from-fintech-purple to-fintech-blue bg-clip-text text-transparent" staggerDuration={0.05} staggerFrom="first" rotationInterval={3000} transition={{
