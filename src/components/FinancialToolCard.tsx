@@ -1,6 +1,7 @@
 
 import React from "react";
 import { ArrowRight } from "lucide-react";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 
 interface FinancialToolCardProps {
   icon: React.ReactNode;
@@ -9,6 +10,7 @@ interface FinancialToolCardProps {
   bgColor: string;
   linkText: string;
   linkHref: string;
+  className?: string;
 }
 
 const FinancialToolCard: React.FC<FinancialToolCardProps> = ({
@@ -17,10 +19,11 @@ const FinancialToolCard: React.FC<FinancialToolCardProps> = ({
   description,
   bgColor,
   linkText,
-  linkHref
+  linkHref,
+  className = ""
 }) => {
   return (
-    <div className={`${bgColor} rounded-xl p-8 text-center transition-transform hover:-translate-y-1 hover:shadow-md`}>
+    <div className={`${bgColor} rounded-xl p-8 text-center transition-transform hover:-translate-y-1 hover:shadow-xl ${className}`}>
       <div className="flex justify-center mb-4">
         <div className="w-14 h-14 flex items-center justify-center">
           {icon}
