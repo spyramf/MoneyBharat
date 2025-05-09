@@ -9,9 +9,9 @@ import {
   Calculator,
   Search,
   Umbrella,
-  Loan,
   Briefcase,
-  Handshake
+  Handshake,
+  CreditCard // Replacing Loan with CreditCard
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
@@ -20,7 +20,7 @@ import ProductCard from "@/components/ProductCard";
 import TestimonialCard from "@/components/TestimonialCard";
 import Footer from "@/components/Footer";
 import FinancialToolCard from "@/components/FinancialToolCard";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 
 const Index = () => {
   return (
@@ -309,7 +309,7 @@ const Index = () => {
             <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow duration-300">
               <CardHeader className="pb-4">
                 <div className="w-12 h-12 flex items-center justify-center bg-orange-100 rounded-full mb-4">
-                  <Loan className="h-6 w-6 text-orange-600" />
+                  <CreditCard className="h-6 w-6 text-orange-600" />
                 </div>
                 <CardTitle>Personal Loans</CardTitle>
                 <CardDescription>Quick funds for your personal needs</CardDescription>
