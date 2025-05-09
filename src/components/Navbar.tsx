@@ -51,7 +51,7 @@ const Navbar = () => {
             <Link to="/loans" className="font-medium text-gray-700 hover:text-fintech-purple transition-colors">
               Loans
             </Link>
-            <Link to="#about" className="font-medium text-gray-700 hover:text-fintech-purple transition-colors">
+            <Link to="/about" className="font-medium text-gray-700 hover:text-fintech-purple transition-colors">
               About Us
             </Link>
             <Button className="bg-gradient-to-r from-fintech-purple to-fintech-blue hover:opacity-90">
@@ -94,7 +94,7 @@ const Navbar = () => {
                 Loans
               </Link>
               <Link
-                to="#about"
+                to="/about"
                 className="font-medium text-gray-700 hover:text-fintech-purple transition-colors"
                 onClick={() => setIsOpen(false)}
               >
