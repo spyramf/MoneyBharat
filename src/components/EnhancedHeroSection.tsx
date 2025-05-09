@@ -122,7 +122,7 @@ const EnhancedHeroSection = () => {
           {/* Right content - Interactive showcase */}
           <div className="order-1 lg:order-2 h-[450px] md:h-[550px] relative">
             <div className="absolute inset-0">
-              <Floating sensitivity={-0.5} className="w-full h-full py-[100px]">
+              <Floating sensitivity={-0.5} className="w-full h-full py-0">
                 {/* Main central card */}
                 <FloatingElement depth={0.2} className="top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
                   <motion.div initial={{
