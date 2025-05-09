@@ -1,9 +1,10 @@
 
-import { Shield, Users, TrendingUp, Award } from "lucide-react";
+import { Shield, Users, TrendingUp, Award, Milestone } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import Home from "@/components/icons/Home";
 import GraduationCap from "@/components/icons/GraduationCap";
 import Car from "@/components/icons/Car";
@@ -79,6 +80,203 @@ const AboutUs = () => {
                 innovative tools that help users compare, choose, and manage financial products that best 
                 suit their unique needs.
               </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Leadership Team Section */}
+      <section className="py-16 px-4 bg-gray-50">
+        <div className="container mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-2xl md:text-3xl font-bold mb-4">Leadership Team</h2>
+            <p className="text-gray-700 max-w-3xl mx-auto">
+              Meet the experienced professionals behind Money Bharat's success.
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {/* Team Member 1 */}
+            <div className="bg-white p-6 rounded-lg shadow-md">
+              <div className="mb-6 flex justify-center">
+                <Avatar className="w-32 h-32 border-4 border-fintech-purple/20">
+                  <AvatarFallback className="bg-fintech-deep-purple text-white text-2xl">
+                    RK
+                  </AvatarFallback>
+                </Avatar>
+              </div>
+              <h3 className="font-bold text-xl mb-1">Rajesh Kumar</h3>
+              <p className="text-fintech-orange font-medium mb-3">Founder & CEO</p>
+              <p className="text-gray-600">
+                15+ years of experience in financial services. Former VP at HDFC Bank.
+              </p>
+            </div>
+            
+            {/* Team Member 2 */}
+            <div className="bg-white p-6 rounded-lg shadow-md">
+              <div className="mb-6 flex justify-center">
+                <Avatar className="w-32 h-32 border-4 border-fintech-purple/20">
+                  <AvatarFallback className="bg-fintech-blue text-white text-2xl">
+                    AV
+                  </AvatarFallback>
+                </Avatar>
+              </div>
+              <h3 className="font-bold text-xl mb-1">Anjali Verma</h3>
+              <p className="text-fintech-orange font-medium mb-3">Chief Investment Officer</p>
+              <p className="text-gray-600">
+                SEBI registered investment advisor with expertise in mutual funds and equity markets.
+              </p>
+            </div>
+            
+            {/* Team Member 3 */}
+            <div className="bg-white p-6 rounded-lg shadow-md">
+              <div className="mb-6 flex justify-center">
+                <Avatar className="w-32 h-32 border-4 border-fintech-purple/20">
+                  <AvatarFallback className="bg-fintech-orange text-white text-2xl">
+                    VS
+                  </AvatarFallback>
+                </Avatar>
+              </div>
+              <h3 className="font-bold text-xl mb-1">Vikram Singh</h3>
+              <p className="text-fintech-orange font-medium mb-3">Head of Technology</p>
+              <p className="text-gray-600">
+                Tech leader with experience at Paytm and PhonePe. Built scalable fintech platforms.
+              </p>
+            </div>
+            
+            {/* Team Member 4 */}
+            <div className="bg-white p-6 rounded-lg shadow-md">
+              <div className="mb-6 flex justify-center">
+                <Avatar className="w-32 h-32 border-4 border-fintech-purple/20">
+                  <AvatarFallback className="bg-fintech-purple text-white text-2xl">
+                    PS
+                  </AvatarFallback>
+                </Avatar>
+              </div>
+              <h3 className="font-bold text-xl mb-1">Priya Sharma</h3>
+              <p className="text-fintech-orange font-medium mb-3">Head of Customer Experience</p>
+              <p className="text-gray-600">
+                Customer service expert focused on building seamless financial journeys.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Our Milestones Section */}
+      <section className="py-16 px-4">
+        <div className="container mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-2xl md:text-3xl font-bold mb-4">Our Milestones</h2>
+            <p className="text-gray-700 max-w-3xl mx-auto">
+              Key moments in our journey to transform financial services in India.
+            </p>
+          </div>
+          
+          <div className="relative">
+            {/* Vertical Timeline Line */}
+            <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gray-200"></div>
+            
+            {/* Milestone 1 */}
+            <div className="relative z-10">
+              <div className="flex items-center justify-center mb-8">
+                <div className="bg-fintech-orange w-6 h-6 rounded-full border-4 border-white shadow-md"></div>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+                <div className="md:text-right md:pr-12">
+                  <h3 className="text-lg font-bold text-fintech-deep-purple">2018</h3>
+                  <h4 className="text-xl font-bold mb-2">Company Founded</h4>
+                  <p className="text-gray-600">
+                    Money Bharat was established with a vision to make financing accessible to all Indians.
+                  </p>
+                </div>
+                <div className="md:pl-12"></div>
+              </div>
+            </div>
+            
+            {/* Milestone 2 */}
+            <div className="relative z-10">
+              <div className="flex items-center justify-center mb-8">
+                <div className="bg-fintech-purple w-6 h-6 rounded-full border-4 border-white shadow-md"></div>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+                <div className="md:text-right md:pr-12 md:hidden lg:block lg:invisible"></div>
+                <div className="md:pl-12">
+                  <h3 className="text-lg font-bold text-fintech-deep-purple">2019</h3>
+                  <h4 className="text-xl font-bold mb-2">AMFI Registration</h4>
+                  <p className="text-gray-600">
+                    Received official AMFI registration and partnered with first 10 AMCs.
+                  </p>
+                </div>
+              </div>
+            </div>
+            
+            {/* Milestone 3 */}
+            <div className="relative z-10">
+              <div className="flex items-center justify-center mb-8">
+                <div className="bg-green-500 w-6 h-6 rounded-full border-4 border-white shadow-md"></div>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+                <div className="md:text-right md:pr-12">
+                  <h3 className="text-lg font-bold text-fintech-deep-purple">2020</h3>
+                  <h4 className="text-xl font-bold mb-2">Mobile App Launch</h4>
+                  <p className="text-gray-600">
+                    Launched our first mobile app, reaching 100,000 downloads in the first quarter.
+                  </p>
+                </div>
+                <div className="md:pl-12"></div>
+              </div>
+            </div>
+            
+            {/* Milestone 4 */}
+            <div className="relative z-10">
+              <div className="flex items-center justify-center mb-8">
+                <div className="bg-green-500 w-6 h-6 rounded-full border-4 border-white shadow-md"></div>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+                <div className="md:text-right md:pr-12 md:hidden lg:block lg:invisible"></div>
+                <div className="md:pl-12">
+                  <h3 className="text-lg font-bold text-fintech-deep-purple">2021</h3>
+                  <h4 className="text-xl font-bold mb-2">Daily SIP Innovation</h4>
+                  <p className="text-gray-600">
+                    Pioneered the Daily SIP model, making us the first platform to offer this in India.
+                  </p>
+                </div>
+              </div>
+            </div>
+            
+            {/* Milestone 5 */}
+            <div className="relative z-10">
+              <div className="flex items-center justify-center mb-8">
+                <div className="bg-fintech-blue w-6 h-6 rounded-full border-4 border-white shadow-md"></div>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+                <div className="md:text-right md:pr-12">
+                  <h3 className="text-lg font-bold text-fintech-deep-purple">2022</h3>
+                  <h4 className="text-xl font-bold mb-2">1M Customers</h4>
+                  <p className="text-gray-600">
+                    Crossed 1 million customer milestone and expanded to insurance products.
+                  </p>
+                </div>
+                <div className="md:pl-12"></div>
+              </div>
+            </div>
+            
+            {/* Milestone 6 */}
+            <div className="relative z-10">
+              <div className="flex items-center justify-center mb-8">
+                <div className="bg-fintech-blue w-6 h-6 rounded-full border-4 border-white shadow-md"></div>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="md:text-right md:pr-12 md:hidden lg:block lg:invisible"></div>
+                <div className="md:pl-12">
+                  <h3 className="text-lg font-bold text-fintech-deep-purple">2023</h3>
+                  <h4 className="text-xl font-bold mb-2">Loan Services Integration</h4>
+                  <p className="text-gray-600">
+                    Added comprehensive loan services with connections to 70+ financial institutions.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
