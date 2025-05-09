@@ -30,9 +30,9 @@ const EnhancedHeroSection = () => {
       </div>
       
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center px-0 py-0">
           {/* Left content */}
-          <motion.div className="order-2 lg:order-1 space-y-8" initial={{
+          <motion.div initial={{
           opacity: 0,
           y: 20
         }} animate={{
@@ -40,7 +40,7 @@ const EnhancedHeroSection = () => {
           y: 0
         }} transition={{
           duration: 0.6
-        }}>
+        }} className="order-2 lg:order-1 space-y-8 px-[10px] py-[100px]">
             <div className="inline-block px-4 py-1.5 bg-gradient-to-r from-fintech-purple/20 to-fintech-blue/20 rounded-full">
               <p className="text-sm font-medium text-gray-700">
                 <span className="text-fintech-purple font-bold mr-2">New</span> 
@@ -48,7 +48,7 @@ const EnhancedHeroSection = () => {
               </p>
             </div>
             
-            <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-justify xl:text-6xl">
               Build Your{" "}
               <span className="inline-block">
                 <TextRotate texts={["Wealth", "Future", "Dreams", "Legacy", "Portfolio", "Security"]} mainClassName="inline-block bg-gradient-to-r from-fintech-purple to-fintech-blue bg-clip-text text-transparent" staggerDuration={0.05} staggerFrom="first" rotationInterval={3000} transition={{
