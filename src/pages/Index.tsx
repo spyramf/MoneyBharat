@@ -9,7 +9,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
-import HeroSection from "@/components/HeroSection";
+import EnhancedHeroSection from "@/components/EnhancedHeroSection";
 import ProductCard from "@/components/ProductCard";
 import TestimonialCard from "@/components/TestimonialCard";
 import Footer from "@/components/Footer";
@@ -18,7 +18,7 @@ const Index = () => {
   return (
     <div className="min-h-screen">
       <Navbar />
-      <HeroSection />
+      <EnhancedHeroSection />
       
       {/* Services Section */}
       <section className="py-16 md:py-24">
