@@ -10,6 +10,9 @@ import Insurance from "./pages/Insurance";
 import Loans from "./pages/Loans";
 import AboutUs from "./pages/AboutUs";
 import NotFound from "./pages/NotFound";
+import SipCalculator from "./pages/SipCalculator";
+import EmiCalculator from "./pages/EmiCalculator";
+import TaxSaving from "./pages/TaxSaving";
 
 const queryClient = new QueryClient();
 
@@ -25,6 +28,9 @@ const App = () => (
           <Route path="/insurance" element={<Insurance />} />
           <Route path="/loans" element={<Loans />} />
           <Route path="/about" element={<AboutUs />} />
+          <Route path="/tools/sip-calculator" element={<SipCalculator />} />
+          <Route path="/tools/emi-calculator" element={<EmiCalculator />} />
+          <Route path="/tools/tax-saving" element={<TaxSaving />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

@@ -5,7 +5,9 @@ import {
   PiggyBank, 
   Wallet, 
   ArrowRight, 
-  CheckCircle 
+  CheckCircle,
+  Calculator,
+  Search
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
@@ -13,12 +15,52 @@ import EnhancedHeroSection from "@/components/EnhancedHeroSection";
 import ProductCard from "@/components/ProductCard";
 import TestimonialCard from "@/components/TestimonialCard";
 import Footer from "@/components/Footer";
+import FinancialToolCard from "@/components/FinancialToolCard";
 
 const Index = () => {
   return (
     <div className="min-h-screen">
       <Navbar />
       <EnhancedHeroSection />
+      
+      {/* Financial Tools Section */}
+      <section className="py-16 md:py-24 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <div className="text-center max-w-3xl mx-auto mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Financial Tools</h2>
+            <p className="text-gray-600">Calculate, plan and optimize your finances</p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            <FinancialToolCard 
+              icon={<Calculator className="text-blue-500" />}
+              title="SIP Calculator"
+              description="Calculate your potential returns from systematic investments"
+              bgColor="bg-blue-50"
+              linkText="Use Calculator"
+              linkHref="/tools/sip-calculator"
+            />
+            
+            <FinancialToolCard 
+              icon={<Calculator className="text-green-500" />}
+              title="Loan EMI Calculator"
+              description="Plan your loan repayments with our easy EMI calculator"
+              bgColor="bg-green-50"
+              linkText="Use Calculator"
+              linkHref="/tools/emi-calculator"
+            />
+            
+            <FinancialToolCard 
+              icon={<Search className="text-purple-500" />}
+              title="Tax Saving Tools"
+              description="Find the best tax saving investment options"
+              bgColor="bg-purple-50"
+              linkText="Use Calculator"
+              linkHref="/tools/tax-saving"
+            />
+          </div>
+        </div>
+      </section>
       
       {/* Services Section */}
       <section className="py-16 md:py-24">
