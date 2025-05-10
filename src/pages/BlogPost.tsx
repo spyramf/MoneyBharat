@@ -97,11 +97,15 @@ const BlogPost = () => {
           <Breadcrumb className="mb-8">
             <BreadcrumbList>
               <BreadcrumbItem>
-                <BreadcrumbLink as={Link} to="/">Home</BreadcrumbLink>
+                <BreadcrumbLink asChild>
+                  <Link to="/">Home</Link>
+                </BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbSeparator />
               <BreadcrumbItem>
-                <BreadcrumbLink as={Link} to="/blog">Blog</BreadcrumbLink>
+                <BreadcrumbLink asChild>
+                  <Link to="/blog">Blog</Link>
+                </BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbSeparator />
               <BreadcrumbItem>
