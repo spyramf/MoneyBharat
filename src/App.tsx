@@ -14,6 +14,8 @@ import SipCalculator from "./pages/SipCalculator";
 import EmiCalculator from "./pages/EmiCalculator";
 import TaxSaving from "./pages/TaxSaving";
 import HealthInsurance from "./pages/HealthInsurance";
+import Blog from "./pages/Blog";
+import BlogPost from "./pages/BlogPost";
 
 const queryClient = new QueryClient();
 
@@ -30,6 +32,8 @@ const App = () => (
           <Route path="/health-insurance" element={<HealthInsurance />} />
           <Route path="/loans" element={<Loans />} />
           <Route path="/about" element={<AboutUs />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:slug" element={<BlogPost />} />
           <Route path="/tools/sip-calculator" element={<SipCalculator />} />
           <Route path="/tools/emi-calculator" element={<EmiCalculator />} />
           <Route path="/tools/tax-saving" element={<TaxSaving />} />
