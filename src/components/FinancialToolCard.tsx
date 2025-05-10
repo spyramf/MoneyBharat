@@ -30,15 +30,15 @@ const FinancialToolCard: React.FC<FinancialToolCardProps> = ({
         </div>
       </div>
       
-      <h3 className="text-xl font-bold mb-3">{title}</h3>
+      <h3 className="text-xl font-bold mb-3 text-white">{title}</h3>
       
-      <p className="text-gray-600 mb-6">
+      <p className="text-white/80 mb-6">
         {description}
       </p>
       
       <a 
         href={linkHref} 
-        className="inline-flex items-center font-medium text-gray-800 hover:text-fintech-purple transition-colors"
+        className="inline-flex items-center font-medium text-white hover:text-white/90 transition-colors"
       >
         {linkText} 
         <ArrowRight className="ml-2 h-4 w-4" />
