@@ -50,19 +50,22 @@ const Footer = () => {
             <h3 className="font-semibold mb-4 text-gray-900">Products</h3>
             <ul className="space-y-3">
               <li>
-                <a href="#" className="text-gray-600 hover:text-fintech-purple">Mutual Funds</a>
+                <a href="/mutual-funds" className="text-gray-600 hover:text-fintech-purple">Mutual Funds</a>
               </li>
               <li>
-                <a href="#" className="text-gray-600 hover:text-fintech-purple">Term Insurance</a>
+                <a href="/health-insurance" className="text-gray-600 hover:text-fintech-purple">Health Insurance</a>
               </li>
               <li>
-                <a href="#" className="text-gray-600 hover:text-fintech-purple">Health Insurance</a>
+                <a href="/insurance" className="text-gray-600 hover:text-fintech-purple">Term Insurance</a>
               </li>
               <li>
-                <a href="#" className="text-gray-600 hover:text-fintech-purple">Personal Loans</a>
+                <a href="/insurance" className="text-gray-600 hover:text-fintech-purple">General Insurance</a>
               </li>
               <li>
-                <a href="#" className="text-gray-600 hover:text-fintech-purple">Home Loans</a>
+                <a href="/loans" className="text-gray-600 hover:text-fintech-purple">Personal Loans</a>
+              </li>
+              <li>
+                <a href="/loans" className="text-gray-600 hover:text-fintech-purple">Home Loans</a>
               </li>
             </ul>
           </div>
@@ -72,7 +75,7 @@ const Footer = () => {
             <h3 className="font-semibold mb-4 text-gray-900">Company</h3>
             <ul className="space-y-3">
               <li>
-                <a href="#" className="text-gray-600 hover:text-fintech-purple">About Us</a>
+                <a href="/about" className="text-gray-600 hover:text-fintech-purple">About Us</a>
               </li>
               <li>
                 <a href="#" className="text-gray-600 hover:text-fintech-purple">Careers</a>
