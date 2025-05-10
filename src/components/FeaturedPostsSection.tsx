@@ -11,9 +11,14 @@ const FeaturedPostsSection = ({ posts }: FeaturedPostsSectionProps) => {
   if (posts.length === 0) return null;
   
   return (
-    <section className="py-12">
+    <section className="py-16 bg-white">
       <div className="container mx-auto px-4">
-        <h2 className="text-2xl font-bold mb-8">Featured Articles</h2>
+        <div className="flex justify-between items-center mb-8">
+          <h2 className="text-2xl font-bold">Featured Articles</h2>
+          <Link to="/blog" className="text-fintech-purple hover:underline font-medium">
+            View All
+          </Link>
+        </div>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {posts.map((post) => (

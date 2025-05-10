@@ -21,4 +21,5 @@ export interface BlogPost {
   readingTime: number;
   featured: boolean;
   tableOfContents: TableOfContentsItem[];
+  popularity?: number;
 }

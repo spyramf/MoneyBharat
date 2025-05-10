@@ -1,16 +1,18 @@
 
 import { Link } from 'react-router-dom';
-import { Calendar, User } from 'lucide-react';
+import { Calendar, User, Clock } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardHeader, CardContent, CardFooter } from '@/components/ui/card';
 import { BlogPost } from '@/types/blog';
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 interface BlogPostCardProps {
   post: BlogPost;
   featured?: boolean;
+  compact?: boolean;
 }
 
-const BlogPostCard = ({ post, featured = false }: BlogPostCardProps) => {
+const BlogPostCard = ({ post, featured = false, compact = false }: BlogPostCardProps) => {
   return (
     <Card className={`overflow-hidden transition-all duration-300 hover:shadow-md ${featured ? 'h-full' : ''}`}>
       <div className="relative aspect-video overflow-hidden">
@@ -36,10 +38,15 @@ const BlogPostCard = ({ post, featured = false }: BlogPostCardProps) => {
         </Link>
       </CardHeader>
       <CardContent className="py-2">
-        <p className="text-gray-600 line-clamp-3 mb-4">{post.excerpt}</p>
+        {!compact && (
+          <p className="text-gray-600 line-clamp-3 mb-4">{post.excerpt}</p>
+        )}
         <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-gray-500">
           <div className="flex items-center">
-            <User size={14} className="mr-1" />
+            <Avatar className="h-6 w-6 mr-2">
+              <AvatarImage src={post.authorAvatar || "https://github.com/shadcn.png"} />
+              <AvatarFallback>{post.author.charAt(0)}</AvatarFallback>
+            </Avatar>
             <span>{post.author}</span>
           </div>
           <div className="flex items-center">
@@ -49,6 +56,10 @@ const BlogPostCard = ({ post, featured = false }: BlogPostCardProps) => {
               month: 'short',
               day: 'numeric'
             })}</span>
+          </div>
+          <div className="flex items-center">
+            <Clock size={14} className="mr-1" />
+            <span>{post.readingTime} min read</span>
           </div>
         </div>
       </CardContent>
