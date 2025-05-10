@@ -7,6 +7,8 @@ import { Input } from "@/components/ui/input";
 import { Slider } from "@/components/ui/slider";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Badge } from "@/components/ui/badge";
@@ -27,7 +29,13 @@ import {
   DollarSign,
   Bandage as BriefcaseMedical,
   Ambulance,
-  Bandage
+  Bandage,
+  FileText,
+  Info,
+  CalendarDays,
+  FileCheck,
+  FileX,
+  Question
 } from "lucide-react";
 import FinancialToolCard from "@/components/FinancialToolCard";
 
@@ -439,61 +447,91 @@ const HealthInsurance = () => {
         </div>
       </section>
 
-      {/* Key Benefits Section */}
+      {/* Choosing a Health Insurance Plan - Factors to Consider */}
       <section className="py-16 px-4 sm:px-6">
         <div className="container mx-auto">
           <div className="mb-10 text-center">
-            <h2 className="text-3xl font-bold mb-4">Why Choose Our Health Insurance</h2>
+            <h2 className="text-3xl font-bold mb-4">Choosing a Health Insurance Plan</h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              We offer comprehensive health protection with exceptional benefits
+              Key factors to consider when selecting the right health insurance for you and your family
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <Card className="border-0 shadow-sm">
-              <CardContent className="p-6 text-center">
-                <div className="w-16 h-16 bg-fintech-purple/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Hospital className="h-8 w-8 text-fintech-purple" />
-                </div>
-                <h3 className="font-bold text-lg mb-2">Cashless Hospitalization</h3>
+              <CardContent className="p-6">
+                <h3 className="text-xl font-semibold mb-4 flex items-center">
+                  <FileCheck className="h-6 w-6 mr-2 text-fintech-purple" />
+                  Coverage Amount
+                </h3>
                 <p className="text-gray-600">
-                  Get treatment at 10,000+ network hospitals without paying upfront
+                  Evaluate your medical history, potential healthcare needs, and financial situation to determine an adequate sum insured. 
+                  The coverage should be sufficient to handle medical inflation and unforeseen critical illnesses.
                 </p>
               </CardContent>
             </Card>
             
             <Card className="border-0 shadow-sm">
-              <CardContent className="p-6 text-center">
-                <div className="w-16 h-16 bg-fintech-purple/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <CreditCard className="h-8 w-8 text-fintech-purple" />
-                </div>
-                <h3 className="font-bold text-lg mb-2">No Claim Bonus</h3>
+              <CardContent className="p-6">
+                <h3 className="text-xl font-semibold mb-4 flex items-center">
+                  <Users className="h-6 w-6 mr-2 text-fintech-purple" />
+                  Family Size & Composition
+                </h3>
                 <p className="text-gray-600">
-                  Get up to 50% increase in sum insured for claim-free years
+                  Consider whether an individual plan or family floater policy would better suit your needs based on your family's age, 
+                  health status, and medical requirements.
                 </p>
               </CardContent>
             </Card>
             
             <Card className="border-0 shadow-sm">
-              <CardContent className="p-6 text-center">
-                <div className="w-16 h-16 bg-fintech-purple/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Calculator className="h-8 w-8 text-fintech-purple" />
-                </div>
-                <h3 className="font-bold text-lg mb-2">Tax Benefits</h3>
+              <CardContent className="p-6">
+                <h3 className="text-xl font-semibold mb-4 flex items-center">
+                  <Hospital className="h-6 w-6 mr-2 text-fintech-purple" />
+                  Network Hospitals
+                </h3>
                 <p className="text-gray-600">
-                  Save up to ₹75,000 annually under Section 80D of Income Tax Act
+                  Check if your preferred hospitals are included in the insurer's network for cashless treatment. 
+                  A wide hospital network ensures convenient access to quality healthcare services.
                 </p>
               </CardContent>
             </Card>
             
             <Card className="border-0 shadow-sm">
-              <CardContent className="p-6 text-center">
-                <div className="w-16 h-16 bg-fintech-purple/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <ShieldCheck className="h-8 w-8 text-fintech-purple" />
-                </div>
-                <h3 className="font-bold text-lg mb-2">Lifetime Renewability</h3>
+              <CardContent className="p-6">
+                <h3 className="text-xl font-semibold mb-4 flex items-center">
+                  <Clock className="h-6 w-6 mr-2 text-fintech-purple" />
+                  Waiting Periods
+                </h3>
                 <p className="text-gray-600">
-                  Enjoy continued protection with lifetime policy renewals
+                  Understand the various waiting periods for pre-existing diseases, specific ailments, and maternity benefits. 
+                  Choose policies with shorter waiting periods if you have existing health conditions.
+                </p>
+              </CardContent>
+            </Card>
+            
+            <Card className="border-0 shadow-sm">
+              <CardContent className="p-6">
+                <h3 className="text-xl font-semibold mb-4 flex items-center">
+                  <FileX className="h-6 w-6 mr-2 text-fintech-purple" />
+                  Exclusions & Sub-limits
+                </h3>
+                <p className="text-gray-600">
+                  Carefully review policy exclusions and sub-limits on room rent, specific treatments, or procedures.
+                  Policies with fewer restrictions and sub-limits are generally more beneficial.
+                </p>
+              </CardContent>
+            </Card>
+            
+            <Card className="border-0 shadow-sm">
+              <CardContent className="p-6">
+                <h3 className="text-xl font-semibold mb-4 flex items-center">
+                  <CreditCard className="h-6 w-6 mr-2 text-fintech-purple" />
+                  Claim Settlement Ratio
+                </h3>
+                <p className="text-gray-600">
+                  Research the insurer's claim settlement ratio and turnaround time. A higher ratio indicates reliability and
+                  efficiency in processing claims when you need them most.
                 </p>
               </CardContent>
             </Card>
@@ -501,131 +539,190 @@ const HealthInsurance = () => {
         </div>
       </section>
 
-      {/* Health Insurance Articles */}
+      {/* Factors That Affect Health Insurance Premium */}
       <section className="py-16 px-4 sm:px-6 bg-gray-50">
         <div className="container mx-auto">
           <div className="mb-10 text-center">
-            <h2 className="text-3xl font-bold mb-4">Health Insurance Knowledge Center</h2>
+            <h2 className="text-3xl font-bold mb-4">Factors That Affect Health Insurance Premium</h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Learn more about health insurance to make informed decisions
+              Understanding what influences the cost of your health insurance policy
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {healthArticles.map((article, index) => (
-              <Card key={index} className="border-0 hover:shadow-md transition-shadow">
-                <CardContent className="p-6">
-                  <div className="w-12 h-12 bg-fintech-purple/10 rounded-full flex items-center justify-center mb-4">
-                    {article.icon}
-                  </div>
-                  <h3 className="text-xl font-semibold mb-3">{article.title}</h3>
-                  <p className="text-gray-600 mb-4">{article.excerpt}</p>
-                  <Link to="#" className="text-fintech-purple font-medium flex items-center">
-                    Read More <ArrowRight className="ml-1 h-4 w-4" />
-                  </Link>
-                </CardContent>
-              </Card>
-            ))}
+          <div className="glass-card p-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="flex">
+                <div className="w-12 h-12 bg-fintech-purple/10 rounded-full flex-shrink-0 flex items-center justify-center mr-4">
+                  <CalendarDays className="h-6 w-6 text-fintech-purple" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-semibold mb-2">Age</h3>
+                  <p className="text-gray-600">
+                    Premium increases with age as health risks typically grow higher. Purchasing insurance at a younger age secures lower premiums.
+                  </p>
+                </div>
+              </div>
+              
+              <div className="flex">
+                <div className="w-12 h-12 bg-fintech-purple/10 rounded-full flex-shrink-0 flex items-center justify-center mr-4">
+                  <FileText className="h-6 w-6 text-fintech-purple" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-semibold mb-2">Medical History</h3>
+                  <p className="text-gray-600">
+                    Pre-existing conditions often lead to higher premiums or extended waiting periods for coverage.
+                  </p>
+                </div>
+              </div>
+              
+              <div className="flex">
+                <div className="w-12 h-12 bg-fintech-purple/10 rounded-full flex-shrink-0 flex items-center justify-center mr-4">
+                  <Users className="h-6 w-6 text-fintech-purple" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-semibold mb-2">Family Size</h3>
+                  <p className="text-gray-600">
+                    The number of family members included in the policy directly affects the premium amount.
+                  </p>
+                </div>
+              </div>
+              
+              <div className="flex">
+                <div className="w-12 h-12 bg-fintech-purple/10 rounded-full flex-shrink-0 flex items-center justify-center mr-4">
+                  <DollarSign className="h-6 w-6 text-fintech-purple" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-semibold mb-2">Sum Insured</h3>
+                  <p className="text-gray-600">
+                    Higher coverage amounts result in higher premium payments, but offer greater financial security.
+                  </p>
+                </div>
+              </div>
+              
+              <div className="flex">
+                <div className="w-12 h-12 bg-fintech-purple/10 rounded-full flex-shrink-0 flex items-center justify-center mr-4">
+                  <Hospital className="h-6 w-6 text-fintech-purple" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-semibold mb-2">Location</h3>
+                  <p className="text-gray-600">
+                    Premiums vary based on city tier due to differences in healthcare costs across locations.
+                  </p>
+                </div>
+              </div>
+              
+              <div className="flex">
+                <div className="w-12 h-12 bg-fintech-purple/10 rounded-full flex-shrink-0 flex items-center justify-center mr-4">
+                  <BriefcaseMedical className="h-6 w-6 text-fintech-purple" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-semibold mb-2">Occupation</h3>
+                  <p className="text-gray-600">
+                    High-risk occupations may attract higher premiums due to increased chances of health issues or injuries.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Financial Tools Section */}
+      {/* Key features of a Health insurance policy */}
       <section className="py-16 px-4 sm:px-6">
         <div className="container mx-auto">
-          <h2 className="text-3xl font-bold mb-10 text-center">
-            Helpful Financial Tools
-          </h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <FinancialToolCard
-              icon={<Calculator className="h-10 w-10 text-white" />}
-              title="Medical Cost Calculator"
-              description="Estimate your potential medical expenses and required coverage"
-              bgColor="bg-gradient-to-br from-fintech-purple to-fintech-blue"
-              linkText="Use Calculator"
-              linkHref="/tools/medical-cost-calculator"
-            />
-            
-            <FinancialToolCard
-              icon={<Hospital className="h-10 w-10 text-white" />}
-              title="Hospital Locator"
-              description="Find nearby network hospitals for cashless treatment"
-              bgColor="bg-gradient-to-br from-fintech-orange to-fintech-purple"
-              linkText="Locate Hospitals"
-              linkHref="/tools/hospital-locator"
-            />
-            
-            <FinancialToolCard
-              icon={<ShieldCheck className="h-10 w-10 text-white" />}
-              title="Coverage Advisor"
-              description="Get personalized recommendations for your health insurance needs"
-              bgColor="bg-gradient-to-br from-fintech-blue to-fintech-ocean-blue"
-              linkText="Get Advice"
-              linkHref="/tools/coverage-advisor"
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-16 px-4 sm:px-6 bg-gradient-to-r from-fintech-purple to-fintech-blue text-white">
-        <div className="container mx-auto text-center">
-          <h2 className="text-3xl font-bold mb-6">Ready to Secure Your Health?</h2>
-          <p className="text-xl mb-8 max-w-2xl mx-auto">
-            Compare plans from top insurers and get the best health coverage for you and your family
-          </p>
-          <Button className="bg-white text-fintech-purple hover:bg-gray-100 px-8 py-6 text-lg">
-            Get Health Insurance Quote
-          </Button>
-        </div>
-      </section>
-
-      {/* FAQ Section */}
-      <section className="py-16 px-4 sm:px-6">
-        <div className="container mx-auto max-w-4xl">
           <div className="mb-10 text-center">
-            <h2 className="text-3xl font-bold mb-4">Frequently Asked Questions</h2>
-            <p className="text-xl text-gray-600">
-              Everything you need to know about health insurance
+            <h2 className="text-3xl font-bold mb-4">Key Features of a Health Insurance Policy</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Essential benefits included in comprehensive health insurance plans
             </p>
           </div>
           
-          <div className="space-y-6">
-            <div className="glass-card p-6">
-              <h3 className="text-xl font-semibold mb-2">What is a waiting period in health insurance?</h3>
-              <p className="text-gray-600">
-                A waiting period is the time you must wait after buying a health insurance policy before you can claim benefits for certain conditions. Most policies have 30-day initial waiting periods for illnesses and 2-4 years for pre-existing conditions.
-              </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div>
+              <div className="mb-6">
+                <div className="flex items-center mb-2">
+                  <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
+                  <h3 className="text-lg font-semibold">Hospitalization Coverage</h3>
+                </div>
+                <p className="text-gray-600 ml-8">
+                  Covers room charges, nursing expenses, ICU costs, surgeon's fees, doctor visits, medicines, and other services during hospitalization.
+                </p>
+              </div>
+              
+              <div className="mb-6">
+                <div className="flex items-center mb-2">
+                  <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
+                  <h3 className="text-lg font-semibold">Pre & Post Hospitalization</h3>
+                </div>
+                <p className="text-gray-600 ml-8">
+                  Coverage for medical expenses incurred before admission (typically 30-60 days) and after discharge (typically 60-90 days).
+                </p>
+              </div>
+              
+              <div className="mb-6">
+                <div className="flex items-center mb-2">
+                  <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
+                  <h3 className="text-lg font-semibold">Daycare Procedures</h3>
+                </div>
+                <p className="text-gray-600 ml-8">
+                  Covers treatments that require less than 24 hours of hospitalization, such as cataract surgery, chemotherapy, dialysis, etc.
+                </p>
+              </div>
+              
+              <div className="mb-6">
+                <div className="flex items-center mb-2">
+                  <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
+                  <h3 className="text-lg font-semibold">No-Claim Bonus</h3>
+                </div>
+                <p className="text-gray-600 ml-8">
+                  Reward in the form of increased sum insured or premium discounts for claim-free years, enhancing your coverage over time.
+                </p>
+              </div>
             </div>
             
-            <div className="glass-card p-6">
-              <h3 className="text-xl font-semibold mb-2">What is a pre-existing condition?</h3>
-              <p className="text-gray-600">
-                Pre-existing conditions are health issues, diseases, or injuries that existed before you purchased your health insurance policy. These typically have longer waiting periods before coverage begins.
-              </p>
-            </div>
-            
-            <div className="glass-card p-6">
-              <h3 className="text-xl font-semibold mb-2">What is a cashless hospitalization?</h3>
-              <p className="text-gray-600">
-                Cashless hospitalization allows you to get medical treatment at a network hospital without paying upfront. The insurance company settles the bill directly with the hospital, subject to policy terms and conditions.
-              </p>
-            </div>
-            
-            <div className="glass-card p-6">
-              <h3 className="text-xl font-semibold mb-2">What is the difference between individual and family floater policies?</h3>
-              <p className="text-gray-600">
-                An individual health policy covers a single person with a dedicated sum insured. A family floater policy covers multiple family members under a single policy with a shared sum insured that can be used by any covered family member.
-              </p>
+            <div>
+              <div className="mb-6">
+                <div className="flex items-center mb-2">
+                  <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
+                  <h3 className="text-lg font-semibold">Cashless Treatment</h3>
+                </div>
+                <p className="text-gray-600 ml-8">
+                  Direct settlement between the insurer and network hospitals, eliminating the need for upfront payment by the policyholder.
+                </p>
+              </div>
+              
+              <div className="mb-6">
+                <div className="flex items-center mb-2">
+                  <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
+                  <h3 className="text-lg font-semibold">AYUSH Coverage</h3>
+                </div>
+                <p className="text-gray-600 ml-8">
+                  Coverage for alternative treatments like Ayurveda, Yoga, Unani, Siddha, and Homeopathy at recognized hospitals.
+                </p>
+              </div>
+              
+              <div className="mb-6">
+                <div className="flex items-center mb-2">
+                  <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
+                  <h3 className="text-lg font-semibold">Preventive Health Check-ups</h3>
+                </div>
+                <p className="text-gray-600 ml-8">
+                  Complimentary health check-ups at regular intervals to monitor your health and detect issues early.
+                </p>
+              </div>
+              
+              <div className="mb-6">
+                <div className="flex items-center mb-2">
+                  <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
+                  <h3 className="text-lg font-semibold">Restoration Benefit</h3>
+                </div>
+                <p className="text-gray-600 ml-8">
+                  Automatic restoration of the sum insured if it gets exhausted during the policy period, providing additional coverage.
+                </p>
+              </div>
             </div>
           </div>
         </div>
       </section>
-      
-      <Footer />
-    </div>
-  );
-};
 
-export default HealthInsurance;
+      {/* Eligibility Criteria for Purchasing a Health Insurance Policy */}
