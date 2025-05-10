@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -27,9 +28,7 @@ import {
   CreditCard,
   ArrowRight,
   DollarSign,
-  Bandage as BriefcaseMedical,
   Ambulance,
-  Bandage,
   FileText,
   Info,
   CalendarDays,
@@ -394,7 +393,7 @@ const HealthInsurance = () => {
             
             <div className="glass-card p-6">
               <div className="w-14 h-14 bg-gradient-to-r from-fintech-blue to-fintech-ocean-blue rounded-xl mb-4 flex items-center justify-center">
-                <BriefcaseMedical className="h-7 w-7 text-white" />
+                <Hospital className="h-7 w-7 text-white" />
               </div>
               <h3 className="text-xl font-bold mb-3">Critical Illness Cover</h3>
               <p className="text-gray-600 mb-4">
@@ -613,7 +612,7 @@ const HealthInsurance = () => {
               
               <div className="flex">
                 <div className="w-12 h-12 bg-fintech-purple/10 rounded-full flex-shrink-0 flex items-center justify-center mr-4">
-                  <BriefcaseMedical className="h-6 w-6 text-fintech-purple" />
+                  <Hospital className="h-6 w-6 text-fintech-purple" />
                 </div>
                 <div>
                   <h3 className="text-lg font-semibold mb-2">Occupation</h3>
@@ -726,3 +725,88 @@ const HealthInsurance = () => {
       </section>
 
       {/* Eligibility Criteria for Purchasing a Health Insurance Policy */}
+      <section className="py-16 px-4 sm:px-6 bg-gray-50">
+        <div className="container mx-auto">
+          <div className="mb-10 text-center">
+            <h2 className="text-3xl font-bold mb-4">Eligibility Criteria for Health Insurance</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Understanding who can apply for health insurance policies in India
+            </p>
+          </div>
+          
+          <div className="max-w-4xl mx-auto">
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Policy Type</TableHead>
+                  <TableHead>Age Criteria</TableHead>
+                  <TableHead>Medical Requirements</TableHead>
+                  <TableHead>Other Conditions</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                <TableRow>
+                  <TableCell className="font-medium">Individual Health Plan</TableCell>
+                  <TableCell>18 to 65 years</TableCell>
+                  <TableCell>Medical check-up may be required beyond 45 years</TableCell>
+                  <TableCell>Valid ID and address proof</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell className="font-medium">Family Floater</TableCell>
+                  <TableCell>
+                    Adult: 18 to 65 years<br />
+                    Children: 3 months to 25 years
+                  </TableCell>
+                  <TableCell>Based on the age of oldest member</TableCell>
+                  <TableCell>Family relationship documents</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell className="font-medium">Senior Citizen Plan</TableCell>
+                  <TableCell>60 to 80 years</TableCell>
+                  <TableCell>Mandatory medical check-up</TableCell>
+                  <TableCell>Income proof may be required</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell className="font-medium">Critical Illness Cover</TableCell>
+                  <TableCell>18 to 65 years</TableCell>
+                  <TableCell>Detailed medical history required</TableCell>
+                  <TableCell>Lower age limit can vary by insurer</TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+            
+            <div className="mt-8 p-6 border rounded-lg bg-yellow-50 border-yellow-200">
+              <h3 className="text-lg font-semibold mb-3 flex items-center">
+                <Info className="h-5 w-5 text-yellow-600 mr-2" />
+                Important Notes on Eligibility
+              </h3>
+              <ul className="space-y-2 text-gray-700">
+                <li className="flex">
+                  <CheckCircle className="h-5 w-5 text-green-500 mr-2 flex-shrink-0 mt-0.5" />
+                  <span>Entry age varies by insurer and policy type. Some insurers offer health plans for newborns, while others require a minimum age of 3 months.</span>
+                </li>
+                <li className="flex">
+                  <CheckCircle className="h-5 w-5 text-green-500 mr-2 flex-shrink-0 mt-0.5" />
+                  <span>Pre-existing conditions don't disqualify you from getting health insurance but may lead to waiting periods before coverage begins.</span>
+                </li>
+                <li className="flex">
+                  <CheckCircle className="h-5 w-5 text-green-500 mr-2 flex-shrink-0 mt-0.5" />
+                  <span>Indian citizens residing abroad can purchase domestic health insurance but coverage may be limited to treatments in India.</span>
+                </li>
+                <li className="flex">
+                  <CheckCircle className="h-5 w-5 text-green-500 mr-2 flex-shrink-0 mt-0.5" />
+                  <span>Non-resident Indians (NRIs) can purchase health insurance policies in India for themselves or their family members living in India.</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <Footer />
+    </div>
+  );
+};
+
+export default HealthInsurance;
