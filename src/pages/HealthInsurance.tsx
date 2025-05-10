@@ -34,7 +34,7 @@ import {
   CalendarDays,
   FileCheck,
   FileX,
-  Question
+  HelpCircle // Changed from Question to HelpCircle which is available in lucide-react
 } from "lucide-react";
 import FinancialToolCard from "@/components/FinancialToolCard";
 
