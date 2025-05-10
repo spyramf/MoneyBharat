@@ -19,7 +19,6 @@ import {
   User,
   Users,
   UserPlus,
-  MedKit,
   Hospital,
   CheckCircle,
   Clock,
@@ -27,6 +26,9 @@ import {
   CreditCard,
   ArrowRight,
   DollarSign,
+  "briefcase-medical": BriefcaseMedical,
+  ambulance,
+  bandage
 } from "lucide-react";
 import FinancialToolCard from "@/components/FinancialToolCard";
 
@@ -385,7 +387,7 @@ const HealthInsurance = () => {
             
             <div className="glass-card p-6">
               <div className="w-14 h-14 bg-gradient-to-r from-fintech-blue to-fintech-ocean-blue rounded-xl mb-4 flex items-center justify-center">
-                <MedKit className="h-7 w-7 text-white" />
+                <BriefcaseMedical className="h-7 w-7 text-white" />
               </div>
               <h3 className="text-xl font-bold mb-3">Critical Illness Cover</h3>
               <p className="text-gray-600 mb-4">
@@ -547,7 +549,7 @@ const HealthInsurance = () => {
             />
             
             <FinancialToolCard
-              icon={<MedKit className="h-10 w-10 text-white" />}
+              icon={<Hospital className="h-10 w-10 text-white" />}
               title="Hospital Locator"
               description="Find nearby network hospitals for cashless treatment"
               bgColor="bg-gradient-to-br from-fintech-orange to-fintech-purple"
