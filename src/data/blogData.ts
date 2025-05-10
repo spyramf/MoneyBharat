@@ -110,7 +110,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: 2,
-    title: 'Understanding Mutual Funds: A Beginner's Guide for Indian Investors',
+    title: "Understanding Mutual Funds: A Beginner's Guide for Indian Investors",
     slug: 'understanding-mutual-funds-beginners-guide',
     excerpt: 'Learn the fundamentals of mutual fund investing and how to build a portfolio that aligns with your financial goals.',
     content: `
