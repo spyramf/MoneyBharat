@@ -7,49 +7,38 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-
-// Mock booking data
-const mockBookings = [
-  {
-    id: 1,
-    name: 'Rahul Sharma',
-    email: 'rahul.sharma@example.com',
-    phone: '+91 9876543210',
-    service: 'Financial Planning',
-    date: '2025-05-15',
-    time: '10:00 AM',
-    status: 'confirmed',
-  },
-  {
-    id: 2,
-    name: 'Priya Patel',
-    email: 'priya.patel@example.com',
-    phone: '+91 9876543211',
-    service: 'Investment Consultation',
-    date: '2025-05-16',
-    time: '2:30 PM',
-    status: 'pending',
-  },
-  {
-    id: 3,
-    name: 'Amit Kumar',
-    email: 'amit.kumar@example.com',
-    phone: '+91 9876543212',
-    service: 'Tax Planning',
-    date: '2025-05-18',
-    time: '11:00 AM',
-    status: 'confirmed',
-  },
-];
+import { useBooking } from '@/context/BookingContext';
+import { toast } from 'sonner';
 
 const BookingManager = () => {
   const [date, setDate] = useState<Date | undefined>(new Date());
   const [selectedTab, setSelectedTab] = useState('all');
   
-  const filteredBookings = mockBookings.filter(booking => {
+  const { bookings, updateBookingStatus, deleteBooking } = useBooking();
+  
+  const filteredBookings = bookings.filter(booking => {
     if (selectedTab === 'all') return true;
     return booking.status === selectedTab;
   });
+
+  const formattedDate = date ? date.toISOString().split('T')[0] : '';
+  
+  const handleConfirm = (id: number) => {
+    updateBookingStatus(id, 'confirmed');
+    toast.success('Booking confirmed successfully');
+  };
+  
+  const handleCancel = (id: number) => {
+    updateBookingStatus(id, 'cancelled');
+    toast.error('Booking cancelled');
+  };
+
+  const handleDelete = (id: number) => {
+    if (window.confirm('Are you sure you want to delete this booking?')) {
+      deleteBooking(id);
+      toast.success('Booking deleted successfully');
+    }
+  };
 
   return (
     <AdminLayout>
@@ -69,7 +58,7 @@ const BookingManager = () => {
                   </TabsList>
                 </div>
                 
-                <TabsContent value="all" className="mt-0">
+                <TabsContent value={selectedTab} className="mt-0">
                   <Table>
                     <TableHeader>
                       <TableRow>
@@ -112,10 +101,19 @@ const BookingManager = () => {
                             </TableCell>
                             <TableCell className="text-right">
                               <div className="flex justify-end gap-2">
-                                <Button variant="outline" size="sm">View</Button>
                                 {booking.status === 'pending' && (
-                                  <Button size="sm" className="bg-green-600 hover:bg-green-700">Confirm</Button>
+                                  <Button size="sm" className="bg-green-600 hover:bg-green-700" onClick={() => handleConfirm(booking.id)}>
+                                    Confirm
+                                  </Button>
                                 )}
+                                {booking.status !== 'cancelled' && (
+                                  <Button size="sm" variant="destructive" onClick={() => handleCancel(booking.id)}>
+                                    Cancel
+                                  </Button>
+                                )}
+                                <Button variant="outline" size="sm" className="text-red-500" onClick={() => handleDelete(booking.id)}>
+                                  Delete
+                                </Button>
                               </div>
                             </TableCell>
                           </TableRow>
@@ -123,17 +121,6 @@ const BookingManager = () => {
                       )}
                     </TableBody>
                   </Table>
-                </TabsContent>
-                
-                {/* Duplicate the Table structure for other tabs if needed */}
-                <TabsContent value="pending" className="mt-0">
-                  {/* Same table structure */}
-                </TabsContent>
-                <TabsContent value="confirmed" className="mt-0">
-                  {/* Same table structure */}
-                </TabsContent>
-                <TabsContent value="cancelled" className="mt-0">
-                  {/* Same table structure */}
                 </TabsContent>
               </Tabs>
             </CardContent>
@@ -154,8 +141,8 @@ const BookingManager = () => {
                 </h3>
                 {date && (
                   <div className="space-y-2">
-                    {mockBookings
-                      .filter(booking => booking.date === date.toISOString().split('T')[0])
+                    {bookings
+                      .filter(booking => booking.date === formattedDate)
                       .map(booking => (
                         <div key={booking.id} className="p-2 rounded bg-gray-50 text-sm">
                           <div className="font-medium">{booking.time} - {booking.name}</div>

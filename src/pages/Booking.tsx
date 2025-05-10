@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useForm } from 'react-hook-form';
@@ -13,8 +12,8 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Card, CardContent } from '@/components/ui/card';
+import { useBooking } from '@/context/BookingContext';
 
 const formSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
@@ -41,6 +40,7 @@ const timeSlots = [
 
 const Booking = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const { addBooking } = useBooking();
   
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -58,12 +58,20 @@ const Booking = () => {
   const onSubmit = (values: z.infer<typeof formSchema>) => {
     console.log("Form values:", values);
     
-    // In a real application, this would be an API call to create a booking
-    setTimeout(() => {
-      toast.success("Your booking request has been received!");
-      setIsSubmitted(true);
-      form.reset();
-    }, 1000);
+    // Add the booking to the context
+    addBooking({
+      name: values.name,
+      email: values.email,
+      phone: values.phone,
+      service: values.service,
+      date: values.preferredDate,
+      time: values.preferredTime,
+      message: values.message,
+    });
+    
+    toast.success("Your booking request has been received!");
+    setIsSubmitted(true);
+    form.reset();
   };
 
   return (

@@ -5,6 +5,7 @@ import { blogPosts } from '@/data/blogData';
 import { FileText, Calendar, Clock } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
+import { useBooking } from '@/context/BookingContext';
 
 const Dashboard = () => {
   const totalBlogs = blogPosts.length;
@@ -12,6 +13,12 @@ const Dashboard = () => {
   const recentBlogs = [...blogPosts].sort((a, b) => 
     new Date(b.publishedDate).getTime() - new Date(a.publishedDate).getTime()
   ).slice(0, 5);
+
+  // Get booking information from context
+  const { bookings } = useBooking();
+  const upcomingBookings = bookings.filter(booking => 
+    new Date(booking.date) >= new Date() && booking.status !== 'cancelled'
+  ).length;
 
   return (
     <AdminLayout>
@@ -45,34 +52,76 @@ const Dashboard = () => {
               <Calendar className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">0</div>
+              <div className="text-2xl font-bold">{upcomingBookings}</div>
+              <Button variant="link" size="sm" className="p-0 mt-2" asChild>
+                <Link to="/admin/bookings">View all bookings</Link>
+              </Button>
             </CardContent>
           </Card>
         </div>
         
-        <h2 className="text-xl font-bold mb-4">Recent Blog Posts</h2>
-        <div className="space-y-4">
-          {recentBlogs.map(blog => (
-            <Card key={blog.id}>
-              <CardContent className="p-4">
-                <div className="flex justify-between items-center">
-                  <div>
-                    <h3 className="font-medium">{blog.title}</h3>
-                    <div className="text-sm text-gray-500 flex items-center mt-1">
-                      <Clock className="h-3 w-3 mr-1" />
-                      {blog.publishedDate}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+          <div>
+            <h2 className="text-xl font-bold mb-4">Recent Blog Posts</h2>
+            <div className="space-y-4">
+              {recentBlogs.map(blog => (
+                <Card key={blog.id}>
+                  <CardContent className="p-4">
+                    <div className="flex justify-between items-center">
+                      <div>
+                        <h3 className="font-medium">{blog.title}</h3>
+                        <div className="text-sm text-gray-500 flex items-center mt-1">
+                          <Clock className="h-3 w-3 mr-1" />
+                          {blog.publishedDate}
+                        </div>
+                      </div>
+                      <div className="flex gap-2">
+                        <Button variant="outline" size="sm" asChild>
+                          <Link to={`/admin/blogs/edit/${blog.id}`}>Edit</Link>
+                        </Button>
+                      </div>
                     </div>
-                  </div>
-                  <div className="flex gap-2">
-                    <Button variant="outline" size="sm" asChild>
-                      <Link to={`/admin/blogs/edit/${blog.id}`}>Edit</Link>
-                    </Button>
-                    <Button variant="ghost" size="sm" className="text-red-500">Delete</Button>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+          
+          <div>
+            <h2 className="text-xl font-bold mb-4">Recent Bookings</h2>
+            <div className="space-y-4">
+              {bookings.slice(0, 5).map(booking => (
+                <Card key={booking.id}>
+                  <CardContent className="p-4">
+                    <div className="flex justify-between items-center">
+                      <div>
+                        <h3 className="font-medium">{booking.name}</h3>
+                        <div className="text-sm text-gray-500 mt-1">
+                          {booking.service} - {booking.date} at {booking.time}
+                        </div>
+                        <div className="text-xs mt-1">
+                          Status: <span className={`font-semibold ${
+                            booking.status === 'confirmed' ? 'text-green-500' : 
+                            booking.status === 'pending' ? 'text-amber-500' : 'text-red-500'
+                          }`}>{booking.status}</span>
+                        </div>
+                      </div>
+                      <Button variant="outline" size="sm" asChild>
+                        <Link to="/admin/bookings">View</Link>
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+              {bookings.length === 0 && (
+                <Card>
+                  <CardContent className="p-4 text-center text-gray-500">
+                    No bookings available yet
+                  </CardContent>
+                </Card>
+              )}
+            </div>
+          </div>
         </div>
       </div>
     </AdminLayout>
