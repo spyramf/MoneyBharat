@@ -3,6 +3,8 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import AdminLayout from '@/components/AdminLayout';
 import { blogPosts } from '@/data/blogData';
 import { FileText, Calendar, Clock } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Link } from 'react-router-dom';
 
 const Dashboard = () => {
   const totalBlogs = blogPosts.length;
