@@ -51,9 +51,6 @@ const Navbar = () => {
             <Link to="/loans" className="font-medium text-gray-700 hover:text-fintech-purple transition-colors">
               Loans
             </Link>
-            <Link to="/blog" className="font-medium text-gray-700 hover:text-fintech-purple transition-colors">
-              Blog
-            </Link>
             <Link to="/about" className="font-medium text-gray-700 hover:text-fintech-purple transition-colors">
               About Us
             </Link>
@@ -95,13 +92,6 @@ const Navbar = () => {
                 onClick={() => setIsOpen(false)}
               >
                 Loans
-              </Link>
-              <Link
-                to="/blog"
-                className="font-medium text-gray-700 hover:text-fintech-purple transition-colors"
-                onClick={() => setIsOpen(false)}
-              >
-                Blog
               </Link>
               <Link
                 to="/about"
