@@ -1,11 +1,24 @@
-
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Navbar from "@/components/Navbar";
-import { ArrowRight, Shield, ShieldCheck, User, Car, Home, Heart, Umbrella, Briefcase } from "lucide-react";
+import { 
+  ArrowRight, 
+  Shield, 
+  ShieldCheck, 
+  User, 
+  Car, 
+  Home, 
+  Heart, 
+  Umbrella, 
+  Briefcase, 
+  Check, 
+  ListOrdered, 
+  Building,
+  ArrowLeft,
+} from "lucide-react";
 
 const InsuranceCard = ({ 
   title, 
@@ -478,6 +491,144 @@ const InsurancePage = () => {
                 </div>
               </TabsContent>
             </Tabs>
+          </div>
+        </div>
+      </section>
+
+      {/* Benefits of Money Bharat Insurance Services */}
+      <section className="py-16 px-4 sm:px-6 bg-gray-50">
+        <div className="container mx-auto">
+          <h2 className="text-3xl font-bold mb-10 text-center">
+            Benefits of <span className="gradient-text">Money Bharat</span> Insurance Services
+          </h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+            <Card className="h-full transition-all duration-200 hover:shadow-lg hover:-translate-y-1">
+              <CardContent className="p-6">
+                <div className="w-12 h-12 rounded-full mb-4 flex items-center justify-center bg-gradient-to-r from-fintech-purple to-fintech-blue text-white">
+                  <Check className="h-6 w-6" />
+                </div>
+                <h3 className="text-lg font-semibold mb-2">Compare Multiple Insurers</h3>
+                <p className="text-gray-600">
+                  Compare quotes from 50+ insurers in one place to find the best coverage at the best price
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="h-full transition-all duration-200 hover:shadow-lg hover:-translate-y-1">
+              <CardContent className="p-6">
+                <div className="w-12 h-12 rounded-full mb-4 flex items-center justify-center bg-gradient-to-r from-fintech-orange to-fintech-purple text-white">
+                  <Check className="h-6 w-6" />
+                </div>
+                <h3 className="text-lg font-semibold mb-2">Transparent Pricing</h3>
+                <p className="text-gray-600">
+                  No hidden fees or charges. Get clear and transparent pricing on all insurance plans
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="h-full transition-all duration-200 hover:shadow-lg hover:-translate-y-1">
+              <CardContent className="p-6">
+                <div className="w-12 h-12 rounded-full mb-4 flex items-center justify-center bg-gradient-to-r from-fintech-blue to-fintech-ocean-blue text-white">
+                  <Check className="h-6 w-6" />
+                </div>
+                <h3 className="text-lg font-semibold mb-2">Expert Assistance</h3>
+                <p className="text-gray-600">
+                  Our insurance experts guide you through the entire process, from selection to claims
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="h-full transition-all duration-200 hover:shadow-lg hover:-translate-y-1">
+              <CardContent className="p-6">
+                <div className="w-12 h-12 rounded-full mb-4 flex items-center justify-center bg-gradient-to-r from-fintech-deep-purple to-fintech-purple text-white">
+                  <Check className="h-6 w-6" />
+                </div>
+                <h3 className="text-lg font-semibold mb-2">Fast Policy Issuance</h3>
+                <p className="text-gray-600">
+                  Get your policy issued quickly with minimal paperwork and hassle-free processing
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* How Money Bharat Works */}
+      <section className="py-16 px-4 sm:px-6">
+        <div className="container mx-auto">
+          <h2 className="text-3xl font-bold mb-10 text-center">
+            How <span className="gradient-text">Money Bharat</span> Works
+          </h2>
+          
+          <div className="flex flex-col md:flex-row items-start justify-between gap-8 max-w-5xl mx-auto">
+            <div className="flex flex-col items-center text-center">
+              <div className="w-16 h-16 rounded-full bg-gradient-to-r from-fintech-purple to-fintech-blue text-white flex items-center justify-center mb-4">
+                <ListOrdered className="h-7 w-7" />
+              </div>
+              <h3 className="text-lg font-semibold mb-2">Share Your Requirements</h3>
+              <p className="text-gray-600 mb-4">Tell us about your insurance needs</p>
+              <ArrowRight className="hidden md:block transform rotate-0 md:rotate-90 lg:rotate-0 h-6 w-6 text-gray-400" />
+            </div>
+            
+            <div className="flex flex-col items-center text-center">
+              <div className="w-16 h-16 rounded-full bg-gradient-to-r from-fintech-orange to-fintech-purple text-white flex items-center justify-center mb-4">
+                <ListOrdered className="h-7 w-7" />
+              </div>
+              <h3 className="text-lg font-semibold mb-2">Compare Plans</h3>
+              <p className="text-gray-600 mb-4">View and compare plans from top insurers</p>
+              <ArrowRight className="hidden md:block transform rotate-0 md:rotate-90 lg:rotate-0 h-6 w-6 text-gray-400" />
+            </div>
+            
+            <div className="flex flex-col items-center text-center">
+              <div className="w-16 h-16 rounded-full bg-gradient-to-r from-fintech-blue to-fintech-ocean-blue text-white flex items-center justify-center mb-4">
+                <ListOrdered className="h-7 w-7" />
+              </div>
+              <h3 className="text-lg font-semibold mb-2">Choose Your Plan</h3>
+              <p className="text-gray-600 mb-4">Select the best plan for your needs</p>
+              <ArrowRight className="hidden md:block transform rotate-0 md:rotate-90 lg:rotate-0 h-6 w-6 text-gray-400" />
+            </div>
+            
+            <div className="flex flex-col items-center text-center">
+              <div className="w-16 h-16 rounded-full bg-gradient-to-r from-fintech-deep-purple to-fintech-purple text-white flex items-center justify-center mb-4">
+                <ListOrdered className="h-7 w-7" />
+              </div>
+              <h3 className="text-lg font-semibold mb-2">Get Insured</h3>
+              <p className="text-gray-600 mb-4">Complete the process and receive your policy</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Our Insurance Partners */}
+      <section className="py-16 px-4 sm:px-6 bg-gray-50">
+        <div className="container mx-auto">
+          <h2 className="text-3xl font-bold mb-10 text-center">
+            Our Insurance <span className="gradient-text">Partners</span>
+          </h2>
+          
+          <p className="text-center text-lg text-gray-600 mb-10 max-w-3xl mx-auto">
+            We partner with India's most trusted insurance providers to bring you the best coverage options at competitive prices
+          </p>
+          
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+            {/* Partner Cards */}
+            {[1, 2, 3, 4, 5, 6].map((item) => (
+              <Card key={item} className="flex items-center justify-center p-6 hover:shadow-md transition-all">
+                <CardContent className="p-0 flex flex-col items-center">
+                  <div className="flex items-center justify-center mb-2">
+                    <Building className="h-10 w-10 text-fintech-purple" />
+                  </div>
+                  <p className="text-center font-medium">Insurance Partner {item}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+          
+          <div className="mt-12 text-center">
+            <Button className="bg-white border border-fintech-purple text-fintech-purple hover:bg-fintech-purple hover:text-white">
+              View All Partners
+            </Button>
           </div>
         </div>
       </section>
