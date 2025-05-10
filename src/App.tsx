@@ -13,7 +13,6 @@ import NotFound from "./pages/NotFound";
 import SipCalculator from "./pages/SipCalculator";
 import EmiCalculator from "./pages/EmiCalculator";
 import TaxSaving from "./pages/TaxSaving";
-import HealthInsurance from "./pages/HealthInsurance";
 
 const queryClient = new QueryClient();
 
@@ -27,7 +26,6 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/mutual-funds" element={<MutualFunds />} />
           <Route path="/insurance" element={<Insurance />} />
-          <Route path="/health-insurance" element={<HealthInsurance />} />
           <Route path="/loans" element={<Loans />} />
           <Route path="/about" element={<AboutUs />} />
           <Route path="/tools/sip-calculator" element={<SipCalculator />} />
