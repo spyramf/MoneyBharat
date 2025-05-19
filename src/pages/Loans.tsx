@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import Navbar from '@/components/Navbar';
@@ -45,17 +46,17 @@ const Loans = () => {
       path: "/loans/personal"
     },
     {
-      id: "home",
-      name: "Home Loan",
-      icon: <Home className="h-10 w-10 text-fintech-blue" />,
-      description: "Affordable housing finance solutions",
-      path: "/loans"
-    },
-    {
       id: "business",
       name: "Business Loan",
       icon: <CreditCard className="h-10 w-10 text-fintech-orange" />,
       description: "Grow your business with flexible financing options",
+      path: "/loans/business"
+    },
+    {
+      id: "home",
+      name: "Home Loan",
+      icon: <Home className="h-10 w-10 text-fintech-blue" />,
+      description: "Affordable housing finance solutions",
       path: "/loans"
     },
     {
