@@ -22,6 +22,9 @@ import HealthInsurance from "./pages/HealthInsurance";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import Booking from "./pages/Booking";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsOfService from "./pages/TermsOfService";
+import Sitemap from "./pages/Sitemap";
 
 // Admin routes
 import Dashboard from "./pages/admin/Dashboard";
@@ -56,6 +59,9 @@ const App = () => (
                 <Route path="/blog" element={<Blog />} />
                 <Route path="/blog/:slug" element={<BlogPost />} />
                 <Route path="/booking" element={<Booking />} />
+                <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                <Route path="/terms-of-service" element={<TermsOfService />} />
+                <Route path="/sitemap" element={<Sitemap />} />
                 
                 {/* Admin Routes */}
                 <Route path="/admin" element={<Dashboard />} />

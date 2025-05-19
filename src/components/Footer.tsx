@@ -1,5 +1,6 @@
 
 import { Facebook, Instagram, Linkedin, Twitter } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -8,10 +9,10 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Brand */}
           <div>
-            <a href="/" className="text-2xl font-bold">
+            <Link to="/" className="text-2xl font-bold">
               <span className="gradient-text">Money</span>
               <span className="text-fintech-blue">Bharat</span>
-            </a>
+            </Link>
             <p className="mt-4 text-gray-600 max-w-xs">
               Transforming India's financial landscape with innovative tech-driven solutions for wealth creation.
             </p>
@@ -50,22 +51,22 @@ const Footer = () => {
             <h3 className="font-semibold mb-4 text-gray-900">Products</h3>
             <ul className="space-y-3">
               <li>
-                <a href="/mutual-funds" className="text-gray-600 hover:text-fintech-purple">Mutual Funds</a>
+                <Link to="/mutual-funds" className="text-gray-600 hover:text-fintech-purple">Mutual Funds</Link>
               </li>
               <li>
-                <a href="/health-insurance" className="text-gray-600 hover:text-fintech-purple">Health Insurance</a>
+                <Link to="/health-insurance" className="text-gray-600 hover:text-fintech-purple">Health Insurance</Link>
               </li>
               <li>
-                <a href="/insurance" className="text-gray-600 hover:text-fintech-purple">Term Insurance</a>
+                <Link to="/insurance" className="text-gray-600 hover:text-fintech-purple">Term Insurance</Link>
               </li>
               <li>
-                <a href="/insurance" className="text-gray-600 hover:text-fintech-purple">General Insurance</a>
+                <Link to="/insurance" className="text-gray-600 hover:text-fintech-purple">General Insurance</Link>
               </li>
               <li>
-                <a href="/loans" className="text-gray-600 hover:text-fintech-purple">Personal Loans</a>
+                <Link to="/loans/personal" className="text-gray-600 hover:text-fintech-purple">Personal Loans</Link>
               </li>
               <li>
-                <a href="/loans" className="text-gray-600 hover:text-fintech-purple">Home Loans</a>
+                <Link to="/loans/business" className="text-gray-600 hover:text-fintech-purple">Business Loans</Link>
               </li>
             </ul>
           </div>
@@ -75,19 +76,19 @@ const Footer = () => {
             <h3 className="font-semibold mb-4 text-gray-900">Company</h3>
             <ul className="space-y-3">
               <li>
-                <a href="/about" className="text-gray-600 hover:text-fintech-purple">About Us</a>
+                <Link to="/about" className="text-gray-600 hover:text-fintech-purple">About Us</Link>
               </li>
               <li>
-                <a href="#" className="text-gray-600 hover:text-fintech-purple">Careers</a>
+                <Link to="/blog" className="text-gray-600 hover:text-fintech-purple">Blog</Link>
               </li>
               <li>
-                <a href="#" className="text-gray-600 hover:text-fintech-purple">Blog</a>
+                <Link to="/booking" className="text-gray-600 hover:text-fintech-purple">Book a Consultation</Link>
               </li>
               <li>
-                <a href="#" className="text-gray-600 hover:text-fintech-purple">Press</a>
+                <Link to="/sitemap" className="text-gray-600 hover:text-fintech-purple">Sitemap</Link>
               </li>
               <li>
-                <a href="#" className="text-gray-600 hover:text-fintech-purple">Contact</a>
+                <a href="mailto:contact@moneybharat.com" className="text-gray-600 hover:text-fintech-purple">Contact</a>
               </li>
             </ul>
           </div>
@@ -97,19 +98,19 @@ const Footer = () => {
             <h3 className="font-semibold mb-4 text-gray-900">Legal</h3>
             <ul className="space-y-3">
               <li>
-                <a href="#" className="text-gray-600 hover:text-fintech-purple">Terms of Service</a>
+                <Link to="/terms-of-service" className="text-gray-600 hover:text-fintech-purple">Terms of Service</Link>
               </li>
               <li>
-                <a href="#" className="text-gray-600 hover:text-fintech-purple">Privacy Policy</a>
+                <Link to="/privacy-policy" className="text-gray-600 hover:text-fintech-purple">Privacy Policy</Link>
               </li>
               <li>
-                <a href="#" className="text-gray-600 hover:text-fintech-purple">Cookie Policy</a>
+                <Link to="#" className="text-gray-600 hover:text-fintech-purple">Cookie Policy</Link>
               </li>
               <li>
-                <a href="#" className="text-gray-600 hover:text-fintech-purple">Compliance</a>
+                <Link to="#" className="text-gray-600 hover:text-fintech-purple">Compliance</Link>
               </li>
               <li>
-                <a href="#" className="text-gray-600 hover:text-fintech-purple">Security</a>
+                <Link to="#" className="text-gray-600 hover:text-fintech-purple">Security</Link>
               </li>
             </ul>
           </div>
