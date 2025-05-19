@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet-async";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { Link } from "react-router-dom";
-import { ArrowRight, FileText, Sitemap as SitemapIcon } from "lucide-react";
+import { ArrowRight, FileText, Map } from "lucide-react";
 
 const Sitemap = () => {
   return (
@@ -21,7 +21,7 @@ const Sitemap = () => {
       <div className="pt-24 pb-16 bg-gradient-to-b from-gray-50 to-white">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-center mb-8">
-            <SitemapIcon className="text-fintech-orange h-12 w-12 mr-4" />
+            <Map className="text-fintech-orange h-12 w-12 mr-4" />
             <h1 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-fintech-purple to-fintech-blue">
               Sitemap
             </h1>
