@@ -14,6 +14,7 @@ import Home from '@/components/icons/Home';
 import Car from '@/components/icons/Car';
 import GraduationCap from '@/components/icons/GraduationCap';
 import Gold from '@/components/icons/Gold';
+import { Link } from 'react-router-dom';
 
 const Loans = () => {
   const [loanAmount, setLoanAmount] = useState<number>(500000);
@@ -40,37 +41,43 @@ const Loans = () => {
       id: "personal",
       name: "Personal Loan",
       icon: <Banknote className="h-10 w-10 text-fintech-purple" />,
-      description: "Quick unsecured loans for your personal needs"
+      description: "Quick unsecured loans for your personal needs",
+      path: "/loans/personal"
     },
     {
       id: "home",
       name: "Home Loan",
       icon: <Home className="h-10 w-10 text-fintech-blue" />,
-      description: "Affordable housing finance solutions"
+      description: "Affordable housing finance solutions",
+      path: "/loans"
     },
     {
       id: "business",
       name: "Business Loan",
       icon: <CreditCard className="h-10 w-10 text-fintech-orange" />,
-      description: "Grow your business with flexible financing options"
+      description: "Grow your business with flexible financing options",
+      path: "/loans"
     },
     {
       id: "car",
       name: "Car Loan",
       icon: <Car className="h-10 w-10 text-fintech-deep-purple" />,
-      description: "Drive your dream car with competitive rates"
+      description: "Drive your dream car with competitive rates",
+      path: "/loans"
     },
     {
       id: "education",
       name: "Education Loan",
       icon: <GraduationCap className="h-10 w-10 text-green-500" />,
-      description: "Invest in education with affordable student loans"
+      description: "Invest in education with affordable student loans",
+      path: "/loans"
     },
     {
       id: "gold",
       name: "Gold Loan",
       icon: <Gold className="h-10 w-10 text-yellow-500" />,
-      description: "Quick loans against your gold assets"
+      description: "Quick loans against your gold assets",
+      path: "/loans"
     }
   ];
 
@@ -174,7 +181,9 @@ const Loans = () => {
                   <CardDescription className="text-base">{loan.description}</CardDescription>
                 </CardContent>
                 <CardFooter>
-                  <Button variant="outline" className="w-full">Learn More</Button>
+                  <Button variant="outline" className="w-full" asChild>
+                    <Link to={loan.path}>Learn More</Link>
+                  </Button>
                 </CardFooter>
               </Card>
             ))}

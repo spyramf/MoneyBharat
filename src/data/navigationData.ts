@@ -8,3 +8,12 @@ export const navItems = [
   { name: 'Book a Consultation', path: '/booking' },
   { name: 'About Us', path: '/about' },
 ];
+
+export const loanNavItems = [
+  { name: 'Personal Loan', path: '/loans/personal' },
+  { name: 'Home Loan', path: '/loans' },
+  { name: 'Business Loan', path: '/loans' },
+  { name: 'Car Loan', path: '/loans' },
+  { name: 'Education Loan', path: '/loans' },
+  { name: 'Gold Loan', path: '/loans' }
+];

@@ -11,6 +11,7 @@ import Index from "./pages/Index";
 import MutualFunds from "./pages/MutualFunds";
 import Insurance from "./pages/Insurance";
 import Loans from "./pages/Loans";
+import PersonalLoan from "./pages/PersonalLoan";
 import AboutUs from "./pages/AboutUs";
 import NotFound from "./pages/NotFound";
 import SipCalculator from "./pages/SipCalculator";
@@ -45,6 +46,7 @@ const App = () => (
                 <Route path="/insurance" element={<Insurance />} />
                 <Route path="/health-insurance" element={<HealthInsurance />} />
                 <Route path="/loans" element={<Loans />} />
+                <Route path="/loans/personal" element={<PersonalLoan />} />
                 <Route path="/about" element={<AboutUs />} />
                 <Route path="/tools/sip-calculator" element={<SipCalculator />} />
                 <Route path="/tools/emi-calculator" element={<EmiCalculator />} />
