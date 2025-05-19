@@ -57,14 +57,14 @@ const Loans = () => {
       name: "Home Loan",
       icon: <Home className="h-10 w-10 text-fintech-blue" />,
       description: "Affordable housing finance solutions",
-      path: "/loans"
+      path: "/loans/home"
     },
     {
       id: "car",
       name: "Car Loan",
       icon: <Car className="h-10 w-10 text-fintech-deep-purple" />,
       description: "Drive your dream car with competitive rates",
-      path: "/loans"
+      path: "/loans/car"
     },
     {
       id: "education",

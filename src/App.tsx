@@ -14,6 +14,7 @@ import Loans from "./pages/Loans";
 import PersonalLoan from "./pages/PersonalLoan";
 import BusinessLoan from "./pages/BusinessLoan";
 import CarLoan from "./pages/CarLoan";
+import HomeLoan from "./pages/HomeLoan";
 import AboutUs from "./pages/AboutUs";
 import NotFound from "./pages/NotFound";
 import SipCalculator from "./pages/SipCalculator";
@@ -54,6 +55,7 @@ const App = () => (
                 <Route path="/loans/personal" element={<PersonalLoan />} />
                 <Route path="/loans/business" element={<BusinessLoan />} />
                 <Route path="/loans/car" element={<CarLoan />} />
+                <Route path="/loans/home" element={<HomeLoan />} />
                 <Route path="/about" element={<AboutUs />} />
                 <Route path="/tools/sip-calculator" element={<SipCalculator />} />
                 <Route path="/tools/emi-calculator" element={<EmiCalculator />} />
