@@ -29,7 +29,7 @@ const Navbar = () => {
               </div>
               <span className="text-2xl font-bold">
                 <span className="gradient-text">Money</span>
-                <span className="text-[#2EB883]">BHARAT</span>
+                <span className="text-[#2EB883]"> Bharat</span>
               </span>
             </Link>
           </div>
