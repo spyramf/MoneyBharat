@@ -232,7 +232,7 @@ const Loans = () => {
                   </div>
                   
                   <div className="mt-auto">
-                    <Button className="w-full bg-gradient-to-r from-fintech-purple to-fintech-blue text-white bg-fintech-green text-center">
+                    <Button className="w-full bg-gradient-to-r from-fintech-green to-fintech-blue text-white bg-fintech-green text-center">
                       Apply Now
                     </Button>
                   </div>
