@@ -44,10 +44,46 @@ const MutualFunds = () => {
   };
 
   const fundCategories = [
-    { name: "Equity Funds", returns: "12-15%", risk: "High", icon: <CircleArrowUp className="text-green-500" /> },
-    { name: "Debt Funds", returns: "7-9%", risk: "Low", icon: <CircleArrowDown className="text-blue-500" /> },
-    { name: "Hybrid Funds", returns: "9-12%", risk: "Medium", icon: <FileChartLine className="text-purple-500" /> },
-    { name: "Index Funds", returns: "10-12%", risk: "Medium", icon: <FileChartPie className="text-orange-500" /> },
+    { 
+      name: "Equity Funds", 
+      returns: "12-15%", 
+      risk: "High", 
+      icon: <CircleArrowUp className="h-6 w-6 text-green-500" />,
+      description: "Higher potential returns with market-linked investments in company stocks.",
+      color: "from-green-50 to-green-100",
+      iconBg: "bg-green-100",
+      iconColor: "text-fintech-green" 
+    },
+    { 
+      name: "Debt Funds", 
+      returns: "7-9%", 
+      risk: "Low", 
+      icon: <CircleArrowDown className="h-6 w-6 text-blue-500" />,
+      description: "Stable returns with lower risk investments in fixed income securities.",
+      color: "from-blue-50 to-blue-100",
+      iconBg: "bg-blue-100",
+      iconColor: "text-fintech-blue" 
+    },
+    { 
+      name: "Hybrid Funds", 
+      returns: "9-12%", 
+      risk: "Medium", 
+      icon: <FileChartLine className="h-6 w-6 text-purple-500" />,
+      description: "Balanced approach with a mix of equity and debt investments.",
+      color: "from-purple-50 to-purple-100",
+      iconBg: "bg-purple-100",
+      iconColor: "text-fintech-purple" 
+    },
+    { 
+      name: "Index Funds", 
+      returns: "10-12%", 
+      risk: "Medium", 
+      icon: <FileChartPie className="h-6 w-6 text-orange-500" />,
+      description: "Passive investments that track market indices with lower expenses.",
+      color: "from-orange-50 to-orange-100",
+      iconBg: "bg-orange-100",
+      iconColor: "text-fintech-orange" 
+    },
   ];
   
   const topPerformingFunds = [
@@ -176,38 +212,54 @@ const MutualFunds = () => {
         </div>
       </section>
 
-      {/* Fund Categories Section */}
+      {/* Fund Categories Section - Enhanced with better UI/UX */}
       <section className="py-16 px-4 md:px-8 bg-gray-50">
         <div className="container mx-auto">
-          <div className="text-center mb-12">
+          <div className="text-center mb-16">
             <h2 className="text-3xl font-bold mb-4">Explore Fund Categories</h2>
-            <p className="text-gray-600">Discover the right type of mutual fund for your investment goals</p>
+            <p className="text-gray-600 max-w-2xl mx-auto">Discover the right type of mutual fund for your investment goals and risk appetite</p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
             {fundCategories.map((category, index) => (
-              <Card key={index} className="hover:shadow-lg transition-shadow glass-card">
-                <CardContent className="p-6 flex flex-col items-center text-center">
-                  <div className="w-14 h-14 rounded-full bg-gray-100 flex items-center justify-center mb-4">
-                    {category.icon}
-                  </div>
-                  <h3 className="text-xl font-semibold mb-2">{category.name}</h3>
-                  <div className="space-y-2 w-full">
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">Expected Returns:</span>
-                      <span className="font-medium">{category.returns}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">Risk Level:</span>
-                      <span className="font-medium">{category.risk}</span>
+              <div 
+                key={index}
+                className={`rounded-xl overflow-hidden bg-gradient-to-br ${category.color} border border-white shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 animate-fade-in`}
+                style={{ animationDelay: `${index * 150}ms` }}
+              >
+                <div className="p-6">
+                  <div className={`w-16 h-16 rounded-full ${category.iconBg} flex items-center justify-center mb-5 mx-auto`}>
+                    <div className={`${category.iconColor}`}>
+                      {category.icon}
                     </div>
                   </div>
-                  <Button variant="outline" className="mt-4 w-full group">
-                    Explore Funds
-                    <ArrowRight className="h-4 w-4 ml-1 transition-transform group-hover:translate-x-1" />
-                  </Button>
-                </CardContent>
-              </Card>
+                  
+                  <h3 className="text-xl font-semibold text-center mb-4">{category.name}</h3>
+                  
+                  <div className="space-y-3 mb-5">
+                    <div className="flex justify-between items-center">
+                      <span className="text-gray-600">Expected Returns</span>
+                      <span className="font-semibold">{category.returns}</span>
+                    </div>
+                    <Separator />
+                    <div className="flex justify-between items-center">
+                      <span className="text-gray-600">Risk Level</span>
+                      <span className="font-semibold">{category.risk}</span>
+                    </div>
+                  </div>
+                  
+                  <p className="text-sm text-gray-600 mb-5 text-center">
+                    {category.description}
+                  </p>
+                  
+                  <div className="text-center">
+                    <Button variant="outline" className="group hover:bg-white/50 transition-all">
+                      Explore Funds
+                      <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                    </Button>
+                  </div>
+                </div>
+              </div>
             ))}
           </div>
         </div>
