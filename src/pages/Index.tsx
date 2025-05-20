@@ -506,7 +506,7 @@ const Index = () => {
               </div>
               
               <div className="mt-10">
-                <Button className="bg-gradient-to-r from-fintech-purple to-fintech-blue hover:opacity-90 text-white px-8 py-6">
+                <Button className="bg-gradient-to-r from-fintech-green to-fintech-green \nhover:opacity-90 text-white px-8 py-6">
                   Start Your Financial Journey
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
