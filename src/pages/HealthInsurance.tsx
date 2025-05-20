@@ -429,7 +429,7 @@ const HealthInsurance = () => {
             <Card className="border-0 shadow-sm">
               <CardContent className="p-6">
                 <h3 className="text-xl font-semibold mb-4 flex items-center">
-                  <FileX className="h-6 w-6 mr-2 text-fintech-purple" />
+                  <FileX className="h-6 w-6 mr-2 text-fintech-green" />
                   Exclusions & Sub-limits
                 </h3>
                 <p className="text-gray-600">
@@ -442,7 +442,7 @@ const HealthInsurance = () => {
             <Card className="border-0 shadow-sm">
               <CardContent className="p-6">
                 <h3 className="text-xl font-semibold mb-4 flex items-center">
-                  <CreditCard className="h-6 w-6 mr-2 text-fintech-purple" />
+                  <CreditCard className="h-6 w-6 mr-2 text-fintech-green" />
                   Claim Settlement Ratio
                 </h3>
                 <p className="text-gray-600">
