@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { ArrowRight, CircleArrowDown, CircleArrowUp, FileChartLine, FileChartPie, Info } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -157,7 +158,7 @@ const MutualFunds = () => {
       description: "Benefit from the expertise of professional fund managers who actively manage your investments.",
       icon: <div className="w-12 h-12 rounded-full bg-orange-100 text-fintech-orange flex items-center justify-center">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
-          <path d="M16 21v-2a4 4 0 0 1 2-2H6a4 4 0 0 1-4 4v2" />
+          <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
           <circle cx="9" cy="7" r="4" />
           <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
           <path d="M16 3.13a4 4 0 0 1 0 7.75" />
@@ -1027,4 +1028,23 @@ const MutualFunds = () => {
           <div className="max-w-3xl mx-auto">
             <Accordion type="single" collapsible className="bg-white rounded-xl shadow-sm">
               {faqItems.map((item, index) => (
-                <AccordionItem
+                <AccordionItem key={index} value={`item-${index}`} className="border-b border-gray-200 last:border-0">
+                  <AccordionTrigger className="text-left font-semibold py-4 px-6 hover:no-underline hover:bg-gray-50">
+                    {item.question}
+                  </AccordionTrigger>
+                  <AccordionContent className="px-6 pb-4 text-gray-600">
+                    {item.answer}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </div>
+        </div>
+      </section>
+      
+      <Footer />
+    </div>
+  );
+};
+
+export default MutualFunds;
