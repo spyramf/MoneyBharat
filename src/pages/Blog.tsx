@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { ArrowRight } from 'lucide-react';
@@ -8,32 +7,17 @@ import BlogPostCard from '@/components/BlogPostCard';
 import { blogPosts, blogCategories, type BlogCategory } from '@/data/blogData';
 import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
-
 const Blog = () => {
   const [selectedCategory, setSelectedCategory] = useState<BlogCategory>(blogCategories[0]);
-  
   const featuredPosts = blogPosts.filter(post => post.isFeatured);
-  const filteredPosts = selectedCategory.slug === 'all' 
-    ? blogPosts 
-    : blogPosts.filter(post => post.category.toLowerCase().replace(/\s+/g, '-') === selectedCategory.slug);
-
-  return (
-    <>
+  const filteredPosts = selectedCategory.slug === 'all' ? blogPosts : blogPosts.filter(post => post.category.toLowerCase().replace(/\s+/g, '-') === selectedCategory.slug);
+  return <>
       <Helmet>
         <title>Personal Finance Blog | Money Bharat</title>
-        <meta 
-          name="description" 
-          content="Explore articles on personal finance, investments, insurance, and more. Stay updated with the latest financial insights and tips from Money Bharat's experts." 
-        />
-        <meta 
-          name="keywords" 
-          content="personal finance, investments, mutual funds, insurance, tax planning, financial tips, money management, Indian finance" 
-        />
+        <meta name="description" content="Explore articles on personal finance, investments, insurance, and more. Stay updated with the latest financial insights and tips from Money Bharat's experts." />
+        <meta name="keywords" content="personal finance, investments, mutual funds, insurance, tax planning, financial tips, money management, Indian finance" />
         <meta property="og:title" content="Personal Finance Blog | Money Bharat" />
-        <meta 
-          property="og:description" 
-          content="Explore articles on personal finance, investments, insurance, and more. Stay updated with the latest financial insights and tips from Money Bharat's experts." 
-        />
+        <meta property="og:description" content="Explore articles on personal finance, investments, insurance, and more. Stay updated with the latest financial insights and tips from Money Bharat's experts." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://moneybharat.com/blog" />
         <meta property="og:image" content="/placeholder.svg" />
@@ -42,7 +26,7 @@ const Blog = () => {
 
       <Navbar />
 
-      <main className="pt-24">
+      <main className="pt-24 py-[80px]">
         {/* Hero Section */}
         <section className="bg-gradient-to-r from-fintech-purple/10 to-fintech-blue/10 py-16">
           <div className="container mx-auto px-4">
@@ -76,9 +60,7 @@ const Blog = () => {
               </Button>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {featuredPosts.map((post) => (
-                <BlogPostCard key={post.id} post={post} />
-              ))}
+              {featuredPosts.map(post => <BlogPostCard key={post.id} post={post} />)}
             </div>
           </div>
         </section>
@@ -90,32 +72,20 @@ const Blog = () => {
               <h2 className="text-2xl md:text-3xl font-bold mb-6">All Articles</h2>
               <ScrollArea className="w-full whitespace-nowrap pb-4">
                 <div className="flex gap-3 pb-2">
-                  {blogCategories.map((category) => (
-                    <Button
-                      key={category.slug}
-                      variant={selectedCategory.slug === category.slug ? "default" : "outline"}
-                      size="sm"
-                      className={selectedCategory.slug === category.slug ? "bg-fintech-purple" : ""}
-                      onClick={() => setSelectedCategory(category)}
-                    >
+                  {blogCategories.map(category => <Button key={category.slug} variant={selectedCategory.slug === category.slug ? "default" : "outline"} size="sm" className={selectedCategory.slug === category.slug ? "bg-fintech-purple" : ""} onClick={() => setSelectedCategory(category)}>
                       {category.name} ({category.count})
-                    </Button>
-                  ))}
+                    </Button>)}
                 </div>
               </ScrollArea>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredPosts.map((post) => (
-                <BlogPostCard key={post.id} post={post} />
-              ))}
+              {filteredPosts.map(post => <BlogPostCard key={post.id} post={post} />)}
             </div>
             
-            {filteredPosts.length === 0 && (
-              <div className="text-center py-10">
+            {filteredPosts.length === 0 && <div className="text-center py-10">
                 <p className="text-lg text-gray-500">No articles found in this category.</p>
-              </div>
-            )}
+              </div>}
           </div>
         </section>
 
@@ -128,11 +98,7 @@ const Blog = () => {
                 Subscribe to our newsletter for the latest articles, tips, and expert advice delivered to your inbox.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <input 
-                  type="email" 
-                  placeholder="Enter your email address" 
-                  className="px-4 py-3 rounded-lg text-gray-800 w-full sm:w-64 md:w-80"
-                />
+                <input type="email" placeholder="Enter your email address" className="px-4 py-3 rounded-lg text-gray-800 w-full sm:w-64 md:w-80" />
                 <Button className="bg-white text-fintech-purple hover:bg-gray-100">
                   Subscribe Now
                 </Button>
@@ -143,8 +109,6 @@ const Blog = () => {
       </main>
 
       <Footer />
-    </>
-  );
+    </>;
 };
-
 export default Blog;
