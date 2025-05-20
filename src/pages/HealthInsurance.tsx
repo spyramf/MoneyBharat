@@ -390,7 +390,7 @@ const HealthInsurance = () => {
             <Card className="border-0 shadow-sm">
               <CardContent className="p-6">
                 <h3 className="text-xl font-semibold mb-4 flex items-center">
-                  <Users className="h-6 w-6 mr-2 text-fintech-purple" />
+                  <Users className="h-6 w-6 mr-2 text-fintech-green" />
                   Family Size & Composition
                 </h3>
                 <p className="text-gray-600">
@@ -403,7 +403,7 @@ const HealthInsurance = () => {
             <Card className="border-0 shadow-sm">
               <CardContent className="p-6">
                 <h3 className="text-xl font-semibold mb-4 flex items-center">
-                  <Hospital className="h-6 w-6 mr-2 text-fintech-purple" />
+                  <Hospital className="h-6 w-6 mr-2 text-fintech-green" />
                   Network Hospitals
                 </h3>
                 <p className="text-gray-600">
