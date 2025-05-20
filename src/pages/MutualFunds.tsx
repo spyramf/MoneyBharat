@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { ArrowRight, ChevronDown, CircleArrowDown, CircleArrowUp, FileChartLine, FileChartPie, Info } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -8,6 +7,14 @@ import { Separator } from "@/components/ui/separator";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Slider } from "@/components/ui/slider";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
@@ -93,6 +100,31 @@ const MutualFunds = () => {
     { name: "ICICI Prudential Balanced Advantage", category: "Hybrid", returns: "11.7%", aum: "₹42,800 Cr", risk: "Moderate" },
     { name: "Nippon India Low Duration", category: "Debt", returns: "7.8%", aum: "₹15,600 Cr", risk: "Low" },
   ];
+
+  // Function to determine the risk badge color
+  const getRiskBadgeColor = (risk: string) => {
+    switch (risk) {
+      case "Very High":
+        return "bg-red-100 text-red-800";
+      case "High":
+        return "bg-orange-100 text-orange-800";
+      case "Moderate":
+        return "bg-yellow-100 text-yellow-800";
+      case "Low":
+        return "bg-green-100 text-green-800";
+      default:
+        return "bg-gray-100 text-gray-800";
+    }
+  };
+
+  // Function to determine the returns text color
+  const getReturnsColor = (returns: string) => {
+    const numReturns = parseFloat(returns);
+    if (numReturns >= 15) return "text-green-600";
+    if (numReturns >= 10) return "text-emerald-600";
+    if (numReturns >= 8) return "text-blue-600";
+    return "text-gray-600";
+  };
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -265,7 +297,7 @@ const MutualFunds = () => {
         </div>
       </section>
 
-      {/* Top Performing Funds */}
+      {/* Top Performing Funds - Enhanced with better UI/UX */}
       <section className="py-16 px-4 md:px-8 bg-white">
         <div className="container mx-auto">
           <div className="text-center mb-12">
@@ -273,39 +305,63 @@ const MutualFunds = () => {
             <p className="text-gray-600">Our selection of mutual funds with consistent performance</p>
           </div>
           
-          <div className="overflow-x-auto">
-            <table className="w-full min-w-[800px]">
-              <thead className="bg-gray-50">
-                <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Fund Name</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Category</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">1Y Returns</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">AUM</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Risk</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Action</th>
-                </tr>
-              </thead>
-              <tbody className="bg-white divide-y divide-gray-200">
-                {topPerformingFunds.map((fund, index) => (
-                  <tr key={index} className="hover:bg-gray-50">
-                    <td className="px-6 py-4 whitespace-nowrap font-medium">{fund.name}</td>
-                    <td className="px-6 py-4 whitespace-nowrap">{fund.category}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-green-600 font-medium">{fund.returns}</td>
-                    <td className="px-6 py-4 whitespace-nowrap">{fund.aum}</td>
-                    <td className="px-6 py-4 whitespace-nowrap">{fund.risk}</td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <Button variant="outline" size="sm" className="group">
-                        Invest <ArrowRight className="h-4 w-4 ml-1 transition-transform group-hover:translate-x-1" />
-                      </Button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+          <Card className="shadow-lg border-0 overflow-hidden">
+            <div className="overflow-x-auto">
+              <Table>
+                <TableHeader className="bg-gradient-to-r from-gray-50 to-gray-100">
+                  <TableRow>
+                    <TableHead className="text-sm font-semibold">Fund Name</TableHead>
+                    <TableHead className="text-sm font-semibold">Category</TableHead>
+                    <TableHead className="text-sm font-semibold">1Y Returns</TableHead>
+                    <TableHead className="text-sm font-semibold">AUM</TableHead>
+                    <TableHead className="text-sm font-semibold">Risk</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {topPerformingFunds.map((fund, index) => (
+                    <TableRow 
+                      key={index} 
+                      className="hover:bg-gray-50 transition-colors cursor-pointer animate-fade-in"
+                      style={{ animationDelay: `${index * 100}ms` }}
+                    >
+                      <TableCell className="font-medium py-4">
+                        <div className="flex items-center">
+                          <div className={`w-2 h-12 rounded-l-md ${fund.category === "Equity" ? "bg-fintech-green" : fund.category === "Hybrid" ? "bg-fintech-purple" : "bg-fintech-blue"} mr-3`}></div>
+                          <div>
+                            {fund.name}
+                            <div className="text-xs text-gray-500 mt-1">Top performer in its category</div>
+                          </div>
+                        </div>
+                      </TableCell>
+                      <TableCell>
+                        <span className={`px-3 py-1 rounded-full text-xs ${fund.category === "Equity" ? "bg-green-50 text-green-700" : fund.category === "Hybrid" ? "bg-purple-50 text-purple-700" : "bg-blue-50 text-blue-700"}`}>
+                          {fund.category}
+                        </span>
+                      </TableCell>
+                      <TableCell>
+                        <span className={`font-semibold text-lg ${getReturnsColor(fund.returns)}`}>
+                          {fund.returns}
+                        </span>
+                      </TableCell>
+                      <TableCell>
+                        <div className="flex items-center">
+                          <span className="font-medium">{fund.aum}</span>
+                        </div>
+                      </TableCell>
+                      <TableCell>
+                        <span className={`px-3 py-1 rounded-full text-xs ${getRiskBadgeColor(fund.risk)}`}>
+                          {fund.risk}
+                        </span>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </div>
+          </Card>
           
-          <div className="text-center mt-8">
-            <Button className="bg-gradient-to-r from-fintech-purple to-fintech-blue hover:opacity-90">
+          <div className="text-center mt-8 animate-fade-in" style={{ animationDelay: '500ms' }}>
+            <Button className="bg-gradient-to-r from-fintech-purple to-fintech-blue hover:opacity-90 transition-all transform hover:scale-105">
               View All Mutual Funds
             </Button>
           </div>
