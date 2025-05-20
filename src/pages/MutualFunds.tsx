@@ -854,7 +854,7 @@ const MutualFunds = () => {
             <p className="text-gray-600 max-w-2xl mx-auto">Explore our selection of top-performing mutual funds across different categories</p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
             {topPerformingFunds.map((fund, index) => <div key={index} style={{
             animationDelay: `${index * 100}ms`
           }} className="bg-white border border-gray-100 p-6 shadow-md hover:shadow-lg hover:border-fintech-purple/30 transition-all duration-300 animate-fade-in px-[24px] rounded-xl py-[40px]">
