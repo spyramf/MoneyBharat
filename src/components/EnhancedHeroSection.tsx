@@ -2,7 +2,7 @@ import { ArrowRight, ArrowRightCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 const EnhancedHeroSection = () => {
-  return <section className="relative overflow-hidden pt-16 md:pt-24 pb-16 md:pb-20">
+  return <section className="relative overflow-hidden pt-16 md:pt-24 pb-16 md:pb-20 py-[50px]">
       {/* Background decoration */}
       <div className="absolute top-0 left-0 w-full h-full bg-gradient-radial from-fintech-green/10 to-transparent -z-10"></div>
       <div className="absolute top-40 right-0 w-96 h-96 bg-fintech-green/10 rounded-full blur-3xl -z-10"></div>
