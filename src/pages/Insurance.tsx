@@ -605,7 +605,7 @@ const InsurancePage = () => {
           <p className="text-xl mb-8 max-w-2xl mx-auto">
             Take the first step towards financial security and peace of mind
           </p>
-          <Button className="bg-white text-fintech-purple hover:bg-gray-100 px-8 py-6 text-lg">
+          <Button className="bg-white text-fintech-green hover:bg-gray-100 px-8 py-6 text-lg">
             Get a Free Quote
           </Button>
         </div>
