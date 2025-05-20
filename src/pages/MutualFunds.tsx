@@ -485,15 +485,139 @@ const MutualFunds = () => {
         </div>
       </section>
 
-      {/* New Feature Section - Light Theme with Glowing Borders */}
+      {/* NEW SECTION: Start SIP with Just ₹500 */}
+      <section className="py-16 px-4 md:px-8 bg-gradient-to-br from-white to-blue-50">
+        <div className="container mx-auto">
+          <div className="max-w-5xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                <span className="text-gray-800">Start </span>
+                <span className="text-fintech-green">SIP</span>
+                <span className="text-gray-800"> with Just </span>
+                <span className="text-fintech-orange">₹500</span>
+              </h2>
+              <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+                Invest in Mutual Funds effortlessly with incredible features.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {sipFeatures.map((feature, index) => (
+                <div 
+                  key={index} 
+                  className="bg-white border border-gray-100 rounded-xl p-6 shadow-md hover:shadow-lg hover:border-fintech-purple/30 transition-all duration-300 animate-fade-in"
+                  style={{ animationDelay: `${index * 100}ms` }}
+                >
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="relative">
+                      {feature.icon}
+                    </div>
+                    <h3 className="font-semibold text-lg">{feature.title}</h3>
+                  </div>
+                  <p className="text-gray-600 ml-16">{feature.description}</p>
+                </div>
+              ))}
+            </div>
+
+            <div className="text-center mt-10">
+              <Button className="bg-gradient-to-r from-fintech-green to-fintech-blue text-white hover:opacity-90 transition-all transform hover:scale-105 shadow-[0_0_15px_rgba(155,135,245,0.3)]">
+                Start Your SIP Journey
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* NEW SECTION: Open Demat Account in 3 Steps */}
+      <section className="py-16 px-4 md:px-8 bg-white">
+        <div className="container mx-auto">
+          <div className="max-w-5xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                <span className="text-gray-800">Open Demat Account in </span>
+                <span className="text-fintech-green">3 Steps</span>
+              </h2>
+              <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+                Start your investment journey with a quick and easy account setup process.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {dematSteps.map((step, index) => (
+                <div 
+                  key={index} 
+                  className="bg-white border border-gray-200 rounded-xl p-6 shadow-md hover:shadow-xl transition-all duration-300 relative overflow-hidden animate-fade-in"
+                  style={{ animationDelay: `${index * 200}ms` }}
+                >
+                  <div className="flex flex-col items-center text-center">
+                    <div className="relative mb-4">
+                      {step.icon}
+                      <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-gradient-to-r from-fintech-green to-fintech-blue rounded-full flex items-center justify-center text-white font-bold text-lg animate-enhanced-glow">
+                        {step.number}
+                      </div>
+                    </div>
+                    <h3 className="font-semibold text-xl mb-2">{step.title}</h3>
+                    <p className="text-gray-600">{step.description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="text-center mt-10">
+              <Button className="bg-gradient-to-r from-fintech-purple to-fintech-blue hover:opacity-90 transition-all transform hover:scale-105 shadow-[0_0_15px_rgba(155,135,245,0.3)]">
+                Start Now
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* NEW SECTION: Aaj Ka Investment, Kal Ka Benefit */}
+      <section className="py-16 px-4 md:px-8 bg-gradient-to-br from-white to-purple-50/30">
+        <div className="container mx-auto">
+          <div className="max-w-5xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                <span className="text-gray-800">Aaj Ka </span>
+                <span className="text-fintech-green">Investment</span>
+                <span className="text-gray-800">, Kal Ka </span>
+                <span className="text-fintech-green">Benefit</span>
+              </h2>
+              <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+                Invest in Mutual Funds to build a financially secure future.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {additionalFeatures.map((feature, index) => (
+                <div 
+                  key={index} 
+                  className="bg-white border border-gray-100 rounded-xl p-6 shadow-md hover:shadow-lg hover:border-fintech-purple/30 transition-all duration-300 animate-fade-in"
+                  style={{ animationDelay: `${index * 100}ms` }}
+                >
+                  <div className="flex flex-col items-center text-center gap-4">
+                    <div className="relative">
+                      {feature.icon}
+                    </div>
+                    <h3 className="font-semibold text-lg">{feature.title}</h3>
+                    <p className="text-gray-600">{feature.description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Original Feature Section - Light Theme with Glowing Borders */}
       <section className="py-16 px-4 md:px-8 bg-gradient-to-br from-white to-gray-50">
         <div className="container mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              <span className="text-gray-800">Aaj Ka </span>
-              <span className="text-fintech-green">Investment</span>
-              <span className="text-gray-800">, Kal Ka </span>
-              <span className="text-fintech-green">Benefit</span>
+              <span className="text-gray-800">Mutual Fund </span>
+              <span className="text-fintech-green">Benefits</span>
             </h2>
             <p className="text-lg text-gray-600">
               Invest in Mutual Funds to build a financially secure future.
