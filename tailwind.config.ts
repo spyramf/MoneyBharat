@@ -150,6 +150,14 @@ export default {
                     '50%': {
                         transform: 'translateY(-5px)'
                     }
+                },
+                'enhanced-glow': {
+                    '0%, 100%': { 
+                        boxShadow: '0 0 12px rgba(46, 184, 131, 0.4)'
+                    },
+                    '50%': {
+                        boxShadow: '0 0 24px rgba(155, 135, 245, 0.7)'
+                    }
                 }
 			},
 			animation: {
@@ -162,7 +170,8 @@ export default {
                 'glow': 'glow 2s ease-in-out infinite',
                 'slide-in': 'slide-in 0.5s ease-out',
                 'border-glow': 'border-glow 2s ease-in-out infinite',
-                'float-slow': 'float-slow 3s ease-in-out infinite'
+                'float-slow': 'float-slow 3s ease-in-out infinite',
+                'enhanced-glow': 'enhanced-glow 3s ease-in-out infinite'
 			},
 			backgroundImage: {
 				'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
