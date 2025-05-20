@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { ArrowRight, CircleArrowDown, CircleArrowUp, FileChartLine, FileChartPie, Info } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -7,20 +6,12 @@ import { Separator } from "@/components/ui/separator";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Slider } from "@/components/ui/slider";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
 import { Badge } from "@/components/ui/badge";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-
 const MutualFunds = () => {
   const [investmentAmount, setInvestmentAmount] = useState(5000);
   const [investmentPeriod, setInvestmentPeriod] = useState(5);
@@ -28,56 +19,50 @@ const MutualFunds = () => {
   const [animate, setAnimate] = useState(false);
 
   // Define the sipFeatures array
-  const sipFeatures = [
-    {
-      title: "Zero Commission",
-      description: "Invest in direct mutual funds with zero commission and maximize your returns.",
-      icon: <div className="w-12 h-12 rounded-full bg-green-100 text-fintech-green flex items-center justify-center">
+  const sipFeatures = [{
+    title: "Zero Commission",
+    description: "Invest in direct mutual funds with zero commission and maximize your returns.",
+    icon: <div className="w-12 h-12 rounded-full bg-green-100 text-fintech-green flex items-center justify-center">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
           <circle cx="12" cy="12" r="10" />
           <path d="m4.93 4.93 14.14 14.14" />
           <path d="M9.17 14.83 14.83 9.17" />
         </svg>
       </div>
-    },
-    {
-      title: "Quick Setup",
-      description: "Start your SIP in minutes with our streamlined onboarding process.",
-      icon: <div className="w-12 h-12 rounded-full bg-blue-100 text-fintech-blue flex items-center justify-center">
+  }, {
+    title: "Quick Setup",
+    description: "Start your SIP in minutes with our streamlined onboarding process.",
+    icon: <div className="w-12 h-12 rounded-full bg-blue-100 text-fintech-blue flex items-center justify-center">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
           <polyline points="13 17 18 12 13 7" />
           <polyline points="6 17 11 12 6 7" />
         </svg>
       </div>
-    },
-    {
-      title: "Flexible Options",
-      description: "Choose from various SIP dates and customize your investment plan.",
-      icon: <div className="w-12 h-12 rounded-full bg-purple-100 text-fintech-purple flex items-center justify-center">
+  }, {
+    title: "Flexible Options",
+    description: "Choose from various SIP dates and customize your investment plan.",
+    icon: <div className="w-12 h-12 rounded-full bg-purple-100 text-fintech-purple flex items-center justify-center">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
           <path d="M21 7v6h-6" />
           <path d="M3 17a9 9 0 0 1 9-9 9 9 0 0 1 6 2.3l3 2.7" />
         </svg>
       </div>
-    },
-    {
-      title: "Easy Tracking",
-      description: "Monitor your investments with real-time performance tracking and analytics.",
-      icon: <div className="w-12 h-12 rounded-full bg-orange-100 text-fintech-orange flex items-center justify-center">
+  }, {
+    title: "Easy Tracking",
+    description: "Monitor your investments with real-time performance tracking and analytics.",
+    icon: <div className="w-12 h-12 rounded-full bg-orange-100 text-fintech-orange flex items-center justify-center">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
           <path d="M3 3v18h18" />
           <path d="m19 9-5 5-4-4-3 3" />
         </svg>
       </div>
-    }
-  ];
+  }];
 
   // Define the dematSteps array
-  const dematSteps = [
-    {
-      title: "Fill Basic Details",
-      description: "Complete a simple form with your personal information and identity verification.",
-      icon: <div className="w-16 h-16 rounded-full bg-blue-100 text-fintech-blue flex items-center justify-center">
+  const dematSteps = [{
+    title: "Fill Basic Details",
+    description: "Complete a simple form with your personal information and identity verification.",
+    icon: <div className="w-16 h-16 rounded-full bg-blue-100 text-fintech-blue flex items-center justify-center">
         <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-8 w-8">
           <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
           <polyline points="14 2 14 8 20 8" />
@@ -86,23 +71,21 @@ const MutualFunds = () => {
           <line x1="10" x2="8" y1="9" y2="9" />
         </svg>
       </div>,
-      number: 1
-    },
-    {
-      title: "Complete eKYC",
-      description: "Verify your identity online using Aadhaar-based eKYC for a paperless process.",
-      icon: <div className="w-16 h-16 rounded-full bg-green-100 text-fintech-green flex items-center justify-center">
+    number: 1
+  }, {
+    title: "Complete eKYC",
+    description: "Verify your identity online using Aadhaar-based eKYC for a paperless process.",
+    icon: <div className="w-16 h-16 rounded-full bg-green-100 text-fintech-green flex items-center justify-center">
         <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-8 w-8">
           <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
           <polyline points="22 4 12 14.01 9 11.01" />
         </svg>
       </div>,
-      number: 2
-    },
-    {
-      title: "Start Investing",
-      description: "Begin your investment journey immediately after account activation.",
-      icon: <div className="w-16 h-16 rounded-full bg-purple-100 text-fintech-purple flex items-center justify-center">
+    number: 2
+  }, {
+    title: "Start Investing",
+    description: "Begin your investment journey immediately after account activation.",
+    icon: <div className="w-16 h-16 rounded-full bg-purple-100 text-fintech-purple flex items-center justify-center">
         <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-8 w-8">
           <path d="m12 14 4-4" />
           <path d="M3.34 19a10 10 0 1 1 17.32 0" />
@@ -110,16 +93,14 @@ const MutualFunds = () => {
           <path d="M12 19v-9" />
         </svg>
       </div>,
-      number: 3
-    }
-  ];
+    number: 3
+  }];
 
   // Define the additionalFeatures array
-  const additionalFeatures = [
-    {
-      title: "Tax Benefits",
-      description: "Get up to ₹1.5 lakh tax exemption under Section 80C with ELSS mutual funds.",
-      icon: <div className="w-12 h-12 rounded-full bg-green-100 text-fintech-green flex items-center justify-center">
+  const additionalFeatures = [{
+    title: "Tax Benefits",
+    description: "Get up to ₹1.5 lakh tax exemption under Section 80C with ELSS mutual funds.",
+    icon: <div className="w-12 h-12 rounded-full bg-green-100 text-fintech-green flex items-center justify-center">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
           <rect width="20" height="14" x="2" y="3" rx="2" />
           <line x1="12" x2="12" y1="9" y2="17" />
@@ -127,11 +108,10 @@ const MutualFunds = () => {
           <line x1="16" x2="16" y1="11" y2="15" />
         </svg>
       </div>
-    },
-    {
-      title: "Portfolio Diversification",
-      description: "Spread your investments across various assets to reduce risk and optimize returns.",
-      icon: <div className="w-12 h-12 rounded-full bg-blue-100 text-fintech-blue flex items-center justify-center">
+  }, {
+    title: "Portfolio Diversification",
+    description: "Spread your investments across various assets to reduce risk and optimize returns.",
+    icon: <div className="w-12 h-12 rounded-full bg-blue-100 text-fintech-blue flex items-center justify-center">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
           <circle cx="18" cy="18" r="3" />
           <circle cx="6" cy="6" r="3" />
@@ -139,11 +119,10 @@ const MutualFunds = () => {
           <path d="M11 18H8a2 2 0 0 1-2-2V9" />
         </svg>
       </div>
-    },
-    {
-      title: "Goal-Based Investing",
-      description: "Plan your investments based on your financial goals and timelines.",
-      icon: <div className="w-12 h-12 rounded-full bg-purple-100 text-fintech-purple flex items-center justify-center">
+  }, {
+    title: "Goal-Based Investing",
+    description: "Plan your investments based on your financial goals and timelines.",
+    icon: <div className="w-12 h-12 rounded-full bg-purple-100 text-fintech-purple flex items-center justify-center">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
           <path d="m20 20-6-6" />
           <path d="M14 20h6v-6" />
@@ -152,11 +131,10 @@ const MutualFunds = () => {
           <path d="M14 4h-4v6" />
         </svg>
       </div>
-    },
-    {
-      title: "Expert Fund Managers",
-      description: "Benefit from the expertise of professional fund managers who actively manage your investments.",
-      icon: <div className="w-12 h-12 rounded-full bg-orange-100 text-fintech-orange flex items-center justify-center">
+  }, {
+    title: "Expert Fund Managers",
+    description: "Benefit from the expertise of professional fund managers who actively manage your investments.",
+    icon: <div className="w-12 h-12 rounded-full bg-orange-100 text-fintech-orange flex items-center justify-center">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
           <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
           <circle cx="9" cy="7" r="4" />
@@ -164,21 +142,16 @@ const MutualFunds = () => {
           <path d="M16 3.13a4 4 0 0 1 0 7.75" />
         </svg>
       </div>
-    }
-  ];
-
+  }];
   const handleSliderChange = (value: number[]) => {
     setInvestmentAmount(value[0]);
   };
-
   const handlePeriodChange = (value: number[]) => {
     setInvestmentPeriod(value[0]);
   };
-
   const calculatedReturns = () => {
     const r = 0.12;
     const t = investmentPeriod;
-    
     if (selectedTab === "sip") {
       const monthlyAmount = investmentAmount;
       const months = t * 12;
@@ -190,123 +163,102 @@ const MutualFunds = () => {
   };
 
   // Fund Categories Data
-  const fundCategories = [
-    {
-      type: "Equity Funds",
-      expectedReturns: "12-15%",
-      riskLevel: "High",
-      description: "Higher potential returns with market-linked investments in company stocks.",
-      bgColor: "bg-green-50",
-      iconColor: "text-fintech-green",
-      icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
+  const fundCategories = [{
+    type: "Equity Funds",
+    expectedReturns: "12-15%",
+    riskLevel: "High",
+    description: "Higher potential returns with market-linked investments in company stocks.",
+    bgColor: "bg-green-50",
+    iconColor: "text-fintech-green",
+    icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
           <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
         </svg>
-      )
-    },
-    {
-      type: "Debt Funds",
-      expectedReturns: "7-9%",
-      riskLevel: "Low",
-      description: "Stable returns with lower risk investments in fixed income securities.",
-      bgColor: "bg-blue-50",
-      iconColor: "text-fintech-blue",
-      icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
+  }, {
+    type: "Debt Funds",
+    expectedReturns: "7-9%",
+    riskLevel: "Low",
+    description: "Stable returns with lower risk investments in fixed income securities.",
+    bgColor: "bg-blue-50",
+    iconColor: "text-fintech-blue",
+    icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
           <rect width="20" height="14" x="2" y="3" rx="2" />
           <line x1="12" x2="12" y1="9" y2="17" />
           <line x1="8" x2="8" y1="11" y2="15" />
           <line x1="16" x2="16" y1="11" y2="15" />
         </svg>
-      )
-    },
-    {
-      type: "Hybrid Funds",
-      expectedReturns: "9-12%",
-      riskLevel: "Medium",
-      description: "Balanced approach with a mix of equity and debt investments.",
-      bgColor: "bg-purple-50",
-      iconColor: "text-fintech-purple",
-      icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
+  }, {
+    type: "Hybrid Funds",
+    expectedReturns: "9-12%",
+    riskLevel: "Medium",
+    description: "Balanced approach with a mix of equity and debt investments.",
+    bgColor: "bg-purple-50",
+    iconColor: "text-fintech-purple",
+    icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
           <path d="M2 20h.01" />
           <path d="M7 20v-4" />
           <path d="M12 20v-8" />
           <path d="M17 20V8" />
           <path d="M22 4v16" />
         </svg>
-      )
-    },
-    {
-      type: "Index Funds",
-      expectedReturns: "10-12%",
-      riskLevel: "Medium",
-      description: "Passive investments that track market indices with lower expenses.",
-      bgColor: "bg-orange-50",
-      iconColor: "text-fintech-orange",
-      icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
+  }, {
+    type: "Index Funds",
+    expectedReturns: "10-12%",
+    riskLevel: "Medium",
+    description: "Passive investments that track market indices with lower expenses.",
+    bgColor: "bg-orange-50",
+    iconColor: "text-fintech-orange",
+    icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
           <path d="M3 3v18h18" />
           <path d="m19 9-5 5-4-4-3 3" />
         </svg>
-      )
-    }
-  ];
+  }];
 
   // Top Performing Funds Data
-  const topPerformingFunds = [
-    {
-      name: "HDFC Flexicap Fund",
-      performance: "Top performer in its category",
-      category: "Equity",
-      returns: "15.8%",
-      aum: "₹26,700 Cr",
-      risk: "High",
-      colorClass: "bg-green-500"
-    },
-    {
-      name: "SBI Small Cap Fund",
-      performance: "Top performer in its category",
-      category: "Equity",
-      returns: "17.2%",
-      aum: "₹18,500 Cr",
-      risk: "Very High",
-      colorClass: "bg-red-500"
-    },
-    {
-      name: "Axis Bluechip Fund",
-      performance: "Top performer in its category",
-      category: "Equity",
-      returns: "14.3%",
-      aum: "₹31,200 Cr",
-      risk: "Moderate",
-      colorClass: "bg-yellow-500"
-    },
-    {
-      name: "ICICI Prudential Balanced Advantage",
-      performance: "Top performer in its category",
-      category: "Hybrid",
-      returns: "11.7%",
-      aum: "₹42,800 Cr",
-      risk: "Moderate",
-      colorClass: "bg-yellow-500"
-    },
-    {
-      name: "Nippon India Low Duration",
-      performance: "Top performer in its category",
-      category: "Debt",
-      returns: "7.8%",
-      aum: "₹15,600 Cr",
-      risk: "Low",
-      colorClass: "bg-green-300"
-    }
-  ];
-
-  const mutualFundBenefits = [
-    {
-      title: "Diversification of Investment",
-      description: "Mutual funds spread your investment across various assets, reducing risk and enhancing potential returns through diversification.",
-      icon: <div className="flex items-center justify-center w-12 h-12 rounded-full bg-green-100 text-fintech-green">
+  const topPerformingFunds = [{
+    name: "HDFC Flexicap Fund",
+    performance: "Top performer in its category",
+    category: "Equity",
+    returns: "15.8%",
+    aum: "₹26,700 Cr",
+    risk: "High",
+    colorClass: "bg-green-500"
+  }, {
+    name: "SBI Small Cap Fund",
+    performance: "Top performer in its category",
+    category: "Equity",
+    returns: "17.2%",
+    aum: "₹18,500 Cr",
+    risk: "Very High",
+    colorClass: "bg-red-500"
+  }, {
+    name: "Axis Bluechip Fund",
+    performance: "Top performer in its category",
+    category: "Equity",
+    returns: "14.3%",
+    aum: "₹31,200 Cr",
+    risk: "Moderate",
+    colorClass: "bg-yellow-500"
+  }, {
+    name: "ICICI Prudential Balanced Advantage",
+    performance: "Top performer in its category",
+    category: "Hybrid",
+    returns: "11.7%",
+    aum: "₹42,800 Cr",
+    risk: "Moderate",
+    colorClass: "bg-yellow-500"
+  }, {
+    name: "Nippon India Low Duration",
+    performance: "Top performer in its category",
+    category: "Debt",
+    returns: "7.8%",
+    aum: "₹15,600 Cr",
+    risk: "Low",
+    colorClass: "bg-green-300"
+  }];
+  const mutualFundBenefits = [{
+    title: "Diversification of Investment",
+    description: "Mutual funds spread your investment across various assets, reducing risk and enhancing potential returns through diversification.",
+    icon: <div className="flex items-center justify-center w-12 h-12 rounded-full bg-green-100 text-fintech-green">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
           <circle cx="18" cy="18" r="3" />
           <circle cx="6" cy="6" r="3" />
@@ -314,11 +266,10 @@ const MutualFunds = () => {
           <path d="M11 18H8a2 2 0 0 1-2-2V9" />
         </svg>
       </div>
-    },
-    {
-      title: "80C Benefits",
-      description: "Certain mutual funds, like ELSS, offer tax benefits under Section 80C, helping you save on taxes while investing for future goals.",
-      icon: <div className="flex items-center justify-center w-12 h-12 rounded-full bg-blue-100 text-fintech-blue">
+  }, {
+    title: "80C Benefits",
+    description: "Certain mutual funds, like ELSS, offer tax benefits under Section 80C, helping you save on taxes while investing for future goals.",
+    icon: <div className="flex items-center justify-center w-12 h-12 rounded-full bg-blue-100 text-fintech-blue">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
           <path d="M20 6v12a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2Z" />
           <path d="M2 8h2v12a2 2 0 0 0 2 2h12" />
@@ -326,32 +277,29 @@ const MutualFunds = () => {
           <path d="M16 12h-8" />
         </svg>
       </div>
-    },
-    {
-      title: "Highly Regulated",
-      description: "Mutual funds are regulated by SEBI, ensuring transparency and protecting investor interests through stringent guidelines.",
-      icon: <div className="flex items-center justify-center w-12 h-12 rounded-full bg-purple-100 text-fintech-purple">
+  }, {
+    title: "Highly Regulated",
+    description: "Mutual funds are regulated by SEBI, ensuring transparency and protecting investor interests through stringent guidelines.",
+    icon: <div className="flex items-center justify-center w-12 h-12 rounded-full bg-purple-100 text-fintech-purple">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
           <rect width="18" height="11" x="3" y="11" rx="2" ry="2" />
           <path d="M7 11V7a5 5 0 0 1 10 0v4" />
           <circle cx="12" cy="16" r="1" />
         </svg>
       </div>
-    },
-    {
-      title: "Lower Transaction Costs",
-      description: "Investing in mutual funds typically incurs lower transaction costs compared to individual stock trading, making it cost-effective.",
-      icon: <div className="flex items-center justify-center w-12 h-12 rounded-full bg-orange-100 text-fintech-orange">
+  }, {
+    title: "Lower Transaction Costs",
+    description: "Investing in mutual funds typically incurs lower transaction costs compared to individual stock trading, making it cost-effective.",
+    icon: <div className="flex items-center justify-center w-12 h-12 rounded-full bg-orange-100 text-fintech-orange">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
           <line x1="12" x2="12" y1="2" y2="22" />
           <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
         </svg>
       </div>
-    },
-    {
-      title: "Liquid Assets",
-      description: "Mutual funds offer high liquidity, allowing you to easily redeem your investments when needed, providing financial flexibility.",
-      icon: <div className="flex items-center justify-center w-12 h-12 rounded-full bg-cyan-100 text-cyan-600">
+  }, {
+    title: "Liquid Assets",
+    description: "Mutual funds offer high liquidity, allowing you to easily redeem your investments when needed, providing financial flexibility.",
+    icon: <div className="flex items-center justify-center w-12 h-12 rounded-full bg-cyan-100 text-cyan-600">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
           <path d="M8 16a5 5 0 0 1 10 0" />
           <line x1="2" x2="22" y1="20" y2="20" />
@@ -363,11 +311,10 @@ const MutualFunds = () => {
           <line x1="14" x2="22" y1="12" y2="12" />
         </svg>
       </div>
-    },
-    {
-      title: "Invest in Smaller Amounts",
-      description: "You can start investing in mutual funds with small amounts, making them accessible and ideal for beginners and seasoned investors alike.",
-      icon: <div className="flex items-center justify-center w-12 h-12 rounded-full bg-yellow-100 text-yellow-600">
+  }, {
+    title: "Invest in Smaller Amounts",
+    description: "You can start investing in mutual funds with small amounts, making them accessible and ideal for beginners and seasoned investors alike.",
+    icon: <div className="flex items-center justify-center w-12 h-12 rounded-full bg-yellow-100 text-yellow-600">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
           <path d="M2 20h.01" />
           <path d="M7 20v-4" />
@@ -376,14 +323,11 @@ const MutualFunds = () => {
           <path d="M22 4v16" />
         </svg>
       </div>
-    }
-  ];
-
-  const sipAdvantages = [
-    {
-      title: "Investment Discipline",
-      description: "SIP encourages regular investing, fostering financial discipline. It helps you stay committed to your investment goals over the long term.",
-      icon: <div className="flex items-center justify-center w-12 h-12 rounded-full bg-green-100 text-fintech-green">
+  }];
+  const sipAdvantages = [{
+    title: "Investment Discipline",
+    description: "SIP encourages regular investing, fostering financial discipline. It helps you stay committed to your investment goals over the long term.",
+    icon: <div className="flex items-center justify-center w-12 h-12 rounded-full bg-green-100 text-fintech-green">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
           <rect width="18" height="18" x="3" y="4" rx="2" ry="2" />
           <line x1="16" x2="16" y1="2" y2="6" />
@@ -392,22 +336,20 @@ const MutualFunds = () => {
           <path d="m9 16 2 2 4-4" />
         </svg>
       </div>
-    },
-    {
-      title: "Power of Compounding",
-      description: "By investing consistently, you benefit from the power of compounding, where your returns generate further earnings, maximizing your wealth over time.",
-      icon: <div className="flex items-center justify-center w-12 h-12 rounded-full bg-purple-100 text-fintech-purple">
+  }, {
+    title: "Power of Compounding",
+    description: "By investing consistently, you benefit from the power of compounding, where your returns generate further earnings, maximizing your wealth over time.",
+    icon: <div className="flex items-center justify-center w-12 h-12 rounded-full bg-purple-100 text-fintech-purple">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
           <path d="M12 17V3" />
           <path d="m6 11 6 6 6-6" />
           <path d="M19 21H5" />
         </svg>
       </div>
-    },
-    {
-      title: "You Can Start Small",
-      description: "You can start investing with a minimal amount such as Rs. 500, making SIPs accessible for everyone. This flexibility allows you to grow your investment gradually.",
-      icon: <div className="flex items-center justify-center w-12 h-12 rounded-full bg-blue-100 text-fintech-blue">
+  }, {
+    title: "You Can Start Small",
+    description: "You can start investing with a minimal amount such as Rs. 500, making SIPs accessible for everyone. This flexibility allows you to grow your investment gradually.",
+    icon: <div className="flex items-center justify-center w-12 h-12 rounded-full bg-blue-100 text-fintech-blue">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
           <path d="M2 20h.01" />
           <path d="M7 20v-4" />
@@ -416,11 +358,10 @@ const MutualFunds = () => {
           <path d="M22 4v16" />
         </svg>
       </div>
-    },
-    {
-      title: "Convenient - At Your Fingertips",
-      description: "SIPs offer convenience, allowing you to invest effortlessly through online platforms, ensuring your investments are just a click away.",
-      icon: <div className="flex items-center justify-center w-12 h-12 rounded-full bg-orange-100 text-fintech-orange">
+  }, {
+    title: "Convenient - At Your Fingertips",
+    description: "SIPs offer convenience, allowing you to invest effortlessly through online platforms, ensuring your investments are just a click away.",
+    icon: <div className="flex items-center justify-center w-12 h-12 rounded-full bg-orange-100 text-fintech-orange">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
           <path d="M11 12H3" />
           <path d="M16 6H3" />
@@ -429,11 +370,10 @@ const MutualFunds = () => {
           <path d="M22 2 10 14" />
         </svg>
       </div>
-    },
-    {
-      title: "Professional Fund Management",
-      description: "Your SIP mutual funds are managed by professional fund managers, ensuring that your portfolio benefits from expert insights and strategies.",
-      icon: <div className="flex items-center justify-center w-12 h-12 rounded-full bg-cyan-100 text-cyan-600">
+  }, {
+    title: "Professional Fund Management",
+    description: "Your SIP mutual funds are managed by professional fund managers, ensuring that your portfolio benefits from expert insights and strategies.",
+    icon: <div className="flex items-center justify-center w-12 h-12 rounded-full bg-cyan-100 text-cyan-600">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
           <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
           <circle cx="9" cy="7" r="4" />
@@ -441,43 +381,37 @@ const MutualFunds = () => {
           <path d="M16 3.13a4 4 0 0 1 0 7.75" />
         </svg>
       </div>
-    },
-    {
-      title: "Can be Automated",
-      description: "SIPs can be easily automated via AutoPay on Dhan, setting up hassle-free monthly investments. This ensures consistency without the need for constant manual input.",
-      icon: <div className="flex items-center justify-center w-12 h-12 rounded-full bg-yellow-100 text-yellow-600">
+  }, {
+    title: "Can be Automated",
+    description: "SIPs can be easily automated via AutoPay on Dhan, setting up hassle-free monthly investments. This ensures consistency without the need for constant manual input.",
+    icon: <div className="flex items-center justify-center w-12 h-12 rounded-full bg-yellow-100 text-yellow-600">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
           <path d="M17 6H8a5 5 0 0 0 0 10h9" />
           <path d="m19 9-3-3 3-3" />
           <path d="m19 15-3 3 3 3" />
         </svg>
       </div>
-    }
-  ];
-
-  const choosingMutualFundsTips = [
-    {
-      title: "Fund Performance",
-      description: "Evaluate the fund's historical performance and its Assets Under Management (AUM) to ensure stability and growth potential.",
-      icon: <div className="flex items-center justify-center w-12 h-12 rounded-full bg-green-100 text-fintech-green">
+  }];
+  const choosingMutualFundsTips = [{
+    title: "Fund Performance",
+    description: "Evaluate the fund's historical performance and its Assets Under Management (AUM) to ensure stability and growth potential.",
+    icon: <div className="flex items-center justify-center w-12 h-12 rounded-full bg-green-100 text-fintech-green">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
           <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
         </svg>
       </div>
-    },
-    {
-      title: "AMC Track Record",
-      description: "Consider the track record of the Asset Management Company (AMC). A reputable AMC with a strong history can indicate reliability and effective fund management.",
-      icon: <div className="flex items-center justify-center w-12 h-12 rounded-full bg-orange-100 text-fintech-orange">
+  }, {
+    title: "AMC Track Record",
+    description: "Consider the track record of the Asset Management Company (AMC). A reputable AMC with a strong history can indicate reliability and effective fund management.",
+    icon: <div className="flex items-center justify-center w-12 h-12 rounded-full bg-orange-100 text-fintech-orange">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
           <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
         </svg>
       </div>
-    },
-    {
-      title: "Fund Managers",
-      description: "Look at the experience and expertise of the fund managers. Skilled fund managers can make informed decisions that positively impact the fund's performance.",
-      icon: <div className="flex items-center justify-center w-12 h-12 rounded-full bg-blue-100 text-fintech-blue">
+  }, {
+    title: "Fund Managers",
+    description: "Look at the experience and expertise of the fund managers. Skilled fund managers can make informed decisions that positively impact the fund's performance.",
+    icon: <div className="flex items-center justify-center w-12 h-12 rounded-full bg-blue-100 text-fintech-blue">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
           <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
           <circle cx="9" cy="7" r="4" />
@@ -485,11 +419,10 @@ const MutualFunds = () => {
           <path d="M16 3.13a4 4 0 0 1 0 7.75" />
         </svg>
       </div>
-    },
-    {
-      title: "Index Benchmark",
-      description: "Compare the fund's returns against its benchmark index. Consistent outperformance relative to the benchmark suggests a well-managed fund.",
-      icon: <div className="flex items-center justify-center w-12 h-12 rounded-full bg-purple-100 text-fintech-purple">
+  }, {
+    title: "Index Benchmark",
+    description: "Compare the fund's returns against its benchmark index. Consistent outperformance relative to the benchmark suggests a well-managed fund.",
+    icon: <div className="flex items-center justify-center w-12 h-12 rounded-full bg-purple-100 text-fintech-purple">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
           <path d="M10 2v7.31" />
           <path d="M14 9.3V4" />
@@ -504,14 +437,11 @@ const MutualFunds = () => {
           <path d="M14 13v5" />
         </svg>
       </div>
-    }
-  ];
-
-  const mutualFundTerms = [
-    {
-      title: "SIP",
-      description: "A Systematic Investment Plan (SIP) allows you to invest a fixed amount regularly in a mutual fund, promoting disciplined saving and wealth accumulation over time.",
-      icon: <div className="flex items-center justify-center w-12 h-12 rounded-full bg-green-100 text-fintech-green">
+  }];
+  const mutualFundTerms = [{
+    title: "SIP",
+    description: "A Systematic Investment Plan (SIP) allows you to invest a fixed amount regularly in a mutual fund, promoting disciplined saving and wealth accumulation over time.",
+    icon: <div className="flex items-center justify-center w-12 h-12 rounded-full bg-green-100 text-fintech-green">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
           <rect width="18" height="18" x="3" y="4" rx="2" ry="2" />
           <line x1="16" x2="16" y1="2" y2="6" />
@@ -521,11 +451,10 @@ const MutualFunds = () => {
           <line x1="8" x2="16" y1="18" y2="18" />
         </svg>
       </div>
-    },
-    {
-      title: "STP",
-      description: "A Systematic Transfer Plan (STP) lets you transfer a fixed amount from one mutual fund to another, helping in portfolio rebalancing and managing risk.",
-      icon: <div className="flex items-center justify-center w-12 h-12 rounded-full bg-blue-100 text-fintech-blue">
+  }, {
+    title: "STP",
+    description: "A Systematic Transfer Plan (STP) lets you transfer a fixed amount from one mutual fund to another, helping in portfolio rebalancing and managing risk.",
+    icon: <div className="flex items-center justify-center w-12 h-12 rounded-full bg-blue-100 text-fintech-blue">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
           <path d="M17 3v10" />
           <path d="m12 8 5-5 5 5" />
@@ -533,22 +462,20 @@ const MutualFunds = () => {
           <path d="m2 16 5 5 5-5" />
         </svg>
       </div>
-    },
-    {
-      title: "SWP",
-      description: "A Systematic Withdrawal Plan (SWP) enables you to withdraw a fixed sum regularly from your mutual fund, providing steady income while maintaining your investment.",
-      icon: <div className="flex items-center justify-center w-12 h-12 rounded-full bg-purple-100 text-fintech-purple">
+  }, {
+    title: "SWP",
+    description: "A Systematic Withdrawal Plan (SWP) enables you to withdraw a fixed sum regularly from your mutual fund, providing steady income while maintaining your investment.",
+    icon: <div className="flex items-center justify-center w-12 h-12 rounded-full bg-purple-100 text-fintech-purple">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
           <path d="M12 3v12" />
           <path d="m8 11 4 4 4-4" />
           <path d="M8 5H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-4" />
         </svg>
       </div>
-    },
-    {
-      title: "AUM",
-      description: "Assets Under Management (AUM) refers to the total market value of all assets managed by a mutual fund, indicating the fund's size and investor trust.",
-      icon: <div className="flex items-center justify-center w-12 h-12 rounded-full bg-orange-100 text-orange-600">
+  }, {
+    title: "AUM",
+    description: "Assets Under Management (AUM) refers to the total market value of all assets managed by a mutual fund, indicating the fund's size and investor trust.",
+    icon: <div className="flex items-center justify-center w-12 h-12 rounded-full bg-orange-100 text-orange-600">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
           <rect width="20" height="14" x="2" y="3" rx="2" />
           <line x1="12" x2="12" y1="9" y2="17" />
@@ -556,11 +483,10 @@ const MutualFunds = () => {
           <line x1="16" x2="16" y1="11" y2="15" />
         </svg>
       </div>
-    },
-    {
-      title: "NAV",
-      description: "Net Asset Value (NAV) represents the per-unit value of a mutual fund, calculated by dividing the total assets minus liabilities by the number of outstanding units.",
-      icon: <div className="flex items-center justify-center w-12 h-12 rounded-full bg-teal-100 text-teal-600">
+  }, {
+    title: "NAV",
+    description: "Net Asset Value (NAV) represents the per-unit value of a mutual fund, calculated by dividing the total assets minus liabilities by the number of outstanding units.",
+    icon: <div className="flex items-center justify-center w-12 h-12 rounded-full bg-teal-100 text-teal-600">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
           <path d="M2 20h.01" />
           <path d="M7 20v-4" />
@@ -569,11 +495,10 @@ const MutualFunds = () => {
           <path d="M22 4v16" />
         </svg>
       </div>
-    },
-    {
-      title: "Expense Ratio",
-      description: "The expense ratio is the annual fee expressed as a percentage, covering fund management costs. A lower ratio typically indicates higher net returns for investors.",
-      icon: <div className="flex items-center justify-center w-12 h-12 rounded-full bg-red-100 text-red-600">
+  }, {
+    title: "Expense Ratio",
+    description: "The expense ratio is the annual fee expressed as a percentage, covering fund management costs. A lower ratio typically indicates higher net returns for investors.",
+    icon: <div className="flex items-center justify-center w-12 h-12 rounded-full bg-red-100 text-red-600">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
           <path d="M2 20h.01" />
           <path d="M7 20v-4" />
@@ -582,52 +507,42 @@ const MutualFunds = () => {
           <path d="M22 4v16" />
         </svg>
       </div>
-    },
-    {
-      title: "Entry Load",
-      description: "Entry load is a fee charged when investing in a mutual fund. Though many funds have eliminated it, understanding any applicable charges helps maximize your investment.",
-      icon: <div className="flex items-center justify-center w-12 h-12 rounded-full bg-yellow-100 text-yellow-600">
+  }, {
+    title: "Entry Load",
+    description: "Entry load is a fee charged when investing in a mutual fund. Though many funds have eliminated it, understanding any applicable charges helps maximize your investment.",
+    icon: <div className="flex items-center justify-center w-12 h-12 rounded-full bg-yellow-100 text-yellow-600">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
           <line x1="12" x2="12" y1="2" y2="22" />
           <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
         </svg>
       </div>
-    },
-    {
-      title: "Exit Load",
-      description: "Exit load is a fee incurred when redeeming mutual fund units before a certain period. It serves as a penalty for early withdrawal, encouraging long-term investment.",
-      icon: <div className="flex items-center justify-center w-12 h-12 rounded-full bg-pink-100 text-pink-600">
+  }, {
+    title: "Exit Load",
+    description: "Exit load is a fee incurred when redeeming mutual fund units before a certain period. It serves as a penalty for early withdrawal, encouraging long-term investment.",
+    icon: <div className="flex items-center justify-center w-12 h-12 rounded-full bg-pink-100 text-pink-600">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
           <path d="M12 3v12" />
           <path d="m8 11 4 4 4-4" />
           <path d="M8 5H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-4" />
         </svg>
       </div>
-    }
-  ];
+  }];
 
   // New FAQ data for the accordion
-  const faqItems = [
-    {
-      question: "What is a Mutual Fund?",
-      answer: "A mutual fund is an investment vehicle that pools money from multiple investors to purchase securities like stocks, bonds, and other assets. Professional fund managers allocate these assets to generate capital gains or income for investors."
-    },
-    {
-      question: "How do SIP investments work?",
-      answer: "Systematic Investment Plans (SIPs) allow investors to invest a fixed amount in mutual funds at regular intervals (typically monthly). This approach helps in rupee-cost averaging and building wealth over time through disciplined investing."
-    },
-    {
-      question: "Are mutual fund investments safe?",
-      answer: "Mutual funds come with varying degrees of risk depending on their type. While they're generally considered safer than direct stock investments due to diversification, they're not completely risk-free. Equity funds carry higher risk but potentially higher returns, while debt funds are relatively safer."
-    },
-    {
-      question: "What are the tax implications of mutual fund investments?",
-      answer: "Tax implications vary based on fund type and holding period. Equity funds held over 1 year have long-term capital gains taxed at 10% (above ₹1 lakh), while debt funds' long-term gains (held over 3 years) are taxed at 20% with indexation. Short-term gains are added to your income and taxed as per your slab rate."
-    }
-  ];
-
-  return (
-    <div className="min-h-screen flex flex-col">
+  const faqItems = [{
+    question: "What is a Mutual Fund?",
+    answer: "A mutual fund is an investment vehicle that pools money from multiple investors to purchase securities like stocks, bonds, and other assets. Professional fund managers allocate these assets to generate capital gains or income for investors."
+  }, {
+    question: "How do SIP investments work?",
+    answer: "Systematic Investment Plans (SIPs) allow investors to invest a fixed amount in mutual funds at regular intervals (typically monthly). This approach helps in rupee-cost averaging and building wealth over time through disciplined investing."
+  }, {
+    question: "Are mutual fund investments safe?",
+    answer: "Mutual funds come with varying degrees of risk depending on their type. While they're generally considered safer than direct stock investments due to diversification, they're not completely risk-free. Equity funds carry higher risk but potentially higher returns, while debt funds are relatively safer."
+  }, {
+    question: "What are the tax implications of mutual fund investments?",
+    answer: "Tax implications vary based on fund type and holding period. Equity funds held over 1 year have long-term capital gains taxed at 10% (above ₹1 lakh), while debt funds' long-term gains (held over 3 years) are taxed at 20% with indexation. Short-term gains are added to your income and taxed as per your slab rate."
+  }];
+  return <div className="min-h-screen flex flex-col">
       <Navbar />
 
       {/* Hero Section */}
@@ -664,12 +579,9 @@ const MutualFunds = () => {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {sipFeatures.map((feature, index) => (
-                <div 
-                  key={index} 
-                  className="bg-white border border-gray-100 rounded-xl p-6 shadow-md hover:shadow-lg hover:border-fintech-purple/30 transition-all duration-300 animate-fade-in"
-                  style={{ animationDelay: `${index * 100}ms` }}
-                >
+              {sipFeatures.map((feature, index) => <div key={index} className="bg-white border border-gray-100 rounded-xl p-6 shadow-md hover:shadow-lg hover:border-fintech-purple/30 transition-all duration-300 animate-fade-in" style={{
+              animationDelay: `${index * 100}ms`
+            }}>
                   <div className="flex items-center gap-4 mb-4">
                     <div className="relative">
                       {feature.icon}
@@ -677,8 +589,7 @@ const MutualFunds = () => {
                     <h3 className="font-semibold text-lg">{feature.title}</h3>
                   </div>
                   <p className="text-gray-600 ml-16">{feature.description}</p>
-                </div>
-              ))}
+                </div>)}
             </div>
 
             <div className="text-center mt-10">
@@ -706,12 +617,9 @@ const MutualFunds = () => {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {dematSteps.map((step, index) => (
-                <div 
-                  key={index} 
-                  className="bg-white border border-gray-200 rounded-xl p-6 shadow-md hover:shadow-xl transition-all duration-300 relative overflow-hidden animate-fade-in"
-                  style={{ animationDelay: `${index * 200}ms` }}
-                >
+              {dematSteps.map((step, index) => <div key={index} className="bg-white border border-gray-200 rounded-xl p-6 shadow-md hover:shadow-xl transition-all duration-300 relative overflow-hidden animate-fade-in" style={{
+              animationDelay: `${index * 200}ms`
+            }}>
                   <div className="flex flex-col items-center text-center">
                     <div className="relative mb-4">
                       {step.icon}
@@ -722,12 +630,11 @@ const MutualFunds = () => {
                     <h3 className="font-semibold text-xl mb-2">{step.title}</h3>
                     <p className="text-gray-600">{step.description}</p>
                   </div>
-                </div>
-              ))}
+                </div>)}
             </div>
 
             <div className="text-center mt-10">
-              <Button className="bg-gradient-to-r from-fintech-purple to-fintech-blue hover:opacity-90 transition-all transform hover:scale-105 shadow-[0_0_15px_rgba(155,135,245,0.3)]">
+              <Button className="bg-gradient-to-r from-fintech-orange to-fintech-green hover:opacity-90 transition-all transform hover:scale-105 shadow-[0_0_15px_rgba(155,135,245,0.3)]">
                 Start Now
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
@@ -753,12 +660,9 @@ const MutualFunds = () => {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {additionalFeatures.map((feature, index) => (
-                <div 
-                  key={index} 
-                  className="bg-white border border-gray-100 rounded-xl p-6 shadow-md hover:shadow-lg hover:border-fintech-purple/30 transition-all duration-300 animate-fade-in"
-                  style={{ animationDelay: `${index * 100}ms` }}
-                >
+              {additionalFeatures.map((feature, index) => <div key={index} className="bg-white border border-gray-100 rounded-xl p-6 shadow-md hover:shadow-lg hover:border-fintech-purple/30 transition-all duration-300 animate-fade-in" style={{
+              animationDelay: `${index * 100}ms`
+            }}>
                   <div className="flex flex-col items-center text-center gap-4">
                     <div className="relative">
                       {feature.icon}
@@ -766,8 +670,7 @@ const MutualFunds = () => {
                     <h3 className="font-semibold text-lg">{feature.title}</h3>
                     <p className="text-gray-600">{feature.description}</p>
                   </div>
-                </div>
-              ))}
+                </div>)}
             </div>
           </div>
         </div>
@@ -787,19 +690,15 @@ const MutualFunds = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-            {mutualFundBenefits.map((benefit, index) => (
-              <div 
-                key={index}
-                className="bg-white backdrop-blur-sm border border-gray-200 p-6 rounded-xl transform transition-all duration-300 hover:-translate-y-1 hover:shadow-xl animate-fade-in"
-                style={{ animationDelay: `${index * 150}ms` }}
-              >
+            {mutualFundBenefits.map((benefit, index) => <div key={index} className="bg-white backdrop-blur-sm border border-gray-200 p-6 rounded-xl transform transition-all duration-300 hover:-translate-y-1 hover:shadow-xl animate-fade-in" style={{
+            animationDelay: `${index * 150}ms`
+          }}>
                 <div className="flex items-center mb-4">
                   {benefit.icon}
                   <h3 className="font-bold text-xl ml-3">{benefit.title}</h3>
                 </div>
                 <p className="text-gray-600">{benefit.description}</p>
-              </div>
-            ))}
+              </div>)}
           </div>
         </div>
       </section>
@@ -818,12 +717,9 @@ const MutualFunds = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            {sipAdvantages.map((advantage, index) => (
-              <div 
-                key={index}
-                className="bg-white backdrop-blur-sm border border-gray-200 p-6 rounded-xl shadow-sm transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl animate-fade-in"
-                style={{ animationDelay: `${index * 100}ms` }}
-              >
+            {sipAdvantages.map((advantage, index) => <div key={index} className="bg-white backdrop-blur-sm border border-gray-200 p-6 rounded-xl shadow-sm transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl animate-fade-in" style={{
+            animationDelay: `${index * 100}ms`
+          }}>
                 <div className="flex items-start gap-4">
                   {advantage.icon}
                   <div>
@@ -831,8 +727,7 @@ const MutualFunds = () => {
                     <p className="text-gray-600 text-sm">{advantage.description}</p>
                   </div>
                 </div>
-              </div>
-            ))}
+              </div>)}
           </div>
         </div>
       </section>
@@ -851,12 +746,9 @@ const MutualFunds = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-            {choosingMutualFundsTips.map((tip, index) => (
-              <div 
-                key={index}
-                className="bg-white backdrop-blur-sm border border-gray-200 p-6 rounded-xl shadow-sm transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl animate-fade-in"
-                style={{ animationDelay: `${index * 100}ms` }}
-              >
+            {choosingMutualFundsTips.map((tip, index) => <div key={index} className="bg-white backdrop-blur-sm border border-gray-200 p-6 rounded-xl shadow-sm transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl animate-fade-in" style={{
+            animationDelay: `${index * 100}ms`
+          }}>
                 <div className="flex flex-col items-center text-center gap-4">
                   {tip.icon}
                   <div>
@@ -864,8 +756,7 @@ const MutualFunds = () => {
                     <p className="text-gray-600 text-sm">{tip.description}</p>
                   </div>
                 </div>
-              </div>
-            ))}
+              </div>)}
           </div>
         </div>
       </section>
@@ -884,13 +775,11 @@ const MutualFunds = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-            {mutualFundTerms.map((term, index) => (
-              <HoverCard key={index}>
+            {mutualFundTerms.map((term, index) => <HoverCard key={index}>
                 <HoverCardTrigger asChild>
-                  <div 
-                    className="bg-white backdrop-blur-sm border border-gray-200 p-6 rounded-xl shadow-sm transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl animate-fade-in cursor-pointer"
-                    style={{ animationDelay: `${index * 100}ms` }}
-                  >
+                  <div className="bg-white backdrop-blur-sm border border-gray-200 p-6 rounded-xl shadow-sm transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl animate-fade-in cursor-pointer" style={{
+                animationDelay: `${index * 100}ms`
+              }}>
                     <div className="flex flex-col items-center text-center">
                       {term.icon}
                       <h3 className="font-bold text-xl my-3">{term.title}</h3>
@@ -904,8 +793,7 @@ const MutualFunds = () => {
                     <p className="text-gray-700">{term.description}</p>
                   </div>
                 </HoverCardContent>
-              </HoverCard>
-            ))}
+              </HoverCard>)}
           </div>
         </div>
       </section>
@@ -919,12 +807,9 @@ const MutualFunds = () => {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
-            {fundCategories.map((fund, index) => (
-              <div 
-                key={index}
-                className={`${fund.bgColor} p-6 rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 animate-fade-in`}
-                style={{ animationDelay: `${index * 150}ms` }}
-              >
+            {fundCategories.map((fund, index) => <div key={index} className={`${fund.bgColor} p-6 rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 animate-fade-in`} style={{
+            animationDelay: `${index * 150}ms`
+          }}>
                 <div className="flex justify-center mb-4">
                   <div className={`w-12 h-12 rounded-full flex items-center justify-center ${fund.iconColor} bg-white/70`}>
                     {fund.icon}
@@ -945,8 +830,7 @@ const MutualFunds = () => {
                 </div>
                 
                 <p className="text-sm text-gray-600">{fund.description}</p>
-              </div>
-            ))}
+              </div>)}
           </div>
         </div>
       </section>
@@ -973,8 +857,7 @@ const MutualFunds = () => {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {topPerformingFunds.map((fund, index) => (
-                  <TableRow key={index} className="hover:bg-gray-50/50">
+                {topPerformingFunds.map((fund, index) => <TableRow key={index} className="hover:bg-gray-50/50">
                     <TableCell>
                       <div className="flex items-center">
                         <div className={`w-1.5 h-14 ${fund.colorClass} rounded-full mr-3`}></div>
@@ -992,22 +875,15 @@ const MutualFunds = () => {
                     <TableCell className="font-semibold text-fintech-green">{fund.returns}</TableCell>
                     <TableCell>{fund.aum}</TableCell>
                     <TableCell>
-                      <Badge
-                        variant={
-                          fund.risk === "Low" ? "success" :
-                          fund.risk === "Moderate" ? "warning" :
-                          fund.risk === "High" ? "info" : "destructive"
-                        }
-                      >
+                      <Badge variant={fund.risk === "Low" ? "success" : fund.risk === "Moderate" ? "warning" : fund.risk === "High" ? "info" : "destructive"}>
                         {fund.risk}
                       </Badge>
                     </TableCell>
-                  </TableRow>
-                ))}
+                  </TableRow>)}
               </TableBody>
             </Table>
             <div className="flex justify-center p-5">
-              <Button className="bg-fintech-purple hover:bg-fintech-purple/80 text-white">
+              <Button className="text-white bg-fintech-green">
                 View All Mutual Funds
               </Button>
             </div>
@@ -1027,24 +903,20 @@ const MutualFunds = () => {
           
           <div className="max-w-3xl mx-auto">
             <Accordion type="single" collapsible className="bg-white rounded-xl shadow-sm">
-              {faqItems.map((item, index) => (
-                <AccordionItem key={index} value={`item-${index}`} className="border-b border-gray-200 last:border-0">
+              {faqItems.map((item, index) => <AccordionItem key={index} value={`item-${index}`} className="border-b border-gray-200 last:border-0">
                   <AccordionTrigger className="text-left font-semibold py-4 px-6 hover:no-underline hover:bg-gray-50">
                     {item.question}
                   </AccordionTrigger>
                   <AccordionContent className="px-6 pb-4 text-gray-600">
                     {item.answer}
                   </AccordionContent>
-                </AccordionItem>
-              ))}
+                </AccordionItem>)}
             </Accordion>
           </div>
         </div>
       </section>
       
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default MutualFunds;

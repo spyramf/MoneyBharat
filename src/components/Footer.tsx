@@ -1,17 +1,14 @@
-
 import { Facebook, Instagram, Linkedin, Twitter } from "lucide-react";
 import { Link } from "react-router-dom";
-
 const Footer = () => {
-  return (
-    <footer className="bg-gray-50 py-12 md:py-16">
+  return <footer className="bg-gray-50 py-12 md:py-16">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Brand */}
           <div>
             <Link to="/" className="text-2xl font-bold">
               <span className="gradient-text">Money</span>
-              <span className="text-fintech-blue">Bharat</span>
+              <span className="text-fintech-green">Bharat</span>
             </Link>
             <p className="mt-4 text-gray-600 max-w-xs">
               Transforming India's financial landscape with innovative tech-driven solutions for wealth creation.
@@ -19,28 +16,16 @@ const Footer = () => {
             
             {/* Social icons */}
             <div className="flex mt-6 gap-4">
-              <a
-                href="#"
-                className="w-9 h-9 rounded-full bg-gray-100 hover:bg-fintech-purple/10 flex items-center justify-center transition-colors duration-200"
-              >
+              <a href="#" className="w-9 h-9 rounded-full bg-gray-100 hover:bg-fintech-purple/10 flex items-center justify-center transition-colors duration-200">
                 <Facebook size={18} className="text-gray-700" />
               </a>
-              <a
-                href="#"
-                className="w-9 h-9 rounded-full bg-gray-100 hover:bg-fintech-purple/10 flex items-center justify-center transition-colors duration-200"
-              >
+              <a href="#" className="w-9 h-9 rounded-full bg-gray-100 hover:bg-fintech-purple/10 flex items-center justify-center transition-colors duration-200">
                 <Twitter size={18} className="text-gray-700" />
               </a>
-              <a
-                href="#"
-                className="w-9 h-9 rounded-full bg-gray-100 hover:bg-fintech-purple/10 flex items-center justify-center transition-colors duration-200"
-              >
+              <a href="#" className="w-9 h-9 rounded-full bg-gray-100 hover:bg-fintech-purple/10 flex items-center justify-center transition-colors duration-200">
                 <Instagram size={18} className="text-gray-700" />
               </a>
-              <a
-                href="#"
-                className="w-9 h-9 rounded-full bg-gray-100 hover:bg-fintech-purple/10 flex items-center justify-center transition-colors duration-200"
-              >
+              <a href="#" className="w-9 h-9 rounded-full bg-gray-100 hover:bg-fintech-purple/10 flex items-center justify-center transition-colors duration-200">
                 <Linkedin size={18} className="text-gray-700" />
               </a>
             </div>
@@ -125,8 +110,6 @@ const Footer = () => {
           </p>
         </div>
       </div>
-    </footer>
-  );
+    </footer>;
 };
-
 export default Footer;
