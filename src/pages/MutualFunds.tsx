@@ -689,7 +689,7 @@ const MutualFunds = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
             {mutualFundBenefits.map((benefit, index) => <div key={index} className="bg-white backdrop-blur-sm border border-gray-200 p-6 rounded-xl transform transition-all duration-300 hover:-translate-y-1 hover:shadow-xl animate-fade-in" style={{
             animationDelay: `${index * 150}ms`
           }}>
