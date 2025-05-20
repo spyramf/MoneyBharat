@@ -12,6 +12,7 @@ import { Badge } from "@/components/ui/badge";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+
 const MutualFunds = () => {
   const [investmentAmount, setInvestmentAmount] = useState(5000);
   const [investmentPeriod, setInvestmentPeriod] = useState(5);
@@ -163,55 +164,64 @@ const MutualFunds = () => {
   };
 
   // Fund Categories Data
-  const fundCategories = [{
-    type: "Equity Funds",
-    expectedReturns: "12-15%",
-    riskLevel: "High",
-    description: "Higher potential returns with market-linked investments in company stocks.",
-    bgColor: "bg-green-50",
-    iconColor: "text-fintech-green",
-    icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
+  const fundCategories = [
+    {
+      type: "Equity Funds",
+      expectedReturns: "12-15%",
+      riskLevel: "High",
+      description: "Higher potential returns with market-linked investments in company stocks.",
+      bgColor: "bg-green-50",
+      textColor: "text-green-600",
+      iconBg: "bg-green-100/70",
+      icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6 text-green-600">
           <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
         </svg>
-  }, {
-    type: "Debt Funds",
-    expectedReturns: "7-9%",
-    riskLevel: "Low",
-    description: "Stable returns with lower risk investments in fixed income securities.",
-    bgColor: "bg-blue-50",
-    iconColor: "text-fintech-blue",
-    icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
-          <rect width="20" height="14" x="2" y="3" rx="2" />
-          <line x1="12" x2="12" y1="9" y2="17" />
-          <line x1="8" x2="8" y1="11" y2="15" />
-          <line x1="16" x2="16" y1="11" y2="15" />
+    },
+    {
+      type: "Debt Funds",
+      expectedReturns: "7-9%",
+      riskLevel: "Low",
+      description: "Stable returns with lower risk investments in fixed income securities.",
+      bgColor: "bg-blue-50",
+      textColor: "text-blue-600",
+      iconBg: "bg-blue-100/70",
+      icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6 text-blue-600">
+          <path d="M2 18v3c0 .6.4 1 1 1h4v-3h3v-3h2l1.4-1.4a6.5 6.5 0 1 0-4-4Z"/>
+          <circle cx="16.5" cy="7.5" r=".5"/>
         </svg>
-  }, {
-    type: "Hybrid Funds",
-    expectedReturns: "9-12%",
-    riskLevel: "Medium",
-    description: "Balanced approach with a mix of equity and debt investments.",
-    bgColor: "bg-purple-50",
-    iconColor: "text-fintech-purple",
-    icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
-          <path d="M2 20h.01" />
-          <path d="M7 20v-4" />
-          <path d="M12 20v-8" />
-          <path d="M17 20V8" />
-          <path d="M22 4v16" />
+    },
+    {
+      type: "Hybrid Funds",
+      expectedReturns: "9-12%",
+      riskLevel: "Medium",
+      description: "Balanced approach with a mix of equity and debt investments.",
+      bgColor: "bg-purple-50",
+      textColor: "text-purple-600",
+      iconBg: "bg-purple-100/70",
+      icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6 text-purple-600">
+          <path d="M20 7h-9"/>
+          <path d="M14 17H5"/>
+          <circle cx="17" cy="17" r="3"/>
+          <circle cx="7" cy="7" r="3"/>
         </svg>
-  }, {
-    type: "Index Funds",
-    expectedReturns: "10-12%",
-    riskLevel: "Medium",
-    description: "Passive investments that track market indices with lower expenses.",
-    bgColor: "bg-orange-50",
-    iconColor: "text-fintech-orange",
-    icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
-          <path d="M3 3v18h18" />
-          <path d="m19 9-5 5-4-4-3 3" />
+    },
+    {
+      type: "Index Funds",
+      expectedReturns: "10-12%",
+      riskLevel: "Medium",
+      description: "Passive investments that track market indices with lower expenses.",
+      bgColor: "bg-orange-50",
+      textColor: "text-orange-600",
+      iconBg: "bg-orange-100/70",
+      icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6 text-orange-600">
+          <path d="M2 20h.01"/>
+          <path d="M7 20v-4"/>
+          <path d="M12 20v-8"/>
+          <path d="M17 20V8"/>
+          <path d="M22 4v16"/>
         </svg>
-  }];
+    }
+  ];
 
   // Top Performing Funds Data
   const topPerformingFunds = [{
@@ -798,7 +808,7 @@ const MutualFunds = () => {
         </div>
       </section>
 
-      {/* Fund Categories Section */}
+      {/* Fund Categories Section - Updated with new styling */}
       <section className="py-16 px-4 md:px-8 bg-gray-50">
         <div className="container mx-auto">
           <div className="text-center mb-12">
@@ -807,30 +817,38 @@ const MutualFunds = () => {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
-            {fundCategories.map((fund, index) => <div key={index} className={`${fund.bgColor} p-6 rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 animate-fade-in`} style={{
-            animationDelay: `${index * 150}ms`
-          }}>
-                <div className="flex justify-center mb-4">
-                  <div className={`w-12 h-12 rounded-full flex items-center justify-center ${fund.iconColor} bg-white/70`}>
+            {fundCategories.map((fund, index) => (
+              <div key={index} className={`${fund.bgColor} p-8 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 animate-fade-in h-full`} style={{
+                animationDelay: `${index * 150}ms`
+              }}>
+                <div className="flex justify-center mb-6">
+                  <div className={`w-16 h-16 rounded-full flex items-center justify-center ${fund.iconBg}`}>
                     {fund.icon}
                   </div>
                 </div>
                 
-                <h3 className="text-xl font-bold text-center mb-4">{fund.type}</h3>
+                <h3 className={`text-2xl font-bold text-center mb-6 ${fund.textColor}`}>{fund.type}</h3>
                 
-                <div className="grid grid-cols-2 gap-2 mb-4">
-                  <div>
-                    <p className="text-sm text-gray-500">Expected Returns</p>
-                    <p className="font-semibold">{fund.expectedReturns}</p>
-                  </div>
-                  <div>
-                    <p className="text-sm text-gray-500">Risk Level</p>
-                    <p className="font-semibold">{fund.riskLevel}</p>
-                  </div>
+                <div className="flex justify-between items-center mb-4">
+                  <p className="text-gray-600">Expected Returns</p>
+                  <p className="font-bold">{fund.expectedReturns}</p>
                 </div>
                 
-                <p className="text-sm text-gray-600">{fund.description}</p>
-              </div>)}
+                <div className="flex justify-between items-center mb-6">
+                  <p className="text-gray-600">Risk Level</p>
+                  <p className="font-bold">{fund.riskLevel}</p>
+                </div>
+                
+                <p className="text-gray-600 text-center mb-6">{fund.description}</p>
+                
+                <div className="flex justify-center">
+                  <Button variant="outline" className="bg-white rounded-full hover:bg-gray-50 group">
+                    Explore Funds
+                    <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  </Button>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -840,83 +858,4 @@ const MutualFunds = () => {
         <div className="container mx-auto">
           <div className="text-center mb-8">
             <h2 className="text-3xl md:text-4xl font-bold mb-2">Top Performing Funds</h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Our selection of mutual funds with consistent performance
-            </p>
-          </div>
-          
-          <div className="max-w-6xl mx-auto bg-white rounded-2xl shadow-md overflow-hidden">
-            <Table>
-              <TableHeader>
-                <TableRow className="bg-gray-50">
-                  <TableHead className="w-[300px]">Fund Name</TableHead>
-                  <TableHead>Category</TableHead>
-                  <TableHead>1Y Returns</TableHead>
-                  <TableHead>AUM</TableHead>
-                  <TableHead>Risk</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {topPerformingFunds.map((fund, index) => <TableRow key={index} className="hover:bg-gray-50/50">
-                    <TableCell>
-                      <div className="flex items-center">
-                        <div className={`w-1.5 h-14 ${fund.colorClass} rounded-full mr-3`}></div>
-                        <div>
-                          <div className="font-medium">{fund.name}</div>
-                          <div className="text-sm text-gray-500">{fund.performance}</div>
-                        </div>
-                      </div>
-                    </TableCell>
-                    <TableCell>
-                      <Badge variant={fund.category === "Equity" ? "success" : fund.category === "Hybrid" ? "warning" : "info"}>
-                        {fund.category}
-                      </Badge>
-                    </TableCell>
-                    <TableCell className="font-semibold text-fintech-green">{fund.returns}</TableCell>
-                    <TableCell>{fund.aum}</TableCell>
-                    <TableCell>
-                      <Badge variant={fund.risk === "Low" ? "success" : fund.risk === "Moderate" ? "warning" : fund.risk === "High" ? "info" : "destructive"}>
-                        {fund.risk}
-                      </Badge>
-                    </TableCell>
-                  </TableRow>)}
-              </TableBody>
-            </Table>
-            <div className="flex justify-center p-5">
-              <Button className="text-white bg-fintech-green">
-                View All Mutual Funds
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* NEW SECTION: Frequently Asked Questions */}
-      <section className="py-16 px-4 md:px-8 bg-gray-50">
-        <div className="container mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-2">Frequently Asked Questions</h2>
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              Get answers to common questions about mutual fund investments
-            </p>
-          </div>
-          
-          <div className="max-w-3xl mx-auto">
-            <Accordion type="single" collapsible className="bg-white rounded-xl shadow-sm">
-              {faqItems.map((item, index) => <AccordionItem key={index} value={`item-${index}`} className="border-b border-gray-200 last:border-0">
-                  <AccordionTrigger className="text-left font-semibold py-4 px-6 hover:no-underline hover:bg-gray-50">
-                    {item.question}
-                  </AccordionTrigger>
-                  <AccordionContent className="px-6 pb-4 text-gray-600">
-                    {item.answer}
-                  </AccordionContent>
-                </AccordionItem>)}
-            </Accordion>
-          </div>
-        </div>
-      </section>
-      
-      <Footer />
-    </div>;
-};
-export default MutualFunds;
+            <p className="
