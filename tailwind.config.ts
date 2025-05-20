@@ -134,6 +134,22 @@ export default {
                         transform: 'translateX(0)',
                         opacity: '1'
                     }
+                },
+                'border-glow': {
+                    '0%, 100%': {
+                        borderColor: 'rgba(155, 135, 245, 0.3)'
+                    },
+                    '50%': {
+                        borderColor: 'rgba(155, 135, 245, 0.8)'
+                    }
+                },
+                'float-slow': {
+                    '0%, 100%': {
+                        transform: 'translateY(0)'
+                    },
+                    '50%': {
+                        transform: 'translateY(-5px)'
+                    }
                 }
 			},
 			animation: {
@@ -144,7 +160,9 @@ export default {
                 'fade-in': 'fade-in 0.5s ease-out',
                 'scale-up': 'scale-up 0.3s ease-out',
                 'glow': 'glow 2s ease-in-out infinite',
-                'slide-in': 'slide-in 0.5s ease-out'
+                'slide-in': 'slide-in 0.5s ease-out',
+                'border-glow': 'border-glow 2s ease-in-out infinite',
+                'float-slow': 'float-slow 3s ease-in-out infinite'
 			},
 			backgroundImage: {
 				'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
