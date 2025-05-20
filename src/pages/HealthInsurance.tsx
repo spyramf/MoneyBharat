@@ -40,7 +40,7 @@ const HealthInsuranceCard = ({
               <AspectRatio ratio={1 / 1}>
                 <Skeleton className="h-full w-full rounded-md" />
               </AspectRatio>
-            </div> : <Hospital className="h-8 w-8 text-fintech-purple" />}
+            </div> : <Hospital className="h-8 w-8 text-fintech-green\n" />}
         </div>
         <div className="text-right">
           <div className="inline-flex items-center bg-green-100 px-2 py-1 rounded text-green-700">
