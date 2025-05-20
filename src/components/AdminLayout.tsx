@@ -37,10 +37,19 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
       <div className="min-h-screen flex w-full">
         <Sidebar className="border-r">
           <SidebarHeader className="p-4 border-b">
-            <h2 className="text-xl font-bold">
-              <span className="text-fintech-green">Money</span>
-              <span className="text-fintech-blue">Bharat</span> CMS
-            </h2>
+            <div className="flex items-center">
+              <div className="h-8 w-8 mr-2">
+                <img 
+                  src="/lovable-uploads/91d78f6e-991f-4f65-883d-f9962eb33219.png" 
+                  alt="Money Bharat Logo" 
+                  className="h-full w-full object-contain" 
+                />
+              </div>
+              <h2 className="text-xl font-bold">
+                <span className="text-[#F97316]">MONEY</span>
+                <span className="text-[#2EB883]">BHARAT</span> CMS
+              </h2>
+            </div>
           </SidebarHeader>
           <SidebarContent className="p-4">
             <nav className="flex flex-col">

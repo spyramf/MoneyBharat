@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -68,10 +69,10 @@ export default {
 				fintech: {
 					purple: '#9b87f5',
 					'deep-purple': '#7E69AB',
-					blue: '#0FA0CE',
-					'ocean-blue': '#0EA5E9',
-					orange: '#F97316',
-					green: '#2EB883', // Green color is already defined here
+					blue: '#0066CC',  // Updated to match the blue from the logo
+					'ocean-blue': '#0066CC', // Updated to match
+					orange: '#F97316', // Updated to match the orange from the logo
+					green: '#2EB883', // Green color as per the logo
 				}
 			},
 			borderRadius: {
@@ -106,6 +107,7 @@ export default {
 			backgroundImage: {
 				'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
 				'hero-pattern': 'linear-gradient(90deg, hsla(277, 75%, 84%, 1) 0%, hsla(297, 50%, 51%, 1) 100%)',
+				'money-gradient': 'linear-gradient(90deg, #F97316 0%, #2EB883 100%)'
 			}
 		}
 	},

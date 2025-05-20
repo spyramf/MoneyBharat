@@ -34,9 +34,18 @@ const Navbar = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center">
-            <Link to="/" className="text-2xl font-bold">
-              <span className="text-fintech-green">Money</span>
-              <span className="text-fintech-blue">Bharat</span>
+            <Link to="/" className="flex items-center">
+              <div className="h-10 w-10 mr-2">
+                <img 
+                  src="/lovable-uploads/91d78f6e-991f-4f65-883d-f9962eb33219.png" 
+                  alt="Money Bharat Logo" 
+                  className="h-full w-full object-contain" 
+                />
+              </div>
+              <span className="text-2xl font-bold">
+                <span className="text-[#F97316]">MONEY</span>
+                <span className="text-[#2EB883]">BHARAT</span>
+              </span>
             </Link>
           </div>
 

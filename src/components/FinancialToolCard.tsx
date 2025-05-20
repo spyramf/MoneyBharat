@@ -1,7 +1,6 @@
 
 import React from "react";
 import { ArrowRight } from "lucide-react";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 
 interface FinancialToolCardProps {
   icon: React.ReactNode;
@@ -38,7 +37,7 @@ const FinancialToolCard: React.FC<FinancialToolCardProps> = ({
       
       <a 
         href={linkHref} 
-        className="inline-flex items-center font-medium text-fintech-green hover:text-fintech-blue transition-colors"
+        className="inline-flex items-center font-medium text-[#F97316] hover:text-[#2EB883] transition-colors"
       >
         {linkText} 
         <ArrowRight className="ml-2 h-4 w-4" />
