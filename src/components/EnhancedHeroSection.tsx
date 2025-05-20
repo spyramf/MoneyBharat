@@ -1,11 +1,8 @@
-
 import { ArrowRight, ArrowRightCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-
 const EnhancedHeroSection = () => {
-  return (
-    <section className="relative overflow-hidden pt-16 md:pt-24 pb-16 md:pb-20">
+  return <section className="relative overflow-hidden pt-16 md:pt-24 pb-16 md:pb-20">
       {/* Background decoration */}
       <div className="absolute top-0 left-0 w-full h-full bg-gradient-radial from-fintech-green/10 to-transparent -z-10"></div>
       <div className="absolute top-40 right-0 w-96 h-96 bg-fintech-green/10 rounded-full blur-3xl -z-10"></div>
@@ -16,14 +13,18 @@ const EnhancedHeroSection = () => {
           
           {/* Left content */}
           <div className="w-full md:w-1/2 space-y-6">
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-            >
+            <motion.div initial={{
+            opacity: 0,
+            y: 20
+          }} animate={{
+            opacity: 1,
+            y: 0
+          }} transition={{
+            duration: 0.5
+          }}>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
                 Build Your <span className="text-fintech-green">Portfolio</span> <br />
-                <span className="text-fintech-orange">With Confidence</span>
+                <span className="text-black">With Confidence</span>
               </h1>
               <p className="text-lg md:text-xl text-gray-700 max-w-lg mt-6">
                 Experience a new era of financial freedom with our 
@@ -42,12 +43,14 @@ const EnhancedHeroSection = () => {
             </motion.div>
             
             {/* Trust indicators */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.3, duration: 0.5 }}
-              className="pt-10"
-            >
+            <motion.div initial={{
+            opacity: 0
+          }} animate={{
+            opacity: 1
+          }} transition={{
+            delay: 0.3,
+            duration: 0.5
+          }} className="pt-10">
               <p className="text-sm text-gray-600 mb-3">Trusted by investors across India</p>
               <div className="flex flex-wrap gap-6 items-center">
                 <div className="flex items-center gap-2">
@@ -84,12 +87,15 @@ const EnhancedHeroSection = () => {
           </div>
           
           {/* Right dashboard visualization */}
-          <motion.div 
-            className="w-full md:w-1/2"
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5 }}
-          >
+          <motion.div className="w-full md:w-1/2" initial={{
+          opacity: 0,
+          scale: 0.95
+        }} animate={{
+          opacity: 1,
+          scale: 1
+        }} transition={{
+          duration: 0.5
+        }}>
             <div className="relative">
               <div className="absolute -top-10 -left-10 w-64 h-64 bg-fintech-green/10 rounded-full blur-xl"></div>
               
@@ -110,7 +116,9 @@ const EnhancedHeroSection = () => {
                         <span className="font-medium">₹8.2L</span>
                       </div>
                       <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
-                        <div className="h-full bg-gradient-to-r from-fintech-green to-fintech-blue rounded-full" style={{ width: "82%" }}></div>
+                        <div className="h-full bg-gradient-to-r from-fintech-green to-fintech-blue rounded-full" style={{
+                        width: "82%"
+                      }}></div>
                       </div>
                       <div className="flex justify-between text-xs text-gray-600 mt-1">
                         <span>Target: ₹10L</span>
@@ -183,12 +191,16 @@ const EnhancedHeroSection = () => {
       </div>
       
       {/* Stats section */}
-      <motion.div 
-        className="container mx-auto px-4 mt-16 md:mt-24"
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.6, duration: 0.5 }}
-      >
+      <motion.div className="container mx-auto px-4 mt-16 md:mt-24" initial={{
+      opacity: 0,
+      y: 30
+    }} animate={{
+      opacity: 1,
+      y: 0
+    }} transition={{
+      delay: 0.6,
+      duration: 0.5
+    }}>
         <div className="grid grid-cols-3 gap-6">
           <div className="rounded-xl bg-gray-50/80 backdrop-blur-sm p-6 text-center shadow-sm border border-gray-100">
             <p className="text-3xl md:text-4xl font-bold text-fintech-green mb-2">₹500Cr+</p>
@@ -204,8 +216,6 @@ const EnhancedHeroSection = () => {
           </div>
         </div>
       </motion.div>
-    </section>
-  );
+    </section>;
 };
-
 export default EnhancedHeroSection;
