@@ -100,7 +100,7 @@ const EnhancedHeroSection = () => {
               <div className="absolute -top-10 -left-10 w-64 h-64 bg-fintech-green/10 rounded-full blur-xl"></div>
               
               {/* Investment dashboard */}
-              <div className="glass-card p-6 max-w-md mx-auto shadow-xl">
+              <div className="glass-card p-6 max-w-md mx-auto shadow-xl px-[2px] py-[2px]">
                 <div className="bg-gradient-to-br from-fintech-green/10 to-fintech-blue/10 rounded-lg p-3">
                   <div className="flex justify-between items-center mb-4">
                     <h3 className="text-lg font-semibold">Your Investments</h3>
