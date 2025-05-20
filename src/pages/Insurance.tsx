@@ -4,18 +4,34 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Navbar from "@/components/Navbar";
-import { ArrowRight, Shield, ShieldCheck, User, Car, Home, Heart, Umbrella, Briefcase, Check, ListOrdered, Building, ArrowLeft } from "lucide-react";
-const InsuranceCard = ({
-  title,
-  description,
-  icon,
-  color
-}: {
-  title: string;
-  description: string;
-  icon: React.ReactNode;
-  color: string;
-}) => <Card className="h-full transition-all duration-200 hover:shadow-lg hover:-translate-y-1">
+import { 
+  ArrowRight, 
+  Shield, 
+  ShieldCheck, 
+  User, 
+  Car, 
+  Home, 
+  Heart, 
+  Umbrella, 
+  Briefcase, 
+  Check, 
+  ListOrdered, 
+  Building,
+  ArrowLeft,
+} from "lucide-react";
+
+const InsuranceCard = ({ 
+  title, 
+  description, 
+  icon, 
+  color 
+}: { 
+  title: string; 
+  description: string; 
+  icon: React.ReactNode; 
+  color: string 
+}) => (
+  <Card className="h-full transition-all duration-200 hover:shadow-lg hover:-translate-y-1">
     <CardContent className="p-6">
       <div className={`w-14 h-14 rounded-xl mb-4 flex items-center justify-center ${color} text-white`}>
         {icon}
@@ -27,158 +43,202 @@ const InsuranceCard = ({
         <ArrowRight className="ml-1 h-4 w-4" />
       </Link>
     </CardContent>
-  </Card>;
+  </Card>
+);
+
 const InsurancePage = () => {
   const [selectedInsuranceType, setSelectedInsuranceType] = useState("health");
-  const insuranceCategories = [{
-    id: "health",
-    title: "Health Insurance",
-    icon: <Heart className="h-6 w-6" />,
-    description: "Comprehensive health coverage for individuals and families"
-  }, {
-    id: "life",
-    title: "Life Insurance",
-    icon: <Shield className="h-6 w-6" />,
-    description: "Secure your family's future with our life insurance plans"
-  }, {
-    id: "car",
-    title: "Car Insurance",
-    icon: <Car className="h-6 w-6" />,
-    description: "Protect your vehicle against accidents and damages"
-  }, {
-    id: "home",
-    title: "Home Insurance",
-    icon: <Home className="h-6 w-6" />,
-    description: "Safeguard your home and belongings"
-  }, {
-    id: "term",
-    title: "Term Insurance",
-    icon: <ShieldCheck className="h-6 w-6" />,
-    description: "High coverage at affordable premiums"
-  }];
-  const insuranceTypes = [{
-    id: "health",
-    title: "Health Insurance",
-    cards: [{
-      title: "Individual Health",
-      description: "Comprehensive health protection for you with customizable coverage options",
-      icon: <User className="h-6 w-6" />,
-      color: "bg-gradient-to-r from-fintech-purple to-fintech-blue"
-    }, {
-      title: "Family Health",
-      description: "Coverage for your entire family under a single policy with enhanced benefits",
-      icon: <User className="h-6 w-6" />,
-      color: "bg-gradient-to-r from-fintech-blue to-fintech-ocean-blue"
-    }, {
-      title: "Senior Citizen",
-      description: "Special health plans designed for the needs of senior citizens",
-      icon: <User className="h-6 w-6" />,
-      color: "bg-gradient-to-r from-fintech-orange to-fintech-purple"
-    }, {
-      title: "Critical Illness",
-      description: "Financial protection against major illnesses with lump-sum benefits",
+
+  const insuranceCategories = [
+    {
+      id: "health",
+      title: "Health Insurance",
       icon: <Heart className="h-6 w-6" />,
-      color: "bg-gradient-to-r from-fintech-deep-purple to-fintech-purple"
-    }]
-  }, {
-    id: "life",
-    title: "Life Insurance",
-    cards: [{
-      title: "Term Life",
-      description: "High coverage at affordable premiums for a specific period",
+      description: "Comprehensive health coverage for individuals and families"
+    },
+    {
+      id: "life",
+      title: "Life Insurance",
       icon: <Shield className="h-6 w-6" />,
-      color: "bg-gradient-to-r from-fintech-purple to-fintech-blue"
-    }, {
-      title: "Whole Life",
-      description: "Lifetime coverage with savings benefit for your family",
-      icon: <ShieldCheck className="h-6 w-6" />,
-      color: "bg-gradient-to-r from-fintech-blue to-fintech-ocean-blue"
-    }, {
-      title: "Child Plans",
-      description: "Secure your child's future education and milestones",
-      icon: <User className="h-6 w-6" />,
-      color: "bg-gradient-to-r from-fintech-orange to-fintech-purple"
-    }, {
-      title: "Retirement Plans",
-      description: "Build a corpus for your retirement years with guaranteed returns",
-      icon: <Briefcase className="h-6 w-6" />,
-      color: "bg-gradient-to-r from-fintech-deep-purple to-fintech-purple"
-    }]
-  }, {
-    id: "car",
-    title: "Car Insurance",
-    cards: [{
-      title: "Comprehensive",
-      description: "Complete protection for your vehicle against damages and third-party liability",
+      description: "Secure your family's future with our life insurance plans"
+    },
+    {
+      id: "car",
+      title: "Car Insurance",
       icon: <Car className="h-6 w-6" />,
-      color: "bg-gradient-to-r from-fintech-purple to-fintech-blue"
-    }, {
-      title: "Third-Party",
-      description: "Mandatory insurance covering damages to third parties",
-      icon: <Car className="h-6 w-6" />,
-      color: "bg-gradient-to-r from-fintech-blue to-fintech-ocean-blue"
-    }, {
-      title: "Zero Depreciation",
-      description: "Get full claim without accounting for vehicle depreciation",
-      icon: <Car className="h-6 w-6" />,
-      color: "bg-gradient-to-r from-fintech-orange to-fintech-purple"
-    }, {
-      title: "Add-ons",
-      description: "Customize your policy with additional protections like roadside assistance",
-      icon: <Car className="h-6 w-6" />,
-      color: "bg-gradient-to-r from-fintech-deep-purple to-fintech-purple"
-    }]
-  }, {
-    id: "home",
-    title: "Home Insurance",
-    cards: [{
-      title: "Building Insurance",
-      description: "Protection for your home structure against damages",
+      description: "Protect your vehicle against accidents and damages"
+    },
+    {
+      id: "home",
+      title: "Home Insurance",
       icon: <Home className="h-6 w-6" />,
-      color: "bg-gradient-to-r from-fintech-purple to-fintech-blue"
-    }, {
-      title: "Contents Insurance",
-      description: "Coverage for valuables and belongings inside your home",
-      icon: <Home className="h-6 w-6" />,
-      color: "bg-gradient-to-r from-fintech-blue to-fintech-ocean-blue"
-    }, {
-      title: "Combined Policy",
-      description: "Comprehensive coverage for both structure and contents",
-      icon: <Home className="h-6 w-6" />,
-      color: "bg-gradient-to-r from-fintech-orange to-fintech-purple"
-    }, {
-      title: "Natural Disasters",
-      description: "Additional coverage against floods, earthquakes and other calamities",
-      icon: <Umbrella className="h-6 w-6" />,
-      color: "bg-gradient-to-r from-fintech-deep-purple to-fintech-purple"
-    }]
-  }, {
-    id: "term",
-    title: "Term Insurance",
-    cards: [{
-      title: "Regular Term",
-      description: "Pure life coverage with high sum assured at affordable premiums",
+      description: "Safeguard your home and belongings"
+    },
+    {
+      id: "term",
+      title: "Term Insurance",
       icon: <ShieldCheck className="h-6 w-6" />,
-      color: "bg-gradient-to-r from-fintech-purple to-fintech-blue"
-    }, {
-      title: "Return of Premium",
-      description: "Get all your premiums back at policy maturity",
-      icon: <ShieldCheck className="h-6 w-6" />,
-      color: "bg-gradient-to-r from-fintech-blue to-fintech-ocean-blue"
-    }, {
-      title: "Increasing Term",
-      description: "Sum assured increases over time to match inflation",
-      icon: <ShieldCheck className="h-6 w-6" />,
-      color: "bg-gradient-to-r from-fintech-orange to-fintech-purple"
-    }, {
-      title: "Critical Illness Rider",
-      description: "Added protection against major illnesses with your term plan",
-      icon: <Heart className="h-6 w-6" />,
-      color: "bg-gradient-to-r from-fintech-deep-purple to-fintech-purple"
-    }]
-  }];
+      description: "High coverage at affordable premiums"
+    }
+  ];
+
+  const insuranceTypes = [
+    { 
+      id: "health", 
+      title: "Health Insurance",
+      cards: [
+        {
+          title: "Individual Health",
+          description: "Comprehensive health protection for you with customizable coverage options",
+          icon: <User className="h-6 w-6" />,
+          color: "bg-gradient-to-r from-fintech-purple to-fintech-blue"
+        },
+        {
+          title: "Family Health",
+          description: "Coverage for your entire family under a single policy with enhanced benefits",
+          icon: <User className="h-6 w-6" />,
+          color: "bg-gradient-to-r from-fintech-blue to-fintech-ocean-blue"
+        },
+        {
+          title: "Senior Citizen",
+          description: "Special health plans designed for the needs of senior citizens",
+          icon: <User className="h-6 w-6" />,
+          color: "bg-gradient-to-r from-fintech-orange to-fintech-purple"
+        },
+        {
+          title: "Critical Illness",
+          description: "Financial protection against major illnesses with lump-sum benefits",
+          icon: <Heart className="h-6 w-6" />,
+          color: "bg-gradient-to-r from-fintech-deep-purple to-fintech-purple"
+        }
+      ]
+    },
+    { 
+      id: "life", 
+      title: "Life Insurance",
+      cards: [
+        {
+          title: "Term Life",
+          description: "High coverage at affordable premiums for a specific period",
+          icon: <Shield className="h-6 w-6" />,
+          color: "bg-gradient-to-r from-fintech-purple to-fintech-blue"
+        },
+        {
+          title: "Whole Life",
+          description: "Lifetime coverage with savings benefit for your family",
+          icon: <ShieldCheck className="h-6 w-6" />,
+          color: "bg-gradient-to-r from-fintech-blue to-fintech-ocean-blue"
+        },
+        {
+          title: "Child Plans",
+          description: "Secure your child's future education and milestones",
+          icon: <User className="h-6 w-6" />,
+          color: "bg-gradient-to-r from-fintech-orange to-fintech-purple"
+        },
+        {
+          title: "Retirement Plans",
+          description: "Build a corpus for your retirement years with guaranteed returns",
+          icon: <Briefcase className="h-6 w-6" />,
+          color: "bg-gradient-to-r from-fintech-deep-purple to-fintech-purple"
+        }
+      ]
+    },
+    { 
+      id: "car", 
+      title: "Car Insurance",
+      cards: [
+        {
+          title: "Comprehensive",
+          description: "Complete protection for your vehicle against damages and third-party liability",
+          icon: <Car className="h-6 w-6" />,
+          color: "bg-gradient-to-r from-fintech-purple to-fintech-blue"
+        },
+        {
+          title: "Third-Party",
+          description: "Mandatory insurance covering damages to third parties",
+          icon: <Car className="h-6 w-6" />,
+          color: "bg-gradient-to-r from-fintech-blue to-fintech-ocean-blue"
+        },
+        {
+          title: "Zero Depreciation",
+          description: "Get full claim without accounting for vehicle depreciation",
+          icon: <Car className="h-6 w-6" />,
+          color: "bg-gradient-to-r from-fintech-orange to-fintech-purple"
+        },
+        {
+          title: "Add-ons",
+          description: "Customize your policy with additional protections like roadside assistance",
+          icon: <Car className="h-6 w-6" />,
+          color: "bg-gradient-to-r from-fintech-deep-purple to-fintech-purple"
+        }
+      ]
+    },
+    { 
+      id: "home", 
+      title: "Home Insurance",
+      cards: [
+        {
+          title: "Building Insurance",
+          description: "Protection for your home structure against damages",
+          icon: <Home className="h-6 w-6" />,
+          color: "bg-gradient-to-r from-fintech-purple to-fintech-blue"
+        },
+        {
+          title: "Contents Insurance",
+          description: "Coverage for valuables and belongings inside your home",
+          icon: <Home className="h-6 w-6" />,
+          color: "bg-gradient-to-r from-fintech-blue to-fintech-ocean-blue"
+        },
+        {
+          title: "Combined Policy",
+          description: "Comprehensive coverage for both structure and contents",
+          icon: <Home className="h-6 w-6" />,
+          color: "bg-gradient-to-r from-fintech-orange to-fintech-purple"
+        },
+        {
+          title: "Natural Disasters",
+          description: "Additional coverage against floods, earthquakes and other calamities",
+          icon: <Umbrella className="h-6 w-6" />,
+          color: "bg-gradient-to-r from-fintech-deep-purple to-fintech-purple"
+        }
+      ]
+    },
+    { 
+      id: "term", 
+      title: "Term Insurance",
+      cards: [
+        {
+          title: "Regular Term",
+          description: "Pure life coverage with high sum assured at affordable premiums",
+          icon: <ShieldCheck className="h-6 w-6" />,
+          color: "bg-gradient-to-r from-fintech-purple to-fintech-blue"
+        },
+        {
+          title: "Return of Premium",
+          description: "Get all your premiums back at policy maturity",
+          icon: <ShieldCheck className="h-6 w-6" />,
+          color: "bg-gradient-to-r from-fintech-blue to-fintech-ocean-blue"
+        },
+        {
+          title: "Increasing Term",
+          description: "Sum assured increases over time to match inflation",
+          icon: <ShieldCheck className="h-6 w-6" />,
+          color: "bg-gradient-to-r from-fintech-orange to-fintech-purple"
+        },
+        {
+          title: "Critical Illness Rider",
+          description: "Added protection against major illnesses with your term plan",
+          icon: <Heart className="h-6 w-6" />,
+          color: "bg-gradient-to-r from-fintech-deep-purple to-fintech-purple"
+        }
+      ]
+    }
+  ];
+
   const selectedType = insuranceTypes.find(type => type.id === selectedInsuranceType) || insuranceTypes[0];
-  return <div className="min-h-screen bg-background">
+
+  return (
+    <div className="min-h-screen bg-background">
       <Navbar />
       
       {/* Hero Section */}
@@ -201,13 +261,19 @@ const InsurancePage = () => {
           </h2>
           
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
-            {insuranceCategories.map(category => <div key={category.id} className={`glass-card p-6 text-center cursor-pointer transition-all ${selectedInsuranceType === category.id ? 'ring-2 ring-fintech-purple shadow-lg' : 'hover:shadow-md'}`} onClick={() => setSelectedInsuranceType(category.id)}>
+            {insuranceCategories.map(category => (
+              <div 
+                key={category.id} 
+                className={`glass-card p-6 text-center cursor-pointer transition-all ${selectedInsuranceType === category.id ? 'ring-2 ring-fintech-purple shadow-lg' : 'hover:shadow-md'}`}
+                onClick={() => setSelectedInsuranceType(category.id)}
+              >
                 <div className="flex justify-center mb-4">
                   {category.icon}
                 </div>
                 <h3 className="font-semibold text-lg mb-2">{category.title}</h3>
                 <p className="text-sm text-gray-600">{category.description}</p>
-              </div>)}
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -223,7 +289,15 @@ const InsurancePage = () => {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {selectedType.cards.map((card, index) => <InsuranceCard key={index} title={card.title} description={card.description} icon={card.icon} color={card.color} />)}
+            {selectedType.cards.map((card, index) => (
+              <InsuranceCard
+                key={index}
+                title={card.title}
+                description={card.description}
+                icon={card.icon}
+                color={card.color}
+              />
+            ))}
           </div>
         </div>
       </section>
@@ -539,18 +613,20 @@ const InsurancePage = () => {
           
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
             {/* Partner Cards */}
-            {[1, 2, 3, 4, 5, 6].map(item => <Card key={item} className="flex items-center justify-center p-6 hover:shadow-md transition-all">
+            {[1, 2, 3, 4, 5, 6].map((item) => (
+              <Card key={item} className="flex items-center justify-center p-6 hover:shadow-md transition-all">
                 <CardContent className="p-0 flex flex-col items-center">
                   <div className="flex items-center justify-center mb-2">
                     <Building className="h-10 w-10 text-fintech-purple" />
                   </div>
                   <p className="text-center font-medium">Insurance Partner {item}</p>
                 </CardContent>
-              </Card>)}
+              </Card>
+            ))}
           </div>
           
           <div className="mt-12 text-center">
-            <Button className="bg-white border border-fintech-green hover:bg-fintech-purple text-white">
+            <Button className="bg-white border border-fintech-purple text-fintech-purple hover:bg-fintech-purple hover:text-white">
               View All Partners
             </Button>
           </div>
@@ -610,6 +686,8 @@ const InsurancePage = () => {
           </Button>
         </div>
       </section>
-    </div>;
+    </div>
+  );
 };
+
 export default InsurancePage;
