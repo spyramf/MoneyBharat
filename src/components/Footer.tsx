@@ -8,7 +8,7 @@ const Footer = () => {
           <div>
             <Link to="/" className="text-2xl font-bold">
               <span className="gradient-text">Money</span>
-              <span className="text-fintech-green">Bharat</span>
+              <span className="text-fintech-green"> Bharat</span>
             </Link>
             <p className="mt-4 text-gray-600 max-w-xs">
               Transforming India's financial landscape with innovative tech-driven solutions for wealth creation.
