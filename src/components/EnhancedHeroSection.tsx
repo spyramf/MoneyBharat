@@ -210,7 +210,7 @@ const EnhancedHeroSection = () => {
             <p className="text-3xl md:text-4xl font-bold text-fintech-blue mb-2">50K+</p>
             <p className="text-gray-600 text-sm">Happy Clients</p>
           </div>
-          <div className="rounded-xl bg-gray-50/80 backdrop-blur-sm p-6 text-center shadow-sm border border-gray-100">
+          <div className="rounded-xl bg-gray-50/80 backdrop-blur-sm p-6 text-center shadow-sm border border-green-300">
             <p className="text-3xl md:text-4xl font-bold text-fintech-green mb-2">15+</p>
             <p className="text-gray-600 text-sm">Years Experience</p>
           </div>
