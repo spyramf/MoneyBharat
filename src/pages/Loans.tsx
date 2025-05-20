@@ -14,7 +14,6 @@ import Home from '@/components/icons/Home';
 import Car from '@/components/icons/Car';
 import GraduationCap from '@/components/icons/GraduationCap';
 import { Link } from 'react-router-dom';
-
 const Loans = () => {
   const [loanAmount, setLoanAmount] = useState<number>(500000);
   const [loanTenure, setLoanTenure] = useState<number>(36);
@@ -26,122 +25,96 @@ const Loans = () => {
     const principal = loanAmount;
     const rateMonthly = interestRate / 12 / 100;
     const tenure = loanTenure;
-    
     const emi = principal * rateMonthly * Math.pow(1 + rateMonthly, tenure) / (Math.pow(1 + rateMonthly, tenure) - 1);
     return Math.round(emi);
   };
-
   const emi = calculateEmi();
   const totalPayable = emi * loanTenure;
   const totalInterest = totalPayable - loanAmount;
-
-  const loanTypes = [
-    {
-      id: "personal",
-      name: "Personal Loan",
-      icon: <Banknote className="h-10 w-10 text-fintech-purple" />,
-      description: "Quick unsecured loans for your personal needs",
-      path: "/loans/personal"
-    },
-    {
-      id: "business",
-      name: "Business Loan",
-      icon: <CreditCard className="h-10 w-10 text-fintech-orange" />,
-      description: "Grow your business with flexible financing options",
-      path: "/loans/business"
-    },
-    {
-      id: "home",
-      name: "Home Loan",
-      icon: <Home className="h-10 w-10 text-fintech-blue" />,
-      description: "Affordable housing finance solutions",
-      path: "/loans/home"
-    },
-    {
-      id: "car",
-      name: "Car Loan",
-      icon: <Car className="h-10 w-10 text-fintech-deep-purple" />,
-      description: "Drive your dream car with competitive rates",
-      path: "/loans/car"
-    },
-    {
-      id: "education",
-      name: "Education Loan",
-      icon: <GraduationCap className="h-10 w-10 text-green-500" />,
-      description: "Invest in education with affordable student loans",
-      path: "/loans/education"
-    },
-    {
-      id: "mutual-funds",
-      name: "Loan Against Mutual Funds",
-      icon: <TrendingUp className="h-10 w-10 text-yellow-500" />,
-      description: "Quick loans against your mutual fund investments",
-      path: "/loans/mutual-funds"
-    }
-  ];
-
-  const loanComparisons = [
-    { 
-      bank: "HDFC Bank", 
-      interestRate: "10.50% - 18.00%",
-      processingFee: "Up to 2.50%",
-      prepaymentCharges: "Nil for floating rate loans" 
-    },
-    { 
-      bank: "ICICI Bank", 
-      interestRate: "10.75% - 18.49%",
-      processingFee: "Up to 2.25% + GST",
-      prepaymentCharges: "2% on outstanding amount" 
-    },
-    { 
-      bank: "SBI", 
-      interestRate: "9.60% - 16.40%",
-      processingFee: "1.50% - 2.00% + GST",
-      prepaymentCharges: "Nil after 12 months" 
-    },
-    { 
-      bank: "Axis Bank", 
-      interestRate: "10.49% - 18.00%",
-      processingFee: "Up to 2.00% + GST",
-      prepaymentCharges: "2% on outstanding amount" 
-    },
-    { 
-      bank: "Bajaj Finserv", 
-      interestRate: "11.00% - 16.00%",
-      processingFee: "Up to 3.99% + GST",
-      prepaymentCharges: "4% on outstanding amount" 
-    }
-  ];
-
-  const faqs = [
-    {
-      question: "How do I apply for a loan?",
-      answer: "You can apply for a loan by submitting an application through our website, visiting our branch, or contacting our customer service team. You'll need to provide personal information, income details, and any required documents."
-    },
-    {
-      question: "What documents are required for a loan application?",
-      answer: "Typically, you'll need identity proof (Aadhaar, PAN card), address proof, income proof (salary slips, ITR), bank statements for the last 6 months, and employment details. Additional documents may be required based on the loan type."
-    },
-    {
-      question: "How long does the loan approval process take?",
-      answer: "The approval process can take anywhere from a few hours to a few days depending on the loan type, amount, and verification process. Personal loans are typically processed faster than secured loans like home loans."
-    },
-    {
-      question: "Can I prepay my loan before the end of the tenure?",
-      answer: "Yes, most loans can be prepaid before the end of the tenure. However, some lenders may charge a prepayment penalty, usually a percentage of the outstanding loan amount."
-    },
-    {
-      question: "How is my loan interest rate determined?",
-      answer: "Your loan interest rate is determined based on various factors including your credit score, income, loan amount, tenure, employment status, and the lender's policies."
-    }
-  ];
-
-  return (
-    <div className="flex min-h-screen flex-col">
+  const loanTypes = [{
+    id: "personal",
+    name: "Personal Loan",
+    icon: <Banknote className="h-10 w-10 text-fintech-purple" />,
+    description: "Quick unsecured loans for your personal needs",
+    path: "/loans/personal"
+  }, {
+    id: "business",
+    name: "Business Loan",
+    icon: <CreditCard className="h-10 w-10 text-fintech-orange" />,
+    description: "Grow your business with flexible financing options",
+    path: "/loans/business"
+  }, {
+    id: "home",
+    name: "Home Loan",
+    icon: <Home className="h-10 w-10 text-fintech-blue" />,
+    description: "Affordable housing finance solutions",
+    path: "/loans/home"
+  }, {
+    id: "car",
+    name: "Car Loan",
+    icon: <Car className="h-10 w-10 text-fintech-deep-purple" />,
+    description: "Drive your dream car with competitive rates",
+    path: "/loans/car"
+  }, {
+    id: "education",
+    name: "Education Loan",
+    icon: <GraduationCap className="h-10 w-10 text-green-500" />,
+    description: "Invest in education with affordable student loans",
+    path: "/loans/education"
+  }, {
+    id: "mutual-funds",
+    name: "Loan Against Mutual Funds",
+    icon: <TrendingUp className="h-10 w-10 text-yellow-500" />,
+    description: "Quick loans against your mutual fund investments",
+    path: "/loans/mutual-funds"
+  }];
+  const loanComparisons = [{
+    bank: "HDFC Bank",
+    interestRate: "10.50% - 18.00%",
+    processingFee: "Up to 2.50%",
+    prepaymentCharges: "Nil for floating rate loans"
+  }, {
+    bank: "ICICI Bank",
+    interestRate: "10.75% - 18.49%",
+    processingFee: "Up to 2.25% + GST",
+    prepaymentCharges: "2% on outstanding amount"
+  }, {
+    bank: "SBI",
+    interestRate: "9.60% - 16.40%",
+    processingFee: "1.50% - 2.00% + GST",
+    prepaymentCharges: "Nil after 12 months"
+  }, {
+    bank: "Axis Bank",
+    interestRate: "10.49% - 18.00%",
+    processingFee: "Up to 2.00% + GST",
+    prepaymentCharges: "2% on outstanding amount"
+  }, {
+    bank: "Bajaj Finserv",
+    interestRate: "11.00% - 16.00%",
+    processingFee: "Up to 3.99% + GST",
+    prepaymentCharges: "4% on outstanding amount"
+  }];
+  const faqs = [{
+    question: "How do I apply for a loan?",
+    answer: "You can apply for a loan by submitting an application through our website, visiting our branch, or contacting our customer service team. You'll need to provide personal information, income details, and any required documents."
+  }, {
+    question: "What documents are required for a loan application?",
+    answer: "Typically, you'll need identity proof (Aadhaar, PAN card), address proof, income proof (salary slips, ITR), bank statements for the last 6 months, and employment details. Additional documents may be required based on the loan type."
+  }, {
+    question: "How long does the loan approval process take?",
+    answer: "The approval process can take anywhere from a few hours to a few days depending on the loan type, amount, and verification process. Personal loans are typically processed faster than secured loans like home loans."
+  }, {
+    question: "Can I prepay my loan before the end of the tenure?",
+    answer: "Yes, most loans can be prepaid before the end of the tenure. However, some lenders may charge a prepayment penalty, usually a percentage of the outstanding loan amount."
+  }, {
+    question: "How is my loan interest rate determined?",
+    answer: "Your loan interest rate is determined based on various factors including your credit score, income, loan amount, tenure, employment status, and the lender's policies."
+  }];
+  return <div className="flex min-h-screen flex-col">
       <Navbar />
       
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-fintech-purple to-fintech-blue py-16 md:py-24">
+      <section className="bg-gradient-to-r from-fintech-purple to-fintech-blue py-16 bg-green-50 md:py-[100px]">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
@@ -168,8 +141,7 @@ const Loans = () => {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {loanTypes.map((loan) => (
-              <Card key={loan.id} className="hover:shadow-lg transition-shadow duration-300 hover:-translate-y-1">
+            {loanTypes.map(loan => <Card key={loan.id} className="hover:shadow-lg transition-shadow duration-300 hover:-translate-y-1">
                 <CardHeader className="flex flex-row items-center gap-4">
                   {loan.icon}
                   <div>
@@ -184,8 +156,7 @@ const Loans = () => {
                     <Link to={loan.path}>Learn More</Link>
                   </Button>
                 </CardFooter>
-              </Card>
-            ))}
+              </Card>)}
           </div>
         </div>
       </section>
@@ -206,22 +177,9 @@ const Loans = () => {
                 <div className="mb-6">
                   <Label htmlFor="loan-amount">Loan Amount (₹)</Label>
                   <div className="flex items-center gap-4 mt-2">
-                    <Input 
-                      id="loan-amount"
-                      type="number" 
-                      value={loanAmount}
-                      onChange={(e) => setLoanAmount(Number(e.target.value))}
-                      className="w-full"
-                    />
+                    <Input id="loan-amount" type="number" value={loanAmount} onChange={e => setLoanAmount(Number(e.target.value))} className="w-full" />
                   </div>
-                  <Slider 
-                    value={[loanAmount]} 
-                    min={50000} 
-                    max={5000000} 
-                    step={10000}
-                    onValueChange={(value) => setLoanAmount(value[0])}
-                    className="mt-4" 
-                  />
+                  <Slider value={[loanAmount]} min={50000} max={5000000} step={10000} onValueChange={value => setLoanAmount(value[0])} className="mt-4" />
                   <div className="flex justify-between text-sm text-gray-500 mt-1">
                     <span>₹50K</span>
                     <span>₹50L</span>
@@ -231,23 +189,9 @@ const Loans = () => {
                 <div className="mb-6">
                   <Label htmlFor="interest-rate">Interest Rate (%)</Label>
                   <div className="flex items-center gap-4 mt-2">
-                    <Input 
-                      id="interest-rate"
-                      type="number" 
-                      value={interestRate}
-                      onChange={(e) => setInterestRate(Number(e.target.value))}
-                      step="0.1"
-                      className="w-full"
-                    />
+                    <Input id="interest-rate" type="number" value={interestRate} onChange={e => setInterestRate(Number(e.target.value))} step="0.1" className="w-full" />
                   </div>
-                  <Slider 
-                    value={[interestRate]} 
-                    min={5} 
-                    max={20} 
-                    step={0.1}
-                    onValueChange={(value) => setInterestRate(value[0])}
-                    className="mt-4" 
-                  />
+                  <Slider value={[interestRate]} min={5} max={20} step={0.1} onValueChange={value => setInterestRate(value[0])} className="mt-4" />
                   <div className="flex justify-between text-sm text-gray-500 mt-1">
                     <span>5%</span>
                     <span>20%</span>
@@ -257,22 +201,9 @@ const Loans = () => {
                 <div className="mb-6">
                   <Label htmlFor="loan-tenure">Loan Tenure (months)</Label>
                   <div className="flex items-center gap-4 mt-2">
-                    <Input 
-                      id="loan-tenure"
-                      type="number" 
-                      value={loanTenure}
-                      onChange={(e) => setLoanTenure(Number(e.target.value))}
-                      className="w-full"
-                    />
+                    <Input id="loan-tenure" type="number" value={loanTenure} onChange={e => setLoanTenure(Number(e.target.value))} className="w-full" />
                   </div>
-                  <Slider 
-                    value={[loanTenure]} 
-                    min={12} 
-                    max={84} 
-                    step={1}
-                    onValueChange={(value) => setLoanTenure(value[0])}
-                    className="mt-4" 
-                  />
+                  <Slider value={[loanTenure]} min={12} max={84} step={1} onValueChange={value => setLoanTenure(value[0])} className="mt-4" />
                   <div className="flex justify-between text-sm text-gray-500 mt-1">
                     <span>1 Year</span>
                     <span>7 Years</span>
@@ -333,8 +264,7 @@ const Loans = () => {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {loanComparisons.map((bank, index) => (
-                  <TableRow key={index}>
+                {loanComparisons.map((bank, index) => <TableRow key={index}>
                     <TableCell className="font-medium">{bank.bank}</TableCell>
                     <TableCell>{bank.interestRate}</TableCell>
                     <TableCell>{bank.processingFee}</TableCell>
@@ -342,8 +272,7 @@ const Loans = () => {
                     <TableCell>
                       <Button variant="outline" size="sm">Apply</Button>
                     </TableCell>
-                  </TableRow>
-                ))}
+                  </TableRow>)}
               </TableBody>
             </Table>
           </div>
@@ -417,13 +346,11 @@ const Loans = () => {
           </div>
           
           <div className="max-w-3xl mx-auto">
-            {faqs.map((faq, index) => (
-              <div key={index} className="mb-6 last:mb-0">
+            {faqs.map((faq, index) => <div key={index} className="mb-6 last:mb-0">
                 <h3 className="text-xl font-semibold mb-2">{faq.question}</h3>
                 <p className="text-gray-600">{faq.answer}</p>
                 {index < faqs.length - 1 && <Separator className="mt-6" />}
-              </div>
-            ))}
+              </div>)}
           </div>
         </div>
       </section>
@@ -444,8 +371,6 @@ const Loans = () => {
       </section>
 
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default Loans;
