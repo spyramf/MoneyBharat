@@ -469,7 +469,7 @@ const HealthInsurance = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               <div className="flex">
                 <div className="w-12 h-12 bg-fintech-purple/10 rounded-full flex-shrink-0 flex items-center justify-center mr-4">
-                  <CalendarDays className="h-6 w-6 text-fintech-purple" />
+                  <CalendarDays className="h-6 w-6 text-fintech-green" />
                 </div>
                 <div>
                   <h3 className="text-lg font-semibold mb-2">Age</h3>
