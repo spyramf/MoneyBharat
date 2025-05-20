@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import Navbar from '@/components/Navbar';
@@ -10,11 +9,10 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Separator } from '@/components/ui/separator';
 import Footer from '@/components/Footer';
-import { CreditCard, Calculator, Shield, ArrowDown, ArrowUp, Banknote, Percent } from 'lucide-react';
+import { CreditCard, Calculator, Shield, ArrowDown, ArrowUp, Banknote, Percent, TrendingUp } from 'lucide-react';
 import Home from '@/components/icons/Home';
 import Car from '@/components/icons/Car';
 import GraduationCap from '@/components/icons/GraduationCap';
-import Gold from '@/components/icons/Gold';
 import { Link } from 'react-router-dom';
 
 const Loans = () => {
@@ -74,11 +72,11 @@ const Loans = () => {
       path: "/loans/education"
     },
     {
-      id: "gold",
-      name: "Gold Loan",
-      icon: <Gold className="h-10 w-10 text-yellow-500" />,
-      description: "Quick loans against your gold assets",
-      path: "/loans"
+      id: "mutual-funds",
+      name: "Loan Against Mutual Funds",
+      icon: <TrendingUp className="h-10 w-10 text-yellow-500" />,
+      description: "Quick loans against your mutual fund investments",
+      path: "/loans/mutual-funds"
     }
   ];
 

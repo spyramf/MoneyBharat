@@ -16,6 +16,7 @@ import BusinessLoan from "./pages/BusinessLoan";
 import CarLoan from "./pages/CarLoan";
 import HomeLoan from "./pages/HomeLoan";
 import EducationLoan from "./pages/EducationLoan";
+import LoanAgainstMutualFunds from "./pages/LoanAgainstMutualFunds";
 import AboutUs from "./pages/AboutUs";
 import NotFound from "./pages/NotFound";
 import SipCalculator from "./pages/SipCalculator";
@@ -58,6 +59,7 @@ const App = () => (
                 <Route path="/loans/car" element={<CarLoan />} />
                 <Route path="/loans/home" element={<HomeLoan />} />
                 <Route path="/loans/education" element={<EducationLoan />} />
+                <Route path="/loans/mutual-funds" element={<LoanAgainstMutualFunds />} />
                 <Route path="/about" element={<AboutUs />} />
                 <Route path="/tools/sip-calculator" element={<SipCalculator />} />
                 <Route path="/tools/emi-calculator" element={<EmiCalculator />} />
