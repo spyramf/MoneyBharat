@@ -282,7 +282,7 @@ const HealthInsurance = () => {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div className="glass-card p-6">
+            <div className="glass-card p-6 border">
               <div className="w-14 h-14 bg-gradient-to-r from-fintech-purple to-fintech-blue rounded-xl mb-4 flex items-center justify-center">
                 <User className="h-7 w-7 text-white" />
               </div>
