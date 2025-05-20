@@ -116,6 +116,24 @@ export default {
                         opacity: '1',
                         transform: 'scale(1)'
                     }
+                },
+                'glow': {
+                    '0%, 100%': { 
+                        boxShadow: '0 0 10px rgba(155, 135, 245, 0.3)'
+                    },
+                    '50%': {
+                        boxShadow: '0 0 20px rgba(155, 135, 245, 0.6)'
+                    }
+                },
+                'slide-in': {
+                    '0%': {
+                        transform: 'translateX(-20px)',
+                        opacity: '0'
+                    },
+                    '100%': {
+                        transform: 'translateX(0)',
+                        opacity: '1'
+                    }
                 }
 			},
 			animation: {
@@ -124,7 +142,9 @@ export default {
 				'float': 'float 6s ease-in-out infinite',
 				'pulse-slow': 'pulse-slow 4s ease-in-out infinite',
                 'fade-in': 'fade-in 0.5s ease-out',
-                'scale-up': 'scale-up 0.3s ease-out'
+                'scale-up': 'scale-up 0.3s ease-out',
+                'glow': 'glow 2s ease-in-out infinite',
+                'slide-in': 'slide-in 0.5s ease-out'
 			},
 			backgroundImage: {
 				'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',

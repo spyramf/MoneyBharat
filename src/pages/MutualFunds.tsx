@@ -61,7 +61,8 @@ const MutualFunds = () => {
       description: "Higher potential returns with market-linked investments in company stocks.",
       color: "from-green-50 to-green-100",
       iconBg: "bg-green-100",
-      iconColor: "text-fintech-green" 
+      iconColor: "text-fintech-green",
+      borderGlow: "shadow-[0_0_15px_rgba(46,184,131,0.3)]"
     },
     { 
       name: "Debt Funds", 
@@ -71,7 +72,8 @@ const MutualFunds = () => {
       description: "Stable returns with lower risk investments in fixed income securities.",
       color: "from-blue-50 to-blue-100",
       iconBg: "bg-blue-100",
-      iconColor: "text-fintech-blue" 
+      iconColor: "text-fintech-blue",
+      borderGlow: "shadow-[0_0_15px_rgba(0,102,204,0.3)]"
     },
     { 
       name: "Hybrid Funds", 
@@ -81,7 +83,8 @@ const MutualFunds = () => {
       description: "Balanced approach with a mix of equity and debt investments.",
       color: "from-purple-50 to-purple-100",
       iconBg: "bg-purple-100",
-      iconColor: "text-fintech-purple" 
+      iconColor: "text-fintech-purple",
+      borderGlow: "shadow-[0_0_15px_rgba(155,135,245,0.3)]"
     },
     { 
       name: "Index Funds", 
@@ -91,7 +94,8 @@ const MutualFunds = () => {
       description: "Passive investments that track market indices with lower expenses.",
       color: "from-orange-50 to-orange-100",
       iconBg: "bg-orange-100",
-      iconColor: "text-fintech-orange" 
+      iconColor: "text-fintech-orange",
+      borderGlow: "shadow-[0_0_15px_rgba(249,115,22,0.3)]"
     },
   ];
   
@@ -139,28 +143,28 @@ const MutualFunds = () => {
     {
       title: "Convenient",
       description: "One simple app for all your investing needs",
-      icon: <div className="bg-black/80 p-3 rounded-xl border border-fintech-green/30">
+      icon: <div className="bg-gradient-to-br from-white to-gray-100 p-3 rounded-xl border border-fintech-green shadow-[0_0_15px_rgba(46,184,131,0.3)]">
         <FileChartLine className="h-6 w-6 text-fintech-green" />
       </div>
     },
     {
       title: "Reliable",
       description: "Trusted by Lakhs of users like you",
-      icon: <div className="bg-black/80 p-3 rounded-xl border border-fintech-purple/30">
+      icon: <div className="bg-gradient-to-br from-white to-gray-100 p-3 rounded-xl border border-fintech-purple shadow-[0_0_15px_rgba(155,135,245,0.3)]">
         <CircleArrowUp className="h-6 w-6 text-fintech-purple" />
       </div>
     },
     {
       title: "More for You",
       description: "1% extra returns at ₹0 Brokerage",
-      icon: <div className="bg-black/80 p-3 rounded-xl border border-fintech-orange/30">
+      icon: <div className="bg-gradient-to-br from-white to-gray-100 p-3 rounded-xl border border-fintech-orange shadow-[0_0_15px_rgba(249,115,22,0.3)]">
         <CircleArrowUp className="h-6 w-6 text-fintech-orange" />
       </div>
     },
     {
       title: "Incredible Features",
       description: "All round features for building your Mutual Fund portfolio",
-      icon: <div className="bg-black/80 p-3 rounded-xl border border-fintech-blue/30">
+      icon: <div className="bg-gradient-to-br from-white to-gray-100 p-3 rounded-xl border border-fintech-blue shadow-[0_0_15px_rgba(0,102,204,0.3)]">
         <FileChartPie className="h-6 w-6 text-fintech-blue" />
       </div>
     }
@@ -171,7 +175,7 @@ const MutualFunds = () => {
     {
       title: "Top Mutual Funds",
       description: "Discover funds that are outperforming others",
-      icon: <div className="bg-black/80 p-3 rounded-xl border border-fintech-orange/30">
+      icon: <div className="bg-gradient-to-br from-white to-gray-100 p-3 rounded-xl border border-yellow-300 shadow-[0_0_15px_rgba(250,204,21,0.3)]">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6 text-yellow-500">
           <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
         </svg>
@@ -180,7 +184,7 @@ const MutualFunds = () => {
     {
       title: "Weekly & Monthly SIPs",
       description: "Stay consistent with SIPs in Mutual Funds",
-      icon: <div className="bg-black/80 p-3 rounded-xl border border-fintech-green/30">
+      icon: <div className="bg-gradient-to-br from-white to-gray-100 p-3 rounded-xl border border-fintech-green shadow-[0_0_15px_rgba(46,184,131,0.3)]">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6 text-fintech-green">
           <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
           <line x1="16" y1="2" x2="16" y2="6" />
@@ -192,7 +196,7 @@ const MutualFunds = () => {
     {
       title: "One-Tap Top-Up",
       description: "Add more to your top performing funds in one tap",
-      icon: <div className="bg-black/80 p-3 rounded-xl border border-fintech-orange/30">
+      icon: <div className="bg-gradient-to-br from-white to-gray-100 p-3 rounded-xl border border-yellow-300 shadow-[0_0_15px_rgba(250,204,21,0.3)]">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6 text-yellow-500">
           <circle cx="12" cy="12" r="10" />
           <text x="8" y="16" style={{ font: "bold 12px sans-serif", fill: "currentColor" }}>₹</text>
@@ -202,7 +206,7 @@ const MutualFunds = () => {
     {
       title: "Add to Cart",
       description: "Put multiple Mutual Funds in a basket, invest in one go",
-      icon: <div className="bg-black/80 p-3 rounded-xl border border-fintech-purple/30">
+      icon: <div className="bg-gradient-to-br from-white to-gray-100 p-3 rounded-xl border border-fintech-purple shadow-[0_0_15px_rgba(155,135,245,0.3)]">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6 text-fintech-purple">
           <circle cx="9" cy="21" r="1" />
           <circle cx="20" cy="21" r="1" />
@@ -266,17 +270,17 @@ const MutualFunds = () => {
         </div>
       </section>
 
-      {/* New Feature Section - Dark Theme */}
-      <section className="py-16 px-4 md:px-8 bg-black text-white">
+      {/* New Feature Section - Light Theme with Glowing Borders */}
+      <section className="py-16 px-4 md:px-8 bg-gradient-to-br from-white to-gray-50">
         <div className="container mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              <span className="text-white">Aaj Ka </span>
+              <span className="text-gray-800">Aaj Ka </span>
               <span className="text-fintech-green">Investment</span>
-              <span className="text-white">, Kal Ka </span>
+              <span className="text-gray-800">, Kal Ka </span>
               <span className="text-fintech-green">Benefit</span>
             </h2>
-            <p className="text-lg text-gray-300">
+            <p className="text-lg text-gray-600">
               Invest in Mutual Funds to build a financially secure future.
             </p>
           </div>
@@ -285,31 +289,31 @@ const MutualFunds = () => {
             {featureCards.map((feature, index) => (
               <div 
                 key={index}
-                className="bg-black/40 backdrop-blur-sm border border-gray-800 p-6 rounded-xl transform transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-fintech-green/10 animate-fade-in"
+                className="bg-white backdrop-blur-sm border border-gray-200 p-6 rounded-xl transform transition-all duration-300 hover:-translate-y-1 hover:shadow-xl animate-fade-in"
                 style={{ animationDelay: `${index * 150}ms` }}
               >
                 <div className="flex items-center mb-4">
                   {feature.icon}
                   <h3 className="font-bold text-xl ml-3">{feature.title}</h3>
                 </div>
-                <p className="text-gray-400">{feature.description}</p>
+                <p className="text-gray-600">{feature.description}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* SIP Features - Dark Theme */}
-      <section className="py-16 px-4 md:px-8 bg-gradient-to-br from-black via-gray-900 to-black text-white">
+      {/* SIP Features - Light Theme with Glowing Cards */}
+      <section className="py-16 px-4 md:px-8 bg-gradient-to-br from-gray-50 via-white to-gray-50 text-gray-800">
         <div className="container mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              <span className="text-white">Start </span>
+              <span className="text-gray-800">Start </span>
               <span className="text-fintech-green">SIP</span>
-              <span className="text-white"> with Just </span>
+              <span className="text-gray-800"> with Just </span>
               <span className="text-fintech-green">₹500</span>
             </h2>
-            <p className="text-lg text-gray-300">
+            <p className="text-lg text-gray-600">
               Invest in Mutual Funds effortlessly with incredible features.
             </p>
           </div>
@@ -318,26 +322,26 @@ const MutualFunds = () => {
             {sipFeatureCards.map((feature, index) => (
               <div 
                 key={index}
-                className="bg-black/40 backdrop-blur-sm border border-gray-800 p-6 rounded-xl transform transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-fintech-purple/10 animate-fade-in"
+                className="bg-white backdrop-blur-sm border border-gray-200 p-6 rounded-xl transform transition-all duration-300 hover:-translate-y-1 hover:shadow-xl animate-fade-in"
                 style={{ animationDelay: `${index * 150}ms` }}
               >
                 <div className="flex items-center mb-4">
                   {feature.icon}
                   <h3 className="font-bold text-xl ml-3">{feature.title}</h3>
                 </div>
-                <p className="text-gray-400">{feature.description}</p>
+                <p className="text-gray-600">{feature.description}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Account Opening Steps - Dark Theme */}
-      <section className="py-16 px-4 md:px-8 bg-black text-white">
+      {/* Account Opening Steps - Light Theme with Numbered Steps */}
+      <section className="py-16 px-4 md:px-8 bg-gradient-to-br from-white to-gray-50 text-gray-800">
         <div className="container mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              <span className="text-white">Open Demat Account in </span>
+              <span className="text-gray-800">Open Demat Account in </span>
               <span className="text-fintech-green">3 Steps</span>
             </h2>
           </div>
@@ -346,16 +350,16 @@ const MutualFunds = () => {
             {accountOpeningSteps.map((step, index) => (
               <div 
                 key={index}
-                className="relative bg-black/40 backdrop-blur-sm border border-gray-800 p-6 rounded-xl transform transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-fintech-blue/10 animate-fade-in"
+                className="relative bg-white backdrop-blur-sm border border-gray-200 p-6 rounded-xl transform transition-all duration-300 hover:-translate-y-1 hover:shadow-xl animate-fade-in"
                 style={{ animationDelay: `${index * 200}ms` }}
               >
                 <div className="flex items-start gap-4">
-                  <div className="bg-black p-4 rounded-xl border border-fintech-green/30">
+                  <div className="bg-gradient-to-br from-white to-gray-100 p-4 rounded-xl border border-fintech-green/30 shadow-[0_0_10px_rgba(46,184,131,0.2)]">
                     {step.icon}
                   </div>
                   <div>
                     <h3 className="font-bold text-xl mb-2">{step.title}</h3>
-                    <p className="text-gray-400">{step.description}</p>
+                    <p className="text-gray-600">{step.description}</p>
                   </div>
                 </div>
                 <div className="absolute right-6 top-1/2 -translate-y-1/2 text-8xl font-bold text-fintech-green/20">
@@ -366,7 +370,7 @@ const MutualFunds = () => {
           </div>
 
           <div className="text-center mt-12">
-            <Button className="bg-fintech-green hover:bg-fintech-green/90 text-black font-bold text-lg px-8 py-6 rounded-full group animate-float">
+            <Button className="bg-fintech-green hover:bg-fintech-green/90 text-white font-bold text-lg px-8 py-6 rounded-full group animate-float shadow-[0_0_15px_rgba(46,184,131,0.4)]">
               Start Now 
               <ArrowRight className="ml-2 h-5 w-5 transform transition-transform group-hover:translate-x-1" />
             </Button>
@@ -389,7 +393,7 @@ const MutualFunds = () => {
               <p className="text-gray-600">Estimate your potential returns with our investment calculator</p>
             </div>
             
-            <Card className="shadow-xl border-0 bg-white/80 backdrop-blur-sm hover:shadow-2xl transition-all duration-500">
+            <Card className="shadow-xl border border-gray-100 bg-white/90 backdrop-blur-sm hover:shadow-2xl transition-all duration-500 shadow-[0_0_25px_rgba(155,135,245,0.15)]">
               <CardHeader className="pb-0">
                 <Tabs defaultValue="sip" className="w-full" onValueChange={setSelectedTab}>
                   <TabsList className="w-full mb-6 bg-gray-100/50 p-1">
@@ -447,7 +451,7 @@ const MutualFunds = () => {
                   </div>
                 </div>
 
-                <Card className={`bg-gradient-to-br from-purple-50 to-blue-50 border-0 shadow-inner transition-all ${animate ? 'scale-105' : 'scale-100'}`}>
+                <Card className={`bg-gradient-to-br from-purple-50 to-blue-50 border border-white shadow-[0_0_20px_rgba(155,135,245,0.2)] transition-all ${animate ? 'scale-105' : 'scale-100'}`}>
                   <CardContent className="p-8">
                     <div className="flex flex-col md:flex-row justify-between gap-8">
                       <div className="text-center md:text-left">
@@ -489,7 +493,7 @@ const MutualFunds = () => {
             {fundCategories.map((category, index) => (
               <div 
                 key={index}
-                className={`rounded-xl overflow-hidden bg-gradient-to-br ${category.color} border border-white shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 animate-fade-in`}
+                className={`rounded-xl overflow-hidden bg-gradient-to-br ${category.color} border border-white shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 animate-fade-in ${category.borderGlow}`}
                 style={{ animationDelay: `${index * 150}ms` }}
               >
                 <div className="p-6">
@@ -518,7 +522,7 @@ const MutualFunds = () => {
                   </p>
                   
                   <div className="text-center">
-                    <Button variant="outline" className="group hover:bg-white/50 transition-all">
+                    <Button variant="outline" className="group hover:bg-white/50 transition-all border-fintech-purple/30 hover:border-fintech-purple/50 shadow-[0_0_10px_rgba(155,135,245,0.15)]">
                       Explore Funds
                       <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                     </Button>
@@ -538,7 +542,7 @@ const MutualFunds = () => {
             <p className="text-gray-600">Our selection of mutual funds with consistent performance</p>
           </div>
           
-          <Card className="shadow-lg border-0 overflow-hidden">
+          <Card className="shadow-lg border-0 overflow-hidden shadow-[0_0_25px_rgba(155,135,245,0.1)]">
             <div className="overflow-x-auto">
               <Table>
                 <TableHeader className="bg-gradient-to-r from-gray-50 to-gray-100">
@@ -594,7 +598,7 @@ const MutualFunds = () => {
           </Card>
           
           <div className="text-center mt-8 animate-fade-in" style={{ animationDelay: '500ms' }}>
-            <Button className="bg-gradient-to-r from-fintech-purple to-fintech-blue hover:opacity-90 transition-all transform hover:scale-105">
+            <Button className="bg-gradient-to-r from-fintech-purple to-fintech-blue hover:opacity-90 transition-all transform hover:scale-105 shadow-[0_0_20px_rgba(155,135,245,0.3)]">
               View All Mutual Funds
             </Button>
           </div>
@@ -632,7 +636,7 @@ const MutualFunds = () => {
                 answer: "Select mutual funds based on your financial goals, investment horizon, risk tolerance, fund performance history, expense ratio, fund manager experience, and fund house reputation. It's advisable to diversify your investments across different types of funds."
               }
             ].map((faq, index) => (
-              <Card key={index} className="shadow-sm border-0">
+              <Card key={index} className="shadow-sm border border-gray-100 hover:shadow-md transition-all hover:border-fintech-purple/20 animate-fade-in" style={{ animationDelay: `${index * 150}ms` }}>
                 <CardContent className="p-6">
                   <div className="flex items-start gap-2">
                     <Info className="h-5 w-5 text-fintech-purple mt-1 flex-shrink-0" />
@@ -654,7 +658,7 @@ const MutualFunds = () => {
           <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Start Your Investment Journey?</h2>
           <p className="text-xl mb-8 text-white/90">Create an account and start investing in just 5 minutes</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button className="bg-white text-fintech-purple hover:bg-white/90 text-lg px-8 py-6">
+            <Button className="bg-white text-fintech-purple hover:bg-white/90 text-lg px-8 py-6 shadow-[0_0_25px_rgba(255,255,255,0.3)]">
               Open Free Account
             </Button>
             <Button variant="outline" className="border-white text-white hover:bg-white/10 text-lg px-8 py-6">
