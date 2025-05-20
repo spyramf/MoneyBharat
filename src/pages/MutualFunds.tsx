@@ -12,6 +12,7 @@ import { Badge } from "@/components/ui/badge";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import ProductCard from "@/components/ProductCard";
 
 const MutualFunds = () => {
   const [investmentAmount, setInvestmentAmount] = useState(5000);
@@ -103,7 +104,7 @@ const MutualFunds = () => {
     description: "Get up to ₹1.5 lakh tax exemption under Section 80C with ELSS mutual funds.",
     icon: <div className="w-12 h-12 rounded-full bg-green-100 text-fintech-green flex items-center justify-center">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
-          <rect width="20" height="14" x="2" y="3" rx="2" />
+          <rect width="20" height="14" x="2" y="3" rx="2" ry="2" />
           <line x1="12" x2="12" y1="9" y2="17" />
           <line x1="8" x2="8" y1="11" y2="15" />
           <line x1="16" x2="16" y1="11" y2="15" />
@@ -589,9 +590,14 @@ const MutualFunds = () => {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {sipFeatures.map((feature, index) => <div key={index} style={{
-              animationDelay: `${index * 100}ms`
-            }} className="bg-white border border-gray-100 rounded-xl p-6 shadow-md hover:shadow-lg hover:border-fintech-purple/30 transition-all duration-300 animate-fade-in py-[40px] px-[10px]">
+              {sipFeatures.map((feature, index) => (
+                <div 
+                  key={index} 
+                  style={{
+                    animationDelay: `${index * 100}ms`
+                  }} 
+                  className="bg-white border border-gray-100 rounded-xl p-6 shadow-md hover:shadow-lg hover:border-fintech-purple/30 transition-all duration-300 animate-fade-in py-[40px] px-[10px]"
+                >
                   <div className="flex items-center gap-4 mb-4">
                     <div className="relative">
                       {feature.icon}
@@ -599,7 +605,8 @@ const MutualFunds = () => {
                     <h3 className="font-semibold text-lg">{feature.title}</h3>
                   </div>
                   <p className="text-gray-600 ml-16 mx-[20px]">{feature.description}</p>
-                </div>)}
+                </div>
+              ))}
             </div>
 
             <div className="text-center mt-10">
@@ -818,9 +825,13 @@ const MutualFunds = () => {
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
             {fundCategories.map((fund, index) => (
-              <div key={index} className={`${fund.bgColor} p-8 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 animate-fade-in h-full`} style={{
-                animationDelay: `${index * 150}ms`
-              }}>
+              <div 
+                key={index} 
+                className={`${fund.bgColor} p-8 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 animate-fade-in h-full`} 
+                style={{
+                  animationDelay: `${index * 150}ms`
+                }}
+              >
                 <div className="flex justify-center mb-6">
                   <div className={`w-16 h-16 rounded-full flex items-center justify-center ${fund.iconBg}`}>
                     {fund.icon}
@@ -858,4 +869,14 @@ const MutualFunds = () => {
         <div className="container mx-auto">
           <div className="text-center mb-8">
             <h2 className="text-3xl md:text-4xl font-bold mb-2">Top Performing Funds</h2>
-            <p className="
+            <p className="text-gray-600 max-w-2xl mx-auto">Explore our selection of top-performing mutual funds across different categories</p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {topPerformingFunds.map((fund, index) => (
+              <div key={index} className="bg-white border border-gray-100 rounded-xl p-6 shadow-md hover:shadow-lg hover:border-fintech-purple/30 transition-all duration-300 animate-fade-in" style={{
+                animationDelay: `${index * 100}ms`
+              }}>
+                <div className="flex justify-center mb-4">
+                  <div className="w-16 h-16 rounded-full flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLine
