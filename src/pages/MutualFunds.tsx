@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { ArrowRight, CircleArrowDown, CircleArrowUp, FileChartLine, FileChartPie, Info } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -888,7 +889,7 @@ const MutualFunds = () => {
         </div>
       </section>
 
-      {/* Fund Categories Section - ADDED FROM REFERENCE */}
+      {/* Fund Categories Section */}
       <section className="py-16 px-4 md:px-8 bg-gray-50">
         <div className="container mx-auto">
           <div className="text-center mb-12">
@@ -917,4 +918,21 @@ const MutualFunds = () => {
                     <p className="font-semibold">{fund.expectedReturns}</p>
                   </div>
                   <div>
-                    <p className="text-sm text
+                    <p className="text-sm text-gray-500">Risk Level</p>
+                    <p className="font-semibold">{fund.riskLevel}</p>
+                  </div>
+                </div>
+                
+                <p className="text-sm text-gray-600">{fund.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+      
+      <Footer />
+    </div>
+  );
+};
+
+export default MutualFunds;
