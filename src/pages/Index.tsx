@@ -65,7 +65,7 @@ const Index = () => {
                 </ul>
               </CardContent>
               <CardFooter>
-                <a href="/mutual-funds" className="text-fintech-purple hover:text-fintech-blue transition-colors font-medium flex items-center">
+                <a href="/mutual-funds" className="text-fintech-green hover:text-fintech-blue transition-colors font-medium flex items-center">
                   Explore Equity Funds
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </a>
