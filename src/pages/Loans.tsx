@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import Navbar from '@/components/Navbar';
@@ -114,16 +115,16 @@ const Loans = () => {
       <Navbar />
       
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-fintech-purple to-fintech-blue py-16 bg-green-50 md:py-[100px]">
+      <section className="bg-gradient-to-r from-fintech-purple/10 to-fintech-blue/10 py-16 bg-green-50 md:py-[100px]">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-fintech-purple mb-6 gradient-text">
               Get the Best Loan Offers Tailored for You
             </h1>
-            <p className="text-lg md:text-xl text-white/90 mb-8">
+            <p className="text-lg md:text-xl text-gray-700 mb-8">
               Compare loans from 50+ banks and find the perfect match for your financial needs
             </p>
-            <Button size="lg" className="bg-white text-fintech-purple hover:bg-white/90">
+            <Button size="lg" className="bg-fintech-purple hover:bg-fintech-deep-purple text-white">
               Check Your Eligibility
             </Button>
           </div>
@@ -131,7 +132,7 @@ const Loans = () => {
       </section>
 
       {/* Loan Types Section */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Explore Our Loan Products</h2>
@@ -162,7 +163,7 @@ const Loans = () => {
       </section>
 
       {/* Loan Calculator Section */}
-      <section className="py-16">
+      <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-12">
@@ -243,7 +244,7 @@ const Loans = () => {
       </section>
 
       {/* Bank Comparison */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Compare Loan Options</h2>
@@ -280,7 +281,7 @@ const Loans = () => {
       </section>
 
       {/* Features Section */}
-      <section className="py-16">
+      <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Why Choose MoneyBharat?</h2>
@@ -336,7 +337,7 @@ const Loans = () => {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Frequently Asked Questions</h2>
