@@ -767,7 +767,7 @@ const MutualFunds = () => {
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
               <span className="text-gray-800">Important Terms </span>
-              <span className="text-fintech-purple">Related to Mutual Funds</span>
+              <span className="gradient-text">Related to Mutual Funds</span>
             </h2>
             <p className="text-lg text-gray-600 max-w-3xl mx-auto">
               Familiarize yourself with these key mutual fund terms to make informed investment decisions.
