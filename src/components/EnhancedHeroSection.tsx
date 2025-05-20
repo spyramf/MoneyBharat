@@ -5,21 +5,11 @@ import { motion } from "framer-motion";
 
 const EnhancedHeroSection = () => {
   return (
-    <section className="relative overflow-hidden pt-24 md:pt-32 pb-16 md:pb-20">
+    <section className="relative overflow-hidden pt-16 md:pt-24 pb-16 md:pb-20">
       {/* Background decoration */}
       <div className="absolute top-0 left-0 w-full h-full bg-gradient-radial from-fintech-purple/10 to-transparent -z-10"></div>
       <div className="absolute top-40 right-0 w-96 h-96 bg-fintech-blue/10 rounded-full blur-3xl -z-10"></div>
       <div className="absolute bottom-20 left-20 w-64 h-64 bg-fintech-purple/10 rounded-full blur-3xl -z-10"></div>
-      
-      {/* Fixed Deposit Promotion Banner */}
-      <div className="absolute top-0 left-0 right-0 bg-gradient-to-r from-fintech-blue/20 to-fintech-purple/20 backdrop-blur-sm py-2 z-10">
-        <div className="container mx-auto px-4">
-          <div className="flex items-center justify-center text-sm md:text-base gap-1">
-            <span className="bg-fintech-blue text-white px-2 py-0.5 rounded-full text-xs font-semibold">New</span>
-            <p>Special <span className="font-bold">8.5%</span> interest rate on fixed deposits</p>
-          </div>
-        </div>
-      </div>
       
       <div className="container mx-auto px-4">
         <div className="flex flex-col-reverse md:flex-row items-center gap-8 md:gap-12">

@@ -30,7 +30,6 @@ const Navbar = () => {
         'fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-4',
         scrolled ? 'bg-white/90 backdrop-blur-md shadow-sm' : 'bg-transparent'
       )}
-      style={{ marginTop: '28px' }} // Add top margin for the banner
     >
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between">
