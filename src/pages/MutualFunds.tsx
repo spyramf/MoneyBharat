@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ArrowRight, ChevronDown, CircleArrowDown, CircleArrowUp, FileChartLine, FileChartPie, Info } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -22,6 +22,7 @@ const MutualFunds = () => {
   const [investmentAmount, setInvestmentAmount] = useState(5000);
   const [investmentPeriod, setInvestmentPeriod] = useState(5);
   const [selectedTab, setSelectedTab] = useState("sip");
+  const [animate, setAnimate] = useState(false);
 
   const handleSliderChange = (value: number[]) => {
     setInvestmentAmount(value[0]);
@@ -126,6 +127,12 @@ const MutualFunds = () => {
     return "text-gray-600";
   };
 
+  useEffect(() => {
+    setAnimate(true);
+    const timer = setTimeout(() => setAnimate(false), 1000);
+    return () => clearTimeout(timer);
+  }, [investmentAmount, investmentPeriod, selectedTab]);
+
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
@@ -147,31 +154,37 @@ const MutualFunds = () => {
         </div>
       </section>
 
-      {/* Calculator Section */}
-      <section className="py-16 px-4 md:px-8 bg-white">
-        <div className="container mx-auto">
+      {/* Calculator Section - Enhanced UI */}
+      <section className="py-16 px-4 md:px-8 bg-white relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-purple-50/50 via-white to-blue-50/50 opacity-70"></div>
+        
+        {/* Decorative elements */}
+        <div className="absolute top-10 left-10 w-40 h-40 bg-fintech-purple/5 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-10 right-10 w-60 h-60 bg-fintech-green/5 rounded-full blur-3xl"></div>
+        
+        <div className="container mx-auto relative z-10">
           <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold mb-4">Investment Calculator</h2>
+            <div className="text-center mb-12 animate-fade-in">
+              <h2 className="text-3xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-fintech-purple to-fintech-blue">Investment Calculator</h2>
               <p className="text-gray-600">Estimate your potential returns with our investment calculator</p>
             </div>
             
-            <Card className="shadow-lg border-0">
-              <CardHeader>
+            <Card className="shadow-xl border-0 bg-white/80 backdrop-blur-sm hover:shadow-2xl transition-all duration-500">
+              <CardHeader className="pb-0">
                 <Tabs defaultValue="sip" className="w-full" onValueChange={setSelectedTab}>
-                  <TabsList className="w-full mb-6">
-                    <TabsTrigger value="sip" className="flex-1">SIP Investment</TabsTrigger>
-                    <TabsTrigger value="lumpsum" className="flex-1">Lumpsum Investment</TabsTrigger>
+                  <TabsList className="w-full mb-6 bg-gray-100/50 p-1">
+                    <TabsTrigger value="sip" className="flex-1 data-[state=active]:bg-white data-[state=active]:text-fintech-purple data-[state=active]:shadow-md transition-all duration-300">SIP Investment</TabsTrigger>
+                    <TabsTrigger value="lumpsum" className="flex-1 data-[state=active]:bg-white data-[state=active]:text-fintech-purple data-[state=active]:shadow-md transition-all duration-300">Lumpsum Investment</TabsTrigger>
                   </TabsList>
                 </Tabs>
               </CardHeader>
-              <CardContent className="space-y-8">
+              <CardContent className="space-y-8 pt-4">
                 <div>
                   <div className="flex justify-between items-center mb-2">
-                    <Label htmlFor="investment-amount">
+                    <Label htmlFor="investment-amount" className="text-sm font-medium">
                       {selectedTab === "sip" ? "Monthly Investment Amount" : "Investment Amount"}
                     </Label>
-                    <div className="bg-gray-100 px-3 py-1 rounded-md">
+                    <div className="bg-gray-100 px-4 py-2 rounded-full font-semibold text-fintech-purple">
                       ₹ {investmentAmount.toLocaleString()}
                     </div>
                   </div>
@@ -183,18 +196,18 @@ const MutualFunds = () => {
                     step={1000} 
                     value={[investmentAmount]}
                     onValueChange={handleSliderChange}
-                    className="py-4"
+                    className="py-6"
                   />
-                  <div className="flex justify-between text-sm text-gray-500">
-                    <span>₹1,000</span>
-                    <span>₹1,00,000</span>
+                  <div className="flex justify-between text-sm text-gray-500 mt-1">
+                    <span className="font-medium">₹1,000</span>
+                    <span className="font-medium">₹1,00,000</span>
                   </div>
                 </div>
 
                 <div>
                   <div className="flex justify-between items-center mb-2">
-                    <Label htmlFor="investment-period">Investment Period (Years)</Label>
-                    <div className="bg-gray-100 px-3 py-1 rounded-md">
+                    <Label htmlFor="investment-period" className="text-sm font-medium">Investment Period (Years)</Label>
+                    <div className="bg-gray-100 px-4 py-2 rounded-full font-semibold text-fintech-purple">
                       {investmentPeriod} years
                     </div>
                   </div>
@@ -206,32 +219,32 @@ const MutualFunds = () => {
                     step={1} 
                     value={[investmentPeriod]}
                     onValueChange={handlePeriodChange}
-                    className="py-4"
+                    className="py-6"
                   />
-                  <div className="flex justify-between text-sm text-gray-500">
-                    <span>1 year</span>
-                    <span>30 years</span>
+                  <div className="flex justify-between text-sm text-gray-500 mt-1">
+                    <span className="font-medium">1 year</span>
+                    <span className="font-medium">30 years</span>
                   </div>
                 </div>
 
-                <Card className="bg-gradient-to-br from-purple-50 to-blue-50">
-                  <CardContent className="p-6">
+                <Card className={`bg-gradient-to-br from-purple-50 to-blue-50 border-0 shadow-inner transition-all ${animate ? 'scale-105' : 'scale-100'}`}>
+                  <CardContent className="p-8">
                     <div className="flex flex-col md:flex-row justify-between gap-8">
-                      <div>
-                        <p className="text-gray-600 mb-1">Invested Amount</p>
-                        <p className="text-2xl font-bold">
+                      <div className="text-center md:text-left">
+                        <p className="text-gray-500 text-xs uppercase tracking-wider mb-1">Invested Amount</p>
+                        <p className={`text-2xl font-bold ${animate ? 'animate-fade-in' : ''}`}>
                           ₹{(selectedTab === "sip" ? investmentAmount * 12 * investmentPeriod : investmentAmount).toLocaleString()}
                         </p>
                       </div>
-                      <div>
-                        <p className="text-gray-600 mb-1">Estimated Returns</p>
-                        <p className="text-2xl font-bold text-fintech-purple">
+                      <div className="text-center">
+                        <p className="text-gray-500 text-xs uppercase tracking-wider mb-1">Estimated Returns</p>
+                        <p className={`text-2xl font-bold text-fintech-purple ${animate ? 'animate-fade-in' : ''}`}>
                           ₹{(calculatedReturns() - (selectedTab === "sip" ? investmentAmount * 12 * investmentPeriod : investmentAmount)).toLocaleString()}
                         </p>
                       </div>
-                      <div>
-                        <p className="text-gray-600 mb-1">Total Value</p>
-                        <p className="text-3xl font-bold gradient-text">
+                      <div className="text-center md:text-right">
+                        <p className="text-gray-500 text-xs uppercase tracking-wider mb-1">Total Value</p>
+                        <p className={`text-3xl font-bold gradient-text ${animate ? 'animate-fade-in' : ''}`}>
                           ₹{calculatedReturns().toLocaleString()}
                         </p>
                       </div>
@@ -244,7 +257,7 @@ const MutualFunds = () => {
         </div>
       </section>
 
-      {/* Fund Categories Section - Enhanced with better UI/UX */}
+      {/* Fund Categories Section */}
       <section className="py-16 px-4 md:px-8 bg-gray-50">
         <div className="container mx-auto">
           <div className="text-center mb-16">
@@ -297,7 +310,7 @@ const MutualFunds = () => {
         </div>
       </section>
 
-      {/* Top Performing Funds - Enhanced with better UI/UX */}
+      {/* Top Performing Funds */}
       <section className="py-16 px-4 md:px-8 bg-white">
         <div className="container mx-auto">
           <div className="text-center mb-12">
