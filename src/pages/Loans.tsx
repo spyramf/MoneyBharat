@@ -379,7 +379,7 @@ const Loans = () => {
       </section>
 
       {/* Apply Now CTA */}
-      <section className="py-16 bg-gradient-to-r from-fintech-purple to-fintech-blue">
+      <section className="py-16 bg-gradient-to-r from-fintech-green to-fintech-orange">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center text-white">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to Get Started?</h2>
