@@ -368,7 +368,7 @@ const Index = () => {
           </div>
           
           <div className="mt-12 text-center">
-            <Button className="bg-gradient-to-r from-fintech-orange to-fintech-purple hover:opacity-90 text-white px-8 py-6">
+            <Button className="bg-gradient-to-r from-fintech-green to-fintech-green hover:opacity-90 text-white px-8 py-6">
               Check Loan Eligibility
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
@@ -548,7 +548,7 @@ const Index = () => {
             <p className="mb-8 opacity-80 text-lg">
               Join thousands of satisfied clients who have taken control of their finances with Money Bharat's innovative solutions.
             </p>
-            <Button className="bg-white text-fintech-purple hover:bg-gray-100 px-8 py-6 text-lg">
+            <Button className="bg-white hover:bg-gray-100 px-8 py-6 text-lg text-fintech-green">
               Get Started Now
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
