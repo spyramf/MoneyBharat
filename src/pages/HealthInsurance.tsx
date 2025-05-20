@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -15,29 +14,8 @@ import Footer from "@/components/Footer";
 import { Badge } from "@/components/ui/badge";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Skeleton } from "@/components/ui/skeleton";
-import {
-  Heart,
-  ShieldCheck,
-  User,
-  Users,
-  UserPlus,
-  Hospital,
-  CheckCircle,
-  Clock,
-  Calculator,
-  CreditCard,
-  ArrowRight,
-  DollarSign,
-  Ambulance,
-  FileText,
-  Info,
-  CalendarDays,
-  FileCheck,
-  FileX,
-  HelpCircle 
-} from "lucide-react";
+import { Heart, ShieldCheck, User, Users, UserPlus, Hospital, CheckCircle, Clock, Calculator, CreditCard, ArrowRight, DollarSign, Ambulance, FileText, Info, CalendarDays, FileCheck, FileX, HelpCircle } from "lucide-react";
 import FinancialToolCard from "@/components/FinancialToolCard";
-
 const HealthInsuranceCard = ({
   title,
   coverAmount,
@@ -45,7 +23,7 @@ const HealthInsuranceCard = ({
   features,
   rating,
   company,
-  logo,
+  logo
 }: {
   title: string;
   coverAmount: string;
@@ -54,20 +32,15 @@ const HealthInsuranceCard = ({
   rating: number;
   company: string;
   logo?: string;
-}) => (
-  <Card className="border shadow-md hover:shadow-xl transition-all duration-300">
+}) => <Card className="border shadow-md hover:shadow-xl transition-all duration-300">
     <CardContent className="p-6">
       <div className="flex items-center justify-between mb-4">
         <div className="w-16 h-16 bg-gray-100 rounded-md flex items-center justify-center">
-          {logo ? (
-            <div className="w-12 h-12">
+          {logo ? <div className="w-12 h-12">
               <AspectRatio ratio={1 / 1}>
                 <Skeleton className="h-full w-full rounded-md" />
               </AspectRatio>
-            </div>
-          ) : (
-            <Hospital className="h-8 w-8 text-fintech-purple" />
-          )}
+            </div> : <Hospital className="h-8 w-8 text-fintech-purple" />}
         </div>
         <div className="text-right">
           <div className="inline-flex items-center bg-green-100 px-2 py-1 rounded text-green-700">
@@ -91,12 +64,10 @@ const HealthInsuranceCard = ({
       </div>
 
       <div className="mb-4">
-        {features.map((feature, index) => (
-          <div key={index} className="flex items-center mb-2">
+        {features.map((feature, index) => <div key={index} className="flex items-center mb-2">
             <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
             <span className="text-sm">{feature}</span>
-          </div>
-        ))}
+          </div>)}
       </div>
 
       <div className="flex justify-between items-center">
@@ -108,69 +79,54 @@ const HealthInsuranceCard = ({
         </Button>
       </div>
     </CardContent>
-  </Card>
-);
-
+  </Card>;
 const HealthInsurance = () => {
   const [ageGroup, setAgeGroup] = useState<number[]>([30]);
   const [coverAmount, setCoverAmount] = useState<number[]>([500000]);
   const [familyMembers, setFamilyMembers] = useState("self");
-
-  const insurancePlans = [
-    {
-      title: "Health Shield Plus",
-      coverAmount: "5,00,000",
-      monthlyPremium: "899",
-      features: ["No Room Rent Capping", "Free Health Check-up", "No Co-Payment"],
-      rating: 4.5,
-      company: "ABC Insurance"
-    },
-    {
-      title: "Comprehensive Care",
-      coverAmount: "10,00,000",
-      monthlyPremium: "1,299",
-      features: ["Daycare Procedures", "Pre & Post Hospitalization", "Ambulance Cover"],
-      rating: 4.2,
-      company: "XYZ Health"
-    },
-    {
-      title: "Family Floater Plus",
-      coverAmount: "15,00,000",
-      monthlyPremium: "1,899",
-      features: ["Cover for 4 Family Members", "AYUSH Treatment", "Restoration Benefit"],
-      rating: 4.7,
-      company: "PQR Assurance"
-    },
-    {
-      title: "Senior Care Gold",
-      coverAmount: "7,50,000",
-      monthlyPremium: "2,499",
-      features: ["No Medical Check-up", "Chronic Disease Cover", "Home Healthcare"],
-      rating: 4.3,
-      company: "LMN Insurance"
-    },
-  ];
-
-  const healthArticles = [
-    {
-      title: "Why Health Insurance is Essential in Today's World",
-      excerpt: "Learn about the importance of health coverage in unpredictable times.",
-      icon: <Heart className="h-6 w-6" />
-    },
-    {
-      title: "How to Choose the Right Health Insurance Plan",
-      excerpt: "Factors to consider when selecting a health insurance policy for your family.",
-      icon: <ShieldCheck className="h-6 w-6" />
-    },
-    {
-      title: "Understanding Pre-existing Conditions and Waiting Periods",
-      excerpt: "Navigate the complexities of pre-existing conditions in health insurance.",
-      icon: <Clock className="h-6 w-6" />
-    }
-  ];
-
-  return (
-    <div className="min-h-screen bg-background">
+  const insurancePlans = [{
+    title: "Health Shield Plus",
+    coverAmount: "5,00,000",
+    monthlyPremium: "899",
+    features: ["No Room Rent Capping", "Free Health Check-up", "No Co-Payment"],
+    rating: 4.5,
+    company: "ABC Insurance"
+  }, {
+    title: "Comprehensive Care",
+    coverAmount: "10,00,000",
+    monthlyPremium: "1,299",
+    features: ["Daycare Procedures", "Pre & Post Hospitalization", "Ambulance Cover"],
+    rating: 4.2,
+    company: "XYZ Health"
+  }, {
+    title: "Family Floater Plus",
+    coverAmount: "15,00,000",
+    monthlyPremium: "1,899",
+    features: ["Cover for 4 Family Members", "AYUSH Treatment", "Restoration Benefit"],
+    rating: 4.7,
+    company: "PQR Assurance"
+  }, {
+    title: "Senior Care Gold",
+    coverAmount: "7,50,000",
+    monthlyPremium: "2,499",
+    features: ["No Medical Check-up", "Chronic Disease Cover", "Home Healthcare"],
+    rating: 4.3,
+    company: "LMN Insurance"
+  }];
+  const healthArticles = [{
+    title: "Why Health Insurance is Essential in Today's World",
+    excerpt: "Learn about the importance of health coverage in unpredictable times.",
+    icon: <Heart className="h-6 w-6" />
+  }, {
+    title: "How to Choose the Right Health Insurance Plan",
+    excerpt: "Factors to consider when selecting a health insurance policy for your family.",
+    icon: <ShieldCheck className="h-6 w-6" />
+  }, {
+    title: "Understanding Pre-existing Conditions and Waiting Periods",
+    excerpt: "Navigate the complexities of pre-existing conditions in health insurance.",
+    icon: <Clock className="h-6 w-6" />
+  }];
+  return <div className="min-h-screen bg-background">
       <Navbar />
       
       {/* Hero Section */}
@@ -183,7 +139,7 @@ const HealthInsurance = () => {
             Compare health insurance plans tailored to your needs and get coverage at the best price
           </p>
           <div className="max-w-md mx-auto">
-            <Button className="bg-gradient-to-r from-fintech-purple to-fintech-blue text-white px-8 py-6 text-lg w-full">
+            <Button className="bg-gradient-to-r from-fintech-green to-fintech-green text-white px-8 py-6 text-lg w-full">
               Compare Health Insurance Plans
             </Button>
           </div>
@@ -204,15 +160,7 @@ const HealthInsurance = () => {
                     <span className="text-sm text-gray-500">18 years</span>
                     <span className="text-sm text-gray-500">70 years</span>
                   </div>
-                  <Slider
-                    id="age-range"
-                    defaultValue={ageGroup}
-                    max={70}
-                    min={18}
-                    step={1}
-                    onValueChange={setAgeGroup}
-                    className="mb-2"
-                  />
+                  <Slider id="age-range" defaultValue={ageGroup} max={70} min={18} step={1} onValueChange={setAgeGroup} className="mb-2" />
                   <div className="text-center">
                     <span className="text-lg font-semibold">{ageGroup[0]} years</span>
                   </div>
@@ -221,27 +169,15 @@ const HealthInsurance = () => {
                 <div className="mb-6">
                   <Label className="mb-2 block text-sm font-medium">Who Needs Health Insurance?</Label>
                   <div className="grid grid-cols-3 gap-2">
-                    <Button 
-                      variant={familyMembers === 'self' ? 'default' : 'outline'} 
-                      onClick={() => setFamilyMembers('self')}
-                      className={familyMembers === 'self' ? 'bg-fintech-purple' : ''}
-                    >
+                    <Button variant={familyMembers === 'self' ? 'default' : 'outline'} onClick={() => setFamilyMembers('self')} className={familyMembers === 'self' ? 'bg-fintech-purple' : ''}>
                       <User className="mr-2 h-4 w-4" />
                       Self
                     </Button>
-                    <Button 
-                      variant={familyMembers === 'self+spouse' ? 'default' : 'outline'}
-                      onClick={() => setFamilyMembers('self+spouse')}
-                      className={familyMembers === 'self+spouse' ? 'bg-fintech-purple' : ''}
-                    >
+                    <Button variant={familyMembers === 'self+spouse' ? 'default' : 'outline'} onClick={() => setFamilyMembers('self+spouse')} className={familyMembers === 'self+spouse' ? 'bg-fintech-purple' : ''}>
                       <Users className="mr-2 h-4 w-4" />
                       Self+Spouse
                     </Button>
-                    <Button 
-                      variant={familyMembers === 'family' ? 'default' : 'outline'}
-                      onClick={() => setFamilyMembers('family')}
-                      className={familyMembers === 'family' ? 'bg-fintech-purple' : ''}
-                    >
+                    <Button variant={familyMembers === 'family' ? 'default' : 'outline'} onClick={() => setFamilyMembers('family')} className={familyMembers === 'family' ? 'bg-fintech-purple' : ''}>
                       <UserPlus className="mr-2 h-4 w-4" />
                       Family
                     </Button>
@@ -256,20 +192,10 @@ const HealthInsurance = () => {
                     <span className="text-sm text-gray-500">₹3L</span>
                     <span className="text-sm text-gray-500">₹1Cr</span>
                   </div>
-                  <Slider
-                    id="cover-amount"
-                    defaultValue={coverAmount}
-                    max={10000000}
-                    min={300000}
-                    step={100000}
-                    onValueChange={setCoverAmount}
-                    className="mb-2"
-                  />
+                  <Slider id="cover-amount" defaultValue={coverAmount} max={10000000} min={300000} step={100000} onValueChange={setCoverAmount} className="mb-2" />
                   <div className="text-center">
                     <span className="text-lg font-semibold">
-                      ₹{coverAmount[0] >= 10000000 ? '1 Crore' : 
-                         coverAmount[0] >= 100000 ? `${coverAmount[0]/100000} Lakh` : 
-                         coverAmount[0]}
+                      ₹{coverAmount[0] >= 10000000 ? '1 Crore' : coverAmount[0] >= 100000 ? `${coverAmount[0] / 100000} Lakh` : coverAmount[0]}
                     </span>
                   </div>
                 </div>
@@ -277,10 +203,7 @@ const HealthInsurance = () => {
                 <div className="mb-6">
                   <Label className="mb-2 block text-sm font-medium">City Tier</Label>
                   <div className="grid grid-cols-3 gap-2">
-                    <Button 
-                      variant="outline"
-                      className="bg-fintech-purple text-white hover:bg-fintech-purple/90"
-                    >
+                    <Button variant="outline" className="bg-fintech-purple text-white hover:bg-fintech-purple/90">
                       Tier 1
                     </Button>
                     <Button variant="outline">
@@ -322,25 +245,19 @@ const HealthInsurance = () => {
             
             <TabsContent value="individual" className="mt-6">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                {insurancePlans.map((plan, index) => (
-                  <HealthInsuranceCard key={index} {...plan} />
-                ))}
+                {insurancePlans.map((plan, index) => <HealthInsuranceCard key={index} {...plan} />)}
               </div>
             </TabsContent>
             
             <TabsContent value="family" className="mt-6">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                {insurancePlans.map((plan, index) => (
-                  <HealthInsuranceCard key={`family-${index}`} {...plan} />
-                ))}
+                {insurancePlans.map((plan, index) => <HealthInsuranceCard key={`family-${index}`} {...plan} />)}
               </div>
             </TabsContent>
             
             <TabsContent value="senior" className="mt-6">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                {insurancePlans.map((plan, index) => (
-                  <HealthInsuranceCard key={`senior-${index}`} {...plan} />
-                ))}
+                {insurancePlans.map((plan, index) => <HealthInsuranceCard key={`senior-${index}`} {...plan} />)}
               </div>
             </TabsContent>
           </Tabs>
@@ -1957,8 +1874,6 @@ const HealthInsurance = () => {
 
       {/* Footer */}
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default HealthInsurance;
