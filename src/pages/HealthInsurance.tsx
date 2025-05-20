@@ -335,7 +335,7 @@ const HealthInsurance = () => {
             </div>
             
             <div className="glass-card p-6">
-              <div className="w-14 h-14 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl mb-4 flex items-center justify-center">
+              <div className="w-14 h-14 bg-gradient-to-r from-green-500 to-pink-500 rounded-xl mb-4 flex items-center justify-center">
                 <UserPlus className="h-7 w-7 text-white" />
               </div>
               <h3 className="text-xl font-bold mb-3">Senior Citizen Health Insurance</h3>
