@@ -7,9 +7,9 @@ const EnhancedHeroSection = () => {
   return (
     <section className="relative overflow-hidden pt-16 md:pt-24 pb-16 md:pb-20">
       {/* Background decoration */}
-      <div className="absolute top-0 left-0 w-full h-full bg-gradient-radial from-fintech-purple/10 to-transparent -z-10"></div>
-      <div className="absolute top-40 right-0 w-96 h-96 bg-fintech-blue/10 rounded-full blur-3xl -z-10"></div>
-      <div className="absolute bottom-20 left-20 w-64 h-64 bg-fintech-purple/10 rounded-full blur-3xl -z-10"></div>
+      <div className="absolute top-0 left-0 w-full h-full bg-gradient-radial from-fintech-green/10 to-transparent -z-10"></div>
+      <div className="absolute top-40 right-0 w-96 h-96 bg-fintech-green/10 rounded-full blur-3xl -z-10"></div>
+      <div className="absolute bottom-20 left-20 w-64 h-64 bg-fintech-green/10 rounded-full blur-3xl -z-10"></div>
       
       <div className="container mx-auto px-4">
         <div className="flex flex-col-reverse md:flex-row items-center gap-8 md:gap-12">
@@ -22,7 +22,7 @@ const EnhancedHeroSection = () => {
               transition={{ duration: 0.5 }}
             >
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
-                Build Your <span className="text-fintech-purple">Portfolio</span> <br />
+                Build Your <span className="text-fintech-green">Portfolio</span> <br />
                 <span className="text-fintech-orange">With Confidence</span>
               </h1>
               <p className="text-lg md:text-xl text-gray-700 max-w-lg mt-6">
@@ -31,10 +31,10 @@ const EnhancedHeroSection = () => {
                 insurance, and loans for every Indian.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 pt-6">
-                <Button className="bg-fintech-purple hover:bg-fintech-purple/90 text-white font-medium px-8 py-6 rounded-full">
+                <Button className="bg-fintech-green hover:bg-fintech-green/90 text-white font-medium px-8 py-6 rounded-full">
                   Start Investing
                 </Button>
-                <Button variant="outline" className="group border-fintech-purple text-fintech-purple hover:text-fintech-blue transition-colors px-8 py-6 rounded-full">
+                <Button variant="outline" className="group border-fintech-green text-fintech-green hover:text-fintech-blue transition-colors px-8 py-6 rounded-full">
                   Book Consultation
                   <ArrowRightCircle className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </Button>
@@ -55,7 +55,7 @@ const EnhancedHeroSection = () => {
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-600"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
                   </div>
                   <div>
-                    <p className="text-lg font-bold text-fintech-purple">SEBI</p>
+                    <p className="text-lg font-bold text-fintech-green">SEBI</p>
                     <p className="text-xs text-gray-500">Registered</p>
                   </div>
                 </div>
@@ -91,11 +91,11 @@ const EnhancedHeroSection = () => {
             transition={{ duration: 0.5 }}
           >
             <div className="relative">
-              <div className="absolute -top-10 -left-10 w-64 h-64 bg-fintech-orange/10 rounded-full blur-xl"></div>
+              <div className="absolute -top-10 -left-10 w-64 h-64 bg-fintech-green/10 rounded-full blur-xl"></div>
               
               {/* Investment dashboard */}
               <div className="glass-card p-6 max-w-md mx-auto shadow-xl">
-                <div className="bg-gradient-to-br from-fintech-purple/10 to-fintech-blue/10 rounded-lg p-3">
+                <div className="bg-gradient-to-br from-fintech-green/10 to-fintech-blue/10 rounded-lg p-3">
                   <div className="flex justify-between items-center mb-4">
                     <h3 className="text-lg font-semibold">Your Investments</h3>
                     <div className="bg-green-100 text-green-700 px-2 py-1 rounded text-xs font-medium">
@@ -110,7 +110,7 @@ const EnhancedHeroSection = () => {
                         <span className="font-medium">₹8.2L</span>
                       </div>
                       <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
-                        <div className="h-full bg-gradient-to-r from-fintech-purple to-fintech-blue rounded-full" style={{ width: "82%" }}></div>
+                        <div className="h-full bg-gradient-to-r from-fintech-green to-fintech-blue rounded-full" style={{ width: "82%" }}></div>
                       </div>
                       <div className="flex justify-between text-xs text-gray-600 mt-1">
                         <span>Target: ₹10L</span>
@@ -122,7 +122,7 @@ const EnhancedHeroSection = () => {
                   <div className="mt-6 space-y-3">
                     <div className="flex justify-between items-center p-2 bg-white rounded-lg shadow-sm">
                       <div className="flex items-center gap-2">
-                        <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600">
+                        <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center text-green-600">
                           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m2 9 3-3 3 3"></path><path d="M8 6h10a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-6"></path></svg>
                         </div>
                         <div>
@@ -138,7 +138,7 @@ const EnhancedHeroSection = () => {
                     
                     <div className="flex justify-between items-center p-2 bg-white rounded-lg shadow-sm">
                       <div className="flex items-center gap-2">
-                        <div className="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center text-purple-600">
+                        <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center text-green-600">
                           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m2 9 3-3 3 3"></path><path d="M8 6h10a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-6"></path></svg>
                         </div>
                         <div>
@@ -154,7 +154,7 @@ const EnhancedHeroSection = () => {
                   </div>
                   
                   <div className="mt-4 text-right">
-                    <a href="#" className="text-fintech-purple hover:text-fintech-blue transition-colors text-sm font-medium flex items-center justify-end">
+                    <a href="#" className="text-fintech-green hover:text-fintech-blue transition-colors text-sm font-medium flex items-center justify-end">
                       View Complete Portfolio
                       <ArrowRight className="ml-1 h-3 w-3" />
                     </a>
@@ -164,14 +164,14 @@ const EnhancedHeroSection = () => {
               
               {/* Floating elements */}
               <div className="absolute -top-6 right-4 md:right-10 w-24 h-24 glass-card rounded-lg shadow-lg p-2 flex flex-col items-center justify-center animate-bounce-slow">
-                <div className="w-6 h-6 rounded-full bg-gradient-to-r from-green-400 to-green-500 mb-1"></div>
+                <div className="w-6 h-6 rounded-full bg-gradient-to-r from-green-400 to-fintech-green mb-1"></div>
                 <p className="text-xs text-gray-600">Growth</p>
                 <p className="text-sm font-bold text-green-600">+18.7%</p>
               </div>
               
               <div className="absolute -bottom-4 -left-4 p-3 glass-card rounded-lg shadow-lg animate-pulse-slow">
                 <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-full bg-gradient-to-r from-fintech-orange to-fintech-purple flex items-center justify-center text-white text-xs font-bold">
+                  <div className="w-8 h-8 rounded-full bg-gradient-to-r from-fintech-green to-fintech-blue flex items-center justify-center text-white text-xs font-bold">
                     ₹
                   </div>
                   <p className="text-sm font-semibold">Instant Loans</p>
@@ -191,7 +191,7 @@ const EnhancedHeroSection = () => {
       >
         <div className="grid grid-cols-3 gap-6">
           <div className="rounded-xl bg-gray-50/80 backdrop-blur-sm p-6 text-center shadow-sm border border-gray-100">
-            <p className="text-3xl md:text-4xl font-bold text-fintech-purple mb-2">₹500Cr+</p>
+            <p className="text-3xl md:text-4xl font-bold text-fintech-green mb-2">₹500Cr+</p>
             <p className="text-gray-600 text-sm">Assets Managed</p>
           </div>
           <div className="rounded-xl bg-gray-50/80 backdrop-blur-sm p-6 text-center shadow-sm border border-gray-100">
@@ -199,7 +199,7 @@ const EnhancedHeroSection = () => {
             <p className="text-gray-600 text-sm">Happy Clients</p>
           </div>
           <div className="rounded-xl bg-gray-50/80 backdrop-blur-sm p-6 text-center shadow-sm border border-gray-100">
-            <p className="text-3xl md:text-4xl font-bold text-fintech-orange mb-2">15+</p>
+            <p className="text-3xl md:text-4xl font-bold text-fintech-green mb-2">15+</p>
             <p className="text-gray-600 text-sm">Years Experience</p>
           </div>
         </div>

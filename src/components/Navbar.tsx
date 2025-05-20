@@ -35,29 +35,29 @@ const Navbar = () => {
         <div className="flex items-center justify-between">
           <div className="flex items-center">
             <Link to="/" className="text-2xl font-bold">
-              <span className="gradient-text">Money</span>
+              <span className="text-fintech-green">Money</span>
               <span className="text-fintech-blue">Bharat</span>
             </Link>
           </div>
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center gap-8">
-            <Link to="/mutual-funds" className="font-medium text-gray-700 hover:text-fintech-purple transition-colors">
+            <Link to="/mutual-funds" className="font-medium text-gray-700 hover:text-fintech-green transition-colors">
               Mutual Funds
             </Link>
-            <Link to="/insurance" className="font-medium text-gray-700 hover:text-fintech-purple transition-colors">
+            <Link to="/insurance" className="font-medium text-gray-700 hover:text-fintech-green transition-colors">
               Insurance
             </Link>
-            <Link to="/loans" className="font-medium text-gray-700 hover:text-fintech-purple transition-colors">
+            <Link to="/loans" className="font-medium text-gray-700 hover:text-fintech-green transition-colors">
               Loans
             </Link>
-            <Link to="/blog" className="font-medium text-gray-700 hover:text-fintech-purple transition-colors">
+            <Link to="/blog" className="font-medium text-gray-700 hover:text-fintech-green transition-colors">
               Blog
             </Link>
-            <Link to="/about" className="font-medium text-gray-700 hover:text-fintech-purple transition-colors">
+            <Link to="/about" className="font-medium text-gray-700 hover:text-fintech-green transition-colors">
               About Us
             </Link>
-            <Button className="bg-fintech-blue hover:opacity-90 text-white rounded-full">
+            <Button className="bg-fintech-green hover:bg-fintech-green/90 text-white rounded-full">
               Get Started
             </Button>
           </div>
@@ -77,40 +77,40 @@ const Navbar = () => {
             <div className="flex flex-col gap-4">
               <Link
                 to="/mutual-funds"
-                className="font-medium text-gray-700 hover:text-fintech-purple transition-colors"
+                className="font-medium text-gray-700 hover:text-fintech-green transition-colors"
                 onClick={() => setIsOpen(false)}
               >
                 Mutual Funds
               </Link>
               <Link
                 to="/insurance"
-                className="font-medium text-gray-700 hover:text-fintech-purple transition-colors"
+                className="font-medium text-gray-700 hover:text-fintech-green transition-colors"
                 onClick={() => setIsOpen(false)}
               >
                 Insurance
               </Link>
               <Link
                 to="/loans"
-                className="font-medium text-gray-700 hover:text-fintech-purple transition-colors"
+                className="font-medium text-gray-700 hover:text-fintech-green transition-colors"
                 onClick={() => setIsOpen(false)}
               >
                 Loans
               </Link>
               <Link
                 to="/blog"
-                className="font-medium text-gray-700 hover:text-fintech-purple transition-colors"
+                className="font-medium text-gray-700 hover:text-fintech-green transition-colors"
                 onClick={() => setIsOpen(false)}
               >
                 Blog
               </Link>
               <Link
                 to="/about"
-                className="font-medium text-gray-700 hover:text-fintech-purple transition-colors"
+                className="font-medium text-gray-700 hover:text-fintech-green transition-colors"
                 onClick={() => setIsOpen(false)}
               >
                 About Us
               </Link>
-              <Button className="bg-fintech-blue hover:opacity-90 text-white w-full rounded-full">
+              <Button className="bg-fintech-green hover:bg-fintech-green/90 text-white w-full rounded-full">
                 Get Started
               </Button>
             </div>

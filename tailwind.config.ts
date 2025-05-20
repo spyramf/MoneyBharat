@@ -72,6 +72,7 @@ export default {
 					blue: '#0FA0CE',
 					'ocean-blue': '#0EA5E9',
 					orange: '#F97316',
+					green: '#2EB883', // Added new green color
 				}
 			},
 			borderRadius: {
