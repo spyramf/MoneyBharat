@@ -555,7 +555,7 @@ const MutualFunds = () => {
             <p className="text-lg md:text-xl text-gray-700 mb-8">
               Invest smarter with Money Bharat's curated mutual funds selection, zero commission, and expert guidance.
             </p>
-            <Button className="bg-gradient-to-r from-fintech-purple to-fintech-blue hover:opacity-90 text-lg px-8 py-6">
+            <Button className="bg-gradient-to-r from-fintech-green to-fintech-green hover:opacity-90 text-lg px-8 py-6">
               Start Investing Now
             </Button>
           </div>
