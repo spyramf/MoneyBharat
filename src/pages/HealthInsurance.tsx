@@ -309,7 +309,7 @@ const HealthInsurance = () => {
             </div>
             
             <div className="glass-card p-6">
-              <div className="w-14 h-14 bg-gradient-to-r from-fintech-blue to-fintech-ocean-blue rounded-xl mb-4 flex items-center justify-center">
+              <div className="w-14 h-14 bg-gradient-to-r from-fintech-green to-fintech-ocean-blue rounded-xl mb-4 flex items-center justify-center">
                 <Hospital className="h-7 w-7 text-white" />
               </div>
               <h3 className="text-xl font-bold mb-3">Critical Illness Cover</h3>
