@@ -964,7 +964,7 @@ const HealthInsurance = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div className="space-y-6">
                     <div className="flex">
-                      <div className="w-10 h-10 rounded-full bg-fintech-purple flex items-center justify-center text-white font-bold flex-shrink-0 mr-4">
+                      <div className="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold flex-shrink-0 mr-4 bg-fintech-green">
                         1
                       </div>
                       <div>
@@ -976,7 +976,7 @@ const HealthInsurance = () => {
                     </div>
                     
                     <div className="flex">
-                      <div className="w-10 h-10 rounded-full bg-fintech-purple flex items-center justify-center text-white font-bold flex-shrink-0 mr-4">
+                      <div className="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold flex-shrink-0 mr-4 bg-fintech-green">
                         2
                       </div>
                       <div>
@@ -988,7 +988,7 @@ const HealthInsurance = () => {
                     </div>
                     
                     <div className="flex">
-                      <div className="w-10 h-10 rounded-full bg-fintech-purple flex items-center justify-center text-white font-bold flex-shrink-0 mr-4">
+                      <div className="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold flex-shrink-0 mr-4 bg-fintech-green">
                         3
                       </div>
                       <div>
@@ -1002,7 +1002,7 @@ const HealthInsurance = () => {
                   
                   <div className="space-y-6">
                     <div className="flex">
-                      <div className="w-10 h-10 rounded-full bg-fintech-purple flex items-center justify-center text-white font-bold flex-shrink-0 mr-4">
+                      <div className="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold flex-shrink-0 mr-4 bg-fintech-green">
                         4
                       </div>
                       <div>
@@ -1014,7 +1014,7 @@ const HealthInsurance = () => {
                     </div>
                     
                     <div className="flex">
-                      <div className="w-10 h-10 rounded-full bg-fintech-purple flex items-center justify-center text-white font-bold flex-shrink-0 mr-4">
+                      <div className="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold flex-shrink-0 mr-4 bg-fintech-green">
                         5
                       </div>
                       <div>
@@ -1026,7 +1026,7 @@ const HealthInsurance = () => {
                     </div>
                     
                     <div className="flex">
-                      <div className="w-10 h-10 rounded-full bg-fintech-purple flex items-center justify-center text-white font-bold flex-shrink-0 mr-4">
+                      <div className="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold flex-shrink-0 mr-4 bg-fintech-green">
                         6
                       </div>
                       <div>
