@@ -13,7 +13,6 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ProductCard from "@/components/ProductCard";
-
 const MutualFunds = () => {
   const [investmentAmount, setInvestmentAmount] = useState(5000);
   const [investmentPeriod, setInvestmentPeriod] = useState(5);
@@ -165,64 +164,59 @@ const MutualFunds = () => {
   };
 
   // Fund Categories Data
-  const fundCategories = [
-    {
-      type: "Equity Funds",
-      expectedReturns: "12-15%",
-      riskLevel: "High",
-      description: "Higher potential returns with market-linked investments in company stocks.",
-      bgColor: "bg-green-50",
-      textColor: "text-green-600",
-      iconBg: "bg-green-100/70",
-      icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6 text-green-600">
+  const fundCategories = [{
+    type: "Equity Funds",
+    expectedReturns: "12-15%",
+    riskLevel: "High",
+    description: "Higher potential returns with market-linked investments in company stocks.",
+    bgColor: "bg-green-50",
+    textColor: "text-green-600",
+    iconBg: "bg-green-100/70",
+    icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6 text-green-600">
           <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
         </svg>
-    },
-    {
-      type: "Debt Funds",
-      expectedReturns: "7-9%",
-      riskLevel: "Low",
-      description: "Stable returns with lower risk investments in fixed income securities.",
-      bgColor: "bg-blue-50",
-      textColor: "text-blue-600",
-      iconBg: "bg-blue-100/70",
-      icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6 text-blue-600">
-          <path d="M2 18v3c0 .6.4 1 1 1h4v-3h3v-3h2l1.4-1.4a6.5 6.5 0 1 0-4-4Z"/>
-          <circle cx="16.5" cy="7.5" r=".5"/>
+  }, {
+    type: "Debt Funds",
+    expectedReturns: "7-9%",
+    riskLevel: "Low",
+    description: "Stable returns with lower risk investments in fixed income securities.",
+    bgColor: "bg-blue-50",
+    textColor: "text-blue-600",
+    iconBg: "bg-blue-100/70",
+    icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6 text-blue-600">
+          <path d="M2 18v3c0 .6.4 1 1 1h4v-3h3v-3h2l1.4-1.4a6.5 6.5 0 1 0-4-4Z" />
+          <circle cx="16.5" cy="7.5" r=".5" />
         </svg>
-    },
-    {
-      type: "Hybrid Funds",
-      expectedReturns: "9-12%",
-      riskLevel: "Medium",
-      description: "Balanced approach with a mix of equity and debt investments.",
-      bgColor: "bg-purple-50",
-      textColor: "text-purple-600",
-      iconBg: "bg-purple-100/70",
-      icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6 text-purple-600">
-          <path d="M20 7h-9"/>
-          <path d="M14 17H5"/>
-          <circle cx="17" cy="17" r="3"/>
-          <circle cx="7" cy="7" r="3"/>
+  }, {
+    type: "Hybrid Funds",
+    expectedReturns: "9-12%",
+    riskLevel: "Medium",
+    description: "Balanced approach with a mix of equity and debt investments.",
+    bgColor: "bg-purple-50",
+    textColor: "text-purple-600",
+    iconBg: "bg-purple-100/70",
+    icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6 text-purple-600">
+          <path d="M20 7h-9" />
+          <path d="M14 17H5" />
+          <circle cx="17" cy="17" r="3" />
+          <circle cx="7" cy="7" r="3" />
         </svg>
-    },
-    {
-      type: "Index Funds",
-      expectedReturns: "10-12%",
-      riskLevel: "Medium",
-      description: "Passive investments that track market indices with lower expenses.",
-      bgColor: "bg-orange-50",
-      textColor: "text-orange-600",
-      iconBg: "bg-orange-100/70",
-      icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6 text-orange-600">
-          <path d="M2 20h.01"/>
-          <path d="M7 20v-4"/>
-          <path d="M12 20v-8"/>
-          <path d="M17 20V8"/>
-          <path d="M22 4v16"/>
+  }, {
+    type: "Index Funds",
+    expectedReturns: "10-12%",
+    riskLevel: "Medium",
+    description: "Passive investments that track market indices with lower expenses.",
+    bgColor: "bg-orange-50",
+    textColor: "text-orange-600",
+    iconBg: "bg-orange-100/70",
+    icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6 text-orange-600">
+          <path d="M2 20h.01" />
+          <path d="M7 20v-4" />
+          <path d="M12 20v-8" />
+          <path d="M17 20V8" />
+          <path d="M22 4v16" />
         </svg>
-    }
-  ];
+  }];
 
   // Top Performing Funds Data
   const topPerformingFunds = [{
@@ -553,8 +547,7 @@ const MutualFunds = () => {
     question: "What are the tax implications of mutual fund investments?",
     answer: "Tax implications vary based on fund type and holding period. Equity funds held over 1 year have long-term capital gains taxed at 10% (above ₹1 lakh), while debt funds' long-term gains (held over 3 years) are taxed at 20% with indexation. Short-term gains are added to your income and taxed as per your slab rate."
   }];
-  return (
-    <div className="min-h-screen flex flex-col">
+  return <div className="min-h-screen flex flex-col">
       <Navbar />
 
       {/* Hero Section */}
@@ -591,14 +584,9 @@ const MutualFunds = () => {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {sipFeatures.map((feature, index) => (
-                <div 
-                  key={index} 
-                  style={{
-                    animationDelay: `${index * 100}ms`
-                  }} 
-                  className="bg-white border border-gray-100 rounded-xl p-6 shadow-md hover:shadow-lg hover:border-fintech-purple/30 transition-all duration-300 animate-fade-in py-[40px] px-[10px]"
-                >
+              {sipFeatures.map((feature, index) => <div key={index} style={{
+              animationDelay: `${index * 100}ms`
+            }} className="bg-white border border-gray-100 rounded-xl p-6 shadow-md hover:shadow-lg hover:border-fintech-purple/30 transition-all duration-300 animate-fade-in py-[40px] px-[10px]">
                   <div className="flex items-center gap-4 mb-4">
                     <div className="relative">
                       {feature.icon}
@@ -606,8 +594,7 @@ const MutualFunds = () => {
                     <h3 className="font-semibold text-lg">{feature.title}</h3>
                   </div>
                   <p className="text-gray-600 ml-16 mx-[20px]">{feature.description}</p>
-                </div>
-              ))}
+                </div>)}
             </div>
 
             <div className="text-center mt-10">
@@ -825,14 +812,9 @@ const MutualFunds = () => {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
-            {fundCategories.map((fund, index) => (
-              <div 
-                key={index} 
-                className={`${fund.bgColor} p-8 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 animate-fade-in h-full`} 
-                style={{
-                  animationDelay: `${index * 150}ms`
-                }}
-              >
+            {fundCategories.map((fund, index) => <div key={index} className={`${fund.bgColor} p-8 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 animate-fade-in h-full`} style={{
+            animationDelay: `${index * 150}ms`
+          }}>
                 <div className="flex justify-center mb-6">
                   <div className={`w-16 h-16 rounded-full flex items-center justify-center ${fund.iconBg}`}>
                     {fund.icon}
@@ -859,14 +841,13 @@ const MutualFunds = () => {
                     <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                   </Button>
                 </div>
-              </div>
-            ))}
+              </div>)}
           </div>
         </div>
       </section>
       
       {/* NEW SECTION: Top Performing Funds Table */}
-      <section className="py-16 px-4 md:px-8 bg-white">
+      <section className="px-4 md:px-8 bg-white py-[10px]">
         <div className="container mx-auto">
           <div className="text-center mb-8">
             <h2 className="text-3xl md:text-4xl font-bold mb-2">Top Performing Funds</h2>
@@ -874,10 +855,9 @@ const MutualFunds = () => {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {topPerformingFunds.map((fund, index) => (
-              <div key={index} className="bg-white border border-gray-100 rounded-xl p-6 shadow-md hover:shadow-lg hover:border-fintech-purple/30 transition-all duration-300 animate-fade-in" style={{
-                animationDelay: `${index * 100}ms`
-              }}>
+            {topPerformingFunds.map((fund, index) => <div key={index} style={{
+            animationDelay: `${index * 100}ms`
+          }} className="bg-white border border-gray-100 p-6 shadow-md hover:shadow-lg hover:border-fintech-purple/30 transition-all duration-300 animate-fade-in px-[24px] rounded-xl py-[40px]">
                 <div className="flex justify-center mb-4">
                   <div className="w-16 h-16 rounded-full flex items-center justify-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-8 w-8">
@@ -886,19 +866,19 @@ const MutualFunds = () => {
                   </div>
                 </div>
                 <h3 className="font-bold text-lg text-center mb-4">{fund.name}</h3>
-                <div className="flex justify-between items-center mb-2">
+                <div className="flex justify-between items-center mb-2 py-[5px]">
                   <span className="text-gray-600">Returns (CAGR)</span>
                   <span className="font-bold text-green-600">{fund.returns}</span>
                 </div>
-                <div className="flex justify-between items-center mb-2">
+                <div className="flex justify-between items-center mb-2 py-[5px]">
                   <span className="text-gray-600">Category</span>
                   <span>{fund.category}</span>
                 </div>
-                <div className="flex justify-between items-center mb-2">
+                <div className="flex justify-between items-center mb-2 py-[5px]">
                   <span className="text-gray-600">AUM</span>
                   <span>{fund.aum}</span>
                 </div>
-                <div className="flex justify-between items-center mb-4">
+                <div className="flex justify-between items-center mb-4 py-[5px]">
                   <span className="text-gray-600">Risk</span>
                   <span className={`px-2 py-1 rounded-full text-xs text-white ${fund.colorClass}`}>{fund.risk}</span>
                 </div>
@@ -908,15 +888,12 @@ const MutualFunds = () => {
                     <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                   </Button>
                 </div>
-              </div>
-            ))}
+              </div>)}
           </div>
         </div>
       </section>
 
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default MutualFunds;
