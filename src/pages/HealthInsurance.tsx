@@ -816,7 +816,7 @@ const HealthInsurance = () => {
             </p>
           </div>
           
-          <div className="">
+          <div className="max-w-4xl mx-auto glass-card p-8">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div>
                 <h3 className="text-xl font-semibold mb-4 flex items-center">
