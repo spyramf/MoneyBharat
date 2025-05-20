@@ -28,7 +28,7 @@ const Blog = () => {
 
       <main className="pt-24 py-[80px]">
         {/* Hero Section */}
-        <section className="bg-gradient-to-r from-fintech-purple/10 to-fintech-blue/10 py-16">
+        <section className="bg-gradient-to-r from-fintech-purple/10 to-fintech-blue/10 py-16 bg-green-50">
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto text-center">
               <h1 className="text-4xl md:text-5xl font-bold mb-6 gradient-text">
