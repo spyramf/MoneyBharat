@@ -634,7 +634,7 @@ const MutualFunds = () => {
             </div>
 
             <div className="text-center mt-10">
-              <Button className="bg-gradient-to-r from-fintech-orange to-fintech-green hover:opacity-90 transition-all transform hover:scale-105 shadow-[0_0_15px_rgba(155,135,245,0.3)]">
+              <Button className="bg-gradient-to-r from-fintech-green to-fintech-green hover:opacity-90 transition-all transform hover:scale-105 shadow-[0_0_15px_rgba(155,135,245,0.3)]">
                 Start Now
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
