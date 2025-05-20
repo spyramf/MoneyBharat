@@ -1,340 +1,221 @@
-import { ArrowRight } from "lucide-react";
+
+import { ArrowRight, ArrowRightCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import { TextRotate } from "@/components/ui/text-rotate";
-import Floating, { FloatingElement } from "@/components/ui/parallax-floating";
-const financialImages = [{
-  url: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2426&auto=format&fit=crop&ixlib=rb-4.0.3",
-  title: "Financial charts and graphs"
-}, {
-  url: "https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.0.3",
-  title: "Financial planning"
-}, {
-  url: "https://images.unsplash.com/photo-1579621970588-a35d0e7ab9b6?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.0.3",
-  title: "Mobile banking"
-}, {
-  url: "https://images.unsplash.com/photo-1567427017947-545c5f8d16ad?q=80&w=2358&auto=format&fit=crop&ixlib=rb-4.0.3",
-  title: "Investment tracking"
-}, {
-  url: "https://images.unsplash.com/photo-1434626881859-194d67b2b86f?q=80&w=2338&auto=format&fit=crop&ixlib=rb-4.0.3",
-  title: "Handshake business deal"
-}];
+
 const EnhancedHeroSection = () => {
-  return <section className="relative overflow-hidden min-h-[90vh] flex items-center py-16 md:py-0">
-      {/* Dynamic background elements */}
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-fintech-purple/5 via-fintech-blue/10 to-transparent"></div>
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-fintech-blue/5 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-20 left-20 w-[300px] h-[300px] bg-fintech-purple/5 rounded-full blur-3xl"></div>
-        <div className="absolute top-40 left-1/2 w-[200px] h-[200px] bg-fintech-orange/5 rounded-full blur-3xl"></div>
+  return (
+    <section className="relative overflow-hidden pt-24 md:pt-32 pb-16 md:pb-20">
+      {/* Background decoration */}
+      <div className="absolute top-0 left-0 w-full h-full bg-gradient-radial from-fintech-purple/10 to-transparent -z-10"></div>
+      <div className="absolute top-40 right-0 w-96 h-96 bg-fintech-blue/10 rounded-full blur-3xl -z-10"></div>
+      <div className="absolute bottom-20 left-20 w-64 h-64 bg-fintech-purple/10 rounded-full blur-3xl -z-10"></div>
+      
+      {/* Fixed Deposit Promotion Banner */}
+      <div className="absolute top-0 left-0 right-0 bg-gradient-to-r from-fintech-blue/20 to-fintech-purple/20 backdrop-blur-sm py-2 z-10">
+        <div className="container mx-auto px-4">
+          <div className="flex items-center justify-center text-sm md:text-base gap-1">
+            <span className="bg-fintech-blue text-white px-2 py-0.5 rounded-full text-xs font-semibold">New</span>
+            <p>Special <span className="font-bold">8.5%</span> interest rate on fixed deposits</p>
+          </div>
+        </div>
       </div>
       
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div className="flex flex-col-reverse md:flex-row items-center gap-8 md:gap-12">
+          
           {/* Left content */}
-          <motion.div className="order-2 lg:order-1 space-y-8" initial={{
-          opacity: 0,
-          y: 20
-        }} animate={{
-          opacity: 1,
-          y: 0
-        }} transition={{
-          duration: 0.6
-        }}>
-            <div className="inline-block px-4 py-1.5 bg-gradient-to-r from-fintech-purple/20 to-fintech-blue/20 rounded-full">
-              <p className="text-sm font-medium text-gray-700">
-                <span className="text-fintech-purple font-bold mr-2">New</span> 
-                Special 8.5% interest rate on fixed deposits
+          <div className="w-full md:w-1/2 space-y-6">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
+                Build Your <span className="text-fintech-purple">Portfolio</span> <br />
+                <span className="text-fintech-orange">With Confidence</span>
+              </h1>
+              <p className="text-lg md:text-xl text-gray-700 max-w-lg mt-6">
+                Experience a new era of financial freedom with our 
+                AI-powered platform that simplifies investing, 
+                insurance, and loans for every Indian.
               </p>
-            </div>
+              <div className="flex flex-col sm:flex-row gap-4 pt-6">
+                <Button className="bg-fintech-purple hover:bg-fintech-purple/90 text-white font-medium px-8 py-6 rounded-full">
+                  Start Investing
+                </Button>
+                <Button variant="outline" className="group border-fintech-purple text-fintech-purple hover:text-fintech-blue transition-colors px-8 py-6 rounded-full">
+                  Book Consultation
+                  <ArrowRightCircle className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </Button>
+              </div>
+            </motion.div>
             
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-left xl:text-5xl">
-              Build Your{" "}
-              <span className="inline-block">
-                <TextRotate texts={["Wealth", "Future", "Dreams", "Legacy", "Portfolio", "Security"]} mainClassName="inline-block bg-gradient-to-r from-fintech-purple to-fintech-blue bg-clip-text text-transparent" staggerDuration={0.05} staggerFrom="first" rotationInterval={3000} transition={{
-                type: "spring",
-                damping: 30,
-                stiffness: 400
-              }} />
-              </span>{" "}
-              <br />
-              <span className="bg-gradient-to-r from-fintech-orange to-fintech-purple bg-clip-text text-transparent">
-                With Confidence
-              </span>
-            </h1>
-            
-            <p className="text-lg md:text-xl text-gray-700 max-w-lg">
-              Experience a new era of financial freedom with our AI-powered platform 
-              that simplifies investing, insurance, and loans for every Indian.
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-4 pt-4">
-              <Button size="lg" className="bg-gradient-to-r from-fintech-purple to-fintech-blue hover:opacity-90 text-white font-medium px-8 py-6 rounded-full shadow-lg shadow-fintech-purple/20">
-                Start Investing
-              </Button>
-              <Button variant="outline" size="lg" className="group border-fintech-purple text-fintech-purple hover:bg-fintech-purple/10 transition-colors px-8 py-6 rounded-full">
-                Book Consultation
-                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </Button>
-            </div>
-            
-            {/* Credentials */}
-            <div className="pt-8 border-t border-gray-100">
-              <p className="text-sm text-gray-500 mb-4">Trusted by investors across India</p>
-              <div className="flex flex-wrap gap-8">
-                <div className="flex items-center">
-                  <div className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center mr-3">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                    </svg>
+            {/* Trust indicators */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.3, duration: 0.5 }}
+              className="pt-10"
+            >
+              <p className="text-sm text-gray-600 mb-3">Trusted by investors across India</p>
+              <div className="flex flex-wrap gap-6 items-center">
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-600"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
                   </div>
                   <div>
-                    <p className="text-3xl font-bold gradient-text">SEBI</p>
-                    <p className="text-xs text-gray-600">Registered</p>
+                    <p className="text-lg font-bold text-fintech-purple">SEBI</p>
+                    <p className="text-xs text-gray-500">Registered</p>
                   </div>
                 </div>
-                <div className="flex items-center">
-                  <div className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center mr-3">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                    </svg>
+                
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-600"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m20 8-8 5-8-5"></path></svg>
                   </div>
                   <div>
-                    <p className="text-3xl font-bold gradient-text">256-bit</p>
-                    <p className="text-xs text-gray-600">Encryption</p>
+                    <p className="text-lg font-bold text-fintech-blue">256-bit</p>
+                    <p className="text-xs text-gray-500">Encryption</p>
                   </div>
                 </div>
-                <div className="flex items-center">
-                  <div className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center mr-3">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
+                
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-600"><circle cx="12" cy="12" r="10"></circle><path d="M16 8h-6.5a2.5 2.5 0 0 0 0 5h1a2.5 2.5 0 0 1 0 5H4"></path><path d="M12 18v2"></path><path d="M12 4v2"></path></svg>
                   </div>
                   <div>
-                    <p className="text-3xl font-bold gradient-text">₹10Cr+</p>
-                    <p className="text-xs text-gray-600">Insurance Cover</p>
+                    <p className="text-lg font-bold text-fintech-orange">₹10Cr+</p>
+                    <p className="text-xs text-gray-500">Insurance Cover</p>
                   </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+          
+          {/* Right dashboard visualization */}
+          <motion.div 
+            className="w-full md:w-1/2"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5 }}
+          >
+            <div className="relative">
+              <div className="absolute -top-10 -left-10 w-64 h-64 bg-fintech-orange/10 rounded-full blur-xl"></div>
+              
+              {/* Investment dashboard */}
+              <div className="glass-card p-6 max-w-md mx-auto shadow-xl">
+                <div className="bg-gradient-to-br from-fintech-purple/10 to-fintech-blue/10 rounded-lg p-3">
+                  <div className="flex justify-between items-center mb-4">
+                    <h3 className="text-lg font-semibold">Your Investments</h3>
+                    <div className="bg-green-100 text-green-700 px-2 py-1 rounded text-xs font-medium">
+                      Annual Returns: +18.7%
+                    </div>
+                  </div>
+                  
+                  <div className="space-y-4">
+                    <div>
+                      <div className="flex justify-between text-sm mb-1">
+                        <span>Portfolio Value</span>
+                        <span className="font-medium">₹8.2L</span>
+                      </div>
+                      <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
+                        <div className="h-full bg-gradient-to-r from-fintech-purple to-fintech-blue rounded-full" style={{ width: "82%" }}></div>
+                      </div>
+                      <div className="flex justify-between text-xs text-gray-600 mt-1">
+                        <span>Target: ₹10L</span>
+                        <span>82% achieved</span>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="mt-6 space-y-3">
+                    <div className="flex justify-between items-center p-2 bg-white rounded-lg shadow-sm">
+                      <div className="flex items-center gap-2">
+                        <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m2 9 3-3 3 3"></path><path d="M8 6h10a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-6"></path></svg>
+                        </div>
+                        <div>
+                          <p className="font-medium text-sm">HDFC Top 100</p>
+                          <p className="text-xs text-gray-500">Large Cap</p>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <p className="text-sm text-green-600 font-medium">+16.2%</p>
+                        <p className="text-xs text-gray-500">₹85K</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex justify-between items-center p-2 bg-white rounded-lg shadow-sm">
+                      <div className="flex items-center gap-2">
+                        <div className="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center text-purple-600">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m2 9 3-3 3 3"></path><path d="M8 6h10a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-6"></path></svg>
+                        </div>
+                        <div>
+                          <p className="font-medium text-sm">Axis Small Cap</p>
+                          <p className="text-xs text-gray-500">Small Cap</p>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <p className="text-sm text-green-600 font-medium">+21.8%</p>
+                        <p className="text-xs text-gray-500">₹95K</p>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="mt-4 text-right">
+                    <a href="#" className="text-fintech-purple hover:text-fintech-blue transition-colors text-sm font-medium flex items-center justify-end">
+                      View Complete Portfolio
+                      <ArrowRight className="ml-1 h-3 w-3" />
+                    </a>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Floating elements */}
+              <div className="absolute -top-6 right-4 md:right-10 w-24 h-24 glass-card rounded-lg shadow-lg p-2 flex flex-col items-center justify-center animate-bounce-slow">
+                <div className="w-6 h-6 rounded-full bg-gradient-to-r from-green-400 to-green-500 mb-1"></div>
+                <p className="text-xs text-gray-600">Growth</p>
+                <p className="text-sm font-bold text-green-600">+18.7%</p>
+              </div>
+              
+              <div className="absolute -bottom-4 -left-4 p-3 glass-card rounded-lg shadow-lg animate-pulse-slow">
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-8 rounded-full bg-gradient-to-r from-fintech-orange to-fintech-purple flex items-center justify-center text-white text-xs font-bold">
+                    ₹
+                  </div>
+                  <p className="text-sm font-semibold">Instant Loans</p>
                 </div>
               </div>
             </div>
           </motion.div>
-          
-          {/* Right content - Interactive showcase */}
-          <div className="order-1 lg:order-2 h-[450px] md:h-[550px] relative">
-            <div className="absolute inset-0">
-              <Floating sensitivity={-0.5} className="w-full h-full py-0">
-                {/* Main central card */}
-                <FloatingElement depth={0.2} className="top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                  <motion.div initial={{
-                  opacity: 0,
-                  scale: 0.9
-                }} animate={{
-                  opacity: 1,
-                  scale: 1
-                }} transition={{
-                  delay: 0.3,
-                  duration: 0.8
-                }} className="glass-card p-5 rounded-2xl bg-white/80 backdrop-blur-md shadow-xl border border-white/30 w-[280px] md:w-[320px] my-0 mx-0">
-                    <div className="text-center mb-4">
-                      <h3 className="font-bold text-lg text-gray-800">Your Investment Dashboard</h3>
-                    </div>
-                    <div className="bg-gradient-to-br from-fintech-purple/80 to-fintech-blue/80 p-4 rounded-xl text-white mb-4">
-                      <div className="flex justify-between items-center">
-                        <p>Portfolio Value</p>
-                        <p className="font-bold text-xl">₹5,87,420</p>
-                      </div>
-                      <div className="mt-2 w-full bg-white/20 h-1.5 rounded-full">
-                        <div className="bg-white h-full rounded-full w-[65%]"></div>
-                      </div>
-                      <div className="flex justify-between text-sm mt-1">
-                        <p>Target: ₹10L</p>
-                        <p>58.7% Complete</p>
-                      </div>
-                    </div>
-                    <div className="space-y-3">
-                      <div className="flex justify-between items-center p-2 bg-gray-50 rounded-lg">
-                        <div className="flex items-center">
-                          <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center mr-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-                            </svg>
-                          </div>
-                          <div>
-                            <p className="text-sm font-medium">HDFC Top 100</p>
-                            <p className="text-xs text-gray-500">Large Cap</p>
-                          </div>
-                        </div>
-                        <div className="text-right">
-                          <p className="text-sm font-medium text-green-600">+17.4%</p>
-                          <p className="text-xs text-gray-500">₹1.2L</p>
-                        </div>
-                      </div>
-                      
-                      <div className="flex justify-between items-center p-2 bg-gray-50 rounded-lg">
-                        <div className="flex items-center">
-                          <div className="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center mr-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                            </svg>
-                          </div>
-                          <div>
-                            <p className="text-sm font-medium">Axis Small Cap</p>
-                            <p className="text-xs text-gray-500">Small Cap</p>
-                          </div>
-                        </div>
-                        <div className="text-right">
-                          <p className="text-sm font-medium text-green-600">+21.8%</p>
-                          <p className="text-xs text-gray-500">₹85K</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="mt-4 pt-3 border-t border-gray-100 text-center">
-                      <button className="text-fintech-blue font-medium text-sm">View Complete Portfolio →</button>
-                    </div>
-                  </motion.div>
-                </FloatingElement>
-                
-                {/* Floating images */}
-                <FloatingElement depth={1.5} className="top-[10%] left-[5%]">
-                  <motion.div className="w-32 h-32 md:w-40 md:h-40 rotate-[-5deg] shadow-xl rounded-xl overflow-hidden" initial={{
-                  opacity: 0,
-                  x: -50
-                }} animate={{
-                  opacity: 1,
-                  x: 0
-                }} transition={{
-                  delay: 0.4,
-                  duration: 0.8
-                }} whileHover={{
-                  scale: 1.05
-                }}>
-                    <img src={financialImages[0].url} alt={financialImages[0].title} className="w-full h-full object-cover" />
-                  </motion.div>
-                </FloatingElement>
-                
-                <FloatingElement depth={0.8} className="bottom-[15%] left-[10%]">
-                  <motion.div className="w-36 h-28 md:w-44 md:h-36 rotate-[8deg] shadow-xl rounded-xl overflow-hidden" initial={{
-                  opacity: 0,
-                  x: -50,
-                  y: 50
-                }} animate={{
-                  opacity: 1,
-                  x: 0,
-                  y: 0
-                }} transition={{
-                  delay: 0.6,
-                  duration: 0.8
-                }} whileHover={{
-                  scale: 1.05
-                }}>
-                    <img src={financialImages[1].url} alt={financialImages[1].title} className="w-full h-full object-cover" />
-                  </motion.div>
-                </FloatingElement>
-                
-                <FloatingElement depth={1.2} className="top-[5%] right-[10%]">
-                  <motion.div className="w-28 h-36 md:w-36 md:h-44 rotate-[12deg] shadow-xl rounded-xl overflow-hidden" initial={{
-                  opacity: 0,
-                  x: 50
-                }} animate={{
-                  opacity: 1,
-                  x: 0
-                }} transition={{
-                  delay: 0.5,
-                  duration: 0.8
-                }} whileHover={{
-                  scale: 1.05
-                }}>
-                    <img src={financialImages[2].url} alt={financialImages[2].title} className="w-full h-full object-cover" />
-                  </motion.div>
-                </FloatingElement>
-                
-                <FloatingElement depth={0.9} className="bottom-[10%] right-[5%]">
-                  <motion.div className="w-32 h-40 md:w-40 md:h-48 rotate-[-10deg] shadow-xl rounded-xl overflow-hidden" initial={{
-                  opacity: 0,
-                  x: 50,
-                  y: 50
-                }} animate={{
-                  opacity: 1,
-                  x: 0,
-                  y: 0
-                }} transition={{
-                  delay: 0.7,
-                  duration: 0.8
-                }} whileHover={{
-                  scale: 1.05
-                }}>
-                    <img src={financialImages[3].url} alt={financialImages[3].title} className="w-full h-full object-cover" />
-                  </motion.div>
-                </FloatingElement>
-                
-                {/* Floating stats cards */}
-                <FloatingElement depth={1.7} className="top-[30%] right-[25%]">
-                  <motion.div className="bg-white/90 backdrop-blur-sm p-3 rounded-lg shadow-lg border border-gray-100" initial={{
-                  opacity: 0,
-                  scale: 0.8
-                }} animate={{
-                  opacity: 1,
-                  scale: 1
-                }} transition={{
-                  delay: 0.9,
-                  duration: 0.8
-                }} whileHover={{
-                  scale: 1.05
-                }}>
-                    <p className="text-xs text-gray-500">Annual Returns</p>
-                    <p className="font-bold text-green-600 text-lg">+18.7%</p>
-                  </motion.div>
-                </FloatingElement>
-                
-                <FloatingElement depth={1.3} className="bottom-[35%] left-[25%]">
-                  <motion.div className="bg-white/90 backdrop-blur-sm p-3 rounded-lg shadow-lg border border-gray-100" initial={{
-                  opacity: 0,
-                  scale: 0.8
-                }} animate={{
-                  opacity: 1,
-                  scale: 1
-                }} transition={{
-                  delay: 1.0,
-                  duration: 0.8
-                }} whileHover={{
-                  scale: 1.05
-                }}>
-                    <div className="flex items-center gap-2">
-                      <div className="w-6 h-6 rounded-full bg-gradient-to-r from-fintech-orange to-fintech-purple flex items-center justify-center text-white text-xs font-bold">₹</div>
-                      <p className="font-bold text-sm">Instant Loans</p>
-                    </div>
-                  </motion.div>
-                </FloatingElement>
-              </Floating>
-            </div>
-          </div>
         </div>
-        
-        {/* Stats bar */}
-        <motion.div className="mt-8 md:mt-12 grid grid-cols-3 gap-4 max-w-4xl mx-auto" initial={{
-        opacity: 0,
-        y: 20
-      }} animate={{
-        opacity: 1,
-        y: 0
-      }} transition={{
-        duration: 0.6,
-        delay: 1.0
-      }}>
-          <div className="text-center p-4 rounded-xl bg-gradient-to-br from-fintech-purple/10 to-fintech-blue/10">
-            <p className="text-3xl font-bold gradient-text">₹500Cr+</p>
+      </div>
+      
+      {/* Stats section */}
+      <motion.div 
+        className="container mx-auto px-4 mt-16 md:mt-24"
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.6, duration: 0.5 }}
+      >
+        <div className="grid grid-cols-3 gap-6">
+          <div className="rounded-xl bg-gray-50/80 backdrop-blur-sm p-6 text-center shadow-sm border border-gray-100">
+            <p className="text-3xl md:text-4xl font-bold text-fintech-purple mb-2">₹500Cr+</p>
             <p className="text-gray-600 text-sm">Assets Managed</p>
           </div>
-          <div className="text-center p-4 rounded-xl bg-gradient-to-br from-fintech-blue/10 to-fintech-ocean-blue/10">
-            <p className="text-3xl font-bold gradient-text">50K+</p>
+          <div className="rounded-xl bg-gray-50/80 backdrop-blur-sm p-6 text-center shadow-sm border border-gray-100">
+            <p className="text-3xl md:text-4xl font-bold text-fintech-blue mb-2">50K+</p>
             <p className="text-gray-600 text-sm">Happy Clients</p>
           </div>
-          <div className="text-center p-4 rounded-xl bg-gradient-to-br from-fintech-orange/10 to-fintech-purple/10">
-            <p className="text-3xl font-bold gradient-text">15+</p>
+          <div className="rounded-xl bg-gray-50/80 backdrop-blur-sm p-6 text-center shadow-sm border border-gray-100">
+            <p className="text-3xl md:text-4xl font-bold text-fintech-orange mb-2">15+</p>
             <p className="text-gray-600 text-sm">Years Experience</p>
           </div>
-        </motion.div>
-      </div>
-    </section>;
+        </div>
+      </motion.div>
+    </section>
+  );
 };
+
 export default EnhancedHeroSection;

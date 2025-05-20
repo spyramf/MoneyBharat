@@ -28,8 +28,9 @@ const Navbar = () => {
     <nav
       className={cn(
         'fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-4',
-        scrolled ? 'bg-white/80 backdrop-blur-md shadow-sm' : 'bg-transparent'
+        scrolled ? 'bg-white/90 backdrop-blur-md shadow-sm' : 'bg-transparent'
       )}
+      style={{ marginTop: '28px' }} // Add top margin for the banner
     >
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between">
@@ -57,7 +58,7 @@ const Navbar = () => {
             <Link to="/about" className="font-medium text-gray-700 hover:text-fintech-purple transition-colors">
               About Us
             </Link>
-            <Button className="bg-gradient-to-r from-fintech-purple to-fintech-blue hover:opacity-90">
+            <Button className="bg-fintech-blue hover:opacity-90 text-white rounded-full">
               Get Started
             </Button>
           </div>
@@ -110,7 +111,7 @@ const Navbar = () => {
               >
                 About Us
               </Link>
-              <Button className="bg-gradient-to-r from-fintech-purple to-fintech-blue hover:opacity-90 w-full">
+              <Button className="bg-fintech-blue hover:opacity-90 text-white w-full rounded-full">
                 Get Started
               </Button>
             </div>
