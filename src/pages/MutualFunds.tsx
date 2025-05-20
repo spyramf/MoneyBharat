@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { ArrowRight, CircleArrowDown, CircleArrowUp, FileChartLine, FileChartPie, Info } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -17,6 +16,7 @@ import {
 } from "@/components/ui/table";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
 import { Badge } from "@/components/ui/badge";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
@@ -157,7 +157,7 @@ const MutualFunds = () => {
       description: "Benefit from the expertise of professional fund managers who actively manage your investments.",
       icon: <div className="w-12 h-12 rounded-full bg-orange-100 text-fintech-orange flex items-center justify-center">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
-          <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+          <path d="M16 21v-2a4 4 0 0 1 2-2H6a4 4 0 0 1-4 4v2" />
           <circle cx="9" cy="7" r="4" />
           <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
           <path d="M16 3.13a4 4 0 0 1 0 7.75" />
@@ -605,6 +605,26 @@ const MutualFunds = () => {
     }
   ];
 
+  // New FAQ data for the accordion
+  const faqItems = [
+    {
+      question: "What is a Mutual Fund?",
+      answer: "A mutual fund is an investment vehicle that pools money from multiple investors to purchase securities like stocks, bonds, and other assets. Professional fund managers allocate these assets to generate capital gains or income for investors."
+    },
+    {
+      question: "How do SIP investments work?",
+      answer: "Systematic Investment Plans (SIPs) allow investors to invest a fixed amount in mutual funds at regular intervals (typically monthly). This approach helps in rupee-cost averaging and building wealth over time through disciplined investing."
+    },
+    {
+      question: "Are mutual fund investments safe?",
+      answer: "Mutual funds come with varying degrees of risk depending on their type. While they're generally considered safer than direct stock investments due to diversification, they're not completely risk-free. Equity funds carry higher risk but potentially higher returns, while debt funds are relatively safer."
+    },
+    {
+      question: "What are the tax implications of mutual fund investments?",
+      answer: "Tax implications vary based on fund type and holding period. Equity funds held over 1 year have long-term capital gains taxed at 10% (above ₹1 lakh), while debt funds' long-term gains (held over 3 years) are taxed at 20% with indexation. Short-term gains are added to your income and taxed as per your slab rate."
+    }
+  ];
+
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
@@ -930,9 +950,81 @@ const MutualFunds = () => {
         </div>
       </section>
       
-      <Footer />
-    </div>
-  );
-};
+      {/* NEW SECTION: Top Performing Funds Table */}
+      <section className="py-16 px-4 md:px-8 bg-white">
+        <div className="container mx-auto">
+          <div className="text-center mb-8">
+            <h2 className="text-3xl md:text-4xl font-bold mb-2">Top Performing Funds</h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Our selection of mutual funds with consistent performance
+            </p>
+          </div>
+          
+          <div className="max-w-6xl mx-auto bg-white rounded-2xl shadow-md overflow-hidden">
+            <Table>
+              <TableHeader>
+                <TableRow className="bg-gray-50">
+                  <TableHead className="w-[300px]">Fund Name</TableHead>
+                  <TableHead>Category</TableHead>
+                  <TableHead>1Y Returns</TableHead>
+                  <TableHead>AUM</TableHead>
+                  <TableHead>Risk</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {topPerformingFunds.map((fund, index) => (
+                  <TableRow key={index} className="hover:bg-gray-50/50">
+                    <TableCell>
+                      <div className="flex items-center">
+                        <div className={`w-1.5 h-14 ${fund.colorClass} rounded-full mr-3`}></div>
+                        <div>
+                          <div className="font-medium">{fund.name}</div>
+                          <div className="text-sm text-gray-500">{fund.performance}</div>
+                        </div>
+                      </div>
+                    </TableCell>
+                    <TableCell>
+                      <Badge variant={fund.category === "Equity" ? "success" : fund.category === "Hybrid" ? "warning" : "info"}>
+                        {fund.category}
+                      </Badge>
+                    </TableCell>
+                    <TableCell className="font-semibold text-fintech-green">{fund.returns}</TableCell>
+                    <TableCell>{fund.aum}</TableCell>
+                    <TableCell>
+                      <Badge
+                        variant={
+                          fund.risk === "Low" ? "success" :
+                          fund.risk === "Moderate" ? "warning" :
+                          fund.risk === "High" ? "info" : "destructive"
+                        }
+                      >
+                        {fund.risk}
+                      </Badge>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+            <div className="flex justify-center p-5">
+              <Button className="bg-fintech-purple hover:bg-fintech-purple/80 text-white">
+                View All Mutual Funds
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
 
-export default MutualFunds;
+      {/* NEW SECTION: Frequently Asked Questions */}
+      <section className="py-16 px-4 md:px-8 bg-gray-50">
+        <div className="container mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-2">Frequently Asked Questions</h2>
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+              Get answers to common questions about mutual fund investments
+            </p>
+          </div>
+          
+          <div className="max-w-3xl mx-auto">
+            <Accordion type="single" collapsible className="bg-white rounded-xl shadow-sm">
+              {faqItems.map((item, index) => (
+                <AccordionItem
