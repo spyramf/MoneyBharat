@@ -180,7 +180,7 @@ const Index = () => {
                 </ul>
               </CardContent>
               <CardFooter>
-                <a href="/insurance" className="text-fintech-purple hover:text-fintech-green transition-colors font-medium flex items-center">
+                <a href="/insurance" className="text-fintech-green hover:text-fintech-green transition-colors font-medium flex items-center">
                   Explore Life Insurance
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </a>
@@ -193,7 +193,7 @@ const Index = () => {
                   <Umbrella className="h-6 w-6 text-green-600" />
                 </div>
                 <CardTitle>Health Insurance</CardTitle>
-                <CardDescription>Comprehensive coverage for medical expenses</CardDescription>
+                <CardDescription>Comprehensive coverage for medical expense</CardDescription>
               </CardHeader>
               <CardContent className="pb-4">
                 <ul className="space-y-2">
@@ -212,7 +212,7 @@ const Index = () => {
                 </ul>
               </CardContent>
               <CardFooter>
-                <a href="/insurance" className="text-fintech-purple hover:text-fintech-green transition-colors font-medium flex items-center">
+                <a href="/insurance" className="text-fintech-green hover:text-fintech-green transition-colors font-medium flex items-center">
                   Explore Health Insurance
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </a>
@@ -235,7 +235,7 @@ const Index = () => {
                   </li>
                   <li className="flex items-start">
                     <CheckCircle className="h-5 w-5 text-green-500 mt-0.5 mr-2 flex-shrink-0" />
-                    <span>Home insurance against natural disasters</span>
+                    <span>Insurance against natural disasters</span>
                   </li>
                   <li className="flex items-start">
                     <CheckCircle className="h-5 w-5 text-green-500 mt-0.5 mr-2 flex-shrink-0" />
@@ -244,7 +244,7 @@ const Index = () => {
                 </ul>
               </CardContent>
               <CardFooter>
-                <a href="/insurance" className="text-fintech-purple hover:text-fintech-green transition-colors font-medium flex items-center">
+                <a href="/insurance" className="text-fintech-green hover:text-fintech-green transition-colors font-medium flex items-center">
                   Explore General Insurance
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </a>
@@ -290,12 +290,12 @@ const Index = () => {
                   </li>
                   <li className="flex items-start">
                     <CheckCircle className="h-5 w-5 text-green-500 mt-0.5 mr-2 flex-shrink-0" />
-                    <span>Flexible repayment options up to 5 years</span>
+                    <span>Flexible repayment options up to 5 yr</span>
                   </li>
                 </ul>
               </CardContent>
               <CardFooter>
-                <a href="/loans" className="text-fintech-purple hover:text-fintech-green transition-colors font-medium flex items-center">
+                <a href="/loans" className="text-fintech-green hover:text-fintech-green transition-colors font-medium flex items-center">
                   Apply for Personal Loan
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </a>
@@ -327,7 +327,7 @@ const Index = () => {
                 </ul>
               </CardContent>
               <CardFooter>
-                <a href="/loans" className="text-fintech-purple hover:text-fintech-green transition-colors font-medium flex items-center">
+                <a href="/loans" className="text-fintech-green hover:text-fintech-green transition-colors font-medium flex items-center">
                   Apply for Home Loan
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </a>
@@ -359,7 +359,7 @@ const Index = () => {
                 </ul>
               </CardContent>
               <CardFooter>
-                <a href="/loans" className="text-fintech-purple hover:text-fintech-green transition-colors font-medium flex items-center">
+                <a href="/loans" className="text-fintech-green hover:text-fintech-green transition-colors font-medium flex items-center">
                   Apply for Business Loan
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </a>
@@ -377,7 +377,7 @@ const Index = () => {
       </section>
       
       {/* Services Section */}
-      <section className="py-16 md:py-24">
+      <section className="py-16 md:py-[20px]">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-2xl mx-auto mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
@@ -517,7 +517,7 @@ const Index = () => {
       </section>
       
       {/* Testimonials Section */}
-      <section className="py-16 md:py-24">
+      <section className="py-16 md:py-[20px]">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-2xl mx-auto mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
