@@ -118,7 +118,7 @@ const Loans = () => {
       <section className="bg-gradient-to-r from-fintech-purple/10 to-fintech-blue/10 py-16 bg-green-50 md:py-[100px]">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-fintech-purple mb-6 gradient-text">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold gradient-text mb-6 gradient-text">
               Get the Best Loan Offers Tailored for You
             </h1>
             <p className="text-lg md:text-xl text-gray-700 mb-8">
