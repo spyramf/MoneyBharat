@@ -97,7 +97,7 @@ const Index = () => {
                 </ul>
               </CardContent>
               <CardFooter>
-                <a href="/mutual-funds" className="text-fintech-purple hover:text-fintech-blue transition-colors font-medium flex items-center">
+                <a href="/mutual-funds" className="text-fintech-purple hover:text-fintech-green transition-colors font-medium flex items-center">
                   Explore Debt Funds
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </a>
@@ -129,7 +129,7 @@ const Index = () => {
                 </ul>
               </CardContent>
               <CardFooter>
-                <a href="/mutual-funds" className="text-fintech-purple hover:text-fintech-blue transition-colors font-medium flex items-center">
+                <a href="/mutual-funds" className="text-fintech-purple hover:text-fintech-green \ntransition-colors font-medium flex items-center">
                   Explore Hybrid Funds
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </a>
@@ -180,7 +180,7 @@ const Index = () => {
                 </ul>
               </CardContent>
               <CardFooter>
-                <a href="/insurance" className="text-fintech-purple hover:text-fintech-blue transition-colors font-medium flex items-center">
+                <a href="/insurance" className="text-fintech-purple hover:text-fintech-green transition-colors font-medium flex items-center">
                   Explore Life Insurance
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </a>
@@ -212,7 +212,7 @@ const Index = () => {
                 </ul>
               </CardContent>
               <CardFooter>
-                <a href="/insurance" className="text-fintech-purple hover:text-fintech-blue transition-colors font-medium flex items-center">
+                <a href="/insurance" className="text-fintech-purple hover:text-fintech-green transition-colors font-medium flex items-center">
                   Explore Health Insurance
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </a>
@@ -244,7 +244,7 @@ const Index = () => {
                 </ul>
               </CardContent>
               <CardFooter>
-                <a href="/insurance" className="text-fintech-purple hover:text-fintech-blue transition-colors font-medium flex items-center">
+                <a href="/insurance" className="text-fintech-purple hover:text-fintech-green transition-colors font-medium flex items-center">
                   Explore General Insurance
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </a>
@@ -295,7 +295,7 @@ const Index = () => {
                 </ul>
               </CardContent>
               <CardFooter>
-                <a href="/loans" className="text-fintech-purple hover:text-fintech-blue transition-colors font-medium flex items-center">
+                <a href="/loans" className="text-fintech-purple hover:text-fintech-green transition-colors font-medium flex items-center">
                   Apply for Personal Loan
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </a>
@@ -327,7 +327,7 @@ const Index = () => {
                 </ul>
               </CardContent>
               <CardFooter>
-                <a href="/loans" className="text-fintech-purple hover:text-fintech-blue transition-colors font-medium flex items-center">
+                <a href="/loans" className="text-fintech-purple hover:text-fintech-green transition-colors font-medium flex items-center">
                   Apply for Home Loan
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </a>
@@ -359,7 +359,7 @@ const Index = () => {
                 </ul>
               </CardContent>
               <CardFooter>
-                <a href="/loans" className="text-fintech-purple hover:text-fintech-blue transition-colors font-medium flex items-center">
+                <a href="/loans" className="text-fintech-purple hover:text-fintech-green transition-colors font-medium flex items-center">
                   Apply for Business Loan
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </a>
