@@ -542,7 +542,7 @@ const InsurancePage = () => {
             {[1, 2, 3, 4, 5, 6].map(item => <Card key={item} className="flex items-center justify-center p-6 hover:shadow-md transition-all">
                 <CardContent className="p-0 flex flex-col items-center">
                   <div className="flex items-center justify-center mb-2">
-                    <Building className="h-10 w-10 text-fintech-purple" />
+                    <Building className="h-10 w-10 text-fintech-green\n" />
                   </div>
                   <p className="text-center font-medium">Insurance Partner {item}</p>
                 </CardContent>
@@ -599,7 +599,7 @@ const InsurancePage = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 px-4 sm:px-6 bg-gradient-to-r from-fintech-purple to-fintech-blue text-white">
+      <section className="py-16 px-4 sm:px-6 bg-gradient-to-r from-fintech-green to-fintech-orange text-white">
         <div className="container mx-auto text-center">
           <h2 className="text-3xl font-bold mb-6">Ready to Get Insured?</h2>
           <p className="text-xl mb-8 max-w-2xl mx-auto">
