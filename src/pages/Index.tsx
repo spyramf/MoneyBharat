@@ -399,7 +399,7 @@ const Index = () => {
       </section>
       
       {/* Features Section */}
-      <section className="py-16 md:py-24 bg-gray-50">
+      <section className="py-16 bg-gray-50 md:py-[60px]">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row items-center gap-12">
             {/* Left Image */}
