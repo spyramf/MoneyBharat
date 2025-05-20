@@ -312,7 +312,7 @@ const MutualFunds = () => {
     description: "Mutual funds offer high liquidity, allowing you to easily redeem your investments when needed, providing financial flexibility.",
     icon: <div className="flex items-center justify-center w-12 h-12 rounded-full bg-cyan-100 text-cyan-600">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
-          <path d="M8 16a5 5 0 0 1 10 0" />
+          <path d="M8 16a5 5 0 0 0 0 10h12" />
           <line x1="2" x2="22" y1="20" y2="20" />
           <line x1="2" x2="7" y1="4" y2="4" />
           <line x1="2" x2="4" y1="8" y2="8" />
@@ -553,7 +553,8 @@ const MutualFunds = () => {
     question: "What are the tax implications of mutual fund investments?",
     answer: "Tax implications vary based on fund type and holding period. Equity funds held over 1 year have long-term capital gains taxed at 10% (above ₹1 lakh), while debt funds' long-term gains (held over 3 years) are taxed at 20% with indexation. Short-term gains are added to your income and taxed as per your slab rate."
   }];
-  return <div className="min-h-screen flex flex-col">
+  return (
+    <div className="min-h-screen flex flex-col">
       <Navbar />
 
       {/* Hero Section */}
@@ -879,4 +880,43 @@ const MutualFunds = () => {
               }}>
                 <div className="flex justify-center mb-4">
                   <div className="w-16 h-16 rounded-full flex items-center justify-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLine
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-8 w-8">
+                      <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+                    </svg>
+                  </div>
+                </div>
+                <h3 className="font-bold text-lg text-center mb-4">{fund.name}</h3>
+                <div className="flex justify-between items-center mb-2">
+                  <span className="text-gray-600">Returns (CAGR)</span>
+                  <span className="font-bold text-green-600">{fund.returns}</span>
+                </div>
+                <div className="flex justify-between items-center mb-2">
+                  <span className="text-gray-600">Category</span>
+                  <span>{fund.category}</span>
+                </div>
+                <div className="flex justify-between items-center mb-2">
+                  <span className="text-gray-600">AUM</span>
+                  <span>{fund.aum}</span>
+                </div>
+                <div className="flex justify-between items-center mb-4">
+                  <span className="text-gray-600">Risk</span>
+                  <span className={`px-2 py-1 rounded-full text-xs text-white ${fund.colorClass}`}>{fund.risk}</span>
+                </div>
+                <div className="mt-4 flex justify-center">
+                  <Button variant="outline" className="w-full hover:bg-gray-50 group">
+                    Invest Now
+                    <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  </Button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <Footer />
+    </div>
+  );
+};
+
+export default MutualFunds;
