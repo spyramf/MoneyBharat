@@ -51,7 +51,7 @@ const Navbar = () => {
             <Link to="/about" className="font-medium text-gray-700 hover:text-fintech-green transition-colors">
               About Us
             </Link>
-            <Button className="bg-fintech-green hover:bg-fintech-green/90 text-white rounded-full">
+            <Button className="bg-gradient-to-r from-fintech-green to-fintech-green \\\\nhover:opacity-90 text-white px-8 py-6">
               Get Started
             </Button>
           </div>
