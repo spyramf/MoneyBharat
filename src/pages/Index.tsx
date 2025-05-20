@@ -407,7 +407,7 @@ const Index = () => {
               <div className="relative">
                 <div className="absolute -top-6 -left-6 w-64 h-64 bg-fintech-purple/10 rounded-full blur-3xl -z-10"></div>
                 <div className="glass-card p-8 rounded-xl max-w-lg mx-auto">
-                  <div className="bg-gradient-to-br from-fintech-purple/80 to-fintech-blue/80 rounded-lg p-4 mb-6 text-white">
+                  <div className="bg-gradient-to-br from-fintech-green/80 to-fintech-orange/80 rounded-lg p-4 mb-6 text-white">
                     <h3 className="text-lg font-semibold mb-2">Wealth Dashboard</h3>
                     <div className="grid grid-cols-2 gap-3">
                       <div className="bg-white/20 p-3 rounded-lg">
