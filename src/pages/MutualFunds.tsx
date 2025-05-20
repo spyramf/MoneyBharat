@@ -25,6 +25,146 @@ const MutualFunds = () => {
   const [selectedTab, setSelectedTab] = useState("sip");
   const [animate, setAnimate] = useState(false);
 
+  // Define the sipFeatures array
+  const sipFeatures = [
+    {
+      title: "Zero Commission",
+      description: "Invest in direct mutual funds with zero commission and maximize your returns.",
+      icon: <div className="w-12 h-12 rounded-full bg-green-100 text-fintech-green flex items-center justify-center">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
+          <circle cx="12" cy="12" r="10" />
+          <path d="m4.93 4.93 14.14 14.14" />
+          <path d="M9.17 14.83 14.83 9.17" />
+        </svg>
+      </div>
+    },
+    {
+      title: "Quick Setup",
+      description: "Start your SIP in minutes with our streamlined onboarding process.",
+      icon: <div className="w-12 h-12 rounded-full bg-blue-100 text-fintech-blue flex items-center justify-center">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
+          <polyline points="13 17 18 12 13 7" />
+          <polyline points="6 17 11 12 6 7" />
+        </svg>
+      </div>
+    },
+    {
+      title: "Flexible Options",
+      description: "Choose from various SIP dates and customize your investment plan.",
+      icon: <div className="w-12 h-12 rounded-full bg-purple-100 text-fintech-purple flex items-center justify-center">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
+          <path d="M21 7v6h-6" />
+          <path d="M3 17a9 9 0 0 1 9-9 9 9 0 0 1 6 2.3l3 2.7" />
+        </svg>
+      </div>
+    },
+    {
+      title: "Easy Tracking",
+      description: "Monitor your investments with real-time performance tracking and analytics.",
+      icon: <div className="w-12 h-12 rounded-full bg-orange-100 text-fintech-orange flex items-center justify-center">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
+          <path d="M3 3v18h18" />
+          <path d="m19 9-5 5-4-4-3 3" />
+        </svg>
+      </div>
+    }
+  ];
+
+  // Define the dematSteps array
+  const dematSteps = [
+    {
+      title: "Fill Basic Details",
+      description: "Complete a simple form with your personal information and identity verification.",
+      icon: <div className="w-16 h-16 rounded-full bg-blue-100 text-fintech-blue flex items-center justify-center">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-8 w-8">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+          <polyline points="14 2 14 8 20 8" />
+          <line x1="16" x2="8" y1="13" y2="13" />
+          <line x1="16" x2="8" y1="17" y2="17" />
+          <line x1="10" x2="8" y1="9" y2="9" />
+        </svg>
+      </div>,
+      number: 1
+    },
+    {
+      title: "Complete eKYC",
+      description: "Verify your identity online using Aadhaar-based eKYC for a paperless process.",
+      icon: <div className="w-16 h-16 rounded-full bg-green-100 text-fintech-green flex items-center justify-center">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-8 w-8">
+          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+          <polyline points="22 4 12 14.01 9 11.01" />
+        </svg>
+      </div>,
+      number: 2
+    },
+    {
+      title: "Start Investing",
+      description: "Begin your investment journey immediately after account activation.",
+      icon: <div className="w-16 h-16 rounded-full bg-purple-100 text-fintech-purple flex items-center justify-center">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-8 w-8">
+          <path d="m12 14 4-4" />
+          <path d="M3.34 19a10 10 0 1 1 17.32 0" />
+          <path d="M7 19h10" />
+          <path d="M12 19v-9" />
+        </svg>
+      </div>,
+      number: 3
+    }
+  ];
+
+  // Define the additionalFeatures array
+  const additionalFeatures = [
+    {
+      title: "Tax Benefits",
+      description: "Get up to ₹1.5 lakh tax exemption under Section 80C with ELSS mutual funds.",
+      icon: <div className="w-12 h-12 rounded-full bg-green-100 text-fintech-green flex items-center justify-center">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
+          <rect width="20" height="14" x="2" y="3" rx="2" />
+          <line x1="12" x2="12" y1="9" y2="17" />
+          <line x1="8" x2="8" y1="11" y2="15" />
+          <line x1="16" x2="16" y1="11" y2="15" />
+        </svg>
+      </div>
+    },
+    {
+      title: "Portfolio Diversification",
+      description: "Spread your investments across various assets to reduce risk and optimize returns.",
+      icon: <div className="w-12 h-12 rounded-full bg-blue-100 text-fintech-blue flex items-center justify-center">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
+          <circle cx="18" cy="18" r="3" />
+          <circle cx="6" cy="6" r="3" />
+          <path d="M13 6h3a2 2 0 0 1 2 2v7" />
+          <path d="M11 18H8a2 2 0 0 1-2-2V9" />
+        </svg>
+      </div>
+    },
+    {
+      title: "Goal-Based Investing",
+      description: "Plan your investments based on your financial goals and timelines.",
+      icon: <div className="w-12 h-12 rounded-full bg-purple-100 text-fintech-purple flex items-center justify-center">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
+          <path d="m20 20-6-6" />
+          <path d="M14 20h6v-6" />
+          <path d="M4 4v6" />
+          <path d="M4 10h6" />
+          <path d="M14 4h-4v6" />
+        </svg>
+      </div>
+    },
+    {
+      title: "Expert Fund Managers",
+      description: "Benefit from the expertise of professional fund managers who actively manage your investments.",
+      icon: <div className="w-12 h-12 rounded-full bg-orange-100 text-fintech-orange flex items-center justify-center">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
+          <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+          <circle cx="9" cy="7" r="4" />
+          <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+          <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+        </svg>
+      </div>
+    }
+  ];
+
   const handleSliderChange = (value: number[]) => {
     setInvestmentAmount(value[0]);
   };
@@ -777,126 +917,4 @@ const MutualFunds = () => {
                     <p className="font-semibold">{fund.expectedReturns}</p>
                   </div>
                   <div>
-                    <p className="text-sm text-gray-500">Risk Level</p>
-                    <p className="font-semibold">{fund.riskLevel}</p>
-                  </div>
-                </div>
-                
-                <p className="text-gray-600 text-sm mb-6">{fund.description}</p>
-                
-                <div className="flex justify-center">
-                  <Button variant="outline" size="sm" className="group">
-                    Explore Funds 
-                    <ArrowRight className="ml-1 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                  </Button>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Top Performing Funds - ADDED FROM REFERENCE */}
-      <section className="py-16 px-4 md:px-8 bg-white">
-        <div className="container mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Top Performing Funds</h2>
-            <p className="text-gray-600">Our selection of mutual funds with consistent performance</p>
-          </div>
-          
-          <Card className="shadow-lg border-0 overflow-hidden shadow-[0_0_25px_rgba(155,135,245,0.1)]">
-            <div className="overflow-x-auto">
-              <Table>
-                <TableHeader className="bg-gradient-to-r from-gray-50 to-gray-100">
-                  <TableRow>
-                    <TableHead className="text-sm font-semibold">Fund Name</TableHead>
-                    <TableHead className="text-sm font-semibold">Category</TableHead>
-                    <TableHead className="text-sm font-semibold">1Y Returns</TableHead>
-                    <TableHead className="text-sm font-semibold">AUM</TableHead>
-                    <TableHead className="text-sm font-semibold">Risk</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {topPerformingFunds.map((fund, index) => (
-                    <TableRow key={index} className="animate-fade-in" style={{ animationDelay: `${index * 100}ms` }}>
-                      <TableCell>
-                        <div className="flex items-center">
-                          <div className={`w-1 h-16 ${fund.colorClass} rounded-full mr-3`}></div>
-                          <div>
-                            <p className="font-medium">{fund.name}</p>
-                            <p className="text-xs text-gray-500">{fund.performance}</p>
-                          </div>
-                        </div>
-                      </TableCell>
-                      <TableCell>
-                        <Badge variant="outline" className={fund.category === "Equity" ? "text-green-700 border-green-200 bg-green-50" : 
-                                                          fund.category === "Hybrid" ? "text-purple-700 border-purple-200 bg-purple-50" : 
-                                                          "text-blue-700 border-blue-200 bg-blue-50"}>
-                          {fund.category}
-                        </Badge>
-                      </TableCell>
-                      <TableCell>
-                        <span className="font-semibold text-green-600">{fund.returns}</span>
-                      </TableCell>
-                      <TableCell>{fund.aum}</TableCell>
-                      <TableCell>
-                        <Badge variant="outline" className={
-                          fund.risk === "High" ? "text-amber-700 border-amber-200 bg-amber-50" :
-                          fund.risk === "Very High" ? "text-red-700 border-red-200 bg-red-50" :
-                          fund.risk === "Moderate" ? "text-yellow-700 border-yellow-200 bg-yellow-50" :
-                          "text-green-700 border-green-200 bg-green-50"
-                        }>
-                          {fund.risk}
-                        </Badge>
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </div>
-          </Card>
-          
-          <div className="text-center mt-8 animate-fade-in" style={{ animationDelay: '500ms' }}>
-            <Button className="bg-gradient-to-r from-fintech-purple to-fintech-blue hover:opacity-90 transition-all transform hover:scale-105 shadow-[0_0_20px_rgba(155,135,245,0.3)]">
-              View All Mutual Funds
-            </Button>
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ Section */}
-      <section className="py-16 px-4 md:px-8 bg-gray-50">
-        <div className="container mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4">Frequently Asked Questions</h2>
-            <p className="text-gray-600">Get answers to common questions about mutual fund investments</p>
-          </div>
-          
-          <div className="max-w-3xl mx-auto space-y-6">
-            {/* ... keep existing code (FAQ content) */}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-20 px-4 md:px-8 bg-gradient-to-r from-fintech-purple to-fintech-blue text-white">
-        <div className="container mx-auto max-w-4xl text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Start Your Investment Journey?</h2>
-          <p className="text-xl mb-8 text-white/90">Create an account and start investing in just 5 minutes</p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button className="bg-white text-fintech-purple hover:bg-white/90 text-lg px-8 py-6 shadow-[0_0_25px_rgba(255,255,255,0.3)]">
-              Open Free Account
-            </Button>
-            <Button variant="outline" className="border-white text-white hover:bg-white/10 text-lg px-8 py-6">
-              Schedule a Call
-            </Button>
-          </div>
-        </div>
-      </section>
-
-      <Footer />
-    </div>
-  );
-};
-
-export default MutualFunds;
+                    <p className="text-sm text
