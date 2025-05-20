@@ -1443,7 +1443,7 @@ const HealthInsurance = () => {
             </p>
           </div>
           
-          <div className="max-w-4xl mx-auto glass-card p-8">
+          <div className="max-w-4xl mx-auto ">
             <div className="mb-8">
               <h3 className="text-xl font-semibold mb-4">What is Health Insurance Portability?</h3>
               <p className="text-gray-600">
