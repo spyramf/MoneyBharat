@@ -654,22 +654,22 @@ const HealthInsurance = () => {
           <div className="max-w-4xl mx-auto">
             <Table>
               <TableHeader>
-                <TableRow>
-                  <TableHead>Policy Type</TableHead>
-                  <TableHead>Age Criteria</TableHead>
-                  <TableHead>Medical Requirements</TableHead>
-                  <TableHead>Other Conditions</TableHead>
+                <TableRow className="bg-fintech-purple/10">
+                  <TableHead className="font-medium text-fintech-purple">Policy Type</TableHead>
+                  <TableHead className="font-medium text-fintech-purple">Age Criteria</TableHead>
+                  <TableHead className="font-medium text-fintech-purple">Medical Requirements</TableHead>
+                  <TableHead className="font-medium text-fintech-purple">Other Conditions</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 <TableRow>
-                  <TableCell className="font-medium">Individual Health Plan</TableCell>
+                  <TableCell className="font-medium text-fintech-green">Individual Health Plan</TableCell>
                   <TableCell>18 to 65 years</TableCell>
                   <TableCell>Medical check-up may be required beyond 45 years</TableCell>
                   <TableCell>Valid ID and address proof</TableCell>
                 </TableRow>
                 <TableRow>
-                  <TableCell className="font-medium">Family Floater</TableCell>
+                  <TableCell className="font-medium text-fintech-green">Family Floater</TableCell>
                   <TableCell>
                     Adult: 18 to 65 years<br />
                     Children: 3 months to 25 years
@@ -678,13 +678,13 @@ const HealthInsurance = () => {
                   <TableCell>Family relationship documents</TableCell>
                 </TableRow>
                 <TableRow>
-                  <TableCell className="font-medium">Senior Citizen Plan</TableCell>
+                  <TableCell className="font-medium text-fintech-green">Senior Citizen Plan</TableCell>
                   <TableCell>60 to 80 years</TableCell>
                   <TableCell>Mandatory medical check-up</TableCell>
                   <TableCell>Income proof may be required</TableCell>
                 </TableRow>
                 <TableRow>
-                  <TableCell className="font-medium">Critical Illness Cover</TableCell>
+                  <TableCell className="font-medium text-fintech-green">Critical Illness Cover</TableCell>
                   <TableCell>18 to 65 years</TableCell>
                   <TableCell>Detailed medical history required</TableCell>
                   <TableCell>Lower age limit can vary by insurer</TableCell>
@@ -692,26 +692,26 @@ const HealthInsurance = () => {
               </TableBody>
             </Table>
             
-            <div className="mt-8 p-6 border rounded-lg bg-yellow-50 border-yellow-200">
-              <h3 className="text-lg font-semibold mb-3 flex items-center">
-                <Info className="h-5 w-5 text-yellow-600 mr-2" />
+            <div className="mt-8 p-6 border rounded-lg bg-blue-50/80 border-blue-200 shadow-sm">
+              <h3 className="text-lg font-semibold mb-4 flex items-center text-blue-800">
+                <Info className="h-5 w-5 text-blue-600 mr-2" />
                 Important Notes on Eligibility
               </h3>
-              <ul className="space-y-2 text-gray-700">
-                <li className="flex">
-                  <CheckCircle className="h-5 w-5 text-green-500 mr-2 flex-shrink-0 mt-0.5" />
+              <ul className="space-y-3 text-gray-700">
+                <li className="flex items-start p-2 hover:bg-blue-100/50 rounded-md transition-colors">
+                  <CheckCircle className="h-5 w-5 text-green-500 mr-3 flex-shrink-0 mt-0.5" />
                   <span>Entry age varies by insurer and policy type. Some insurers offer health plans for newborns, while others require a minimum age of 3 months.</span>
                 </li>
-                <li className="flex">
-                  <CheckCircle className="h-5 w-5 text-green-500 mr-2 flex-shrink-0 mt-0.5" />
+                <li className="flex items-start p-2 hover:bg-blue-100/50 rounded-md transition-colors">
+                  <CheckCircle className="h-5 w-5 text-green-500 mr-3 flex-shrink-0 mt-0.5" />
                   <span>Pre-existing conditions don't disqualify you from getting health insurance but may lead to waiting periods before coverage begins.</span>
                 </li>
-                <li className="flex">
-                  <CheckCircle className="h-5 w-5 text-green-500 mr-2 flex-shrink-0 mt-0.5" />
+                <li className="flex items-start p-2 hover:bg-blue-100/50 rounded-md transition-colors">
+                  <CheckCircle className="h-5 w-5 text-green-500 mr-3 flex-shrink-0 mt-0.5" />
                   <span>Indian citizens residing abroad can purchase domestic health insurance but coverage may be limited to treatments in India.</span>
                 </li>
-                <li className="flex">
-                  <CheckCircle className="h-5 w-5 text-green-500 mr-2 flex-shrink-0 mt-0.5" />
+                <li className="flex items-start p-2 hover:bg-blue-100/50 rounded-md transition-colors">
+                  <CheckCircle className="h-5 w-5 text-green-500 mr-3 flex-shrink-0 mt-0.5" />
                   <span>Non-resident Indians (NRIs) can purchase health insurance policies in India for themselves or their family members living in India.</span>
                 </li>
               </ul>
