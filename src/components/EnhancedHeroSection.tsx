@@ -32,7 +32,7 @@ const EnhancedHeroSection = () => {
                 insurance, and loans for every Indian.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 pt-6">
-                <Button className="bg-fintech-green hover:bg-fintech-green/90 text-white font-medium px-8 py-6 rounded-full">
+                <Button className="bg-gradient-to-r from-fintech-green to-fintech-green \\nhover:opacity-90 text-white px-8 py-6">
                   Start Investing
                 </Button>
                 <Button variant="outline" className="group border-fintech-green text-fintech-green hover:text-fintech-blue transition-colors px-8 py-6 rounded-full">
