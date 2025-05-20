@@ -782,7 +782,7 @@ const HealthInsurance = () => {
             <Card className="hover:shadow-lg transition-shadow">
               <CardContent className="p-6">
                 <div className="w-12 h-12 bg-fintech-purple/10 rounded-full flex items-center justify-center mb-4">
-                  <CalendarDays className="h-6 w-6 text-fintech-purple" />
+                  <CalendarDays className="h-6 w-6 text-fintech-green" />
                 </div>
                 <h3 className="text-lg font-bold mb-2">Room Rent Waiver</h3>
                 <p className="text-gray-600">
@@ -794,7 +794,7 @@ const HealthInsurance = () => {
             <Card className="hover:shadow-lg transition-shadow">
               <CardContent className="p-6">
                 <div className="w-12 h-12 bg-fintech-purple/10 rounded-full flex items-center justify-center mb-4">
-                  <DollarSign className="h-6 w-6 text-fintech-purple" />
+                  <DollarSign className="h-6 w-6 text-fintech-green" />
                 </div>
                 <h3 className="text-lg font-bold mb-2">Convalescence Benefit</h3>
                 <p className="text-gray-600">
