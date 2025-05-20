@@ -216,7 +216,7 @@ const HealthInsurance = () => {
                 </div>
                 
                 <div className="mt-8">
-                  <Button className="w-full bg-gradient-to-r from-fintech-purple to-fintech-blue py-6 text-lg">
+                  <Button className="w-full bg-gradient-to-r from-fintech-green to-fintech-green py-6 text-lg">
                     Show Best Plans
                   </Button>
                 </div>
