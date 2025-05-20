@@ -124,7 +124,7 @@ const Loans = () => {
             <p className="text-lg md:text-xl text-gray-700 mb-8">
               Compare loans from 50+ banks and find the perfect match for your financial needs
             </p>
-            <Button size="lg" className="bg-fintech-purple hover:bg-fintech-deep-purple text-white">
+            <Button size="lg" className="hover:bg-fintech-deep-purple text-white bg-fintech-green">
               Check Your Eligibility
             </Button>
           </div>
