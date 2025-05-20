@@ -71,7 +71,7 @@ const Loans = () => {
       name: "Education Loan",
       icon: <GraduationCap className="h-10 w-10 text-green-500" />,
       description: "Invest in education with affordable student loans",
-      path: "/loans"
+      path: "/loans/education"
     },
     {
       id: "gold",
