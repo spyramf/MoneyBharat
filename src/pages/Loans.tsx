@@ -232,7 +232,7 @@ const Loans = () => {
                   </div>
                   
                   <div className="mt-auto">
-                    <Button className="w-full bg-gradient-to-r from-fintech-purple to-fintech-blue">
+                    <Button className="w-full bg-gradient-to-r from-fintech-purple to-fintech-blue text-white bg-fintech-green text-center">
                       Apply Now
                     </Button>
                   </div>
@@ -270,11 +270,7 @@ const Loans = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {loanComparisons.map((bank, index) => (
-                    <tr 
-                      key={index} 
-                      className={`border-b border-gray-200 hover:bg-gray-50 transition-colors ${index % 2 === 0 ? 'bg-white' : 'bg-gray-50/50'}`}
-                    >
+                  {loanComparisons.map((bank, index) => <tr key={index} className={`border-b border-gray-200 hover:bg-gray-50 transition-colors ${index % 2 === 0 ? 'bg-white' : 'bg-gray-50/50'}`}>
                       <td className="py-4 px-6">
                         <div className="flex items-center">
                           <div className="w-10 h-10 bg-fintech-purple/10 rounded-full flex items-center justify-center mr-3">
@@ -292,8 +288,7 @@ const Loans = () => {
                       <td className="py-4 px-6">
                         <Badge variant="charge">{bank.prepaymentCharges}</Badge>
                       </td>
-                    </tr>
-                  ))}
+                    </tr>)}
                 </tbody>
               </table>
             </div>
