@@ -23,6 +23,9 @@ const badgeVariants = cva(
         highlight: "border-transparent bg-gradient-to-r from-fintech-orange to-fintech-green text-white shadow-sm hover:shadow-md",
         glow: "border-transparent bg-white dark:bg-gray-800 text-gray-800 dark:text-white shadow-[0_0_10px_rgba(155,135,245,0.5)] hover:shadow-[0_0_15px_rgba(155,135,245,0.7)]",
         pill: "border border-gray-200 bg-transparent text-gray-800 hover:bg-gray-100 hover:text-gray-900",
+        rate: "border-transparent bg-gradient-to-r from-blue-50 to-blue-100 text-fintech-blue font-medium px-3 py-1",
+        fee: "border-transparent bg-gradient-to-r from-purple-50 to-purple-100 text-fintech-purple font-medium px-3 py-1",
+        charge: "border-transparent bg-gradient-to-r from-green-50 to-green-100 text-green-700 font-medium px-3 py-1",
       },
     },
     defaultVariants: {

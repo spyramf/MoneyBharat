@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import Navbar from '@/components/Navbar';
@@ -15,6 +14,7 @@ import Home from '@/components/icons/Home';
 import Car from '@/components/icons/Car';
 import GraduationCap from '@/components/icons/GraduationCap';
 import { Link } from 'react-router-dom';
+import { Badge } from '@/components/ui/badge';
 const Loans = () => {
   const [loanAmount, setLoanAmount] = useState<number>(500000);
   const [loanTenure, setLoanTenure] = useState<number>(36);
@@ -253,29 +253,56 @@ const Loans = () => {
             </p>
           </div>
           
-          <div className="overflow-x-auto">
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead className="w-[200px]">Bank / NBFC</TableHead>
-                  <TableHead>Interest Rate</TableHead>
-                  <TableHead>Processing Fee</TableHead>
-                  <TableHead>Prepayment Charges</TableHead>
-                  <TableHead></TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {loanComparisons.map((bank, index) => <TableRow key={index}>
-                    <TableCell className="font-medium">{bank.bank}</TableCell>
-                    <TableCell>{bank.interestRate}</TableCell>
-                    <TableCell>{bank.processingFee}</TableCell>
-                    <TableCell>{bank.prepaymentCharges}</TableCell>
-                    <TableCell>
-                      <Button variant="outline" size="sm">Apply</Button>
-                    </TableCell>
-                  </TableRow>)}
-              </TableBody>
-            </Table>
+          <div className="max-w-5xl mx-auto overflow-hidden rounded-2xl shadow-lg">
+            <div className="bg-gradient-to-r from-fintech-purple/10 to-fintech-blue/10 p-8 rounded-t-2xl">
+              <h3 className="text-2xl font-bold text-center text-fintech-purple">Compare Loan Options</h3>
+              <p className="text-center text-gray-600 mt-2">Find the best loan rates and terms from our partner banks</p>
+            </div>
+            
+            <div className="overflow-x-auto bg-white rounded-b-2xl">
+              <table className="w-full">
+                <thead>
+                  <tr className="bg-gray-50 border-b border-gray-200">
+                    <th className="py-4 px-6 text-left text-sm font-semibold text-gray-700">Bank / NBFC</th>
+                    <th className="py-4 px-6 text-left text-sm font-semibold text-gray-700">Interest Rate</th>
+                    <th className="py-4 px-6 text-left text-sm font-semibold text-gray-700">Processing Fee</th>
+                    <th className="py-4 px-6 text-left text-sm font-semibold text-gray-700">Prepayment Charges</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {loanComparisons.map((bank, index) => (
+                    <tr 
+                      key={index} 
+                      className={`border-b border-gray-200 hover:bg-gray-50 transition-colors ${index % 2 === 0 ? 'bg-white' : 'bg-gray-50/50'}`}
+                    >
+                      <td className="py-4 px-6">
+                        <div className="flex items-center">
+                          <div className="w-10 h-10 bg-fintech-purple/10 rounded-full flex items-center justify-center mr-3">
+                            <span className="font-bold text-fintech-purple">{bank.bank.charAt(0)}</span>
+                          </div>
+                          <span className="font-medium">{bank.bank}</span>
+                        </div>
+                      </td>
+                      <td className="py-4 px-6">
+                        <Badge variant="rate">{bank.interestRate}</Badge>
+                      </td>
+                      <td className="py-4 px-6">
+                        <Badge variant="fee">{bank.processingFee}</Badge>
+                      </td>
+                      <td className="py-4 px-6">
+                        <Badge variant="charge">{bank.prepaymentCharges}</Badge>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            
+            <div className="bg-gray-50 p-4 border-t border-gray-200 text-center">
+              <p className="text-sm text-gray-600">
+                Rates and charges are indicative and may vary based on eligibility criteria and loan amount
+              </p>
+            </div>
           </div>
         </div>
       </section>
