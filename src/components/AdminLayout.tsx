@@ -16,7 +16,7 @@ const NavItem = ({ href, icon: Icon, title, isActive }: NavItemProps) => (
   <Link to={href}>
     <Button 
       variant={isActive ? "secondary" : "ghost"} 
-      className="w-full justify-start mb-1"
+      className={`w-full justify-start mb-1 ${isActive ? 'text-fintech-green' : ''}`}
     >
       <Icon className="mr-2 h-4 w-4" />
       {title}
@@ -37,7 +37,10 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
       <div className="min-h-screen flex w-full">
         <Sidebar className="border-r">
           <SidebarHeader className="p-4 border-b">
-            <h2 className="text-xl font-bold">Money Bharat CMS</h2>
+            <h2 className="text-xl font-bold">
+              <span className="text-fintech-green">Money</span>
+              <span className="text-fintech-blue">Bharat</span> CMS
+            </h2>
           </SidebarHeader>
           <SidebarContent className="p-4">
             <nav className="flex flex-col">

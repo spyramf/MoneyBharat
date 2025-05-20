@@ -49,7 +49,7 @@ const ProductCard = ({
       
       <a
         href={linkHref}
-        className="inline-flex items-center text-sm font-medium group-hover:text-fintech-purple transition-colors"
+        className="inline-flex items-center text-sm font-medium text-fintech-green hover:text-fintech-blue transition-colors"
       >
         {linkText}
         <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />

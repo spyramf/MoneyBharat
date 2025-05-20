@@ -38,7 +38,7 @@ const FinancialToolCard: React.FC<FinancialToolCardProps> = ({
       
       <a 
         href={linkHref} 
-        className="inline-flex items-center font-medium text-gray-800 hover:text-fintech-purple transition-colors"
+        className="inline-flex items-center font-medium text-fintech-green hover:text-fintech-blue transition-colors"
       >
         {linkText} 
         <ArrowRight className="ml-2 h-4 w-4" />
