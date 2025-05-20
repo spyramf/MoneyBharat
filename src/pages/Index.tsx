@@ -1,17 +1,4 @@
-
-import { 
-  BadgeDollarSign, 
-  Shield, 
-  PiggyBank, 
-  Wallet, 
-  ArrowRight, 
-  CheckCircle,
-  Calculator,
-  Search,
-  Umbrella,
-  Briefcase,
-  Handshake,
-  CreditCard // Replacing Loan with CreditCard
+import { BadgeDollarSign, Shield, PiggyBank, Wallet, ArrowRight, CheckCircle, Calculator, Search, Umbrella, Briefcase, Handshake, CreditCard // Replacing Loan with CreditCard
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
@@ -21,10 +8,8 @@ import TestimonialCard from "@/components/TestimonialCard";
 import Footer from "@/components/Footer";
 import FinancialToolCard from "@/components/FinancialToolCard";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-
 const Index = () => {
-  return (
-    <div className="min-h-screen">
+  return <div className="min-h-screen">
       <Navbar />
       <EnhancedHeroSection />
       
@@ -37,32 +22,11 @@ const Index = () => {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            <FinancialToolCard 
-              icon={<Calculator className="text-blue-500" />}
-              title="SIP Calculator"
-              description="Calculate your potential returns from systematic investments"
-              bgColor="bg-blue-50"
-              linkText="Use Calculator"
-              linkHref="/tools/sip-calculator"
-            />
+            <FinancialToolCard icon={<Calculator className="text-blue-500" />} title="SIP Calculator" description="Calculate your potential returns from systematic investments" bgColor="bg-blue-50" linkText="Use Calculator" linkHref="/tools/sip-calculator" />
             
-            <FinancialToolCard 
-              icon={<Calculator className="text-green-500" />}
-              title="Loan EMI Calculator"
-              description="Plan your loan repayments with our easy EMI calculator"
-              bgColor="bg-green-50"
-              linkText="Use Calculator"
-              linkHref="/tools/emi-calculator"
-            />
+            <FinancialToolCard icon={<Calculator className="text-green-500" />} title="Loan EMI Calculator" description="Plan your loan repayments with our easy EMI calculator" bgColor="bg-green-50" linkText="Use Calculator" linkHref="/tools/emi-calculator" />
             
-            <FinancialToolCard 
-              icon={<Search className="text-purple-500" />}
-              title="Tax Saving Tools"
-              description="Find the best tax saving investment options"
-              bgColor="bg-purple-50"
-              linkText="Use Calculator"
-              linkHref="/tools/tax-saving"
-            />
+            <FinancialToolCard icon={<Search className="text-purple-500" />} title="Tax Saving Tools" description="Find the best tax saving investment options" bgColor="bg-purple-50" linkText="Use Calculator" linkHref="/tools/tax-saving" />
           </div>
         </div>
       </section>
@@ -289,7 +253,7 @@ const Index = () => {
           </div>
           
           <div className="mt-12 text-center">
-            <Button className="bg-gradient-to-r from-fintech-blue to-fintech-ocean-blue hover:opacity-90 text-white px-8 py-6">
+            <Button className="bg-gradient-to-r from-fintech-green to-fintech-green -blue hover:opacity-90 text-white px-8 py-6">
               Get Insurance Quote
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
@@ -425,50 +389,11 @@ const Index = () => {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <ProductCard 
-              title="Mutual Funds"
-              icon={<PiggyBank size={28} />}
-              description="Tech-driven investments with expert portfolio management for optimal returns."
-              features={[
-                "Zero commission direct plans",
-                "Personalized portfolio recommendations",
-                "Real-time performance tracking",
-                "Automatic SIP management"
-              ]}
-              linkText="Explore Mutual Funds"
-              linkHref="#mutual-funds"
-              gradient="bg-gradient-to-r from-fintech-purple to-fintech-blue"
-            />
+            <ProductCard title="Mutual Funds" icon={<PiggyBank size={28} />} description="Tech-driven investments with expert portfolio management for optimal returns." features={["Zero commission direct plans", "Personalized portfolio recommendations", "Real-time performance tracking", "Automatic SIP management"]} linkText="Explore Mutual Funds" linkHref="#mutual-funds" gradient="bg-gradient-to-r from-fintech-purple to-fintech-blue" />
             
-            <ProductCard 
-              title="Insurance"
-              icon={<Shield size={28} />}
-              description="Comprehensive coverage options that protect what matters most to you."
-              features={[
-                "Digital policy management",
-                "AI-powered plan recommendations",
-                "Paperless claims processing",
-                "Family coverage options"
-              ]}
-              linkText="Explore Insurance Plans"
-              linkHref="#insurance"
-              gradient="bg-gradient-to-r from-fintech-blue to-fintech-ocean-blue"
-            />
+            <ProductCard title="Insurance" icon={<Shield size={28} />} description="Comprehensive coverage options that protect what matters most to you." features={["Digital policy management", "AI-powered plan recommendations", "Paperless claims processing", "Family coverage options"]} linkText="Explore Insurance Plans" linkHref="#insurance" gradient="bg-gradient-to-r from-fintech-blue to-fintech-ocean-blue" />
             
-            <ProductCard 
-              title="Loans"
-              icon={<Wallet size={28} />}
-              description="Quick, hassle-free loans with competitive rates and flexible terms."
-              features={[
-                "Instant eligibility check",
-                "Paperless digital process",
-                "Competitive interest rates",
-                "Flexible repayment options"
-              ]}
-              linkText="Explore Loan Options"
-              linkHref="#loans"
-              gradient="bg-gradient-to-r from-fintech-orange to-fintech-purple"
-            />
+            <ProductCard title="Loans" icon={<Wallet size={28} />} description="Quick, hassle-free loans with competitive rates and flexible terms." features={["Instant eligibility check", "Paperless digital process", "Competitive interest rates", "Flexible repayment options"]} linkText="Explore Loan Options" linkHref="#loans" gradient="bg-gradient-to-r from-fintech-orange to-fintech-purple" />
           </div>
         </div>
       </section>
@@ -604,23 +529,11 @@ const Index = () => {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <TestimonialCard 
-              quote="Money Bharat's mutual fund recommendations helped me achieve 18% returns in just one year. Their technology makes investing so simple."
-              name="Rajesh Sharma"
-              title="IT Professional, Bengaluru"
-            />
+            <TestimonialCard quote="Money Bharat's mutual fund recommendations helped me achieve 18% returns in just one year. Their technology makes investing so simple." name="Rajesh Sharma" title="IT Professional, Bengaluru" />
             
-            <TestimonialCard 
-              quote="I was struggling to find the right insurance for my family. Money Bharat's experts guided me to a comprehensive plan that saved us 30% on premiums."
-              name="Priya Mehta"
-              title="Business Owner, Mumbai"
-            />
+            <TestimonialCard quote="I was struggling to find the right insurance for my family. Money Bharat's experts guided me to a comprehensive plan that saved us 30% on premiums." name="Priya Mehta" title="Business Owner, Mumbai" />
             
-            <TestimonialCard 
-              quote="Getting a home loan through Money Bharat was incredibly fast and easy. Their digital process saved me countless hours of paperwork."
-              name="Vikram Singh"
-              title="Engineer, Pune"
-            />
+            <TestimonialCard quote="Getting a home loan through Money Bharat was incredibly fast and easy. Their digital process saved me countless hours of paperwork." name="Vikram Singh" title="Engineer, Pune" />
           </div>
         </div>
       </section>
@@ -644,8 +557,6 @@ const Index = () => {
       </section>
       
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default Index;
