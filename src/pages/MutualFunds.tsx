@@ -15,6 +15,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
+import { Badge } from "@/components/ui/badge";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
@@ -45,6 +46,119 @@ const MutualFunds = () => {
       return Math.round(investmentAmount * Math.pow(1 + r, t));
     }
   };
+
+  // Fund Categories Data
+  const fundCategories = [
+    {
+      type: "Equity Funds",
+      expectedReturns: "12-15%",
+      riskLevel: "High",
+      description: "Higher potential returns with market-linked investments in company stocks.",
+      bgColor: "bg-green-50",
+      iconColor: "text-fintech-green",
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
+          <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+        </svg>
+      )
+    },
+    {
+      type: "Debt Funds",
+      expectedReturns: "7-9%",
+      riskLevel: "Low",
+      description: "Stable returns with lower risk investments in fixed income securities.",
+      bgColor: "bg-blue-50",
+      iconColor: "text-fintech-blue",
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
+          <rect width="20" height="14" x="2" y="3" rx="2" />
+          <line x1="12" x2="12" y1="9" y2="17" />
+          <line x1="8" x2="8" y1="11" y2="15" />
+          <line x1="16" x2="16" y1="11" y2="15" />
+        </svg>
+      )
+    },
+    {
+      type: "Hybrid Funds",
+      expectedReturns: "9-12%",
+      riskLevel: "Medium",
+      description: "Balanced approach with a mix of equity and debt investments.",
+      bgColor: "bg-purple-50",
+      iconColor: "text-fintech-purple",
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
+          <path d="M2 20h.01" />
+          <path d="M7 20v-4" />
+          <path d="M12 20v-8" />
+          <path d="M17 20V8" />
+          <path d="M22 4v16" />
+        </svg>
+      )
+    },
+    {
+      type: "Index Funds",
+      expectedReturns: "10-12%",
+      riskLevel: "Medium",
+      description: "Passive investments that track market indices with lower expenses.",
+      bgColor: "bg-orange-50",
+      iconColor: "text-fintech-orange",
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
+          <path d="M3 3v18h18" />
+          <path d="m19 9-5 5-4-4-3 3" />
+        </svg>
+      )
+    }
+  ];
+
+  // Top Performing Funds Data
+  const topPerformingFunds = [
+    {
+      name: "HDFC Flexicap Fund",
+      performance: "Top performer in its category",
+      category: "Equity",
+      returns: "15.8%",
+      aum: "₹26,700 Cr",
+      risk: "High",
+      colorClass: "bg-green-500"
+    },
+    {
+      name: "SBI Small Cap Fund",
+      performance: "Top performer in its category",
+      category: "Equity",
+      returns: "17.2%",
+      aum: "₹18,500 Cr",
+      risk: "Very High",
+      colorClass: "bg-red-500"
+    },
+    {
+      name: "Axis Bluechip Fund",
+      performance: "Top performer in its category",
+      category: "Equity",
+      returns: "14.3%",
+      aum: "₹31,200 Cr",
+      risk: "Moderate",
+      colorClass: "bg-yellow-500"
+    },
+    {
+      name: "ICICI Prudential Balanced Advantage",
+      performance: "Top performer in its category",
+      category: "Hybrid",
+      returns: "11.7%",
+      aum: "₹42,800 Cr",
+      risk: "Moderate",
+      colorClass: "bg-yellow-500"
+    },
+    {
+      name: "Nippon India Low Duration",
+      performance: "Top performer in its category",
+      category: "Debt",
+      returns: "7.8%",
+      aum: "₹15,600 Cr",
+      risk: "Low",
+      colorClass: "bg-green-300"
+    }
+  ];
 
   const mutualFundBenefits = [
     {
@@ -510,25 +624,59 @@ const MutualFunds = () => {
         </div>
       </section>
 
-      {/* Fund Categories Section */}
+      {/* Fund Categories Section - ADDED FROM REFERENCE */}
       <section className="py-16 px-4 md:px-8 bg-gray-50">
         <div className="container mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold mb-4">Explore Fund Categories</h2>
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Explore Fund Categories</h2>
             <p className="text-gray-600 max-w-2xl mx-auto">Discover the right type of mutual fund for your investment goals and risk appetite</p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
-            {/* Fund categories data should be here */}
+            {fundCategories.map((fund, index) => (
+              <div 
+                key={index}
+                className={`${fund.bgColor} p-6 rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 animate-fade-in`}
+                style={{ animationDelay: `${index * 150}ms` }}
+              >
+                <div className="flex justify-center mb-4">
+                  <div className={`w-12 h-12 rounded-full flex items-center justify-center ${fund.iconColor} bg-white/70`}>
+                    {fund.icon}
+                  </div>
+                </div>
+                
+                <h3 className="text-xl font-bold text-center mb-4">{fund.type}</h3>
+                
+                <div className="grid grid-cols-2 gap-2 mb-4">
+                  <div>
+                    <p className="text-sm text-gray-500">Expected Returns</p>
+                    <p className="font-semibold">{fund.expectedReturns}</p>
+                  </div>
+                  <div>
+                    <p className="text-sm text-gray-500">Risk Level</p>
+                    <p className="font-semibold">{fund.riskLevel}</p>
+                  </div>
+                </div>
+                
+                <p className="text-gray-600 text-sm mb-6">{fund.description}</p>
+                
+                <div className="flex justify-center">
+                  <Button variant="outline" size="sm" className="group">
+                    Explore Funds 
+                    <ArrowRight className="ml-1 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </Button>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Top Performing Funds */}
+      {/* Top Performing Funds - ADDED FROM REFERENCE */}
       <section className="py-16 px-4 md:px-8 bg-white">
         <div className="container mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4">Top Performing Funds</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Top Performing Funds</h2>
             <p className="text-gray-600">Our selection of mutual funds with consistent performance</p>
           </div>
           
@@ -545,7 +693,40 @@ const MutualFunds = () => {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {/* Top performing funds data should be here */}
+                  {topPerformingFunds.map((fund, index) => (
+                    <TableRow key={index} className="animate-fade-in" style={{ animationDelay: `${index * 100}ms` }}>
+                      <TableCell>
+                        <div className="flex items-center">
+                          <div className={`w-1 h-16 ${fund.colorClass} rounded-full mr-3`}></div>
+                          <div>
+                            <p className="font-medium">{fund.name}</p>
+                            <p className="text-xs text-gray-500">{fund.performance}</p>
+                          </div>
+                        </div>
+                      </TableCell>
+                      <TableCell>
+                        <Badge variant="outline" className={fund.category === "Equity" ? "text-green-700 border-green-200 bg-green-50" : 
+                                                          fund.category === "Hybrid" ? "text-purple-700 border-purple-200 bg-purple-50" : 
+                                                          "text-blue-700 border-blue-200 bg-blue-50"}>
+                          {fund.category}
+                        </Badge>
+                      </TableCell>
+                      <TableCell>
+                        <span className="font-semibold text-green-600">{fund.returns}</span>
+                      </TableCell>
+                      <TableCell>{fund.aum}</TableCell>
+                      <TableCell>
+                        <Badge variant="outline" className={
+                          fund.risk === "High" ? "text-amber-700 border-amber-200 bg-amber-50" :
+                          fund.risk === "Very High" ? "text-red-700 border-red-200 bg-red-50" :
+                          fund.risk === "Moderate" ? "text-yellow-700 border-yellow-200 bg-yellow-50" :
+                          "text-green-700 border-green-200 bg-green-50"
+                        }>
+                          {fund.risk}
+                        </Badge>
+                      </TableCell>
+                    </TableRow>
+                  ))}
                 </TableBody>
               </Table>
             </div>
@@ -568,7 +749,7 @@ const MutualFunds = () => {
           </div>
           
           <div className="max-w-3xl mx-auto space-y-6">
-            {/* FAQ data should be here */}
+            {/* ... keep existing code (FAQ content) */}
           </div>
         </div>
       </section>
