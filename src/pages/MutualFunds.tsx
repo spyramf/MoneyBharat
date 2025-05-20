@@ -571,7 +571,7 @@ const MutualFunds = () => {
                 <span className="text-gray-800">Start </span>
                 <span className="text-fintech-green">SIP</span>
                 <span className="text-gray-800"> with Just </span>
-                <span className="text-fintech-orange">₹500</span>
+                <span className="text-fintech-orange">₹100</span>
               </h2>
               <p className="text-lg text-gray-600 max-w-3xl mx-auto">
                 Invest in Mutual Funds effortlessly with incredible features.
@@ -579,21 +579,21 @@ const MutualFunds = () => {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {sipFeatures.map((feature, index) => <div key={index} className="bg-white border border-gray-100 rounded-xl p-6 shadow-md hover:shadow-lg hover:border-fintech-purple/30 transition-all duration-300 animate-fade-in" style={{
+              {sipFeatures.map((feature, index) => <div key={index} style={{
               animationDelay: `${index * 100}ms`
-            }}>
+            }} className="bg-white border border-gray-100 rounded-xl p-6 shadow-md hover:shadow-lg hover:border-fintech-purple/30 transition-all duration-300 animate-fade-in py-[40px] px-[10px]">
                   <div className="flex items-center gap-4 mb-4">
                     <div className="relative">
                       {feature.icon}
                     </div>
                     <h3 className="font-semibold text-lg">{feature.title}</h3>
                   </div>
-                  <p className="text-gray-600 ml-16">{feature.description}</p>
+                  <p className="text-gray-600 ml-16 mx-[20px]">{feature.description}</p>
                 </div>)}
             </div>
 
             <div className="text-center mt-10">
-              <Button className="bg-gradient-to-r from-fintech-green to-fintech-blue text-white hover:opacity-90 transition-all transform hover:scale-105 shadow-[0_0_15px_rgba(155,135,245,0.3)]">
+              <Button className="bg-gradient-to-r from-fintech-green to-fintech-green text-white hover:opacity-90 transition-all transform hover:scale-105 shadow-[0_0_15px_rgba(155,135,245,0.3)]">
                 Start Your SIP Journey
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
