@@ -1,4 +1,3 @@
-
 // This file contains all the data for the mutual funds page components
 
 export const sipFeatures = [{
@@ -295,10 +294,11 @@ export const mutualFundBenefits = [{
     </div>
 }];
 
-export const sipAdvantages = [{
-  title: "Investment Discipline",
-  description: "SIP encourages regular investing, fostering financial discipline. It helps you stay committed to your investment goals over the long term.",
-  icon: <div className="flex items-center justify-center w-12 h-12 rounded-full bg-green-100 text-fintech-green">
+export const sipAdvantages = [
+  {
+    title: "Investment Discipline",
+    description: "SIP encourages regular investing, fostering financial discipline. It helps you stay committed to your investment goals over the long term.",
+    icon: <div className="flex items-center justify-center w-12 h-12 rounded-full bg-green-100 text-fintech-green">
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
         <rect width="18" height="18" x="3" y="4" rx="2" ry="2" />
         <line x1="16" x2="16" y1="2" y2="6" />
@@ -306,9 +306,75 @@ export const sipAdvantages = [{
         <line x1="3" x2="21" y1="10" y2="10" />
         <path d="m9 16 2 2 4-4" />
       </svg>
-    </div>
-},
-// ... add the rest of the sipAdvantages, choosingMutualFundsTips, mutualFundTerms, and faqItems data here
+    </div>,
+    iconBg: "bg-green-100"
+  },
+  {
+    title: "Power of Compounding",
+    description: "By investing consistently, you benefit from the power of compounding, where your returns generate further earnings, maximizing your wealth over time.",
+    icon: <div className="flex items-center justify-center w-12 h-12 rounded-full bg-purple-100 text-purple-600">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
+        <circle cx="12" cy="12" r="10" />
+        <path d="M12 8v8" />
+        <path d="m8 12 4 4 4-4" />
+      </svg>
+    </div>,
+    iconBg: "bg-purple-100"
+  },
+  {
+    title: "You Can Start Small",
+    description: "You can start investing with a minimal amount such as Rs. 500, making SIPs accessible for everyone. This flexibility allows you to grow your investment gradually.",
+    icon: <div className="flex items-center justify-center w-12 h-12 rounded-full bg-blue-100 text-blue-600">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
+        <line x1="12" x2="12" y1="2" y2="22" />
+        <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+      </svg>
+    </div>,
+    iconBg: "bg-blue-100"
+  },
+  {
+    title: "Convenient - At Your Fingertips",
+    description: "SIPs offer convenience, allowing you to invest effortlessly through online platforms, ensuring your investments are just a click away.",
+    icon: <div className="flex items-center justify-center w-12 h-12 rounded-full bg-orange-100 text-orange-500">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
+        <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+        <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+      </svg>
+    </div>,
+    iconBg: "bg-orange-100"
+  },
+  {
+    title: "Professional Fund Management",
+    description: "Your SIP mutual funds are managed by professional fund managers, ensuring that your portfolio benefits from expert insights and strategies.",
+    icon: <div className="flex items-center justify-center w-12 h-12 rounded-full bg-cyan-100 text-cyan-600">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
+        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+        <circle cx="9" cy="7" r="4" />
+        <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+      </svg>
+    </div>,
+    iconBg: "bg-cyan-100"
+  },
+  {
+    title: "Can be Automated",
+    description: "SIPs can be easily automated via AutoPay on Dhan, setting up hassle-free monthly investments. This ensures consistency without the need for constant manual input.",
+    icon: <div className="flex items-center justify-center w-12 h-12 rounded-full bg-yellow-100 text-yellow-600">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
+        <rect width="18" height="18" x="3" y="4" rx="2" ry="2" />
+        <line x1="16" x2="16" y1="2" y2="6" />
+        <line x1="8" x2="8" y1="2" y2="6" />
+        <line x1="3" x2="21" y1="10" y2="10" />
+        <path d="M8 14h.01" />
+        <path d="M12 14h.01" />
+        <path d="M16 14h.01" />
+        <path d="M8 18h.01" />
+        <path d="M12 18h.01" />
+        <path d="M16 18h.01" />
+      </svg>
+    </div>,
+    iconBg: "bg-yellow-100"
+  }
 ];
 
 export const choosingMutualFundsTips = [{
