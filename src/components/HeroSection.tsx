@@ -1,6 +1,7 @@
 
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const HeroSection = () => {
   return (
@@ -25,10 +26,12 @@ const HeroSection = () => {
               <Button className="bg-gradient-to-r from-fintech-purple to-fintech-blue hover:opacity-90 text-white font-medium px-8 py-6">
                 Explore Services
               </Button>
-              <Button variant="outline" className="group border-fintech-purple text-fintech-purple hover:text-fintech-blue transition-colors px-8 py-6">
-                Book Consultation
-                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </Button>
+              <Link to="/booking">
+                <Button variant="outline" className="group border-fintech-purple text-fintech-purple hover:text-fintech-blue transition-colors px-8 py-6">
+                  Book Consultation
+                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </Button>
+              </Link>
             </div>
             
             {/* Stats */}

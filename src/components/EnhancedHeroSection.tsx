@@ -2,6 +2,7 @@
 import { ArrowRight, ArrowRightCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const EnhancedHeroSection = () => {
   return (
@@ -34,10 +35,12 @@ const EnhancedHeroSection = () => {
                 <Button className="bg-gradient-to-r from-fintech-green to-fintech-green hover:opacity-90 text-white px-8 py-6">
                   Start Investing
                 </Button>
-                <Button variant="outline" className="group border-fintech-green text-fintech-green hover:text-fintech-green transition-colors px-8 py-6 rounded-xl">
-                  Book Consultation
-                  <ArrowRightCircle className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                </Button>
+                <Link to="/booking">
+                  <Button variant="outline" className="group border-fintech-green text-fintech-green hover:text-fintech-green transition-colors px-8 py-6 rounded-xl">
+                    Book Consultation
+                    <ArrowRightCircle className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  </Button>
+                </Link>
               </div>
             </motion.div>
             
