@@ -1,15 +1,19 @@
 
-import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 
 interface Fund {
   name: string;
-  performance: string;
-  category: string;
   returns: string;
-  aum: string;
   risk: string;
+  category: string;
+  aum: string;
   colorClass: string;
+  description: string;
+  borderColor: string;
+  riskColorClass: string;
 }
 
 interface TopPerformingFundsProps {
@@ -18,57 +22,60 @@ interface TopPerformingFundsProps {
 
 const TopPerformingFunds = ({ funds }: TopPerformingFundsProps) => {
   return (
-    <section className="px-4 md:px-8 bg-white py-[10px]">
+    <section className="px-4 md:px-8 bg-white py-16">
       <div className="container mx-auto">
         <div className="text-center mb-8">
           <h2 className="text-3xl md:text-4xl font-bold mb-2">Top Performing Funds</h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
-            Explore our selection of top-performing mutual funds across different categories
+            Our selection of mutual funds with consistent performance
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
-          {funds.map((fund, index) => (
-            <div
-              key={index}
-              style={{
-                animationDelay: `${index * 100}ms`
-              }}
-              className="bg-white border border-gray-100 p-6 shadow-md hover:shadow-lg hover:border-fintech-purple/30 transition-all duration-300 animate-fade-in px-[24px] rounded-xl py-[40px]"
-            >
-              <div className="flex justify-center mb-4">
-                <div className="w-16 h-16 rounded-full flex items-center justify-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-8 w-8">
-                    <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
-                  </svg>
-                </div>
-              </div>
-              <h3 className="font-bold text-lg text-center mb-4">{fund.name}</h3>
-              <div className="flex justify-between items-center mb-2 py-[5px]">
-                <span className="text-gray-600">Returns (CAGR)</span>
-                <span className="font-bold text-green-600">{fund.returns}</span>
-              </div>
-              <div className="flex justify-between items-center mb-2 py-[5px]">
-                <span className="text-gray-600">Category</span>
-                <span>{fund.category}</span>
-              </div>
-              <div className="flex justify-between items-center mb-2 py-[5px]">
-                <span className="text-gray-600">AUM</span>
-                <span>{fund.aum}</span>
-              </div>
-              <div className="flex justify-between items-center mb-4 py-[5px]">
-                <span className="text-gray-600">Risk</span>
-                <span className={`px-2 py-1 rounded-full text-xs text-white ${fund.colorClass}`}>{fund.risk}</span>
-              </div>
-              <div className="mt-4 flex justify-center">
-                <Button variant="outline" className="w-full hover:bg-gray-50 group">
-                  Invest Now
-                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                </Button>
-              </div>
-            </div>
-          ))}
-        </div>
+        <Card className="shadow-sm border border-gray-100 rounded-xl overflow-hidden">
+          <CardContent className="p-0">
+            <Table>
+              <TableHeader className="bg-gray-50">
+                <TableRow>
+                  <TableHead className="w-[250px] py-4">Fund Name</TableHead>
+                  <TableHead className="w-[120px] py-4">Category</TableHead>
+                  <TableHead className="w-[120px] py-4">1Y Returns</TableHead>
+                  <TableHead className="w-[120px] py-4">AUM</TableHead>
+                  <TableHead className="w-[120px] py-4">Risk</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {funds.map((fund, index) => (
+                  <TableRow 
+                    key={index}
+                    className={`${fund.borderColor} hover:bg-gray-50 transition-colors`}
+                  >
+                    <TableCell className="py-4">
+                      <div className="font-medium">{fund.name}</div>
+                      <div className="text-sm text-gray-500">{fund.description}</div>
+                    </TableCell>
+                    <TableCell>
+                      <Badge variant="outline" className="bg-green-50 text-green-700 border-green-100 font-medium">
+                        {fund.category}
+                      </Badge>
+                    </TableCell>
+                    <TableCell className="font-medium text-green-600">{fund.returns}</TableCell>
+                    <TableCell>{fund.aum}</TableCell>
+                    <TableCell>
+                      <Badge className={`${fund.riskColorClass} border-0`}>
+                        {fund.risk}
+                      </Badge>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </CardContent>
+          <div className="p-4 flex justify-center border-t border-gray-100">
+            <Button className="bg-green-500 hover:bg-green-600">
+              View All Mutual Funds
+            </Button>
+          </div>
+        </Card>
       </div>
     </section>
   );

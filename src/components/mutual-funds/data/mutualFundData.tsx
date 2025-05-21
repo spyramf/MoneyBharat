@@ -60,10 +60,12 @@ interface Fund {
   name: string;
   returns: string;
   risk: string;
-  performance: string;
   category: string;
   aum: string;
   colorClass: string;
+  description: string;
+  borderColor: string;
+  riskColorClass: string;
 }
 
 interface MutualFundTerm {
@@ -196,32 +198,60 @@ export const fundCategories: FundCategory[] = [
 
 export const topPerformingFunds: Fund[] = [
   {
-    name: "SBI Bluechip Fund",
-    returns: "18.5%",
-    risk: "Moderate",
-    performance: "★★★★☆",
-    category: "Large Cap",
-    aum: "₹29,876 Cr",
-    colorClass: "bg-blue-100"
+    name: "HDFC Flexicap Fund",
+    returns: "15.8%",
+    risk: "High",
+    category: "Equity",
+    aum: "₹26,700 Cr",
+    colorClass: "bg-green-100",
+    description: "Top performer in its category",
+    borderColor: "border-l-4 border-green-500",
+    riskColorClass: "bg-blue-100 text-blue-800"
   },
   {
-    name: "HDFC Top 100 Fund",
+    name: "SBI Small Cap Fund",
     returns: "17.2%",
-    risk: "Moderate",
-    performance: "★★★★★",
-    category: "Large Cap",
-    aum: "₹21,543 Cr",
-    colorClass: "bg-green-100"
+    risk: "Very High",
+    category: "Equity",
+    aum: "₹18,500 Cr",
+    colorClass: "bg-blue-100",
+    description: "Top performer in its category",
+    borderColor: "border-l-4 border-red-500",
+    riskColorClass: "bg-red-100 text-red-800"
   },
   {
-    name: "ICICI Prudential Bluechip Fund",
-    returns: "19.8%",
+    name: "Axis Bluechip Fund",
+    returns: "14.3%",
     risk: "Moderate",
-    performance: "★★★★☆",
-    category: "Large Cap",
-    aum: "₹32,140 Cr",
-    colorClass: "bg-purple-100"
+    category: "Equity",
+    aum: "₹31,200 Cr",
+    colorClass: "bg-purple-100",
+    description: "Top performer in its category",
+    borderColor: "border-l-4 border-yellow-500",
+    riskColorClass: "bg-yellow-100 text-yellow-800"
   },
+  {
+    name: "ICICI Prudential Balanced Advantage",
+    returns: "11.7%",
+    risk: "Moderate",
+    category: "Hybrid",
+    aum: "₹42,800 Cr",
+    colorClass: "bg-orange-100",
+    description: "Top performer in its category",
+    borderColor: "border-l-4 border-yellow-500",
+    riskColorClass: "bg-yellow-100 text-yellow-800"
+  },
+  {
+    name: "Nippon India Low Duration",
+    returns: "7.8%",
+    risk: "Low",
+    category: "Debt",
+    aum: "₹15,600 Cr",
+    colorClass: "bg-teal-100",
+    description: "Top performer in its category",
+    borderColor: "border-l-4 border-green-500",
+    riskColorClass: "bg-green-100 text-green-800"
+  }
 ];
 
 export const mutualFundBenefits: Benefit[] = [
