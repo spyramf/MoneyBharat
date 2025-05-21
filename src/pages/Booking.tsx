@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useForm } from 'react-hook-form';
@@ -41,6 +42,7 @@ const timeSlots = [
 
 const Booking = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { addBooking } = useBooking();
   
   const form = useForm<z.infer<typeof formSchema>>({
@@ -56,23 +58,85 @@ const Booking = () => {
     },
   });
 
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
+  const sendEmail = async (formData: z.infer<typeof formSchema>) => {
+    // Get the service label from the value
+    const serviceLabel = services.find(s => s.value === formData.service)?.label || formData.service;
+    
+    // Create email content
+    const emailContent = `
+      New Booking Request:
+      
+      Name: ${formData.name}
+      Email: ${formData.email}
+      Phone: ${formData.phone}
+      Service: ${serviceLabel}
+      Preferred Date: ${formData.preferredDate}
+      Preferred Time: ${formData.preferredTime}
+      Message: ${formData.message || "N/A"}
+    `;
+    
+    try {
+      // Using Email JS to send email directly from the frontend
+      const response = await fetch("https://api.emailjs.com/api/v1.0/email/send", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          service_id: "service_default", // Replace with your EmailJS service ID
+          template_id: "template_default", // Replace with your EmailJS template ID
+          user_id: "user_default", // Replace with your EmailJS user ID
+          template_params: {
+            to_email: "spyraexim@gmail.com",
+            from_name: formData.name,
+            from_email: formData.email,
+            subject: `New Booking Request from ${formData.name}`,
+            message: emailContent,
+          },
+        }),
+      });
+      
+      return response.ok;
+    } catch (error) {
+      console.error("Error sending email:", error);
+      return false;
+    }
+  };
+
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    setIsSubmitting(true);
     console.log("Form values:", values);
     
-    // Add the booking to the context
-    addBooking({
-      name: values.name,
-      email: values.email,
-      phone: values.phone,
-      service: values.service,
-      date: values.preferredDate,
-      time: values.preferredTime,
-      message: values.message,
-    });
-    
-    toast.success("Your booking request has been received!");
-    setIsSubmitted(true);
-    form.reset();
+    try {
+      // Send email
+      const emailSent = await sendEmail(values);
+      
+      // Add the booking to the context
+      addBooking({
+        name: values.name,
+        email: values.email,
+        phone: values.phone,
+        service: values.service,
+        date: values.preferredDate,
+        time: values.preferredTime,
+        message: values.message,
+      });
+      
+      if (emailSent) {
+        toast.success("Your booking request has been received and sent to our team!");
+      } else {
+        toast.success("Your booking request has been received!");
+        console.warn("Email could not be sent, but booking was saved");
+      }
+      
+      setIsSubmitted(true);
+      form.reset();
+    } catch (error) {
+      console.error("Error during submission:", error);
+      toast.error("There was a problem submitting your request. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -259,9 +323,9 @@ const Booking = () => {
                         )}
                       />
                       
-                      <Button type="submit" className="w-full">
+                      <Button type="submit" className="w-full" disabled={isSubmitting}>
                         <Calendar className="mr-2 h-4 w-4" />
-                        Book Your Consultation
+                        {isSubmitting ? "Submitting..." : "Book Your Consultation"}
                       </Button>
                     </form>
                   </Form>
