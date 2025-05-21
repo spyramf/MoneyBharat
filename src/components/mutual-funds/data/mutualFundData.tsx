@@ -1,3 +1,4 @@
+
 import { CheckCircle, ShieldCheck, PiggyBank, TrendingUp, Lightbulb, Scale, CalendarDays, Banknote, FileText, HelpCircle, LucideIcon } from "lucide-react";
 import { Activity, Users, History, BarChart3 } from "lucide-react";
 
@@ -7,10 +8,12 @@ interface Feature {
   icon: JSX.Element;
 }
 
-interface Step {
+interface DematStep {
   title: string;
   description: string;
   image: string;
+  icon: JSX.Element;
+  number: number;
 }
 
 interface Benefit {
@@ -26,21 +29,33 @@ interface Advantage {
   iconBg: string;
 }
 
-interface Category {
-  name: string;
+interface FundCategory {
+  type: string;
+  expectedReturns: string;
+  riskLevel: string;
   description: string;
-  funds: string[];
+  bgColor: string;
+  textColor: string;
+  iconBg: string;
+  icon: JSX.Element;
 }
 
 interface Fund {
   name: string;
   returns: string;
   risk: string;
+  performance: string;
+  category: string;
+  aum: string;
+  colorClass: string;
 }
 
-interface Term {
+interface MutualFundTerm {
   term: string;
   definition: string;
+  title: string;
+  description: string;
+  icon: JSX.Element;
 }
 
 interface Tip {
@@ -72,21 +87,27 @@ export const sipFeatures: Feature[] = [
   },
 ];
 
-export const dematSteps: Step[] = [
+export const dematSteps: DematStep[] = [
   {
     title: "Sign Up",
     description: "Fill in your personal details to create an account.",
     image: "/images/mutual-funds/step-1.svg",
+    icon: <CheckCircle className="w-12 h-12 text-fintech-green" />,
+    number: 1
   },
   {
     title: "KYC Verification",
     description: "Verify your identity online with our quick KYC process.",
     image: "/images/mutual-funds/step-2.svg",
+    icon: <ShieldCheck className="w-12 h-12 text-fintech-green" />,
+    number: 2
   },
   {
     title: "Explore Funds",
     description: "Browse through a wide range of mutual funds.",
     image: "/images/mutual-funds/step-3.svg",
+    icon: <FileText className="w-12 h-12 text-fintech-green" />,
+    number: 3
   },
 ];
 
@@ -113,22 +134,47 @@ export const additionalFeatures: Feature[] = [
   },
 ];
 
-export const fundCategories: Category[] = [
+export const fundCategories: FundCategory[] = [
   {
-    name: "Equity Funds",
+    type: "Equity Funds",
+    expectedReturns: "12-15% p.a.",
+    riskLevel: "High",
     description: "Invest in stocks for high growth potential.",
-    funds: ["Large Cap", "Mid Cap", "Small Cap"],
+    bgColor: "bg-blue-50",
+    textColor: "text-blue-700",
+    iconBg: "bg-blue-100",
+    icon: <TrendingUp className="h-8 w-8 text-blue-600" />
   },
   {
-    name: "Debt Funds",
+    type: "Debt Funds",
+    expectedReturns: "7-9% p.a.",
+    riskLevel: "Low to Medium",
     description: "Invest in fixed-income securities for stable returns.",
-    funds: ["Government Bonds", "Corporate Bonds", "Treasury Bills"],
+    bgColor: "bg-green-50",
+    textColor: "text-green-700",
+    iconBg: "bg-green-100",
+    icon: <ShieldCheck className="h-8 w-8 text-green-600" />
   },
   {
-    name: "Hybrid Funds",
+    type: "Hybrid Funds",
+    expectedReturns: "10-12% p.a.",
+    riskLevel: "Medium",
     description: "Invest in a mix of stocks and bonds for balanced growth.",
-    funds: ["Aggressive Hybrid", "Balanced Hybrid", "Conservative Hybrid"],
+    bgColor: "bg-purple-50",
+    textColor: "text-purple-700",
+    iconBg: "bg-purple-100",
+    icon: <Scale className="h-8 w-8 text-purple-600" />
   },
+  {
+    type: "Index Funds",
+    expectedReturns: "10-12% p.a.",
+    riskLevel: "Medium",
+    description: "Track market indices with lower expense ratios.",
+    bgColor: "bg-orange-50",
+    textColor: "text-orange-700",
+    iconBg: "bg-orange-100",
+    icon: <BarChart3 className="h-8 w-8 text-orange-600" />
+  }
 ];
 
 export const topPerformingFunds: Fund[] = [
@@ -136,16 +182,28 @@ export const topPerformingFunds: Fund[] = [
     name: "SBI Bluechip Fund",
     returns: "18.5%",
     risk: "Moderate",
+    performance: "★★★★☆",
+    category: "Large Cap",
+    aum: "₹29,876 Cr",
+    colorClass: "bg-blue-100"
   },
   {
     name: "HDFC Top 100 Fund",
     returns: "17.2%",
     risk: "Moderate",
+    performance: "★★★★★",
+    category: "Large Cap",
+    aum: "₹21,543 Cr",
+    colorClass: "bg-green-100"
   },
   {
     name: "ICICI Prudential Bluechip Fund",
     returns: "19.8%",
     risk: "Moderate",
+    performance: "★★★★☆",
+    category: "Large Cap",
+    aum: "₹32,140 Cr",
+    colorClass: "bg-purple-100"
   },
 ];
 
@@ -237,19 +295,35 @@ export const choosingMutualFundsTips: Tip[] = [
   }
 ];
 
-export const mutualFundTerms: Term[] = [
+export const mutualFundTerms: MutualFundTerm[] = [
   {
     term: "NAV (Net Asset Value)",
     definition: "The market value of a fund's assets, less its liabilities, divided by the number of outstanding units.",
+    title: "NAV",
+    description: "The market value of a fund's assets, less its liabilities, divided by the number of outstanding units.",
+    icon: <TrendingUp className="w-8 h-8 text-fintech-green" />
   },
   {
     term: "Expense Ratio",
     definition: "The annual cost of operating a fund, expressed as a percentage of the fund's average net assets.",
+    title: "Expense Ratio",
+    description: "The annual cost of operating a fund, expressed as a percentage of the fund's average net assets.",
+    icon: <Banknote className="w-8 h-8 text-fintech-green" />
   },
   {
     term: "Exit Load",
     definition: "A fee charged when you redeem your investment before a specified period.",
+    title: "Exit Load",
+    description: "A fee charged when you redeem your investment before a specified period.",
+    icon: <FileText className="w-8 h-8 text-fintech-green" />
   },
+  {
+    term: "SIP",
+    definition: "Systematic Investment Plan - A way to invest a fixed amount in mutual funds at regular intervals.",
+    title: "SIP",
+    description: "Systematic Investment Plan - A way to invest a fixed amount in mutual funds at regular intervals.",
+    icon: <CalendarDays className="w-8 h-8 text-fintech-green" />
+  }
 ];
 
 export const faqItems: FAQItem[] = [

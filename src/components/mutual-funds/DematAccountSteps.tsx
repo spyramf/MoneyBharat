@@ -7,6 +7,7 @@ interface DematStep {
   description: string;
   icon: JSX.Element;
   number: number;
+  image: string;
 }
 
 interface DematAccountStepsProps {

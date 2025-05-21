@@ -1,14 +1,16 @@
 
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
 
-interface Term {
+interface MutualFundTerm {
+  term: string;
+  definition: string;
   title: string;
   description: string;
   icon: JSX.Element;
 }
 
 interface MutualFundTermsProps {
-  terms: Term[];
+  terms: MutualFundTerm[];
 }
 
 const MutualFundTerms = ({ terms }: MutualFundTermsProps) => {
@@ -44,8 +46,8 @@ const MutualFundTerms = ({ terms }: MutualFundTermsProps) => {
               </HoverCardTrigger>
               <HoverCardContent side="top" className="w-80 p-4 shadow-xl bg-white border border-gray-200">
                 <div className="flex flex-col gap-2">
-                  <h4 className="font-bold text-lg">{term.title}</h4>
-                  <p className="text-gray-700">{term.description}</p>
+                  <h4 className="font-bold text-lg">{term.term}</h4>
+                  <p className="text-gray-700">{term.definition}</p>
                 </div>
               </HoverCardContent>
             </HoverCard>
