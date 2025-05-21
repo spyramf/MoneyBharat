@@ -1,18 +1,4 @@
-
-import { 
-  BadgeDollarSign, 
-  Shield, 
-  PiggyBank, 
-  Wallet, 
-  ArrowRight, 
-  CheckCircle, 
-  Calculator, 
-  Search, 
-  Umbrella, 
-  Briefcase, 
-  Handshake, 
-  CreditCard 
-} from "lucide-react";
+import { BadgeDollarSign, Shield, PiggyBank, Wallet, ArrowRight, CheckCircle, Calculator, Search, Umbrella, Briefcase, Handshake, CreditCard } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
@@ -22,11 +8,12 @@ import TestimonialCard from "@/components/TestimonialCard";
 import Footer from "@/components/Footer";
 import FinancialToolCard from "@/components/FinancialToolCard";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-
 const Index = () => {
   // Animation variants
   const containerVariants = {
-    hidden: { opacity: 0 },
+    hidden: {
+      opacity: 0
+    },
     visible: {
       opacity: 1,
       transition: {
@@ -34,9 +21,11 @@ const Index = () => {
       }
     }
   };
-  
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: {
+      opacity: 0,
+      y: 20
+    },
     visible: {
       opacity: 1,
       y: 0,
@@ -45,79 +34,44 @@ const Index = () => {
       }
     }
   };
-
-  return (
-    <div className="min-h-screen">
+  return <div className="min-h-screen">
       <Navbar />
       <EnhancedHeroSection />
       
       {/* Financial Tools Section */}
-      <motion.section 
-        className="py-16 bg-gray-50 md:py-[50px]"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        variants={containerVariants}
-      >
+      <motion.section className="py-16 bg-gray-50 md:py-[50px]" initial="hidden" whileInView="visible" viewport={{
+      once: true,
+      amount: 0.2
+    }} variants={containerVariants}>
         <div className="container mx-auto px-4">
-          <motion.div 
-            className="text-center max-w-3xl mx-auto mb-12"
-            variants={itemVariants}
-          >
+          <motion.div className="text-center max-w-3xl mx-auto mb-12" variants={itemVariants}>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Financial Tools</h2>
             <p className="text-gray-600">Calculate, plan and optimize your finances</p>
           </motion.div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             <motion.div variants={itemVariants}>
-              <FinancialToolCard 
-                icon={<Calculator className="text-blue-500" />} 
-                title="SIP Calculator" 
-                description="Calculate your potential returns from systematic investments" 
-                bgColor="bg-blue-50" 
-                linkText="Use Calculator" 
-                linkHref="/tools/sip-calculator" 
-              />
+              <FinancialToolCard icon={<Calculator className="text-blue-500" />} title="SIP Calculator" description="Calculate your potential returns from systematic investments" bgColor="bg-blue-50" linkText="Use Calculator" linkHref="/tools/sip-calculator" />
             </motion.div>
             
             <motion.div variants={itemVariants}>
-              <FinancialToolCard 
-                icon={<Calculator className="text-green-500" />} 
-                title="Loan EMI Calculator" 
-                description="Plan your loan repayments with our easy EMI calculator" 
-                bgColor="bg-green-50" 
-                linkText="Use Calculator" 
-                linkHref="/tools/emi-calculator" 
-              />
+              <FinancialToolCard icon={<Calculator className="text-green-500" />} title="Loan EMI Calculator" description="Plan your loan repayments with our easy EMI calculator" bgColor="bg-green-50" linkText="Use Calculator" linkHref="/tools/emi-calculator" />
             </motion.div>
             
             <motion.div variants={itemVariants}>
-              <FinancialToolCard 
-                icon={<Search className="text-purple-500" />} 
-                title="Tax Saving Tools" 
-                description="Find the best tax saving investment options" 
-                bgColor="bg-purple-50" 
-                linkText="Use Calculator" 
-                linkHref="/tools/tax-saving" 
-              />
+              <FinancialToolCard icon={<Search className="text-purple-500" />} title="Tax Saving Tools" description="Find the best tax saving investment options" bgColor="bg-purple-50" linkText="Use Calculator" linkHref="/tools/tax-saving" />
             </motion.div>
           </div>
         </div>
       </motion.section>
       
       {/* Mutual Fund Investments Section */}
-      <motion.section 
-        className="py-16 bg-white md:py-[20px]"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        variants={containerVariants}
-      >
+      <motion.section className="py-16 bg-white md:py-[20px]" initial="hidden" whileInView="visible" viewport={{
+      once: true,
+      amount: 0.2
+    }} variants={containerVariants}>
         <div className="container mx-auto px-4">
-          <motion.div 
-            className="text-center max-w-3xl mx-auto mb-16"
-            variants={itemVariants}
-          >
+          <motion.div className="text-center max-w-3xl mx-auto mb-16" variants={itemVariants}>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Mutual Fund Investments</h2>
             <p className="text-gray-600">Grow your wealth with our curated selection of top-performing mutual funds</p>
           </motion.div>
@@ -183,7 +137,7 @@ const Index = () => {
                   </ul>
                 </CardContent>
                 <CardFooter>
-                  <a href="/mutual-funds" className="text-fintech-purple hover:text-fintech-green transition-colors font-medium flex items-center">
+                  <a href="/mutual-funds" className="text-fintech-green hover:text-fintech-green transition-colors font-medium flex items-center">
                     Explore Debt Funds
                     <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                   </a>
@@ -236,18 +190,12 @@ const Index = () => {
       </motion.section>
       
       {/* Comprehensive Insurance Solutions */}
-      <motion.section 
-        className="py-16 bg-gray-50 md:py-[50px]"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        variants={containerVariants}
-      >
+      <motion.section className="py-16 bg-gray-50 md:py-[50px]" initial="hidden" whileInView="visible" viewport={{
+      once: true,
+      amount: 0.2
+    }} variants={containerVariants}>
         <div className="container mx-auto px-4">
-          <motion.div 
-            className="text-center max-w-3xl mx-auto mb-16"
-            variants={itemVariants}
-          >
+          <motion.div className="text-center max-w-3xl mx-auto mb-16" variants={itemVariants}>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Comprehensive Insurance Solutions</h2>
             <p className="text-gray-600">Protect yourself and your loved ones with our range of insurance products</p>
           </motion.div>
@@ -366,18 +314,12 @@ const Index = () => {
       </motion.section>
       
       {/* Loan Solutions */}
-      <motion.section 
-        className="py-16 md:py-24 bg-white"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        variants={containerVariants}
-      >
+      <motion.section className="py-16 md:py-24 bg-white" initial="hidden" whileInView="visible" viewport={{
+      once: true,
+      amount: 0.2
+    }} variants={containerVariants}>
         <div className="container mx-auto px-4">
-          <motion.div 
-            className="text-center max-w-3xl mx-auto mb-16"
-            variants={itemVariants}
-          >
+          <motion.div className="text-center max-w-3xl mx-auto mb-16" variants={itemVariants}>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Loan Solutions</h2>
             <p className="text-gray-600">Fast and hassle-free loans with competitive interest rates</p>
           </motion.div>
@@ -496,18 +438,12 @@ const Index = () => {
       </motion.section>
       
       {/* Services Section */}
-      <motion.section 
-        className="py-16 md:py-[20px]"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        variants={containerVariants}
-      >
+      <motion.section className="py-16 md:py-[20px]" initial="hidden" whileInView="visible" viewport={{
+      once: true,
+      amount: 0.2
+    }} variants={containerVariants}>
         <div className="container mx-auto px-4">
-          <motion.div 
-            className="text-center max-w-2xl mx-auto mb-16"
-            variants={itemVariants}
-          >
+          <motion.div className="text-center max-w-2xl mx-auto mb-16" variants={itemVariants}>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
               Comprehensive Financial Services for <span className="gradient-text">Every Need</span>
             </h2>
@@ -518,52 +454,25 @@ const Index = () => {
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <motion.div variants={itemVariants}>
-              <ProductCard 
-                title="Mutual Funds" 
-                icon={<PiggyBank size={28} />} 
-                description="Tech-driven investments with expert portfolio management for optimal returns." 
-                features={["Zero commission direct plans", "Personalized portfolio recommendations", "Real-time performance tracking", "Automatic SIP management"]} 
-                linkText="Explore Mutual Funds" 
-                linkHref="/mutual-funds" 
-                gradient="bg-gradient-to-r from-fintech-purple to-fintech-blue" 
-              />
+              <ProductCard title="Mutual Funds" icon={<PiggyBank size={28} />} description="Tech-driven investments with expert portfolio management for optimal returns." features={["Zero commission direct plans", "Personalized portfolio recommendations", "Real-time performance tracking", "Automatic SIP management"]} linkText="Explore Mutual Funds" linkHref="/mutual-funds" gradient="bg-gradient-to-r from-fintech-purple to-fintech-blue" />
             </motion.div>
             
             <motion.div variants={itemVariants}>
-              <ProductCard 
-                title="Insurance" 
-                icon={<Shield size={28} />} 
-                description="Comprehensive coverage options that protect what matters most to you." 
-                features={["Digital policy management", "AI-powered plan recommendations", "Paperless claims processing", "Family coverage options"]} 
-                linkText="Explore Insurance Plans" 
-                linkHref="/insurance" 
-                gradient="bg-gradient-to-r from-fintech-blue to-fintech-ocean-blue" 
-              />
+              <ProductCard title="Insurance" icon={<Shield size={28} />} description="Comprehensive coverage options that protect what matters most to you." features={["Digital policy management", "AI-powered plan recommendations", "Paperless claims processing", "Family coverage options"]} linkText="Explore Insurance Plans" linkHref="/insurance" gradient="bg-gradient-to-r from-fintech-blue to-fintech-ocean-blue" />
             </motion.div>
             
             <motion.div variants={itemVariants}>
-              <ProductCard 
-                title="Loans" 
-                icon={<Wallet size={28} />} 
-                description="Quick, hassle-free loans with competitive rates and flexible terms." 
-                features={["Instant eligibility check", "Paperless digital process", "Competitive interest rates", "Flexible repayment options"]} 
-                linkText="Explore Loan Options" 
-                linkHref="/loans" 
-                gradient="bg-gradient-to-r from-fintech-orange to-fintech-purple" 
-              />
+              <ProductCard title="Loans" icon={<Wallet size={28} />} description="Quick, hassle-free loans with competitive rates and flexible terms." features={["Instant eligibility check", "Paperless digital process", "Competitive interest rates", "Flexible repayment options"]} linkText="Explore Loan Options" linkHref="/loans" gradient="bg-gradient-to-r from-fintech-orange to-fintech-purple" />
             </motion.div>
           </div>
         </div>
       </motion.section>
       
       {/* Features Section */}
-      <motion.section 
-        className="py-16 bg-gray-50 md:py-[60px]"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        variants={containerVariants}
-      >
+      <motion.section className="py-16 bg-gray-50 md:py-[60px]" initial="hidden" whileInView="visible" viewport={{
+      once: true,
+      amount: 0.2
+    }} variants={containerVariants}>
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row items-center gap-12">
             {/* Left Image */}
@@ -681,18 +590,12 @@ const Index = () => {
       </motion.section>
       
       {/* Testimonials Section */}
-      <motion.section 
-        className="py-16 md:py-[20px]"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        variants={containerVariants}
-      >
+      <motion.section className="py-16 md:py-[20px]" initial="hidden" whileInView="visible" viewport={{
+      once: true,
+      amount: 0.2
+    }} variants={containerVariants}>
         <div className="container mx-auto px-4">
-          <motion.div 
-            className="text-center max-w-2xl mx-auto mb-16"
-            variants={itemVariants}
-          >
+          <motion.div className="text-center max-w-2xl mx-auto mb-16" variants={itemVariants}>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
               Trusted by <span className="gradient-text">Thousands</span> Across India
             </h2>
@@ -703,45 +606,27 @@ const Index = () => {
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <motion.div variants={itemVariants}>
-              <TestimonialCard 
-                quote="Money Bharat's mutual fund recommendations helped me achieve 18% returns in just one year. Their technology makes investing so simple." 
-                name="Rajesh Sharma" 
-                title="IT Professional, Bengaluru" 
-              />
+              <TestimonialCard quote="Money Bharat's mutual fund recommendations helped me achieve 18% returns in just one year. Their technology makes investing so simple." name="Rajesh Sharma" title="IT Professional, Bengaluru" />
             </motion.div>
             
             <motion.div variants={itemVariants}>
-              <TestimonialCard 
-                quote="I was struggling to find the right insurance for my family. Money Bharat's experts guided me to a comprehensive plan that saved us 30% on premiums." 
-                name="Priya Mehta" 
-                title="Business Owner, Mumbai" 
-              />
+              <TestimonialCard quote="I was struggling to find the right insurance for my family. Money Bharat's experts guided me to a comprehensive plan that saved us 30% on premiums." name="Priya Mehta" title="Business Owner, Mumbai" />
             </motion.div>
             
             <motion.div variants={itemVariants}>
-              <TestimonialCard 
-                quote="Getting a home loan through Money Bharat was incredibly fast and easy. Their digital process saved me countless hours of paperwork." 
-                name="Vikram Singh" 
-                title="Engineer, Pune" 
-              />
+              <TestimonialCard quote="Getting a home loan through Money Bharat was incredibly fast and easy. Their digital process saved me countless hours of paperwork." name="Vikram Singh" title="Engineer, Pune" />
             </motion.div>
           </div>
         </div>
       </motion.section>
       
       {/* CTA Section */}
-      <motion.section 
-        className="py-16 md:py-24 bg-gradient-to-r from-fintech-green to-fintech-orange text-white"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        variants={containerVariants}
-      >
+      <motion.section className="py-16 md:py-24 bg-gradient-to-r from-fintech-green to-fintech-orange text-white" initial="hidden" whileInView="visible" viewport={{
+      once: true,
+      amount: 0.2
+    }} variants={containerVariants}>
         <div className="container mx-auto px-4">
-          <motion.div 
-            className="text-center max-w-2xl mx-auto"
-            variants={itemVariants}
-          >
+          <motion.div className="text-center max-w-2xl mx-auto" variants={itemVariants}>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
               Ready to Transform Your Financial Future?
             </h2>
@@ -757,8 +642,6 @@ const Index = () => {
       </motion.section>
       
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default Index;
