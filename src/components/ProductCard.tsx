@@ -21,7 +21,7 @@ const ProductCard = ({
   gradient
 }: ProductCardProps) => {
   return (
-    <div className={`glass-card p-6 rounded-xl group transition-transform hover:-translate-y-2`}>
+    <div className={`glass-card p-6 rounded-xl group transition-transform hover:-translate-y-2 border border-gray-100 shadow-sm hover:shadow-md`}>
       <div className={`w-14 h-14 rounded-xl mb-4 flex items-center justify-center ${gradient} text-white`}>
         {icon}
       </div>
@@ -41,7 +41,7 @@ const ProductCard = ({
         ))}
       </ul>
       
-      <a href={linkHref} className="inline-flex items-center text-sm font-medium text-[#2EB883] hover:text-[#2EB883] transition-colors">
+      <a href={linkHref} className="inline-flex items-center text-sm font-medium text-[#2EB883] hover:text-[#2EB883]/90 transition-colors">
         {linkText}
         <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
       </a>

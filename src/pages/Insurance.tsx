@@ -3,8 +3,13 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Badge } from "@/components/ui/badge";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import Navbar from "@/components/Navbar";
-import { ArrowRight, Shield, ShieldCheck, User, Car, Home, Heart, Umbrella, Briefcase, Check, ListOrdered, Building, ArrowLeft } from "lucide-react";
+import ProductCard from "@/components/ProductCard";
+import { ArrowRight, Shield, ShieldCheck, User, Car, Home, Heart, Umbrella, Briefcase, Check, ListOrdered, Building, ArrowLeft, FileChartLine } from "lucide-react";
+
 const InsuranceCard = ({
   title,
   description,
@@ -28,8 +33,10 @@ const InsuranceCard = ({
       </Link>
     </CardContent>
   </Card>;
+
 const InsurancePage = () => {
   const [selectedInsuranceType, setSelectedInsuranceType] = useState("health");
+  
   const insuranceCategories = [{
     id: "health",
     title: "Health Insurance",
@@ -56,6 +63,7 @@ const InsurancePage = () => {
     icon: <ShieldCheck className="h-6 w-6" />,
     description: "High coverage at affordable premiums"
   }];
+  
   const insuranceTypes = [{
     id: "health",
     title: "Health Insurance",
@@ -177,37 +185,182 @@ const InsurancePage = () => {
       color: "bg-gradient-to-r from-fintech-deep-purple to-fintech-purple"
     }]
   }];
+  
+  const topInsuranceProviders = [
+    {
+      name: "HDFC ERGO",
+      category: "Health & General",
+      claimSettlement: "98.5%",
+      networkHospitals: "12,500+",
+      rating: "4.8",
+      riskProfile: "Very Good",
+      colorClass: "bg-green-500"
+    },
+    {
+      name: "ICICI Lombard",
+      category: "Health & General",
+      claimSettlement: "97.9%",
+      networkHospitals: "10,800+",
+      rating: "4.7",
+      riskProfile: "Very Good",
+      colorClass: "bg-green-500"
+    },
+    {
+      name: "Bajaj Allianz",
+      category: "Life & Health",
+      claimSettlement: "97.2%",
+      networkHospitals: "9,500+",
+      rating: "4.5",
+      riskProfile: "Good",
+      colorClass: "bg-blue-500"
+    },
+    {
+      name: "SBI Life Insurance",
+      category: "Life Insurance",
+      claimSettlement: "98.1%",
+      networkHospitals: "N/A",
+      rating: "4.6",
+      riskProfile: "Very Good",
+      colorClass: "bg-green-500"
+    },
+    {
+      name: "Star Health",
+      category: "Health Insurance",
+      claimSettlement: "96.8%",
+      networkHospitals: "11,200+",
+      rating: "4.4",
+      riskProfile: "Good",
+      colorClass: "bg-blue-500"
+    }
+  ];
+
+  const frequentlyAskedQuestions = [
+    {
+      question: "What is the waiting period in health insurance?",
+      answer: "A waiting period is a specific time during which you cannot claim benefits under your health insurance policy. It typically ranges from 30 days to 4 years depending on the condition. Pre-existing diseases usually have a waiting period of 2-4 years."
+    },
+    {
+      question: "How do I choose the right insurance cover amount?",
+      answer: "Consider factors like your age, medical history, family health history, lifestyle, income, and existing liabilities. For health insurance, a cover of at least ₹5-10 lakhs is recommended for individuals in metro cities, while for life insurance, a cover of at least 10 times your annual income is advisable."
+    },
+    {
+      question: "What is claim settlement ratio and why is it important?",
+      answer: "Claim settlement ratio is the percentage of claims an insurer has settled compared to the total claims received. A higher ratio (ideally above 95%) indicates the insurer is more likely to honor valid claims, making it an important factor when choosing an insurance provider."
+    },
+    {
+      question: "Can I port my existing health insurance policy?",
+      answer: "Yes, IRDAI regulations allow you to port your health insurance policy from one insurer to another while maintaining continuity benefits like waiting periods for pre-existing conditions. You need to apply for portability at least 45 days before your existing policy's renewal date."
+    },
+    {
+      question: "What tax benefits do insurance policies offer?",
+      answer: "Under Section 80C, premiums paid for life insurance policies qualify for tax deduction up to ₹1.5 lakhs. Under Section 80D, premiums paid for health insurance policies qualify for deduction up to ₹25,000 for self, spouse and children (additional ₹25,000 for parents, and ₹50,000 if parents are senior citizens)."
+    }
+  ];
+
+  const insuranceKeyBenefits = [
+    {
+      title: "Financial Protection",
+      description: "Insurance provides a financial safety net for you and your family against unexpected events and major financial losses.",
+      icon: <div className="flex items-center justify-center w-12 h-12 rounded-full bg-green-100 text-green-600">
+        <Shield className="h-6 w-6" />
+      </div>
+    },
+    {
+      title: "Peace of Mind",
+      description: "With insurance coverage, you can enjoy greater peace of mind knowing that you're protected against life's uncertainties.",
+      icon: <div className="flex items-center justify-center w-12 h-12 rounded-full bg-blue-100 text-blue-600">
+        <ShieldCheck className="h-6 w-6" />
+      </div>
+    },
+    {
+      title: "Tax Benefits",
+      description: "Many insurance policies offer tax advantages, helping you reduce your tax liability while securing your future.",
+      icon: <div className="flex items-center justify-center w-12 h-12 rounded-full bg-purple-100 text-purple-600">
+        <FileChartLine className="h-6 w-6" />
+      </div>
+    },
+    {
+      title: "Estate Planning",
+      description: "Life insurance can be an important tool in estate planning, ensuring your wealth is transferred to your beneficiaries as intended.",
+      icon: <div className="flex items-center justify-center w-12 h-12 rounded-full bg-orange-100 text-orange-600">
+        <Briefcase className="h-6 w-6" />
+      </div>
+    },
+    {
+      title: "Cashless Treatment",
+      description: "Health insurance policies offer cashless treatment at network hospitals, making healthcare access smoother during emergencies.",
+      icon: <div className="flex items-center justify-center w-12 h-12 rounded-full bg-cyan-100 text-cyan-600">
+        <Heart className="h-6 w-6" />
+      </div>
+    },
+    {
+      title: "Long-term Savings",
+      description: "Some insurance policies double as investment instruments, helping you build a corpus for your long-term financial goals.",
+      icon: <div className="flex items-center justify-center w-12 h-12 rounded-full bg-yellow-100 text-yellow-600">
+        <User className="h-6 w-6" />
+      </div>
+    }
+  ];
+
   const selectedType = insuranceTypes.find(type => type.id === selectedInsuranceType) || insuranceTypes[0];
-  return <div className="min-h-screen bg-background">
+
+  return (
+    <div className="min-h-screen bg-background">
       <Navbar />
       
-      {/* Hero Section */}
-      <section className="pt-32 pb-16 px-4 sm:px-6">
+      {/* Hero Section - Enhanced with gradient and better typography */}
+      <section className="pt-32 pb-16 px-4 sm:px-6 bg-gradient-to-b from-white to-blue-50">
         <div className="container mx-auto text-center">
+          <div className="inline-block px-4 py-1.5 mb-6 rounded-full bg-blue-50 border border-blue-100">
+            <span className="text-sm font-medium text-blue-600">Compare Insurance Plans from 50+ Providers</span>
+          </div>
           <h1 className="text-4xl md:text-5xl font-bold mb-6">
-            Find the <span className="gradient-text">Perfect Insurance</span> for You
+            Find the <span className="gradient-text bg-gradient-to-r from-fintech-purple to-fintech-blue bg-clip-text text-transparent">Perfect Insurance</span> for You
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
             Compare plans from top insurers and get the right coverage at the best price
           </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button className="bg-gradient-to-r from-fintech-purple to-fintech-blue text-white px-6 py-6 text-lg">
+              Get Free Quote
+            </Button>
+            <Button variant="outline" className="border-fintech-purple text-fintech-purple px-6 py-6 text-lg">
+              Talk to an Expert
+            </Button>
+          </div>
         </div>
       </section>
 
       {/* Compare Insurance Categories */}
-      <section className="py-12 px-4 sm:px-6 bg-gray-50">
+      <section className="py-16 px-4 sm:px-6 bg-gray-50">
         <div className="container mx-auto">
-          <h2 className="text-3xl font-bold mb-10 text-center">
-            Insurance Categories
-          </h2>
+          <div className="max-w-3xl mx-auto text-center mb-10">
+            <h2 className="text-3xl font-bold mb-4">
+              Insurance Categories
+            </h2>
+            <p className="text-lg text-gray-600">
+              Choose from our range of insurance products designed to protect what matters most to you
+            </p>
+          </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
-            {insuranceCategories.map(category => <div key={category.id} className={`glass-card p-6 text-center cursor-pointer transition-all ${selectedInsuranceType === category.id ? 'ring-2 ring-fintech-purple shadow-lg' : 'hover:shadow-md'}`} onClick={() => setSelectedInsuranceType(category.id)}>
+            {insuranceCategories.map(category => (
+              <div 
+                key={category.id} 
+                className={`glass-card p-6 text-center cursor-pointer transition-all ${
+                  selectedInsuranceType === category.id 
+                    ? 'ring-2 ring-fintech-purple shadow-lg' 
+                    : 'hover:shadow-md hover:border-fintech-purple/20'
+                }`} 
+                onClick={() => setSelectedInsuranceType(category.id)}
+              >
                 <div className="flex justify-center mb-4">
                   {category.icon}
                 </div>
                 <h3 className="font-semibold text-lg mb-2">{category.title}</h3>
                 <p className="text-sm text-gray-600">{category.description}</p>
-              </div>)}
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -215,24 +368,122 @@ const InsurancePage = () => {
       {/* Insurance Plans */}
       <section className="py-16 px-4 sm:px-6">
         <div className="container mx-auto">
-          <div className="mb-10 text-center">
+          <div className="mb-10 text-center max-w-3xl mx-auto">
             <h2 className="text-3xl font-bold mb-4">{selectedType.title} Plans</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-lg text-gray-600">
               Compare and choose from our range of {selectedType.title.toLowerCase()} plans designed for your needs
             </p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {selectedType.cards.map((card, index) => <InsuranceCard key={index} title={card.title} description={card.description} icon={card.icon} color={card.color} />)}
+            {selectedType.cards.map((card, index) => (
+              <InsuranceCard 
+                key={index} 
+                title={card.title} 
+                description={card.description} 
+                icon={card.icon} 
+                color={card.color} 
+              />
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Insurance Calculator */}
+      {/* Top Insurance Providers - New Section */}
+      <section className="py-16 px-4 sm:px-6 bg-gray-50">
+        <div className="container mx-auto">
+          <div className="max-w-3xl mx-auto text-center mb-10">
+            <h2 className="text-3xl font-bold mb-4">Top Insurance Providers</h2>
+            <p className="text-lg text-gray-600">
+              Compare the best insurance companies based on claim settlement ratio, network hospitals, and customer ratings
+            </p>
+          </div>
+          
+          <div className="overflow-x-auto rounded-lg border border-gray-100 bg-white shadow-sm">
+            <Table>
+              <TableHeader className="bg-gray-50">
+                <TableRow>
+                  <TableHead className="w-[200px]">Insurer</TableHead>
+                  <TableHead>Category</TableHead>
+                  <TableHead>Claim Settlement</TableHead>
+                  <TableHead>Network Hospitals</TableHead>
+                  <TableHead>Customer Rating</TableHead>
+                  <TableHead>Risk Profile</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {topInsuranceProviders.map((provider, index) => (
+                  <TableRow key={index}>
+                    <TableCell className="font-medium">
+                      <div className="flex items-center gap-3">
+                        <div className={`w-1.5 h-14 ${provider.colorClass} rounded-full`}></div>
+                        {provider.name}
+                      </div>
+                    </TableCell>
+                    <TableCell>{provider.category}</TableCell>
+                    <TableCell>{provider.claimSettlement}</TableCell>
+                    <TableCell>{provider.networkHospitals}</TableCell>
+                    <TableCell>{provider.rating}/5</TableCell>
+                    <TableCell>
+                      <Badge 
+                        className={`${
+                          provider.riskProfile === "Very Good" 
+                            ? "bg-green-100 text-green-800" 
+                            : "bg-blue-100 text-blue-800"
+                        }`}
+                      >
+                        {provider.riskProfile}
+                      </Badge>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
+          
+          <div className="text-center mt-8">
+            <Button variant="outline" className="border-fintech-purple text-fintech-purple">
+              View All Insurance Providers
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Key Benefits of Insurance - New Section */}
+      <section className="py-16 px-4 sm:px-6">
+        <div className="container mx-auto">
+          <div className="max-w-3xl mx-auto text-center mb-10">
+            <h2 className="text-3xl font-bold mb-4">Key Benefits of Insurance</h2>
+            <p className="text-lg text-gray-600">
+              Insurance is more than just protection—it's an essential component of your financial planning
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {insuranceKeyBenefits.map((benefit, index) => (
+              <div key={index} className="glass-card p-6 border border-gray-100 rounded-xl">
+                <div className="mb-4">
+                  {benefit.icon}
+                </div>
+                <h3 className="text-xl font-semibold mb-2">{benefit.title}</h3>
+                <p className="text-gray-600">{benefit.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Enhanced Insurance Calculator */}
       <section className="py-16 px-4 sm:px-6 bg-gray-50">
         <div className="container mx-auto max-w-5xl">
-          <div className="glass-card p-8">
-            <h2 className="text-3xl font-bold mb-6 text-center">Insurance Premium Calculator</h2>
+          <div className="glass-card p-8 border border-gray-100 shadow-md">
+            <div className="text-center mb-8">
+              <h2 className="text-3xl font-bold mb-4">Insurance Premium Calculator</h2>
+              <p className="text-lg text-gray-600">
+                Get an estimate of your insurance premium based on your requirements
+              </p>
+            </div>
             
             <Tabs defaultValue="health" className="w-full">
               <TabsList className="grid w-full grid-cols-3 mb-8">
@@ -302,7 +553,6 @@ const InsurancePage = () => {
               </TabsContent>
               
               <TabsContent value="life" className="p-4">
-                {/* Similar form fields for life insurance */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -362,7 +612,6 @@ const InsurancePage = () => {
               </TabsContent>
               
               <TabsContent value="car" className="p-4">
-                {/* Similar form fields for car insurance */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -421,12 +670,42 @@ const InsurancePage = () => {
         </div>
       </section>
 
-      {/* Benefits of Money Bharat Insurance Services */}
-      <section className="py-16 px-4 sm:px-6 bg-gray-50">
+      {/* FAQ Section - New Enhanced Section */}
+      <section className="py-16 px-4 sm:px-6">
+        <div className="container mx-auto max-w-4xl">
+          <div className="text-center mb-10">
+            <h2 className="text-3xl font-bold mb-4">Frequently Asked Questions</h2>
+            <p className="text-lg text-gray-600">
+              Find answers to common questions about insurance policies and coverage
+            </p>
+          </div>
+          
+          <Accordion type="single" collapsible className="w-full space-y-4">
+            {frequentlyAskedQuestions.map((faq, index) => (
+              <AccordionItem key={index} value={`item-${index}`} className="border border-gray-200 rounded-lg overflow-hidden">
+                <AccordionTrigger className="px-6 py-4 hover:bg-gray-50 hover:no-underline">
+                  <span className="font-medium text-left">{faq.question}</span>
+                </AccordionTrigger>
+                <AccordionContent className="px-6 pb-4 pt-2 text-gray-600">
+                  {faq.answer}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
+      </section>
+
+      {/* Benefits of Money Bharat Insurance Services - With Updated Styling */}
+      <section className="py-16 px-4 sm:px-6 bg-gradient-to-b from-gray-50 to-white">
         <div className="container mx-auto">
-          <h2 className="text-3xl font-bold mb-10 text-center">
-            Benefits of <span className="gradient-text">Money Bharat</span> Insurance Services
-          </h2>
+          <div className="max-w-3xl mx-auto text-center mb-10">
+            <h2 className="text-3xl font-bold mb-4">
+              Benefits of <span className="gradient-text bg-gradient-to-r from-fintech-purple to-fintech-blue bg-clip-text text-transparent">Money Bharat</span> Insurance Services
+            </h2>
+            <p className="text-lg text-gray-600">
+              Why thousands of customers choose us for their insurance needs
+            </p>
+          </div>
           
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
             <Card className="h-full transition-all duration-200 hover:shadow-lg hover:-translate-y-1">
@@ -480,12 +759,17 @@ const InsurancePage = () => {
         </div>
       </section>
 
-      {/* How Money Bharat Works */}
+      {/* How Money Bharat Works - With Updated Styling */}
       <section className="py-16 px-4 sm:px-6">
         <div className="container mx-auto">
-          <h2 className="text-3xl font-bold mb-10 text-center">
-            How <span className="gradient-text">Money Bharat</span> Works
-          </h2>
+          <div className="max-w-3xl mx-auto text-center mb-10">
+            <h2 className="text-3xl font-bold mb-4">
+              How <span className="gradient-text bg-gradient-to-r from-fintech-purple to-fintech-blue bg-clip-text text-transparent">Money Bharat</span> Works
+            </h2>
+            <p className="text-lg text-gray-600">
+              Simple steps to get insured with us
+            </p>
+          </div>
           
           <div className="flex flex-col md:flex-row items-start justify-between gap-8 max-w-5xl mx-auto">
             <div className="flex flex-col items-center text-center">
@@ -526,16 +810,17 @@ const InsurancePage = () => {
         </div>
       </section>
 
-      {/* Our Insurance Partners */}
+      {/* Our Insurance Partners - With Updated Styling */}
       <section className="py-16 px-4 sm:px-6 bg-gray-50">
         <div className="container mx-auto">
-          <h2 className="text-3xl font-bold mb-10 text-center">
-            Our Insurance <span className="gradient-text">Partners</span>
-          </h2>
-          
-          <p className="text-center text-lg text-gray-600 mb-10 max-w-3xl mx-auto">
-            We partner with India's most trusted insurance providers to bring you the best coverage options at competitive prices
-          </p>
+          <div className="max-w-3xl mx-auto text-center mb-10">
+            <h2 className="text-3xl font-bold mb-4">
+              Our Insurance <span className="gradient-text bg-gradient-to-r from-fintech-purple to-fintech-blue bg-clip-text text-transparent">Partners</span>
+            </h2>
+            <p className="text-lg text-gray-600 mb-10">
+              We partner with India's most trusted insurance providers to bring you the best coverage options at competitive prices
+            </p>
+          </div>
           
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
             {/* Partner Cards */}
@@ -557,12 +842,17 @@ const InsurancePage = () => {
         </div>
       </section>
 
-      {/* Why Choose Us */}
+      {/* Why Choose Us - With Updated Styling */}
       <section className="py-16 px-4 sm:px-6">
         <div className="container mx-auto">
-          <h2 className="text-3xl font-bold mb-10 text-center">
-            Why Choose <span className="gradient-text">Money Bharat</span> for Insurance?
-          </h2>
+          <div className="max-w-3xl mx-auto text-center mb-10">
+            <h2 className="text-3xl font-bold mb-4">
+              Why Choose <span className="gradient-text bg-gradient-to-r from-fintech-purple to-fintech-blue bg-clip-text text-transparent">Money Bharat</span> for Insurance?
+            </h2>
+            <p className="text-lg text-gray-600 mb-10">
+              Discover why we are the preferred choice for insurance in India
+            </p>
+          </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="glass-card p-6 text-center">
@@ -598,18 +888,25 @@ const InsurancePage = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
+      {/* CTA Section - Enhanced */}
       <section className="py-16 px-4 sm:px-6 bg-gradient-to-r from-fintech-green to-fintech-orange text-white">
         <div className="container mx-auto text-center">
           <h2 className="text-3xl font-bold mb-6">Ready to Get Insured?</h2>
           <p className="text-xl mb-8 max-w-2xl mx-auto">
             Take the first step towards financial security and peace of mind
           </p>
-          <Button className="bg-white text-fintech-green hover:bg-gray-100 px-8 py-6 text-lg">
-            Get a Free Quote
-          </Button>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button className="bg-white text-fintech-green hover:bg-gray-100 px-8 py-6 text-lg">
+              Get a Free Quote
+            </Button>
+            <Button variant="outline" className="border-white text-white hover:bg-white/10 px-8 py-6 text-lg">
+              Speak to an Advisor
+            </Button>
+          </div>
         </div>
       </section>
-    </div>;
+    </div>
+  );
 };
+
 export default InsurancePage;
