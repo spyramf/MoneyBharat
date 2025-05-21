@@ -1,5 +1,22 @@
-import { CheckCircle, ShieldCheck, PiggyBank, TrendingUp, Lightbulb, Scale, CalendarDays, Banknote, FileText, HelpCircle, LucideIcon } from "lucide-react";
-import { Activity, Users, History, BarChart3 } from "lucide-react";
+import { 
+  CheckCircle, 
+  ShieldCheck, 
+  PiggyBank, 
+  TrendingUp, 
+  Lightbulb, 
+  Scale, 
+  CalendarDays, 
+  Banknote, 
+  FileText, 
+  HelpCircle, 
+  ArrowRight, 
+  Database, 
+  Currency, 
+  Activity, 
+  Users, 
+  History, 
+  BarChart3 
+} from "lucide-react";
 
 interface Feature {
   title: string;
