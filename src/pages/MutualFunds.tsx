@@ -23,7 +23,7 @@ const MutualFunds = () => {
   const sipFeatures = [{
     title: "Zero Commission",
     description: "Invest in direct mutual funds with zero commission and maximize your returns.",
-    icon: <div className="w-12 h-12 rounded-full bg-green-100 text-fintech-green flex items-center justify-center">
+    icon: <div className="w-12 h-12 rounded-full bg-green-100 text-fintech-green flex items-center justify-center px-0">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
           <circle cx="12" cy="12" r="10" />
           <path d="m4.93 4.93 14.14 14.14" />
@@ -586,8 +586,8 @@ const MutualFunds = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {sipFeatures.map((feature, index) => <div key={index} style={{
               animationDelay: `${index * 100}ms`
-            }} className="bg-white border border-gray-100 rounded-xl p-6 shadow-md hover:shadow-lg hover:border-fintech-purple/30 transition-all duration-300 animate-fade-in py-[40px] px-[10px]">
-                  <div className="flex items-center gap-4 mb-4">
+            }} className="bg-white border border-gray-100 rounded-xl p-6 shadow-md hover:shadow-lg hover:border-fintech-purple/30 transition-all duration-300 animate-fade-in py-[29px] px-0">
+                  <div className="flex items-center gap-4 mb-4 px-[5px]">
                     <div className="relative">
                       {feature.icon}
                     </div>
