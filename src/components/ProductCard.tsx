@@ -43,7 +43,7 @@ const ProductCard = ({
         </ul>
       </div>
       
-      <a href={linkHref} className="inline-flex items-center text-sm font-medium text-[#2EB883] hover:text-[#2EB883]/90 transition-colors group-hover:underline">
+      <a href={linkHref} className="inline-flex items-center text-sm font-medium text-fintech-green hover:text-fintech-green/90 transition-colors group-hover:underline">
         {linkText}
         <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
       </a>
