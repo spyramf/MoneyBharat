@@ -1,4 +1,7 @@
 
+import { ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
+
 interface FundCategory {
   type: string;
   expectedReturns: string;
