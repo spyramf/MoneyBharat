@@ -31,6 +31,7 @@ const services = [
   { value: "tax-planning", label: "Tax Planning" },
   { value: "retirement-planning", label: "Retirement Planning" },
   { value: "insurance-consultation", label: "Insurance Consultation" },
+  { value: "loan-consultation", label: "Loan Consultation" },
 ];
 
 const timeSlots = [
