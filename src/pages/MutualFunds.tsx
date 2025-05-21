@@ -605,10 +605,17 @@ const MutualFunds = () => {
             </div>
 
             <div className="text-center mt-10">
+              <a
+  href="https://spyraexima.wylth.com/NewOnBoarding/SignUp"
+  target="_blank"
+  rel="noopener noreferrer"
+>
               <Button className="bg-gradient-to-r from-fintech-green to-fintech-green text-white hover:opacity-90 transition-all transform hover:scale-105 shadow-[0_0_15px_rgba(155,135,245,0.3)]">
                 Start Your SIP Journey
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
+</a>
+                
             </div>
           </div>
         </div>
@@ -646,10 +653,17 @@ const MutualFunds = () => {
             </div>
 
             <div className="text-center mt-10">
+                            <a
+  href="https://spyraexima.wylth.com/NewOnBoarding/SignUp"
+  target="_blank"
+  rel="noopener noreferrer"
+>
               <Button className="bg-gradient-to-r from-fintech-green to-fintech-green hover:opacity-90 transition-all transform hover:scale-105 shadow-[0_0_15px_rgba(155,135,245,0.3)]">
                 Start Now
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
+</a>
+              
             </div>
           </div>
         </div>
