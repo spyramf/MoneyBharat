@@ -45,7 +45,7 @@ const MutualFunds = () => {
       <FundCategories categories={fundCategories} />
       <TopPerformingFunds funds={topPerformingFunds} />
       <MutualFundFAQs items={faqItems} />
-      <SipCalculator />
+      {/* <SipCalculator /> */}
       <Footer />
     </div>
   );
