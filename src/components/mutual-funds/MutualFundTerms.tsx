@@ -1,5 +1,6 @@
 
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
+import { Card, CardContent } from "@/components/ui/card";
 
 interface MutualFundTerm {
   term: string;
@@ -7,6 +8,7 @@ interface MutualFundTerm {
   title: string;
   description: string;
   icon: JSX.Element;
+  bgColor?: string;
 }
 
 interface MutualFundTermsProps {
@@ -20,7 +22,8 @@ const MutualFundTerms = ({ terms }: MutualFundTermsProps) => {
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             <span className="text-gray-800">Important Terms </span>
-            <span className="gradient-text">Related to Mutual Funds</span>
+            <span className="text-orange-500">Related to </span>
+            <span className="text-green-500">Mutual Funds</span>
           </h2>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
             Familiarize yourself with these key mutual fund terms to make informed investment decisions.
@@ -31,18 +34,17 @@ const MutualFundTerms = ({ terms }: MutualFundTermsProps) => {
           {terms.map((term, index) => (
             <HoverCard key={index}>
               <HoverCardTrigger asChild>
-                <div
-                  className="bg-white backdrop-blur-sm border border-gray-200 p-6 rounded-xl shadow-sm transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl animate-fade-in cursor-pointer"
-                  style={{
-                    animationDelay: `${index * 100}ms`
-                  }}
-                >
-                  <div className="flex flex-col items-center text-center">
-                    {term.icon}
-                    <h3 className="font-bold text-xl my-3">{term.title}</h3>
-                    <p className="text-gray-600 text-sm line-clamp-2">{term.description}</p>
-                  </div>
-                </div>
+                <Card className="border border-gray-200 rounded-xl shadow-sm transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl animate-fade-in cursor-pointer overflow-hidden">
+                  <CardContent className="p-6">
+                    <div className="flex flex-col items-center text-center">
+                      <div className={`rounded-full p-3 mb-4 ${term.bgColor || 'bg-green-100'}`}>
+                        {term.icon}
+                      </div>
+                      <h3 className="font-bold text-xl mb-2">{term.title}</h3>
+                      <p className="text-gray-600 text-sm line-clamp-3">{term.description}</p>
+                    </div>
+                  </CardContent>
+                </Card>
               </HoverCardTrigger>
               <HoverCardContent side="top" className="w-80 p-4 shadow-xl bg-white border border-gray-200">
                 <div className="flex flex-col gap-2">

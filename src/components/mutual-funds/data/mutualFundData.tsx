@@ -1,4 +1,3 @@
-
 import { CheckCircle, ShieldCheck, PiggyBank, TrendingUp, Lightbulb, Scale, CalendarDays, Banknote, FileText, HelpCircle, LucideIcon } from "lucide-react";
 import { Activity, Users, History, BarChart3 } from "lucide-react";
 
@@ -56,6 +55,7 @@ interface MutualFundTerm {
   title: string;
   description: string;
   icon: JSX.Element;
+  bgColor?: string;
 }
 
 interface Tip {
@@ -297,32 +297,68 @@ export const choosingMutualFundsTips: Tip[] = [
 
 export const mutualFundTerms: MutualFundTerm[] = [
   {
-    term: "NAV (Net Asset Value)",
-    definition: "The market value of a fund's assets, less its liabilities, divided by the number of outstanding units.",
-    title: "NAV",
-    description: "The market value of a fund's assets, less its liabilities, divided by the number of outstanding units.",
-    icon: <TrendingUp className="w-8 h-8 text-fintech-green" />
-  },
-  {
-    term: "Expense Ratio",
-    definition: "The annual cost of operating a fund, expressed as a percentage of the fund's average net assets.",
-    title: "Expense Ratio",
-    description: "The annual cost of operating a fund, expressed as a percentage of the fund's average net assets.",
-    icon: <Banknote className="w-8 h-8 text-fintech-green" />
-  },
-  {
-    term: "Exit Load",
-    definition: "A fee charged when you redeem your investment before a specified period.",
-    title: "Exit Load",
-    description: "A fee charged when you redeem your investment before a specified period.",
-    icon: <FileText className="w-8 h-8 text-fintech-green" />
-  },
-  {
     term: "SIP",
     definition: "Systematic Investment Plan - A way to invest a fixed amount in mutual funds at regular intervals.",
     title: "SIP",
-    description: "Systematic Investment Plan - A way to invest a fixed amount in mutual funds at regular intervals.",
-    icon: <CalendarDays className="w-8 h-8 text-fintech-green" />
+    description: "A Systematic Investment Plan (SIP) allows you to invest a fixed amount at regular intervals in mutual funds.",
+    icon: <CalendarDays className="w-6 h-6 text-green-600" />,
+    bgColor: "bg-green-100"
+  },
+  {
+    term: "STP",
+    definition: "Systematic Transfer Plan - A facility that allows investors to transfer a fixed amount from one mutual fund to another at regular intervals.",
+    title: "STP",
+    description: "A Systematic Transfer Plan (STP) lets you transfer a fixed amount from one mutual fund to another periodically.",
+    icon: <ArrowRight className="w-6 h-6 text-blue-600" />,
+    bgColor: "bg-blue-100"
+  },
+  {
+    term: "SWP",
+    definition: "Systematic Withdrawal Plan - Allows you to withdraw a fixed amount from your mutual fund investments at regular intervals.",
+    title: "SWP",
+    description: "A Systematic Withdrawal Plan (SWP) enables you to withdraw a fixed amount from your mutual fund at regular intervals.",
+    icon: <FileText className="w-6 h-6 text-purple-600" />,
+    bgColor: "bg-purple-100"
+  },
+  {
+    term: "AUM",
+    definition: "Assets Under Management - The total market value of investments that a mutual fund manages on behalf of its investors.",
+    title: "AUM",
+    description: "Assets Under Management (AUM) refers to the total market value of assets that a fund manages for investors.",
+    icon: <Database className="w-6 h-6 text-orange-600" />,
+    bgColor: "bg-orange-100"
+  },
+  {
+    term: "NAV",
+    definition: "Net Asset Value - The per-unit market value of a mutual fund's investments, calculated by dividing the total value of all the securities in the portfolio by the total number of units.",
+    title: "NAV",
+    description: "Net Asset Value (NAV) represents the per-unit value of a mutual fund, calculated daily.",
+    icon: <TrendingUp className="w-6 h-6 text-green-600" />,
+    bgColor: "bg-green-100"
+  },
+  {
+    term: "Expense Ratio",
+    definition: "The annual fee charged by a mutual fund as a percentage of its assets, covering management fees, administrative costs, and other expenses.",
+    title: "Expense Ratio",
+    description: "The expense ratio is the annual fee expressed as a percentage of a fund's average net assets.",
+    icon: <Currency className="w-6 h-6 text-red-600" />,
+    bgColor: "bg-red-100"
+  },
+  {
+    term: "Entry Load",
+    definition: "A fee charged at the time of purchase of mutual fund units. Currently, SEBI has abolished entry loads for all mutual funds.",
+    title: "Entry Load",
+    description: "Entry load is a fee charged when investing in a mutual fund. (Currently abolished by SEBI)",
+    icon: <Banknote className="w-6 h-6 text-yellow-600" />,
+    bgColor: "bg-yellow-100"
+  },
+  {
+    term: "Exit Load",
+    definition: "A fee charged when you redeem your investment before a specified period, typically to discourage short-term investing.",
+    title: "Exit Load",
+    description: "Exit load is a fee incurred when redeeming mutual fund units within a specified period after purchase.",
+    icon: <FileText className="w-6 h-6 text-pink-600" />,
+    bgColor: "bg-pink-100"
   }
 ];
 
