@@ -1,4 +1,7 @@
 
+import { Activity, Users, History, BarChart3 } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
+
 interface Tip {
   title: string;
   description: string;
@@ -25,21 +28,22 @@ const ChooseMutualFundsTips = ({ tips }: ChooseMutualFundsTipsProps) => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
           {tips.map((tip, index) => (
-            <div
+            <Card 
               key={index}
-              className="bg-white backdrop-blur-sm border border-gray-200 p-6 rounded-xl shadow-sm transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl animate-fade-in"
-              style={{
-                animationDelay: `${index * 100}ms`
-              }}
+              className="border border-gray-200 bg-white shadow-sm hover:shadow-md transition-shadow duration-300"
             >
-              <div className="flex flex-col items-center text-center gap-4">
-                {tip.icon}
-                <div>
-                  <h3 className="font-bold text-xl mb-2">{tip.title}</h3>
-                  <p className="text-gray-600 text-sm">{tip.description}</p>
+              <CardContent className="pt-6">
+                <div className="flex flex-col items-center text-center gap-4">
+                  <div className="w-16 h-16 rounded-full flex items-center justify-center">
+                    {tip.icon}
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-xl mb-2">{tip.title}</h3>
+                    <p className="text-gray-600 text-sm">{tip.description}</p>
+                  </div>
                 </div>
-              </div>
-            </div>
+              </CardContent>
+            </Card>
           ))}
         </div>
       </div>
