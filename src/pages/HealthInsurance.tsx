@@ -17,6 +17,7 @@ import RequiredDocuments from "@/components/health-insurance/RequiredDocuments";
 import HealthBenefits from "@/components/health-insurance/HealthBenefits";
 import CoverageOptions from "@/components/health-insurance/CoverageOptions";
 import ClaimsProcess from "@/components/health-insurance/ClaimsProcess";
+import ClaimRejectionReasons from "@/components/health-insurance/ClaimRejectionReasons";
 import HealthFAQs from "@/components/health-insurance/HealthFAQs";
 import HealthCTA from "@/components/health-insurance/HealthCTA";
 
@@ -38,6 +39,7 @@ const HealthInsurance = () => {
         {/* <HealthBenefits /> */}
         {/* <CoverageOptions /> */}
         <ClaimsProcess />
+        <ClaimRejectionReasons />
         <HealthFAQs />
         <HealthCTA />
       </main>
