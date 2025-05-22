@@ -11,10 +11,11 @@ import HealthInsuranceTypes from "@/components/health-insurance/HealthInsuranceT
 import FactorsToConsider from "@/components/health-insurance/FactorsToConsider";
 import PremiumFactors from "@/components/health-insurance/PremiumFactors";
 import KeyPolicyFeatures from "@/components/health-insurance/KeyPolicyFeatures";
+import EligibilityCriteria from "@/components/health-insurance/EligibilityCriteria";
+import HealthBenefits from "@/components/health-insurance/HealthBenefits";
 import CoverageOptions from "@/components/health-insurance/CoverageOptions";
 import ClaimsProcess from "@/components/health-insurance/ClaimsProcess";
 import HealthFAQs from "@/components/health-insurance/HealthFAQs";
-import HealthBenefits from "@/components/health-insurance/HealthBenefits";
 import HealthCTA from "@/components/health-insurance/HealthCTA";
 
 const HealthInsurance = () => {
@@ -29,6 +30,7 @@ const HealthInsurance = () => {
         <FactorsToConsider />
         <PremiumFactors />
         <KeyPolicyFeatures />
+        <EligibilityCriteria />
         <HealthBenefits />
         <CoverageOptions />
         <ClaimsProcess />
