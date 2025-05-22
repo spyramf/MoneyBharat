@@ -1,10 +1,8 @@
-
 import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { TrendingUp, ArrowRight } from "lucide-react";
-
 interface Fund {
   name: string;
   returns: string;
@@ -16,14 +14,13 @@ interface Fund {
   borderColor: string;
   riskColorClass: string;
 }
-
 interface TopPerformingFundsProps {
   funds: Fund[];
 }
-
-const TopPerformingFunds = ({ funds }: TopPerformingFundsProps) => {
-  return (
-    <section className="px-4 md:px-8 bg-white py-12">
+const TopPerformingFunds = ({
+  funds
+}: TopPerformingFundsProps) => {
+  return <section className="px-4 md:px-8 bg-white py-12">
       <div className="container mx-auto">
         <div className="text-center mb-8">
           <h2 className="text-3xl md:text-4xl font-bold mb-2 relative inline-block">
@@ -49,11 +46,7 @@ const TopPerformingFunds = ({ funds }: TopPerformingFundsProps) => {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {funds.map((fund, index) => (
-                    <TableRow 
-                      key={index}
-                      className="hover:bg-gray-50 transition-all duration-200 border-0"
-                    >
+                  {funds.map((fund, index) => <TableRow key={index} className="hover:bg-gray-50 transition-all duration-200 border-0">
                       <TableCell className="py-6 px-6 border-t border-gray-100">
                         <div className="flex items-start gap-3">
                           <div className={`w-1 self-stretch rounded-full ${fund.borderColor.replace("border-l-4 ", "bg-")}`}></div>
@@ -80,22 +73,20 @@ const TopPerformingFunds = ({ funds }: TopPerformingFundsProps) => {
                           {fund.risk}
                         </Badge>
                       </TableCell>
-                    </TableRow>
-                  ))}
+                    </TableRow>)}
                 </TableBody>
               </Table>
             </div>
           </CardContent>
           <div className="p-5 flex justify-center border-t border-gray-200 bg-gray-50">
-            <Button className="bg-green-500 hover:bg-green-600 transition-all duration-300 font-medium flex items-center gap-2 px-6 py-2.5 rounded-lg shadow-sm hover:shadow-md">
+            <Button className="transition-all duration-300 font-medium flex items-center gap-2 px-6 py-2.5 rounded-lg shadow-sm hover:shadow-md bg-fintech-green">
               View All Mutual Funds
               <ArrowRight className="w-4 h-4" />
             </Button>
           </div>
         </Card>
       </div>
-    </section>
-  );
+    </section>;
 };
 
 // Helper function to get badge styles based on category or risk level
@@ -119,5 +110,4 @@ const getRiskBadgeStyles = (value: string): string => {
       return 'bg-gray-100 text-gray-700 border-0 px-3 py-1.5 font-medium';
   }
 };
-
 export default TopPerformingFunds;
