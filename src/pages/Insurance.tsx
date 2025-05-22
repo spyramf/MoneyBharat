@@ -44,8 +44,8 @@ const InsurancePage = () => {
       {/* <InsurancePremiumCalculator /> */}
       <MoneyBharatBenefits benefits={moneyBharatBenefits} />
       <HowItWorks />
-      <InsurancePartners />
       <WhyChooseUs />
+      <InsurancePartners />
       <InsuranceFAQs faqs={frequentlyAskedQuestions} />
       <InsuranceCTA />
     </div>
