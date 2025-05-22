@@ -20,6 +20,7 @@ import ClaimsProcess from "@/components/health-insurance/ClaimsProcess";
 import ClaimRejectionReasons from "@/components/health-insurance/ClaimRejectionReasons";
 import CoverageTable from "@/components/health-insurance/CoverageTable";
 import InsurancePortability from "@/components/health-insurance/InsurancePortability";
+import NetworkHospitals from "@/components/health-insurance/NetworkHospitals";
 import HealthFAQs from "@/components/health-insurance/HealthFAQs";
 import HealthCTA from "@/components/health-insurance/HealthCTA";
 
@@ -44,6 +45,7 @@ const HealthInsurance = () => {
         <ClaimRejectionReasons />
         <CoverageTable />
         <InsurancePortability />
+        <NetworkHospitals />
         <HealthFAQs />
         <HealthCTA />
       </main>
