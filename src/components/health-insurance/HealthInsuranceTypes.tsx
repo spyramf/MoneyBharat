@@ -1,74 +1,114 @@
 
 import React from "react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { PersonStanding, Users, Shield, Hospital, DollarSign } from "lucide-react";
 
 interface InsuranceType {
   id: string;
   title: string;
   description: string;
   icon: React.ReactNode;
+  pricing?: string;
+  badgeText?: string;
+  badgeVariant?: "info" | "pill" | "rate" | "fee";
 }
 
 const insuranceTypes: InsuranceType[] = [
   {
     id: "individual",
     title: "Individual Health Insurance",
-    description: "Coverage for a single person with customized benefits for personal healthcare needs.",
-    icon: <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 text-xl font-bold">I</div>
+    description: "Tailored coverage for a single person with customizable benefits to suit personal health needs.",
+    icon: <PersonStanding className="w-6 h-6 text-white" />,
+    pricing: "Starting at ₹499/month",
+    badgeVariant: "rate"
   },
   {
     id: "family",
-    title: "Family Floater Plans",
-    description: "A single policy that covers your entire family under one sum insured amount.",
-    icon: <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center text-green-600 text-xl font-bold">F</div>
+    title: "Family Floater Insurance",
+    description: "Comprehensive coverage for your entire family under a single policy with shared sum insured.",
+    icon: <Users className="w-6 h-6 text-white" />,
+    pricing: "Starting at ₹1,199/month",
+    badgeVariant: "rate"
   },
   {
     id: "critical",
     title: "Critical Illness Cover",
-    description: "Provides coverage for major illnesses like cancer, heart attack, and organ transplants.",
-    icon: <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center text-red-600 text-xl font-bold">C</div>
-  },
-  {
-    id: "senior",
-    title: "Senior Citizen Plans",
-    description: "Special plans designed for individuals over 60 years with higher coverage for age-related issues.",
-    icon: <div className="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center text-amber-600 text-xl font-bold">S</div>
-  },
-  {
-    id: "maternity",
-    title: "Maternity Health Cover",
-    description: "Coverage for pregnancy, childbirth, and postnatal care expenses.",
-    icon: <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center text-purple-600 text-xl font-bold">M</div>
+    description: "Financial protection against major illnesses with lump-sum benefits upon diagnosis.",
+    icon: <Hospital className="w-6 h-6 text-white" />,
+    pricing: "Starting at ₹699/month",
+    badgeVariant: "rate"
   },
   {
     id: "group",
     title: "Group Health Insurance",
-    description: "Employer-provided health coverage for employees and sometimes their dependents.",
-    icon: <div className="w-12 h-12 bg-cyan-100 rounded-full flex items-center justify-center text-cyan-600 text-xl font-bold">G</div>
+    description: "Employer-provided coverage for employees with competitive premiums and extensive benefits.",
+    icon: <Users className="w-6 h-6 text-white" />,
+    badgeText: "Custom corporate plans",
+    badgeVariant: "pill"
+  },
+  {
+    id: "senior",
+    title: "Senior Citizen Health Insurance",
+    description: "Specialized plans for individuals above 60 years with coverage for age-related ailments.",
+    icon: <PersonStanding className="w-6 h-6 text-white" />,
+    pricing: "Starting at ₹1,999/month",
+    badgeVariant: "rate"
+  },
+  {
+    id: "topup",
+    title: "Top-up Health Plans",
+    description: "Additional coverage that starts after your base health insurance reaches its limit.",
+    icon: <DollarSign className="w-6 h-6 text-white" />,
+    pricing: "Starting at ₹299/month",
+    badgeVariant: "rate"
   }
 ];
 
 const HealthInsuranceTypes = () => {
   return (
-    <section className="py-12 bg-white">
+    <section className="py-16 bg-white">
       <div className="container mx-auto px-4">
         <div className="text-center mb-10">
-          <h2 className="text-3xl font-bold mb-3">Types of Health Insurance</h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
-            Explore different types of health insurance coverage to find what suits your specific requirements.
+          <h2 className="text-3xl font-bold mb-3">Types of Health Insurance Plans</h2>
+          <p className="text-gray-600 max-w-3xl mx-auto">
+            Find the right health coverage for your specific needs
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {insuranceTypes.map((type) => (
-            <Card key={type.id} className="hover:shadow-lg transition-shadow">
-              <CardHeader className="flex flex-row items-center gap-4 pb-2">
-                {type.icon}
-                <CardTitle>{type.title}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="text-base">{type.description}</CardDescription>
-              </CardContent>
+            <Card key={type.id} className="shadow-sm hover:shadow-md transition-shadow border border-gray-100 overflow-hidden">
+              <div className="p-6">
+                <div className="mb-5">
+                  <div className={`w-12 h-12 rounded-lg flex items-center justify-center bg-gradient-to-br 
+                    ${type.id === "individual" ? "from-teal-500 to-teal-600" : ""}
+                    ${type.id === "family" ? "from-orange-500 to-purple-400" : ""}
+                    ${type.id === "critical" ? "from-teal-500 to-teal-600" : ""}
+                    ${type.id === "group" ? "from-teal-400 to-blue-500" : ""}
+                    ${type.id === "senior" ? "from-green-500 to-purple-500" : ""}
+                    ${type.id === "topup" ? "from-amber-400 to-amber-500" : ""}
+                  `}>
+                    {type.icon}
+                  </div>
+                </div>
+                
+                <h3 className="text-xl font-bold mb-3">{type.title}</h3>
+                <p className="text-gray-600 mb-6">{type.description}</p>
+                
+                <CardContent className="p-0">
+                  {type.pricing && (
+                    <Badge variant={type.badgeVariant} className="text-xs font-medium">
+                      {type.pricing}
+                    </Badge>
+                  )}
+                  {type.badgeText && (
+                    <Badge variant={type.badgeVariant} className="text-xs font-medium">
+                      {type.badgeText}
+                    </Badge>
+                  )}
+                </CardContent>
+              </div>
             </Card>
           ))}
         </div>
