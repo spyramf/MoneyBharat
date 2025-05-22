@@ -16,7 +16,7 @@ const HealthCTA = () => {
               Get a Quote 
               <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
             </Button>
-            <Button size="lg" variant="outline" className="border-2 border-white text-white hover:bg-blue-700 shadow-lg transition-all duration-300">
+            <Button size="lg" variant="outline" className="border-2 border-white text-green hover:bg-blue-700 shadow-lg transition-all duration-300">
               <Phone className="mr-2 h-4 w-4" /> Speak to an Advisor
             </Button>
           </div>
