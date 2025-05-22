@@ -13,6 +13,7 @@ import PremiumFactors from "@/components/health-insurance/PremiumFactors";
 import KeyPolicyFeatures from "@/components/health-insurance/KeyPolicyFeatures";
 import EligibilityCriteria from "@/components/health-insurance/EligibilityCriteria";
 import RiderCovers from "@/components/health-insurance/RiderCovers";
+import RequiredDocuments from "@/components/health-insurance/RequiredDocuments";
 import HealthBenefits from "@/components/health-insurance/HealthBenefits";
 import CoverageOptions from "@/components/health-insurance/CoverageOptions";
 import ClaimsProcess from "@/components/health-insurance/ClaimsProcess";
@@ -33,6 +34,7 @@ const HealthInsurance = () => {
         <KeyPolicyFeatures />
         <EligibilityCriteria />
         <RiderCovers />
+        <RequiredDocuments />
         <HealthBenefits />
         <CoverageOptions />
         <ClaimsProcess />
