@@ -2,7 +2,7 @@ import React from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Phone, Upload } from "lucide-react";
 const HealthCTA = () => {
-  return <section className="py-16 md:py-20 bg-gradient-to-r from-blue-700 via-blue-600 to-blue-500 text-white">
+  return <section className="py-16 md:py-20 bg-gradient-to-r from-fintech-green via-blue-600 to-blue-500 text-white">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 animate-fade-in">
