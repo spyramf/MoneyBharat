@@ -9,6 +9,7 @@ import QuickQuoteCalculator from "@/components/health-insurance/QuickQuoteCalcul
 import PopularHealthPlans from "@/components/health-insurance/PopularHealthPlans";
 import HealthInsuranceTypes from "@/components/health-insurance/HealthInsuranceTypes";
 import FactorsToConsider from "@/components/health-insurance/FactorsToConsider";
+import PremiumFactors from "@/components/health-insurance/PremiumFactors";
 import CoverageOptions from "@/components/health-insurance/CoverageOptions";
 import ClaimsProcess from "@/components/health-insurance/ClaimsProcess";
 import HealthFAQs from "@/components/health-insurance/HealthFAQs";
@@ -25,6 +26,7 @@ const HealthInsurance = () => {
         <PopularHealthPlans />
         <HealthInsuranceTypes />
         <FactorsToConsider />
+        <PremiumFactors />
         <HealthBenefits />
         <CoverageOptions />
         <ClaimsProcess />
