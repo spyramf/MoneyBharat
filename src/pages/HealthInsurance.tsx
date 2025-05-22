@@ -26,8 +26,8 @@ const HealthInsurance = () => {
       <Navbar />
       <main>
         <HealthInsuranceHero />
-        <QuickQuoteCalculator />
-        <PopularHealthPlans />
+        {/* <QuickQuoteCalculator /> */}
+        {/* <PopularHealthPlans /> */}
         <HealthInsuranceTypes />
         <FactorsToConsider />
         <PremiumFactors />
