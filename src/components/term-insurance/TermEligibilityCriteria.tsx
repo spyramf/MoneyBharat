@@ -1,7 +1,7 @@
 
 import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
-import { User, Users, FileCheck, Globe, Buildings, AlertTriangle } from "lucide-react";
+import { User, Users, FileCheck, Globe, Building, AlertTriangle } from "lucide-react";
 
 interface Criteria {
   id: string;
@@ -30,7 +30,7 @@ const eligibilityCriteria: Criteria[] = [
     id: "income",
     title: "Income Status",
     description: "You must have a steady source of income to qualify for and maintain a term insurance policy.",
-    icon: <Buildings className="w-6 h-6 text-indigo-600" />
+    icon: <Building className="w-6 h-6 text-indigo-600" />
   },
   {
     id: "nationality",

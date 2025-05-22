@@ -1,6 +1,6 @@
 
 import React from "react";
-import { Heart, Stethoscope, BadgeDollarSign, Umbrella, Wheelchair, UserMinus } from "lucide-react";
+import { Heart, Stethoscope, BadgeDollarSign, Umbrella, Accessibility, UserMinus } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 
 interface RiderOption {
@@ -30,7 +30,7 @@ const riderOptions: RiderOption[] = [
     id: "disability",
     title: "Disability Cover",
     description: "Offers financial protection if you become permanently disabled and unable to work.",
-    Icon: Wheelchair,
+    Icon: Accessibility,
     cost: "+15-25% of base premium"
   },
   {
