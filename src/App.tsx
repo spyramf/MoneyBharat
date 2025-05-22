@@ -23,6 +23,7 @@ import SipCalculator from "./pages/SipCalculator";
 import EmiCalculator from "./pages/EmiCalculator";
 import TaxSaving from "./pages/TaxSaving";
 import HealthInsurance from "./pages/HealthInsurance";
+import TermInsurance from "./pages/TermInsurance";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import Booking from "./pages/Booking";
@@ -53,6 +54,7 @@ const App = () => (
                 <Route path="/mutual-funds" element={<MutualFunds />} />
                 <Route path="/insurance" element={<Insurance />} />
                 <Route path="/health-insurance" element={<HealthInsurance />} />
+                <Route path="/term-insurance" element={<TermInsurance />} />
                 <Route path="/loans" element={<Loans />} />
                 <Route path="/loans/personal" element={<PersonalLoan />} />
                 <Route path="/loans/business" element={<BusinessLoan />} />

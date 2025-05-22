@@ -17,3 +17,10 @@ export const loanNavItems = [
   { name: 'Education Loan', path: '/loans' },
   { name: 'Gold Loan', path: '/loans' }
 ];
+
+export const insuranceNavItems = [
+  { name: 'Health Insurance', path: '/health-insurance' },
+  { name: 'Term Life Insurance', path: '/term-insurance' },
+  { name: 'Motor Insurance', path: '/insurance' },
+  { name: 'Travel Insurance', path: '/insurance' },
+];
