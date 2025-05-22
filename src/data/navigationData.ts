@@ -22,6 +22,6 @@ export const insuranceNavItems = [
   { name: 'Health Insurance', path: '/health-insurance' },
   { name: 'Term Life Insurance', path: '/term-insurance' },
   { name: 'Vehicle Insurance', path: '/vehicle-insurance' },
-  { name: 'Motor Insurance', path: '/insurance' },
+  { name: 'Motor Insurance', path: '/vehicle-insurance' },
   { name: 'Travel Insurance', path: '/insurance' },
 ];
