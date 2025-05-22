@@ -16,27 +16,27 @@ const premiumFactors: PremiumFactor[] = [{
   id: "medical-history",
   title: "Medical History",
   description: "Pre-existing conditions and past medical issues can affect premium rates and coverage terms.",
-  icon: <FileText className="w-10 h-10 text-blue-600" />
+  icon: <FileText className="w-10 h-10 text-fintech-green" />
 }, {
   id: "family-size",
   title: "Family Size",
   description: "The number of family members covered under your policy directly impacts your premium amount.",
-  icon: <Users className="w-10 h-10 text-blue-600" />
+  icon: <Users className="w-10 h-10 text-fintech-green" />
 }, {
   id: "sum-insured",
   title: "Sum Insured",
   description: "Higher coverage amounts result in higher premiums but provide more comprehensive financial protection.",
-  icon: <DollarSign className="w-10 h-10 text-blue-600" />
+  icon: <DollarSign className="w-10 h-10 text-fintech-green" />
 }, {
   id: "location",
   title: "Location",
   description: "Healthcare costs vary by region, so your residential location affects premium calculations.",
-  icon: <Building className="w-10 h-10 text-blue-600" />
+  icon: <Building className="w-10 h-10 text-fintech-green" />
 }, {
   id: "occupation",
   title: "Occupation",
   description: "Some professions carry higher health risks, which can influence insurance premium rates.",
-  icon: <Briefcase className="w-10 h-10 text-blue-600" />
+  icon: <Briefcase className="w-10 h-10 text-fintech-green" />
 }];
 const PremiumFactors = () => {
   return <section className="py-16 bg-white">
