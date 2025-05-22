@@ -35,8 +35,8 @@ const HealthInsurance = () => {
         <EligibilityCriteria />
         <RiderCovers />
         <RequiredDocuments />
-        <HealthBenefits />
-        <CoverageOptions />
+        {/* <HealthBenefits /> */}
+        {/* <CoverageOptions /> */}
         <ClaimsProcess />
         <HealthFAQs />
         <HealthCTA />
