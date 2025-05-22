@@ -1,6 +1,17 @@
 
 import React from "react";
-import { Users, Receipt, Clock, Check, Hospital, X } from "lucide-react";
+import { 
+  CalendarDays, 
+  FileText, 
+  Users, 
+  DollarSign, 
+  MapPin, 
+  Briefcase 
+} from "lucide-react";
+import { 
+  Card, 
+  CardContent
+} from "@/components/ui/card";
 
 interface Factor {
   id: string;
@@ -9,70 +20,74 @@ interface Factor {
   icon: React.ReactNode;
 }
 
-const factors: Factor[] = [
+const premiumFactors: Factor[] = [
   {
-    id: "coverage",
-    title: "Coverage Amount",
-    description: "Evaluate your medical history, potential healthcare needs, and financial situation to determine an adequate sum insured. The coverage should be sufficient to handle medical inflation and unforeseen critical illnesses.",
-    icon: <Check className="w-5 h-5 text-green-500" />
+    id: "age",
+    title: "Age",
+    description: "Premium increases with age as health risks typically grow higher. Purchasing insurance at a younger age secures lower premiums.",
+    icon: <CalendarDays className="w-8 h-8 text-green-500" />
   },
   {
-    id: "family",
-    title: "Family Size & Composition",
-    description: "Consider whether an individual plan or family floater policy would better suit your needs based on your family's age, health status, and medical requirements.",
-    icon: <Users className="w-5 h-5 text-green-500" />
+    id: "medicalHistory",
+    title: "Medical History",
+    description: "Pre-existing conditions often lead to higher premiums or extended waiting periods for coverage.",
+    icon: <FileText className="w-8 h-8 text-green-500" />
   },
   {
-    id: "network",
-    title: "Network Hospitals",
-    description: "Check if your preferred hospitals are included in the insurer's network for cashless treatment. A wide hospital network ensures convenient access to quality healthcare services.",
-    icon: <Hospital className="w-5 h-5 text-green-500" />
+    id: "familySize",
+    title: "Family Size",
+    description: "The number of family members included in the policy directly affects the premium amount.",
+    icon: <Users className="w-8 h-8 text-green-500" />
   },
   {
-    id: "waitingPeriod",
-    title: "Waiting Periods",
-    description: "Understand the various waiting periods for pre-existing diseases, specific ailments, and maternity benefits. Choose policies with shorter waiting periods if you have existing health conditions.",
-    icon: <Clock className="w-5 h-5 text-green-500" />
+    id: "sumInsured",
+    title: "Sum Insured",
+    description: "Higher coverage amounts result in higher premium payments, but offer greater financial security.",
+    icon: <DollarSign className="w-8 h-8 text-green-500" />
   },
   {
-    id: "exclusions",
-    title: "Exclusions & Sub-limits",
-    description: "Carefully review policy exclusions and sub-limits on room rent, specific treatments, or procedures. Policies with fewer restrictions and sub-limits are generally more beneficial.",
-    icon: <X className="w-5 h-5 text-green-500" />
+    id: "location",
+    title: "Location",
+    description: "Premiums vary based on city tier due to differences in healthcare costs across locations.",
+    icon: <MapPin className="w-8 h-8 text-green-500" />
   },
   {
-    id: "claimSettlement",
-    title: "Claim Settlement Ratio",
-    description: "Research the insurer's claim settlement ratio and turnaround time. A higher ratio indicates reliability and efficiency in processing claims when you need them most.",
-    icon: <Receipt className="w-5 h-5 text-green-500" />
+    id: "occupation",
+    title: "Occupation",
+    description: "High-risk occupations may attract higher premiums due to increased chances of health issues or injuries.",
+    icon: <Briefcase className="w-8 h-8 text-green-500" />
   }
 ];
 
 const FactorsToConsider = () => {
   return (
-    <section className="py-16 bg-gray-50">
+    <section className="py-16 bg-white">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-10">
-          <h2 className="text-3xl font-bold mb-3">Choosing a Health Insurance Plan</h2>
+        <div className="text-center mb-12">
+          <h2 className="text-3xl font-bold mb-3">Factors That Affect Health Insurance Premium</h2>
           <p className="text-gray-600 max-w-3xl mx-auto">
-            Key factors to consider when selecting the right health insurance for you and your family
+            Understanding what influences the cost of your health insurance policy
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-          {factors.map((factor) => (
-            <div 
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+          {premiumFactors.map((factor) => (
+            <Card 
               key={factor.id} 
-              className="bg-white p-6 rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition-shadow flex gap-4"
+              className="border border-gray-100 hover:shadow-md transition-shadow bg-white"
             >
-              <div className="flex-shrink-0 mt-1">
-                {factor.icon}
-              </div>
-              <div>
-                <h3 className="text-xl font-semibold mb-2">{factor.title}</h3>
-                <p className="text-gray-600">{factor.description}</p>
-              </div>
-            </div>
+              <CardContent className="pt-6">
+                <div className="flex items-start gap-4">
+                  <div className="bg-green-50 p-3 rounded-full">
+                    {factor.icon}
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-semibold mb-2">{factor.title}</h3>
+                    <p className="text-gray-600">{factor.description}</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
           ))}
         </div>
       </div>
