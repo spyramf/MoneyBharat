@@ -41,12 +41,12 @@ const InsurancePage = () => {
       <InsurancePlans selectedType={selectedType} />
       <TopInsuranceProviders providers={topInsuranceProviders} />
       <KeyBenefits benefits={insuranceKeyBenefits} />
-      <InsurancePremiumCalculator />
-      <InsuranceFAQs faqs={frequentlyAskedQuestions} />
+      {/* <InsurancePremiumCalculator /> */}
       <MoneyBharatBenefits benefits={moneyBharatBenefits} />
       <HowItWorks />
       <InsurancePartners />
       <WhyChooseUs />
+      <InsuranceFAQs faqs={frequentlyAskedQuestions} />
       <InsuranceCTA />
     </div>
   );
