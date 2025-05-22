@@ -1,10 +1,13 @@
 
 import React from "react";
+import { renderIcon } from "@/utils/iconMapping";
 
 interface Benefit {
   title: string;
   description: string;
-  icon: React.ReactNode;
+  iconName: string;
+  iconBg: string;
+  iconColor: string;
 }
 
 interface KeyBenefitsProps {
@@ -26,7 +29,9 @@ const KeyBenefits = ({ benefits }: KeyBenefitsProps) => {
           {benefits.map((benefit, index) => (
             <div key={index} className="glass-card p-6 border border-gray-100 rounded-xl">
               <div className="mb-4">
-                {benefit.icon}
+                <div className={`flex items-center justify-center w-12 h-12 rounded-full ${benefit.iconBg} ${benefit.iconColor}`}>
+                  {renderIcon(benefit.iconName)}
+                </div>
               </div>
               <h3 className="text-xl font-semibold mb-2">{benefit.title}</h3>
               <p className="text-gray-600">{benefit.description}</p>

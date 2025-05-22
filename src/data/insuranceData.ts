@@ -1,31 +1,29 @@
-
-import { Heart, Shield, ShieldCheck, User, Car, Home, Umbrella, Briefcase, FileChartLine } from "lucide-react";
-import React from "react";
+import { IconType } from "lucide-react";
 
 export const insuranceCategories = [{
   id: "health",
   title: "Health Insurance",
-  icon: <Heart className="h-6 w-6" />,
+  iconName: "Heart",
   description: "Comprehensive health coverage for individuals and families"
 }, {
   id: "life",
   title: "Life Insurance",
-  icon: <Shield className="h-6 w-6" />,
+  iconName: "Shield",
   description: "Secure your family's future with our life insurance plans"
 }, {
   id: "car",
   title: "Car Insurance",
-  icon: <Car className="h-6 w-6" />,
+  iconName: "Car",
   description: "Protect your vehicle against accidents and damages"
 }, {
   id: "home",
   title: "Home Insurance",
-  icon: <Home className="h-6 w-6" />,
+  iconName: "Home",
   description: "Safeguard your home and belongings"
 }, {
   id: "term",
   title: "Term Insurance",
-  icon: <ShieldCheck className="h-6 w-6" />,
+  iconName: "ShieldCheck",
   description: "High coverage at affordable premiums"
 }];
 
@@ -35,22 +33,22 @@ export const insuranceTypes = [{
   cards: [{
     title: "Individual Health",
     description: "Comprehensive health protection for you with customizable coverage options",
-    icon: <User className="h-6 w-6" />,
+    iconName: "User",
     color: "bg-gradient-to-r from-fintech-purple to-fintech-blue"
   }, {
     title: "Family Health",
     description: "Coverage for your entire family under a single policy with enhanced benefits",
-    icon: <User className="h-6 w-6" />,
+    iconName: "User",
     color: "bg-gradient-to-r from-fintech-blue to-fintech-ocean-blue"
   }, {
     title: "Senior Citizen",
     description: "Special health plans designed for the needs of senior citizens",
-    icon: <User className="h-6 w-6" />,
+    iconName: "User",
     color: "bg-gradient-to-r from-fintech-orange to-fintech-purple"
   }, {
     title: "Critical Illness",
     description: "Financial protection against major illnesses with lump-sum benefits",
-    icon: <Heart className="h-6 w-6" />,
+    iconName: "Heart",
     color: "bg-gradient-to-r from-fintech-deep-purple to-fintech-purple"
   }]
 }, {
@@ -59,22 +57,22 @@ export const insuranceTypes = [{
   cards: [{
     title: "Term Life",
     description: "High coverage at affordable premiums for a specific period",
-    icon: <Shield className="h-6 w-6" />,
+    iconName: "Shield",
     color: "bg-gradient-to-r from-fintech-purple to-fintech-blue"
   }, {
     title: "Whole Life",
     description: "Lifetime coverage with savings benefit for your family",
-    icon: <ShieldCheck className="h-6 w-6" />,
+    iconName: "ShieldCheck",
     color: "bg-gradient-to-r from-fintech-blue to-fintech-ocean-blue"
   }, {
     title: "Child Plans",
     description: "Secure your child's future education and milestones",
-    icon: <User className="h-6 w-6" />,
+    iconName: "User",
     color: "bg-gradient-to-r from-fintech-orange to-fintech-purple"
   }, {
     title: "Retirement Plans",
     description: "Build a corpus for your retirement years with guaranteed returns",
-    icon: <Briefcase className="h-6 w-6" />,
+    iconName: "Briefcase",
     color: "bg-gradient-to-r from-fintech-deep-purple to-fintech-purple"
   }]
 }, {
@@ -83,22 +81,22 @@ export const insuranceTypes = [{
   cards: [{
     title: "Comprehensive",
     description: "Complete protection for your vehicle against damages and third-party liability",
-    icon: <Car className="h-6 w-6" />,
+    iconName: "Car",
     color: "bg-gradient-to-r from-fintech-purple to-fintech-blue"
   }, {
     title: "Third-Party",
     description: "Mandatory insurance covering damages to third parties",
-    icon: <Car className="h-6 w-6" />,
+    iconName: "Car",
     color: "bg-gradient-to-r from-fintech-blue to-fintech-ocean-blue"
   }, {
     title: "Zero Depreciation",
     description: "Get full claim without accounting for vehicle depreciation",
-    icon: <Car className="h-6 w-6" />,
+    iconName: "Car",
     color: "bg-gradient-to-r from-fintech-orange to-fintech-purple"
   }, {
     title: "Add-ons",
     description: "Customize your policy with additional protections like roadside assistance",
-    icon: <Car className="h-6 w-6" />,
+    iconName: "Car",
     color: "bg-gradient-to-r from-fintech-deep-purple to-fintech-purple"
   }]
 }, {
@@ -107,22 +105,22 @@ export const insuranceTypes = [{
   cards: [{
     title: "Building Insurance",
     description: "Protection for your home structure against damages",
-    icon: <Home className="h-6 w-6" />,
+    iconName: "Home",
     color: "bg-gradient-to-r from-fintech-purple to-fintech-blue"
   }, {
     title: "Contents Insurance",
     description: "Coverage for valuables and belongings inside your home",
-    icon: <Home className="h-6 w-6" />,
+    iconName: "Home",
     color: "bg-gradient-to-r from-fintech-blue to-fintech-ocean-blue"
   }, {
     title: "Combined Policy",
     description: "Comprehensive coverage for both structure and contents",
-    icon: <Home className="h-6 w-6" />,
+    iconName: "Home",
     color: "bg-gradient-to-r from-fintech-orange to-fintech-purple"
   }, {
     title: "Natural Disasters",
     description: "Additional coverage against floods, earthquakes and other calamities",
-    icon: <Umbrella className="h-6 w-6" />,
+    iconName: "Umbrella",
     color: "bg-gradient-to-r from-fintech-deep-purple to-fintech-purple"
   }]
 }, {
@@ -131,22 +129,22 @@ export const insuranceTypes = [{
   cards: [{
     title: "Regular Term",
     description: "Pure life coverage with high sum assured at affordable premiums",
-    icon: <ShieldCheck className="h-6 w-6" />,
+    iconName: "ShieldCheck",
     color: "bg-gradient-to-r from-fintech-purple to-fintech-blue"
   }, {
     title: "Return of Premium",
     description: "Get all your premiums back at policy maturity",
-    icon: <ShieldCheck className="h-6 w-6" />,
+    iconName: "ShieldCheck",
     color: "bg-gradient-to-r from-fintech-blue to-fintech-ocean-blue"
   }, {
     title: "Increasing Term",
     description: "Sum assured increases over time to match inflation",
-    icon: <ShieldCheck className="h-6 w-6" />,
+    iconName: "ShieldCheck",
     color: "bg-gradient-to-r from-fintech-orange to-fintech-purple"
   }, {
     title: "Critical Illness Rider",
     description: "Added protection against major illnesses with your term plan",
-    icon: <Heart className="h-6 w-6" />,
+    iconName: "Heart",
     color: "bg-gradient-to-r from-fintech-deep-purple to-fintech-purple"
   }]
 }];
@@ -226,44 +224,44 @@ export const insuranceKeyBenefits = [
   {
     title: "Financial Protection",
     description: "Insurance provides a financial safety net for you and your family against unexpected events and major financial losses.",
-    icon: <div className="flex items-center justify-center w-12 h-12 rounded-full bg-green-100 text-green-600">
-      <Shield className="h-6 w-6" />
-    </div>
+    iconName: "Shield",
+    iconBg: "bg-green-100",
+    iconColor: "text-green-600"
   },
   {
     title: "Peace of Mind",
     description: "With insurance coverage, you can enjoy greater peace of mind knowing that you're protected against life's uncertainties.",
-    icon: <div className="flex items-center justify-center w-12 h-12 rounded-full bg-blue-100 text-blue-600">
-      <ShieldCheck className="h-6 w-6" />
-    </div>
+    iconName: "ShieldCheck",
+    iconBg: "bg-blue-100",
+    iconColor: "text-blue-600"
   },
   {
     title: "Tax Benefits",
     description: "Many insurance policies offer tax advantages, helping you reduce your tax liability while securing your future.",
-    icon: <div className="flex items-center justify-center w-12 h-12 rounded-full bg-purple-100 text-purple-600">
-      <FileChartLine className="h-6 w-6" />
-    </div>
+    iconName: "FileChartLine",
+    iconBg: "bg-purple-100",
+    iconColor: "text-purple-600"
   },
   {
     title: "Estate Planning",
     description: "Life insurance can be an important tool in estate planning, ensuring your wealth is transferred to your beneficiaries as intended.",
-    icon: <div className="flex items-center justify-center w-12 h-12 rounded-full bg-orange-100 text-orange-600">
-      <Briefcase className="h-6 w-6" />
-    </div>
+    iconName: "Briefcase",
+    iconBg: "bg-orange-100",
+    iconColor: "text-orange-600"
   },
   {
     title: "Cashless Treatment",
     description: "Health insurance policies offer cashless treatment at network hospitals, making healthcare access smoother during emergencies.",
-    icon: <div className="flex items-center justify-center w-12 h-12 rounded-full bg-cyan-100 text-cyan-600">
-      <Heart className="h-6 w-6" />
-    </div>
+    iconName: "Heart",
+    iconBg: "bg-cyan-100",
+    iconColor: "text-cyan-600"
   },
   {
     title: "Long-term Savings",
     description: "Some insurance policies double as investment instruments, helping you build a corpus for your long-term financial goals.",
-    icon: <div className="flex items-center justify-center w-12 h-12 rounded-full bg-yellow-100 text-yellow-600">
-      <User className="h-6 w-6" />
-    </div>
+    iconName: "User",
+    iconBg: "bg-yellow-100",
+    iconColor: "text-yellow-600"
   }
 ];
 

@@ -3,11 +3,12 @@ import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
+import { renderIcon } from "@/utils/iconMapping";
 
 interface InsuranceCardProps {
   title: string;
   description: string;
-  icon: React.ReactNode;
+  iconName: string;
   color: string;
   linkTo?: string;
   linkText?: string;
@@ -16,7 +17,7 @@ interface InsuranceCardProps {
 const InsuranceCard = ({
   title,
   description,
-  icon,
+  iconName,
   color,
   linkTo = "#",
   linkText = "View plans",
@@ -24,7 +25,7 @@ const InsuranceCard = ({
   <Card className="h-full transition-all duration-200 hover:shadow-lg hover:-translate-y-1">
     <CardContent className="p-6">
       <div className={`w-14 h-14 rounded-xl mb-4 flex items-center justify-center ${color} text-white`}>
-        {icon}
+        {renderIcon(iconName)}
       </div>
       <h3 className="text-xl font-semibold mb-2">{title}</h3>
       <p className="text-gray-600 mb-4">{description}</p>
