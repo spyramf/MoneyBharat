@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
@@ -6,7 +5,8 @@ import { ArrowLeft, Calendar, Clock, Share2 } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import BlogPostCard from '@/components/BlogPostCard';
-import { blogPosts, BlogPost as BlogPostType } from '@/data/blogData';
+import { useBlog } from '@/context/BlogContext';
+import { BlogPost as BlogPostType } from '@/data/blogData';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -17,11 +17,12 @@ const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
   const [post, setPost] = useState<BlogPostType | null>(null);
   const [relatedPosts, setRelatedPosts] = useState<BlogPostType[]>([]);
+  const { blogPosts, getPostBySlug } = useBlog();
 
   useEffect(() => {
     window.scrollTo(0, 0);
     
-    const currentPost = blogPosts.find(p => p.slug === slug);
+    const currentPost = getPostBySlug(slug || '');
     setPost(currentPost || null);
 
     if (currentPost) {
@@ -34,7 +35,7 @@ const BlogPost = () => {
         .slice(0, 3);
       setRelatedPosts(related);
     }
-  }, [slug]);
+  }, [slug, getPostBySlug, blogPosts]);
 
   if (!post) {
     return (
@@ -73,20 +74,20 @@ const BlogPost = () => {
   return (
     <>
       <Helmet>
-        <title>{post.title} | Money Bharat Blog</title>
-        <meta name="description" content={post.excerpt} />
-        <meta name="keywords" content={post.tags.join(', ')} />
-        <meta property="og:title" content={post.title} />
-        <meta property="og:description" content={post.excerpt} />
+        <title>{post?.title || 'Blog Post'} | Money Bharat Blog</title>
+        <meta name="description" content={post?.excerpt} />
+        <meta name="keywords" content={post?.tags.join(', ')} />
+        <meta property="og:title" content={post?.title || ''} />
+        <meta property="og:description" content={post?.excerpt || ''} />
         <meta property="og:type" content="article" />
-        <meta property="og:url" content={`https://moneybharat.com/blog/${post.slug}`} />
-        <meta property="og:image" content={post.featuredImage} />
-        <meta property="article:published_time" content={post.publishedDate} />
-        <meta property="article:section" content={post.category} />
-        {post.tags.map((tag) => (
+        <meta property="og:url" content={`https://moneybharat.com/blog/${post?.slug}`} />
+        <meta property="og:image" content={post?.featuredImage} />
+        <meta property="article:published_time" content={post?.publishedDate} />
+        <meta property="article:section" content={post?.category} />
+        {post?.tags.map((tag) => (
           <meta property="article:tag" content={tag} key={tag} />
         ))}
-        <link rel="canonical" href={`https://moneybharat.com/blog/${post.slug}`} />
+        <link rel="canonical" href={`https://moneybharat.com/blog/${post?.slug}`} />
       </Helmet>
 
       <Navbar />
@@ -109,7 +110,7 @@ const BlogPost = () => {
               </BreadcrumbItem>
               <BreadcrumbSeparator />
               <BreadcrumbItem>
-                <BreadcrumbLink>{post.title}</BreadcrumbLink>
+                <BreadcrumbLink>{post?.title}</BreadcrumbLink>
               </BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
@@ -123,34 +124,34 @@ const BlogPost = () => {
           {/* Category Badge */}
           <div className="mb-4">
             <Badge className="bg-fintech-purple">
-              {post.category}
+              {post?.category}
             </Badge>
           </div>
 
           {/* Article Title */}
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
-            {post.title}
+            {post?.title}
           </h1>
 
           {/* Article Metadata */}
           <div className="flex flex-wrap items-center gap-6 mb-8">
             <div className="flex items-center">
               <Avatar className="h-10 w-10 mr-3">
-                <AvatarImage src={post.author.avatar} alt={post.author.name} />
-                <AvatarFallback>{authorInitials}</AvatarFallback>
+                <AvatarImage src={post?.author.avatar} alt={post?.author.name} />
+                <AvatarFallback>{post?.author.name.split(' ').map(name => name[0]).join('')}</AvatarFallback>
               </Avatar>
               <div>
-                <p className="font-medium">{post.author.name}</p>
-                <p className="text-sm text-gray-500">{post.author.role}</p>
+                <p className="font-medium">{post?.author.name}</p>
+                <p className="text-sm text-gray-500">{post?.author.role}</p>
               </div>
             </div>
             <div className="flex items-center text-gray-500 text-sm">
               <Calendar className="h-4 w-4 mr-1" />
-              {post.publishedDate}
+              {post?.publishedDate}
             </div>
             <div className="flex items-center text-gray-500 text-sm">
               <Clock className="h-4 w-4 mr-1" />
-              {post.readTime}
+              {post?.readTime}
             </div>
             <Button 
               variant="outline" 
@@ -164,49 +165,55 @@ const BlogPost = () => {
           </div>
 
           {/* Featured Image */}
-          <div className="mb-8 rounded-xl overflow-hidden">
-            <img 
-              src={post.featuredImage} 
-              alt={post.title}
-              className="w-full h-auto max-h-[400px] object-cover"
-            />
-          </div>
+          {post?.featuredImage && (
+            <div className="mb-8 rounded-xl overflow-hidden">
+              <img 
+                src={post.featuredImage} 
+                alt={post.title}
+                className="w-full h-auto max-h-[400px] object-cover"
+              />
+            </div>
+          )}
 
           {/* Article Content */}
           <div className="max-w-3xl mx-auto">
             <div 
               className="prose prose-lg max-w-none" 
-              dangerouslySetInnerHTML={{ __html: post.content }}
+              dangerouslySetInnerHTML={{ __html: post?.content || '' }}
             />
 
             {/* Tags */}
-            <div className="mt-10 pt-6 border-t">
-              <h3 className="font-medium mb-3">Related Topics:</h3>
-              <div className="flex flex-wrap gap-2">
-                {post.tags.map((tag) => (
-                  <Badge key={tag} variant="outline" className="text-gray-700">
-                    {tag}
-                  </Badge>
-                ))}
-              </div>
-            </div>
-            
-            {/* Author Bio */}
-            <div className="mt-10 p-6 bg-gray-50 rounded-xl">
-              <div className="flex items-start gap-4">
-                <Avatar className="h-16 w-16">
-                  <AvatarImage src={post.author.avatar} alt={post.author.name} />
-                  <AvatarFallback className="text-lg">{authorInitials}</AvatarFallback>
-                </Avatar>
-                <div>
-                  <h3 className="text-xl font-bold mb-2">About {post.author.name}</h3>
-                  <p className="text-gray-600 mb-4">
-                    {post.author.role} at Money Bharat with extensive experience in Indian financial markets. 
-                    Passionate about making finance accessible to everyone.
-                  </p>
+            {post?.tags && post.tags.length > 0 && (
+              <div className="mt-10 pt-6 border-t">
+                <h3 className="font-medium mb-3">Related Topics:</h3>
+                <div className="flex flex-wrap gap-2">
+                  {post.tags.map((tag) => (
+                    <Badge key={tag} variant="outline" className="text-gray-700">
+                      {tag}
+                    </Badge>
+                  ))}
                 </div>
               </div>
-            </div>
+            )}
+            
+            {/* Author Bio */}
+            {post?.author && (
+              <div className="mt-10 p-6 bg-gray-50 rounded-xl">
+                <div className="flex items-start gap-4">
+                  <Avatar className="h-16 w-16">
+                    <AvatarImage src={post.author.avatar} alt={post.author.name} />
+                    <AvatarFallback className="text-lg">{post.author.name.split(' ').map(name => name[0]).join('')}</AvatarFallback>
+                  </Avatar>
+                  <div>
+                    <h3 className="text-xl font-bold mb-2">About {post.author.name}</h3>
+                    <p className="text-gray-600 mb-4">
+                      {post.author.role} at Money Bharat with extensive experience in Indian financial markets. 
+                      Passionate about making finance accessible to everyone.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         </article>
 
