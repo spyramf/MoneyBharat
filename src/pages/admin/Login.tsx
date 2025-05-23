@@ -56,7 +56,7 @@ const Login = () => {
             <div className="flex justify-center mb-4">
               <div className="h-12 w-12">
                 <img 
-                  src="/lovable-uploads/91d78f6e-991f-4f65-883d-f9962eb33219.png" 
+                  src="/lovable-uploads/92affb7c-7e35-42da-9aff-b0f55a689428.png" 
                   alt="Money Bharat Logo" 
                   className="h-full w-full object-contain" 
                 />

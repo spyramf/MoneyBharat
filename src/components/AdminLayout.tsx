@@ -42,7 +42,7 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
             <div className="flex items-center">
               <div className="h-8 w-8 mr-2">
                 <img 
-                  src="/lovable-uploads/91d78f6e-991f-4f65-883d-f9962eb33219.png" 
+                  src="/lovable-uploads/92affb7c-7e35-42da-9aff-b0f55a689428.png" 
                   alt="Money Bharat Logo" 
                   className="h-full w-full object-contain" 
                 />
