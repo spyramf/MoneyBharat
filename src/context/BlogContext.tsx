@@ -1,5 +1,5 @@
 
-import { createContext, useContext, useState, ReactNode, useEffect } from 'react';
+import { createContext, useContext, useState, ReactNode } from 'react';
 import { blogPosts as initialBlogPosts, BlogPost, blogCategories as initialCategories } from '@/data/blogData';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/components/ui/use-toast';
@@ -33,17 +33,22 @@ interface BlogProviderProps {
 
 // Function to fetch blogs from Supabase
 const fetchBlogs = async (): Promise<BlogPost[]> => {
-  const { data, error } = await supabase
-    .from('blogs')
-    .select('*')
-    .order('created_at', { ascending: false });
+  try {
+    const { data, error } = await supabase
+      .from('blogs')
+      .select('*')
+      .order('created_at', { ascending: false });
 
-  if (error) {
+    if (error) {
+      console.error('Error fetching blogs:', error);
+      throw new Error('Failed to fetch blogs');
+    }
+
+    return data as unknown as BlogPost[];
+  } catch (error) {
     console.error('Error fetching blogs:', error);
-    throw new Error('Failed to fetch blogs');
+    return initialBlogPosts; // Fallback to initial data
   }
-
-  return data as unknown as BlogPost[];
 };
 
 export const BlogProvider = ({ children }: BlogProviderProps) => {
@@ -55,66 +60,89 @@ export const BlogProvider = ({ children }: BlogProviderProps) => {
   const { data: blogPosts = [], isLoading, error } = useQuery({
     queryKey: ['blogs'],
     queryFn: fetchBlogs,
-    // If data fetching fails, fall back to initial data
-    onError: (err) => {
-      console.error('Error loading blogs from Supabase:', err);
-      toast({
-        title: "Error loading blogs",
-        description: "Using fallback data. Please check your connection.",
-        variant: "destructive",
-      });
-      return initialBlogPosts;
+    onSettled: (data, error) => {
+      if (error) {
+        console.error('Error loading blogs from Supabase:', error);
+        toast({
+          title: "Error loading blogs",
+          description: "Using fallback data. Please check your connection.",
+          variant: "destructive",
+        });
+      }
     }
   });
 
   // Initialize Supabase with initial data if needed
-  useEffect(() => {
-    const initializeSupabase = async () => {
-      try {
-        const { count } = await supabase
-          .from('blogs')
-          .select('*', { count: 'exact', head: true });
+  const initializeSupabase = async () => {
+    try {
+      // First check if the table exists by trying a simple count query
+      const { count, error: countError } = await supabase
+        .from('blogs')
+        .select('*', { count: 'exact', head: true });
 
-        // If no data in Supabase, add initial data
-        if (count === 0) {
-          for (const post of initialBlogPosts) {
-            await supabase.from('blogs').insert({
-              ...post,
-              tags: post.tags
-            });
-          }
-          queryClient.invalidateQueries({ queryKey: ['blogs'] });
-        }
-      } catch (error) {
-        console.error('Error initializing blogs in Supabase:', error);
+      if (countError) {
+        console.error('Error checking blogs table:', countError);
+        return; // Table might not exist yet
       }
-    };
 
-    initializeSupabase();
-  }, [queryClient]);
+      // If no data in Supabase, add initial data
+      if (count === 0) {
+        console.log('Initializing blog data in Supabase');
+        for (const post of initialBlogPosts) {
+          try {
+            await supabase
+              .from('blogs')
+              .insert({
+                title: post.title,
+                slug: post.slug, 
+                excerpt: post.excerpt,
+                content: post.content,
+                category: post.category,
+                author: post.author,
+                publishedDate: post.publishedDate,
+                readTime: post.readTime,
+                tags: post.tags,
+                isFeatured: post.isFeatured,
+                featuredImage: post.featuredImage
+              } as any);
+          } catch (error) {
+            console.error('Error inserting blog post:', error);
+          }
+        }
+        queryClient.invalidateQueries({ queryKey: ['blogs'] });
+      }
+    } catch (error) {
+      console.error('Error initializing blogs in Supabase:', error);
+    }
+  };
 
   // Add post mutation
   const addPostMutation = useMutation({
     mutationFn: async (post: Omit<BlogPost, 'id'>) => {
-      const { data, error } = await supabase
-        .from('blogs')
-        .insert({
-          title: post.title,
-          slug: post.slug, 
-          excerpt: post.excerpt,
-          content: post.content,
-          category: post.category,
-          author: post.author,
-          publishedDate: post.publishedDate,
-          readTime: post.readTime,
-          tags: post.tags,
-          isFeatured: post.isFeatured,
-          featuredImage: post.featuredImage
-        })
-        .select();
+      try {
+        const { data, error } = await supabase
+          .from('blogs')
+          .insert({
+            title: post.title,
+            slug: post.slug, 
+            excerpt: post.excerpt,
+            content: post.content,
+            category: post.category,
+            author: post.author,
+            publishedDate: post.publishedDate,
+            readTime: post.readTime,
+            tags: post.tags,
+            isFeatured: post.isFeatured,
+            featuredImage: post.featuredImage
+          } as any)
+          .select();
 
-      if (error) throw new Error(error.message);
-      return data[0] as unknown as BlogPost;
+        if (error) throw new Error(error.message);
+        return data[0] as unknown as BlogPost;
+      } catch (error) {
+        console.error('Error adding blog post:', error);
+        throw error;
+      }
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['blogs'] });
@@ -135,26 +163,31 @@ export const BlogProvider = ({ children }: BlogProviderProps) => {
   // Update post mutation
   const updatePostMutation = useMutation({
     mutationFn: async (post: BlogPost) => {
-      const { error } = await supabase
-        .from('blogs')
-        .update({
-          title: post.title,
-          slug: post.slug,
-          excerpt: post.excerpt,
-          content: post.content,
-          category: post.category,
-          author: post.author,
-          publishedDate: post.publishedDate,
-          readTime: post.readTime,
-          tags: post.tags,
-          isFeatured: post.isFeatured,
-          featuredImage: post.featuredImage,
-          updated_at: new Date().toISOString()
-        })
-        .eq('id', post.id);
+      try {
+        const { error } = await supabase
+          .from('blogs')
+          .update({
+            title: post.title,
+            slug: post.slug,
+            excerpt: post.excerpt,
+            content: post.content,
+            category: post.category,
+            author: post.author,
+            publishedDate: post.publishedDate,
+            readTime: post.readTime,
+            tags: post.tags,
+            isFeatured: post.isFeatured,
+            featuredImage: post.featuredImage,
+            updated_at: new Date().toISOString()
+          } as any)
+          .eq('id', post.id);
 
-      if (error) throw new Error(error.message);
-      return post;
+        if (error) throw new Error(error.message);
+        return post;
+      } catch (error) {
+        console.error('Error updating blog post:', error);
+        throw error;
+      }
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['blogs'] });
@@ -175,13 +208,18 @@ export const BlogProvider = ({ children }: BlogProviderProps) => {
   // Delete post mutation
   const deletePostMutation = useMutation({
     mutationFn: async (id: number) => {
-      const { error } = await supabase
-        .from('blogs')
-        .delete()
-        .eq('id', id);
+      try {
+        const { error } = await supabase
+          .from('blogs')
+          .delete()
+          .eq('id', id);
 
-      if (error) throw new Error(error.message);
-      return id;
+        if (error) throw new Error(error.message);
+        return id;
+      } catch (error) {
+        console.error('Error deleting blog post:', error);
+        throw error;
+      }
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['blogs'] });
@@ -230,6 +268,11 @@ export const BlogProvider = ({ children }: BlogProviderProps) => {
     isLoading,
     error: error as Error | null,
   };
+
+  // Initialize data on first load
+  React.useEffect(() => {
+    initializeSupabase();
+  }, []);
 
   return (
     <BlogContext.Provider value={value}>

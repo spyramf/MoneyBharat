@@ -42,29 +42,34 @@ interface BookingProviderProps {
 
 // Function to fetch bookings from Supabase
 const fetchBookings = async (): Promise<Booking[]> => {
-  const { data, error } = await supabase
-    .from('bookings')
-    .select('*')
-    .order('created_at', { ascending: false });
+  try {
+    const { data, error } = await supabase
+      .from('bookings')
+      .select('*')
+      .order('created_at', { ascending: false });
 
-  if (error) {
-    console.error('Error fetching bookings:', error);
-    throw new Error('Failed to fetch bookings');
+    if (error) {
+      console.error('Error fetching bookings:', error);
+      throw new Error('Failed to fetch bookings');
+    }
+
+    // Map from Supabase format to our app's format
+    return (data || []).map(booking => ({
+      id: booking.id,
+      name: booking.name,
+      email: booking.email,
+      phone: booking.phone,
+      service: booking.service,
+      date: booking.date,
+      time: booking.time,
+      message: booking.message,
+      status: booking.status as 'pending' | 'confirmed' | 'cancelled',
+      createdAt: booking.created_at
+    }));
+  } catch (error) {
+    console.error('Error in fetchBookings:', error);
+    return [];
   }
-
-  // Map from Supabase format to our app's format
-  return data.map(booking => ({
-    id: booking.id,
-    name: booking.name,
-    email: booking.email,
-    phone: booking.phone,
-    service: booking.service,
-    date: booking.date,
-    time: booking.time,
-    message: booking.message,
-    status: booking.status as 'pending' | 'confirmed' | 'cancelled',
-    createdAt: booking.created_at
-  }));
 };
 
 export const BookingProvider = ({ children }: BookingProviderProps) => {
@@ -75,37 +80,42 @@ export const BookingProvider = ({ children }: BookingProviderProps) => {
   const { data: bookings = [], isLoading, error } = useQuery({
     queryKey: ['bookings'],
     queryFn: fetchBookings,
-    onError: (err) => {
-      console.error('Error loading bookings from Supabase:', err);
-      toast({
-        title: "Error loading bookings",
-        description: "Please check your connection.",
-        variant: "destructive",
-      });
-      // Return empty array as fallback
-      return [];
+    onSettled: (data, error) => {
+      if (error) {
+        console.error('Error loading bookings from Supabase:', error);
+        toast({
+          title: "Error loading bookings",
+          description: "Please check your connection.",
+          variant: "destructive",
+        });
+      }
     }
   });
 
   // Add booking mutation
   const addBookingMutation = useMutation({
     mutationFn: async (booking: Omit<Booking, 'id' | 'status' | 'createdAt'>) => {
-      const { data, error } = await supabase
-        .from('bookings')
-        .insert({
-          name: booking.name,
-          email: booking.email,
-          phone: booking.phone,
-          service: booking.service,
-          date: booking.date,
-          time: booking.time,
-          message: booking.message,
-          status: 'pending'
-        })
-        .select();
+      try {
+        const { data, error } = await supabase
+          .from('bookings')
+          .insert({
+            name: booking.name,
+            email: booking.email,
+            phone: booking.phone,
+            service: booking.service,
+            date: booking.date,
+            time: booking.time,
+            message: booking.message,
+            status: 'pending'
+          } as any)
+          .select();
 
-      if (error) throw new Error(error.message);
-      return data[0];
+        if (error) throw new Error(error.message);
+        return data[0];
+      } catch (error) {
+        console.error('Error adding booking:', error);
+        throw error;
+      }
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['bookings'] });
@@ -126,13 +136,18 @@ export const BookingProvider = ({ children }: BookingProviderProps) => {
   // Update booking status mutation
   const updateBookingStatusMutation = useMutation({
     mutationFn: async ({ id, status }: { id: number, status: 'pending' | 'confirmed' | 'cancelled' }) => {
-      const { error } = await supabase
-        .from('bookings')
-        .update({ status })
-        .eq('id', id);
+      try {
+        const { error } = await supabase
+          .from('bookings')
+          .update({ status } as any)
+          .eq('id', id);
 
-      if (error) throw new Error(error.message);
-      return { id, status };
+        if (error) throw new Error(error.message);
+        return { id, status };
+      } catch (error) {
+        console.error('Error updating booking status:', error);
+        throw error;
+      }
     },
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ['bookings'] });
@@ -153,13 +168,18 @@ export const BookingProvider = ({ children }: BookingProviderProps) => {
   // Delete booking mutation
   const deleteBookingMutation = useMutation({
     mutationFn: async (id: number) => {
-      const { error } = await supabase
-        .from('bookings')
-        .delete()
-        .eq('id', id);
+      try {
+        const { error } = await supabase
+          .from('bookings')
+          .delete()
+          .eq('id', id);
 
-      if (error) throw new Error(error.message);
-      return id;
+        if (error) throw new Error(error.message);
+        return id;
+      } catch (error) {
+        console.error('Error deleting booking:', error);
+        throw error;
+      }
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['bookings'] });
