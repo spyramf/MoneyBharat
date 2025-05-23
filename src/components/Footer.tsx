@@ -1,3 +1,4 @@
+
 import { Facebook, Instagram, Linkedin, Twitter } from "lucide-react";
 import { Link } from "react-router-dom";
 const Footer = () => {
@@ -6,9 +7,18 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Brand */}
           <div>
-            <Link to="/" className="text-2xl font-bold">
-              <span className="gradient-text">Money</span>
-              <span className="text-fintech-green"> Bharat</span>
+            <Link to="/" className="flex items-center">
+              <div className="h-10 w-10 mr-2">
+                <img 
+                  src="/lovable-uploads/92affb7c-7e35-42da-9aff-b0f55a689428.png" 
+                  alt="Money Bharat Logo" 
+                  className="h-full w-full object-contain" 
+                />
+              </div>
+              <span className="text-2xl font-bold">
+                <span className="gradient-text">Money</span>
+                <span className="text-fintech-green"> Bharat</span>
+              </span>
             </Link>
             <p className="mt-4 text-gray-600 max-w-xs">
               Transforming India's financial landscape with innovative tech-driven solutions for wealth creation.
