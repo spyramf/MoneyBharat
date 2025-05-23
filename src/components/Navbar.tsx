@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { Button } from "@/components/ui/button";
@@ -26,7 +25,7 @@ const Navbar = () => {
           <div className="flex items-center">
             <Link to="/" className="flex items-center">
               <div className="h-10 w-10 mr-2">
-                <img src="/lovable-uploads/92affb7c-7e35-42da-9aff-b0f55a689428.png" alt="Money Bharat Logo" className="h-full w-full object-contain" />
+                <img src="/lovable-uploads/92affb7c-7e35-42da-9aff-b0f55a689428.png" alt="Money Bharat Logo" className="h-full w-full object-fill" />
               </div>
               <span className="text-2xl font-bold">
                 <span className="gradient-text">Money</span>
