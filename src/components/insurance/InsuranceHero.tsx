@@ -1,8 +1,11 @@
 
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
+import InsuranceQuoteForm from "./InsuranceQuoteForm";
 
 const InsuranceHero = () => {
+  const [isQuoteFormOpen, setIsQuoteFormOpen] = useState(false);
+
   return (
     <section className="pt-32 pb-16 px-4 sm:px-6 bg-gradient-to-b from-white to-blue-50">
       <div className="container mx-auto text-center">
@@ -16,7 +19,10 @@ const InsuranceHero = () => {
           Compare plans from top insurers and get the right coverage at the best price
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Button className="bg-gradient-to-r from-fintech-purple to-fintech-blue text-white px-6 py-6 text-lg">
+          <Button 
+            className="bg-gradient-to-r from-fintech-purple to-fintech-blue text-white px-6 py-6 text-lg"
+            onClick={() => setIsQuoteFormOpen(true)}
+          >
             Get Free Quote
           </Button>
           <Button variant="outline" className="border-fintech-purple text-fintech-purple px-6 py-6 text-lg">
@@ -24,6 +30,11 @@ const InsuranceHero = () => {
           </Button>
         </div>
       </div>
+
+      <InsuranceQuoteForm 
+        open={isQuoteFormOpen}
+        onOpenChange={setIsQuoteFormOpen}
+      />
     </section>
   );
 };
