@@ -43,12 +43,12 @@ const queryClient = new QueryClient();
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <HelmetProvider>
-      <TooltipProvider>
-        <BlogProvider>
-          <BookingProvider>
-            <Toaster />
-            <Sonner />
-            <BrowserRouter>
+      <BlogProvider>
+        <BookingProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <TooltipProvider>
               <Routes>
                 {/* Public Routes */}
                 <Route path="/" element={<Index />} />
@@ -85,10 +85,10 @@ const App = () => (
                 {/* 404 Route */}
                 <Route path="*" element={<NotFound />} />
               </Routes>
-            </BrowserRouter>
-          </BookingProvider>
-        </BlogProvider>
-      </TooltipProvider>
+            </TooltipProvider>
+          </BrowserRouter>
+        </BookingProvider>
+      </BlogProvider>
     </HelmetProvider>
   </QueryClientProvider>
 );
