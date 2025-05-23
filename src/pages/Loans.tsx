@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import Navbar from '@/components/Navbar';
@@ -17,7 +16,6 @@ import GraduationCap from '@/components/icons/GraduationCap';
 import { Link } from 'react-router-dom';
 import { Badge } from '@/components/ui/badge';
 import ProductCard from '@/components/ProductCard';
-
 const Loans = () => {
   const [loanAmount, setLoanAmount] = useState<number>(500000);
   const [loanTenure, setLoanTenure] = useState<number>(36);
@@ -35,37 +33,33 @@ const Loans = () => {
   const emi = calculateEmi();
   const totalPayable = emi * loanTenure;
   const totalInterest = totalPayable - loanAmount;
-  
+
   // New recommended loans data
-  const recommendedLoans = [
-    {
-      name: "Instant Personal Loan",
-      provider: "HDFC Bank",
-      interestRate: "10.50%",
-      processingFee: "Up to 2.50%",
-      maxAmount: "₹40 Lakhs",
-      rating: 4.8,
-      benefits: ["Quick approval within 4 hours", "Zero collateral required", "Flexible repayment options"]
-    },
-    {
-      name: "Business Growth Loan",
-      provider: "ICICI Bank",
-      interestRate: "12.25%",
-      processingFee: "1.50%",
-      maxAmount: "₹75 Lakhs",
-      rating: 4.6,
-      benefits: ["Customized for SMEs", "Minimal documentation", "Line of credit options"]
-    },
-    {
-      name: "Prime Home Loan",
-      provider: "SBI",
-      interestRate: "8.75%",
-      processingFee: "0.35%",
-      maxAmount: "₹5 Crores",
-      rating: 4.9,
-      benefits: ["Lowest interest rates", "Up to 30 years tenure", "Balance transfer option"]
-    }
-  ];
+  const recommendedLoans = [{
+    name: "Instant Personal Loan",
+    provider: "HDFC Bank",
+    interestRate: "10.50%",
+    processingFee: "Up to 2.50%",
+    maxAmount: "₹40 Lakhs",
+    rating: 4.8,
+    benefits: ["Quick approval within 4 hours", "Zero collateral required", "Flexible repayment options"]
+  }, {
+    name: "Business Growth Loan",
+    provider: "ICICI Bank",
+    interestRate: "12.25%",
+    processingFee: "1.50%",
+    maxAmount: "₹75 Lakhs",
+    rating: 4.6,
+    benefits: ["Customized for SMEs", "Minimal documentation", "Line of credit options"]
+  }, {
+    name: "Prime Home Loan",
+    provider: "SBI",
+    interestRate: "8.75%",
+    processingFee: "0.35%",
+    maxAmount: "₹5 Crores",
+    rating: 4.9,
+    benefits: ["Lowest interest rates", "Up to 30 years tenure", "Balance transfer option"]
+  }];
 
   // Enhance loan types with more features
   const loanTypes = [{
@@ -117,7 +111,6 @@ const Loans = () => {
     gradient: "bg-gradient-to-r from-yellow-500 to-yellow-500/80",
     path: "/loans/mutual-funds"
   }];
-  
   const loanComparisons = [{
     bank: "HDFC Bank",
     interestRate: "10.50% - 18.00%",
@@ -144,7 +137,6 @@ const Loans = () => {
     processingFee: "Up to 3.99% + GST",
     prepaymentCharges: "4% on outstanding amount"
   }];
-  
   const faqs = [{
     question: "How do I apply for a loan?",
     answer: "You can apply for a loan by submitting an application through our website, visiting our branch, or contacting our customer service team. You'll need to provide personal information, income details, and any required documents."
@@ -167,38 +159,18 @@ const Loans = () => {
     question: "Can I get a loan with a bad credit score?",
     answer: "While having a good credit score improves your chances of loan approval and better interest rates, some lenders may still offer loans to individuals with poor credit scores, albeit at higher interest rates or with additional security requirements."
   }];
-  
-  // New loan eligibility criteria data
-  const eligibilityCriteria = [
-    {
-      loanType: "Personal Loan",
-      criteria: [
-        "Age 21-60 years",
-        "Minimum income of ₹15,000 per month",
-        "CIBIL score of 700+",
-        "At least 1 year of work experience"
-      ]
-    },
-    {
-      loanType: "Business Loan",
-      criteria: [
-        "Business operational for at least 2 years",
-        "Annual turnover of ₹50 lakhs+",
-        "CIBIL score of 700+",
-        "ITR filed for at least 1 year"
-      ]
-    },
-    {
-      loanType: "Home Loan",
-      criteria: [
-        "Age 21-65 years (at loan maturity)",
-        "Minimum income of ₹25,000 per month",
-        "CIBIL score of 750+",
-        "Property with clear title and approvals"
-      ]
-    }
-  ];
 
+  // New loan eligibility criteria data
+  const eligibilityCriteria = [{
+    loanType: "Personal Loan",
+    criteria: ["Age 21-60 years", "Minimum income of ₹15,000 per month", "CIBIL score of 700+", "At least 1 year of work experience"]
+  }, {
+    loanType: "Business Loan",
+    criteria: ["Business operational for at least 2 years", "Annual turnover of ₹50 lakhs+", "CIBIL score of 700+", "ITR filed for at least 1 year"]
+  }, {
+    loanType: "Home Loan",
+    criteria: ["Age 21-65 years (at loan maturity)", "Minimum income of ₹25,000 per month", "CIBIL score of 750+", "Property with clear title and approvals"]
+  }];
   return <div className="flex min-h-screen flex-col">
       <Navbar />
       
@@ -246,8 +218,7 @@ const Loans = () => {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {recommendedLoans.map((loan, index) => (
-              <Card key={index} className="border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-all">
+            {recommendedLoans.map((loan, index) => <Card key={index} className="border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-all">
                 <div className="bg-gradient-to-r from-fintech-green/10 to-fintech-blue/10 px-6 py-4">
                   <div className="flex justify-between items-center">
                     <h3 className="font-bold text-xl">{loan.name}</h3>
@@ -277,20 +248,17 @@ const Loans = () => {
                   <div className="mb-4">
                     <p className="text-sm font-medium mb-2">Key Benefits</p>
                     <ul className="space-y-2">
-                      {loan.benefits.map((benefit, idx) => (
-                        <li key={idx} className="flex items-start gap-2 text-sm">
+                      {loan.benefits.map((benefit, idx) => <li key={idx} className="flex items-start gap-2 text-sm">
                           <BadgeCheck className="h-5 w-5 text-fintech-green flex-shrink-0 mt-0.5" />
                           <span>{benefit}</span>
-                        </li>
-                      ))}
+                        </li>)}
                     </ul>
                   </div>
                 </CardContent>
                 <CardFooter className="bg-gray-50 border-t border-gray-100">
                   <Button className="w-full bg-fintech-green hover:bg-fintech-green/90">Apply Now</Button>
                 </CardFooter>
-              </Card>
-            ))}
+              </Card>)}
           </div>
         </div>
       </section>
@@ -309,18 +277,7 @@ const Loans = () => {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {loanTypes.map(loan => (
-              <ProductCard
-                key={loan.id}
-                title={loan.name}
-                icon={loan.icon}
-                description={loan.description}
-                features={loan.features}
-                linkText="Learn More"
-                linkHref={loan.path}
-                gradient={loan.gradient}
-              />
-            ))}
+            {loanTypes.map(loan => <ProductCard key={loan.id} title={loan.name} icon={loan.icon} description={loan.description} features={loan.features} linkText="Learn More" linkHref={loan.path} gradient={loan.gradient} />)}
           </div>
         </div>
       </section>
@@ -339,8 +296,7 @@ const Loans = () => {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            {eligibilityCriteria.map((item, index) => (
-              <Card key={index} className="border-none shadow-sm hover:shadow-md transition-all">
+            {eligibilityCriteria.map((item, index) => <Card key={index} className="border-none shadow-sm hover:shadow-md transition-all">
                 <CardHeader className="pb-2">
                   <CardTitle className="flex items-center">
                     <div className="w-10 h-10 rounded-full bg-fintech-blue/10 flex items-center justify-center mr-3">
@@ -353,14 +309,12 @@ const Loans = () => {
                 </CardHeader>
                 <CardContent>
                   <ul className="space-y-3">
-                    {item.criteria.map((criterion, idx) => (
-                      <li key={idx} className="flex items-start gap-2">
+                    {item.criteria.map((criterion, idx) => <li key={idx} className="flex items-start gap-2">
                         <div className="rounded-full bg-fintech-blue/10 p-1 flex-shrink-0 mt-0.5">
                           <BadgeCheck className="h-4 w-4 text-fintech-blue" />
                         </div>
                         <span className="text-sm text-gray-600">{criterion}</span>
-                      </li>
-                    ))}
+                      </li>)}
                   </ul>
                 </CardContent>
                 <CardFooter>
@@ -368,8 +322,7 @@ const Loans = () => {
                     Check Eligibility
                   </Button>
                 </CardFooter>
-              </Card>
-            ))}
+              </Card>)}
           </div>
         </div>
       </section>
@@ -401,14 +354,7 @@ const Loans = () => {
                         <span>Loan Amount (₹)</span>
                         <span className="font-medium text-fintech-purple">{loanAmount.toLocaleString()}</span>
                       </Label>
-                      <Slider 
-                        value={[loanAmount]} 
-                        min={50000} 
-                        max={5000000} 
-                        step={10000} 
-                        onValueChange={value => setLoanAmount(value[0])} 
-                        className="mt-4" 
-                      />
+                      <Slider value={[loanAmount]} min={50000} max={5000000} step={10000} onValueChange={value => setLoanAmount(value[0])} className="mt-4" />
                       <div className="flex justify-between text-sm text-gray-500 mt-1">
                         <span>₹50K</span>
                         <span>₹50L</span>
@@ -420,14 +366,7 @@ const Loans = () => {
                         <span>Interest Rate (%)</span>
                         <span className="font-medium text-fintech-purple">{interestRate}%</span>
                       </Label>
-                      <Slider 
-                        value={[interestRate]} 
-                        min={5} 
-                        max={20} 
-                        step={0.1} 
-                        onValueChange={value => setInterestRate(value[0])} 
-                        className="mt-4" 
-                      />
+                      <Slider value={[interestRate]} min={5} max={20} step={0.1} onValueChange={value => setInterestRate(value[0])} className="mt-4" />
                       <div className="flex justify-between text-sm text-gray-500 mt-1">
                         <span>5%</span>
                         <span>20%</span>
@@ -439,14 +378,7 @@ const Loans = () => {
                         <span>Loan Tenure (months)</span>
                         <span className="font-medium text-fintech-purple">{loanTenure} months</span>
                       </Label>
-                      <Slider 
-                        value={[loanTenure]} 
-                        min={12} 
-                        max={84} 
-                        step={1} 
-                        onValueChange={value => setLoanTenure(value[0])} 
-                        className="mt-4" 
-                      />
+                      <Slider value={[loanTenure]} min={12} max={84} step={1} onValueChange={value => setLoanTenure(value[0])} className="mt-4" />
                       <div className="flex justify-between text-sm text-gray-500 mt-1">
                         <span>1 Year</span>
                         <span>7 Years</span>
@@ -523,13 +455,12 @@ const Loans = () => {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {loanComparisons.map((bank, index) => (
-                    <TableRow key={index} className={`border-b border-gray-200 hover:bg-gray-50/70 transition-colors ${index % 2 === 0 ? 'bg-white' : 'bg-gray-50/50'}`}>
+                  {loanComparisons.map((bank, index) => <TableRow key={index} className={`border-b border-gray-200 hover:bg-gray-50/70 transition-colors ${index % 2 === 0 ? 'bg-white' : 'bg-gray-50/50'}`}>
                       <TableCell className="py-4 px-6">
                         <div className="flex items-center">
                           <div className="w-10 h-10 bg-fintech-purple/10 rounded-full flex items-center justify-center mr-3 text-white font-bold" style={{
-                            backgroundColor: index === 0 ? "#6366f1" : index === 1 ? "#8b5cf6" : index === 2 ? "#0369a1" : index === 3 ? "#14b8a6" : "#f59e0b"
-                          }}>
+                        backgroundColor: index === 0 ? "#6366f1" : index === 1 ? "#8b5cf6" : index === 2 ? "#0369a1" : index === 3 ? "#14b8a6" : "#f59e0b"
+                      }}>
                             {bank.bank.charAt(0)}
                           </div>
                           <div>
@@ -558,8 +489,7 @@ const Loans = () => {
                           Apply
                         </Button>
                       </TableCell>
-                    </TableRow>
-                  ))}
+                    </TableRow>)}
                 </TableBody>
               </Table>
             </div>
@@ -712,16 +642,14 @@ const Loans = () => {
                 <Card className="border-none shadow-sm">
                   <CardContent className="pt-6">
                     <div className="space-y-6">
-                      {faqs.slice(0, 3).map((faq, index) => (
-                        <div key={index} className="mb-6 last:mb-0">
+                      {faqs.slice(0, 3).map((faq, index) => <div key={index} className="mb-6 last:mb-0">
                           <h3 className="text-xl font-semibold mb-2 flex items-center gap-2">
                             <span className="w-6 h-6 rounded-full bg-fintech-blue/10 flex items-center justify-center text-sm text-fintech-blue font-bold">Q</span>
                             {faq.question}
                           </h3>
                           <p className="text-gray-600 pl-8">{faq.answer}</p>
                           {index < 2 && <Separator className="mt-6" />}
-                        </div>
-                      ))}
+                        </div>)}
                     </div>
                   </CardContent>
                 </Card>
@@ -731,16 +659,14 @@ const Loans = () => {
                 <Card className="border-none shadow-sm">
                   <CardContent className="pt-6">
                     <div className="space-y-6">
-                      {faqs.slice(3, 5).map((faq, index) => (
-                        <div key={index} className="mb-6 last:mb-0">
+                      {faqs.slice(3, 5).map((faq, index) => <div key={index} className="mb-6 last:mb-0">
                           <h3 className="text-xl font-semibold mb-2 flex items-center gap-2">
                             <span className="w-6 h-6 rounded-full bg-fintech-blue/10 flex items-center justify-center text-sm text-fintech-blue font-bold">Q</span>
                             {faq.question}
                           </h3>
                           <p className="text-gray-600 pl-8">{faq.answer}</p>
                           {index < 1 && <Separator className="mt-6" />}
-                        </div>
-                      ))}
+                        </div>)}
                     </div>
                   </CardContent>
                 </Card>
@@ -750,16 +676,14 @@ const Loans = () => {
                 <Card className="border-none shadow-sm">
                   <CardContent className="pt-6">
                     <div className="space-y-6">
-                      {faqs.slice(5, 7).map((faq, index) => (
-                        <div key={index} className="mb-6 last:mb-0">
+                      {faqs.slice(5, 7).map((faq, index) => <div key={index} className="mb-6 last:mb-0">
                           <h3 className="text-xl font-semibold mb-2 flex items-center gap-2">
                             <span className="w-6 h-6 rounded-full bg-fintech-blue/10 flex items-center justify-center text-sm text-fintech-blue font-bold">Q</span>
                             {faq.question}
                           </h3>
                           <p className="text-gray-600 pl-8">{faq.answer}</p>
                           {index < 1 && <Separator className="mt-6" />}
-                        </div>
-                      ))}
+                        </div>)}
                     </div>
                   </CardContent>
                 </Card>
@@ -787,7 +711,7 @@ const Loans = () => {
               <Button size="lg" className="bg-white text-fintech-green hover:bg-white/90">
                 Apply for a Loan
               </Button>
-              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10">
+              <Button size="lg" variant="outline" className="border-white text-white bg-fintech-green">
                 Speak to an Advisor
               </Button>
             </div>
