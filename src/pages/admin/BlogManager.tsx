@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useBlog } from '@/context/BlogContext';
 import { blogCategories } from '@/data/blogData';
@@ -27,8 +27,16 @@ const BlogManager = () => {
   const [categoryFilter, setCategoryFilter] = useState('all');
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
   const [postToDelete, setPostToDelete] = useState<number | null>(null);
+  const [refreshKey, setRefreshKey] = useState(0); // Add a refresh key to force re-render
   
   const { blogPosts, deletePost } = useBlog();
+  
+  // Force component to refresh when navigating back to this page
+  useEffect(() => {
+    const refreshData = () => setRefreshKey(prev => prev + 1);
+    window.addEventListener('focus', refreshData);
+    return () => window.removeEventListener('focus', refreshData);
+  }, []);
   
   const filteredBlogs = blogPosts.filter(post => {
     // Apply search filter
@@ -52,6 +60,8 @@ const BlogManager = () => {
       toast.success("Blog post deleted successfully");
       setIsDeleteDialogOpen(false);
       setPostToDelete(null);
+      // Force refresh to ensure UI is updated
+      setRefreshKey(prev => prev + 1);
     }
   };
 
@@ -113,7 +123,7 @@ const BlogManager = () => {
                 </TableRow>
               ) : (
                 filteredBlogs.map(post => (
-                  <TableRow key={post.id}>
+                  <TableRow key={`${post.id}-${refreshKey}`}>
                     <TableCell>
                       <div>
                         <div className="font-medium">{post.title}</div>
