@@ -5,7 +5,7 @@ import InsuranceCard from "./InsuranceCard";
 interface InsurancePlan {
   title: string;
   description: string;
-  icon: React.ReactNode;
+  iconName: string;
   color: string;
 }
 
@@ -36,7 +36,7 @@ const InsurancePlans = ({ selectedType }: InsurancePlansProps) => {
               key={index} 
               title={card.title} 
               description={card.description} 
-              icon={card.icon} 
+              iconName={card.iconName} 
               color={card.color} 
             />
           ))}

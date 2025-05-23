@@ -1,4 +1,3 @@
-import { IconType } from "lucide-react";
 
 export const insuranceCategories = [{
   id: "health",
