@@ -1,5 +1,5 @@
 
-import { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useState, ReactNode, useEffect } from 'react';
 import { blogPosts as initialBlogPosts, BlogPost, blogCategories as initialCategories } from '@/data/blogData';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/components/ui/use-toast';
@@ -34,7 +34,8 @@ interface BlogProviderProps {
 // Function to fetch blogs from Supabase
 const fetchBlogs = async (): Promise<BlogPost[]> => {
   try {
-    const { data, error } = await supabase
+    // Use any type to bypass TypeScript's strict checking since Supabase types aren't generated yet
+    const { data, error } = await (supabase as any)
       .from('blogs')
       .select('*')
       .order('created_at', { ascending: false });
@@ -60,15 +61,16 @@ export const BlogProvider = ({ children }: BlogProviderProps) => {
   const { data: blogPosts = [], isLoading, error } = useQuery({
     queryKey: ['blogs'],
     queryFn: fetchBlogs,
-    onSettled: (data, error) => {
-      if (error) {
-        console.error('Error loading blogs from Supabase:', error);
-        toast({
-          title: "Error loading blogs",
-          description: "Using fallback data. Please check your connection.",
-          variant: "destructive",
-        });
-      }
+    onSuccess: () => {
+      // Success callback
+    },
+    onError: (error) => {
+      console.error('Error loading blogs from Supabase:', error);
+      toast({
+        title: "Error loading blogs",
+        description: "Using fallback data. Please check your connection.",
+        variant: "destructive",
+      });
     }
   });
 
@@ -76,7 +78,7 @@ export const BlogProvider = ({ children }: BlogProviderProps) => {
   const initializeSupabase = async () => {
     try {
       // First check if the table exists by trying a simple count query
-      const { count, error: countError } = await supabase
+      const { count, error: countError } = await (supabase as any)
         .from('blogs')
         .select('*', { count: 'exact', head: true });
 
@@ -90,7 +92,7 @@ export const BlogProvider = ({ children }: BlogProviderProps) => {
         console.log('Initializing blog data in Supabase');
         for (const post of initialBlogPosts) {
           try {
-            await supabase
+            await (supabase as any)
               .from('blogs')
               .insert({
                 title: post.title,
@@ -104,7 +106,7 @@ export const BlogProvider = ({ children }: BlogProviderProps) => {
                 tags: post.tags,
                 isFeatured: post.isFeatured,
                 featuredImage: post.featuredImage
-              } as any);
+              });
           } catch (error) {
             console.error('Error inserting blog post:', error);
           }
@@ -120,7 +122,7 @@ export const BlogProvider = ({ children }: BlogProviderProps) => {
   const addPostMutation = useMutation({
     mutationFn: async (post: Omit<BlogPost, 'id'>) => {
       try {
-        const { data, error } = await supabase
+        const { data, error } = await (supabase as any)
           .from('blogs')
           .insert({
             title: post.title,
@@ -134,7 +136,7 @@ export const BlogProvider = ({ children }: BlogProviderProps) => {
             tags: post.tags,
             isFeatured: post.isFeatured,
             featuredImage: post.featuredImage
-          } as any)
+          })
           .select();
 
         if (error) throw new Error(error.message);
@@ -154,7 +156,7 @@ export const BlogProvider = ({ children }: BlogProviderProps) => {
     onError: (error) => {
       toast({
         title: "Error adding blog post",
-        description: error.message,
+        description: error instanceof Error ? error.message : "An unknown error occurred",
         variant: "destructive",
       });
     }
@@ -164,7 +166,7 @@ export const BlogProvider = ({ children }: BlogProviderProps) => {
   const updatePostMutation = useMutation({
     mutationFn: async (post: BlogPost) => {
       try {
-        const { error } = await supabase
+        const { error } = await (supabase as any)
           .from('blogs')
           .update({
             title: post.title,
@@ -179,7 +181,7 @@ export const BlogProvider = ({ children }: BlogProviderProps) => {
             isFeatured: post.isFeatured,
             featuredImage: post.featuredImage,
             updated_at: new Date().toISOString()
-          } as any)
+          })
           .eq('id', post.id);
 
         if (error) throw new Error(error.message);
@@ -199,7 +201,7 @@ export const BlogProvider = ({ children }: BlogProviderProps) => {
     onError: (error) => {
       toast({
         title: "Error updating blog post",
-        description: error.message,
+        description: error instanceof Error ? error.message : "An unknown error occurred",
         variant: "destructive",
       });
     }
@@ -209,7 +211,7 @@ export const BlogProvider = ({ children }: BlogProviderProps) => {
   const deletePostMutation = useMutation({
     mutationFn: async (id: number) => {
       try {
-        const { error } = await supabase
+        const { error } = await (supabase as any)
           .from('blogs')
           .delete()
           .eq('id', id);
@@ -231,7 +233,7 @@ export const BlogProvider = ({ children }: BlogProviderProps) => {
     onError: (error) => {
       toast({
         title: "Error deleting blog post",
-        description: error.message,
+        description: error instanceof Error ? error.message : "An unknown error occurred",
         variant: "destructive",
       });
     }
@@ -270,7 +272,7 @@ export const BlogProvider = ({ children }: BlogProviderProps) => {
   };
 
   // Initialize data on first load
-  React.useEffect(() => {
+  useEffect(() => {
     initializeSupabase();
   }, []);
 
