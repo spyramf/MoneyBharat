@@ -1,19 +1,64 @@
-
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Search } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import BlogPostCard from '@/components/BlogPostCard';
-import { blogPosts, blogCategories, type BlogCategory } from '@/data/blogData';
+import { blogPosts, blogCategories, type BlogCategory, type BlogPost } from '@/data/blogData';
 import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Badge } from '@/components/ui/badge';
+import { Input } from '@/components/ui/input';
+import { Card } from '@/components/ui/card';
 
 const Blog = () => {
   const [selectedCategory, setSelectedCategory] = useState<BlogCategory>(blogCategories[0]);
+  const [searchQuery, setSearchQuery] = useState<string>('');
+  const [searchResults, setSearchResults] = useState<BlogPost[]>([]);
+  const [isSearching, setIsSearching] = useState<boolean>(false);
+  
   const featuredPosts = blogPosts.filter(post => post.isFeatured);
   const filteredPosts = selectedCategory.slug === 'all' ? blogPosts : blogPosts.filter(post => post.category.toLowerCase().replace(/\s+/g, '-') === selectedCategory.slug);
+  
+  // Handle search functionality with debouncing
+  useEffect(() => {
+    if (searchQuery.trim() === '') {
+      setSearchResults([]);
+      setIsSearching(false);
+      return;
+    }
+    
+    const debounceTimer = setTimeout(() => {
+      const query = searchQuery.toLowerCase();
+      const results = blogPosts.filter(post => {
+        return (
+          post.title.toLowerCase().includes(query) ||
+          post.excerpt.toLowerCase().includes(query) ||
+          post.content.toLowerCase().includes(query) ||
+          post.category.toLowerCase().includes(query) ||
+          post.tags.some(tag => tag.toLowerCase().includes(query)) ||
+          post.author.name.toLowerCase().includes(query)
+        );
+      });
+      
+      setSearchResults(results);
+      setIsSearching(true);
+    }, 300);
+    
+    return () => clearTimeout(debounceTimer);
+  }, [searchQuery]);
+  
+  const handleSearchSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // The search is already handled by the useEffect
+    // This is just to prevent form submission
+  };
+  
+  const clearSearch = () => {
+    setSearchQuery('');
+    setSearchResults([]);
+    setIsSearching(false);
+  };
   
   return <>
       <Helmet>
@@ -60,45 +105,133 @@ const Blog = () => {
           </div>
         </section>
 
-        {/* Featured Posts */}
-        <section className="py-16 bg-white">
+        {/* Search Section */}
+        <section className="py-12 bg-white border-b">
           <div className="container mx-auto px-4">
-            <div className="flex items-center justify-between mb-8">
-              <h2 className="text-2xl md:text-3xl font-bold">Featured Articles</h2>
-              <Button variant="ghost" className="group">
-                View All
-                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </Button>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {featuredPosts.map(post => <BlogPostCard key={post.id} post={post} />)}
+            <div className="max-w-3xl mx-auto">
+              <h2 className="text-2xl font-bold mb-6 text-center">Find Financial Wisdom</h2>
+              <form onSubmit={handleSearchSubmit} className="flex flex-col sm:flex-row gap-3">
+                <div className="relative flex-grow">
+                  <Input
+                    type="text"
+                    placeholder="Search for articles, topics, or keywords..."
+                    className="pr-10 pl-4 py-6 text-base"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                  />
+                  <Search className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 h-5 w-5" />
+                </div>
+                <Button 
+                  type="submit" 
+                  className="bg-fintech-purple hover:bg-fintech-deep-purple py-6"
+                >
+                  Search
+                </Button>
+                {isSearching && (
+                  <Button 
+                    type="button" 
+                    variant="outline" 
+                    className="py-6"
+                    onClick={clearSearch}
+                  >
+                    Clear
+                  </Button>
+                )}
+              </form>
             </div>
           </div>
         </section>
 
-        {/* All Posts with Categories */}
-        <section className="py-16 bg-gray-50">
-          <div className="container mx-auto px-4">
-            <div className="mb-8">
-              <h2 className="text-2xl md:text-3xl font-bold mb-6">All Articles</h2>
-              <ScrollArea className="w-full whitespace-nowrap pb-4">
-                <div className="flex gap-3 pb-2">
-                  {blogCategories.map(category => <Button key={category.slug} variant={selectedCategory.slug === category.slug ? "default" : "outline"} size="sm" className={selectedCategory.slug === category.slug ? "bg-fintech-purple" : ""} onClick={() => setSelectedCategory(category)}>
-                      {category.name} ({category.count})
-                    </Button>)}
+        {/* Search Results Section - Only visible when searching */}
+        {isSearching && (
+          <section className="py-12 bg-gray-50">
+            <div className="container mx-auto px-4">
+              <div className="mb-6 flex justify-between items-center">
+                <h2 className="text-2xl font-bold">
+                  {searchResults.length > 0 ? `Search Results (${searchResults.length})` : 'No Results Found'}
+                </h2>
+                <Button variant="ghost" onClick={clearSearch}>
+                  Back to All Articles
+                </Button>
+              </div>
+              
+              {searchResults.length > 0 ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                  {searchResults.map(post => (
+                    <BlogPostCard key={post.id} post={post} />
+                  ))}
                 </div>
-              </ScrollArea>
+              ) : (
+                <Card className="p-8 text-center">
+                  <p className="text-lg text-gray-500 mb-4">
+                    No articles match your search query "{searchQuery}".
+                  </p>
+                  <p className="text-gray-600 mb-6">
+                    Try using different keywords or browsing our categories below.
+                  </p>
+                  <div className="flex flex-wrap justify-center gap-3">
+                    {blogCategories.slice(1).map(category => (
+                      <Badge 
+                        key={category.slug} 
+                        className="cursor-pointer bg-white hover:bg-fintech-purple/10"
+                        onClick={() => {
+                          setSelectedCategory(category);
+                          clearSearch();
+                        }}
+                      >
+                        {category.name}
+                      </Badge>
+                    ))}
+                  </div>
+                </Card>
+              )}
             </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredPosts.map(post => <BlogPostCard key={post.id} post={post} />)}
+          </section>
+        )}
+
+        {/* Featured Posts - Only visible when not searching */}
+        {!isSearching && (
+          <section className="py-16 bg-white">
+            <div className="container mx-auto px-4">
+              <div className="flex items-center justify-between mb-8">
+                <h2 className="text-2xl md:text-3xl font-bold">Featured Articles</h2>
+                <Button variant="ghost" className="group">
+                  View All
+                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </Button>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                {featuredPosts.map(post => <BlogPostCard key={post.id} post={post} />)}
+              </div>
             </div>
-            
-            {filteredPosts.length === 0 && <div className="text-center py-10">
-                <p className="text-lg text-gray-500">No articles found in this category.</p>
-              </div>}
-          </div>
-        </section>
+          </section>
+        )}
+
+        {/* All Posts with Categories - Only visible when not searching */}
+        {!isSearching && (
+          <section className="py-16 bg-gray-50">
+            <div className="container mx-auto px-4">
+              <div className="mb-8">
+                <h2 className="text-2xl md:text-3xl font-bold mb-6">All Articles</h2>
+                <ScrollArea className="w-full whitespace-nowrap pb-4">
+                  <div className="flex gap-3 pb-2">
+                    {blogCategories.map(category => <Button key={category.slug} variant={selectedCategory.slug === category.slug ? "default" : "outline"} size="sm" className={selectedCategory.slug === category.slug ? "bg-fintech-purple" : ""} onClick={() => setSelectedCategory(category)}>
+                        {category.name} ({category.count})
+                      </Button>)}
+                  </div>
+                </ScrollArea>
+              </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {filteredPosts.map(post => <BlogPostCard key={post.id} post={post} />)}
+              </div>
+              
+              {filteredPosts.length === 0 && <div className="text-center py-10">
+                  <p className="text-lg text-gray-500">No articles found in this category.</p>
+                </div>}
+            </div>
+          </section>
+        )}
 
         {/* Newsletter */}
         <section className="py-16 bg-gradient-to-r from-fintech-purple to-fintech-blue text-white">
@@ -122,4 +255,5 @@ const Blog = () => {
       <Footer />
     </>;
 };
+
 export default Blog;
