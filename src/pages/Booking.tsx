@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet-async';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-import { Check, Calendar } from 'lucide-react';
+import { Check, Calendar, Loader2 } from 'lucide-react';
 import { toast } from "sonner";
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -64,8 +64,8 @@ const Booking = () => {
     console.log("Form values:", values);
     
     try {
-      // Add the booking to the context
-      addBooking({
+      // Add the booking to Supabase via our context
+      await addBooking({
         name: values.name,
         email: values.email,
         phone: values.phone,
@@ -75,7 +75,7 @@ const Booking = () => {
         message: values.message,
       });
       
-      // If we have a form reference, submit the actual form to FormSubmit
+      // If we have a form reference, submit the actual form to FormSubmit (for email notifications)
       if (formRef.current) {
         // Find the service label from the value for better display in email
         const serviceLabel = services.find(s => s.value === values.service)?.label || values.service;
@@ -87,16 +87,17 @@ const Booking = () => {
         }
         
         formRef.current.submit();
-        toast.success("Your booking request has been received and sent to our team!");
+        setIsSubmitted(true);
+        form.reset();
       } else {
         // Fallback in case formRef is not available
-        toast.success("Your booking request has been received!");
         setIsSubmitted(true);
         form.reset();
       }
     } catch (error) {
       console.error("Error during submission:", error);
       toast.error("There was a problem submitting your request. Please try again.");
+    } finally {
       setIsSubmitting(false);
     }
   };
