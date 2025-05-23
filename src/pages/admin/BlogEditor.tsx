@@ -1,7 +1,8 @@
 
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { blogPosts, blogAuthors, blogCategories } from '@/data/blogData';
+import { useBlog } from '@/context/BlogContext';
+import { blogAuthors } from '@/data/blogData';
 import AdminLayout from '@/components/AdminLayout';
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
@@ -14,6 +15,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { toast } from "sonner";
+import { Loader2 } from 'lucide-react';
 
 const formSchema = z.object({
   title: z.string().min(5, "Title must be at least 5 characters"),
@@ -34,6 +36,9 @@ const BlogEditor = () => {
   const { id } = useParams<{ id: string }>();
   const isEditing = id !== "new" && !!id;
   const navigate = useNavigate();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  
+  const { blogPosts, addPost, updatePost, getPostById, categories } = useBlog();
   
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -54,7 +59,7 @@ const BlogEditor = () => {
 
   useEffect(() => {
     if (isEditing) {
-      const post = blogPosts.find(post => post.id === Number(id));
+      const post = getPostById(Number(id));
       if (post) {
         form.reset({
           title: post.title,
@@ -69,21 +74,65 @@ const BlogEditor = () => {
           isFeatured: post.isFeatured,
           featuredImage: post.featuredImage,
         });
+      } else {
+        toast.error("Blog post not found");
+        navigate("/admin/blogs");
       }
     }
-  }, [isEditing, id, form]);
+  }, [isEditing, id, form, getPostById, navigate]);
 
   const onSubmit = (values: z.infer<typeof formSchema>) => {
+    setIsSubmitting(true);
+    
     try {
-      // In a real application, this would be an API call to create/update the blog post
-      console.log("Submitting form values:", values);
+      const tags = values.tags.split(",").map(tag => tag.trim());
+      const authorObject = Object.values(blogAuthors).find(
+        author => author.name === values.author
+      ) || blogAuthors.admin;
       
-      // Show success message and navigate back to blog manager
-      toast.success(`Blog post ${isEditing ? "updated" : "created"} successfully!`);
+      if (isEditing && id) {
+        const updatedPost = {
+          id: Number(id),
+          title: values.title,
+          slug: values.slug,
+          excerpt: values.excerpt,
+          content: values.content,
+          category: values.category,
+          author: authorObject,
+          publishedDate: values.publishedDate,
+          readTime: values.readTime,
+          tags: tags,
+          isFeatured: values.isFeatured,
+          featuredImage: values.featuredImage,
+        };
+        
+        updatePost(updatedPost);
+        toast.success("Blog post updated successfully!");
+      } else {
+        const newPost = {
+          title: values.title,
+          slug: values.slug,
+          excerpt: values.excerpt,
+          content: values.content,
+          category: values.category,
+          author: authorObject,
+          publishedDate: values.publishedDate,
+          readTime: values.readTime,
+          tags: tags,
+          isFeatured: values.isFeatured,
+          featuredImage: values.featuredImage,
+        };
+        
+        addPost(newPost);
+        toast.success("Blog post created successfully!");
+      }
+      
       navigate("/admin/blogs");
     } catch (error) {
+      console.error("Error saving blog post:", error);
       toast.error("Failed to save blog post");
-      console.error(error);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -192,7 +241,7 @@ const BlogEditor = () => {
                             </SelectTrigger>
                           </FormControl>
                           <SelectContent>
-                            {blogCategories.filter(cat => cat.slug !== 'all').map((category) => (
+                            {categories.filter(cat => cat.slug !== 'all').map((category) => (
                               <SelectItem key={category.slug} value={category.name}>
                                 {category.name}
                               </SelectItem>
@@ -319,11 +368,19 @@ const BlogEditor = () => {
                     type="button"
                     variant="outline"
                     onClick={() => navigate("/admin/blogs")}
+                    disabled={isSubmitting}
                   >
                     Cancel
                   </Button>
-                  <Button type="submit">
-                    {isEditing ? "Update Post" : "Create Post"}
+                  <Button type="submit" disabled={isSubmitting}>
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        {isEditing ? "Updating..." : "Creating..."}
+                      </>
+                    ) : (
+                      isEditing ? "Update Post" : "Create Post"
+                    )}
                   </Button>
                 </div>
               </form>

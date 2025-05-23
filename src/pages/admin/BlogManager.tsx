@@ -1,7 +1,8 @@
 
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { blogPosts, blogCategories } from '@/data/blogData';
+import { useBlog } from '@/context/BlogContext';
+import { blogCategories } from '@/data/blogData';
 import AdminLayout from '@/components/AdminLayout';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -9,10 +10,25 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
 import { Plus, Search, Edit, Trash2 } from 'lucide-react';
+import { toast } from 'sonner';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 
 const BlogManager = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [categoryFilter, setCategoryFilter] = useState('all');
+  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
+  const [postToDelete, setPostToDelete] = useState<number | null>(null);
+  
+  const { blogPosts, deletePost } = useBlog();
   
   const filteredBlogs = blogPosts.filter(post => {
     // Apply search filter
@@ -24,6 +40,20 @@ const BlogManager = () => {
     
     return matchesSearch && matchesCategory;
   });
+
+  const handleDeleteClick = (id: number) => {
+    setPostToDelete(id);
+    setIsDeleteDialogOpen(true);
+  };
+
+  const handleDeleteConfirm = () => {
+    if (postToDelete) {
+      deletePost(postToDelete);
+      toast.success("Blog post deleted successfully");
+      setIsDeleteDialogOpen(false);
+      setPostToDelete(null);
+    }
+  };
 
   return (
     <AdminLayout>
@@ -107,7 +137,12 @@ const BlogManager = () => {
                             <Edit className="h-4 w-4" />
                           </Link>
                         </Button>
-                        <Button variant="ghost" size="sm" className="text-red-500">
+                        <Button 
+                          variant="ghost" 
+                          size="sm" 
+                          className="text-red-500"
+                          onClick={() => handleDeleteClick(post.id)}
+                        >
                           <Trash2 className="h-4 w-4" />
                         </Button>
                       </div>
@@ -119,6 +154,24 @@ const BlogManager = () => {
           </Table>
         </div>
       </div>
+
+      {/* Delete Confirmation Dialog */}
+      <AlertDialog open={isDeleteDialogOpen} onOpenChange={setIsDeleteDialogOpen}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Are you sure you want to delete this post?</AlertDialogTitle>
+            <AlertDialogDescription>
+              This action cannot be undone. This will permanently delete the blog post.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction onClick={handleDeleteConfirm} className="bg-red-500 hover:bg-red-600">
+              Delete
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </AdminLayout>
   );
 };

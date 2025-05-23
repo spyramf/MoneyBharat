@@ -1,10 +1,11 @@
+
 import { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { ArrowRight, Search } from 'lucide-react';
+import { useBlog } from '@/context/BlogContext';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import BlogPostCard from '@/components/BlogPostCard';
-import { blogPosts, blogCategories, type BlogCategory, type BlogPost } from '@/data/blogData';
 import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Badge } from '@/components/ui/badge';
@@ -12,13 +13,16 @@ import { Input } from '@/components/ui/input';
 import { Card } from '@/components/ui/card';
 
 const Blog = () => {
-  const [selectedCategory, setSelectedCategory] = useState<BlogCategory>(blogCategories[0]);
+  const { blogPosts, categories } = useBlog();
+  const [selectedCategory, setSelectedCategory] = useState(categories[0]);
   const [searchQuery, setSearchQuery] = useState<string>('');
-  const [searchResults, setSearchResults] = useState<BlogPost[]>([]);
+  const [searchResults, setSearchResults] = useState<typeof blogPosts>([]);
   const [isSearching, setIsSearching] = useState<boolean>(false);
   
   const featuredPosts = blogPosts.filter(post => post.isFeatured);
-  const filteredPosts = selectedCategory.slug === 'all' ? blogPosts : blogPosts.filter(post => post.category.toLowerCase().replace(/\s+/g, '-') === selectedCategory.slug);
+  const filteredPosts = selectedCategory.slug === 'all' 
+    ? blogPosts 
+    : blogPosts.filter(post => post.category.toLowerCase().replace(/\s+/g, '-') === selectedCategory.slug);
   
   // Handle search functionality with debouncing
   useEffect(() => {
@@ -46,7 +50,7 @@ const Blog = () => {
     }, 300);
     
     return () => clearTimeout(debounceTimer);
-  }, [searchQuery]);
+  }, [searchQuery, blogPosts]);
   
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -60,7 +64,8 @@ const Blog = () => {
     setIsSearching(false);
   };
   
-  return <>
+  return (
+    <>
       <Helmet>
         <title>Personal Finance Blog | Money Bharat</title>
         <meta name="description" content="Explore articles on personal finance, investments, insurance, and more. Stay updated with the latest financial insights and tips from Money Bharat's experts." />
@@ -170,7 +175,7 @@ const Blog = () => {
                     Try using different keywords or browsing our categories below.
                   </p>
                   <div className="flex flex-wrap justify-center gap-3">
-                    {blogCategories.slice(1).map(category => (
+                    {categories.slice(1).map(category => (
                       <Badge 
                         key={category.slug} 
                         className="cursor-pointer bg-white hover:bg-fintech-purple/10"
@@ -201,7 +206,13 @@ const Blog = () => {
                 </Button>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                {featuredPosts.map(post => <BlogPostCard key={post.id} post={post} />)}
+                {featuredPosts.length > 0 ? (
+                  featuredPosts.map(post => <BlogPostCard key={post.id} post={post} />)
+                ) : (
+                  <div className="col-span-3 text-center py-10">
+                    <p className="text-lg text-gray-500">No featured articles found.</p>
+                  </div>
+                )}
               </div>
             </div>
           </section>
@@ -215,20 +226,34 @@ const Blog = () => {
                 <h2 className="text-2xl md:text-3xl font-bold mb-6">All Articles</h2>
                 <ScrollArea className="w-full whitespace-nowrap pb-4">
                   <div className="flex gap-3 pb-2">
-                    {blogCategories.map(category => <Button key={category.slug} variant={selectedCategory.slug === category.slug ? "default" : "outline"} size="sm" className={selectedCategory.slug === category.slug ? "bg-fintech-purple" : ""} onClick={() => setSelectedCategory(category)}>
-                        {category.name} ({category.count})
-                      </Button>)}
+                    {categories.map(category => (
+                      <Button 
+                        key={category.slug} 
+                        variant={selectedCategory.slug === category.slug ? "default" : "outline"} 
+                        size="sm" 
+                        className={selectedCategory.slug === category.slug ? "bg-fintech-purple" : ""} 
+                        onClick={() => setSelectedCategory(category)}
+                      >
+                        {category.name} ({category.slug === 'all' 
+                          ? blogPosts.length 
+                          : blogPosts.filter(post => 
+                              post.category.toLowerCase().replace(/\s+/g, '-') === category.slug
+                            ).length})
+                      </Button>
+                    ))}
                   </div>
                 </ScrollArea>
               </div>
               
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {filteredPosts.map(post => <BlogPostCard key={post.id} post={post} />)}
+                {filteredPosts.length > 0 ? (
+                  filteredPosts.map(post => <BlogPostCard key={post.id} post={post} />)
+                ) : (
+                  <div className="col-span-3 text-center py-10">
+                    <p className="text-lg text-gray-500">No articles found in this category.</p>
+                  </div>
+                )}
               </div>
-              
-              {filteredPosts.length === 0 && <div className="text-center py-10">
-                  <p className="text-lg text-gray-500">No articles found in this category.</p>
-                </div>}
             </div>
           </section>
         )}
@@ -253,7 +278,8 @@ const Blog = () => {
       </main>
 
       <Footer />
-    </>;
+    </>
+  );
 };
 
 export default Blog;

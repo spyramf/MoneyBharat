@@ -1,42 +1,96 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import AdminLayout from '@/components/AdminLayout';
 import { Calendar } from '@/components/ui/calendar';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useBooking } from '@/context/BookingContext';
 import { toast } from 'sonner';
+import { 
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle
+} from '@/components/ui/alert-dialog';
+import { format } from 'date-fns';
+import { CalendarCheck, CalendarX, Trash2 } from 'lucide-react';
 
 const BookingManager = () => {
   const [date, setDate] = useState<Date | undefined>(new Date());
   const [selectedTab, setSelectedTab] = useState('all');
+  const [bookingToDelete, setBookingToDelete] = useState<number | null>(null);
+  const [bookingToUpdate, setBookingToUpdate] = useState<{id: number, status: 'confirmed' | 'cancelled'} | null>(null);
+  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
+  const [isUpdateDialogOpen, setIsUpdateDialogOpen] = useState(false);
   
   const { bookings, updateBookingStatus, deleteBooking } = useBooking();
   
   const filteredBookings = bookings.filter(booking => {
-    if (selectedTab === 'all') return true;
-    return booking.status === selectedTab;
+    // Filter by status tab
+    if (selectedTab !== 'all') {
+      if (booking.status !== selectedTab) return false;
+    }
+    
+    // Filter by selected date if a date is selected
+    if (date) {
+      const bookingDate = booking.date;
+      const selectedDate = format(date, 'yyyy-MM-dd');
+      return bookingDate === selectedDate;
+    }
+    
+    return true;
   });
 
-  const formattedDate = date ? date.toISOString().split('T')[0] : '';
-  
-  const handleConfirm = (id: number) => {
-    updateBookingStatus(id, 'confirmed');
-    toast.success('Booking confirmed successfully');
+  const handleUpdateStatus = (id: number, status: 'confirmed' | 'cancelled') => {
+    setBookingToUpdate({id, status});
+    setIsUpdateDialogOpen(true);
   };
   
-  const handleCancel = (id: number) => {
-    updateBookingStatus(id, 'cancelled');
-    toast.error('Booking cancelled');
+  const confirmUpdateStatus = () => {
+    if (bookingToUpdate) {
+      updateBookingStatus(bookingToUpdate.id, bookingToUpdate.status);
+      
+      const message = bookingToUpdate.status === 'confirmed' 
+        ? 'Booking confirmed successfully'
+        : 'Booking cancelled';
+        
+      toast.success(message);
+      setIsUpdateDialogOpen(false);
+      setBookingToUpdate(null);
+    }
+  };
+  
+  const handleDeleteClick = (id: number) => {
+    setBookingToDelete(id);
+    setIsDeleteDialogOpen(true);
+  };
+  
+  const confirmDelete = () => {
+    if (bookingToDelete) {
+      deleteBooking(bookingToDelete);
+      toast.success('Booking deleted successfully');
+      setIsDeleteDialogOpen(false);
+      setBookingToDelete(null);
+    }
   };
 
-  const handleDelete = (id: number) => {
-    if (window.confirm('Are you sure you want to delete this booking?')) {
-      deleteBooking(id);
-      toast.success('Booking deleted successfully');
+  // Get the bookings for the selected date to display in the calendar card
+  const selectedDateBookings = date 
+    ? bookings.filter(booking => booking.date === format(date, 'yyyy-MM-dd'))
+    : [];
+
+  const getStatusColor = (status: string) => {
+    switch(status) {
+      case 'confirmed': return 'bg-green-500 text-white';
+      case 'cancelled': return 'bg-red-500 text-white';
+      default: return 'bg-yellow-500 text-white';
     }
   };
 
@@ -102,17 +156,32 @@ const BookingManager = () => {
                             <TableCell className="text-right">
                               <div className="flex justify-end gap-2">
                                 {booking.status === 'pending' && (
-                                  <Button size="sm" className="bg-green-600 hover:bg-green-700" onClick={() => handleConfirm(booking.id)}>
+                                  <Button 
+                                    size="sm" 
+                                    className="bg-green-600 hover:bg-green-700"
+                                    onClick={() => handleUpdateStatus(booking.id, 'confirmed')}
+                                  >
+                                    <CalendarCheck className="h-4 w-4 mr-1" /> 
                                     Confirm
                                   </Button>
                                 )}
                                 {booking.status !== 'cancelled' && (
-                                  <Button size="sm" variant="destructive" onClick={() => handleCancel(booking.id)}>
+                                  <Button 
+                                    size="sm" 
+                                    variant="destructive" 
+                                    onClick={() => handleUpdateStatus(booking.id, 'cancelled')}
+                                  >
+                                    <CalendarX className="h-4 w-4 mr-1" />
                                     Cancel
                                   </Button>
                                 )}
-                                <Button variant="outline" size="sm" className="text-red-500" onClick={() => handleDelete(booking.id)}>
-                                  Delete
+                                <Button 
+                                  variant="outline" 
+                                  size="sm" 
+                                  className="text-red-500"
+                                  onClick={() => handleDeleteClick(booking.id)}
+                                >
+                                  <Trash2 className="h-4 w-4" />
                                 </Button>
                               </div>
                             </TableCell>
@@ -127,35 +196,94 @@ const BookingManager = () => {
           </Card>
           
           <Card>
-            <CardContent className="p-6">
-              <h2 className="text-lg font-semibold mb-4">Booking Calendar</h2>
+            <CardHeader>
+              <CardTitle>Booking Calendar</CardTitle>
+            </CardHeader>
+            <CardContent className="pb-6">
               <Calendar
                 mode="single"
                 selected={date}
                 onSelect={setDate}
-                className="rounded-md border"
+                className="rounded-md border mb-4"
+                initialFocus
               />
+              
               <div className="mt-4">
                 <h3 className="font-medium mb-2">
-                  {date ? date.toLocaleDateString('en-US', { dateStyle: 'full' }) : 'No date selected'}
+                  {date ? format(date, 'EEEE, MMMM d, yyyy') : 'No date selected'}
                 </h3>
-                {date && (
+                
+                {selectedDateBookings.length > 0 ? (
                   <div className="space-y-2">
-                    {bookings
-                      .filter(booking => booking.date === formattedDate)
-                      .map(booking => (
-                        <div key={booking.id} className="p-2 rounded bg-gray-50 text-sm">
-                          <div className="font-medium">{booking.time} - {booking.name}</div>
-                          <div className="text-gray-500">{booking.service}</div>
+                    {selectedDateBookings.map(booking => (
+                      <div key={booking.id} className="p-3 rounded bg-gray-50 text-sm border">
+                        <div className="flex items-center justify-between">
+                          <span className="font-medium">{booking.time}</span>
+                          <Badge className={getStatusColor(booking.status)}>
+                            {booking.status}
+                          </Badge>
                         </div>
-                      ))}
+                        <div className="font-medium mt-1">{booking.name}</div>
+                        <div className="text-gray-500">{booking.service}</div>
+                      </div>
+                    ))}
                   </div>
-                )}
+                ) : date ? (
+                  <div className="text-center p-4 bg-gray-50 rounded-md">
+                    <p className="text-gray-500">No bookings for this date</p>
+                  </div>
+                ) : null}
               </div>
             </CardContent>
           </Card>
         </div>
       </div>
+      
+      {/* Status update confirmation dialog */}
+      <AlertDialog open={isUpdateDialogOpen} onOpenChange={setIsUpdateDialogOpen}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>
+              {bookingToUpdate?.status === 'confirmed' ? 'Confirm Booking' : 'Cancel Booking'}
+            </AlertDialogTitle>
+            <AlertDialogDescription>
+              {bookingToUpdate?.status === 'confirmed'
+                ? 'Are you sure you want to confirm this booking? This will update the booking status to confirmed.'
+                : 'Are you sure you want to cancel this booking? This will update the booking status to cancelled.'}
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={confirmUpdateStatus}
+              className={bookingToUpdate?.status === 'confirmed' ? 'bg-green-600 hover:bg-green-700' : 'bg-red-600 hover:bg-red-700'}
+            >
+              {bookingToUpdate?.status === 'confirmed' ? 'Yes, Confirm Booking' : 'Yes, Cancel Booking'}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+      
+      {/* Delete confirmation dialog */}
+      <AlertDialog open={isDeleteDialogOpen} onOpenChange={setIsDeleteDialogOpen}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Delete Booking</AlertDialogTitle>
+            <AlertDialogDescription>
+              Are you sure you want to delete this booking? This action cannot be undone.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={confirmDelete}
+              className="bg-red-600 hover:bg-red-700"
+            >
+              Yes, Delete Booking
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </AdminLayout>
   );
 };
