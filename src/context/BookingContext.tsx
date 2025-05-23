@@ -80,13 +80,15 @@ export const BookingProvider = ({ children }: BookingProviderProps) => {
   const { data: bookings = [], isLoading, error } = useQuery({
     queryKey: ['bookings'],
     queryFn: fetchBookings,
-    onError: (error) => {
-      console.error('Error loading bookings from Supabase:', error);
-      toast({
-        title: "Error loading bookings",
-        description: "Please check your connection.",
-        variant: "destructive",
-      });
+    meta: {
+      onError: (error: Error) => {
+        console.error('Error loading bookings from Supabase:', error);
+        toast({
+          title: "Error loading bookings",
+          description: "Please check your connection.",
+          variant: "destructive",
+        });
+      }
     }
   });
 

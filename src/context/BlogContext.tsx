@@ -61,16 +61,15 @@ export const BlogProvider = ({ children }: BlogProviderProps) => {
   const { data: blogPosts = [], isLoading, error } = useQuery({
     queryKey: ['blogs'],
     queryFn: fetchBlogs,
-    onSuccess: () => {
-      // Success callback
-    },
-    onError: (error) => {
-      console.error('Error loading blogs from Supabase:', error);
-      toast({
-        title: "Error loading blogs",
-        description: "Using fallback data. Please check your connection.",
-        variant: "destructive",
-      });
+    meta: {
+      onError: (error: Error) => {
+        console.error('Error loading blogs from Supabase:', error);
+        toast({
+          title: "Error loading blogs",
+          description: "Using fallback data. Please check your connection.",
+          variant: "destructive",
+        });
+      }
     }
   });
 
