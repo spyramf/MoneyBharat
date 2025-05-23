@@ -4,6 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarProvider } from '@/components/ui/sidebar';
 import { Button } from '@/components/ui/button';
 import { LucideIcon, Home, FileText, Calendar, LogOut } from 'lucide-react';
+import { useAuth } from '@/context/AuthContext';
 
 interface NavItemProps {
   href: string;
@@ -31,6 +32,7 @@ interface AdminLayoutProps {
 const AdminLayout = ({ children }: AdminLayoutProps) => {
   const location = useLocation();
   const currentPath = location.pathname;
+  const { logout } = useAuth();
   
   return (
     <SidebarProvider>
@@ -74,7 +76,11 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
             </nav>
           </SidebarContent>
           <SidebarFooter className="p-4 border-t">
-            <Button variant="ghost" className="w-full justify-start text-red-500">
+            <Button 
+              variant="ghost" 
+              className="w-full justify-start text-red-500" 
+              onClick={logout}
+            >
               <LogOut className="mr-2 h-4 w-4" />
               Logout
             </Button>
