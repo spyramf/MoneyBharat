@@ -31,8 +31,8 @@ const Blog = () => {
       <Navbar />
 
       <main className="pt-24">
-        {/* Hero Section - Updated to match other pages */}
-        <section className="py-16 md:py-24 bg-gradient-to-r from-purple-100 to-blue-50 relative overflow-hidden">
+        {/* Hero Section - Updated with proper padding */}
+        <section className="pt-32 pb-16 md:py-24 bg-gradient-to-r from-purple-100 to-blue-50 relative overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-full">
             <div className="absolute top-10 left-10 w-32 h-32 rounded-full bg-fintech-purple/10 blur-3xl"></div>
             <div className="absolute bottom-10 right-10 w-40 h-40 rounded-full bg-fintech-blue/10 blur-3xl"></div>
