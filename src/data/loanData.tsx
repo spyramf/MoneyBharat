@@ -1,5 +1,5 @@
 
-import { ReactNode } from "react";
+import React, { ReactNode } from "react";
 import { Banknote, Clock, PiggyBank, BadgeDollarSign, Shield, CheckCircle } from "lucide-react";
 import Home from "@/components/icons/Home";
 import Car from "@/components/icons/Car";
@@ -29,7 +29,7 @@ export interface ProcessStep {
 }
 
 // Personal Loan Data
-export const personalLoanFeatures = [
+export const personalLoanFeatures: LoanFeature[] = [
   {
     title: "Quick Approval",
     description: "Get your loan approved within 24 hours with minimal documentation",
