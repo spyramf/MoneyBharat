@@ -45,20 +45,39 @@ const fetchBlogs = async (): Promise<BlogPost[]> => {
     }
 
     // Map from Supabase format to our app's format
-    return (data || []).map(blog => ({
-      id: blog.id,
-      title: blog.title,
-      slug: blog.slug,
-      excerpt: blog.excerpt || '',
-      content: blog.content || '',
-      category: blog.category || '',
-      author: (blog.author as BlogAuthor) || { name: 'Unknown', avatar: '', bio: '' },
-      publishedDate: blog.publisheddate || '',
-      readTime: blog.readtime || '',
-      tags: blog.tags || [],
-      isFeatured: blog.isfeatured || false,
-      featuredImage: blog.featuredimage || '/placeholder.svg'
-    }));
+    return (data || []).map(blog => {
+      // Parse author from JSON with proper type checking
+      let author: BlogAuthor;
+      try {
+        if (blog.author && typeof blog.author === 'object') {
+          const authorData = blog.author as any;
+          author = {
+            name: authorData.name || 'Unknown',
+            avatar: authorData.avatar || '',
+            role: authorData.role || 'Finance Expert'
+          };
+        } else {
+          author = { name: 'Unknown', avatar: '', role: 'Finance Expert' };
+        }
+      } catch {
+        author = { name: 'Unknown', avatar: '', role: 'Finance Expert' };
+      }
+
+      return {
+        id: blog.id,
+        title: blog.title,
+        slug: blog.slug,
+        excerpt: blog.excerpt || '',
+        content: blog.content || '',
+        category: blog.category || '',
+        author: author,
+        publishedDate: blog.publisheddate || '',
+        readTime: blog.readtime || '',
+        tags: blog.tags || [],
+        isFeatured: blog.isfeatured || false,
+        featuredImage: blog.featuredimage || '/placeholder.svg'
+      };
+    });
   } catch (error) {
     console.error('Error fetching blogs:', error);
     return initialBlogPosts; // Fallback to initial data
@@ -102,7 +121,7 @@ export const BlogProvider = ({ children }: BlogProviderProps) => {
                 excerpt: post.excerpt,
                 content: post.content,
                 category: post.category,
-                author: post.author,
+                author: JSON.parse(JSON.stringify(post.author)), // Serialize to JSON
                 publisheddate: post.publishedDate,
                 readtime: post.readTime,
                 tags: post.tags,
@@ -132,7 +151,7 @@ export const BlogProvider = ({ children }: BlogProviderProps) => {
             excerpt: post.excerpt,
             content: post.content,
             category: post.category,
-            author: post.author,
+            author: JSON.parse(JSON.stringify(post.author)), // Serialize to JSON
             publisheddate: post.publishedDate,
             readtime: post.readTime,
             tags: post.tags,
@@ -181,7 +200,7 @@ export const BlogProvider = ({ children }: BlogProviderProps) => {
             excerpt: post.excerpt,
             content: post.content,
             category: post.category,
-            author: post.author,
+            author: JSON.parse(JSON.stringify(post.author)), // Serialize to JSON
             publisheddate: post.publishedDate,
             readtime: post.readTime,
             tags: post.tags,
