@@ -1,7 +1,7 @@
 
 import React, { createContext, useContext, ReactNode } from 'react';
 import { supabase } from '@/integrations/supabase/client';
-import { useToast } from '@/components/ui/use-toast';
+import { useToast } from '@/hooks/use-toast';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 
 export type Booking = {
@@ -43,7 +43,7 @@ interface BookingProviderProps {
 // Function to fetch bookings from Supabase
 const fetchBookings = async (): Promise<Booking[]> => {
   try {
-    const { data, error } = await (supabase as any)
+    const { data, error } = await supabase
       .from('bookings')
       .select('*')
       .order('created_at', { ascending: false });
@@ -80,23 +80,13 @@ export const BookingProvider = ({ children }: BookingProviderProps) => {
   const { data: bookings = [], isLoading, error } = useQuery({
     queryKey: ['bookings'],
     queryFn: fetchBookings,
-    meta: {
-      onError: (error: Error) => {
-        console.error('Error loading bookings from Supabase:', error);
-        toast({
-          title: "Error loading bookings",
-          description: "Please check your connection.",
-          variant: "destructive",
-        });
-      }
-    }
   });
 
   // Add booking mutation
   const addBookingMutation = useMutation({
     mutationFn: async (booking: Omit<Booking, 'id' | 'status' | 'createdAt'>) => {
       try {
-        const { data, error } = await (supabase as any)
+        const { data, error } = await supabase
           .from('bookings')
           .insert({
             name: booking.name,
@@ -108,10 +98,11 @@ export const BookingProvider = ({ children }: BookingProviderProps) => {
             message: booking.message,
             status: 'pending'
           })
-          .select();
+          .select()
+          .single();
 
         if (error) throw new Error(error.message);
-        return data[0];
+        return data;
       } catch (error) {
         console.error('Error adding booking:', error);
         throw error;
@@ -137,7 +128,7 @@ export const BookingProvider = ({ children }: BookingProviderProps) => {
   const updateBookingStatusMutation = useMutation({
     mutationFn: async ({ id, status }: { id: number, status: 'pending' | 'confirmed' | 'cancelled' }) => {
       try {
-        const { error } = await (supabase as any)
+        const { error } = await supabase
           .from('bookings')
           .update({ status })
           .eq('id', id);
@@ -169,7 +160,7 @@ export const BookingProvider = ({ children }: BookingProviderProps) => {
   const deleteBookingMutation = useMutation({
     mutationFn: async (id: number) => {
       try {
-        const { error } = await (supabase as any)
+        const { error } = await supabase
           .from('bookings')
           .delete()
           .eq('id', id);
