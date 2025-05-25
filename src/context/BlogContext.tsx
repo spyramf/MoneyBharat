@@ -1,6 +1,6 @@
 
 import React, { createContext, useContext, useState, ReactNode, useEffect } from 'react';
-import { blogPosts as initialBlogPosts, BlogPost, blogCategories as initialCategories } from '@/data/blogData';
+import { blogPosts as initialBlogPosts, BlogPost, blogCategories as initialCategories, BlogAuthor } from '@/data/blogData';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
@@ -52,12 +52,12 @@ const fetchBlogs = async (): Promise<BlogPost[]> => {
       excerpt: blog.excerpt || '',
       content: blog.content || '',
       category: blog.category || '',
-      author: blog.author || { name: 'Unknown', avatar: '', bio: '' },
-      publishedDate: blog.publishedDate || '',
-      readTime: blog.readTime || '',
+      author: (blog.author as BlogAuthor) || { name: 'Unknown', avatar: '', bio: '' },
+      publishedDate: blog.publisheddate || '',
+      readTime: blog.readtime || '',
       tags: blog.tags || [],
-      isFeatured: blog.isFeatured || false,
-      featuredImage: blog.featuredImage || '/placeholder.svg'
+      isFeatured: blog.isfeatured || false,
+      featuredImage: blog.featuredimage || '/placeholder.svg'
     }));
   } catch (error) {
     console.error('Error fetching blogs:', error);
@@ -103,11 +103,11 @@ export const BlogProvider = ({ children }: BlogProviderProps) => {
                 content: post.content,
                 category: post.category,
                 author: post.author,
-                publishedDate: post.publishedDate,
-                readTime: post.readTime,
+                publisheddate: post.publishedDate,
+                readtime: post.readTime,
                 tags: post.tags,
-                isFeatured: post.isFeatured,
-                featuredImage: post.featuredImage
+                isfeatured: post.isFeatured,
+                featuredimage: post.featuredImage
               });
           } catch (error) {
             console.error('Error inserting blog post:', error);
@@ -133,11 +133,11 @@ export const BlogProvider = ({ children }: BlogProviderProps) => {
             content: post.content,
             category: post.category,
             author: post.author,
-            publishedDate: post.publishedDate,
-            readTime: post.readTime,
+            publisheddate: post.publishedDate,
+            readtime: post.readTime,
             tags: post.tags,
-            isFeatured: post.isFeatured,
-            featuredImage: post.featuredImage
+            isfeatured: post.isFeatured,
+            featuredimage: post.featuredImage
           })
           .select()
           .single();
@@ -182,11 +182,11 @@ export const BlogProvider = ({ children }: BlogProviderProps) => {
             content: post.content,
             category: post.category,
             author: post.author,
-            publishedDate: post.publishedDate,
-            readTime: post.readTime,
+            publisheddate: post.publishedDate,
+            readtime: post.readTime,
             tags: post.tags,
-            isFeatured: post.isFeatured,
-            featuredImage: post.featuredImage,
+            isfeatured: post.isFeatured,
+            featuredimage: post.featuredImage,
             updated_at: new Date().toISOString()
           })
           .eq('id', post.id);
