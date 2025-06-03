@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useInvestorAuth } from '@/context/InvestorAuthContext';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
-import { ArrowLeft, LogOut, Eye } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
+import InvestorPageLayout from '@/components/investor/InvestorPageLayout';
+import BankAccountForm from '@/components/investor/BankAccountForm';
 
 const bankAccountSchema = z.object({
   ifscCode: z.string().min(11, 'IFSC code must be 11 characters').max(11, 'IFSC code must be 11 characters'),
@@ -113,147 +111,42 @@ const InvestorBankAccount = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-600 to-blue-800">
-      {/* Header */}
-      <div className="bg-blue-700 text-white py-6 px-8">
-        <div className="flex items-center justify-between">
-          <h1 className="text-2xl font-bold">Bank Account Details</h1>
-          <Button 
-            onClick={signOut}
+    <InvestorPageLayout
+      title="Bank Account Details"
+      pageTitle="Add Bank Account Details"
+      description="Please provide your bank account information to complete your profile"
+      onSignOut={signOut}
+    >
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+        <BankAccountForm
+          register={register}
+          errors={errors}
+          setValue={setValue}
+          watchedIfscCode={watchedIfscCode}
+          onViewIfsc={handleViewIfsc}
+        />
+
+        {/* Buttons */}
+        <div className="flex gap-4 pt-4">
+          <Button
+            type="button"
             variant="outline"
-            size="sm"
-            className="bg-transparent border-white text-white hover:bg-white hover:text-blue-700"
+            onClick={handleBack}
+            className="flex-1"
           >
-            <LogOut className="h-4 w-4 mr-2" />
-            Logout
+            <ArrowLeft className="h-4 w-4 mr-2" />
+            Back
+          </Button>
+          <Button
+            type="submit"
+            disabled={isSubmitting}
+            className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-medium"
+          >
+            {isSubmitting ? 'Saving...' : 'Add Bank Account(s)'}
           </Button>
         </div>
-      </div>
-
-      <div className="flex items-center justify-center p-8">
-        <div className="w-full max-w-2xl">
-          <Card className="bg-white shadow-xl">
-            <CardHeader className="text-center">
-              <div className="flex justify-center mb-4">
-                <img 
-                  src="/lovable-uploads/aaa1dbf8-5b73-4620-a205-6193e82f8185.png" 
-                  alt="Money Bharat Logo" 
-                  className="h-16"
-                />
-              </div>
-              <CardTitle className="text-2xl font-bold text-gray-900">
-                Add Bank Account Details
-              </CardTitle>
-              <p className="text-gray-600 mt-2">
-                Please provide your bank account information to complete your profile
-              </p>
-            </CardHeader>
-
-            <CardContent className="space-y-6">
-              <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-                {/* IFSC Code */}
-                <div className="space-y-2">
-                  <Label htmlFor="ifscCode">
-                    IFSC Code <span className="text-red-500">*</span>
-                  </Label>
-                  <div className="flex gap-2">
-                    <Input
-                      id="ifscCode"
-                      placeholder="Enter IFSC Code"
-                      {...register('ifscCode')}
-                      className="uppercase"
-                      maxLength={11}
-                    />
-                    <Button
-                      type="button"
-                      variant="outline"
-                      onClick={handleViewIfsc}
-                      disabled={!watchedIfscCode || watchedIfscCode.length !== 11}
-                      className="px-6"
-                    >
-                      <Eye className="h-4 w-4 mr-2" />
-                      View
-                    </Button>
-                  </div>
-                  {errors.ifscCode && (
-                    <p className="text-sm text-red-600">{errors.ifscCode.message}</p>
-                  )}
-                </div>
-
-                {/* Account Number */}
-                <div className="space-y-2">
-                  <Label htmlFor="accountNumber">
-                    Account Number <span className="text-red-500">*</span>
-                  </Label>
-                  <Input
-                    id="accountNumber"
-                    placeholder="Enter Account Number"
-                    {...register('accountNumber')}
-                  />
-                  {errors.accountNumber && (
-                    <p className="text-sm text-red-600">{errors.accountNumber.message}</p>
-                  )}
-                </div>
-
-                {/* Account Type */}
-                <div className="space-y-2">
-                  <Label htmlFor="accountType">
-                    Account Type <span className="text-red-500">*</span>
-                  </Label>
-                  <Select onValueChange={(value) => setValue('accountType', value)}>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select Account Type" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="savings">Savings Account</SelectItem>
-                      <SelectItem value="current">Current Account</SelectItem>
-                      <SelectItem value="salary">Salary Account</SelectItem>
-                    </SelectContent>
-                  </Select>
-                  {errors.accountType && (
-                    <p className="text-sm text-red-600">{errors.accountType.message}</p>
-                  )}
-                </div>
-
-                {/* Default Payout */}
-                <div className="flex items-center space-x-2">
-                  <input
-                    type="checkbox"
-                    id="defaultPayout"
-                    checked={true}
-                    disabled
-                    className="w-4 h-4 text-blue-600"
-                  />
-                  <Label htmlFor="defaultPayout" className="text-sm">
-                    Set as default payout bank account
-                  </Label>
-                </div>
-
-                {/* Buttons */}
-                <div className="flex gap-4 pt-4">
-                  <Button
-                    type="button"
-                    variant="outline"
-                    onClick={handleBack}
-                    className="flex-1"
-                  >
-                    <ArrowLeft className="h-4 w-4 mr-2" />
-                    Back
-                  </Button>
-                  <Button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-medium"
-                  >
-                    {isSubmitting ? 'Saving...' : 'Add Bank Account(s)'}
-                  </Button>
-                </div>
-              </form>
-            </CardContent>
-          </Card>
-        </div>
-      </div>
-    </div>
+      </form>
+    </InvestorPageLayout>
   );
 };
 
