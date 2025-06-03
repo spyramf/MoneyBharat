@@ -91,6 +91,7 @@ export const InvestorAuthProvider = ({ children }: InvestorAuthProviderProps) =>
         email,
         password,
         options: {
+          emailRedirectTo: undefined, // Disable email verification
           data: userData
         }
       });
