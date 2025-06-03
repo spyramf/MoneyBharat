@@ -5,6 +5,7 @@ import ProfileListStats from './profile-list/ProfileListStats';
 import ProfileListActions from './profile-list/ProfileListActions';
 import ProfileListFilters from './profile-list/ProfileListFilters';
 import ProfileListTable from './profile-list/ProfileListTable';
+import UCCCreationForm from './profile-list/UCCCreationForm';
 import { UCCProfile, ProfileStats } from './profile-list/types';
 import { mockProfiles } from './profile-list/mockData';
 
@@ -16,6 +17,7 @@ const ProfileListView = () => {
   const [uccAvailableOnly, setUccAvailableOnly] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(10);
+  const [showUCCForm, setShowUCCForm] = useState(false);
 
   useEffect(() => {
     // For now, using mock data. In real implementation, fetch from Supabase
@@ -68,6 +70,18 @@ const ProfileListView = () => {
     }, 2000);
   };
 
+  const handleCreateUCC = () => {
+    setShowUCCForm(true);
+  };
+
+  const handleCloseUCCForm = () => {
+    setShowUCCForm(false);
+  };
+
+  if (showUCCForm) {
+    return <UCCCreationForm onClose={handleCloseUCCForm} />;
+  }
+
   return (
     <div className="p-6 bg-gray-50 min-h-screen">
       {/* Header */}
@@ -76,7 +90,11 @@ const ProfileListView = () => {
           <h1 className="text-2xl font-bold text-gray-900">Profile List (UCC Management)</h1>
           <p className="text-gray-600">Manage BSE UCC profiles and client accounts</p>
         </div>
-        <ProfileListActions loading={loading} onSync={handleSync} />
+        <ProfileListActions 
+          loading={loading} 
+          onSync={handleSync} 
+          onCreateUCC={handleCreateUCC}
+        />
       </div>
 
       {/* Stats Cards */}
