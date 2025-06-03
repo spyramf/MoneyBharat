@@ -134,6 +134,25 @@ export const InvestorAuthProvider = ({ children }: InvestorAuthProviderProps) =>
       
       if (data.user && data.session) {
         console.log('User created and automatically signed in');
+        
+        // Assign default client role to new user
+        try {
+          const { error: roleError } = await supabase
+            .from('user_roles')
+            .insert({
+              user_id: data.user.id,
+              role: 'client'
+            });
+            
+          if (roleError) {
+            console.error('Error assigning role:', roleError);
+          } else {
+            console.log('Client role assigned successfully');
+          }
+        } catch (roleError) {
+          console.error('Role assignment error:', roleError);
+        }
+        
         return { error: null, user: data.user, session: data.session };
       } else if (data.user && !data.session) {
         console.log('User created, attempting immediate sign in...');
@@ -145,6 +164,24 @@ export const InvestorAuthProvider = ({ children }: InvestorAuthProviderProps) =>
         if (signInResult.error) {
           console.error('Auto sign-in failed:', signInResult.error);
           return { error: signInResult.error };
+        }
+        
+        // Assign default client role to new user
+        try {
+          const { error: roleError } = await supabase
+            .from('user_roles')
+            .insert({
+              user_id: signInResult.data.user.id,
+              role: 'client'
+            });
+            
+          if (roleError) {
+            console.error('Error assigning role:', roleError);
+          } else {
+            console.log('Client role assigned successfully');
+          }
+        } catch (roleError) {
+          console.error('Role assignment error:', roleError);
         }
         
         return { error: null, user: signInResult.data.user, session: signInResult.data.session };
