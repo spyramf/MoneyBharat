@@ -38,6 +38,7 @@ export const InvestorAuthProvider = ({ children }: InvestorAuthProviderProps) =>
     // Set up auth state listener
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       (event, session) => {
+        console.log('Auth state changed:', event, session?.user?.email);
         setSession(session);
         setUser(session?.user ?? null);
         setIsLoading(false);
@@ -84,9 +85,9 @@ export const InvestorAuthProvider = ({ children }: InvestorAuthProviderProps) =>
 
   const signUp = async (email: string, password: string, userData?: any) => {
     try {
-      const redirectUrl = `${window.location.origin}/investor/dashboard`;
+      const redirectUrl = `${window.location.origin}/investor/bank-account`;
       
-      const { error } = await supabase.auth.signUp({
+      const { data, error } = await supabase.auth.signUp({
         email,
         password,
         options: {
@@ -104,10 +105,20 @@ export const InvestorAuthProvider = ({ children }: InvestorAuthProviderProps) =>
         return { error };
       }
 
-      toast({
-        title: "Registration Successful",
-        description: "Please check your email to verify your account.",
-      });
+      // Check if user needs email verification
+      if (data.user && !data.session) {
+        toast({
+          title: "Registration Successful",
+          description: "Please check your email to verify your account before proceeding.",
+          variant: "default",
+        });
+      } else if (data.session) {
+        // User is immediately logged in (email confirmation disabled)
+        toast({
+          title: "Account Created Successfully",
+          description: "Welcome! Please complete your bank account details.",
+        });
+      }
       
       return { error: null };
     } catch (error) {
@@ -119,6 +130,8 @@ export const InvestorAuthProvider = ({ children }: InvestorAuthProviderProps) =>
   const signOut = async () => {
     try {
       await supabase.auth.signOut();
+      // Clear onboarding completion flag
+      localStorage.removeItem('onboardingCompleted');
       toast({
         title: "Signed out",
         description: "You have been successfully signed out.",
