@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -44,8 +45,7 @@ type SignupFormData = z.infer<typeof signupSchema>;
 
 const InvestorSignup = () => {
   const [investorCategory, setInvestorCategory] = useState<'individual' | 'non-individual'>('individual');
-  const [pendingSignupData, setPendingSignupData] = useState<SignupFormData | null>(null);
-  const [isProcessingSignup, setIsProcessingSignup] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
   const { signUp, signOut, user } = useInvestorAuth();
   const navigate = useNavigate();
   const { toast } = useToast();
@@ -67,97 +67,52 @@ const InvestorSignup = () => {
   const watchedInvestorCategory = watch('investorCategory');
   const watchedIdentityType = watch('identityType');
 
-  // Handle auth state changes - when user becomes available after signup
+  // Redirect if user is already logged in and has completed onboarding
   useEffect(() => {
-    const handleAuthSuccess = async () => {
-      if (user && pendingSignupData && isProcessingSignup) {
-        console.log('User authenticated, saving client data:', user.id);
-        
-        try {
-          // Save client data to database now that we have the user
-          const clientData = {
-            investor_id: user.id,
-            name: `${pendingSignupData.firstName} ${pendingSignupData.lastName}`,
-            email: pendingSignupData.email,
-            phone: pendingSignupData.phone,
-            investor_category: pendingSignupData.investorCategory,
-            holding_type: pendingSignupData.holdingType,
-            residential_status: pendingSignupData.residentialStatus,
-            identity_type: pendingSignupData.identityType,
-            pan_number: pendingSignupData.panNumber,
-            date_of_birth: pendingSignupData.dateOfBirth,
-            onboarding_status: 'incomplete',
-            kyc_status: 'pending',
-          };
-          
-          const { error: insertError } = await supabase
-            .from('clients')
-            .insert(clientData);
-          
-          if (insertError) {
-            console.error('Error saving client data:', insertError);
-            toast({
-              title: "Error",
-              description: "Failed to save your information. Please try again.",
-              variant: "destructive",
-            });
-            setIsProcessingSignup(false);
-            setPendingSignupData(null);
-            return;
-          }
-          
-          console.log('Client data saved successfully');
-          
-          // Clear pending data
-          setPendingSignupData(null);
-          setIsProcessingSignup(false);
-          
-          // Save minimal data in sessionStorage for the bank account page
-          sessionStorage.setItem('investorSignupData', JSON.stringify({
-            email: pendingSignupData.email
-          }));
-          
-          toast({
-            title: "Account Created Successfully",
-            description: "Please complete your bank account details.",
-          });
-          
-          // Navigate to bank account page
-          navigate('/investor/bank-account');
-          
-        } catch (error) {
-          console.error('Error in auth success handler:', error);
-          toast({
-            title: "Error",
-            description: "An unexpected error occurred. Please try again.",
-            variant: "destructive",
-          });
-          setIsProcessingSignup(false);
-          setPendingSignupData(null);
-        }
-      }
-    };
-
-    handleAuthSuccess();
-  }, [user, pendingSignupData, isProcessingSignup, navigate, toast]);
-
-  useEffect(() => {
-    // Only redirect to dashboard if user is already logged in and has completed onboarding
-    if (user && !isProcessingSignup) {
+    if (user && !isProcessing) {
       const hasCompletedOnboarding = localStorage.getItem('onboardingCompleted');
       if (hasCompletedOnboarding) {
         navigate('/investor/dashboard');
       }
     }
-  }, [user, navigate, isProcessingSignup]);
+  }, [user, navigate, isProcessing]);
+
+  const saveClientData = async (userData: SignupFormData, userId: string) => {
+    console.log('Saving client data for user:', userId);
+    
+    const clientData = {
+      investor_id: userId,
+      name: `${userData.firstName} ${userData.lastName}`,
+      email: userData.email,
+      phone: userData.phone,
+      investor_category: userData.investorCategory,
+      holding_type: userData.holdingType,
+      residential_status: userData.residentialStatus,
+      identity_type: userData.identityType,
+      pan_number: userData.panNumber,
+      date_of_birth: userData.dateOfBirth,
+      onboarding_status: 'incomplete',
+      kyc_status: 'pending',
+    };
+    
+    const { error } = await supabase
+      .from('clients')
+      .insert(clientData);
+    
+    if (error) {
+      console.error('Error saving client data:', error);
+      throw error;
+    }
+    
+    console.log('Client data saved successfully');
+  };
 
   const onSubmit = async (data: SignupFormData) => {
-    if (isProcessingSignup) return; // Prevent double submission
+    if (isProcessing) return;
     
     try {
       console.log('Starting signup process for:', data.email);
-      setIsProcessingSignup(true);
-      setPendingSignupData(data);
+      setIsProcessing(true);
       
       // Create user metadata for Supabase Auth
       const userData = {
@@ -173,13 +128,12 @@ const InvestorSignup = () => {
       };
       
       // Sign up with Supabase Auth
-      const { error } = await signUp(data.email, data.password, userData);
+      const { error: signupError } = await signUp(data.email, data.password, userData);
       
-      if (error) {
-        console.error('Signup error:', error);
+      if (signupError) {
+        console.error('Signup error:', signupError);
         
-        // Check if user already exists
-        if (error.message?.includes('already been registered') || error.message?.includes('already exists')) {
+        if (signupError.message?.includes('already been registered') || signupError.message?.includes('already exists')) {
           toast({
             title: "Account Already Exists",
             description: "An account with this email already exists. Please try logging in instead.",
@@ -188,20 +142,58 @@ const InvestorSignup = () => {
         } else {
           toast({
             title: "Registration Failed",
-            description: error.message || "Failed to create account. Please try again.",
+            description: signupError.message || "Failed to create account. Please try again.",
             variant: "destructive",
           });
         }
         
-        setIsProcessingSignup(false);
-        setPendingSignupData(null);
+        setIsProcessing(false);
         return;
       }
       
-      console.log('Signup successful, waiting for auth state change...');
+      console.log('Signup successful, waiting for auth session...');
       
-      // Don't show success message here - let the auth state change handler manage the flow
-      // The useEffect above will handle the rest once the user becomes available
+      // Wait a moment for the auth session to be established
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      // Get the current session
+      const { data: { session } } = await supabase.auth.getSession();
+      
+      if (session?.user) {
+        console.log('Session established, saving client data...');
+        
+        try {
+          await saveClientData(data, session.user.id);
+          
+          // Save minimal data in sessionStorage for the bank account page
+          sessionStorage.setItem('investorSignupData', JSON.stringify({
+            email: data.email
+          }));
+          
+          toast({
+            title: "Account Created Successfully",
+            description: "Please complete your bank account details.",
+          });
+          
+          console.log('Navigating to bank account page...');
+          navigate('/investor/bank-account');
+          
+        } catch (clientError) {
+          console.error('Error saving client data:', clientError);
+          toast({
+            title: "Error",
+            description: "Failed to save your information. Please try again.",
+            variant: "destructive",
+          });
+        }
+      } else {
+        console.log('No session available, user may need to verify email');
+        toast({
+          title: "Registration Successful",
+          description: "Please check your email to verify your account before proceeding.",
+          variant: "default",
+        });
+      }
       
     } catch (error) {
       console.error('Registration error:', error);
@@ -210,8 +202,8 @@ const InvestorSignup = () => {
         description: "An unexpected error occurred. Please try again.",
         variant: "destructive",
       });
-      setIsProcessingSignup(false);
-      setPendingSignupData(null);
+    } finally {
+      setIsProcessing(false);
     }
   };
 
@@ -246,7 +238,7 @@ const InvestorSignup = () => {
               </SelectContent>
             </Select>
             {errors.holdingType && (
-              <p className="text-sm text-red-600">{errors.holdingType.message}</p>
+              <p className="text-sm text-red-600">{errors.holdingType?.message as string}</p>
             )}
           </div>
 
@@ -266,7 +258,7 @@ const InvestorSignup = () => {
               </SelectContent>
             </Select>
             {errors.residentialStatus && (
-              <p className="text-sm text-red-600">{errors.residentialStatus.message}</p>
+              <p className="text-sm text-red-600">{errors.residentialStatus?.message as string}</p>
             )}
           </div>
         </div>
@@ -285,10 +277,10 @@ const InvestorSignup = () => {
 
         <Button
           type="submit"
-          disabled={isSubmitting || isProcessingSignup}
+          disabled={isSubmitting || isProcessing}
           className="w-full h-12 bg-blue-600 hover:bg-blue-700 text-white font-medium"
         >
-          {isSubmitting || isProcessingSignup ? 'Creating Account...' : 'Create Account'}
+          {isSubmitting || isProcessing ? 'Creating Account...' : 'Create Account'}
         </Button>
 
         <div className="text-center">

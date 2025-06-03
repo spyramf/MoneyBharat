@@ -85,42 +85,24 @@ export const InvestorAuthProvider = ({ children }: InvestorAuthProviderProps) =>
 
   const signUp = async (email: string, password: string, userData?: any) => {
     try {
-      const redirectUrl = `${window.location.origin}/investor/bank-account`;
+      console.log('Starting signup with Supabase...');
       
       const { data, error } = await supabase.auth.signUp({
         email,
         password,
         options: {
-          emailRedirectTo: redirectUrl,
           data: userData
         }
       });
       
       if (error) {
-        toast({
-          title: "Registration Failed",
-          description: error.message,
-          variant: "destructive",
-        });
+        console.error('Supabase signup error:', error);
         return { error };
       }
 
-      // Check if user needs email verification
-      if (data.user && !data.session) {
-        toast({
-          title: "Registration Successful",
-          description: "Please check your email to verify your account before proceeding.",
-          variant: "default",
-        });
-      } else if (data.session) {
-        // User is immediately logged in (email confirmation disabled)
-        toast({
-          title: "Account Created Successfully",
-          description: "Welcome! Please complete your bank account details.",
-        });
-      }
-      
+      console.log('Supabase signup successful:', data.user?.email);
       return { error: null };
+      
     } catch (error) {
       console.error('Sign up error:', error);
       return { error };
