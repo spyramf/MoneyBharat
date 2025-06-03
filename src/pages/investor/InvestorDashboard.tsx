@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useInvestorAuth } from '@/context/InvestorAuthContext';
 import { useUserRole } from '@/hooks/useUserRole';
 import { useUserPermissions } from '@/hooks/useUserPermissions';
@@ -8,6 +8,7 @@ import EnhancedRMDashboard from '@/components/dashboard/EnhancedRMDashboard';
 import SubbrokerDashboard from '@/components/dashboard/SubbrokerDashboard';
 import ClientDashboard from '@/components/dashboard/ClientDashboard';
 import FinlecStyleDashboard from '@/components/dashboard/FinlecStyleDashboard';
+import ClientsDashboardView from '@/components/dashboard/ClientsDashboardView';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { LogOut, PieChart, Settings, Users, BarChart3, TrendingUp, FileText, AlertTriangle, Calendar } from 'lucide-react';
@@ -16,6 +17,7 @@ const InvestorDashboard = () => {
   const { user, signOut } = useInvestorAuth();
   const { userRole, isLoading: roleLoading } = useUserRole();
   const { hasPermission, isLoading: permissionsLoading } = useUserPermissions();
+  const [activeView, setActiveView] = useState('dashboard');
 
   if (roleLoading || permissionsLoading) {
     return (
@@ -58,9 +60,17 @@ const InvestorDashboard = () => {
     return allItems.filter(item => hasPermission(item.permission));
   };
 
+  const handleNavigation = (itemKey: string) => {
+    setActiveView(itemKey);
+  };
+
   const renderDashboard = () => {
-    // Show the modern Finlec-style dashboard for all users
-    return <FinlecStyleDashboard />;
+    switch (activeView) {
+      case 'clients':
+        return <ClientsDashboardView />;
+      default:
+        return <FinlecStyleDashboard />;
+    }
   };
 
   const navigationItems = getNavigationItems();
@@ -86,18 +96,18 @@ const InvestorDashboard = () => {
 
         <nav className="space-y-2 max-h-96 overflow-y-auto">
           {navigationItems.map((item) => (
-            <a 
+            <button
               key={item.key}
-              href={item.path} 
-              className={`flex items-center space-x-3 p-3 rounded-lg transition-colors ${
-                item.key === 'dashboard' 
+              onClick={() => handleNavigation(item.key)}
+              className={`w-full flex items-center space-x-3 p-3 rounded-lg transition-colors text-left ${
+                activeView === item.key 
                   ? 'bg-blue-700 text-white' 
                   : 'hover:bg-blue-700'
               }`}
             >
               <item.icon className="h-5 w-5" />
               <span className="text-sm">{item.name}</span>
-            </a>
+            </button>
           ))}
         </nav>
 
