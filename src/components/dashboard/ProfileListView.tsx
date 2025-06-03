@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -14,7 +13,7 @@ import { useToast } from '@/hooks/use-toast';
 import { 
   Search, 
   Upload, 
-  Sync,
+  RefreshCw,
   ExternalLink,
   Plus,
   MoreHorizontal,
@@ -182,7 +181,7 @@ const ProfileListView = () => {
         </div>
         <div className="flex items-center gap-3">
           <Button onClick={handleSync} variant="outline" size="sm" disabled={loading}>
-            <Sync className={`h-4 w-4 mr-2 ${loading ? 'animate-spin' : ''}`} />
+            <RefreshCw className={`h-4 w-4 mr-2 ${loading ? 'animate-spin' : ''}`} />
             Sync
           </Button>
           <Button variant="outline" size="sm" asChild>
