@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -70,6 +69,8 @@ const InvestorBankAccount = () => {
     if (!user) return;
 
     try {
+      console.log('Updating bank account details for user:', user.id);
+      
       // Update the existing client record with bank details
       const { error } = await supabase
         .from('clients')
@@ -82,7 +83,12 @@ const InvestorBankAccount = () => {
         })
         .eq('investor_id', user.id);
 
-      if (error) throw error;
+      if (error) {
+        console.error('Error updating bank account details:', error);
+        throw error;
+      }
+
+      console.log('Bank account details updated successfully');
 
       // Clear session storage
       sessionStorage.removeItem('investorSignupData');
