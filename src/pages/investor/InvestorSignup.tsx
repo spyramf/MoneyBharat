@@ -102,87 +102,7 @@ const InvestorSignup = () => {
 
             <CardContent className="space-y-8">
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-                {/* Personal Information */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="space-y-2">
-                    <Label htmlFor="firstName">First Name *</Label>
-                    <Input
-                      id="firstName"
-                      placeholder="Enter first name"
-                      {...register('firstName')}
-                    />
-                    {errors.firstName && (
-                      <p className="text-sm text-red-600">{errors.firstName.message}</p>
-                    )}
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="lastName">Last Name *</Label>
-                    <Input
-                      id="lastName"
-                      placeholder="Enter last name"
-                      {...register('lastName')}
-                    />
-                    {errors.lastName && (
-                      <p className="text-sm text-red-600">{errors.lastName.message}</p>
-                    )}
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="space-y-2">
-                    <Label htmlFor="email">Email Address *</Label>
-                    <Input
-                      id="email"
-                      type="email"
-                      placeholder="Enter email address"
-                      {...register('email')}
-                    />
-                    {errors.email && (
-                      <p className="text-sm text-red-600">{errors.email.message}</p>
-                    )}
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="phone">Phone Number *</Label>
-                    <Input
-                      id="phone"
-                      type="tel"
-                      placeholder="Enter phone number"
-                      {...register('phone')}
-                    />
-                    {errors.phone && (
-                      <p className="text-sm text-red-600">{errors.phone.message}</p>
-                    )}
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="space-y-2">
-                    <Label htmlFor="password">Password *</Label>
-                    <Input
-                      id="password"
-                      type="password"
-                      placeholder="Create password"
-                      {...register('password')}
-                    />
-                    {errors.password && (
-                      <p className="text-sm text-red-600">{errors.password.message}</p>
-                    )}
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="confirmPassword">Confirm Password *</Label>
-                    <Input
-                      id="confirmPassword"
-                      type="password"
-                      placeholder="Confirm password"
-                      {...register('confirmPassword')}
-                    />
-                    {errors.confirmPassword && (
-                      <p className="text-sm text-red-600">{errors.confirmPassword.message}</p>
-                    )}
-                  </div>
-                </div>
-
-                {/* Investor Category */}
+                {/* Investor Category - Moved to top */}
                 <div className="space-y-4">
                   <Label className="text-base font-medium">
                     Investor Category <span className="text-red-500">*</span>
@@ -314,6 +234,86 @@ const InvestorSignup = () => {
                     </div>
                   </CardContent>
                 </Card>
+
+                {/* Personal Information - Moved to bottom */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="space-y-2">
+                    <Label htmlFor="firstName">First Name *</Label>
+                    <Input
+                      id="firstName"
+                      placeholder="Enter first name"
+                      {...register('firstName')}
+                    />
+                    {errors.firstName && (
+                      <p className="text-sm text-red-600">{errors.firstName.message}</p>
+                    )}
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="lastName">Last Name *</Label>
+                    <Input
+                      id="lastName"
+                      placeholder="Enter last name"
+                      {...register('lastName')}
+                    />
+                    {errors.lastName && (
+                      <p className="text-sm text-red-600">{errors.lastName.message}</p>
+                    )}
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="space-y-2">
+                    <Label htmlFor="email">Email Address *</Label>
+                    <Input
+                      id="email"
+                      type="email"
+                      placeholder="Enter email address"
+                      {...register('email')}
+                    />
+                    {errors.email && (
+                      <p className="text-sm text-red-600">{errors.email.message}</p>
+                    )}
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="phone">Phone Number *</Label>
+                    <Input
+                      id="phone"
+                      type="tel"
+                      placeholder="Enter phone number"
+                      {...register('phone')}
+                    />
+                    {errors.phone && (
+                      <p className="text-sm text-red-600">{errors.phone.message}</p>
+                    )}
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="space-y-2">
+                    <Label htmlFor="password">Password *</Label>
+                    <Input
+                      id="password"
+                      type="password"
+                      placeholder="Create password"
+                      {...register('password')}
+                    />
+                    {errors.password && (
+                      <p className="text-sm text-red-600">{errors.password.message}</p>
+                    )}
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="confirmPassword">Confirm Password *</Label>
+                    <Input
+                      id="confirmPassword"
+                      type="password"
+                      placeholder="Confirm password"
+                      {...register('confirmPassword')}
+                    />
+                    {errors.confirmPassword && (
+                      <p className="text-sm text-red-600">{errors.confirmPassword.message}</p>
+                    )}
+                  </div>
+                </div>
 
                 <Button
                   type="submit"
