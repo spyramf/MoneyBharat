@@ -133,7 +133,8 @@ const InvestorSignup = () => {
       if (signupResult.error) {
         console.error('Signup error:', signupResult.error);
         
-        if (signupResult.error.message?.includes('already been registered') || signupResult.error.message?.includes('already exists')) {
+        if (signupResult.error.message?.includes('already been registered') || 
+            signupResult.error.message?.includes('already exists')) {
           toast({
             title: "Account Already Exists",
             description: "An account with this email already exists. Please try logging in instead.",
@@ -151,21 +152,16 @@ const InvestorSignup = () => {
         return;
       }
       
-      console.log('Signup successful, user created:', signupResult.user?.email);
+      console.log('Signup successful, user created and logged in:', signupResult.user?.email);
       
-      // If we have a user from signup, use that user ID
+      // Save client data with the authenticated user's ID
       if (signupResult.user) {
         try {
           await saveClientData(data, signupResult.user.id);
           
-          // Save minimal data in sessionStorage for the bank account page
-          sessionStorage.setItem('investorSignupData', JSON.stringify({
-            email: data.email
-          }));
-          
           toast({
             title: "Account Created Successfully",
-            description: "Please complete your bank account details.",
+            description: "Welcome! Please complete your bank account details to finish setup.",
           });
           
           console.log('Navigating to bank account page...');
@@ -174,61 +170,20 @@ const InvestorSignup = () => {
         } catch (clientError) {
           console.error('Error saving client data:', clientError);
           toast({
-            title: "Error",
-            description: "Failed to save your information. Please try again.",
-            variant: "destructive",
+            title: "Account Created",
+            description: "Your account was created but there was an issue saving additional details. Please complete your profile.",
+            variant: "default",
           });
+          navigate('/investor/bank-account');
         }
       } else {
-        // Fallback: wait for auth session
-        console.log('No user in signup result, waiting for auth session...');
-        
-        // Wait for auth session to be established
-        let retries = 0;
-        const maxRetries = 10;
-        const checkSession = async () => {
-          const { data: { session } } = await supabase.auth.getSession();
-          
-          if (session?.user) {
-            console.log('Session established, saving client data...');
-            
-            try {
-              await saveClientData(data, session.user.id);
-              
-              sessionStorage.setItem('investorSignupData', JSON.stringify({
-                email: data.email
-              }));
-              
-              toast({
-                title: "Account Created Successfully",
-                description: "Please complete your bank account details.",
-              });
-              
-              navigate('/investor/bank-account');
-              
-            } catch (clientError) {
-              console.error('Error saving client data:', clientError);
-              toast({
-                title: "Error",
-                description: "Failed to save your information. Please try again.",
-                variant: "destructive",
-              });
-            }
-          } else if (retries < maxRetries) {
-            retries++;
-            setTimeout(checkSession, 500);
-          } else {
-            console.log('Max retries reached, showing manual login message');
-            toast({
-              title: "Account Created",
-              description: "Your account has been created. Please sign in to continue.",
-              variant: "default",
-            });
-            navigate('/investor/login');
-          }
-        };
-        
-        checkSession();
+        console.error('No user returned from signup');
+        toast({
+          title: "Registration Issue",
+          description: "Account may have been created. Please try logging in.",
+          variant: "default",
+        });
+        navigate('/investor/login');
       }
       
     } catch (error) {

@@ -113,10 +113,13 @@ export type Database = {
           email: string | null
           family_head_id: string | null
           family_relationship: string | null
+          holding_type: string | null
           id: string
+          identity_type: string | null
           ifsc_code: string | null
           investment_amount: number | null
           investment_experience: string | null
+          investor_category: string | null
           investor_id: string
           is_default_payout: boolean | null
           kyc_status: string | null
@@ -128,6 +131,7 @@ export type Database = {
           phone: string | null
           pincode: string | null
           relationship_manager: string | null
+          residential_status: string | null
           risk_profile: string | null
           sip_amount: number | null
           state: string | null
@@ -146,10 +150,13 @@ export type Database = {
           email?: string | null
           family_head_id?: string | null
           family_relationship?: string | null
+          holding_type?: string | null
           id?: string
+          identity_type?: string | null
           ifsc_code?: string | null
           investment_amount?: number | null
           investment_experience?: string | null
+          investor_category?: string | null
           investor_id: string
           is_default_payout?: boolean | null
           kyc_status?: string | null
@@ -161,6 +168,7 @@ export type Database = {
           phone?: string | null
           pincode?: string | null
           relationship_manager?: string | null
+          residential_status?: string | null
           risk_profile?: string | null
           sip_amount?: number | null
           state?: string | null
@@ -179,10 +187,13 @@ export type Database = {
           email?: string | null
           family_head_id?: string | null
           family_relationship?: string | null
+          holding_type?: string | null
           id?: string
+          identity_type?: string | null
           ifsc_code?: string | null
           investment_amount?: number | null
           investment_experience?: string | null
+          investor_category?: string | null
           investor_id?: string
           is_default_payout?: boolean | null
           kyc_status?: string | null
@@ -194,6 +205,7 @@ export type Database = {
           phone?: string | null
           pincode?: string | null
           relationship_manager?: string | null
+          residential_status?: string | null
           risk_profile?: string | null
           sip_amount?: number | null
           state?: string | null

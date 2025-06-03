@@ -1,3 +1,4 @@
+
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { User, Session } from '@supabase/supabase-js';
@@ -90,7 +91,7 @@ export const InvestorAuthProvider = ({ children }: InvestorAuthProviderProps) =>
         email,
         password,
         options: {
-          emailRedirectTo: undefined, // Disable email verification
+          emailRedirectTo: undefined, // Disable email verification for immediate login
           data: userData
         }
       });
@@ -101,6 +102,26 @@ export const InvestorAuthProvider = ({ children }: InvestorAuthProviderProps) =>
       }
 
       console.log('Supabase signup successful:', data.user?.email);
+      
+      // For immediate access without email verification, the user should be automatically signed in
+      if (data.user && data.session) {
+        console.log('User created and automatically signed in');
+        return { error: null, user: data.user, session: data.session };
+      } else if (data.user && !data.session) {
+        // If user exists but no session, try to sign them in immediately
+        console.log('User created, attempting immediate sign in...');
+        const signInResult = await supabase.auth.signInWithPassword({
+          email,
+          password,
+        });
+        
+        if (signInResult.error) {
+          console.error('Auto sign-in failed:', signInResult.error);
+          return { error: signInResult.error };
+        }
+        
+        return { error: null, user: signInResult.data.user, session: signInResult.data.session };
+      }
       
       return { error: null, user: data.user, session: data.session };
       
