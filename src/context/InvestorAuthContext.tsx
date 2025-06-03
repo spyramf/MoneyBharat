@@ -1,4 +1,3 @@
-
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { User, Session } from '@supabase/supabase-js';
@@ -9,7 +8,7 @@ interface InvestorAuthContextType {
   session: Session | null;
   isLoading: boolean;
   signIn: (email: string, password: string) => Promise<{ error: any }>;
-  signUp: (email: string, password: string, userData?: any) => Promise<{ error: any }>;
+  signUp: (email: string, password: string, userData?: any) => Promise<{ error: any; user?: User; session?: Session }>;
   signOut: () => Promise<void>;
   resetPassword: (email: string) => Promise<{ error: any }>;
 }
@@ -102,11 +101,6 @@ export const InvestorAuthProvider = ({ children }: InvestorAuthProviderProps) =>
       }
 
       console.log('Supabase signup successful:', data.user?.email);
-      
-      // For disabled email verification, the user should be automatically confirmed
-      if (data.user && !data.user.email_confirmed_at) {
-        console.log('User created but not confirmed, this is expected behavior');
-      }
       
       return { error: null, user: data.user, session: data.session };
       
