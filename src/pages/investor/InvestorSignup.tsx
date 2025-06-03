@@ -46,7 +46,7 @@ type SignupFormData = z.infer<typeof signupSchema>;
 const InvestorSignup = () => {
   const [investorCategory, setInvestorCategory] = useState<'individual' | 'non-individual'>('individual');
   const [isProcessing, setIsProcessing] = useState(false);
-  const { signUp, signOut, user } = useInvestorAuth();
+  const { signUp, signOut, user, checkExistingClient } = useInvestorAuth();
   const navigate = useNavigate();
   const { toast } = useToast();
 
@@ -114,7 +114,34 @@ const InvestorSignup = () => {
       console.log('Starting signup process for:', data.email);
       setIsProcessing(true);
       
-      // Create user metadata for Supabase Auth
+      // First, check if client already exists by email
+      const existingClientResult = await checkExistingClient(data.email);
+      
+      if (existingClientResult.error) {
+        console.error('Error checking existing client:', existingClientResult.error);
+        toast({
+          title: "Error",
+          description: "Unable to check existing account. Please try again.",
+          variant: "destructive",
+        });
+        setIsProcessing(false);
+        return;
+      }
+      
+      if (existingClientResult.exists) {
+        console.log('Client already exists, redirecting to next step');
+        toast({
+          title: "Account Found",
+          description: `Welcome back ${existingClientResult.client?.name}! Proceeding to bank account setup.`,
+        });
+        navigate('/investor/bank-account');
+        setIsProcessing(false);
+        return;
+      }
+      
+      // If client doesn't exist, proceed with normal signup
+      console.log('No existing client found, creating new account');
+      
       const userData = {
         first_name: data.firstName,
         last_name: data.lastName,
@@ -127,7 +154,6 @@ const InvestorSignup = () => {
         date_of_birth: data.dateOfBirth,
       };
       
-      // Sign up with Supabase Auth
       const signupResult = await signUp(data.email, data.password, userData);
       
       if (signupResult.error) {
@@ -154,7 +180,6 @@ const InvestorSignup = () => {
       
       console.log('Signup successful, user created and logged in:', signupResult.user?.email);
       
-      // Save client data with the authenticated user's ID
       if (signupResult.user) {
         try {
           await saveClientData(data, signupResult.user.id);
@@ -271,7 +296,7 @@ const InvestorSignup = () => {
           disabled={isSubmitting || isProcessing}
           className="w-full h-12 bg-blue-600 hover:bg-blue-700 text-white font-medium"
         >
-          {isSubmitting || isProcessing ? 'Creating Account...' : 'Create Account'}
+          {isSubmitting || isProcessing ? 'Processing...' : 'Create Account'}
         </Button>
 
         <div className="text-center">
