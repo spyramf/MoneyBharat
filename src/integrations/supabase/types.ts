@@ -99,6 +99,48 @@ export type Database = {
         }
         Relationships: []
       }
+      business_metrics: {
+        Row: {
+          branch_id: string | null
+          created_at: string
+          id: string
+          metric_type: string
+          metric_value: number | null
+          percentage_change: number | null
+          period_end: string
+          period_start: string
+          period_type: string
+          rm_id: string | null
+          target_value: number | null
+        }
+        Insert: {
+          branch_id?: string | null
+          created_at?: string
+          id?: string
+          metric_type: string
+          metric_value?: number | null
+          percentage_change?: number | null
+          period_end: string
+          period_start: string
+          period_type: string
+          rm_id?: string | null
+          target_value?: number | null
+        }
+        Update: {
+          branch_id?: string | null
+          created_at?: string
+          id?: string
+          metric_type?: string
+          metric_value?: number | null
+          percentage_change?: number | null
+          period_end?: string
+          period_start?: string
+          period_type?: string
+          rm_id?: string | null
+          target_value?: number | null
+        }
+        Relationships: []
+      }
       clients: {
         Row: {
           aadhar: string | null
@@ -223,6 +265,322 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      compliance_alerts: {
+        Row: {
+          alert_type: string
+          client_id: string | null
+          created_at: string
+          description: string | null
+          due_date: string | null
+          id: string
+          resolved_by: string | null
+          resolved_date: string | null
+          severity: string
+          status: string | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          alert_type: string
+          client_id?: string | null
+          created_at?: string
+          description?: string | null
+          due_date?: string | null
+          id?: string
+          resolved_by?: string | null
+          resolved_date?: string | null
+          severity: string
+          status?: string | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          alert_type?: string
+          client_id?: string | null
+          created_at?: string
+          description?: string | null
+          due_date?: string | null
+          id?: string
+          resolved_by?: string | null
+          resolved_date?: string | null
+          severity?: string
+          status?: string | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "compliance_alerts_client_id_fkey"
+            columns: ["client_id"]
+            isOneToOne: false
+            referencedRelation: "clients"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      kyc_details: {
+        Row: {
+          client_id: string | null
+          created_at: string
+          document_number: string | null
+          expiry_date: string | null
+          id: string
+          kyc_type: string
+          remarks: string | null
+          updated_at: string
+          verification_status: string | null
+          verified_date: string | null
+        }
+        Insert: {
+          client_id?: string | null
+          created_at?: string
+          document_number?: string | null
+          expiry_date?: string | null
+          id?: string
+          kyc_type: string
+          remarks?: string | null
+          updated_at?: string
+          verification_status?: string | null
+          verified_date?: string | null
+        }
+        Update: {
+          client_id?: string | null
+          created_at?: string
+          document_number?: string | null
+          expiry_date?: string | null
+          id?: string
+          kyc_type?: string
+          remarks?: string | null
+          updated_at?: string
+          verification_status?: string | null
+          verified_date?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "kyc_details_client_id_fkey"
+            columns: ["client_id"]
+            isOneToOne: false
+            referencedRelation: "clients"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      portfolios: {
+        Row: {
+          client_id: string | null
+          created_at: string
+          current_value: number | null
+          folio_number: string | null
+          fund_name: string
+          gain_loss: number | null
+          gain_loss_percentage: number | null
+          id: string
+          invested_amount: number | null
+          nav: number | null
+          scheme_code: string | null
+          units: number | null
+          updated_at: string
+        }
+        Insert: {
+          client_id?: string | null
+          created_at?: string
+          current_value?: number | null
+          folio_number?: string | null
+          fund_name: string
+          gain_loss?: number | null
+          gain_loss_percentage?: number | null
+          id?: string
+          invested_amount?: number | null
+          nav?: number | null
+          scheme_code?: string | null
+          units?: number | null
+          updated_at?: string
+        }
+        Update: {
+          client_id?: string | null
+          created_at?: string
+          current_value?: number | null
+          folio_number?: string | null
+          fund_name?: string
+          gain_loss?: number | null
+          gain_loss_percentage?: number | null
+          id?: string
+          invested_amount?: number | null
+          nav?: number | null
+          scheme_code?: string | null
+          units?: number | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "portfolios_client_id_fkey"
+            columns: ["client_id"]
+            isOneToOne: false
+            referencedRelation: "clients"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      sip_registrations: {
+        Row: {
+          bank_account: string | null
+          client_id: string | null
+          created_at: string
+          end_date: string | null
+          frequency: string
+          fund_name: string
+          id: string
+          installments_completed: number | null
+          mandate_id: string | null
+          next_installment_date: string | null
+          scheme_code: string | null
+          sip_amount: number
+          sip_date: number
+          start_date: string
+          status: string | null
+          total_installments: number | null
+          updated_at: string
+        }
+        Insert: {
+          bank_account?: string | null
+          client_id?: string | null
+          created_at?: string
+          end_date?: string | null
+          frequency: string
+          fund_name: string
+          id?: string
+          installments_completed?: number | null
+          mandate_id?: string | null
+          next_installment_date?: string | null
+          scheme_code?: string | null
+          sip_amount: number
+          sip_date: number
+          start_date: string
+          status?: string | null
+          total_installments?: number | null
+          updated_at?: string
+        }
+        Update: {
+          bank_account?: string | null
+          client_id?: string | null
+          created_at?: string
+          end_date?: string | null
+          frequency?: string
+          fund_name?: string
+          id?: string
+          installments_completed?: number | null
+          mandate_id?: string | null
+          next_installment_date?: string | null
+          scheme_code?: string | null
+          sip_amount?: number
+          sip_date?: number
+          start_date?: string
+          status?: string | null
+          total_installments?: number | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "sip_registrations_client_id_fkey"
+            columns: ["client_id"]
+            isOneToOne: false
+            referencedRelation: "clients"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      transactions: {
+        Row: {
+          amount: number | null
+          client_id: string | null
+          created_at: string
+          folio_number: string | null
+          fund_name: string
+          id: string
+          nav: number | null
+          order_id: string | null
+          remarks: string | null
+          scheme_code: string | null
+          settlement_date: string | null
+          status: string | null
+          transaction_date: string
+          transaction_type: string
+          units: number | null
+        }
+        Insert: {
+          amount?: number | null
+          client_id?: string | null
+          created_at?: string
+          folio_number?: string | null
+          fund_name: string
+          id?: string
+          nav?: number | null
+          order_id?: string | null
+          remarks?: string | null
+          scheme_code?: string | null
+          settlement_date?: string | null
+          status?: string | null
+          transaction_date: string
+          transaction_type: string
+          units?: number | null
+        }
+        Update: {
+          amount?: number | null
+          client_id?: string | null
+          created_at?: string
+          folio_number?: string | null
+          fund_name?: string
+          id?: string
+          nav?: number | null
+          order_id?: string | null
+          remarks?: string | null
+          scheme_code?: string | null
+          settlement_date?: string | null
+          status?: string | null
+          transaction_date?: string
+          transaction_type?: string
+          units?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "transactions_client_id_fkey"
+            columns: ["client_id"]
+            isOneToOne: false
+            referencedRelation: "clients"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      user_permissions: {
+        Row: {
+          access_level: string | null
+          created_at: string
+          feature_name: string
+          id: string
+          is_enabled: boolean | null
+          updated_at: string
+          user_role: string
+        }
+        Insert: {
+          access_level?: string | null
+          created_at?: string
+          feature_name: string
+          id?: string
+          is_enabled?: boolean | null
+          updated_at?: string
+          user_role: string
+        }
+        Update: {
+          access_level?: string | null
+          created_at?: string
+          feature_name?: string
+          id?: string
+          is_enabled?: boolean | null
+          updated_at?: string
+          user_role?: string
+        }
+        Relationships: []
       }
       user_roles: {
         Row: {
