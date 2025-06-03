@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useInvestorAuth } from '@/context/InvestorAuthContext';
 import { useUserRole } from '@/hooks/useUserRole';
@@ -9,6 +8,7 @@ import SubbrokerDashboard from '@/components/dashboard/SubbrokerDashboard';
 import ClientDashboard from '@/components/dashboard/ClientDashboard';
 import FinlecStyleDashboard from '@/components/dashboard/FinlecStyleDashboard';
 import ClientsDashboardView from '@/components/dashboard/ClientsDashboardView';
+import ProfileListView from '@/components/dashboard/ProfileListView';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { LogOut, PieChart, Settings, Users, BarChart3, TrendingUp, FileText, AlertTriangle, Calendar, ChevronDown, ChevronRight } from 'lucide-react';
@@ -95,12 +95,7 @@ const InvestorDashboard = () => {
       case 'clients':
         return <ClientsDashboardView />;
       case 'portfolio_overview':
-        return (
-          <div className="p-6">
-            <h2 className="text-2xl font-bold mb-4">Profile List</h2>
-            <p className="text-gray-600">Profile list content will be implemented here.</p>
-          </div>
-        );
+        return <ProfileListView />;
       case 'my_holdings':
         return (
           <div className="p-6">
