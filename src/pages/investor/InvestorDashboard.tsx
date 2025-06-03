@@ -46,15 +46,15 @@ const InvestorDashboard = () => {
       { name: 'Dashboard', path: '/investor/dashboard', icon: PieChart, key: 'dashboard', permission: 'dashboard_overview' },
       { name: 'Clients', path: '/investor/clients', icon: Users, key: 'clients', permission: 'client_management' },
       { 
-        name: 'Portfolio Management', 
+        name: 'BSE Online', 
         path: '#', 
         icon: BarChart3, 
         key: 'portfolio', 
         permission: 'portfolio_management',
         hasSubmenu: true,
         submenuItems: [
-          { name: 'Portfolio Overview', key: 'portfolio_overview', permission: 'portfolio_management' },
-          { name: 'My Holdings', key: 'my_holdings', permission: 'portfolio_management' },
+          { name: 'Profile List', key: 'portfolio_overview', permission: 'portfolio_management' },
+          { name: 'Mandate Lists', key: 'my_holdings', permission: 'portfolio_management' },
           { name: 'My Orders', key: 'my_orders', permission: 'portfolio_management' },
           { name: 'SIP Orders', key: 'sip_orders', permission: 'portfolio_management' },
           { name: 'Transaction History', key: 'transaction_history', permission: 'portfolio_management' },
@@ -97,15 +97,15 @@ const InvestorDashboard = () => {
       case 'portfolio_overview':
         return (
           <div className="p-6">
-            <h2 className="text-2xl font-bold mb-4">Portfolio Overview</h2>
-            <p className="text-gray-600">Portfolio overview content will be implemented here.</p>
+            <h2 className="text-2xl font-bold mb-4">Profile List</h2>
+            <p className="text-gray-600">Profile list content will be implemented here.</p>
           </div>
         );
       case 'my_holdings':
         return (
           <div className="p-6">
-            <h2 className="text-2xl font-bold mb-4">My Holdings</h2>
-            <p className="text-gray-600">Holdings information will be displayed here.</p>
+            <h2 className="text-2xl font-bold mb-4">Mandate Lists</h2>
+            <p className="text-gray-600">Mandate lists information will be displayed here.</p>
           </div>
         );
       case 'my_orders':
