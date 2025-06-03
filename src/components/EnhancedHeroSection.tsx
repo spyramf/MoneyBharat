@@ -1,4 +1,3 @@
-
 import { ArrowRight, ArrowRightCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
@@ -32,9 +31,11 @@ const EnhancedHeroSection = () => {
                 insurance, and loans for every Indian.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 pt-6">
-                <Button className="bg-gradient-to-r from-fintech-green to-fintech-green hover:opacity-90 text-white px-8 py-6">
-                  Start Investing
-                </Button>
+                <Link to="/investor/login">
+                  <Button className="bg-gradient-to-r from-fintech-green to-fintech-green hover:opacity-90 text-white px-8 py-6">
+                    Start Investing
+                  </Button>
+                </Link>
                 <Link to="/booking">
                   <Button variant="outline" className="group border-fintech-green text-fintech-green hover:text-fintech-green transition-colors px-8 py-6 rounded-xl">
                     Book Consultation
