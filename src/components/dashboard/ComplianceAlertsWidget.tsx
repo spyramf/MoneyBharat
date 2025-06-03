@@ -35,7 +35,21 @@ const ComplianceAlertsWidget = () => {
         .limit(5);
 
       if (error) throw error;
-      setAlerts(data || []);
+      
+      const typedData = (data || []).map(item => ({
+        id: item.id,
+        alert_type: item.alert_type,
+        severity: (item.severity === 'low' || item.severity === 'medium' || item.severity === 'high' || item.severity === 'critical')
+          ? item.severity
+          : 'medium' as const,
+        title: item.title,
+        description: item.description || '',
+        status: item.status,
+        due_date: item.due_date,
+        client_id: item.client_id
+      }));
+      
+      setAlerts(typedData);
     } catch (error) {
       console.error('Error fetching compliance alerts:', error);
     } finally {

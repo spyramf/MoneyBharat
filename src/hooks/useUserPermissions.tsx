@@ -35,7 +35,14 @@ export const useUserPermissions = () => {
           console.error('Error fetching user permissions:', error);
           setPermissions([]);
         } else {
-          setPermissions(data || []);
+          const typedData = (data || []).map(item => ({
+            feature_name: item.feature_name,
+            is_enabled: item.is_enabled,
+            access_level: (item.access_level === 'read' || item.access_level === 'write' || item.access_level === 'admin') 
+              ? item.access_level 
+              : 'read' as const
+          }));
+          setPermissions(typedData);
         }
       } catch (error) {
         console.error('Error fetching permissions:', error);
