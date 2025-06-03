@@ -7,9 +7,10 @@ import EnhancedAdminDashboard from '@/components/dashboard/EnhancedAdminDashboar
 import EnhancedRMDashboard from '@/components/dashboard/EnhancedRMDashboard';
 import SubbrokerDashboard from '@/components/dashboard/SubbrokerDashboard';
 import ClientDashboard from '@/components/dashboard/ClientDashboard';
+import FinlecStyleDashboard from '@/components/dashboard/FinlecStyleDashboard';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { LogOut, PieChart, Settings, Users, BarChart3, TrendingUp, FileText, AlertTriangle } from 'lucide-react';
+import { LogOut, PieChart, Settings, Users, BarChart3, TrendingUp, FileText, AlertTriangle, Calendar } from 'lucide-react';
 
 const InvestorDashboard = () => {
   const { user, signOut } = useInvestorAuth();
@@ -58,17 +59,8 @@ const InvestorDashboard = () => {
   };
 
   const renderDashboard = () => {
-    switch (userRole) {
-      case 'admin':
-        return <EnhancedAdminDashboard />;
-      case 'rm':
-        return <EnhancedRMDashboard />;
-      case 'subbroker':
-        return <SubbrokerDashboard />;
-      case 'client':
-      default:
-        return <ClientDashboard />;
-    }
+    // Show the modern Finlec-style dashboard for all users
+    return <FinlecStyleDashboard />;
   };
 
   const navigationItems = getNavigationItems();
@@ -112,7 +104,7 @@ const InvestorDashboard = () => {
         {/* Feature Access Indicator */}
         <div className="mt-6 p-3 bg-blue-700 rounded-lg">
           <div className="text-xs opacity-75 mb-1">Available Features</div>
-          <div className="text-sm font-medium">{navigationItems.length} of {navigationItems.length}</div>
+          <div className="text-sm font-medium">{navigationItems.length} features</div>
           <div className="text-xs opacity-75">Role-based access</div>
         </div>
       </div>
@@ -128,6 +120,10 @@ const InvestorDashboard = () => {
               </h2>
             </div>
             <div className="flex items-center space-x-4">
+              <div className="flex items-center space-x-2">
+                <Calendar className="h-4 w-4 text-gray-500" />
+                <span className="text-sm text-gray-600">NAV Date: {new Date().toLocaleDateString()}</span>
+              </div>
               <div className="flex items-center space-x-2">
                 <span className="text-sm text-gray-600">Role: {getRoleDisplayName(userRole || 'client')}</span>
               </div>
@@ -145,7 +141,7 @@ const InvestorDashboard = () => {
         </header>
 
         {/* Dashboard Content */}
-        <main className="flex-1 p-6">
+        <main className="flex-1">
           {renderDashboard()}
         </main>
       </div>
