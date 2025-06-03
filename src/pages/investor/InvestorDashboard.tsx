@@ -11,13 +11,14 @@ import FinlecStyleDashboard from '@/components/dashboard/FinlecStyleDashboard';
 import ClientsDashboardView from '@/components/dashboard/ClientsDashboardView';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { LogOut, PieChart, Settings, Users, BarChart3, TrendingUp, FileText, AlertTriangle, Calendar } from 'lucide-react';
+import { LogOut, PieChart, Settings, Users, BarChart3, TrendingUp, FileText, AlertTriangle, Calendar, ChevronDown, ChevronRight } from 'lucide-react';
 
 const InvestorDashboard = () => {
   const { user, signOut } = useInvestorAuth();
   const { userRole, isLoading: roleLoading } = useUserRole();
   const { hasPermission, isLoading: permissionsLoading } = useUserPermissions();
   const [activeView, setActiveView] = useState('dashboard');
+  const [expandedMenus, setExpandedMenus] = useState<string[]>([]);
 
   if (roleLoading || permissionsLoading) {
     return (
@@ -44,7 +45,24 @@ const InvestorDashboard = () => {
     const allItems = [
       { name: 'Dashboard', path: '/investor/dashboard', icon: PieChart, key: 'dashboard', permission: 'dashboard_overview' },
       { name: 'Clients', path: '/investor/clients', icon: Users, key: 'clients', permission: 'client_management' },
-      { name: 'Portfolio Management', path: '#', icon: BarChart3, key: 'portfolio', permission: 'portfolio_management' },
+      { 
+        name: 'Portfolio Management', 
+        path: '#', 
+        icon: BarChart3, 
+        key: 'portfolio', 
+        permission: 'portfolio_management',
+        hasSubmenu: true,
+        submenuItems: [
+          { name: 'Portfolio Overview', key: 'portfolio_overview', permission: 'portfolio_management' },
+          { name: 'My Holdings', key: 'my_holdings', permission: 'portfolio_management' },
+          { name: 'My Orders', key: 'my_orders', permission: 'portfolio_management' },
+          { name: 'SIP Orders', key: 'sip_orders', permission: 'portfolio_management' },
+          { name: 'Transaction History', key: 'transaction_history', permission: 'portfolio_management' },
+          { name: 'KYC Status', key: 'kyc_status', permission: 'portfolio_management' },
+          { name: 'Transfer Holdings', key: 'transfer_holdings', permission: 'portfolio_management' },
+          { name: 'Bulk Orders', key: 'bulk_orders', permission: 'portfolio_management' }
+        ]
+      },
       { name: 'Transaction Management', path: '#', icon: FileText, key: 'transactions', permission: 'transaction_management' },
       { name: 'SIP Management', path: '#', icon: TrendingUp, key: 'sip', permission: 'sip_management' },
       { name: 'KYC Management', path: '#', icon: FileText, key: 'kyc', permission: 'kyc_management' },
@@ -60,7 +78,15 @@ const InvestorDashboard = () => {
     return allItems.filter(item => hasPermission(item.permission));
   };
 
-  const handleNavigation = (itemKey: string) => {
+  const toggleSubmenu = (itemKey: string) => {
+    setExpandedMenus(prev => 
+      prev.includes(itemKey) 
+        ? prev.filter(key => key !== itemKey)
+        : [...prev, itemKey]
+    );
+  };
+
+  const handleNavigation = (itemKey: string, parentKey?: string) => {
     setActiveView(itemKey);
   };
 
@@ -68,6 +94,62 @@ const InvestorDashboard = () => {
     switch (activeView) {
       case 'clients':
         return <ClientsDashboardView />;
+      case 'portfolio_overview':
+        return (
+          <div className="p-6">
+            <h2 className="text-2xl font-bold mb-4">Portfolio Overview</h2>
+            <p className="text-gray-600">Portfolio overview content will be implemented here.</p>
+          </div>
+        );
+      case 'my_holdings':
+        return (
+          <div className="p-6">
+            <h2 className="text-2xl font-bold mb-4">My Holdings</h2>
+            <p className="text-gray-600">Holdings information will be displayed here.</p>
+          </div>
+        );
+      case 'my_orders':
+        return (
+          <div className="p-6">
+            <h2 className="text-2xl font-bold mb-4">My Orders</h2>
+            <p className="text-gray-600">Order history and management will be shown here.</p>
+          </div>
+        );
+      case 'sip_orders':
+        return (
+          <div className="p-6">
+            <h2 className="text-2xl font-bold mb-4">SIP Orders</h2>
+            <p className="text-gray-600">SIP order management interface will be implemented here.</p>
+          </div>
+        );
+      case 'transaction_history':
+        return (
+          <div className="p-6">
+            <h2 className="text-2xl font-bold mb-4">Transaction History</h2>
+            <p className="text-gray-600">Detailed transaction history will be displayed here.</p>
+          </div>
+        );
+      case 'kyc_status':
+        return (
+          <div className="p-6">
+            <h2 className="text-2xl font-bold mb-4">KYC Status</h2>
+            <p className="text-gray-600">KYC verification status and documents will be shown here.</p>
+          </div>
+        );
+      case 'transfer_holdings':
+        return (
+          <div className="p-6">
+            <h2 className="text-2xl font-bold mb-4">Transfer Holdings</h2>
+            <p className="text-gray-600">Holdings transfer functionality will be implemented here.</p>
+          </div>
+        );
+      case 'bulk_orders':
+        return (
+          <div className="p-6">
+            <h2 className="text-2xl font-bold mb-4">Bulk Orders</h2>
+            <p className="text-gray-600">Bulk order processing interface will be available here.</p>
+          </div>
+        );
       default:
         return <FinlecStyleDashboard />;
     }
@@ -94,20 +176,51 @@ const InvestorDashboard = () => {
           </div>
         </div>
 
-        <nav className="space-y-2 max-h-96 overflow-y-auto">
+        <nav className="space-y-1 max-h-96 overflow-y-auto">
           {navigationItems.map((item) => (
-            <button
-              key={item.key}
-              onClick={() => handleNavigation(item.key)}
-              className={`w-full flex items-center space-x-3 p-3 rounded-lg transition-colors text-left ${
-                activeView === item.key 
-                  ? 'bg-blue-700 text-white' 
-                  : 'hover:bg-blue-700'
-              }`}
-            >
-              <item.icon className="h-5 w-5" />
-              <span className="text-sm">{item.name}</span>
-            </button>
+            <div key={item.key}>
+              <button
+                onClick={() => item.hasSubmenu ? toggleSubmenu(item.key) : handleNavigation(item.key)}
+                className={`w-full flex items-center justify-between p-3 rounded-lg transition-colors text-left ${
+                  activeView === item.key 
+                    ? 'bg-blue-700 text-white' 
+                    : 'hover:bg-blue-700'
+                }`}
+              >
+                <div className="flex items-center space-x-3">
+                  <item.icon className="h-5 w-5" />
+                  <span className="text-sm">{item.name}</span>
+                </div>
+                {item.hasSubmenu && (
+                  <div className="ml-2">
+                    {expandedMenus.includes(item.key) ? (
+                      <ChevronDown className="h-4 w-4" />
+                    ) : (
+                      <ChevronRight className="h-4 w-4" />
+                    )}
+                  </div>
+                )}
+              </button>
+              
+              {/* Submenu */}
+              {item.hasSubmenu && expandedMenus.includes(item.key) && (
+                <div className="ml-6 mt-1 space-y-1">
+                  {item.submenuItems?.map((subItem) => (
+                    <button
+                      key={subItem.key}
+                      onClick={() => handleNavigation(subItem.key, item.key)}
+                      className={`w-full text-left p-2 rounded text-sm transition-colors ${
+                        activeView === subItem.key
+                          ? 'bg-blue-700 text-white'
+                          : 'text-blue-100 hover:bg-blue-700 hover:text-white'
+                      }`}
+                    >
+                      {subItem.name}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
           ))}
         </nav>
 
