@@ -23,10 +23,19 @@ const signupSchema = z.object({
   holdingType: z.string().min(1, 'Please select holding type'),
   residentialStatus: z.string().min(1, 'Please select residential status'),
   identityType: z.enum(['pan', 'pekrn']),
+  panNumber: z.string().min(1, 'PAN/PEKRN number is required'),
   dateOfBirth: z.string().min(1, 'Date of birth is required'),
 }).refine((data) => data.password === data.confirmPassword, {
   message: "Passwords don't match",
   path: ["confirmPassword"],
+}).refine((data) => {
+  if (data.identityType === 'pan') {
+    return /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/.test(data.panNumber);
+  }
+  return data.panNumber.length >= 10;
+}, {
+  message: "Please enter a valid PAN number (format: ABCDE1234F) or PEKRN",
+  path: ["panNumber"],
 });
 
 type SignupFormData = z.infer<typeof signupSchema>;
@@ -68,12 +77,18 @@ const InvestorSignup = () => {
       holding_type: data.holdingType,
       residential_status: data.residentialStatus,
       identity_type: data.identityType,
+      pan_number: data.panNumber,
       date_of_birth: data.dateOfBirth,
     };
     
     const { error } = await signUp(data.email, data.password, userData);
     if (!error) {
-      navigate('/investor/login');
+      // Store form data in sessionStorage to pass to bank account page
+      sessionStorage.setItem('investorSignupData', JSON.stringify({
+        ...userData,
+        email: data.email
+      }));
+      navigate('/investor/bank-account');
     }
   };
 
@@ -102,7 +117,7 @@ const InvestorSignup = () => {
 
             <CardContent className="space-y-8">
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-                {/* Investor Category - Moved to top */}
+                {/* Investor Category */}
                 <div className="space-y-4">
                   <Label className="text-base font-medium">
                     Investor Category <span className="text-red-500">*</span>
@@ -220,6 +235,21 @@ const InvestorSignup = () => {
                     </div>
 
                     <div className="space-y-2">
+                      <Label htmlFor="panNumber">
+                        {watchedIdentityType === 'pan' ? 'PAN Number' : 'PEKRN Number'} <span className="text-red-500">*</span>
+                      </Label>
+                      <Input
+                        id="panNumber"
+                        placeholder={watchedIdentityType === 'pan' ? 'Enter PAN (e.g., ABCDE1234F)' : 'Enter PEKRN'}
+                        {...register('panNumber')}
+                        className="uppercase"
+                      />
+                      {errors.panNumber && (
+                        <p className="text-sm text-red-600">{errors.panNumber.message}</p>
+                      )}
+                    </div>
+
+                    <div className="space-y-2">
                       <Label htmlFor="dateOfBirth">
                         Date of Birth <span className="text-red-500">*</span>
                       </Label>
@@ -235,7 +265,7 @@ const InvestorSignup = () => {
                   </CardContent>
                 </Card>
 
-                {/* Personal Information - Moved to bottom */}
+                {/* Personal Information */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <Label htmlFor="firstName">First Name *</Label>

@@ -91,6 +91,11 @@ const App = () => (
                     {/* Investor Routes */}
                     <Route path="/investor/login" element={<InvestorLogin />} />
                     <Route path="/investor/signup" element={<InvestorSignup />} />
+                    <Route path="/investor/bank-account" element={
+                      <InvestorProtectedRoute>
+                        <InvestorBankAccount />
+                      </InvestorProtectedRoute>
+                    } />
                     <Route path="/investor/dashboard" element={
                       <InvestorProtectedRoute>
                         <InvestorDashboard />
@@ -144,5 +149,8 @@ const App = () => (
     </HelmetProvider>
   </QueryClientProvider>
 );
+
+// Add the missing import
+import InvestorBankAccount from "./pages/investor/InvestorBankAccount";
 
 export default App;

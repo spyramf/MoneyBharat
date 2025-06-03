@@ -102,6 +102,8 @@ export type Database = {
       clients: {
         Row: {
           aadhar: string | null
+          account_number: string | null
+          account_type: string | null
           address: string | null
           annual_income: number | null
           aum: number | null
@@ -112,14 +114,17 @@ export type Database = {
           family_head_id: string | null
           family_relationship: string | null
           id: string
+          ifsc_code: string | null
           investment_amount: number | null
           investment_experience: string | null
           investor_id: string
+          is_default_payout: boolean | null
           kyc_status: string | null
           name: string
           occupation: string | null
           onboarding_status: string | null
           pan_card: string | null
+          pan_number: string | null
           phone: string | null
           pincode: string | null
           relationship_manager: string | null
@@ -130,6 +135,8 @@ export type Database = {
         }
         Insert: {
           aadhar?: string | null
+          account_number?: string | null
+          account_type?: string | null
           address?: string | null
           annual_income?: number | null
           aum?: number | null
@@ -140,14 +147,17 @@ export type Database = {
           family_head_id?: string | null
           family_relationship?: string | null
           id?: string
+          ifsc_code?: string | null
           investment_amount?: number | null
           investment_experience?: string | null
           investor_id: string
+          is_default_payout?: boolean | null
           kyc_status?: string | null
           name: string
           occupation?: string | null
           onboarding_status?: string | null
           pan_card?: string | null
+          pan_number?: string | null
           phone?: string | null
           pincode?: string | null
           relationship_manager?: string | null
@@ -158,6 +168,8 @@ export type Database = {
         }
         Update: {
           aadhar?: string | null
+          account_number?: string | null
+          account_type?: string | null
           address?: string | null
           annual_income?: number | null
           aum?: number | null
@@ -168,14 +180,17 @@ export type Database = {
           family_head_id?: string | null
           family_relationship?: string | null
           id?: string
+          ifsc_code?: string | null
           investment_amount?: number | null
           investment_experience?: string | null
           investor_id?: string
+          is_default_payout?: boolean | null
           kyc_status?: string | null
           name?: string
           occupation?: string | null
           onboarding_status?: string | null
           pan_card?: string | null
+          pan_number?: string | null
           phone?: string | null
           pincode?: string | null
           relationship_manager?: string | null
