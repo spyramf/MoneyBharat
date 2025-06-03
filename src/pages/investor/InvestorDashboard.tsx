@@ -84,11 +84,11 @@ const InvestorDashboard = () => {
         </div>
 
         <nav className="space-y-2">
-          <a href="#" className="flex items-center space-x-3 p-3 rounded-lg bg-blue-700 text-white">
+          <a href="/investor/dashboard" className="flex items-center space-x-3 p-3 rounded-lg bg-blue-700 text-white">
             <BarChart3 className="h-5 w-5" />
             <span>Dashboard</span>
           </a>
-          <a href="#" className="flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-700 transition-colors">
+          <a href="/investor/clients" className="flex items-center space-x-3 p-3 rounded-lg hover:bg-blue-700 transition-colors">
             <Users className="h-5 w-5" />
             <span>Clients</span>
           </a>

@@ -99,6 +99,101 @@ export type Database = {
         }
         Relationships: []
       }
+      clients: {
+        Row: {
+          aadhar: string | null
+          address: string | null
+          annual_income: number | null
+          aum: number | null
+          city: string | null
+          created_at: string
+          date_of_birth: string | null
+          email: string | null
+          family_head_id: string | null
+          family_relationship: string | null
+          id: string
+          investment_amount: number | null
+          investment_experience: string | null
+          investor_id: string
+          kyc_status: string | null
+          name: string
+          occupation: string | null
+          onboarding_status: string | null
+          pan_card: string | null
+          phone: string | null
+          pincode: string | null
+          relationship_manager: string | null
+          risk_profile: string | null
+          sip_amount: number | null
+          state: string | null
+          updated_at: string
+        }
+        Insert: {
+          aadhar?: string | null
+          address?: string | null
+          annual_income?: number | null
+          aum?: number | null
+          city?: string | null
+          created_at?: string
+          date_of_birth?: string | null
+          email?: string | null
+          family_head_id?: string | null
+          family_relationship?: string | null
+          id?: string
+          investment_amount?: number | null
+          investment_experience?: string | null
+          investor_id: string
+          kyc_status?: string | null
+          name: string
+          occupation?: string | null
+          onboarding_status?: string | null
+          pan_card?: string | null
+          phone?: string | null
+          pincode?: string | null
+          relationship_manager?: string | null
+          risk_profile?: string | null
+          sip_amount?: number | null
+          state?: string | null
+          updated_at?: string
+        }
+        Update: {
+          aadhar?: string | null
+          address?: string | null
+          annual_income?: number | null
+          aum?: number | null
+          city?: string | null
+          created_at?: string
+          date_of_birth?: string | null
+          email?: string | null
+          family_head_id?: string | null
+          family_relationship?: string | null
+          id?: string
+          investment_amount?: number | null
+          investment_experience?: string | null
+          investor_id?: string
+          kyc_status?: string | null
+          name?: string
+          occupation?: string | null
+          onboarding_status?: string | null
+          pan_card?: string | null
+          phone?: string | null
+          pincode?: string | null
+          relationship_manager?: string | null
+          risk_profile?: string | null
+          sip_amount?: number | null
+          state?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "clients_family_head_id_fkey"
+            columns: ["family_head_id"]
+            isOneToOne: false
+            referencedRelation: "clients"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never

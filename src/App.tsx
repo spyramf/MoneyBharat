@@ -47,6 +47,7 @@ import BookingManager from "./pages/admin/BookingManager";
 import InvestorLogin from "./pages/investor/InvestorLogin";
 import InvestorSignup from "./pages/investor/InvestorSignup";
 import InvestorDashboard from "./pages/investor/InvestorDashboard";
+import InvestorClients from "./pages/investor/InvestorClients";
 
 const queryClient = new QueryClient();
 
@@ -93,6 +94,11 @@ const App = () => (
                     <Route path="/investor/dashboard" element={
                       <InvestorProtectedRoute>
                         <InvestorDashboard />
+                      </InvestorProtectedRoute>
+                    } />
+                    <Route path="/investor/clients" element={
+                      <InvestorProtectedRoute>
+                        <InvestorClients />
                       </InvestorProtectedRoute>
                     } />
                     
