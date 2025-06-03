@@ -128,12 +128,12 @@ const InvestorSignup = () => {
       };
       
       // Sign up with Supabase Auth
-      const { error: signupError } = await signUp(data.email, data.password, userData);
+      const signupResult = await signUp(data.email, data.password, userData);
       
-      if (signupError) {
-        console.error('Signup error:', signupError);
+      if (signupResult.error) {
+        console.error('Signup error:', signupResult.error);
         
-        if (signupError.message?.includes('already been registered') || signupError.message?.includes('already exists')) {
+        if (signupResult.error.message?.includes('already been registered') || signupResult.error.message?.includes('already exists')) {
           toast({
             title: "Account Already Exists",
             description: "An account with this email already exists. Please try logging in instead.",
@@ -142,7 +142,7 @@ const InvestorSignup = () => {
         } else {
           toast({
             title: "Registration Failed",
-            description: signupError.message || "Failed to create account. Please try again.",
+            description: signupResult.error.message || "Failed to create account. Please try again.",
             variant: "destructive",
           });
         }
@@ -151,19 +151,12 @@ const InvestorSignup = () => {
         return;
       }
       
-      console.log('Signup successful, waiting for auth session...');
+      console.log('Signup successful, user created:', signupResult.user?.email);
       
-      // Wait a moment for the auth session to be established
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      // Get the current session
-      const { data: { session } } = await supabase.auth.getSession();
-      
-      if (session?.user) {
-        console.log('Session established, saving client data...');
-        
+      // If we have a user from signup, use that user ID
+      if (signupResult.user) {
         try {
-          await saveClientData(data, session.user.id);
+          await saveClientData(data, signupResult.user.id);
           
           // Save minimal data in sessionStorage for the bank account page
           sessionStorage.setItem('investorSignupData', JSON.stringify({
@@ -187,12 +180,55 @@ const InvestorSignup = () => {
           });
         }
       } else {
-        console.log('No session available, user may need to verify email');
-        toast({
-          title: "Registration Successful",
-          description: "Please check your email to verify your account before proceeding.",
-          variant: "default",
-        });
+        // Fallback: wait for auth session
+        console.log('No user in signup result, waiting for auth session...');
+        
+        // Wait for auth session to be established
+        let retries = 0;
+        const maxRetries = 10;
+        const checkSession = async () => {
+          const { data: { session } } = await supabase.auth.getSession();
+          
+          if (session?.user) {
+            console.log('Session established, saving client data...');
+            
+            try {
+              await saveClientData(data, session.user.id);
+              
+              sessionStorage.setItem('investorSignupData', JSON.stringify({
+                email: data.email
+              }));
+              
+              toast({
+                title: "Account Created Successfully",
+                description: "Please complete your bank account details.",
+              });
+              
+              navigate('/investor/bank-account');
+              
+            } catch (clientError) {
+              console.error('Error saving client data:', clientError);
+              toast({
+                title: "Error",
+                description: "Failed to save your information. Please try again.",
+                variant: "destructive",
+              });
+            }
+          } else if (retries < maxRetries) {
+            retries++;
+            setTimeout(checkSession, 500);
+          } else {
+            console.log('Max retries reached, showing manual login message');
+            toast({
+              title: "Account Created",
+              description: "Your account has been created. Please sign in to continue.",
+              variant: "default",
+            });
+            navigate('/investor/login');
+          }
+        };
+        
+        checkSession();
       }
       
     } catch (error) {
@@ -238,7 +274,7 @@ const InvestorSignup = () => {
               </SelectContent>
             </Select>
             {errors.holdingType && (
-              <p className="text-sm text-red-600">{errors.holdingType?.message as string}</p>
+              <p className="text-sm text-red-600">{errors.holdingType?.message}</p>
             )}
           </div>
 
@@ -258,7 +294,7 @@ const InvestorSignup = () => {
               </SelectContent>
             </Select>
             {errors.residentialStatus && (
-              <p className="text-sm text-red-600">{errors.residentialStatus?.message as string}</p>
+              <p className="text-sm text-red-600">{errors.residentialStatus?.message}</p>
             )}
           </div>
         </div>

@@ -102,7 +102,13 @@ export const InvestorAuthProvider = ({ children }: InvestorAuthProviderProps) =>
       }
 
       console.log('Supabase signup successful:', data.user?.email);
-      return { error: null };
+      
+      // For disabled email verification, the user should be automatically confirmed
+      if (data.user && !data.user.email_confirmed_at) {
+        console.log('User created but not confirmed, this is expected behavior');
+      }
+      
+      return { error: null, user: data.user, session: data.session };
       
     } catch (error) {
       console.error('Sign up error:', error);
