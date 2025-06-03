@@ -94,20 +94,24 @@ const InvestorClients = () => {
     currentPage * rowsPerPage
   );
 
-  const handleSelectAll = (checked: boolean) => {
-    if (checked) {
+  const handleSelectAll = (checked: boolean | "indeterminate") => {
+    if (checked === true) {
       setSelectedClients(paginatedClients.map(client => client.id));
     } else {
       setSelectedClients([]);
     }
   };
 
-  const handleSelectClient = (clientId: string, checked: boolean) => {
-    if (checked) {
+  const handleSelectClient = (clientId: string, checked: boolean | "indeterminate") => {
+    if (checked === true) {
       setSelectedClients([...selectedClients, clientId]);
     } else {
       setSelectedClients(selectedClients.filter(id => id !== clientId));
     }
+  };
+
+  const handleShowFamilyHeadsChange = (checked: boolean | "indeterminate") => {
+    setShowFamilyHeadsOnly(checked === true);
   };
 
   const getFamilyHeadName = (client: Client) => {
@@ -154,7 +158,7 @@ const InvestorClients = () => {
               <Checkbox
                 id="family-heads"
                 checked={showFamilyHeadsOnly}
-                onCheckedChange={setShowFamilyHeadsOnly}
+                onCheckedChange={handleShowFamilyHeadsChange}
               />
               <label htmlFor="family-heads" className="text-sm font-medium">
                 Show Family Heads Only
@@ -229,7 +233,7 @@ const InvestorClients = () => {
                       <TableCell>
                         <Checkbox
                           checked={selectedClients.includes(client.id)}
-                          onCheckedChange={(checked) => handleSelectClient(client.id, checked as boolean)}
+                          onCheckedChange={(checked) => handleSelectClient(client.id, checked)}
                         />
                       </TableCell>
                       <TableCell className="font-medium">{client.name}</TableCell>
