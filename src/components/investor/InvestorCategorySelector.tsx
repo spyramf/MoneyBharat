@@ -57,7 +57,7 @@ const InvestorCategorySelector = ({
         </Card>
       </div>
       {errors?.investorCategory && (
-        <p className="text-sm text-red-600">{errors.investorCategory.message}</p>
+        <p className="text-sm text-red-600">{errors.investorCategory?.message as string}</p>
       )}
     </div>
   );

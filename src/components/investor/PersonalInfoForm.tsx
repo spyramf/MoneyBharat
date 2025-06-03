@@ -21,7 +21,7 @@ const PersonalInfoForm = ({ register, errors }: PersonalInfoFormProps) => {
             {...register('firstName')}
           />
           {errors.firstName && (
-            <p className="text-sm text-red-600">{errors.firstName.message}</p>
+            <p className="text-sm text-red-600">{errors.firstName?.message as string}</p>
           )}
         </div>
         <div className="space-y-2">
@@ -32,7 +32,7 @@ const PersonalInfoForm = ({ register, errors }: PersonalInfoFormProps) => {
             {...register('lastName')}
           />
           {errors.lastName && (
-            <p className="text-sm text-red-600">{errors.lastName.message}</p>
+            <p className="text-sm text-red-600">{errors.lastName?.message as string}</p>
           )}
         </div>
       </div>
@@ -47,7 +47,7 @@ const PersonalInfoForm = ({ register, errors }: PersonalInfoFormProps) => {
             {...register('email')}
           />
           {errors.email && (
-            <p className="text-sm text-red-600">{errors.email.message}</p>
+            <p className="text-sm text-red-600">{errors.email?.message as string}</p>
           )}
         </div>
         <div className="space-y-2">
@@ -59,7 +59,7 @@ const PersonalInfoForm = ({ register, errors }: PersonalInfoFormProps) => {
             {...register('phone')}
           />
           {errors.phone && (
-            <p className="text-sm text-red-600">{errors.phone.message}</p>
+            <p className="text-sm text-red-600">{errors.phone?.message as string}</p>
           )}
         </div>
       </div>
@@ -74,7 +74,7 @@ const PersonalInfoForm = ({ register, errors }: PersonalInfoFormProps) => {
             {...register('password')}
           />
           {errors.password && (
-            <p className="text-sm text-red-600">{errors.password.message}</p>
+            <p className="text-sm text-red-600">{errors.password?.message as string}</p>
           )}
         </div>
         <div className="space-y-2">
@@ -86,7 +86,7 @@ const PersonalInfoForm = ({ register, errors }: PersonalInfoFormProps) => {
             {...register('confirmPassword')}
           />
           {errors.confirmPassword && (
-            <p className="text-sm text-red-600">{errors.confirmPassword.message}</p>
+            <p className="text-sm text-red-600">{errors.confirmPassword?.message as string}</p>
           )}
         </div>
       </div>

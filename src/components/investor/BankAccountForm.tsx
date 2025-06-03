@@ -49,7 +49,7 @@ const BankAccountForm = ({
           </Button>
         </div>
         {errors.ifscCode && (
-          <p className="text-sm text-red-600">{errors.ifscCode.message}</p>
+          <p className="text-sm text-red-600">{errors.ifscCode?.message as string}</p>
         )}
       </div>
 
@@ -64,7 +64,7 @@ const BankAccountForm = ({
           {...register('accountNumber')}
         />
         {errors.accountNumber && (
-          <p className="text-sm text-red-600">{errors.accountNumber.message}</p>
+          <p className="text-sm text-red-600">{errors.accountNumber?.message as string}</p>
         )}
       </div>
 
@@ -84,7 +84,7 @@ const BankAccountForm = ({
           </SelectContent>
         </Select>
         {errors.accountType && (
-          <p className="text-sm text-red-600">{errors.accountType.message}</p>
+          <p className="text-sm text-red-600">{errors.accountType?.message as string}</p>
         )}
       </div>
 

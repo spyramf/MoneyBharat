@@ -60,7 +60,7 @@ const HolderDetailsForm = ({
             className="uppercase"
           />
           {errors.panNumber && (
-            <p className="text-sm text-red-600">{errors.panNumber.message}</p>
+            <p className="text-sm text-red-600">{errors.panNumber?.message as string}</p>
           )}
         </div>
 
@@ -74,7 +74,7 @@ const HolderDetailsForm = ({
             {...register('dateOfBirth')}
           />
           {errors.dateOfBirth && (
-            <p className="text-sm text-red-600">{errors.dateOfBirth.message}</p>
+            <p className="text-sm text-red-600">{errors.dateOfBirth?.message as string}</p>
           )}
         </div>
       </CardContent>
