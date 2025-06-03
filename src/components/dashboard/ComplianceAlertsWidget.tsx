@@ -40,8 +40,8 @@ const ComplianceAlertsWidget = () => {
         id: item.id,
         alert_type: item.alert_type,
         severity: (item.severity === 'low' || item.severity === 'medium' || item.severity === 'high' || item.severity === 'critical')
-          ? item.severity
-          : 'medium' as const,
+          ? item.severity as 'low' | 'medium' | 'high' | 'critical'
+          : 'medium' as 'low' | 'medium' | 'high' | 'critical',
         title: item.title,
         description: item.description || '',
         status: item.status,

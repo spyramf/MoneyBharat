@@ -39,8 +39,8 @@ export const useUserPermissions = () => {
             feature_name: item.feature_name,
             is_enabled: item.is_enabled,
             access_level: (item.access_level === 'read' || item.access_level === 'write' || item.access_level === 'admin') 
-              ? item.access_level 
-              : 'read' as const
+              ? item.access_level as 'read' | 'write' | 'admin'
+              : 'read' as 'read' | 'write' | 'admin'
           }));
           setPermissions(typedData);
         }
