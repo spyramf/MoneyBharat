@@ -27,7 +27,6 @@ const InvestorBankAccount = () => {
   const { user, signOut } = useInvestorAuth();
   const navigate = useNavigate();
   const { toast } = useToast();
-  const [signupData, setSignupData] = useState<any>(null);
 
   const {
     register,
@@ -45,19 +44,15 @@ const InvestorBankAccount = () => {
   const watchedIfscCode = watch('ifscCode');
 
   useEffect(() => {
-    // Get signup data from sessionStorage
-    const storedData = sessionStorage.getItem('investorSignupData');
-    if (storedData) {
-      setSignupData(JSON.parse(storedData));
-    } else {
-      // If no signup data, redirect to signup
-      navigate('/investor/signup');
-    }
-  }, [navigate]);
-
-  useEffect(() => {
+    // Check if user is authenticated
     if (!user) {
       navigate('/investor/login');
+    } else {
+      // Check if user has already completed onboarding
+      const hasCompletedOnboarding = localStorage.getItem('onboardingCompleted');
+      if (hasCompletedOnboarding) {
+        navigate('/investor/dashboard');
+      }
     }
   }, [user, navigate]);
 
@@ -72,33 +67,20 @@ const InvestorBankAccount = () => {
   };
 
   const onSubmit = async (data: BankAccountFormData) => {
-    if (!user || !signupData) return;
+    if (!user) return;
 
     try {
-      // Combine signup data with bank account data
-      const clientData = {
-        investor_id: user.id,
-        name: `${signupData.first_name} ${signupData.last_name}`,
-        email: signupData.email,
-        phone: signupData.phone,
-        investor_category: signupData.investor_category,
-        holding_type: signupData.holding_type,
-        residential_status: signupData.residential_status,
-        identity_type: signupData.identity_type,
-        pan_number: signupData.pan_number,
-        date_of_birth: signupData.date_of_birth,
-        ifsc_code: data.ifscCode,
-        account_number: data.accountNumber,
-        account_type: data.accountType,
-        is_default_payout: data.isDefaultPayout,
-        kyc_status: 'pending',
-        onboarding_status: 'completed',
-      };
-
-      // Insert client data into database
+      // Update the existing client record with bank details
       const { error } = await supabase
         .from('clients')
-        .insert(clientData);
+        .update({
+          ifsc_code: data.ifscCode,
+          account_number: data.accountNumber,
+          account_type: data.accountType,
+          is_default_payout: data.isDefaultPayout,
+          onboarding_status: 'completed', // Update status to completed
+        })
+        .eq('investor_id', user.id);
 
       if (error) throw error;
 
@@ -109,24 +91,20 @@ const InvestorBankAccount = () => {
       localStorage.setItem('onboardingCompleted', 'true');
 
       toast({
-        title: "Account Created Successfully",
-        description: "Your account has been created and bank details saved.",
+        title: "Account Setup Completed",
+        description: "Your bank details have been saved successfully.",
       });
 
       navigate('/investor/dashboard');
     } catch (error) {
-      console.error('Error saving client data:', error);
+      console.error('Error updating client data:', error);
       toast({
         title: "Error",
-        description: "Failed to save account details. Please try again.",
+        description: "Failed to save bank account details. Please try again.",
         variant: "destructive",
       });
     }
   };
-
-  if (!signupData) {
-    return <div>Loading...</div>;
-  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-600 to-blue-800">

@@ -10,6 +10,8 @@ import { User, Building } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
+import { supabase } from '@/integrations/supabase/client';
+import { useToast } from '@/hooks/use-toast';
 
 const signupSchema = z.object({
   firstName: z.string().min(2, 'First name must be at least 2 characters'),
@@ -43,6 +45,7 @@ const InvestorSignup = () => {
   const [investorCategory, setInvestorCategory] = useState<'individual' | 'non-individual'>('individual');
   const { signUp, user } = useInvestorAuth();
   const navigate = useNavigate();
+  const { toast } = useToast();
 
   const {
     register,
@@ -73,28 +76,90 @@ const InvestorSignup = () => {
   }, [user, navigate]);
 
   const onSubmit = async (data: SignupFormData) => {
-    const userData = {
-      first_name: data.firstName,
-      last_name: data.lastName,
-      phone: data.phone,
-      investor_category: data.investorCategory,
-      holding_type: data.holdingType,
-      residential_status: data.residentialStatus,
-      identity_type: data.identityType,
-      pan_number: data.panNumber,
-      date_of_birth: data.dateOfBirth,
-    };
-    
-    const { error } = await signUp(data.email, data.password, userData);
-    if (!error) {
-      // Store form data in sessionStorage to pass to bank account page
+    try {
+      // First, create the auth user account
+      const userData = {
+        first_name: data.firstName,
+        last_name: data.lastName,
+        phone: data.phone,
+        investor_category: data.investorCategory,
+        holding_type: data.holdingType,
+        residential_status: data.residentialStatus,
+        identity_type: data.identityType,
+        pan_number: data.panNumber,
+        date_of_birth: data.dateOfBirth,
+      };
+      
+      // Sign up with Supabase Auth
+      const { error } = await signUp(data.email, data.password, userData);
+      
+      if (error) {
+        toast({
+          title: "Registration Failed",
+          description: error.message || "Failed to create account. Please try again.",
+          variant: "destructive",
+        });
+        return;
+      }
+      
+      // Get the newly created user ID - this relies on the auth session being available
+      const { data: { session } } = await supabase.auth.getSession();
+      
+      if (!session?.user?.id) {
+        toast({
+          title: "Error",
+          description: "Could not get user session. Please try again or log in.",
+          variant: "destructive",
+        });
+        return;
+      }
+      
+      // Store client data in the database
+      const clientData = {
+        investor_id: session.user.id,
+        name: `${data.firstName} ${data.lastName}`,
+        email: data.email,
+        phone: data.phone,
+        investor_category: data.investorCategory,
+        holding_type: data.holdingType,
+        residential_status: data.residentialStatus,
+        identity_type: data.identityType,
+        pan_number: data.panNumber,
+        date_of_birth: data.dateOfBirth,
+        onboarding_status: 'incomplete', // Will be updated to 'completed' after bank details
+        kyc_status: 'pending',
+      };
+      
+      // Insert into clients table
+      const { error: insertError } = await supabase
+        .from('clients')
+        .insert(clientData);
+      
+      if (insertError) {
+        console.error('Error saving client data:', insertError);
+        toast({
+          title: "Error",
+          description: "Failed to save your information. Please try again.",
+          variant: "destructive",
+        });
+        return;
+      }
+      
+      // Save minimal data in sessionStorage for the bank account page
       sessionStorage.setItem('investorSignupData', JSON.stringify({
-        ...userData,
         email: data.email
       }));
       
-      // Navigate to bank account page while keeping user logged in
+      // Redirect to bank account page
       navigate('/investor/bank-account');
+      
+    } catch (error) {
+      console.error('Registration error:', error);
+      toast({
+        title: "Registration Failed",
+        description: "An unexpected error occurred. Please try again.",
+        variant: "destructive",
+      });
     }
   };
 
