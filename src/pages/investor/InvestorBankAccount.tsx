@@ -104,6 +104,9 @@ const InvestorBankAccount = () => {
 
       // Clear session storage
       sessionStorage.removeItem('investorSignupData');
+      
+      // Mark onboarding as completed
+      localStorage.setItem('onboardingCompleted', 'true');
 
       toast({
         title: "Account Created Successfully",

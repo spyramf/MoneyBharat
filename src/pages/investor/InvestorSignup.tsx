@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -63,8 +62,13 @@ const InvestorSignup = () => {
   const watchedIdentityType = watch('identityType');
 
   useEffect(() => {
+    // Only redirect to dashboard if user is already logged in and has completed onboarding
     if (user) {
-      navigate('/investor/dashboard');
+      // Check if user is coming from a fresh signup or already logged in
+      const hasCompletedOnboarding = localStorage.getItem('onboardingCompleted');
+      if (hasCompletedOnboarding) {
+        navigate('/investor/dashboard');
+      }
     }
   }, [user, navigate]);
 
@@ -88,6 +92,8 @@ const InvestorSignup = () => {
         ...userData,
         email: data.email
       }));
+      
+      // Navigate to bank account page while keeping user logged in
       navigate('/investor/bank-account');
     }
   };
