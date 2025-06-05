@@ -16,9 +16,9 @@ const Footer = () => {
   ];
 
   const trustBadges = [
-    { text: "SEBI Registered", subtext: "INA000000000" },
+    { text: "AMFI Registered", subtext: "ARN-225204" },
     { text: "256-bit SSL", subtext: "Secure Encryption" },
-    { text: "₹10Cr+ Insurance", subtext: "Protected Investments" },
+    { text: "₹100Cr+ Insurance", subtext: "Protected Investments" },
     { text: "ISO 27001", subtext: "Certified Security" }
   ];
 
@@ -60,11 +60,11 @@ const Footer = () => {
                 </div>
                 <div className="flex items-center text-gray-300 text-sm">
                   <Mail className="h-4 w-4 mr-3 text-fintech-green" />
-                  <span>contact@moneybharat.com</span>
+                  <span>contact@moneybharat.co</span>
                 </div>
                 <div className="flex items-start text-gray-300 text-sm">
                   <MapPin className="h-4 w-4 mr-3 text-fintech-green mt-0.5 flex-shrink-0" />
-                  <span>Mumbai, Maharashtra, India</span>
+                  <span>Pune, Maharashtra, India</span>
                 </div>
               </div>
             </div>
@@ -213,7 +213,7 @@ const Footer = () => {
                 © {new Date().getFullYear()} Money Bharat Finance. All rights reserved.
               </p>
               <p className="text-gray-500 text-xs mt-1">
-                SEBI Registered Investment Advisor - INA000000000
+                AMFI Registered Investment Advisor - ARN-225204
               </p>
             </div>
             
