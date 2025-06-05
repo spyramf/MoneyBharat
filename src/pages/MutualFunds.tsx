@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 
 import MutualFundHero from "@/components/mutual-funds/MutualFundHero";
 import SIPFeatures from "@/components/mutual-funds/SIPFeatures";
+import NRIExcellence from "@/components/mutual-funds/NRIExcellence";
 import DematAccountSteps from "@/components/mutual-funds/DematAccountSteps";
 import AdditionalFeatures from "@/components/mutual-funds/AdditionalFeatures";
 import MutualFundBenefits from "@/components/mutual-funds/MutualFundBenefits";
@@ -36,6 +37,7 @@ const MutualFunds = () => {
       <Navbar />
       <MutualFundHero />
       <SIPFeatures features={sipFeatures} />
+      <NRIExcellence />
       <DematAccountSteps steps={dematSteps} />
       <AdditionalFeatures features={additionalFeatures} />
       <MutualFundBenefits benefits={mutualFundBenefits} />
