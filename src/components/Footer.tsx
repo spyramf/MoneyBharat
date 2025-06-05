@@ -12,7 +12,9 @@ const Footer = () => {
     { name: "SIP Calculator", path: "/sip-calculator" },
     { name: "EMI Calculator", path: "/emi-calculator" },
     { name: "Tax Saving", path: "/tax-saving" },
-    { name: "Book Consultation", path: "/booking" }
+    { name: "Book Consultation", path: "/booking" },
+    { name: "About Us", path: "/about" },
+    { name: "Blog", path: "/blog" }
   ];
 
   const trustBadges = [
@@ -120,9 +122,8 @@ const Footer = () => {
                 ))}
               </ul>
               
-              {/* <h3 className="font-semibold mb-6 text-white text-lg">Company</h3> */}
-              {/* <ul className="space-y-3"> */}
-              <ul>
+              {/* <h3 className="font-semibold mb-6 text-white text-lg">Company</h3>
+              <ul className="space-y-3">
                 <li>
                   <Link to="/about" className="text-gray-300 hover:text-fintech-green transition-colors duration-200 flex items-center group">
                     <span className="w-2 h-2 bg-fintech-green rounded-full mr-3 opacity-0 group-hover:opacity-100 transition-opacity"></span>
@@ -135,7 +136,7 @@ const Footer = () => {
                     Blog
                   </Link>
                 </li>
-              </ul>
+              </ul> */}
             </div>
             
             {/* Legal & App Downloads */}
