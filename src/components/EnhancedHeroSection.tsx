@@ -63,7 +63,7 @@ const EnhancedHeroSection = () => {
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-600"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
                   </div>
                   <div>
-                    <p className="text-lg font-bold text-fintech-green">SEBI</p>
+                    <p className="text-lg font-bold text-fintech-green">AMFI</p>
                     <p className="text-xs text-gray-500">Registered</p>
                   </div>
                 </div>
@@ -83,7 +83,7 @@ const EnhancedHeroSection = () => {
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-600"><circle cx="12" cy="12" r="10"></circle><path d="M16 8h-6.5a2.5 2.5 0 0 0 0 5h1a2.5 2.5 0 0 1 0 5H4"></path><path d="M12 18v2"></path><path d="M12 4v2"></path></svg>
                   </div>
                   <div>
-                    <p className="text-lg font-bold text-fintech-orange">₹10Cr+</p>
+                    <p className="text-lg font-bold text-fintech-orange">₹100Cr+</p>
                     <p className="text-xs text-gray-500">Insurance Cover</p>
                   </div>
                 </div>
@@ -208,11 +208,11 @@ const EnhancedHeroSection = () => {
     }}>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="rounded-2xl bg-white p-6 text-center shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300">
-            <p className="text-3xl md:text-4xl font-bold text-fintech-green mb-2">₹500Cr+</p>
+            <p className="text-3xl md:text-4xl font-bold text-fintech-green mb-2">₹5000Cr+</p>
             <p className="text-gray-600">Assets Managed</p>
           </div>
           <div className="rounded-2xl bg-white p-6 text-center shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300">
-            <p className="text-3xl md:text-4xl font-bold text-fintech-blue mb-2">50K+</p>
+            <p className="text-3xl md:text-4xl font-bold text-fintech-blue mb-2">500K+</p>
             <p className="text-gray-600">Happy Clients</p>
           </div>
           <div className="rounded-2xl bg-white p-6 text-center shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300">
