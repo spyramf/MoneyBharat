@@ -41,7 +41,7 @@ const Footer = () => {
             <h3 className="font-semibold mb-4 text-gray-900">Products</h3>
             <ul className="space-y-3">
               <li>
-                <Link to="/mutual-funds" className="text-zinc-50 text-center">Mutual Funds</Link>
+                <Link to="/mutual-funds" className="text-center text-zinc-50">Mutual Funds</Link>
               </li>
               <li>
                 <Link to="/health-insurance" className="text-gray-600 hover:text-fintech-purple">Health Insurance</Link>
