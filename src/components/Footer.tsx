@@ -1,4 +1,3 @@
-
 import { Facebook, Instagram, Linkedin, Twitter } from "lucide-react";
 import { Link } from "react-router-dom";
 const Footer = () => {
@@ -9,23 +8,19 @@ const Footer = () => {
           <div>
             <Link to="/" className="flex items-center">
               <div className="h-10 w-10 mr-2">
-                <img 
-                  src="/lovable-uploads/92affb7c-7e35-42da-9aff-b0f55a689428.png" 
-                  alt="Money Bharat Logo" 
-                  className="h-full w-full object-contain" 
-                />
+                <img src="/lovable-uploads/92affb7c-7e35-42da-9aff-b0f55a689428.png" alt="Money Bharat Logo" className="h-full w-full object-contain" />
               </div>
               <span className="text-2xl font-bold">
                 <span className="gradient-text">Money</span>
                 <span className="text-fintech-green"> Bharat</span>
               </span>
             </Link>
-            <p className="mt-4 text-gray-600 max-w-xs">
+            <p className="mt-4 text-gray-600 max-w-xs text-center">
               Transforming India's financial landscape with innovative tech-driven solutions for wealth creation.
             </p>
             
             {/* Social icons */}
-            <div className="flex mt-6 gap-4">
+            <div className="flex mt-6 gap-6">
               <a href="#" className="w-9 h-9 rounded-full bg-gray-100 hover:bg-fintech-purple/10 flex items-center justify-center transition-colors duration-200">
                 <Facebook size={18} className="text-gray-700" />
               </a>
