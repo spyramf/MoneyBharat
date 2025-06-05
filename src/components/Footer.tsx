@@ -12,11 +12,13 @@ const Footer = () => {
     { name: "SIP Calculator", path: "/sip-calculator" },
     { name: "EMI Calculator", path: "/emi-calculator" },
     { name: "Tax Saving", path: "/tax-saving" },
-    { name: "Book Consultation", path: "/booking" }
+    { name: "Book Consultation", path: "/booking" },
+    { name: "About Us", path: "/about" },
+    { name: "Blog", path: "/blog" }
   ];
 
   const trustBadges = [
-    { text: "ARN Registered", subtext: "ARN - 225204" },
+    { text: "AMFI Registered", subtext: "ARN - 225204" },
     { text: "256-bit SSL", subtext: "Secure Encryption" },
     { text: "₹100Cr+ Insurance", subtext: "Protected Investments" },
     { text: "ISO 27001", subtext: "Certified Security" }
@@ -120,7 +122,7 @@ const Footer = () => {
                 ))}
               </ul>
               
-              <h3 className="font-semibold mb-6 text-white text-lg">Company</h3>
+              {/* <h3 className="font-semibold mb-6 text-white text-lg">Company</h3>
               <ul className="space-y-3">
                 <li>
                   <Link to="/about" className="text-gray-300 hover:text-fintech-green transition-colors duration-200 flex items-center group">
@@ -134,7 +136,7 @@ const Footer = () => {
                     Blog
                   </Link>
                 </li>
-              </ul>
+              </ul> */}
             </div>
             
             {/* Legal & App Downloads */}
