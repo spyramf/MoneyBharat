@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useBlog } from '@/context/BlogContext';
@@ -11,6 +10,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Switch } from '@/components/ui/switch';
 import { Card, CardContent } from '@/components/ui/card';
+import { ImageUpload } from '@/components/ui/image-upload';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -29,7 +29,7 @@ const formSchema = z.object({
   readTime: z.string().min(1, "Please provide a read time"),
   tags: z.string().min(1, "Please provide at least one tag"),
   isFeatured: z.boolean().default(false),
-  featuredImage: z.string().min(1, "Please provide a featured image URL"),
+  featuredImage: z.string().min(1, "Please provide a featured image"),
 });
 
 const BlogEditor = () => {
@@ -333,10 +333,17 @@ const BlogEditor = () => {
                   name="featuredImage"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Featured Image URL</FormLabel>
+                      <FormLabel>Featured Image</FormLabel>
                       <FormControl>
-                        <Input placeholder="/placeholder.svg" {...field} />
+                        <ImageUpload
+                          value={field.value}
+                          onChange={field.onChange}
+                          placeholder="Upload featured image for your blog post"
+                        />
                       </FormControl>
+                      <FormDescription>
+                        Upload an image or provide a URL. This image will be displayed as the blog post thumbnail.
+                      </FormDescription>
                       <FormMessage />
                     </FormItem>
                   )}
