@@ -4,6 +4,7 @@ import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
+import { format } from "date-fns";
 
 interface BlogPostCardProps {
   post: BlogPost;
@@ -33,7 +34,7 @@ const BlogPostCard = ({ post, compact = false }: BlogPostCardProps) => {
                 {post.title}
               </h3>
               <p className="mt-1 text-xs text-gray-500">
-                {post.publishedDate} · {post.readTime}
+                {post.publishedDate && format(new Date(post.publishedDate), 'PP')} · {post.readTime}
               </p>
             </div>
           </div>
@@ -74,7 +75,7 @@ const BlogPostCard = ({ post, compact = false }: BlogPostCardProps) => {
             </div>
           </div>
           <div className="text-xs text-gray-500">
-            {post.publishedDate} · {post.readTime}
+            {post.publishedDate && format(new Date(post.publishedDate), 'PP')} · {post.readTime}
           </div>
         </CardFooter>
       </Card>

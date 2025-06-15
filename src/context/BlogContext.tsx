@@ -345,7 +345,7 @@ export const BlogProvider = ({ children }: BlogProviderProps) => {
         `,
         category: "Personal Finance",
         author: seoAuthor,
-        publishedDate: "June 15, 2025",
+        publishedDate: "2025-06-15",
         readTime: "6 min read",
         tags: [
           "personal finance",

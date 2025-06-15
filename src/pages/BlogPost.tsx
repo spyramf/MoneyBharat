@@ -12,6 +12,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbSeparator } from '@/components/ui/breadcrumb';
+import { format } from 'date-fns';
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -210,7 +211,7 @@ const BlogPost = () => {
             </div>
             <div className="flex items-center text-gray-500 text-sm">
               <Calendar className="h-4 w-4 mr-1" />
-              {post?.publishedDate}
+              {post?.publishedDate && format(new Date(post.publishedDate), 'PPP')}
             </div>
             <div className="flex items-center text-gray-500 text-sm">
               <Clock className="h-4 w-4 mr-1" />
