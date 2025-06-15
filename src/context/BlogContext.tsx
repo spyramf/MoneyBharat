@@ -1,4 +1,3 @@
-
 import React, { createContext, useContext, useState, ReactNode, useEffect } from 'react';
 import { blogPosts as initialBlogPosts, BlogPost, blogCategories as initialCategories, BlogAuthor, blogAuthors } from '@/data/blogData';
 import { supabase } from '@/integrations/supabase/client';
@@ -99,44 +98,42 @@ export const BlogProvider = ({ children }: BlogProviderProps) => {
   // Add post mutation
   const addPostMutation = useMutation({
     mutationFn: async (post: Omit<BlogPost, 'id'>) => {
-      try {
-        const { data, error } = await supabase
-          .from('blogs')
-          .insert({
-            title: post.title,
-            slug: post.slug, 
-            excerpt: post.excerpt,
-            content: post.content,
-            category: post.category,
-            author: JSON.parse(JSON.stringify(post.author)), // Serialize to JSON
-            publisheddate: post.publishedDate,
-            readtime: post.readTime,
-            tags: post.tags,
-            isfeatured: post.isFeatured,
-            featuredimage: post.featuredImage
-          })
-          .select()
-          .single();
+      console.log('[BLOG] Attempting to add blog post', post);
+      const { data, error } = await supabase
+        .from('blogs')
+        .insert({
+          title: post.title,
+          slug: post.slug, 
+          excerpt: post.excerpt,
+          content: post.content,
+          category: post.category,
+          author: JSON.parse(JSON.stringify(post.author)), // Serialize to JSON
+          publisheddate: post.publishedDate,
+          readtime: post.readTime,
+          tags: post.tags,
+          isfeatured: post.isFeatured,
+          featuredimage: post.featuredImage
+        })
+        .select()
+        .single();
 
-        if (error) {
-          console.error('Supabase error:', error);
-          throw new Error(error.message);
-        }
-        return data;
-      } catch (error) {
-        console.error('Error adding blog post:', error);
-        throw error;
+      if (error) {
+        console.error('[BLOG] Supabase insert error:', error);
+        throw new Error(error.message);
       }
+      console.log('[BLOG] Blog added:', data);
+      return data;
     },
     onSuccess: () => {
+      console.log("[BLOG] Blog post add success. Refetching...");
       queryClient.invalidateQueries({ queryKey: ['blogs'] });
       toast({
         title: "Blog post added",
         description: "Your post has been added successfully",
       });
     },
-    onError: (error) => {
-      console.error('Add post error:', error);
+    onError: (error: any) => {
+      console.error('[BLOG] Error adding blog post:', error);
       toast({
         title: "Error adding blog post",
         description: error instanceof Error ? error.message : "An unknown error occurred",
@@ -148,40 +145,42 @@ export const BlogProvider = ({ children }: BlogProviderProps) => {
   // Update post mutation
   const updatePostMutation = useMutation({
     mutationFn: async (post: BlogPost) => {
-      try {
-        const { error } = await supabase
-          .from('blogs')
-          .update({
-            title: post.title,
-            slug: post.slug,
-            excerpt: post.excerpt,
-            content: post.content,
-            category: post.category,
-            author: JSON.parse(JSON.stringify(post.author)), // Serialize to JSON
-            publisheddate: post.publishedDate,
-            readtime: post.readTime,
-            tags: post.tags,
-            isfeatured: post.isFeatured,
-            featuredimage: post.featuredImage,
-            updated_at: new Date().toISOString()
-          })
-          .eq('id', post.id);
+      console.log('[BLOG] Attempting to update post', post);
+      const { error } = await supabase
+        .from('blogs')
+        .update({
+          title: post.title,
+          slug: post.slug,
+          excerpt: post.excerpt,
+          content: post.content,
+          category: post.category,
+          author: JSON.parse(JSON.stringify(post.author)),
+          publisheddate: post.publishedDate,
+          readtime: post.readTime,
+          tags: post.tags,
+          isfeatured: post.isFeatured,
+          featuredimage: post.featuredImage,
+          updated_at: new Date().toISOString()
+        })
+        .eq('id', post.id);
 
-        if (error) throw new Error(error.message);
-        return post;
-      } catch (error) {
-        console.error('Error updating blog post:', error);
-        throw error;
+      if (error) {
+        console.error('[BLOG] Supabase update error:', error);
+        throw new Error(error.message);
       }
+      console.log('[BLOG] Blog updated:', post.id);
+      return post;
     },
     onSuccess: () => {
+      console.log("[BLOG] Blog post update success. Refetching...");
       queryClient.invalidateQueries({ queryKey: ['blogs'] });
       toast({
         title: "Blog post updated",
         description: "Your post has been updated successfully",
       });
     },
-    onError: (error) => {
+    onError: (error: any) => {
+      console.error('[BLOG] Error updating blog post:', error);
       toast({
         title: "Error updating blog post",
         description: error instanceof Error ? error.message : "An unknown error occurred",
@@ -193,27 +192,29 @@ export const BlogProvider = ({ children }: BlogProviderProps) => {
   // Delete post mutation
   const deletePostMutation = useMutation({
     mutationFn: async (id: number) => {
-      try {
-        const { error } = await supabase
-          .from('blogs')
-          .delete()
-          .eq('id', id);
+      console.log('[BLOG] Attempting to delete post', id);
+      const { error } = await supabase
+        .from('blogs')
+        .delete()
+        .eq('id', id);
 
-        if (error) throw new Error(error.message);
-        return id;
-      } catch (error) {
-        console.error('Error deleting blog post:', error);
-        throw error;
+      if (error) {
+        console.error('[BLOG] Supabase delete error:', error);
+        throw new Error(error.message);
       }
+      console.log('[BLOG] Blog deleted:', id);
+      return id;
     },
     onSuccess: () => {
+      console.log("[BLOG] Blog post delete success. Refetching...");
       queryClient.invalidateQueries({ queryKey: ['blogs'] });
       toast({
         title: "Blog post deleted",
         description: "Your post has been deleted successfully",
       });
     },
-    onError: (error) => {
+    onError: (error: any) => {
+      console.error('[BLOG] Error deleting blog post:', error);
       toast({
         title: "Error deleting blog post",
         description: error instanceof Error ? error.message : "An unknown error occurred",
