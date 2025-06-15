@@ -87,7 +87,70 @@ const BlogPost = () => {
         {post?.tags.map((tag) => (
           <meta property="article:tag" content={tag} key={tag} />
         ))}
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={post?.title || 'Blog Post'} />
+        <meta name="twitter:description" content={post?.excerpt} />
+        <meta name="twitter:image" content={post?.featuredImage} />
         <link rel="canonical" href={`https://moneybharat.com/blog/${post?.slug}`} />
+        {/* Article structured data */}
+        <script type="application/ld+json">{`
+          {
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": "${post?.title?.replace(/"/g, '\\"')}",
+            "description": "${post?.excerpt?.replace(/"/g, '\\"')}",
+            "image": ["${post?.featuredImage}"],
+            "author": {
+              "@type": "Person",
+              "name": "${post?.author?.name?.replace(/"/g, '\\"') || "Money Bharat Team"}"
+            },
+            "publisher": {
+              "@type": "Organization",
+              "name": "Money Bharat",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "${post?.featuredImage}"
+              }
+            },
+            "datePublished": "${post?.publishedDate}",
+            "articleSection": "${post?.category}",
+            "keywords": "${post?.tags?.join(', ')}",
+            "mainEntityOfPage": {
+              "@type": "WebPage",
+              "@id": "https://moneybharat.com/blog/${post?.slug}"
+            }
+          }
+        `}
+        </script>
+        {/* Breadcrumb structured data */}
+        <script type="application/ld+json">{`
+          {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://moneybharat.com/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Blog",
+                "item": "https://moneybharat.com/blog"
+              },
+              {
+                "@type": "ListItem",
+                "position": 3,
+                "name": "${post?.title?.replace(/"/g, '\\"')}",
+                "item": "https://moneybharat.com/blog/${post?.slug}"
+              }
+            ]
+          }
+        `}
+        </script>
       </Helmet>
 
       <Navbar />
@@ -169,7 +232,7 @@ const BlogPost = () => {
             <div className="mb-8 rounded-xl overflow-hidden">
               <img 
                 src={post.featuredImage} 
-                alt={post.title}
+                alt={post.title + " - " + post.category + " - " + (post?.tags?.[0] || "Money Bharat") + " - Money Bharat Blog"}
                 className="w-full h-auto max-h-[400px] object-cover"
               />
             </div>

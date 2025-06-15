@@ -68,13 +68,19 @@ const Blog = () => {
     <>
       <Helmet>
         <title>Personal Finance Blog | Money Bharat</title>
-        <meta name="description" content="Explore articles on personal finance, investments, insurance, and more. Stay updated with the latest financial insights and tips from Money Bharat's experts." />
-        <meta name="keywords" content="personal finance, investments, mutual funds, insurance, tax planning, financial tips, money management, Indian finance" />
+        <meta name="description" content="Discover expert personal finance guides, investment advice, insurance tips, and actionable strategies tailored for Indians. Navigate your financial journey with insights from Money Bharat's team." />
+        <meta name="keywords" content="personal finance, investments, mutual funds, insurance, tax planning, financial tips, money management, Indian finance, best SIPs, moneybharat, financial guides" />
+        {/* Open Graph tags */}
         <meta property="og:title" content="Personal Finance Blog | Money Bharat" />
-        <meta property="og:description" content="Explore articles on personal finance, investments, insurance, and more. Stay updated with the latest financial insights and tips from Money Bharat's experts." />
+        <meta property="og:description" content="Expert tips, guides, and resources for building financial security and wealth in India." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://moneybharat.com/blog" />
         <meta property="og:image" content="/placeholder.svg" />
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Personal Finance Blog | Money Bharat" />
+        <meta name="twitter:description" content="Expert tips, guides, and resources for building financial security and wealth in India." />
+        <meta name="twitter:image" content="/placeholder.svg" />
         <link rel="canonical" href="https://moneybharat.com/blog" />
       </Helmet>
 
