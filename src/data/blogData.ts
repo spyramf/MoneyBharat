@@ -1,4 +1,3 @@
-
 export interface BlogAuthor {
   name: string;
   avatar: string;
@@ -100,7 +99,7 @@ export const blogPosts: BlogPost[] = [
       
       <p>Following these principles consistently will put you on the path to financial security and independence.</p>
     `,
-    featuredImage: '/placeholder.svg',
+    featuredImage: 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=800&q=80',
     category: 'Personal Finance',
     author: blogAuthors.aditya,
     publishedDate: 'May 2, 2025',
@@ -157,7 +156,7 @@ export const blogPosts: BlogPost[] = [
       
       <p>Start small, stay consistent, and gradually increase your understanding and investment amounts as you get more comfortable with mutual fund investing.</p>
     `,
-    featuredImage: '/placeholder.svg',
+    featuredImage: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80',
     category: 'Mutual Funds',
     author: blogAuthors.priya,
     publishedDate: 'May 7, 2025',
@@ -217,7 +216,7 @@ export const blogPosts: BlogPost[] = [
       
       <p>Remember, the best health insurance is one that you buy before you need it. Don't wait for a medical emergency to consider health insurance.</p>
     `,
-    featuredImage: '/placeholder.svg',
+    featuredImage: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=800&q=80',
     category: 'Insurance',
     author: blogAuthors.rahul,
     publishedDate: 'May 10, 2025',
@@ -269,7 +268,7 @@ export const blogPosts: BlogPost[] = [
       
       <p>Remember, the goal should be tax optimization, not just tax saving. Choose investments that align with your financial goals, risk tolerance, and liquidity needs.</p>
     `,
-    featuredImage: '/placeholder.svg',
+    featuredImage: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=800&q=80',
     category: 'Tax Planning',
     author: blogAuthors.neha,
     publishedDate: 'May 15, 2025',
@@ -283,7 +282,7 @@ export const blogPosts: BlogPost[] = [
     slug: 'demystifying-home-loans',
     excerpt: 'Navigate the complex process of securing a home loan with confidence and get the most favorable terms for your dream home.',
     content: ``,
-    featuredImage: '/placeholder.svg',
+    featuredImage: 'https://images.unsplash.com/photo-1649972904349-6e44c42644a7?auto=format&fit=crop&w=800&q=80',
     category: 'Loans & Credit',
     author: blogAuthors.aditya,
     publishedDate: 'May 18, 2025',
@@ -297,7 +296,7 @@ export const blogPosts: BlogPost[] = [
     slug: 'sip-vs-lump-sum-investing',
     excerpt: 'Compare the two primary approaches to mutual fund investing and understand which might be better suited for your financial situation.',
     content: ``,
-    featuredImage: '/placeholder.svg',
+    featuredImage: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80',
     category: 'Mutual Funds',
     author: blogAuthors.priya,
     publishedDate: 'May 22, 2025',
@@ -311,7 +310,7 @@ export const blogPosts: BlogPost[] = [
     slug: 'ultimate-guide-term-insurance',
     excerpt: 'Learn why term insurance is the most essential form of life insurance and how to select the right policy for your family\'s protection.',
     content: ``,
-    featuredImage: '/placeholder.svg',
+    featuredImage: 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=800&q=80',
     category: 'Insurance',
     author: blogAuthors.rahul,
     publishedDate: 'May 25, 2025',
@@ -325,7 +324,7 @@ export const blogPosts: BlogPost[] = [
     slug: 'emergency-fund-importance-building',
     excerpt: 'Discover the importance of having an emergency fund in your financial portfolio and strategies to build one effectively.',
     content: ``,
-    featuredImage: '/placeholder.svg',
+    featuredImage: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=800&q=80',
     category: 'Personal Finance',
     author: blogAuthors.aditya,
     publishedDate: 'May 28, 2025',
@@ -339,7 +338,7 @@ export const blogPosts: BlogPost[] = [
     slug: 'credit-cards-benefits-avoiding-debt',
     excerpt: 'Learn how to leverage credit card rewards and benefits without falling into debt cycles that can derail your finances.',
     content: ``,
-    featuredImage: '/placeholder.svg',
+    featuredImage: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=800&q=80',
     category: 'Loans & Credit',
     author: blogAuthors.priya,
     publishedDate: 'Jun 1, 2025',
@@ -353,7 +352,7 @@ export const blogPosts: BlogPost[] = [
     slug: 'understanding-capital-gains-tax',
     excerpt: 'A comprehensive guide to how capital gains are taxed in India across different asset classes and holding periods.',
     content: ``,
-    featuredImage: '/placeholder.svg',
+    featuredImage: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80',
     category: 'Tax Planning',
     author: blogAuthors.neha,
     publishedDate: 'Jun 5, 2025',
@@ -367,7 +366,7 @@ export const blogPosts: BlogPost[] = [
     slug: 'index-funds-vs-active-funds',
     excerpt: 'Compare passive and active investment strategies to determine which approach might be better for different segments of your portfolio.',
     content: ``,
-    featuredImage: '/placeholder.svg',
+    featuredImage: 'https://images.unsplash.com/photo-1649972904349-6e44c42644a7?auto=format&fit=crop&w=800&q=80',
     category: 'Mutual Funds',
     author: blogAuthors.priya,
     publishedDate: 'Jun 10, 2025',
@@ -381,7 +380,7 @@ export const blogPosts: BlogPost[] = [
     slug: 'budgeting-digital-age-apps-strategies',
     excerpt: 'Explore modern budgeting techniques and digital tools that can help you manage your finances more effectively.',
     content: ``,
-    featuredImage: '/placeholder.svg',
+    featuredImage: 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=800&q=80',
     category: 'Personal Finance',
     author: blogAuthors.aditya,
     publishedDate: 'Jun 15, 2025',
