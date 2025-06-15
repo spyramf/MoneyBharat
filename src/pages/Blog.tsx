@@ -82,6 +82,25 @@ const Blog = () => {
         <meta name="twitter:description" content="Expert tips, guides, and resources for building financial security and wealth in India." />
         <meta name="twitter:image" content="/placeholder.svg" />
         <link rel="canonical" href="https://moneybharat.com/blog" />
+        {/* Blog Index Structured Data */}
+        <script type="application/ld+json">{`
+          {
+            "@context": "https://schema.org",
+            "@type": "Blog",
+            "name": "Money Bharat Personal Finance Blog",
+            "description": "Discover expert personal finance guides, investment advice, insurance tips, and actionable strategies tailored for Indians.",
+            "url": "https://moneybharat.com/blog",
+            "publisher": {
+              "@type": "Organization",
+              "name": "Money Bharat",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "/placeholder.svg"
+              }
+            }
+          }
+        `}
+        </script>
       </Helmet>
 
       <Navbar />
