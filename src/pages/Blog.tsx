@@ -74,14 +74,14 @@ const Blog = () => {
         <meta property="og:title" content="Personal Finance Blog | Money Bharat" />
         <meta property="og:description" content="Expert tips, guides, and resources for building financial security and wealth in India." />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://moneybharat.com/blog" />
+        <meta property="og:url" content="https://moneybharat.co/blog" />
         <meta property="og:image" content="/placeholder.svg" />
         {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Personal Finance Blog | Money Bharat" />
         <meta name="twitter:description" content="Expert tips, guides, and resources for building financial security and wealth in India." />
         <meta name="twitter:image" content="/placeholder.svg" />
-        <link rel="canonical" href="https://moneybharat.com/blog" />
+        <link rel="canonical" href="https://moneybharat.co/blog" />
         {/* Blog Index Structured Data */}
         <script type="application/ld+json">{`
           {
@@ -89,7 +89,7 @@ const Blog = () => {
             "@type": "Blog",
             "name": "Money Bharat Personal Finance Blog",
             "description": "Discover expert personal finance guides, investment advice, insurance tips, and actionable strategies tailored for Indians.",
-            "url": "https://moneybharat.com/blog",
+            "url": "https://moneybharat.co/blog",
             "publisher": {
               "@type": "Organization",
               "name": "Money Bharat",

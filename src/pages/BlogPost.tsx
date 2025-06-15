@@ -74,7 +74,7 @@ const BlogPost = () => {
         <meta property="og:title" content={post?.title || ''} />
         <meta property="og:description" content={post?.excerpt || ''} />
         <meta property="og:type" content="article" />
-        <meta property="og:url" content={`https://moneybharat.com/blog/${post?.slug}`} />
+        <meta property="og:url" content={`https://moneybharat.co/blog/${post?.slug}`} />
         <meta property="og:image" content={post?.featuredImage} />
         <meta property="article:published_time" content={post?.publishedDate} />
         <meta property="article:section" content={post?.category} />
@@ -86,7 +86,7 @@ const BlogPost = () => {
         <meta name="twitter:title" content={post?.title || 'Blog Post'} />
         <meta name="twitter:description" content={post?.excerpt} />
         <meta name="twitter:image" content={post?.featuredImage} />
-        <link rel="canonical" href={`https://moneybharat.com/blog/${post?.slug}`} />
+        <link rel="canonical" href={`https://moneybharat.co/blog/${post?.slug}`} />
         {/* Article structured data */}
         <script type="application/ld+json">{`
           {
@@ -112,7 +112,7 @@ const BlogPost = () => {
             "keywords": "${post?.tags?.join(', ')}",
             "mainEntityOfPage": {
               "@type": "WebPage",
-              "@id": "https://moneybharat.com/blog/${post?.slug}"
+              "@id": "https://moneybharat.co/blog/${post?.slug}"
             }
           }
         `}
@@ -127,19 +127,19 @@ const BlogPost = () => {
                 "@type": "ListItem",
                 "position": 1,
                 "name": "Home",
-                "item": "https://moneybharat.com/"
+                "item": "https://moneybharat.co/"
               },
               {
                 "@type": "ListItem",
                 "position": 2,
                 "name": "Blog",
-                "item": "https://moneybharat.com/blog"
+                "item": "https://moneybharat.co/blog"
               },
               {
                 "@type": "ListItem",
                 "position": 3,
                 "name": "${post?.title?.replace(/"/g, '\\"')}",
-                "item": "https://moneybharat.com/blog/${post?.slug}"
+                "item": "https://moneybharat.co/blog/${post?.slug}"
               }
             ]
           }
