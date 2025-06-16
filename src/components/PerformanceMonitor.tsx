@@ -1,6 +1,16 @@
 
 import { useEffect } from 'react';
 
+// Type definitions for Web Performance API
+interface PerformanceEventTiming extends PerformanceEntry {
+  processingStart: number;
+}
+
+interface LayoutShift extends PerformanceEntry {
+  value: number;
+  hadRecentInput: boolean;
+}
+
 const PerformanceMonitor = () => {
   useEffect(() => {
     // Monitor Core Web Vitals in production
