@@ -1,5 +1,5 @@
 
-import { lazy, Suspense, ComponentType } from 'react';
+import React, { lazy, Suspense, ComponentType, useEffect, useRef } from 'react';
 
 // Generic lazy loading wrapper with error boundary
 export const lazyLoadComponent = <T extends ComponentType<any>>(
@@ -20,9 +20,9 @@ export const useIntersectionObserver = (
   callback: () => void,
   options: IntersectionObserverInit = {}
 ) => {
-  const targetRef = React.useRef<HTMLDivElement>(null);
+  const targetRef = useRef<HTMLDivElement>(null);
   
-  React.useEffect(() => {
+  useEffect(() => {
     const target = targetRef.current;
     if (!target) return;
     
