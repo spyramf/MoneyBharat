@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -66,6 +65,14 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
+				// Flattened fintech colors to match class usage
+				'fintech-purple': '#9b87f5',
+				'fintech-deep-purple': '#7E69AB',
+				'fintech-blue': '#0066CC',
+				'fintech-ocean-blue': '#0066CC',
+				'fintech-orange': '#F97316',
+				'fintech-green': '#2EB883',
+				// Keep the nested structure for backwards compatibility
 				fintech: {
 					purple: '#9b87f5',
 					'deep-purple': '#7E69AB',
