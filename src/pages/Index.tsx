@@ -1,10 +1,9 @@
-
 import { lazy, Suspense } from "react";
 import Navbar from "@/components/Navbar";
-import EnhancedHeroSection from "@/components/EnhancedHeroSection";
+import OptimizedHeroSection from "@/components/OptimizedHeroSection";
 import Footer from "@/components/Footer";
 
-// Lazy load non-critical sections for better initial load
+// Keep lazy loading only for below-the-fold sections
 const FeaturesSection = lazy(() => import("@/components/home/FeaturesSection"));
 const FinancialToolsSection = lazy(() => import("@/components/home/FinancialToolsSection"));
 const MutualFundSection = lazy(() => import("@/components/home/MutualFundSection"));
@@ -14,7 +13,7 @@ const ServicesSection = lazy(() => import("@/components/home/ServicesSection"));
 const TestimonialsSection = lazy(() => import("@/components/home/TestimonialsSection"));
 const CTASection = lazy(() => import("@/components/home/CTASection"));
 
-// Loading fallback component
+// Simplified loading fallback
 const SectionLoader = () => (
   <div className="py-16">
     <div className="container mx-auto px-4">
@@ -35,8 +34,10 @@ const Index = () => {
   return (
     <div className="min-h-screen">
       <Navbar />
-      <EnhancedHeroSection />
+      {/* Use optimized hero section for LCP */}
+      <OptimizedHeroSection />
       
+      {/* Load services section without Suspense (critical above-the-fold) */}
       <Suspense fallback={<SectionLoader />}>
         <ServicesSection />
       </Suspense>
