@@ -46,6 +46,7 @@ import BookingManager from "./pages/admin/BookingManager";
 // Investor routes
 import InvestorLogin from "./pages/investor/InvestorLogin";
 import InvestorSignup from "./pages/investor/InvestorSignup";
+import InvestorBankAccount from "./pages/investor/InvestorBankAccount";
 import InvestorDashboard from "./pages/investor/InvestorDashboard";
 import InvestorClients from "./pages/investor/InvestorClients";
 
@@ -149,8 +150,5 @@ const App = () => (
     </HelmetProvider>
   </QueryClientProvider>
 );
-
-// Add the missing import
-import InvestorBankAccount from "./pages/investor/InvestorBankAccount";
 
 export default App;
