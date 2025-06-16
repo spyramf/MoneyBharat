@@ -39,19 +39,9 @@ export default defineConfig(({ mode }) => ({
     chunkSizeWarningLimit: 1000,
     // Enable source maps for better debugging
     sourcemap: mode === 'development',
-    // Optimize CSS
-    cssCodeSplit: true,
-    // Enable minification only in production
-    minify: mode === 'production' ? 'terser' : false,
-    // Only configure terser options in production
-    ...(mode === 'production' && {
-      terserOptions: {
-        compress: {
-          drop_console: true,
-          drop_debugger: true
-        }
-      }
-    })
+    // Enable minification in production
+    minify: mode === 'production' ? 'esbuild' : false,
+    // Remove problematic terser configuration
   },
   // Optimize dependencies
   optimizeDeps: {

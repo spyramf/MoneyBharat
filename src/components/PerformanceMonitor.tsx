@@ -11,23 +11,30 @@ interface LayoutShift extends PerformanceEntry {
   hadRecentInput: boolean;
 }
 
+// Safe logging function for production
+const safeLog = (message: string, value?: number) => {
+  if (import.meta.env.DEV) {
+    console.log(message, value);
+  }
+};
+
 const PerformanceMonitor = () => {
   useEffect(() => {
-    // Monitor Core Web Vitals in production
-    if (typeof window !== 'undefined' && 'performance' in window) {
+    // Monitor Core Web Vitals in development only
+    if (typeof window !== 'undefined' && 'performance' in window && import.meta.env.DEV) {
       const observer = new PerformanceObserver((list) => {
         list.getEntries().forEach((entry) => {
           if (entry.entryType === 'largest-contentful-paint') {
-            console.log('LCP:', entry.startTime);
+            safeLog('LCP:', entry.startTime);
           }
           if (entry.entryType === 'first-input') {
             const fidEntry = entry as PerformanceEventTiming;
-            console.log('FID:', fidEntry.processingStart - fidEntry.startTime);
+            safeLog('FID:', fidEntry.processingStart - fidEntry.startTime);
           }
           if (entry.entryType === 'layout-shift') {
             const clsEntry = entry as LayoutShift;
             if (!clsEntry.hadRecentInput) {
-              console.log('CLS:', clsEntry.value);
+              safeLog('CLS:', clsEntry.value);
             }
           }
         });
