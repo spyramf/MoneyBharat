@@ -20,95 +20,51 @@
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:image" content="/lovable-uploads/92affb7c-7e35-42da-9aff-b0f55a689428.png" />
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="/lovable-uploads/92affb7c-7e35-42da-9aff-b0f55a689428.png" as="image" />
     <link rel="icon" href="/lovable-uploads/92affb7c-7e35-42da-9aff-b0f55a689428.png" type="image/png" />
     
-    <!-- Structured Data -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "FinancialService",
-      "name": "Money Bharat Finance",
-      "description": "India's leading fintech platform offering mutual funds, insurance, and loans",
-      "url": "https://moneybharat.co",
-      "logo": "https://moneybharat.co/lovable-uploads/92affb7c-7e35-42da-9aff-b0f55a689428.png",
-      "sameAs": [
-        "https://www.facebook.com/moneybharatfinance",
-        "https://www.linkedin.com/company/money-bharat-finance"
-      ],
-      "address": {
-        "@type": "PostalAddress",
-        "addressCountry": "IN"
-      },
-      "hasOfferCatalog": {
-        "@type": "OfferCatalog",
-        "name": "Financial Services",
-        "itemListElement": [
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Mutual Fund Investment",
-              "description": "Zero commission mutual fund investments"
-            }
-          },
-          {
-            "@type": "Offer", 
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Insurance Services",
-              "description": "Comprehensive insurance coverage"
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service", 
-              "name": "Loan Services",
-              "description": "Personal, home, and business loans"
-            }
-          }
-        ]
-      }
-    }
-    </script>
+    <!-- Structured Data - Minified -->
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"FinancialService","name":"Money Bharat Finance","description":"India's leading fintech platform offering mutual funds, insurance, and loans","url":"https://moneybharat.co","logo":"https://moneybharat.co/lovable-uploads/92affb7c-7e35-42da-9aff-b0f55a689428.png","sameAs":["https://www.facebook.com/moneybharatfinance","https://www.linkedin.com/company/money-bharat-finance"],"address":{"@type":"PostalAddress","addressCountry":"IN"},"hasOfferCatalog":{"@type":"OfferCatalog","name":"Financial Services","itemListElement":[{"@type":"Offer","itemOffered":{"@type":"Service","name":"Mutual Fund Investment","description":"Zero commission mutual fund investments"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Insurance Services","description":"Comprehensive insurance coverage"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Loan Services","description":"Personal, home, and business loans"}}]}}</script>
     
-    <!-- Critical resource hints for performance -->
+    <!-- Critical resource hints -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     
-    <!-- Optimized font loading - only essential weights -->
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap"></noscript>
-    
-    <!-- Critical CSS inlined for faster FCP -->
+    <!-- Inline critical CSS -->
     <style>
       body {
-        font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         margin: 0;
         padding: 0;
         background-color: #fefefe;
         color: #1a1a1a;
+        line-height: 1.5;
       }
       
       /* Critical above-the-fold styles */
       .hero-section {
-        padding-top: 4rem;
-        padding-bottom: 3rem;
+        padding: 4rem 1rem 3rem;
         background: linear-gradient(135deg, rgba(46, 184, 131, 0.05) 0%, transparent 100%);
+        min-height: 60vh;
+        display: flex;
+        align-items: center;
       }
       
       .container {
         max-width: 1200px;
         margin: 0 auto;
-        padding: 0 1rem;
+        width: 100%;
       }
       
       .hero-title {
-        font-size: 2.5rem;
+        font-size: clamp(2rem, 5vw, 3rem);
         font-weight: 700;
         line-height: 1.2;
         margin-bottom: 1.5rem;
+        text-align: center;
       }
       
       .hero-text {
@@ -116,6 +72,9 @@
         color: #4a5568;
         margin-bottom: 2rem;
         max-width: 32rem;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
       }
       
       .btn-primary {
@@ -127,54 +86,58 @@
         display: inline-block;
         font-weight: 600;
         transition: opacity 0.2s;
+        border: none;
+        cursor: pointer;
       }
       
       .btn-primary:hover {
         opacity: 0.9;
       }
       
-      @media (min-width: 768px) {
-        .hero-title {
-          font-size: 3rem;
-        }
+      /* Loading optimization */
+      #root {
+        min-height: 100vh;
+      }
+      
+      /* Prevent layout shift */
+      img {
+        max-width: 100%;
+        height: auto;
       }
     </style>
   </head>
 
   <body>
-    <!-- Google Tag Manager (noscript) - moved for performance -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5MDJK698"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    
     <div id="root"></div>
     
     <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS VERY COMMENT! -->
     <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
     <script type="module" src="/src/main.tsx"></script>
     
-    <!-- Deferred tracking scripts for better performance -->
+    <!-- Deferred analytics for performance -->
     <script>
-      // Load tracking scripts after page load to improve performance
       window.addEventListener('load', function() {
-        // Google Tag Manager
-        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-        })(window,document,'script','dataLayer','GTM-5MDJK698');
-        
-        // Google Analytics
-        var gaScript = document.createElement('script');
-        gaScript.async = true;
-        gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-CQXV6846QN';
-        document.head.appendChild(gaScript);
-        
-        gaScript.onload = function() {
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', 'G-CQXV6846QN');
-        };
+        setTimeout(function() {
+          // Google Tag Manager
+          (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+          new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+          j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+          'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+          })(window,document,'script','dataLayer','GTM-5MDJK698');
+          
+          // Google Analytics
+          var gaScript = document.createElement('script');
+          gaScript.async = true;
+          gaScript.src = 'https://www.googletagmanager.com/gtag.js?id=G-CQXV6846QN';
+          document.head.appendChild(gaScript);
+          
+          gaScript.onload = function() {
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-CQXV6846QN');
+          };
+        }, 1000);
       });
     </script>
   </body>

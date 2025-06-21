@@ -1,6 +1,4 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -79,7 +77,6 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeSpeed;
-    font-display: swap;
   }
   
   .container {
@@ -89,34 +86,27 @@
   
   button {
     @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring;
-    contain: layout style;
-  }
-  
-  h1, h2, h3 {
-    contain: layout style;
   }
 }
 
 @layer components {
   .glass-card {
     @apply bg-white/90 backdrop-blur-sm shadow-lg border border-white/20 rounded-xl;
-    contain: layout style paint;
   }
   
   .gradient-text {
     @apply text-green-600;
-    contain: layout style;
   }
   
-  /* Simplified fade animation only for critical elements */
+  /* Optimized fade animation */
   .animate-fade-in {
-    animation: fadeIn 0.3s ease-out forwards;
+    animation: fadeIn 0.2s ease-out forwards;
   }
   
   @keyframes fadeIn {
     from {
       opacity: 0;
-      transform: translateY(10px);
+      transform: translateY(5px);
     }
     to {
       opacity: 1;
@@ -128,22 +118,22 @@
     .animate-fade-in {
       animation: none;
     }
+    
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 }
 
-/* Performance optimization: Critical rendering path */
-.glass-card,
-.gradient-text {
-  contain: layout style paint;
-}
-
-/* Critical CSS for hero section */
-section:first-of-type {
-  contain: layout style;
-}
-
-/* Optimize image loading */
+/* Performance optimizations */
 img {
   content-visibility: auto;
   contain-intrinsic-size: 1px 400px;
+}
+
+/* Optimize critical rendering path */
+section:first-of-type {
+  contain: layout style;
 }

@@ -1,13 +1,16 @@
 
-import FeaturesSection from "@/components/home/FeaturesSection";
-import FinancialToolsSection from "@/components/home/FinancialToolsSection";
-import MutualFundSection from "@/components/home/MutualFundSection";
-import InsuranceSection from "@/components/home/InsuranceSection";
-import LoanSection from "@/components/home/LoanSection";
-import TrustSecuritySection from "@/components/home/TrustSecuritySection";
-import TestimonialsSection from "@/components/home/TestimonialsSection";
-import FAQSection from "@/components/home/FAQSection";
-import CTASection from "@/components/home/CTASection";
+import { lazy } from "react";
+
+// Lazy load sections with better chunking strategy
+const FeaturesSection = lazy(() => import("@/components/home/FeaturesSection"));
+const MutualFundSection = lazy(() => import("@/components/home/MutualFundSection"));
+const InsuranceSection = lazy(() => import("@/components/home/InsuranceSection"));
+const LoanSection = lazy(() => import("@/components/home/LoanSection"));
+const FinancialToolsSection = lazy(() => import("@/components/home/FinancialToolsSection"));
+const TrustSecuritySection = lazy(() => import("@/components/home/TrustSecuritySection"));
+const TestimonialsSection = lazy(() => import("@/components/home/TestimonialsSection"));
+const FAQSection = lazy(() => import("@/components/home/FAQSection"));
+const CTASection = lazy(() => import("@/components/home/CTASection"));
 
 const BelowFoldSections = () => {
   return (
