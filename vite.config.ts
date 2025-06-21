@@ -3,8 +3,6 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import { componentTagger } from "lovable-tagger";
-import type { ViteDevServer, PreviewServer } from "vite";
-import type { IncomingMessage, ServerResponse } from "http";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
@@ -16,22 +14,6 @@ export default defineConfig(({ mode }) => ({
     react(),
     mode === 'development' &&
     componentTagger(),
-    // Plugin to serve XML sitemap with correct headers
-    {
-      name: 'xml-sitemap',
-      configureServer(server: ViteDevServer) {
-        server.middlewares.use('/sitemap.xml', (req: IncomingMessage, res: ServerResponse, next: () => void) => {
-          res.setHeader('Content-Type', 'application/xml');
-          next();
-        });
-      },
-      configurePreviewServer(server: PreviewServer) {
-        server.middlewares.use('/sitemap.xml', (req: IncomingMessage, res: ServerResponse, next: () => void) => {
-          res.setHeader('Content-Type', 'application/xml');
-          next();
-        });
-      }
-    }
   ].filter(Boolean),
   resolve: {
     alias: {
@@ -59,8 +41,7 @@ export default defineConfig(({ mode }) => ({
     sourcemap: mode === 'development',
     // Enable minification in production
     minify: mode === 'production' ? 'esbuild' : false,
-    // Copy XML sitemap to build output
-    assetsInclude: ['**/*.xml']
+    // Remove problematic terser configuration
   },
   // Optimize dependencies
   optimizeDeps: {
@@ -71,7 +52,5 @@ export default defineConfig(({ mode }) => ({
       'framer-motion',
       'lucide-react'
     ]
-  },
-  // Ensure XML files are served correctly
-  publicDir: 'public'
+  }
 }));
