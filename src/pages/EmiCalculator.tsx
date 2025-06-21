@@ -10,14 +10,6 @@ import { Form, FormControl, FormField, FormItem, FormLabel } from "@/components/
 import { useForm } from "react-hook-form";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import {
-  PieChart,
-  Pie,
-  Cell,
-  ResponsiveContainer,
-  Tooltip,
-  Legend
-} from "recharts";
 
 interface FormValues {
   loanAmount: number;
@@ -39,8 +31,6 @@ const EmiCalculator = () => {
   const [emi, setEmi] = useState(0);
   const [totalInterest, setTotalInterest] = useState(0);
   const [totalAmount, setTotalAmount] = useState(0);
-  const [pieData, setPieData] = useState<any[]>([]);
-  const [yearlyBreakup, setYearlyBreakup] = useState<any[]>([]);
 
   const loanTypeOptions = [
     { value: "home", label: "Home Loan", defaultRate: 8.5 },
@@ -66,57 +56,12 @@ const EmiCalculator = () => {
     };
   };
 
-  const generateYearlyBreakup = (
-    loanAmount: number, 
-    interestRate: number, 
-    loanTerm: number
-  ) => {
-    const monthlyRate = interestRate / 12 / 100;
-    const totalMonths = loanTerm * 12;
-    const monthlyEmi = loanAmount * monthlyRate * Math.pow(1 + monthlyRate, totalMonths) / 
-                     (Math.pow(1 + monthlyRate, totalMonths) - 1);
-    
-    let remainingPrincipal = loanAmount;
-    const yearlyData = [];
-    
-    for (let year = 1; year <= loanTerm; year++) {
-      let yearlyPrincipal = 0;
-      let yearlyInterest = 0;
-      
-      for (let month = 1; month <= 12; month++) {
-        if ((year - 1) * 12 + month > totalMonths) break;
-        
-        const monthlyInterest = remainingPrincipal * monthlyRate;
-        const monthlyPrincipal = monthlyEmi - monthlyInterest;
-        
-        yearlyPrincipal += monthlyPrincipal;
-        yearlyInterest += monthlyInterest;
-        remainingPrincipal -= monthlyPrincipal;
-      }
-      
-      yearlyData.push({
-        year: `Year ${year}`,
-        principal: Math.round(yearlyPrincipal),
-        interest: Math.round(yearlyInterest)
-      });
-    }
-    
-    return yearlyData;
-  };
-
   useEffect(() => {
     const { loanAmount, interestRate, loanTerm } = form.getValues();
     const result = calculateEMI(loanAmount, interestRate, loanTerm);
     setEmi(result.monthlyEmi);
     setTotalInterest(result.totalInterest);
     setTotalAmount(result.totalPayment);
-    
-    setPieData([
-      { name: "Principal", value: loanAmount, fill: "#9b87f5" },
-      { name: "Interest", value: result.totalInterest, fill: "#0FA0CE" }
-    ]);
-    
-    setYearlyBreakup(generateYearlyBreakup(loanAmount, interestRate, loanTerm));
   }, [form.watch("loanAmount"), form.watch("interestRate"), form.watch("loanTerm")]);
 
   useEffect(() => {
@@ -134,8 +79,6 @@ const EmiCalculator = () => {
       maximumFractionDigits: 0,
     }).format(value);
   };
-
-  const COLORS = ["#9b87f5", "#0FA0CE"];
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -317,7 +260,7 @@ const EmiCalculator = () => {
                       </div>
                       <div className="bg-blue-50 p-4 rounded-lg">
                         <p className="text-sm text-gray-600">Total Interest</p>
-                        <p className="text-lg font-bold mt-1 text-fintech-blue">{formatCurrency(totalInterest)}</p>
+                        <p className="text-lg font-bold mt-1 text-blue-600">{formatCurrency(totalInterest)}</p>
                       </div>
                       <div className="bg-gradient-to-r from-green-50 to-blue-50 p-4 rounded-lg">
                         <p className="text-sm text-gray-600">Total Payment</p>
@@ -325,43 +268,18 @@ const EmiCalculator = () => {
                       </div>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="space-y-6">
                       <div>
-                        <h3 className="text-sm font-medium mb-3">Payment Distribution</h3>
-                        <div className="h-48">
-                          <ResponsiveContainer width="100%" height="100%">
-                            <PieChart>
-                              <Pie
-                                data={pieData}
-                                cx="50%"
-                                cy="50%"
-                                labelLine={false}
-                                outerRadius={80}
-                                fill="#8884d8"
-                                dataKey="value"
-                              >
-                                {pieData.map((entry, index) => (
-                                  <Cell key={`cell-${index}`} fill={entry.fill} />
-                                ))}
-                              </Pie>
-                              <Tooltip formatter={(value) => formatCurrency(value as number)} />
-                              <Legend />
-                            </PieChart>
-                          </ResponsiveContainer>
-                        </div>
-                      </div>
-                      
-                      <div>
-                        <h3 className="text-sm font-medium mb-3">Principal vs Interest</h3>
+                        <h3 className="text-sm font-medium mb-3">Payment Breakdown</h3>
                         <div className="space-y-3">
                           <div>
                             <div className="flex justify-between text-sm mb-1">
-                              <span>Principal</span>
+                              <span>Principal Amount</span>
                               <span>{formatCurrency(form.watch("loanAmount"))}</span>
                             </div>
                             <div className="h-2 w-full bg-gray-100 rounded-full overflow-hidden">
                               <div 
-                                className="h-full bg-fintech-purple" 
+                                className="h-full bg-green-500" 
                                 style={{ width: `${(form.watch("loanAmount") / totalAmount) * 100}%` }}
                               ></div>
                             </div>
@@ -369,12 +287,12 @@ const EmiCalculator = () => {
                           
                           <div>
                             <div className="flex justify-between text-sm mb-1">
-                              <span>Interest</span>
+                              <span>Total Interest</span>
                               <span>{formatCurrency(totalInterest)}</span>
                             </div>
                             <div className="h-2 w-full bg-gray-100 rounded-full overflow-hidden">
                               <div 
-                                className="h-full bg-fintech-blue" 
+                                className="h-full bg-blue-500" 
                                 style={{ width: `${(totalInterest / totalAmount) * 100}%` }}
                               ></div>
                             </div>
@@ -382,11 +300,20 @@ const EmiCalculator = () => {
 
                           <div className="mt-4 pt-3 border-t">
                             <div className="flex justify-between text-sm font-medium">
-                              <span>Total Payment</span>
+                              <span>Total Amount Payable</span>
                               <span>{formatCurrency(totalAmount)}</span>
                             </div>
                           </div>
                         </div>
+                      </div>
+
+                      <div className="bg-gray-50 p-4 rounded-lg">
+                        <h4 className="font-medium mb-2">Key Information</h4>
+                        <ul className="text-sm text-gray-600 space-y-1">
+                          <li>• EMI remains constant throughout the loan tenure</li>
+                          <li>• Early repayment can significantly reduce total interest</li>
+                          <li>• Interest rates may vary based on your credit profile</li>
+                        </ul>
                       </div>
                     </div>
                   </CardContent>

@@ -55,7 +55,6 @@ export default defineConfig(({ mode }) => ({
     ],
     exclude: [
       'framer-motion',
-      'recharts',
       'embla-carousel-react'
     ]
   },
