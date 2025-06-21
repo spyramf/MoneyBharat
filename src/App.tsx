@@ -1,4 +1,5 @@
 
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -58,11 +59,11 @@ function App() {
   return (
     <HelmetProvider>
       <QueryClientProvider client={queryClient}>
-        <InvestorAuthProvider>
-          <AuthProvider>
-            <BookingProvider>
-              <BlogProvider>
-                <BrowserRouter>
+        <BrowserRouter>
+          <InvestorAuthProvider>
+            <AuthProvider>
+              <BookingProvider>
+                <BlogProvider>
                   <PerformanceOptimizer />
                   <div className="min-h-screen bg-background">
                     <Toaster />
@@ -145,14 +146,15 @@ function App() {
                       <Route path="*" element={<NotFound />} />
                     </Routes>
                   </div>
-                </BrowserRouter>
-              </BlogProvider>
-            </BookingProvider>
-          </AuthProvider>
-        </InvestorAuthProvider>
+                </BlogProvider>
+              </BookingProvider>
+            </AuthProvider>
+          </InvestorAuthProvider>
+        </BrowserRouter>
       </QueryClientProvider>
     </HelmetProvider>
   );
 }
 
 export default App;
+
