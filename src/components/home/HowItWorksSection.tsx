@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowRight, UserCheck, Search, FileCheck, TrendingUp } from "lucide-react";
@@ -73,7 +72,7 @@ const HowItWorksSection = () => {
                 <p className="text-sm text-gray-600">Get professional guidance on direct mutual fund plans and investment strategies</p>
               </div>
               <div className="bg-blue-50 p-4 rounded-lg">
-                <h4 ClassName="font-semibold text-fintech-blue mb-2">Expert Financial Advice</h4>
+                <h4 className="font-semibold text-fintech-blue mb-2">Expert Financial Advice</h4>
                 <p className="text-sm text-gray-600">Get personalized guidance from AMFI-certified advisors</p>
               </div>
               <div className="bg-purple-50 p-4 rounded-lg">
