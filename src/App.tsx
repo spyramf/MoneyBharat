@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -56,11 +57,11 @@ const queryClient = new QueryClient();
 function App() {
   return (
     <HelmetProvider>
-      <InvestorAuthProvider>
-        <AuthProvider>
-          <BookingProvider>
-            <BlogProvider>
-              <QueryClient>
+      <QueryClientProvider client={queryClient}>
+        <InvestorAuthProvider>
+          <AuthProvider>
+            <BookingProvider>
+              <BlogProvider>
                 <BrowserRouter>
                   <PerformanceOptimizer />
                   <div className="min-h-screen bg-background">
@@ -145,11 +146,11 @@ function App() {
                     </Routes>
                   </div>
                 </BrowserRouter>
-              </QueryClient>
-            </BlogProvider>
-          </BookingProvider>
-        </AuthProvider>
-      </InvestorAuthProvider>
+              </BlogProvider>
+            </BookingProvider>
+          </AuthProvider>
+        </InvestorAuthProvider>
+      </QueryClientProvider>
     </HelmetProvider>
   );
 }
