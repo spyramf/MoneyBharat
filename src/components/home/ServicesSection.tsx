@@ -32,24 +32,26 @@ const ServicesSection = () => {
       <div className="container mx-auto px-4">
         <motion.div className="text-center max-w-2xl mx-auto mb-16" variants={itemVariants}>
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Comprehensive Financial Services for <span className="gradient-text">Every Need</span>
+            Money Bharat's Comprehensive Financial Services for <span className="gradient-text">Every Indian</span>
           </h2>
           <p className="text-gray-600">
-            Our tech-powered platform offers tailored financial solutions to help you achieve your goals and secure your future.
+            Our award-winning platform offers tailored financial solutions to help you achieve your goals and secure your future.
+            From zero-commission investments to comprehensive insurance coverage, Money Bharat Finance is your trusted partner.
           </p>
         </motion.div>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <motion.div variants={itemVariants}>
             <ProductCard 
-              title="Mutual Funds" 
+              title="Best Mutual Funds in India" 
               icon={<PiggyBank size={28} />} 
-              description="Tech-driven investments with expert portfolio management for optimal returns." 
+              description="Zero-commission direct mutual fund plans with AI-powered portfolio management for optimal returns. Start your SIP journey with Money Bharat Finance." 
               features={[
                 "Zero commission direct plans",
-                "Personalized portfolio recommendations", 
+                "AI-powered portfolio recommendations", 
                 "Real-time performance tracking",
-                "Automatic SIP management"
+                "Automatic SIP management",
+                "Tax-saving ELSS funds"
               ]} 
               linkText="Explore Mutual Funds" 
               linkHref="/mutual-funds" 
@@ -59,14 +61,15 @@ const ServicesSection = () => {
           
           <motion.div variants={itemVariants}>
             <ProductCard 
-              title="Insurance" 
+              title="Comprehensive Insurance Plans" 
               icon={<Shield size={28} />} 
-              description="Comprehensive coverage options that protect what matters most to you." 
+              description="Complete insurance coverage including health, life, and general insurance that protects what matters most to you and your family." 
               features={[
-                "Digital policy management",
+                "Health & life insurance policies",
                 "AI-powered plan recommendations",
                 "Paperless claims processing",
-                "Family coverage options"
+                "Family floater options",
+                "Cashless hospital network"
               ]} 
               linkText="Explore Insurance Plans" 
               linkHref="/insurance" 
@@ -76,14 +79,15 @@ const ServicesSection = () => {
           
           <motion.div variants={itemVariants}>
             <ProductCard 
-              title="Loans" 
+              title="Quick & Easy Loans" 
               icon={<Wallet size={28} />} 
-              description="Quick, hassle-free loans with competitive rates and flexible terms." 
+              description="Instant loan approvals with competitive rates and flexible terms. Personal, home, and business loans with minimal documentation." 
               features={[
                 "Instant eligibility check",
-                "Paperless digital process",
+                "100% paperless digital process",
                 "Competitive interest rates",
-                "Flexible repayment options"
+                "Flexible repayment options",
+                "Same-day loan disbursement"
               ]} 
               linkText="Explore Loan Options" 
               linkHref="/loans" 
@@ -91,6 +95,28 @@ const ServicesSection = () => {
             />
           </motion.div>
         </div>
+        
+        {/* Additional internal linking section */}
+        <motion.div className="mt-12 text-center" variants={itemVariants}>
+          <h3 className="text-xl font-semibold mb-4">Popular Money Bharat Finance Services</h3>
+          <div className="flex flex-wrap justify-center gap-4">
+            <a href="/tools/sip-calculator" className="bg-white border border-gray-200 px-4 py-2 rounded-lg hover:bg-fintech-green hover:text-white transition-colors">
+              SIP Calculator
+            </a>
+            <a href="/health-insurance" className="bg-white border border-gray-200 px-4 py-2 rounded-lg hover:bg-fintech-green hover:text-white transition-colors">
+              Health Insurance
+            </a>
+            <a href="/loans/personal" className="bg-white border border-gray-200 px-4 py-2 rounded-lg hover:bg-fintech-green hover:text-white transition-colors">
+              Personal Loans
+            </a>
+            <a href="/tools/emi-calculator" className="bg-white border border-gray-200 px-4 py-2 rounded-lg hover:bg-fintech-green hover:text-white transition-colors">
+              EMI Calculator
+            </a>
+            <a href="/blog/top-7-personal-finance-tips-india" className="bg-white border border-gray-200 px-4 py-2 rounded-lg hover:bg-fintech-green hover:text-white transition-colors">
+              Finance Tips
+            </a>
+          </div>
+        </motion.div>
       </div>
     </motion.section>
   );

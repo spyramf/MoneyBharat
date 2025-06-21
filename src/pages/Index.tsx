@@ -1,3 +1,4 @@
+
 import { lazy, Suspense } from "react";
 import Navbar from "@/components/Navbar";
 import OptimizedHeroSection from "@/components/OptimizedHeroSection";
@@ -40,50 +41,64 @@ const Index = () => {
     <div className="min-h-screen">
       <Navbar />
       
-      {/* Critical above-the-fold content */}
-      <OptimizedHeroSection />
-      
-      {/* Load services section without Suspense (critical) */}
-      <ServicesSection />
-      
-      {/* How it works section for content expansion */}
-      <HowItWorksSection />
-      
-      <Suspense fallback={<SectionLoader />}>
-        <FeaturesSection />
-      </Suspense>
-      
-      <Suspense fallback={<SectionLoader />}>
-        <MutualFundSection />
-      </Suspense>
-      
-      <Suspense fallback={<SectionLoader />}>
-        <InsuranceSection />
-      </Suspense>
-      
-      <Suspense fallback={<SectionLoader />}>
-        <LoanSection />
-      </Suspense>
-      
-      <Suspense fallback={<SectionLoader />}>
-        <FinancialToolsSection />
-      </Suspense>
-      
-      <Suspense fallback={<SectionLoader />}>
-        <TrustSecuritySection />
-      </Suspense>
-      
-      <Suspense fallback={<SectionLoader />}>
-        <TestimonialsSection />
-      </Suspense>
-      
-      <Suspense fallback={<SectionLoader />}>
-        <FAQSection />
-      </Suspense>
-      
-      <Suspense fallback={<SectionLoader />}>
-        <CTASection />
-      </Suspense>
+      {/* Main heading and hero content */}
+      <main>
+        <OptimizedHeroSection />
+        
+        {/* Navigation breadcrumbs for SEO */}
+        <nav aria-label="Site navigation" className="hidden">
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/mutual-funds">Mutual Funds</a></li>
+            <li><a href="/insurance">Insurance</a></li>
+            <li><a href="/loans">Loans</a></li>
+            <li><a href="/tools/sip-calculator">SIP Calculator</a></li>
+            <li><a href="/blog">Blog</a></li>
+          </ul>
+        </nav>
+        
+        {/* Services section with internal links */}
+        <ServicesSection />
+        
+        {/* How it works section for content expansion */}
+        <HowItWorksSection />
+        
+        <Suspense fallback={<SectionLoader />}>
+          <FeaturesSection />
+        </Suspense>
+        
+        <Suspense fallback={<SectionLoader />}>
+          <MutualFundSection />
+        </Suspense>
+        
+        <Suspense fallback={<SectionLoader />}>
+          <InsuranceSection />
+        </Suspense>
+        
+        <Suspense fallback={<SectionLoader />}>
+          <LoanSection />
+        </Suspense>
+        
+        <Suspense fallback={<SectionLoader />}>
+          <FinancialToolsSection />
+        </Suspense>
+        
+        <Suspense fallback={<SectionLoader />}>
+          <TrustSecuritySection />
+        </Suspense>
+        
+        <Suspense fallback={<SectionLoader />}>
+          <TestimonialsSection />
+        </Suspense>
+        
+        <Suspense fallback={<SectionLoader />}>
+          <FAQSection />
+        </Suspense>
+        
+        <Suspense fallback={<SectionLoader />}>
+          <CTASection />
+        </Suspense>
+      </main>
       
       <Footer />
     </div>
