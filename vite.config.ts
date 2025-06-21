@@ -21,27 +21,29 @@ export default defineConfig(({ mode }) => ({
     },
   },
   build: {
-    // Optimize bundle size and splitting
+    // Aggressive bundle optimization
     rollupOptions: {
       output: {
         manualChunks: {
           vendor: ['react', 'react-dom'],
           router: ['react-router-dom'],
-          ui: ['@radix-ui/react-accordion', '@radix-ui/react-dialog', '@radix-ui/react-dropdown-menu'],
-          charts: ['recharts'],
-          animations: ['framer-motion'],
-          forms: ['react-hook-form', '@hookform/resolvers', 'zod'],
+          ui: ['@radix-ui/react-accordion', '@radix-ui/react-dialog'],
           icons: ['lucide-react']
         }
       }
     },
     // Reduce chunk size warnings threshold
-    chunkSizeWarningLimit: 1000,
-    // Enable source maps for better debugging
+    chunkSizeWarningLimit: 500,
+    // Enable source maps only in development
     sourcemap: mode === 'development',
-    // Enable minification in production
-    minify: mode === 'production' ? 'esbuild' : false,
-    // Remove problematic terser configuration
+    // Enable aggressive minification
+    minify: 'esbuild',
+    // Remove CSS code splitting to reduce requests
+    cssCodeSplit: false,
+    // Enable compression
+    reportCompressedSize: true,
+    // Target modern browsers for smaller bundles
+    target: 'es2020'
   },
   // Optimize dependencies
   optimizeDeps: {
@@ -49,8 +51,16 @@ export default defineConfig(({ mode }) => ({
       'react',
       'react-dom',
       'react-router-dom',
-      'framer-motion',
       'lucide-react'
+    ],
+    exclude: [
+      'framer-motion',
+      'recharts',
+      'embla-carousel-react'
     ]
+  },
+  // Enable CSS optimization
+  css: {
+    devSourcemap: mode === 'development'
   }
 }));

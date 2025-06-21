@@ -1,42 +1,41 @@
 
-import { ArrowRight, ArrowRightCircle } from "lucide-react";
+import { ArrowRightCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
 const OptimizedHeroSection = () => {
   return (
-    <section className="relative overflow-hidden pt-16 md:pt-24 pb-16 md:pb-20 py-[50px]">
+    <section className="hero-section relative overflow-hidden">
       {/* Simplified background decoration */}
-      <div className="absolute top-0 left-0 w-full h-full bg-gradient-radial from-fintech-green/5 to-transparent -z-10"></div>
-      <div className="absolute top-40 right-0 w-80 h-80 bg-fintech-green/5 rounded-full blur-2xl -z-10"></div>
+      <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-green-50 to-transparent -z-10"></div>
       
-      <div className="container mx-auto px-4">
+      <div className="container">
         <div className="flex flex-col-reverse md:flex-row items-center gap-8 md:gap-12">
           
           {/* Left content - optimized for LCP */}
           <div className="w-full md:w-1/2 space-y-6">
             <div>
-              <h1 className="text-4xl md:text-5xl font-bold leading-tight lg:text-5xl">
-                India's Best <span className="text-fintech-green">Mutual Funds</span>, <br />
+              <h1 className="hero-title">
+                India's Best <span className="text-green-600">Mutual Funds</span>, <br />
                 <span className="text-black">Insurance & Loans Platform</span>
               </h1>
-              <p className="text-lg text-gray-700 max-w-lg mt-6 md:text-lg">
+              <p className="hero-text">
                 Money Bharat Finance is India's leading fintech platform offering zero-commission 
-                <Link to="/mutual-funds" className="text-fintech-green hover:underline mx-1">mutual fund investments</Link>, 
-                comprehensive <Link to="/insurance" className="text-fintech-green hover:underline mx-1">insurance coverage</Link>, 
-                and instant <Link to="/loans" className="text-fintech-green hover:underline mx-1">loan approvals</Link>. 
+                <Link to="/mutual-funds" className="text-green-600 hover:underline mx-1">mutual fund investments</Link>, 
+                comprehensive <Link to="/insurance" className="text-green-600 hover:underline mx-1">insurance coverage</Link>, 
+                and instant <Link to="/loans" className="text-green-600 hover:underline mx-1">loan approvals</Link>. 
                 Join 500,000+ investors building wealth with Money Bharat Finance today.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 pt-6">
                 <Link to="/investor/login">
-                  <Button className="bg-gradient-to-r from-fintech-green to-fintech-green hover:opacity-90 text-white px-8 py-6">
+                  <Button className="btn-primary">
                     Start Investing Today
                   </Button>
                 </Link>
                 <Link to="/booking">
-                  <Button variant="outline" className="group border-fintech-green text-fintech-green hover:text-fintech-green transition-colors px-8 py-6 rounded-xl">
+                  <Button variant="outline" className="group border-green-600 text-green-600 hover:bg-green-600 hover:text-white transition-colors px-8 py-6 rounded-xl">
                     Free Financial Consultation
-                    <ArrowRightCircle className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                    <ArrowRightCircle className="ml-2 h-4 w-4" />
                   </Button>
                 </Link>
               </div>
@@ -45,156 +44,113 @@ const OptimizedHeroSection = () => {
               <div className="pt-4">
                 <p className="text-sm text-gray-600 mb-2">Quick Access:</p>
                 <div className="flex flex-wrap gap-2">
-                  <Link to="/tools/sip-calculator" className="text-xs bg-gray-100 px-3 py-1 rounded-full hover:bg-fintech-green hover:text-white transition-colors">
+                  <Link to="/tools/sip-calculator" className="text-xs bg-gray-100 px-3 py-1 rounded-full hover:bg-green-600 hover:text-white transition-colors">
                     SIP Calculator
                   </Link>
-                  <Link to="/tools/emi-calculator" className="text-xs bg-gray-100 px-3 py-1 rounded-full hover:bg-fintech-green hover:text-white transition-colors">
+                  <Link to="/tools/emi-calculator" className="text-xs bg-gray-100 px-3 py-1 rounded-full hover:bg-green-600 hover:text-white transition-colors">
                     EMI Calculator
                   </Link>
-                  <Link to="/health-insurance" className="text-xs bg-gray-100 px-3 py-1 rounded-full hover:bg-fintech-green hover:text-white transition-colors">
+                  <Link to="/health-insurance" className="text-xs bg-gray-100 px-3 py-1 rounded-full hover:bg-green-600 hover:text-white transition-colors">
                     Health Insurance
                   </Link>
-                  <Link to="/blog" className="text-xs bg-gray-100 px-3 py-1 rounded-full hover:bg-fintech-green hover:text-white transition-colors">
+                  <Link to="/blog" className="text-xs bg-gray-100 px-3 py-1 rounded-full hover:bg-green-600 hover:text-white transition-colors">
                     Financial Tips
                   </Link>
                 </div>
               </div>
             </div>
             
-            {/* Trust indicators - simplified */}
-            <div className="pt-10">
+            {/* Simplified trust indicators */}
+            <div className="pt-8">
               <p className="text-sm text-gray-600 mb-3">Trusted by investors across India</p>  
-              <div className="flex flex-wrap gap-6 items-center">
+              <div className="flex flex-wrap gap-6 items-center text-sm">
                 <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center">
-                    <div className="w-4 h-4 bg-fintech-green rounded"></div>
-                  </div>
-                  <div>
-                    <p className="text-lg font-bold text-fintech-green">AMFI</p>
-                    <p className="text-xs text-gray-500">Registered</p>
-                  </div>
+                  <div className="w-3 h-3 bg-green-600 rounded-full"></div>
+                  <span className="font-semibold">AMFI Registered</span>
                 </div>
-                
                 <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center">
-                    <div className="w-4 h-4 bg-fintech-blue rounded"></div>
-                  </div>
-                  <div>
-                    <p className="text-lg font-bold text-fintech-blue">256-bit</p>
-                    <p className="text-xs text-gray-500">Encryption</p>
-                  </div>
+                  <div className="w-3 h-3 bg-blue-600 rounded-full"></div>
+                  <span className="font-semibold">256-bit Encryption</span>
                 </div>
-                
                 <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center">
-                    <div className="w-4 h-4 bg-fintech-orange rounded-full"></div>
-                  </div>
-                  <div>
-                    <p className="text-lg font-bold text-fintech-orange">₹100Cr+</p>
-                    <p className="text-xs text-gray-500">Insurance Cover</p>
-                  </div>
+                  <div className="w-3 h-3 bg-orange-500 rounded-full"></div>
+                  <span className="font-semibold">₹100Cr+ Insurance Cover</span>
                 </div>
               </div>
             </div>
           </div>
           
-          {/* Right dashboard visualization - simplified */}
+          {/* Simplified right visualization */}
           <div className="w-full md:w-1/2">
-            <div className="relative">
-              <div className="absolute -top-10 -left-10 w-64 h-64 bg-fintech-green/5 rounded-full blur-xl"></div>
-              
-              {/* Simplified investment dashboard */}
-              <div className="bg-white/90 backdrop-blur-sm shadow-xl rounded-lg p-6 max-w-md mx-auto border">
-                <div className="bg-gradient-to-br from-fintech-green/10 to-fintech-blue/10 rounded-lg p-4">
-                  <div className="flex justify-between items-center mb-4">
-                    <h2 className="text-lg font-semibold">Money Bharat Portfolio</h2>
-                    <div className="bg-green-100 text-green-700 px-2 py-1 rounded text-xs font-medium">
-                      +18.7%
+            <div className="bg-white shadow-xl rounded-lg p-6 max-w-md mx-auto border">
+              <div className="bg-gradient-to-br from-green-50 to-blue-50 rounded-lg p-4">
+                <div className="flex justify-between items-center mb-4">
+                  <h2 className="text-lg font-semibold">Portfolio</h2>
+                  <div className="bg-green-100 text-green-700 px-2 py-1 rounded text-xs font-medium">
+                    +18.7%
+                  </div>
+                </div>
+                
+                <div className="space-y-3">
+                  <div>
+                    <div className="flex justify-between text-sm mb-1">
+                      <span>Total Value</span>
+                      <span className="font-medium">₹8.2L</span>
+                    </div>
+                    <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
+                      <div className="h-full bg-gradient-to-r from-green-500 to-blue-500 w-4/5"></div>
                     </div>
                   </div>
                   
-                  <div className="space-y-4">
-                    <div>
-                      <div className="flex justify-between text-sm mb-1">
-                        <span>Portfolio Value</span>
-                        <span className="font-medium">₹8.2L</span>
-                      </div>
-                      <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
-                        <div className="h-full bg-gradient-to-r from-fintech-green to-fintech-blue rounded-full w-4/5"></div>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div className="mt-4 space-y-2">
+                  <div className="space-y-2">
                     <div className="flex justify-between items-center p-2 bg-white rounded shadow-sm">
-                      <div className="flex items-center gap-2">
-                        <div className="w-6 h-6 rounded-full bg-green-100"></div>
-                        <div>
-                          <p className="font-medium text-sm">HDFC Top 100</p>
-                          <p className="text-xs text-gray-500">Large Cap</p>
-                        </div>
+                      <div>
+                        <p className="font-medium text-sm">HDFC Top 100</p>
+                        <p className="text-xs text-gray-500">Large Cap</p>
                       </div>
-                      <div className="text-right">
-                        <p className="text-sm text-green-600 font-medium">+16.2%</p>
-                      </div>
+                      <p className="text-sm text-green-600 font-medium">+16.2%</p>
                     </div>
                     
                     <div className="flex justify-between items-center p-2 bg-white rounded shadow-sm">
-                      <div className="flex items-center gap-2">
-                        <div className="w-6 h-6 rounded-full bg-blue-100"></div>
-                        <div>
-                          <p className="font-medium text-sm">Axis Small Cap</p>
-                          <p className="text-xs text-gray-500">Small Cap</p>
-                        </div>
+                      <div>
+                        <p className="font-medium text-sm">Axis Small Cap</p>
+                        <p className="text-xs text-gray-500">Small Cap</p>
                       </div>
-                      <div className="text-right">
-                        <p className="text-sm text-green-600 font-medium">+21.8%</p>
-                      </div>
+                      <p className="text-sm text-green-600 font-medium">+21.8%</p>
                     </div>
                   </div>
                 </div>
-              </div>
-              
-              {/* Simplified floating elements */}
-              <div className="absolute -top-4 right-4 w-20 h-20 bg-white shadow-lg rounded-lg p-2 flex flex-col items-center justify-center">
-                <div className="w-4 h-4 rounded-full bg-gradient-to-r from-green-400 to-fintech-green mb-1"></div>
-                <p className="text-xs text-gray-600">Growth</p>
-                <p className="text-sm font-bold text-green-600">+18.7%</p>
               </div>
             </div>
           </div>
         </div>
       </div>
       
-      {/* Enhanced stats section with internal links */}
-      <div className="container mx-auto px-4 mt-16 md:mt-24">
+      {/* Enhanced stats section */}
+      <div className="container mt-16 md:mt-20">
         <div className="text-center mb-8">
-          <h2 className="text-2xl md:text-3xl font-bold text-gray-900">
-            Why Choose Money Bharat Finance for Your Financial Journey?
+          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+            Why Choose Money Bharat Finance?
           </h2>
-          <p className="text-lg text-gray-600 mt-4 max-w-3xl mx-auto">
-            Money Bharat Finance has been empowering investors across India with cutting-edge technology, 
-            expert guidance, and transparent financial solutions. Explore our 
-            <Link to="/mutual-funds" className="text-fintech-green hover:underline mx-1">mutual fund plans</Link>, 
-            <Link to="/insurance" className="text-fintech-green hover:underline mx-1">insurance policies</Link>, and 
-            <Link to="/loans" className="text-fintech-green hover:underline mx-1">loan products</Link> today.
+          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+            Money Bharat Finance has been empowering investors across India with cutting-edge technology and expert guidance.
           </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="rounded-2xl bg-white p-6 text-center shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300">
-            <p className="text-3xl md:text-4xl font-bold text-fintech-green mb-2">₹5000Cr+</p>
-            <p className="text-gray-600">Assets Under Management</p>
-            <Link to="/about" className="text-sm text-fintech-green hover:underline">Learn More</Link>
+          <div className="bg-white p-6 text-center shadow-sm border border-gray-100 rounded-lg hover:shadow-md transition-shadow">
+            <p className="text-3xl font-bold text-green-600 mb-2">₹5000Cr+</p>
+            <p className="text-gray-600 mb-2">Assets Under Management</p>
+            <Link to="/about" className="text-sm text-green-600 hover:underline">Learn More</Link>
           </div>
-          <div className="rounded-2xl bg-white p-6 text-center shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300">
-            <p className="text-3xl md:text-4xl font-bold text-fintech-blue mb-2">500K+</p>
-            <p className="text-gray-600">Happy Investors</p>
-            <Link to="/investor/signup" className="text-sm text-fintech-green hover:underline">Join Now</Link>
+          <div className="bg-white p-6 text-center shadow-sm border border-gray-100 rounded-lg hover:shadow-md transition-shadow">
+            <p className="text-3xl font-bold text-blue-600 mb-2">500K+</p>
+            <p className="text-gray-600 mb-2">Happy Investors</p>
+            <Link to="/investor/signup" className="text-sm text-green-600 hover:underline">Join Now</Link>
           </div>
-          <div className="rounded-2xl bg-white p-6 text-center shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300">
-            <p className="text-3xl md:text-4xl font-bold text-fintech-green mb-2">15+</p>
-            <p className="text-gray-600">Years Experience</p>
-            <Link to="/about" className="text-sm text-fintech-green hover:underline">Our Story</Link>
+          <div className="bg-white p-6 text-center shadow-sm border border-gray-100 rounded-lg hover:shadow-md transition-shadow">
+            <p className="text-3xl font-bold text-green-600 mb-2">15+</p>
+            <p className="text-gray-600 mb-2">Years Experience</p>
+            <Link to="/about" className="text-sm text-green-600 hover:underline">Our Story</Link>
           </div>
         </div>
       </div>
