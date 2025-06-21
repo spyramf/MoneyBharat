@@ -14,6 +14,22 @@ export default defineConfig(({ mode }) => ({
     react(),
     mode === 'development' &&
     componentTagger(),
+    // Plugin to serve XML sitemap with correct headers
+    {
+      name: 'xml-sitemap',
+      configureServer(server) {
+        server.middlewares.use('/sitemap.xml', (req, res, next) => {
+          res.setHeader('Content-Type', 'application/xml');
+          next();
+        });
+      },
+      configurePreviewServer(server) {
+        server.middlewares.use('/sitemap.xml', (req, res, next) => {
+          res.setHeader('Content-Type', 'application/xml');
+          next();
+        });
+      }
+    }
   ].filter(Boolean),
   resolve: {
     alias: {
@@ -41,7 +57,8 @@ export default defineConfig(({ mode }) => ({
     sourcemap: mode === 'development',
     // Enable minification in production
     minify: mode === 'production' ? 'esbuild' : false,
-    // Remove problematic terser configuration
+    // Copy XML sitemap to build output
+    assetsInclude: ['**/*.xml']
   },
   // Optimize dependencies
   optimizeDeps: {
@@ -52,5 +69,7 @@ export default defineConfig(({ mode }) => ({
       'framer-motion',
       'lucide-react'
     ]
-  }
+  },
+  // Ensure XML files are served correctly
+  publicDir: 'public'
 }));

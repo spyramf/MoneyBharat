@@ -87,7 +87,7 @@ const App = () => (
                     <Route path="/booking" element={<Booking />} />
                     <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                     <Route path="/terms-of-service" element={<TermsOfService />} />
-                    <Route path="/sitemap" element={<Sitemap />} />
+                    <Route path="/site-navigation" element={<Sitemap />} />
                     
                     {/* Investor Routes */}
                     <Route path="/investor/login" element={<InvestorLogin />} />
