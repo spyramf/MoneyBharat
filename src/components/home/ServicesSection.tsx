@@ -1,118 +1,98 @@
 
+import { motion } from "framer-motion";
 import { PiggyBank, Shield, Wallet } from "lucide-react";
 import ProductCard from "@/components/ProductCard";
 
 const ServicesSection = () => {
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.2 }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.5 }
+    }
+  };
+
   return (
-    <section className="py-16 md:py-20 bg-gray-50" role="region" aria-labelledby="services-heading">
+    <motion.section 
+      className="py-16 md:py-[20px]" 
+      initial="hidden" 
+      whileInView="visible" 
+      viewport={{ once: true, amount: 0.2 }} 
+      variants={containerVariants}
+    >
       <div className="container mx-auto px-4">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 id="services-heading" className="text-3xl md:text-4xl font-bold mb-6">
-            Money Bharat's Comprehensive Financial Services for <span className="text-green-600">Every Indian</span>
+        <motion.div className="text-center max-w-2xl mx-auto mb-16" variants={itemVariants}>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            Comprehensive Financial Services for <span className="gradient-text">Every Need</span>
           </h2>
-          <p className="text-gray-600 text-lg leading-relaxed">
-            Our award-winning platform offers tailored financial solutions to help you achieve your goals and secure your future.
-            From zero-commission investments to comprehensive insurance coverage, Money Bharat Finance is your trusted partner.
+          <p className="text-gray-600">
+            Our tech-powered platform offers tailored financial solutions to help you achieve your goals and secure your future.
           </p>
-        </div>
+        </motion.div>
         
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-          <div className="transform hover:scale-105 transition-transform duration-300">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <motion.div variants={itemVariants}>
             <ProductCard 
-              title="Best Mutual Funds in India" 
-              icon={<PiggyBank size={32} className="text-purple-600" />} 
-              description="Zero-commission direct mutual fund plans with AI-powered portfolio management for optimal returns. Start your SIP journey with Money Bharat Finance." 
+              title="Mutual Funds" 
+              icon={<PiggyBank size={28} />} 
+              description="Tech-driven investments with expert portfolio management for optimal returns." 
               features={[
                 "Zero commission direct plans",
-                "AI-powered portfolio recommendations", 
+                "Personalized portfolio recommendations", 
                 "Real-time performance tracking",
-                "Automatic SIP management",
-                "Tax-saving ELSS funds"
+                "Automatic SIP management"
               ]} 
               linkText="Explore Mutual Funds" 
               linkHref="/mutual-funds" 
-              gradient="bg-gradient-to-br from-purple-500 to-blue-500" 
+              gradient="bg-gradient-to-r from-fintech-purple to-fintech-blue" 
             />
-          </div>
+          </motion.div>
           
-          <div className="transform hover:scale-105 transition-transform duration-300">
+          <motion.div variants={itemVariants}>
             <ProductCard 
-              title="Comprehensive Insurance Plans" 
-              icon={<Shield size={32} className="text-blue-600" />} 
-              description="Complete insurance coverage including health, life, and general insurance that protects what matters most to you and your family." 
+              title="Insurance" 
+              icon={<Shield size={28} />} 
+              description="Comprehensive coverage options that protect what matters most to you." 
               features={[
-                "Health & life insurance policies",
+                "Digital policy management",
                 "AI-powered plan recommendations",
                 "Paperless claims processing",
-                "Family floater options",
-                "Cashless hospital network"
+                "Family coverage options"
               ]} 
               linkText="Explore Insurance Plans" 
               linkHref="/insurance" 
-              gradient="bg-gradient-to-br from-blue-500 to-cyan-500" 
+              gradient="bg-gradient-to-r from-fintech-blue to-fintech-ocean-blue" 
             />
-          </div>
+          </motion.div>
           
-          <div className="transform hover:scale-105 transition-transform duration-300">
+          <motion.div variants={itemVariants}>
             <ProductCard 
-              title="Quick & Easy Loans" 
-              icon={<Wallet size={32} className="text-orange-600" />} 
-              description="Instant loan approvals with competitive rates and flexible terms. Personal, home, and business loans with minimal documentation." 
+              title="Loans" 
+              icon={<Wallet size={28} />} 
+              description="Quick, hassle-free loans with competitive rates and flexible terms." 
               features={[
                 "Instant eligibility check",
-                "100% paperless digital process",
+                "Paperless digital process",
                 "Competitive interest rates",
-                "Flexible repayment options",
-                "Same-day loan disbursement"
+                "Flexible repayment options"
               ]} 
               linkText="Explore Loan Options" 
               linkHref="/loans" 
-              gradient="bg-gradient-to-br from-orange-500 to-red-500" 
+              gradient="bg-gradient-to-r from-fintech-orange to-fintech-purple" 
             />
-          </div>
-        </div>
-        
-        {/* Enhanced popular services section */}
-        <div className="mt-16 bg-white rounded-2xl p-8 shadow-lg border border-gray-100">
-          <div className="text-center mb-8">
-            <h3 className="text-2xl font-bold mb-4 text-gray-800">Popular Money Bharat Finance Services</h3>
-            <p className="text-gray-600">Quick access to our most-used financial tools and services</p>
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
-            <a href="/tools/sip-calculator" 
-               className="bg-gradient-to-r from-green-50 to-green-100 border border-green-200 px-4 py-3 rounded-xl hover:from-green-600 hover:to-green-700 hover:text-white transition-all duration-300 text-center group"
-               aria-label="Calculate SIP returns and plan investments">
-              <div className="font-semibold text-sm">SIP Calculator</div>
-              <div className="text-xs mt-1 opacity-75 group-hover:opacity-100">Plan Investments</div>
-            </a>
-            <a href="/health-insurance" 
-               className="bg-gradient-to-r from-blue-50 to-blue-100 border border-blue-200 px-4 py-3 rounded-xl hover:from-blue-600 hover:to-blue-700 hover:text-white transition-all duration-300 text-center group"
-               aria-label="Get comprehensive health insurance coverage">
-              <div className="font-semibold text-sm">Health Insurance</div>
-              <div className="text-xs mt-1 opacity-75 group-hover:opacity-100">Protect Family</div>
-            </a>
-            <a href="/loans/personal" 
-               className="bg-gradient-to-r from-orange-50 to-orange-100 border border-orange-200 px-4 py-3 rounded-xl hover:from-orange-600 hover:to-orange-700 hover:text-white transition-all duration-300 text-center group"
-               aria-label="Apply for instant personal loans">
-              <div className="font-semibold text-sm">Personal Loans</div>
-              <div className="text-xs mt-1 opacity-75 group-hover:opacity-100">Instant Approval</div>
-            </a>
-            <a href="/tools/emi-calculator" 
-               className="bg-gradient-to-r from-purple-50 to-purple-100 border border-purple-200 px-4 py-3 rounded-xl hover:from-purple-600 hover:to-purple-700 hover:text-white transition-all duration-300 text-center group"
-               aria-label="Calculate loan EMI amounts">
-              <div className="font-semibold text-sm">EMI Calculator</div>
-              <div className="text-xs mt-1 opacity-75 group-hover:opacity-100">Plan Loans</div>
-            </a>
-            <a href="/blog/top-7-personal-finance-tips-india" 
-               className="bg-gradient-to-r from-teal-50 to-teal-100 border border-teal-200 px-4 py-3 rounded-xl hover:from-teal-600 hover:to-teal-700 hover:text-white transition-all duration-300 text-center group"
-               aria-label="Read expert financial tips and advice">
-              <div className="font-semibold text-sm">Finance Tips</div>
-              <div className="text-xs mt-1 opacity-75 group-hover:opacity-100">Expert Advice</div>
-            </a>
-          </div>
+          </motion.div>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 

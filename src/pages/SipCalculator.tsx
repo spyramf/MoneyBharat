@@ -10,6 +10,16 @@ import { Form, FormControl, FormField, FormItem, FormLabel } from "@/components/
 import { useForm } from "react-hook-form";
 import { Progress } from "@/components/ui/progress";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+  Cell,
+} from "recharts";
 
 interface FormValues {
   monthlyInvestment: number;
@@ -29,7 +39,7 @@ const SipCalculator = () => {
   const [investedAmount, setInvestedAmount] = useState(0);
   const [estimatedReturns, setEstimatedReturns] = useState(0);
   const [totalValue, setTotalValue] = useState(0);
-  const [yearlyData, setYearlyData] = useState<any[]>([]);
+  const [chartData, setChartData] = useState<any[]>([]);
 
   const calculateSIP = (monthlyInvestment: number, expectedReturn: number, timePeriod: number) => {
     const monthlyRate = expectedReturn / 12 / 100;
@@ -50,11 +60,11 @@ const SipCalculator = () => {
     };
   };
 
-  const generateYearlyData = (monthlyInvestment: number, expectedReturn: number, timePeriod: number) => {
+  const generateChartData = (monthlyInvestment: number, expectedReturn: number, timePeriod: number) => {
     const data = [];
     const monthlyRate = expectedReturn / 12 / 100;
     
-    for (let year = 1; year <= Math.min(timePeriod, 10); year++) {
+    for (let year = 1; year <= timePeriod; year++) {
       const months = year * 12;
       const invested = monthlyInvestment * months;
       
@@ -65,10 +75,9 @@ const SipCalculator = () => {
       const returns = futureValue - invested;
       
       data.push({
-        year: year,
+        year: `Year ${year}`,
         invested: Math.round(invested),
-        returns: Math.round(returns),
-        total: Math.round(futureValue)
+        returns: Math.round(returns)
       });
     }
     
@@ -81,7 +90,7 @@ const SipCalculator = () => {
     setInvestedAmount(result.invested);
     setEstimatedReturns(result.returns);
     setTotalValue(result.total);
-    setYearlyData(generateYearlyData(monthlyInvestment, expectedReturn, timePeriod));
+    setChartData(generateChartData(monthlyInvestment, expectedReturn, timePeriod));
   }, [form.watch("monthlyInvestment"), form.watch("expectedReturn"), form.watch("timePeriod")]);
 
   const formatCurrency = (value: number) => {
@@ -277,23 +286,32 @@ const SipCalculator = () => {
                       </div>
                     </div>
 
-                    <div className="space-y-4">
-                      <h3 className="text-sm font-medium">Year-wise Growth</h3>
-                      <div className="space-y-3 max-h-64 overflow-y-auto">
-                        {yearlyData.map((data, index) => (
-                          <div key={index} className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
-                            <div className="text-sm">
-                              <span className="font-medium">Year {data.year}</span>
-                            </div>
-                            <div className="text-right">
-                              <div className="text-xs text-gray-600">Total: {formatCurrency(data.total)}</div>
-                              <div className="text-xs text-gray-500">
-                                Invested: {formatCurrency(data.invested)} | Returns: {formatCurrency(data.returns)}
-                              </div>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
+                    <div className="h-64">
+                      <ResponsiveContainer width="100%" height="100%">
+                        <BarChart
+                          data={chartData}
+                          margin={{ top: 10, right: 10, left: 0, bottom: 0 }}
+                          barSize={20}
+                          stackOffset="sign"
+                        >
+                          <CartesianGrid strokeDasharray="3 3" vertical={false} />
+                          <XAxis dataKey="year" fontSize={12} />
+                          <YAxis 
+                            tickFormatter={(value) => value >= 1000000 
+                              ? `${(value / 1000000).toFixed(1)}M` 
+                              : value >= 1000 
+                              ? `${(value / 1000).toFixed(0)}K` 
+                              : value}
+                            fontSize={12}
+                          />
+                          <Tooltip 
+                            formatter={(value: number) => [formatCurrency(value), ""]}
+                            labelFormatter={(label) => `${label}`}
+                          />
+                          <Bar dataKey="invested" name="Investment" stackId="a" fill="#9b87f5" />
+                          <Bar dataKey="returns" name="Returns" stackId="a" fill="#0FA0CE" />
+                        </BarChart>
+                      </ResponsiveContainer>
                     </div>
                   </CardContent>
                 </Card>

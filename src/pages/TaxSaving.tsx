@@ -11,6 +11,16 @@ import { useForm } from "react-hook-form";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Button } from "@/components/ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+  Legend
+} from "recharts";
 
 interface FormValues {
   income: number;
@@ -499,21 +509,38 @@ const TaxSaving = () => {
                     </div>
 
                     <div className="mb-6">
-                      <h3 className="text-sm font-medium mb-3">Tax Comparison</h3>
-                      <div className="space-y-4">
-                        {comparisonData.map((data, index) => (
-                          <div key={index} className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
-                            <div className="text-sm">
-                              <span className="font-medium">{data.name}</span>
-                            </div>
-                            <div className="text-right">
-                              <div className="text-sm font-semibold">{formatCurrency(data.tax)}</div>
-                              <div className="text-xs text-gray-500">
-                                Rate: {data.effectiveRate}%
-                              </div>
-                            </div>
-                          </div>
-                        ))}
+                      <h3 className="text-sm font-medium mb-3">Tax Amount Comparison</h3>
+                      <div className="h-64">
+                        <ResponsiveContainer width="100%" height="100%">
+                          <BarChart
+                            data={comparisonData}
+                            margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                          >
+                            <CartesianGrid strokeDasharray="3 3" />
+                            <XAxis dataKey="name" />
+                            <YAxis 
+                              yAxisId="left" 
+                              orientation="left" 
+                              stroke="#9b87f5"
+                              tickFormatter={(value) => value >= 100000 ? `${(value / 100000).toFixed(1)}L` : `${value}`}
+                            />
+                            <YAxis 
+                              yAxisId="right" 
+                              orientation="right" 
+                              stroke="#0FA0CE"
+                              tickFormatter={(value) => `${value}%`}
+                            />
+                            <Tooltip 
+                              formatter={(value, name) => {
+                                if (name === "tax") return [formatCurrency(value as number), "Tax Amount"];
+                                return [`${value}%`, "Effective Tax Rate"];
+                              }}
+                            />
+                            <Legend />
+                            <Bar yAxisId="left" dataKey="tax" name="Tax Amount" fill="#9b87f5" />
+                            <Bar yAxisId="right" dataKey="effectiveRate" name="Effective Tax Rate %" fill="#0FA0CE" />
+                          </BarChart>
+                        </ResponsiveContainer>
                       </div>
                     </div>
                   </CardContent>

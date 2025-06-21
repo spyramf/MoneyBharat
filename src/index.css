@@ -1,4 +1,6 @@
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -11,7 +13,7 @@
     --card-foreground: 222.2 84% 4.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
-    --primary: 158 61% 45%;
+    --primary: 158 61% 45%; /* #2EB883 green from logo */
     --primary-foreground: 210 40% 98%;
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 222.2 47.4% 11.2%;
@@ -23,16 +25,16 @@
     --destructive-foreground: 210 40% 98%;
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 158 61% 45%;
+    --ring: 158 61% 45%; /* #2EB883 green from logo */
     --radius: 0.75rem;
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 158 61% 45%;
+    --sidebar-primary: 158 61% 45%; /* #2EB883 green from logo */
     --sidebar-primary-foreground: 0 0% 98%;
     --sidebar-accent: 240 4.8% 95.9%;
     --sidebar-accent-foreground: 240 5.9% 10%;
     --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 158 61% 45%;
+    --sidebar-ring: 158 61% 45%; /* #2EB883 green from logo */
   }
 
   .dark {
@@ -42,7 +44,7 @@
     --card-foreground: 210 40% 98%;
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
-    --primary: 158 61% 45%;
+    --primary: 158 61% 45%; /* #2EB883 green from logo */
     --primary-foreground: 222.2 47.4% 11.2%;
     --secondary: 217.2 32.6% 17.5%;
     --secondary-foreground: 210 40% 98%;
@@ -57,7 +59,7 @@
     --ring: 212.7 26.8% 83.9%;
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 158 61% 45%;
+    --sidebar-primary: 158 61% 45%; /* #2EB883 green from logo */
     --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 240 3.7% 15.9%;
     --sidebar-accent-foreground: 240 4.8% 95.9%;
@@ -66,26 +68,9 @@
   }
 }
 
-/* CSS Reset and Base Styles */
 @layer base {
   * {
     @apply border-border;
-    box-sizing: border-box;
-  }
-
-  *::before,
-  *::after {
-    box-sizing: border-box;
-  }
-
-  html {
-    -webkit-text-size-adjust: 100%;
-    font-feature-settings: "clig" off, "liga" off;
-    font-family: system-ui, sans-serif;
-    line-height: 1.15;
-    -moz-tab-size: 4;
-    tab-size: 4;
-    -webkit-tap-highlight-color: transparent;
   }
 
   body {
@@ -94,70 +79,7 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeSpeed;
-    margin: 0;
-    min-height: 100vh;
-  }
-
-  h1, h2, h3, h4, h5, h6 {
-    font-size: inherit;
-    font-weight: inherit;
-    margin: 0;
-  }
-
-  p {
-    margin: 0;
-  }
-
-  ol, ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-
-  img, svg, video, canvas, audio, iframe, embed, object {
-    display: block;
-    vertical-align: middle;
-    max-width: 100%;
-    height: auto;
-  }
-
-  button, input, optgroup, select, textarea {
-    font-family: inherit;
-    font-size: 100%;
-    font-weight: inherit;
-    line-height: inherit;
-    color: inherit;
-    margin: 0;
-    padding: 0;
-  }
-
-  button, select {
-    text-transform: none;
-  }
-
-  button, [type='button'], [type='reset'], [type='submit'] {
-    -webkit-appearance: button;
-    background-color: transparent;
-    background-image: none;
-    border: 0;
-    cursor: pointer;
-  }
-
-  a {
-    color: inherit;
-    text-decoration: inherit;
-  }
-
-  table {
-    text-indent: 0;
-    border-color: inherit;
-    border-collapse: collapse;
-  }
-
-  hr {
-    height: 0;
-    color: inherit;
-    border-top-width: 1px;
+    font-display: swap;
   }
   
   .container {
@@ -167,128 +89,62 @@
   
   button {
     @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring;
+    contain: layout style;
+  }
+  
+  h1, h2, h3 {
+    contain: layout style;
   }
 }
 
 @layer components {
   .glass-card {
-    @apply bg-white/90 backdrop-blur-sm shadow-lg border border-white/20 rounded-xl;
+    @apply bg-white/70 backdrop-blur-sm shadow-lg border border-white/20 rounded-xl;
+    contain: layout style paint;
+    transform: translate3d(0, 0, 0);
   }
   
   .gradient-text {
-    @apply text-green-600;
-  }
-
-  /* Button component styles */
-  .btn-primary {
-    @apply bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2;
-  }
-
-  .btn-secondary {
-    @apply bg-white hover:bg-gray-50 text-gray-900 font-semibold py-2 px-4 rounded-lg border border-gray-300 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2;
-  }
-
-  /* Card component styles */
-  .card {
-    @apply bg-white rounded-xl shadow-lg border border-gray-200 p-6;
-  }
-
-  .card-hover {
-    @apply transition-transform duration-300 hover:scale-105 hover:shadow-xl;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-[#F97316] to-[#2EB883];
+    contain: layout style;
   }
   
-  /* Optimized fade animation */
   .animate-fade-in {
-    animation: fadeIn 0.3s ease-out forwards;
+    animation: fadeIn 0.6s ease-out forwards;
+    animation-fill-mode: both;
   }
   
   @keyframes fadeIn {
     from {
       opacity: 0;
-      transform: translateY(10px);
+      transform: translateY(20px);
     }
     to {
       opacity: 1;
       transform: translateY(0);
     }
   }
-
-  /* Hero section specific styles */
-  .hero-section {
-    @apply relative py-16 md:py-20 lg:py-24;
-  }
-
-  .hero-title {
-    @apply text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight;
-  }
-
-  .hero-text {
-    @apply text-lg sm:text-xl text-gray-600 max-w-3xl;
-  }
   
   @media (prefers-reduced-motion: reduce) {
     .animate-fade-in {
       animation: none;
     }
-    
-    * {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-    }
   }
 }
 
-/* Performance optimizations */
-img {
-  content-visibility: auto;
-  contain-intrinsic-size: 1px 400px;
+/* Performance optimization: Critical rendering path */
+.glass-card,
+.gradient-text {
+  contain: layout style paint;
 }
 
-/* Optimize critical rendering path */
+/* Critical CSS for hero section */
 section:first-of-type {
   contain: layout style;
 }
 
-/* Fix any specificity issues */
-.bg-green-600 {
-  background-color: rgb(34 197 94) !important;
-}
-
-.text-green-600 {
-  color: rgb(34 197 94) !important;
-}
-
-.border-green-600 {
-  border-color: rgb(34 197 94) !important;
-}
-
-/* Ensure animations work properly */
-@supports (animation-timeline: auto) {
-  .animate-fade-in {
-    animation-timeline: auto;
-  }
-}
-
-/* Mobile-first responsive design improvements */
-@media (max-width: 640px) {
-  .container {
-    @apply px-4;
-  }
-  
-  .hero-section {
-    @apply py-12;
-  }
-}
-
-@media (min-width: 641px) and (max-width: 1024px) {
-  .container {
-    @apply px-6;
-  }
-}
-
-@media (min-width: 1025px) {
-  .container {
-    @apply px-8;
-  }
+/* Optimize image loading */
+img {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 400px;
 }
