@@ -60,10 +60,9 @@ const HomeLoan = () => {
       
       {/* Hero Section */}
       <LoanHero
-        title="Realize Your Dream of Homeownership"
+        title="Home Loan"
         subtitle="Get the best home loan offers with competitive interest rates from 30+ banks and housing finance companies"
         primaryButtonText="Check Your Eligibility"
-        onPrimaryClick={handleCheckEligibility}
         gradientFrom="from-fintech-blue"
         gradientTo="to-fintech-purple"
         className="md:py-24"
