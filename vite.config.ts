@@ -1,4 +1,3 @@
-
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
@@ -58,8 +57,8 @@ export default defineConfig(({ mode }) => ({
     sourcemap: false,
     // Enable aggressive minification
     minify: 'esbuild',
-    // Remove CSS code splitting to reduce requests
-    cssCodeSplit: false,
+    // Keep CSS code splitting enabled for better performance
+    cssCodeSplit: true,
     // Enable compression
     reportCompressedSize: false, // Disable to speed up build
     // Target modern browsers for smaller bundles
@@ -85,12 +84,16 @@ export default defineConfig(({ mode }) => ({
       'framer-motion' // Large animation library
     ]
   },
-  // Enable CSS optimization
+  // Enhanced CSS optimization
   css: {
     devSourcemap: false,
-    // Inline small CSS files
     postcss: {
       plugins: []
+    },
+    preprocessorOptions: {
+      css: {
+        charset: false
+      }
     }
   },
   // Performance optimizations
