@@ -18,7 +18,7 @@ const HowItWorksSection = () => {
     {
       icon: <FileCheck className="h-8 w-8" />,
       title: "Easy Investment & Application",
-      description: "Invest in mutual funds with zero commission, apply for insurance with instant quotes, or get pre-approved loans with minimal documentation. Our streamlined process eliminates paperwork and reduces processing time."
+      description: "Invest in mutual funds with expert guidance, apply for insurance with instant quotes, or get pre-approved loans with minimal documentation. Our streamlined process eliminates paperwork and reduces processing time."
     },
     {
       icon: <TrendingUp className="h-8 w-8" />,
@@ -69,11 +69,11 @@ const HowItWorksSection = () => {
             </p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
               <div className="bg-green-50 p-4 rounded-lg">
-                <h4 className="font-semibold text-fintech-green mb-2">Zero Commission Investing</h4>
-                <p className="text-sm text-gray-600">Save more with direct mutual fund plans and zero hidden charges</p>
+                <h4 className="font-semibold text-fintech-green mb-2">Expert Advisory Services</h4>
+                <p className="text-sm text-gray-600">Get professional guidance on direct mutual fund plans and investment strategies</p>
               </div>
               <div className="bg-blue-50 p-4 rounded-lg">
-                <h4 className="font-semibold text-fintech-blue mb-2">Expert Financial Advice</h4>
+                <h4 ClassName="font-semibold text-fintech-blue mb-2">Expert Financial Advice</h4>
                 <p className="text-sm text-gray-600">Get personalized guidance from AMFI-certified advisors</p>
               </div>
               <div className="bg-purple-50 p-4 rounded-lg">
