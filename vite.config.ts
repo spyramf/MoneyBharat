@@ -3,7 +3,8 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import { componentTagger } from "lovable-tagger";
-import type { ViteDevServer, Connect } from "vite";
+import type { ViteDevServer, PreviewServer } from "vite";
+import type { IncomingMessage, ServerResponse } from "http";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
@@ -19,13 +20,13 @@ export default defineConfig(({ mode }) => ({
     {
       name: 'xml-sitemap',
       configureServer(server: ViteDevServer) {
-        server.middlewares.use('/sitemap.xml', (req: Connect.IncomingMessage, res: Connect.ServerResponse, next: Connect.NextFunction) => {
+        server.middlewares.use('/sitemap.xml', (req: IncomingMessage, res: ServerResponse, next: () => void) => {
           res.setHeader('Content-Type', 'application/xml');
           next();
         });
       },
-      configurePreviewServer(server: ViteDevServer) {
-        server.middlewares.use('/sitemap.xml', (req: Connect.IncomingMessage, res: Connect.ServerResponse, next: Connect.NextFunction) => {
+      configurePreviewServer(server: PreviewServer) {
+        server.middlewares.use('/sitemap.xml', (req: IncomingMessage, res: ServerResponse, next: () => void) => {
           res.setHeader('Content-Type', 'application/xml');
           next();
         });
