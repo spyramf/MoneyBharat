@@ -32,41 +32,53 @@ const Footer = () => {
           {/* Top Section */}
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 mb-12">
             
-            {/* Brand & Contact */}
-            <div className="lg:col-span-1 space-y-6">
+            {/* Brand & Contact - Enhanced with Schema.org microdata */}
+            <div 
+              className="lg:col-span-1 space-y-6"
+              itemScope 
+              itemType="https://schema.org/FinancialService"
+            >
               <Link to="/" className="flex items-center">
                 <div className="h-12 w-12 mr-3">
                   <img 
                     src="/lovable-uploads/92affb7c-7e35-42da-9aff-b0f55a689428.png" 
                     alt="Money Bharat Logo" 
-                    className="h-full w-full object-contain" 
+                    className="h-full w-full object-contain"
+                    itemProp="logo"
                   />
                 </div>
-                <span className="text-3xl font-bold">
+                <span className="text-3xl font-bold" itemProp="name">
                   <span className="gradient-text">Money</span>
                   <span className="text-fintech-green"> Bharat</span>
                 </span>
               </Link>
               
-              <p className="text-gray-300 max-w-md leading-relaxed">
+              <p 
+                className="text-gray-300 max-w-md leading-relaxed"
+                itemProp="description"
+              >
                 Transforming India's financial landscape with innovative tech-driven solutions. 
                 Your trusted partner for wealth creation and financial security.
               </p>
               
-              {/* Contact Info */}
-              <div className="space-y-3">
+              {/* Contact Info with Schema.org microdata */}
+              <div className="space-y-3" itemProp="contactPoint" itemScope itemType="https://schema.org/ContactPoint">
                 <h4 className="font-semibold text-white text-sm mb-3">Contact Info</h4>
                 <div className="flex items-center text-gray-300 text-sm">
                   <Phone className="h-4 w-4 mr-3 text-fintech-green" />
-                  <span>+91 98765 43210</span>
+                  <span itemProp="telephone">+91 98765 43210</span>
                 </div>
                 <div className="flex items-center text-gray-300 text-sm">
                   <Mail className="h-4 w-4 mr-3 text-fintech-green" />
-                  <span>contact@moneybharat.com</span>
+                  <span itemProp="email">contact@moneybharat.com</span>
                 </div>
                 <div className="flex items-start text-gray-300 text-sm">
                   <MapPin className="h-4 w-4 mr-3 text-fintech-green mt-0.5 flex-shrink-0" />
-                  <span>Mumbai, Maharashtra, India</span>
+                  <span itemProp="address" itemScope itemType="https://schema.org/PostalAddress">
+                    <span itemProp="addressLocality">Mumbai</span>, 
+                    <span itemProp="addressRegion"> Maharashtra</span>, 
+                    <span itemProp="addressCountry"> India</span>
+                  </span>
                 </div>
               </div>
             </div>
@@ -121,22 +133,6 @@ const Footer = () => {
                   </li>
                 ))}
               </ul>
-              
-              {/* <h3 className="font-semibold mb-6 text-white text-lg">Company</h3>
-              <ul className="space-y-3">
-                <li>
-                  <Link to="/about" className="text-gray-300 hover:text-fintech-green transition-colors duration-200 flex items-center group">
-                    <span className="w-2 h-2 bg-fintech-green rounded-full mr-3 opacity-0 group-hover:opacity-100 transition-opacity"></span>
-                    About Us
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/blog" className="text-gray-300 hover:text-fintech-green transition-colors duration-200 flex items-center group">
-                    <span className="w-2 h-2 bg-fintech-green rounded-full mr-3 opacity-0 group-hover:opacity-100 transition-opacity"></span>
-                    Blog
-                  </Link>
-                </li>
-              </ul> */}
             </div>
             
             {/* Legal & App Downloads */}

@@ -3,6 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import StructuredData from "@/components/seo/StructuredData";
 
 import MutualFundHero from "@/components/mutual-funds/MutualFundHero";
 import SIPFeatures from "@/components/mutual-funds/SIPFeatures";
@@ -32,8 +33,25 @@ import {
 } from "@/components/mutual-funds/data/mutualFundData";
 
 const MutualFunds = () => {
+  // Convert FAQ items to structured data format
+  const faqData = faqItems.map(faq => ({
+    question: faq.question,
+    answer: faq.answer
+  }));
+
   return (
     <div className="min-h-screen flex flex-col">
+      <StructuredData 
+        page="mutual-funds" 
+        faqData={faqData}
+        productData={{
+          name: "Mutual Fund Investment Plans",
+          description: "Expert-guided direct mutual fund plans and SIP investments with zero commission",
+          category: "Investment",
+          price: "500"
+        }}
+      />
+      
       <Navbar />
       <MutualFundHero />
       <SIPFeatures features={sipFeatures} />

@@ -37,6 +37,68 @@
         font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
       }
     </style>
+
+    <!-- Base Schema.org markup for the website -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Money Bharat Finance",
+      "alternateName": "Money Bharat",
+      "url": "https://moneybharat.co",
+      "description": "India's leading AI-powered financial platform for mutual funds, insurance, and loans",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Money Bharat Finance",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://moneybharat.co/lovable-uploads/92affb7c-7e35-42da-9aff-b0f55a689428.png"
+        }
+      },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://moneybharat.co/blog?search={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+
+    <!-- BreadcrumbList Schema for navigation -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://moneybharat.co"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Mutual Funds",
+          "item": "https://moneybharat.co/mutual-funds"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Insurance",
+          "item": "https://moneybharat.co/insurance"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "Loans",
+          "item": "https://moneybharat.co/loans"
+        }
+      ]
+    }
+    </script>
   </head>
 
   <body>

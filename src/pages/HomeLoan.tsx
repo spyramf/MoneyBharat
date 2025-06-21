@@ -5,6 +5,8 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import StructuredData from '@/components/seo/StructuredData';
+
 import LoanHero from '@/components/loans/LoanHero';
 import LoanCalculator from '@/components/loans/LoanCalculator';
 import LoanFeatures from '@/components/loans/LoanFeatures';
@@ -54,8 +56,25 @@ const HomeLoan = () => {
     // Logic to handle loan application
   };
 
+  // Convert FAQ items to structured data format
+  const faqData = homeLoanFAQs.map(faq => ({
+    question: faq.question,
+    answer: faq.answer
+  }));
+
   return (
     <div className="flex min-h-screen flex-col">
+      <StructuredData 
+        page="loans" 
+        faqData={faqData}
+        productData={{
+          name: "Home Loan",
+          description: "Competitive home loans with lowest interest rates and flexible EMI options",
+          category: "Loan",
+          price: "8.5"
+        }}
+      />
+      
       <Navbar />
       
       {/* Hero Section */}
