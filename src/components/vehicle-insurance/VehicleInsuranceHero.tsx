@@ -15,7 +15,7 @@ const VehicleInsuranceHero = () => {
             General Insurance
           </span>
           <h1 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">
-            Protection for Your Valuable Assets
+            Money Bharat Vehicle Insurance - Protection for Your Valuable Assets
           </h1>
           <p className="text-lg md:text-xl mb-8 text-gray-700">
             Get the best insurance for your car, bike, or commercial vehicle with affordable premiums and hassle-free claims. Protect against natural disasters and more.

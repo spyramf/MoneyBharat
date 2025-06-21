@@ -15,7 +15,7 @@ const TermInsuranceHero = () => {
             Life Insurance
           </span>
           <h1 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">
-            Secure Your Family's Future with Term Insurance
+            Money Bharat Term Insurance - Secure Your Family's Future
           </h1>
           <p className="text-lg md:text-xl mb-8 text-gray-700">
             Get high coverage at affordable premiums with term insurance plans from leading insurers. Compare and choose the best plan for your needs.

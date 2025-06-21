@@ -19,7 +19,7 @@ const OptimizedHeroSection = () => {
             <div>
               <h1 className="text-4xl md:text-5xl font-bold leading-tight lg:text-5xl">
                 Build Your <span className="text-fintech-green">Portfolio</span> <br />
-                <span className="text-black">With Confidence</span>
+                <span className="text-black">With Money Bharat</span>
               </h1>
               <p className="text-lg text-gray-700 max-w-lg mt-6 md:text-lg">
                 Experience a new era of financial freedom with our 
@@ -174,6 +174,11 @@ const OptimizedHeroSection = () => {
       
       {/* Stats section - simplified */}
       <div className="container mx-auto px-4 mt-16 md:mt-24">
+        <div className="text-center mb-8">
+          <h2 className="text-2xl md:text-3xl font-bold text-gray-900">
+            Why Choose Money Bharat for Your Financial Journey?
+          </h2>
+        </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="rounded-2xl bg-white p-6 text-center shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300">
             <p className="text-3xl md:text-4xl font-bold text-fintech-green mb-2">₹5000Cr+</p>

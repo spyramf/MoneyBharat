@@ -31,8 +31,8 @@ const FinancialToolsSection = () => {
     >
       <div className="container mx-auto px-4">
         <motion.div className="text-center max-w-3xl mx-auto mb-12" variants={itemVariants}>
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Financial Tools</h2>
-          <p className="text-gray-600">Calculate, plan and optimize your finances</p>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">Money Bharat Financial Tools</h2>
+          <p className="text-gray-600">Calculate, plan and optimize your finances with our expert tools</p>
         </motion.div>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
