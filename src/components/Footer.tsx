@@ -78,7 +78,7 @@ const Footer = () => {
                 <div className="flex items-start text-gray-300 text-sm">
                   <MapPin className="h-4 w-4 mr-3 text-fintech-green mt-0.5 flex-shrink-0" />
                   <span itemProp="address" itemScope itemType="https://schema.org/PostalAddress">
-                    <span itemProp="addressLocality">Mumbai</span>, 
+                    <span itemProp="addressLocality">Pune</span>, 
                     <span itemProp="addressRegion"> Maharashtra</span>, 
                     <span itemProp="addressCountry"> India</span>
                   </span>
