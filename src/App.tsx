@@ -9,6 +9,7 @@ import { BlogProvider } from "./context/BlogContext";
 import { BookingProvider } from "./context/BookingContext";
 import { AuthProvider } from "./context/AuthContext";
 import { InvestorAuthProvider } from "./context/InvestorAuthContext";
+import ScrollToTop from "./components/ScrollToTop";
 import ProtectedRoute from "./components/ProtectedRoute";
 import InvestorProtectedRoute from "./components/InvestorProtectedRoute";
 import Index from "./pages/Index";
@@ -58,6 +59,7 @@ const App = () => (
       <BlogProvider>
         <BookingProvider>
           <BrowserRouter>
+            <ScrollToTop />
             <AuthProvider>
               <InvestorAuthProvider>
                 <TooltipProvider>
