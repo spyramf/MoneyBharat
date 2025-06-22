@@ -1,11 +1,8 @@
-
 import { ArrowRight, ArrowRightCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-
 const OptimizedHeroSection = () => {
-  return (
-    <section className="relative overflow-hidden pt-16 md:pt-24 pb-16 md:pb-20 py-[50px]">
+  return <section className="relative overflow-hidden pt-16 md:pt-24 pb-16 md:pb-20 py-[50px]">
       {/* Simplified background decoration */}
       <div className="absolute top-0 left-0 w-full h-full bg-gradient-radial from-fintech-green/5 to-transparent -z-10"></div>
       <div className="absolute top-40 right-0 w-80 h-80 bg-fintech-green/5 rounded-full blur-2xl -z-10"></div>
@@ -159,11 +156,11 @@ const OptimizedHeroSection = () => {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="rounded-2xl bg-white p-6 text-center shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300">
-            <p className="text-3xl md:text-4xl font-bold text-fintech-green mb-2">₹5000Cr+</p>
+            <p className="text-3xl md:text-4xl font-bold text-fintech-green mb-2">₹500Cr+</p>
             <p className="text-gray-600">Assets Under Management</p>
           </div>
           <div className="rounded-2xl bg-white p-6 text-center shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300">
-            <p className="text-3xl md:text-4xl font-bold text-fintech-blue mb-2">500K+</p>
+            <p className="text-3xl md:text-4xl font-bold text-fintech-blue mb-2">50K+</p>
             <p className="text-gray-600">Happy Investors</p>
           </div>
           <div className="rounded-2xl bg-white p-6 text-center shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300">
@@ -172,8 +169,6 @@ const OptimizedHeroSection = () => {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default OptimizedHeroSection;
