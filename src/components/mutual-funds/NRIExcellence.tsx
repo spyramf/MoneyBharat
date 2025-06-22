@@ -162,7 +162,7 @@ const NRIExcellence = () => {
                 </Button>
               </a>
               <Button variant="outline" className="text-lg px-8 py-6 border-fintech-green text-fintech-green hover:bg-fintech-green hover:text-white">
-                Talk to NRI Expert
+                Talk to Expert
               </Button>
             </div>
           </div>
