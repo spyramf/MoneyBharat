@@ -1,31 +1,46 @@
-
 import { Facebook, Instagram, Linkedin, Twitter, Mail, Phone, MapPin, Download, ArrowUp } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-
 const Footer = () => {
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
   };
-
-  const quickTools = [
-    { name: "SIP Calculator", path: "/sip-calculator" },
-    { name: "EMI Calculator", path: "/emi-calculator" },
-    { name: "Tax Saving", path: "/tax-saving" },
-    { name: "Book Consultation", path: "/booking" },
-    { name: "About Us", path: "/about" },
-    { name: "Blog", path: "/blog" }
-  ];
-
-  const trustBadges = [
-    { text: "AMFI Registered", subtext: "ARN - 225204" },
-    { text: "256-bit SSL", subtext: "Secure Encryption" },
-    { text: "₹100Cr+ Insurance", subtext: "Protected Investments" },
-    { text: "ISO 27001", subtext: "Certified Security" }
-  ];
-
-  return (
-    <footer className="relative overflow-hidden bg-gradient-to-br from-gray-900 to-gray-800">
+  const quickTools = [{
+    name: "SIP Calculator",
+    path: "/sip-calculator"
+  }, {
+    name: "EMI Calculator",
+    path: "/emi-calculator"
+  }, {
+    name: "Tax Saving",
+    path: "/tax-saving"
+  }, {
+    name: "Book Consultation",
+    path: "/booking"
+  }, {
+    name: "About Us",
+    path: "/about"
+  }, {
+    name: "Blog",
+    path: "/blog"
+  }];
+  const trustBadges = [{
+    text: "AMFI Registered",
+    subtext: "ARN - 225204"
+  }, {
+    text: "256-bit SSL",
+    subtext: "Secure Encryption"
+  }, {
+    text: "₹100Cr+ Insurance",
+    subtext: "Protected Investments"
+  }, {
+    text: "ISO 27001",
+    subtext: "Certified Security"
+  }];
+  return <footer className="relative overflow-hidden bg-gradient-to-br from-gray-900 to-gray-800">
       {/* Main Footer Content */}
       <div className="relative z-10 py-16 md:py-20">
         <div className="container mx-auto px-4">
@@ -33,19 +48,10 @@ const Footer = () => {
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 mb-12">
             
             {/* Brand & Contact - Enhanced with Schema.org microdata */}
-            <div 
-              className="lg:col-span-1 space-y-6"
-              itemScope 
-              itemType="https://schema.org/FinancialService"
-            >
+            <div className="lg:col-span-1 space-y-6" itemScope itemType="https://schema.org/FinancialService">
               <Link to="/" className="flex items-center">
                 <div className="h-12 w-12 mr-3">
-                  <img 
-                    src="/lovable-uploads/92affb7c-7e35-42da-9aff-b0f55a689428.png" 
-                    alt="Money Bharat Logo" 
-                    className="h-full w-full object-contain"
-                    itemProp="logo"
-                  />
+                  <img src="/lovable-uploads/92affb7c-7e35-42da-9aff-b0f55a689428.png" alt="Money Bharat Logo" className="h-full w-full object-contain" itemProp="logo" />
                 </div>
                 <span className="text-3xl font-bold" itemProp="name">
                   <span className="gradient-text">Money</span>
@@ -53,10 +59,7 @@ const Footer = () => {
                 </span>
               </Link>
               
-              <p 
-                className="text-gray-300 max-w-md leading-relaxed"
-                itemProp="description"
-              >
+              <p className="text-gray-300 max-w-md leading-relaxed" itemProp="description">
                 Transforming India's financial landscape with innovative tech-driven solutions. 
                 Your trusted partner for wealth creation and financial security.
               </p>
@@ -66,11 +69,11 @@ const Footer = () => {
                 <h4 className="font-semibold text-white text-sm mb-3">Contact Info</h4>
                 <div className="flex items-center text-gray-300 text-sm">
                   <Phone className="h-4 w-4 mr-3 text-fintech-green" />
-                  <span itemProp="telephone">+91 98765 43210</span>
+                  <span itemProp="telephone">+91 9970735694</span>
                 </div>
                 <div className="flex items-center text-gray-300 text-sm">
                   <Mail className="h-4 w-4 mr-3 text-fintech-green" />
-                  <span itemProp="email">contact@moneybharat.com</span>
+                  <span itemProp="email">contact@moneybharat.co</span>
                 </div>
                 <div className="flex items-start text-gray-300 text-sm">
                   <MapPin className="h-4 w-4 mr-3 text-fintech-green mt-0.5 flex-shrink-0" />
@@ -124,14 +127,12 @@ const Footer = () => {
             <div>
               <h3 className="font-semibold mb-6 text-white text-lg">Quick Tools</h3>
               <ul className="space-y-3 mb-8">
-                {quickTools.map((tool) => (
-                  <li key={tool.name}>
+                {quickTools.map(tool => <li key={tool.name}>
                     <Link to={tool.path} className="text-gray-300 hover:text-fintech-green transition-colors duration-200 flex items-center group">
                       <span className="w-2 h-2 bg-fintech-green rounded-full mr-3 opacity-0 group-hover:opacity-100 transition-opacity"></span>
                       {tool.name}
                     </Link>
-                  </li>
-                ))}
+                  </li>)}
               </ul>
             </div>
             
@@ -174,12 +175,10 @@ const Footer = () => {
           <div className="border-t border-white/10 pt-8 mb-8">
             <h3 className="text-white font-semibold mb-6 text-center">Trusted & Secure</h3>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              {trustBadges.map((badge, index) => (
-                <div key={index} className="bg-white/5 backdrop-blur-sm border border-white/10 text-center p-4 rounded-lg">
+              {trustBadges.map((badge, index) => <div key={index} className="bg-white/5 backdrop-blur-sm border border-white/10 text-center p-4 rounded-lg">
                   <p className="text-fintech-green font-semibold text-sm">{badge.text}</p>
                   <p className="text-gray-400 text-xs mt-1">{badge.subtext}</p>
-                </div>
-              ))}
+                </div>)}
             </div>
           </div>
           
@@ -216,18 +215,12 @@ const Footer = () => {
             </div>
             
             {/* Back to Top Button */}
-            <button
-              onClick={scrollToTop}
-              className="w-10 h-10 rounded-full bg-fintech-green hover:bg-fintech-green/90 flex items-center justify-center transition-all duration-200 shadow-lg hover:shadow-fintech-green/25"
-              aria-label="Back to top"
-            >
+            <button onClick={scrollToTop} className="w-10 h-10 rounded-full bg-fintech-green hover:bg-fintech-green/90 flex items-center justify-center transition-all duration-200 shadow-lg hover:shadow-fintech-green/25" aria-label="Back to top">
               <ArrowUp size={18} className="text-white" />
             </button>
           </div>
         </div>
       </div>
-    </footer>
-  );
+    </footer>;
 };
-
 export default Footer;
