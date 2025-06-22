@@ -37,10 +37,10 @@ const NRIExcellence = () => {
   ];
 
   const statistics = [
-    { number: "50,000+", label: "NRI Clients Served", icon: <Users className="h-6 w-6" /> },
+    { number: "6000+", label: "NRI Clients Served", icon: <Users className="h-6 w-6" /> },
     { number: "65+", label: "Countries Covered", icon: <Globe className="h-6 w-6" /> },
-    { number: "98%", label: "Client Satisfaction", icon: <Star className="h-6 w-6" /> },
-    { number: "₹5000Cr+", label: "NRI AUM Managed", icon: <TrendingUp className="h-6 w-6" /> }
+    { number: "99%", label: "Client Satisfaction", icon: <Star className="h-6 w-6" /> },
+    { number: "₹50Cr+", label: "NRI AUM Managed", icon: <TrendingUp className="h-6 w-6" /> }
   ];
 
   const trustIndicators = [
@@ -67,7 +67,7 @@ const NRIExcellence = () => {
               </span>
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              Trusted by over 50,000+ NRIs worldwide, we provide seamless, compliant, and tax-efficient 
+              Trusted by over 6000+ NRIs worldwide, we provide seamless, compliant, and tax-efficient 
               mutual fund investment solutions tailored specifically for Non-Resident Indians.
             </p>
           </div>
