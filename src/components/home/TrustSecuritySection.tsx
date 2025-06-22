@@ -38,8 +38,8 @@ const TrustSecuritySection = () => {
   ];
 
   const stats = [
-    { number: "₹5000Cr+", label: "Assets Under Management" },
-    { number: "500K+", label: "Satisfied Customers" },
+    { number: "₹500Cr+", label: "Assets Under Management" },
+    { number: "50K+", label: "Satisfied Customers" },
     { number: "99.8%", label: "Customer Satisfaction" },
     { number: "24/7", label: "Digital Platform Access" }
   ];
