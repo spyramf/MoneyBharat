@@ -14,7 +14,7 @@ import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Card, CardContent } from '@/components/ui/card';
-import { useBooking } from '@/context/BookingContext';
+import { supabase } from '@/integrations/supabase/client';
 
 const formSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
@@ -43,7 +43,6 @@ const timeSlots = [
 const Booking = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { addBooking } = useBooking();
   const formRef = useRef<HTMLFormElement>(null);
   
   const form = useForm<z.infer<typeof formSchema>>({
@@ -64,23 +63,33 @@ const Booking = () => {
     console.log("Form values:", values);
     
     try {
-      // Add the booking to Supabase via our context
-      await addBooking({
-        name: values.name,
-        email: values.email,
-        phone: values.phone,
-        service: values.service,
-        date: values.preferredDate,
-        time: values.preferredTime,
-        message: values.message,
-      });
+      // Direct Supabase insertion without authentication dependencies
+      const { error: supabaseError } = await supabase
+        .from('bookings')
+        .insert({
+          name: values.name,
+          email: values.email,
+          phone: values.phone,
+          service: values.service,
+          date: values.preferredDate,
+          time: values.preferredTime,
+          message: values.message || '',
+          status: 'pending'
+        });
+
+      if (supabaseError) {
+        console.error('Supabase error:', supabaseError);
+        // Continue with FormSubmit even if Supabase fails
+        toast.error("Booking saved with limited functionality. Email notification will still be sent.");
+      } else {
+        console.log('Booking saved to Supabase successfully');
+        toast.success("Booking submitted successfully!");
+      }
       
-      // If we have a form reference, submit the actual form to FormSubmit (for email notifications)
+      // Submit to FormSubmit for email notifications (as backup and for email functionality)
       if (formRef.current) {
-        // Find the service label from the value for better display in email
         const serviceLabel = services.find(s => s.value === values.service)?.label || values.service;
         
-        // Set hidden field values before submission
         const serviceInput = formRef.current.querySelector('input[name="_subject"]') as HTMLInputElement;
         if (serviceInput) {
           serviceInput.value = `Booking Request: ${serviceLabel}`;
@@ -90,7 +99,6 @@ const Booking = () => {
         setIsSubmitted(true);
         form.reset();
       } else {
-        // Fallback in case formRef is not available
         setIsSubmitted(true);
         form.reset();
       }
@@ -215,13 +223,11 @@ const Booking = () => {
                               <Select 
                                 onValueChange={(value) => {
                                   field.onChange(value);
-                                  // Find service label for FormSubmit
                                   const serviceLabel = services.find(s => s.value === value)?.label || value;
                                   const serviceInput = formRef.current?.querySelector('input[name="Service"]') as HTMLInputElement;
                                   if (serviceInput) {
                                     serviceInput.value = serviceLabel;
                                   } else {
-                                    // Create hidden input if it doesn't exist
                                     const input = document.createElement('input');
                                     input.type = 'hidden';
                                     input.name = 'Service';
@@ -244,7 +250,6 @@ const Booking = () => {
                                   ))}
                                 </SelectContent>
                               </Select>
-                              {/* Hidden input for FormSubmit */}
                               <input type="hidden" name="Service" value="" />
                               <FormMessage />
                             </FormItem>
@@ -280,12 +285,10 @@ const Booking = () => {
                               <Select 
                                 onValueChange={(value) => {
                                   field.onChange(value);
-                                  // Update hidden field for FormSubmit
                                   const timeInput = formRef.current?.querySelector('input[name="Preferred Time"]') as HTMLInputElement;
                                   if (timeInput) {
                                     timeInput.value = value;
                                   } else {
-                                    // Create hidden input if it doesn't exist
                                     const input = document.createElement('input');
                                     input.type = 'hidden';
                                     input.name = 'Preferred Time';
@@ -308,7 +311,6 @@ const Booking = () => {
                                   ))}
                                 </SelectContent>
                               </Select>
-                              {/* Hidden input for FormSubmit */}
                               <input type="hidden" name="Preferred Time" value="" />
                               <FormMessage />
                             </FormItem>
