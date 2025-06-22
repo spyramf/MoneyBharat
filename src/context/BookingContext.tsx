@@ -1,4 +1,3 @@
-
 import React, { createContext, useContext, ReactNode } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
@@ -43,7 +42,6 @@ interface BookingProviderProps {
 // Function to fetch bookings from Supabase
 const fetchBookings = async (): Promise<Booking[]> => {
   try {
-    console.log('Fetching bookings...');
     const { data, error } = await supabase
       .from('bookings')
       .select('*')
@@ -53,8 +51,6 @@ const fetchBookings = async (): Promise<Booking[]> => {
       console.error('Error fetching bookings:', error);
       throw new Error('Failed to fetch bookings');
     }
-
-    console.log('Bookings fetched successfully:', data);
 
     // Map from Supabase format to our app's format
     return (data || []).map(booking => ({
@@ -89,13 +85,6 @@ export const BookingProvider = ({ children }: BookingProviderProps) => {
   const addBookingMutation = useMutation({
     mutationFn: async (booking: Omit<Booking, 'id' | 'status' | 'createdAt'>) => {
       try {
-        console.log('Attempting to insert booking:', booking);
-        
-        // Check current session/user
-        const { data: { user }, error: authError } = await supabase.auth.getUser();
-        console.log('Current user:', user);
-        console.log('Auth error:', authError);
-        
         const { data, error } = await supabase
           .from('bookings')
           .insert({
@@ -111,14 +100,11 @@ export const BookingProvider = ({ children }: BookingProviderProps) => {
           .select()
           .single();
 
-        console.log('Insert result:', { data, error });
-
         if (error) {
           console.error('Supabase insert error:', error);
           throw new Error(error.message);
         }
         
-        console.log('Successfully inserted booking:', data);
         return data;
       } catch (error) {
         console.error('Error adding booking:', error);
@@ -133,7 +119,6 @@ export const BookingProvider = ({ children }: BookingProviderProps) => {
       });
     },
     onError: (error) => {
-      console.error('Booking mutation error:', error);
       toast({
         title: "Error submitting booking",
         description: error instanceof Error ? error.message : "An unknown error occurred",
