@@ -1,19 +1,9 @@
 
+import { getCanonicalUrl as getCanonicalUrlFromCanonicalizer } from './urlCanonicalizer';
+
 export const getCanonicalUrl = (path: string = ''): string => {
-  const baseUrl = 'https://moneybharat.co';
-  
-  // Normalize the path
-  let normalizedPath = path.startsWith('/') ? path : `/${path}`;
-  
-  // Remove trailing slash except for root
-  if (normalizedPath !== '/' && normalizedPath.endsWith('/')) {
-    normalizedPath = normalizedPath.slice(0, -1);
-  }
-  
-  // Ensure lowercase
-  normalizedPath = normalizedPath.toLowerCase();
-  
-  return `${baseUrl}${normalizedPath}`;
+  // Use the enhanced canonicalizer for consistent URL generation
+  return getCanonicalUrlFromCanonicalizer(path);
 };
 
 export const getPageTitle = (pageName: string, includeCompany: boolean = true): string => {
@@ -41,4 +31,26 @@ export const getPageDescription = (page: string): string => {
   };
   
   return descriptions[page] || `${page.charAt(0).toUpperCase() + page.slice(1)} - Money Bharat Finance`;
+};
+
+/**
+ * Validate URL canonicalization for SEO
+ */
+export const validateCanonicalUrl = (currentUrl: string, expectedPath: string): boolean => {
+  const canonicalUrl = getCanonicalUrl(expectedPath);
+  return currentUrl === canonicalUrl;
+};
+
+/**
+ * Get SEO-friendly URL structure
+ */
+export const getSEOUrl = (path: string, params?: Record<string, string>): string => {
+  let url = getCanonicalUrl(path);
+  
+  if (params && Object.keys(params).length > 0) {
+    const searchParams = new URLSearchParams(params);
+    url += `?${searchParams.toString()}`;
+  }
+  
+  return url;
 };

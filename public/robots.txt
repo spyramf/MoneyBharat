@@ -1,6 +1,7 @@
 
 # Money Bharat Finance - Robots.txt
 # Website: https://moneybharat.co
+# Preferred Domain: moneybharat.co (without www)
 
 User-agent: Googlebot
 Allow: /
@@ -40,13 +41,15 @@ Disallow: /investor/dashboard/
 Disallow: /api/
 Disallow: /private/
 
-# Disallow duplicate content
+# Disallow duplicate content and tracking parameters
 Disallow: /*?utm_*
 Disallow: /*?ref=*
 Disallow: /*?source=*
 Disallow: /*?campaign=*
+Disallow: /*?fbclid=*
+Disallow: /*?gclid=*
 
-# Allow important files
+# Allow important files and assets
 Allow: /robots.txt
 Allow: /sitemap.xml
 Allow: /favicon.ico
@@ -59,8 +62,12 @@ Allow: /*.gif
 Allow: /*.svg
 Allow: /*.webp
 
-# Sitemaps
+# Sitemaps - Use canonical URLs only
 Sitemap: https://moneybharat.co/sitemap.xml
 
-# Host directive
+# Host directive - Specify preferred domain
 Host: https://moneybharat.co
+
+# Additional crawling instructions
+# All URLs should use the canonical form: https://moneybharat.co
+# www.moneybharat.co should redirect to moneybharat.co

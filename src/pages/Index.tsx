@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import StructuredData from "@/components/seo/StructuredData";
 import SEOHead from "@/components/seo/SEOHead";
 import BreadcrumbSEO from "@/components/seo/BreadcrumbSEO";
+import URLRedirectHandler from "@/components/seo/URLRedirectHandler";
 
 // Import critical above-the-fold sections directly
 import ServicesSection from "@/components/home/ServicesSection";
@@ -77,6 +78,9 @@ const Index = () => {
 
   return (
     <div className="min-h-screen">
+      {/* Handle URL canonicalization */}
+      <URLRedirectHandler enableRedirect={true} />
+      
       <SEOHead 
         title="Money Bharat Finance - Mutual Funds, Insurance & Loans"
         description="Grow your wealth with Money Bharat Finance - India's AI-powered platform for mutual funds, SIP investments, health & life insurance, and instant personal loans. Expert advisory with ₹5000Cr+ AUM."
