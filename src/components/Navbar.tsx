@@ -51,9 +51,11 @@ const Navbar = () => {
             <Link to="/about" className="font-medium text-gray-700 hover:text-fintech-green transition-colors">
               About Us
             </Link>
-            <Button className="bg-gradient-to-r from-fintech-green to-fintech-green \\\\nhover:opacity-90 text-white px-8 py-6">
-              Get Started
-            </Button>
+<a href="https://moneybharat.net/Home/Login" target="_blank" rel="noopener noreferrer">
+  <Button className="bg-gradient-to-r from-fintech-green to-fintech-green hover:opacity-90 text-white px-8 py-6">
+    Get Started
+  </Button>
+</a>
           </div>
 
           {/* Mobile Menu Toggle */}
@@ -80,9 +82,11 @@ const Navbar = () => {
               <Link to="/about" className="font-medium text-gray-700 hover:text-fintech-green transition-colors" onClick={() => setIsOpen(false)}>
                 About Us
               </Link>
-              <Button className="bg-fintech-green hover:bg-fintech-green/90 text-white w-full rounded-full">
-                Get Started
-              </Button>
+<a href="https://moneybharat.net/Home/Login" target="_blank" rel="noopener noreferrer">
+  <Button className="bg-fintech-green hover:bg-fintech-green/90 text-white w-full rounded-full">
+    Get Started
+  </Button>
+</a>
             </div>
           </div>}
       </div>
