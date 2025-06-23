@@ -4,6 +4,8 @@ import Navbar from "@/components/Navbar";
 import OptimizedHeroSection from "@/components/OptimizedHeroSection";
 import Footer from "@/components/Footer";
 import StructuredData from "@/components/seo/StructuredData";
+import SEOHead from "@/components/seo/SEOHead";
+import BreadcrumbSEO from "@/components/seo/BreadcrumbSEO";
 
 // Import critical above-the-fold sections directly
 import ServicesSection from "@/components/home/ServicesSection";
@@ -75,6 +77,12 @@ const Index = () => {
 
   return (
     <div className="min-h-screen">
+      <SEOHead 
+        title="Money Bharat Finance - Mutual Funds, Insurance & Loans"
+        description="Grow your wealth with Money Bharat Finance - India's AI-powered platform for mutual funds, SIP investments, health & life insurance, and instant personal loans. Expert advisory with ₹5000Cr+ AUM."
+        keywords="mutual funds India, SIP investment, health insurance, personal loans, financial planning, investment advisory, Money Bharat, wealth management"
+      />
+      
       <StructuredData 
         page="home" 
         faqData={homeFaqData}
@@ -82,6 +90,7 @@ const Index = () => {
       />
       
       <Navbar />
+      <BreadcrumbSEO />
       
       {/* Critical above-the-fold content */}
       <OptimizedHeroSection />

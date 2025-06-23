@@ -1,9 +1,22 @@
 
+# Money Bharat Finance - Robots.txt
+# Website: https://moneybharat.co
+
 User-agent: Googlebot
 Allow: /
+Crawl-delay: 1
 
 User-agent: Bingbot
 Allow: /
+Crawl-delay: 1
+
+User-agent: Slurp
+Allow: /
+Crawl-delay: 2
+
+User-agent: DuckDuckBot
+Allow: /
+Crawl-delay: 1
 
 User-agent: Twitterbot
 Allow: /
@@ -11,8 +24,43 @@ Allow: /
 User-agent: facebookexternalhit
 Allow: /
 
-User-agent: *
+User-agent: LinkedInBot
 Allow: /
 
+User-agent: WhatsApp
+Allow: /
+
+User-agent: *
+Allow: /
+Crawl-delay: 2
+
+# Disallow admin and private areas
+Disallow: /admin/
+Disallow: /investor/dashboard/
+Disallow: /api/
+Disallow: /private/
+
+# Disallow duplicate content
+Disallow: /*?utm_*
+Disallow: /*?ref=*
+Disallow: /*?source=*
+Disallow: /*?campaign=*
+
+# Allow important files
+Allow: /robots.txt
+Allow: /sitemap.xml
+Allow: /favicon.ico
+Allow: /*.css
+Allow: /*.js
+Allow: /*.png
+Allow: /*.jpg
+Allow: /*.jpeg
+Allow: /*.gif
+Allow: /*.svg
+Allow: /*.webp
+
+# Sitemaps
 Sitemap: https://moneybharat.co/sitemap.xml
 
+# Host directive
+Host: https://moneybharat.co

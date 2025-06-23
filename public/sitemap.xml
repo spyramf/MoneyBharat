@@ -1,103 +1,174 @@
 
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <!-- Main Pages -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" 
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
+  
+  <!-- Homepage -->
   <url>
     <loc>https://moneybharat.co/</loc>
-    <lastmod>2025-06-15</lastmod>
+    <lastmod>2025-06-23</lastmod>
+    <changefreq>daily</changefreq>
     <priority>1.00</priority>
+    <image:image>
+      <image:loc>https://moneybharat.co/lovable-uploads/92affb7c-7e35-42da-9aff-b0f55a689428.png</image:loc>
+      <image:title>Money Bharat Finance Logo</image:title>
+      <image:caption>Money Bharat Finance - Mutual Funds, Insurance and Loans</image:caption>
+    </image:image>
   </url>
-  <url>
-    <loc>https://moneybharat.co/about</loc>
-    <lastmod>2025-06-15</lastmod>
-    <priority>0.80</priority>
-  </url>
-  <url>
-    <loc>https://moneybharat.co/blog</loc>
-    <lastmod>2025-06-15</lastmod>
-    <priority>0.90</priority>
-  </url>
-  <url>
-    <loc>https://moneybharat.co/booking</loc>
-    <lastmod>2025-06-15</lastmod>
-    <priority>0.80</priority>
-  </url>
-  <!-- Products -->
+
+  <!-- Main Service Pages -->
   <url>
     <loc>https://moneybharat.co/mutual-funds</loc>
-    <lastmod>2025-06-15</lastmod>
-    <priority>0.80</priority>
+    <lastmod>2025-06-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
   </url>
   <url>
     <loc>https://moneybharat.co/insurance</loc>
-    <lastmod>2025-06-15</lastmod>
-    <priority>0.80</priority>
-  </url>
-  <url>
-    <loc>https://moneybharat.co/health-insurance</loc>
-    <lastmod>2025-06-15</lastmod>
-    <priority>0.80</priority>
-  </url>
-  <url>
-    <loc>https://moneybharat.co/loans</loc>
-    <lastmod>2025-06-15</lastmod>
-    <priority>0.80</priority>
-  </url>
-  <url>
-    <loc>https://moneybharat.co/loans/personal</loc>
-    <lastmod>2025-06-15</lastmod>
-    <priority>0.70</priority>
-  </url>
-  <url>
-    <loc>https://moneybharat.co/loans/business</loc>
-    <lastmod>2025-06-15</lastmod>
-    <priority>0.70</priority>
-  </url>
-  <!-- Tools -->
-  <url>
-    <loc>https://moneybharat.co/tools/sip-calculator</loc>
-    <lastmod>2025-06-15</lastmod>
-    <priority>0.70</priority>
-  </url>
-  <url>
-    <loc>https://moneybharat.co/tools/emi-calculator</loc>
-    <lastmod>2025-06-15</lastmod>
-    <priority>0.70</priority>
-  </url>
-  <url>
-    <loc>https://moneybharat.co/tools/tax-saving</loc>
-    <lastmod>2025-06-15</lastmod>
-    <priority>0.70</priority>
-  </url>
-  <!-- Legal -->
-  <url>
-    <loc>https://moneybharat.co/privacy-policy</loc>
-    <lastmod>2025-06-15</lastmod>
-    <priority>0.50</priority>
-  </url>
-  <url>
-    <loc>https://moneybharat.co/terms-of-service</loc>
-    <lastmod>2025-06-15</lastmod>
-    <priority>0.50</priority>
-  </url>
-  <url>
-    <loc>https://moneybharat.co/sitemap</loc>
-    <lastmod>2025-06-15</lastmod>
-    <priority>0.50</priority>
-  </url>
-  
-  <!-- Blog Posts - NOTE: This section should be updated automatically or manually when new posts are published -->
-  <url>
-    <loc>https://moneybharat.co/blog/top-7-personal-finance-tips-india</loc>
-    <lastmod>2025-06-15</lastmod>
-    <changefreq>monthly</changefreq>
+    <lastmod>2025-06-23</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.90</priority>
   </url>
   <url>
-    <loc>https://moneybharat.co/blog/mutual-funds-101</loc>
-    <lastmod>2025-06-15</lastmod>
+    <loc>https://moneybharat.co/loans</loc>
+    <lastmod>2025-06-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+
+  <!-- Insurance Pages -->
+  <url>
+    <loc>https://moneybharat.co/health-insurance</loc>
+    <lastmod>2025-06-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://moneybharat.co/term-insurance</loc>
+    <lastmod>2025-06-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://moneybharat.co/vehicle-insurance</loc>
+    <lastmod>2025-06-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- Loan Pages -->
+  <url>
+    <loc>https://moneybharat.co/loans/personal</loc>
+    <lastmod>2025-06-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://moneybharat.co/loans/business</loc>
+    <lastmod>2025-06-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://moneybharat.co/loans/car</loc>
+    <lastmod>2025-06-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://moneybharat.co/loans/home</loc>
+    <lastmod>2025-06-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://moneybharat.co/loans/education</loc>
+    <lastmod>2025-06-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://moneybharat.co/loans/mutual-funds</loc>
+    <lastmod>2025-06-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.70</priority>
+  </url>
+
+  <!-- Tools Pages -->
+  <url>
+    <loc>https://moneybharat.co/tools/sip-calculator</loc>
+    <lastmod>2025-06-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://moneybharat.co/tools/emi-calculator</loc>
+    <lastmod>2025-06-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://moneybharat.co/tools/tax-saving</loc>
+    <lastmod>2025-06-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+  </url>
+
+  <!-- Company Pages -->
+  <url>
+    <loc>https://moneybharat.co/about</loc>
+    <lastmod>2025-06-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
   </url>
-  
+  <url>
+    <loc>https://moneybharat.co/booking</loc>
+    <lastmod>2025-06-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- Blog Section -->
+  <url>
+    <loc>https://moneybharat.co/blog</loc>
+    <lastmod>2025-06-23</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.90</priority>
+  </url>
+
+  <!-- Blog Posts -->
+  <url>
+    <loc>https://moneybharat.co/blog/top-7-personal-finance-tips-india</loc>
+    <lastmod>2025-06-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://moneybharat.co/blog/mutual-funds-101</loc>
+    <lastmod>2025-06-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+  </url>
+
+  <!-- Legal Pages -->
+  <url>
+    <loc>https://moneybharat.co/privacy-policy</loc>
+    <lastmod>2025-06-23</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.40</priority>
+  </url>
+  <url>
+    <loc>https://moneybharat.co/terms-of-service</loc>
+    <lastmod>2025-06-23</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.40</priority>
+  </url>
+  <url>
+    <loc>https://moneybharat.co/sitemap</loc>
+    <lastmod>2025-06-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.30</priority>
+  </url>
+
 </urlset>
