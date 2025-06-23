@@ -24,11 +24,11 @@ const OptimizedHeroSection = () => {
                 most trusted fintech platform.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 pt-6">
-                <Link to="/investor/login">
-                  <Button className="bg-gradient-to-r from-fintech-green to-fintech-green hover:opacity-90 text-white px-8 py-6">
-                    Start Investing
-                  </Button>
-                </Link>
+<a href="https://moneybharat.net/Home/Login" target="_blank" rel="noopener noreferrer">
+  <Button className="bg-gradient-to-r from-fintech-green to-fintech-green hover:opacity-90 text-white px-8 py-6">
+    Start Investing
+  </Button>
+</a>
                 <Link to="/booking">
                   <Button variant="outline" className="group border-fintech-green text-fintech-green hover:text-fintech-green transition-colors px-8 py-6 rounded-xl">
                     Book Consultation
