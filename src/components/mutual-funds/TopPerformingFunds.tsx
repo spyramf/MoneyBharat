@@ -79,10 +79,10 @@ const TopPerformingFunds = ({
             </div>
           </CardContent>
           <div className="p-5 flex justify-center border-t border-gray-200 bg-gray-50">
-            <Button className="transition-all duration-300 font-medium flex items-center gap-2 px-6 py-2.5 rounded-lg shadow-sm hover:shadow-md bg-fintech-green">
+            {/* <Button className="transition-all duration-300 font-medium flex items-center gap-2 px-6 py-2.5 rounded-lg shadow-sm hover:shadow-md bg-fintech-green">
               View All Mutual Funds
               <ArrowRight className="w-4 h-4" />
-            </Button>
+            </Button> */}
           </div>
         </Card>
       </div>
