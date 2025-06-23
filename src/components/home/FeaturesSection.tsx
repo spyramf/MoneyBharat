@@ -135,10 +135,17 @@ const FeaturesSection = () => {
             </div>
             
             <div className="mt-10">
-              <Button className="bg-gradient-to-r from-fintech-green to-fintech-green hover:opacity-90 text-white px-8 py-6">
-                Start Your Financial Journey
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
+<a
+  href="https://moneybharat.net/NewOnBoarding/SignUp"
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  <Button className="bg-gradient-to-r from-fintech-green to-fintech-green hover:opacity-90 text-white px-8 py-6">
+    Start Your Financial Journey
+    <ArrowRight className="ml-2 h-4 w-4" />
+  </Button>
+</a>
+
             </div>
           </motion.div>
         </div>
