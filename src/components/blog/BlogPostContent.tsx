@@ -2,6 +2,7 @@
 import { BlogPost as BlogPostType } from '@/data/blogData';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
+import ShareButtonGroup from '@/components/ui/ShareButtonGroup';
 
 interface BlogPostContentProps {
   post: BlogPostType;
@@ -27,6 +28,18 @@ const BlogPostContent = ({ post }: BlogPostContentProps) => {
           className="prose prose-lg max-w-none" 
           dangerouslySetInnerHTML={{ __html: post.content || '' }}
         />
+
+        {/* Share After Content */}
+        <div className="mt-8 mb-8">
+          <ShareButtonGroup
+            title={post.title}
+            text={`${post.excerpt} - Read more on Money Bharat Finance`}
+            url={`https://moneybharat.co/blog/${post.slug}`}
+            layout="card"
+            platforms={['whatsapp', 'linkedin', 'twitter', 'email', 'copy']}
+            showLabels={true}
+          />
+        </div>
 
         {/* Tags */}
         {post.tags && post.tags.length > 0 && (

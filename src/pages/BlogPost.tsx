@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
@@ -50,20 +49,6 @@ const BlogPost = () => {
       </>
     );
   }
-
-  const handleShare = () => {
-    if (navigator.share) {
-      navigator.share({
-        title: post.title,
-        text: post.excerpt,
-        url: window.location.href,
-      })
-      .catch((error) => console.log('Error sharing', error));
-    } else {
-      navigator.clipboard.writeText(window.location.href);
-      alert('Link copied to clipboard!');
-    }
-  };
 
   return (
     <>
@@ -151,7 +136,7 @@ const BlogPost = () => {
 
       <main className="pt-24 pb-16">
         <article className="container mx-auto px-4">
-          <BlogPostHeader post={post} handleShare={handleShare} />
+          <BlogPostHeader post={post} />
           <BlogPostContent post={post} />
         </article>
 

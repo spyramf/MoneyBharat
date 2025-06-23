@@ -1,19 +1,18 @@
 
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Calendar, Clock, Share2 } from 'lucide-react';
+import { ArrowLeft, Calendar, Clock } from 'lucide-react';
 import { BlogPost as BlogPostType } from '@/data/blogData';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbSeparator } from '@/components/ui/breadcrumb';
+import ShareButtonGroup from '@/components/ui/ShareButtonGroup';
 import { format } from 'date-fns';
 
 interface BlogPostHeaderProps {
   post: BlogPostType;
-  handleShare: () => void;
 }
 
-const BlogPostHeader = ({ post, handleShare }: BlogPostHeaderProps) => {
+const BlogPostHeader = ({ post }: BlogPostHeaderProps) => {
   return (
     <>
       {/* Breadcrumbs */}
@@ -75,15 +74,18 @@ const BlogPostHeader = ({ post, handleShare }: BlogPostHeaderProps) => {
           <Clock className="h-4 w-4 mr-1" />
           {post.readTime}
         </div>
-        <Button 
-          variant="outline" 
-          size="sm" 
-          className="ml-auto" 
-          onClick={handleShare}
-        >
-          <Share2 className="h-4 w-4 mr-2" />
-          Share
-        </Button>
+      </div>
+
+      {/* Share Buttons */}
+      <div className="mb-8 p-4 bg-gray-50 rounded-lg">
+        <ShareButtonGroup
+          title={post.title}
+          text={`${post.excerpt} - Read more on Money Bharat Finance`}
+          url={`https://moneybharat.co/blog/${post.slug}`}
+          platforms={['whatsapp', 'linkedin', 'twitter', 'email', 'copy']}
+          showLabels={true}
+          className="justify-center"
+        />
       </div>
     </>
   );
