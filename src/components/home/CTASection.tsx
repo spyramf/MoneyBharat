@@ -37,10 +37,13 @@ const CTASection = () => {
           <p className="mb-8 opacity-80 text-lg">
             Join thousands of satisfied clients who have taken control of their finances with Money Bharat's innovative solutions.
           </p>
-          <Button className="bg-white hover:bg-gray-100 px-8 py-6 text-lg text-fintech-green">
-            Get Started Now
-            <ArrowRight className="ml-2 h-5 w-5" />
-          </Button>
+<Button
+  onClick={() => window.location.href = "https://moneybharat.net/NewOnBoarding/SignUp"}
+  className="bg-white hover:bg-gray-100 px-8 py-6 text-lg text-fintech-green"
+>
+  Get Started Now
+  <ArrowRight className="ml-2 h-5 w-5" />
+</Button>
         </motion.div>
       </div>
     </motion.section>
