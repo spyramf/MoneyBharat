@@ -28,12 +28,14 @@ const MutualFundHero = () => {
           <p className="text-xl text-gray-700 mb-8 max-w-3xl mx-auto leading-relaxed">Start your wealth creation journey with India's most trusted mutual fund platform. Get expert advisory, zero paperwork, and Best plan benefits with Money Bharat Finance.</p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-            <Link to="/investor/login">
-              <Button className="bg-gradient-to-r from-fintech-green to-fintech-blue hover:opacity-90 text-white px-8 py-4 text-lg">
-                Start SIP Investment
-                <TrendingUp className="ml-2 h-5 w-5" />
-              </Button>
-            </Link>
+<Button
+  onClick={() => window.open("https://moneybharat.net/Home/Login", "_blank")}
+  className="bg-gradient-to-r from-fintech-green to-fintech-blue hover:opacity-90 text-white px-8 py-4 text-lg"
+>
+  Start SIP Investment
+  <TrendingUp className="ml-2 h-5 w-5" />
+</Button>
+
             <Link to="/booking">
               <Button variant="outline" className="border-fintech-green text-fintech-green hover:bg-fintech-green hover:text-white px-8 py-4 text-lg">
                 Get Expert Advice
