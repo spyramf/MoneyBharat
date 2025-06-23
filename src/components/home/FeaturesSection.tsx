@@ -134,19 +134,16 @@ const FeaturesSection = () => {
               </div>
             </div>
             
-            <div className="mt-10">
-<a
-  href="https://moneybharat.net/NewOnBoarding/SignUp"
-  target="_blank"
-  rel="noopener noreferrer"
->
-  <Button className="bg-gradient-to-r from-fintech-green to-fintech-green hover:opacity-90 text-white px-8 py-6">
+<div className="mt-10">
+  <Button
+    onClick={() => window.location.href = "https://moneybharat.net/NewOnBoarding/SignUp"}
+    className="bg-gradient-to-r from-fintech-green to-fintech-green hover:opacity-90 text-white px-8 py-6"
+  >
     Start Your Financial Journey
     <ArrowRight className="ml-2 h-4 w-4" />
   </Button>
-</a>
+</div>
 
-            </div>
           </motion.div>
         </div>
       </div>
