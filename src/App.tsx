@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -10,6 +9,7 @@ import { BookingProvider } from "./context/BookingContext";
 import { AuthProvider } from "./context/AuthContext";
 import { InvestorAuthProvider } from "./context/InvestorAuthContext";
 import ScrollToTop from "./components/ScrollToTop";
+import Custom404Handler from "./components/seo/Custom404Handler";
 import ProtectedRoute from "./components/ProtectedRoute";
 import InvestorProtectedRoute from "./components/InvestorProtectedRoute";
 import Index from "./pages/Index";
@@ -60,6 +60,7 @@ const App = () => (
         <BookingProvider>
           <BrowserRouter>
             <ScrollToTop />
+            <Custom404Handler />
             <AuthProvider>
               <InvestorAuthProvider>
                 <TooltipProvider>

@@ -11,3 +11,6 @@ http://moneybharat.co/* https://moneybharat.co/:splat 301!
 
 # Fallback for any remaining www patterns
 www.moneybharat.co/* moneybharat.co/:splat 301!
+
+# Handle 404 errors with proper status code
+/* /index.html 200
