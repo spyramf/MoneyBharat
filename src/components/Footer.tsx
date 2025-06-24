@@ -188,20 +188,44 @@ const Footer = () => {
             {/* Social Icons */}
             <div className="flex items-center gap-4">
               <span className="text-white font-medium mr-2">Follow Us:</span>
-              <div className="flex gap-3">
-                <a href="#" className="w-10 h-10 rounded-full bg-white/10 hover:bg-fintech-green/20 border border-white/20 hover:border-fintech-green/30 flex items-center justify-center transition-all duration-200 group">
-                  <Facebook size={18} className="text-gray-300 group-hover:text-fintech-green" />
-                </a>
-                <a href="#" className="w-10 h-10 rounded-full bg-white/10 hover:bg-fintech-green/20 border border-white/20 hover:border-fintech-green/30 flex items-center justify-center transition-all duration-200 group">
-                  <Twitter size={18} className="text-gray-300 group-hover:text-fintech-green" />
-                </a>
-                <a href="#" className="w-10 h-10 rounded-full bg-white/10 hover:bg-fintech-green/20 border border-white/20 hover:border-fintech-green/30 flex items-center justify-center transition-all duration-200 group">
-                  <Instagram size={18} className="text-gray-300 group-hover:text-fintech-green" />
-                </a>
-                <a href="#" className="w-10 h-10 rounded-full bg-white/10 hover:bg-fintech-green/20 border border-white/20 hover:border-fintech-green/30 flex items-center justify-center transition-all duration-200 group">
-                  <Linkedin size={18} className="text-gray-300 group-hover:text-fintech-green" />
-                </a>
-              </div>
+<div className="flex gap-3">
+  <a
+    href="https://www.facebook.com/people/Money-Bharat/61577868472394/"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="w-10 h-10 rounded-full bg-white/10 hover:bg-fintech-green/20 border border-white/20 hover:border-fintech-green/30 flex items-center justify-center transition-all duration-200 group"
+  >
+    <Facebook size={18} className="text-gray-300 group-hover:text-fintech-green" />
+  </a>
+
+  <a
+    href="https://x.com/moneybharat360"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="w-10 h-10 rounded-full bg-white/10 hover:bg-fintech-green/20 border border-white/20 hover:border-fintech-green/30 flex items-center justify-center transition-all duration-200 group"
+  >
+    <Twitter size={18} className="text-gray-300 group-hover:text-fintech-green" />
+  </a>
+
+  <a
+    href="https://www.instagram.com/moneybharat360/"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="w-10 h-10 rounded-full bg-white/10 hover:bg-fintech-green/20 border border-white/20 hover:border-fintech-green/30 flex items-center justify-center transition-all duration-200 group"
+  >
+    <Instagram size={18} className="text-gray-300 group-hover:text-fintech-green" />
+  </a>
+
+  <a
+    href="https://www.linkedin.com/company/money-bharat/"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="w-10 h-10 rounded-full bg-white/10 hover:bg-fintech-green/20 border border-white/20 hover:border-fintech-green/30 flex items-center justify-center transition-all duration-200 group"
+  >
+    <Linkedin size={18} className="text-gray-300 group-hover:text-fintech-green" />
+  </a>
+</div>
+
             </div>
             
             {/* Copyright */}
