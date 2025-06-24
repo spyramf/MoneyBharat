@@ -10,6 +10,7 @@ import { AuthProvider } from "./context/AuthContext";
 import { InvestorAuthProvider } from "./context/InvestorAuthContext";
 import ScrollToTop from "./components/ScrollToTop";
 import Custom404Handler from "./components/seo/Custom404Handler";
+import SEOComplianceChecker from "./components/seo/SEOComplianceChecker";
 import ProtectedRoute from "./components/ProtectedRoute";
 import InvestorProtectedRoute from "./components/InvestorProtectedRoute";
 import Index from "./pages/Index";
@@ -61,6 +62,15 @@ const App = () => (
           <BrowserRouter>
             <ScrollToTop />
             <Custom404Handler />
+            <SEOComplianceChecker 
+              enabled={process.env.NODE_ENV === 'development'} 
+              onValidationComplete={(result) => {
+                // Log validation results for development monitoring
+                if (!result.isValid) {
+                  console.warn('⚠️ Sitemap validation issues detected');
+                }
+              }}
+            />
             <AuthProvider>
               <InvestorAuthProvider>
                 <TooltipProvider>

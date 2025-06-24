@@ -2,7 +2,9 @@
 # Money Bharat Finance - Robots.txt
 # Website: https://moneybharat.co
 # Preferred Domain: moneybharat.co (without www)
+# Updated: 2025-06-24
 
+# Primary search engine bots
 User-agent: Googlebot
 Allow: /
 Crawl-delay: 1
@@ -31,6 +33,7 @@ Allow: /
 User-agent: WhatsApp
 Allow: /
 
+# Default rule for all other bots
 User-agent: *
 Allow: /
 Crawl-delay: 2
@@ -62,12 +65,15 @@ Allow: /*.gif
 Allow: /*.svg
 Allow: /*.webp
 
-# Sitemaps - Use canonical URLs only
+# Primary XML Sitemap - CANONICAL URLS ONLY
+# All URLs in sitemap follow canonical format: https://moneybharat.co
 Sitemap: https://moneybharat.co/sitemap.xml
 
-# Host directive - Specify preferred domain
+# Host directive - Specify preferred canonical domain
 Host: https://moneybharat.co
 
-# Additional crawling instructions
-# All URLs should use the canonical form: https://moneybharat.co
-# www.moneybharat.co should redirect to moneybharat.co
+# SEO TOOL COMPATIBILITY NOTES:
+# - All sitemap URLs are canonical (HTTPS, no www, no trailing slashes)
+# - WWW redirects are handled server-side via _redirects and vercel.json
+# - 404 errors return proper HTTP status codes
+# - Custom 404 page provides user-friendly experience

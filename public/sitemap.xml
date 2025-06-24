@@ -1,15 +1,29 @@
 
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  Money Bharat Finance - XML Sitemap
+  Generated: 2025-06-24
+  Canonical URL Strategy: All URLs use HTTPS, no www, no trailing slashes, lowercase
+  Preferred Domain: https://moneybharat.co
+  
+  SEO Compliance Notes:
+  - All URLs are in canonical format as per urlCanonicalizer.ts
+  - HTTPS enforced for all URLs
+  - WWW subdomain redirects to non-www
+  - No trailing slashes except for root URL
+  - All paths are lowercase
+  - No query parameters in core URLs
+-->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" 
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
         xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
   
-  <!-- All URLs use canonical form: https://moneybharat.co (no www) -->
+  <!-- PRIMARY CANONICAL URLS - All URLs follow https://moneybharat.co pattern -->
   
-  <!-- Homepage -->
+  <!-- Homepage - Highest Priority -->
   <url>
     <loc>https://moneybharat.co/</loc>
-    <lastmod>2025-06-23</lastmod>
+    <lastmod>2025-06-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.00</priority>
     <image:image>
@@ -19,156 +33,156 @@
     </image:image>
   </url>
 
-  <!-- Main Service Pages -->
+  <!-- Core Service Pages - High Priority -->
   <url>
     <loc>https://moneybharat.co/mutual-funds</loc>
-    <lastmod>2025-06-23</lastmod>
+    <lastmod>2025-06-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
   </url>
   <url>
     <loc>https://moneybharat.co/insurance</loc>
-    <lastmod>2025-06-23</lastmod>
+    <lastmod>2025-06-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
   </url>
   <url>
     <loc>https://moneybharat.co/loans</loc>
-    <lastmod>2025-06-23</lastmod>
+    <lastmod>2025-06-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
   </url>
 
-  <!-- Insurance Pages -->
+  <!-- Insurance Sub-Pages -->
   <url>
     <loc>https://moneybharat.co/health-insurance</loc>
-    <lastmod>2025-06-23</lastmod>
+    <lastmod>2025-06-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://moneybharat.co/term-insurance</loc>
-    <lastmod>2025-06-23</lastmod>
+    <lastmod>2025-06-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://moneybharat.co/vehicle-insurance</loc>
-    <lastmod>2025-06-23</lastmod>
+    <lastmod>2025-06-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
 
-  <!-- Loan Pages -->
+  <!-- Loan Product Pages -->
   <url>
     <loc>https://moneybharat.co/loans/personal</loc>
-    <lastmod>2025-06-23</lastmod>
+    <lastmod>2025-06-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
   <url>
     <loc>https://moneybharat.co/loans/business</loc>
-    <lastmod>2025-06-23</lastmod>
+    <lastmod>2025-06-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
     <loc>https://moneybharat.co/loans/car</loc>
-    <lastmod>2025-06-23</lastmod>
+    <lastmod>2025-06-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
     <loc>https://moneybharat.co/loans/home</loc>
-    <lastmod>2025-06-23</lastmod>
+    <lastmod>2025-06-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
     <loc>https://moneybharat.co/loans/education</loc>
-    <lastmod>2025-06-23</lastmod>
+    <lastmod>2025-06-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
     <loc>https://moneybharat.co/loans/mutual-funds</loc>
-    <lastmod>2025-06-23</lastmod>
+    <lastmod>2025-06-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.70</priority>
   </url>
 
-  <!-- Tools Pages -->
+  <!-- Financial Tools - User Tools -->
   <url>
     <loc>https://moneybharat.co/tools/sip-calculator</loc>
-    <lastmod>2025-06-23</lastmod>
+    <lastmod>2025-06-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
     <loc>https://moneybharat.co/tools/emi-calculator</loc>
-    <lastmod>2025-06-23</lastmod>
+    <lastmod>2025-06-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
     <loc>https://moneybharat.co/tools/tax-saving</loc>
-    <lastmod>2025-06-23</lastmod>
+    <lastmod>2025-06-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.70</priority>
   </url>
 
-  <!-- Company Pages -->
+  <!-- Company & Information Pages -->
   <url>
     <loc>https://moneybharat.co/about</loc>
-    <lastmod>2025-06-23</lastmod>
+    <lastmod>2025-06-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
   </url>
   <url>
     <loc>https://moneybharat.co/booking</loc>
-    <lastmod>2025-06-23</lastmod>
+    <lastmod>2025-06-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
 
-  <!-- Blog Section -->
+  <!-- Blog Section - Content Marketing -->
   <url>
     <loc>https://moneybharat.co/blog</loc>
-    <lastmod>2025-06-23</lastmod>
+    <lastmod>2025-06-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.90</priority>
   </url>
 
-  <!-- Blog Posts -->
+  <!-- Blog Posts - Dynamic Content -->
   <url>
     <loc>https://moneybharat.co/blog/top-7-personal-finance-tips-india</loc>
-    <lastmod>2025-06-23</lastmod>
+    <lastmod>2025-06-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.70</priority>
   </url>
   <url>
     <loc>https://moneybharat.co/blog/mutual-funds-101</loc>
-    <lastmod>2025-06-23</lastmod>
+    <lastmod>2025-06-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.70</priority>
   </url>
 
-  <!-- Legal Pages -->
+  <!-- Legal & Compliance Pages -->
   <url>
     <loc>https://moneybharat.co/privacy-policy</loc>
-    <lastmod>2025-06-23</lastmod>
+    <lastmod>2025-06-24</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.40</priority>
   </url>
   <url>
     <loc>https://moneybharat.co/terms-of-service</loc>
-    <lastmod>2025-06-23</lastmod>
+    <lastmod>2025-06-24</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.40</priority>
   </url>
   <url>
     <loc>https://moneybharat.co/sitemap</loc>
-    <lastmod>2025-06-23</lastmod>
+    <lastmod>2025-06-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.30</priority>
   </url>
