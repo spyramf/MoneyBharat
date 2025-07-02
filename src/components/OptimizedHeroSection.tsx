@@ -1,8 +1,11 @@
-import { ArrowRight, ArrowRightCircle } from "lucide-react";
+
+import { ArrowRight, ArrowRightCircle, TrendingUp, Shield, Target, DollarSign } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+
 const OptimizedHeroSection = () => {
-  return <section className="relative overflow-hidden pt-16 md:pt-24 pb-16 md:pb-20 py-[50px]">
+  return (
+    <section className="relative overflow-hidden pt-16 md:pt-24 pb-16 md:pb-20 py-[50px]">
       {/* Simplified background decoration */}
       <div className="absolute top-0 left-0 w-full h-full bg-gradient-radial from-fintech-green/5 to-transparent -z-10"></div>
       <div className="absolute top-40 right-0 w-80 h-80 bg-fintech-green/5 rounded-full blur-2xl -z-10"></div>
@@ -24,11 +27,11 @@ const OptimizedHeroSection = () => {
                 most trusted fintech platform.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 pt-6">
-<a href="https://moneybharat.net/Home/Login" target="_blank" rel="noopener noreferrer">
-  <Button className="bg-gradient-to-r from-fintech-green to-fintech-green hover:opacity-90 text-white px-8 py-6">
-    Start Investing
-  </Button>
-</a>
+                <a href="https://moneybharat.net/Home/Login" target="_blank" rel="noopener noreferrer">
+                  <Button className="bg-gradient-to-r from-fintech-green to-fintech-green hover:opacity-90 text-white px-8 py-6">
+                    Start Investing
+                  </Button>
+                </a>
                 <Link to="/booking">
                   <Button variant="outline" className="group border-fintech-green text-fintech-green hover:text-fintech-green transition-colors px-8 py-6 rounded-xl">
                     Book Consultation
@@ -75,64 +78,57 @@ const OptimizedHeroSection = () => {
             </div>
           </div>
           
-          {/* Right dashboard visualization - simplified */}
+          {/* Right diamond benefits visualization */}
           <div className="w-full md:w-1/2">
-            <div className="relative">
+            <div className="relative flex items-center justify-center min-h-[400px]">
+              {/* Background decoration */}
               <div className="absolute -top-10 -left-10 w-64 h-64 bg-fintech-green/5 rounded-full blur-xl"></div>
               
-              {/* Simplified investment dashboard */}
-              <div className="bg-white/90 backdrop-blur-sm shadow-xl rounded-lg p-6 max-w-md mx-auto border">
-                <div className="bg-gradient-to-br from-fintech-green/10 to-fintech-blue/10 rounded-lg p-4">
-                  <div className="flex justify-between items-center mb-4">
-                    <h3 className="text-lg font-semibold">Money Bharat Portfolio</h3>
-                    <div className="bg-green-100 text-green-700 px-2 py-1 rounded text-xs font-medium">
-                      +18.7%
-                    </div>
+              {/* Diamond grid container */}
+              <div className="relative w-80 h-80">
+                {/* Top diamond */}
+                <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-32 h-32 rotate-45 bg-gradient-to-br from-fintech-blue to-fintech-blue/80 rounded-lg shadow-lg flex items-center justify-center group hover:scale-105 transition-transform duration-300">
+                  <div className="transform -rotate-45 text-center text-white">
+                    <TrendingUp className="w-6 h-6 mx-auto mb-1" />
+                    <p className="text-xs font-semibold leading-tight">Disciplines your<br />Financial Habit</p>
                   </div>
-                  
-                  <div className="space-y-4">
-                    <div>
-                      <div className="flex justify-between text-sm mb-1">
-                        <span>Portfolio Value</span>
-                        <span className="font-medium">₹8.2L</span>
-                      </div>
-                      <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
-                        <div className="h-full bg-gradient-to-r from-fintech-green to-fintech-blue rounded-full w-4/5"></div>
-                      </div>
-                    </div>
+                </div>
+                
+                {/* Left diamond */}
+                <div className="absolute top-1/2 left-0 transform -translate-y-1/2 w-32 h-32 rotate-45 bg-gradient-to-br from-fintech-green to-fintech-green/80 rounded-lg shadow-lg flex items-center justify-center group hover:scale-105 transition-transform duration-300">
+                  <div className="transform -rotate-45 text-center text-white">
+                    <DollarSign className="w-6 h-6 mx-auto mb-1" />
+                    <p className="text-xs font-semibold leading-tight">Get Compounding<br />Interest Benefits</p>
                   </div>
-                  
-                  <div className="mt-4 space-y-2">
-                    <div className="flex justify-between items-center p-2 bg-white rounded shadow-sm">
-                      <div className="flex items-center gap-2">
-                        <div className="w-6 h-6 rounded-full bg-green-100"></div>
-                        <div>
-                          <p className="font-medium text-sm">HDFC Top 100</p>
-                          <p className="text-xs text-gray-500">Large Cap</p>
-                        </div>
-                      </div>
-                      <div className="text-right">
-                        <p className="text-sm text-green-600 font-medium">+16.2%</p>
-                      </div>
-                    </div>
-                    
-                    <div className="flex justify-between items-center p-2 bg-white rounded shadow-sm">
-                      <div className="flex items-center gap-2">
-                        <div className="w-6 h-6 rounded-full bg-blue-100"></div>
-                        <div>
-                          <p className="font-medium text-sm">Axis Small Cap</p>
-                          <p className="text-xs text-gray-500">Small Cap</p>
-                        </div>
-                      </div>
-                      <div className="text-right">
-                        <p className="text-sm text-green-600 font-medium">+21.8%</p>
-                      </div>
-                    </div>
+                </div>
+                
+                {/* Right diamond */}
+                <div className="absolute top-1/2 right-0 transform -translate-y-1/2 w-32 h-32 rotate-45 bg-gradient-to-br from-fintech-orange to-fintech-orange/80 rounded-lg shadow-lg flex items-center justify-center group hover:scale-105 transition-transform duration-300">
+                  <div className="transform -rotate-45 text-center text-white">
+                    <Shield className="w-6 h-6 mx-auto mb-1" />
+                    <p className="text-xs font-semibold leading-tight">Helps to Manage<br />Market Volatility</p>
                   </div>
+                </div>
+                
+                {/* Bottom diamond */}
+                <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-32 h-32 rotate-45 bg-gradient-to-br from-purple-500 to-purple-400 rounded-lg shadow-lg flex items-center justify-center group hover:scale-105 transition-transform duration-300">
+                  <div className="transform -rotate-45 text-center text-white">
+                    <Target className="w-6 h-6 mx-auto mb-1" />
+                    <p className="text-xs font-semibold leading-tight">No Charges to<br />Invest in a SIP</p>
+                  </div>
+                </div>
+                
+                {/* Center connecting lines */}
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-2 h-2 bg-white rounded-full shadow-md z-10"></div>
+                
+                {/* Floating benefit text */}
+                <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 text-center">
+                  <p className="text-sm font-medium text-gray-700">Why Choose SIP?</p>
+                  <p className="text-xs text-gray-500">Smart Investment Benefits</p>
                 </div>
               </div>
               
-              {/* Simplified floating elements */}
+              {/* Floating growth indicator */}
               <div className="absolute -top-4 right-4 w-20 h-20 bg-white shadow-lg rounded-lg p-2 flex flex-col items-center justify-center">
                 <div className="w-4 h-4 rounded-full bg-gradient-to-r from-green-400 to-fintech-green mb-1"></div>
                 <p className="text-xs text-gray-600">Growth</p>
@@ -169,6 +165,8 @@ const OptimizedHeroSection = () => {
           </div>
         </div>
       </div>
-    </section>;
+    </section>
+  );
 };
+
 export default OptimizedHeroSection;
