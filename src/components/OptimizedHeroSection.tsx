@@ -119,14 +119,14 @@ const OptimizedHeroSection = () => {
                 </div>
                 
                 {/* Center connecting lines */}
-                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-2 h-2 bg-white rounded-full shadow-md z-10"></div>
+                {/* <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-2 h-2 bg-white rounded-full shadow-md z-10"></div>
                 
                 {/* Floating benefit text */}
-                <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 text-center">
+                {/* <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 text-center">
                   <p className="text-sm font-medium text-gray-700">Why Choose SIP?</p>
                   <p className="text-xs text-gray-500">Smart Investment Benefits</p>
-                </div>
-              </div>
+                </div> */}
+              </div> */}
               
               {/* Floating growth indicator */}
               <div className="absolute -top-4 right-4 w-20 h-20 bg-white shadow-lg rounded-lg p-2 flex flex-col items-center justify-center">
