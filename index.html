@@ -30,6 +30,12 @@
     <!-- Favicon and Icons -->
     <link rel="icon" href="/lovable-uploads/92affb7c-7e35-42da-9aff-b0f55a689428.png" type="image/png" />
     <link rel="apple-touch-icon" href="/lovable-uploads/92affb7c-7e35-42da-9aff-b0f55a689428.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="shortcut icon" href="/lovable-uploads/92affb7c-7e35-42da-9aff-b0f55a689428.png" />
+    <link rel="icon" sizes="16x16" href="/lovable-uploads/92affb7c-7e35-42da-9aff-b0f55a689428.png" />
+    <link rel="icon" sizes="32x32" href="/lovable-uploads/92affb7c-7e35-42da-9aff-b0f55a689428.png" />
+    <link rel="icon" sizes="192x192" href="/lovable-uploads/92affb7c-7e35-42da-9aff-b0f55a689428.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/lovable-uploads/92affb7c-7e35-42da-9aff-b0f55a689428.png" />
     
     <!-- Additional SEO Meta Tags -->
     <meta name="keywords" content="mutual funds India, SIP investment, health insurance, personal loans, financial planning, investment advisory, Money Bharat" />
@@ -149,6 +155,19 @@
     <!-- End Google Tag Manager (noscript) -->
     
     <div id="root"></div>
+    
+    <!-- Service Worker for caching and performance -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker.register('/sw.js').then(function(registration) {
+            console.log('ServiceWorker registration successful');
+          }).catch(function(err) {
+            console.log('ServiceWorker registration failed: ', err);
+          });
+        });
+      }
+    </script>
     
     <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS VERY COMMENT! -->
     <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>

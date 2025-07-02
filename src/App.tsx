@@ -11,6 +11,8 @@ import { InvestorAuthProvider } from "./context/InvestorAuthContext";
 import ScrollToTop from "./components/ScrollToTop";
 import Custom404Handler from "./components/seo/Custom404Handler";
 import SEOComplianceChecker from "./components/seo/SEOComplianceChecker";
+import SEOOptimizations from "./components/seo/SEOOptimizations";
+import TechnicalSEO from "./components/seo/TechnicalSEO";
 import ProtectedRoute from "./components/ProtectedRoute";
 import InvestorProtectedRoute from "./components/InvestorProtectedRoute";
 import Index from "./pages/Index";
@@ -62,6 +64,8 @@ const App = () => (
           <BrowserRouter>
             <ScrollToTop />
             <Custom404Handler />
+            <SEOOptimizations />
+            <TechnicalSEO />
             <SEOComplianceChecker 
               enabled={process.env.NODE_ENV === 'development'} 
               onValidationComplete={(result) => {

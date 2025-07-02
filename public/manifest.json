@@ -1,0 +1,65 @@
+{
+  "name": "Money Bharat Finance",
+  "short_name": "Money Bharat",
+  "description": "India's AI-powered financial platform for mutual funds, SIP investments, health & life insurance, and instant personal loans",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#2EB883",
+  "background_color": "#ffffff",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/lovable-uploads/92affb7c-7e35-42da-9aff-b0f55a689428.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/lovable-uploads/92affb7c-7e35-42da-9aff-b0f55a689428.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable any"
+    }
+  ],
+  "categories": ["finance", "business", "productivity"],
+  "lang": "en-IN",
+  "dir": "ltr",
+  "shortcuts": [
+    {
+      "name": "Mutual Funds",
+      "short_name": "MF",
+      "description": "Invest in mutual funds",
+      "url": "/mutual-funds",
+      "icons": [
+        {
+          "src": "/lovable-uploads/92affb7c-7e35-42da-9aff-b0f55a689428.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Insurance",
+      "short_name": "Insurance",
+      "description": "Get insurance coverage",
+      "url": "/insurance",
+      "icons": [
+        {
+          "src": "/lovable-uploads/92affb7c-7e35-42da-9aff-b0f55a689428.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Loans",
+      "short_name": "Loans",
+      "description": "Apply for loans",
+      "url": "/loans",
+      "icons": [
+        {
+          "src": "/lovable-uploads/92affb7c-7e35-42da-9aff-b0f55a689428.png",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ]
+}

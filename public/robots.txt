@@ -56,6 +56,9 @@ Disallow: /*?gclid=*
 Allow: /robots.txt
 Allow: /sitemap.xml
 Allow: /favicon.ico
+Allow: /humans.txt
+Allow: /manifest.json
+Allow: /sw.js
 Allow: /*.css
 Allow: /*.js
 Allow: /*.png
@@ -64,6 +67,10 @@ Allow: /*.jpeg
 Allow: /*.gif
 Allow: /*.svg
 Allow: /*.webp
+Allow: /*.woff
+Allow: /*.woff2
+Allow: /*.ttf
+Allow: /*.otf
 
 # Primary XML Sitemap - CANONICAL URLS ONLY
 # All URLs in sitemap follow canonical format: https://moneybharat.co

@@ -1,0 +1,46 @@
+/* TEAM */
+Website: Money Bharat Finance
+Designer: Money Bharat Design Team
+Developer: Money Bharat Tech Team
+Contact: contact@moneybharat.com
+Location: Mumbai, Maharashtra, India
+
+/* THANKS */
+Node.js
+React
+Tailwind CSS
+Shadcn UI
+TypeScript
+Vite
+
+/* SITE */
+Domain: moneybharat.co
+Language: English, Hindi
+Technology: React, TypeScript, Tailwind CSS
+Last Update: 2025-01-02
+Standards: HTML5, CSS3, ECMAScript 6+
+Components: Responsive Design, PWA, SEO Optimized
+Software: Visual Studio Code, Git, Figma
+
+/* SEO */
+- Structured Data (JSON-LD)
+- Open Graph Protocol
+- Twitter Cards
+- Canonical URLs
+- XML Sitemap
+- Robots.txt
+- Performance Optimized
+- Mobile-First Design
+- Progressive Web App
+- Service Worker Caching
+
+/* FINANCIAL SERVICES */
+- Mutual Funds Investment
+- SIP (Systematic Investment Plan)
+- Health Insurance
+- Life & Term Insurance
+- Vehicle Insurance
+- Personal Loans
+- Home Loans
+- Business Loans
+- Financial Planning Advisory
