@@ -133,8 +133,8 @@ const OptimizedHeroSection = () => {
                 <div className="w-4 h-4 rounded-full bg-gradient-to-r from-green-400 to-fintech-green mb-1"></div>
                 <p className="text-xs text-gray-600">Growth</p>
                 <p className="text-sm font-bold text-green-600">+18.7%</p>
-              </div>
-            </div> */}
+              </div> */}
+            </div>
           </div>
         </div>
       </div>
