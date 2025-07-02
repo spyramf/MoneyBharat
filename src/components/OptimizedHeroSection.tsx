@@ -85,7 +85,7 @@ const OptimizedHeroSection = () => {
               <div className="absolute -top-10 -left-10 w-64 h-64 bg-fintech-green/5 rounded-full blur-xl"></div>
               
               {/* Diamond grid container */}
-              <div className="relative w-90 h-90">
+              <div className="relative w-70 h-70">
                 {/* Top diamond */}
                 <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-32 h-32 rotate-45 bg-gradient-to-br from-fintech-blue to-fintech-blue/80 rounded-lg shadow-lg flex items-center justify-center group hover:scale-105 transition-transform duration-300">
                   <div className="transform -rotate-45 text-center text-white">
