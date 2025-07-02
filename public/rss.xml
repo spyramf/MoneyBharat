@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:sy="http://purl.org/rss/1.0/modules/syndication/">
+  <channel>
+    <title>Money Bharat Finance Blog</title>
+    <description>Latest insights on mutual funds, insurance, loans, and personal finance in India</description>
+    <link>https://moneybharat.co/blog</link>
+    <atom:link href="https://moneybharat.co/rss.xml" rel="self" type="application/rss+xml" />
+    <language>en-IN</language>
+    <copyright>Money Bharat Finance</copyright>
+    <managingEditor>contact@moneybharat.com (Money Bharat Finance)</managingEditor>
+    <webMaster>contact@moneybharat.com (Money Bharat Finance)</webMaster>
+    <lastBuildDate>Wed, 02 Jan 2025 10:30:00 +0530</lastBuildDate>
+    <sy:updatePeriod>daily</sy:updatePeriod>
+    <sy:updateFrequency>1</sy:updateFrequency>
+    <ttl>1440</ttl>
+    <image>
+      <url>https://moneybharat.co/lovable-uploads/92affb7c-7e35-42da-9aff-b0f55a689428.png</url>
+      <title>Money Bharat Finance</title>
+      <link>https://moneybharat.co/blog</link>
+      <width>400</width>
+      <height>400</height>
+    </image>
+
+    <item>
+      <title>10 Essential Personal Finance Tips Every Indian Should Know</title>
+      <link>https://moneybharat.co/blog/10-essential-personal-finance-tips</link>
+      <description>Master the basics of personal finance with these essential tips tailored for the Indian market and economic conditions.</description>
+      <pubDate>Thu, 02 May 2025 10:00:00 +0530</pubDate>
+      <guid isPermaLink="true">https://moneybharat.co/blog/10-essential-personal-finance-tips</guid>
+      <dc:creator>Aditya Sharma</dc:creator>
+      <category>Personal Finance</category>
+    </item>
+
+    <item>
+      <title>Understanding Mutual Funds: A Beginner's Guide for Indian Investors</title>
+      <link>https://moneybharat.co/blog/understanding-mutual-funds-beginners-guide</link>
+      <description>Learn the fundamentals of mutual fund investing and how to build a portfolio that aligns with your financial goals.</description>
+      <pubDate>Wed, 07 May 2025 10:00:00 +0530</pubDate>
+      <guid isPermaLink="true">https://moneybharat.co/blog/understanding-mutual-funds-beginners-guide</guid>
+      <dc:creator>Priya Patel</dc:creator>
+      <category>Mutual Funds</category>
+    </item>
+
+    <item>
+      <title>Health Insurance in India: Coverage Options and How to Choose</title>
+      <link>https://moneybharat.co/blog/health-insurance-india-coverage-options</link>
+      <description>Navigate the complex world of health insurance in India and find the right coverage for you and your family.</description>
+      <pubDate>Sat, 10 May 2025 10:00:00 +0530</pubDate>
+      <guid isPermaLink="true">https://moneybharat.co/blog/health-insurance-india-coverage-options</guid>
+      <dc:creator>Rahul Mehta</dc:creator>
+      <category>Insurance</category>
+    </item>
+
+    <item>
+      <title>Tax-Saving Investment Options for Indian Taxpayers</title>
+      <link>https://moneybharat.co/blog/tax-saving-investment-options</link>
+      <description>Explore various tax-saving instruments under Section 80C and beyond to optimize your tax liability while growing your wealth.</description>
+      <pubDate>Thu, 15 May 2025 10:00:00 +0530</pubDate>
+      <guid isPermaLink="true">https://moneybharat.co/blog/tax-saving-investment-options</guid>
+      <dc:creator>Neha Gupta</dc:creator>
+      <category>Tax Planning</category>
+    </item>
+
+  </channel>
+</rss>

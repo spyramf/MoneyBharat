@@ -41,8 +41,10 @@ const SEOHead = ({
       <meta name="keywords" content={keywords} />
       <link rel="canonical" href={canonicalUrl} />
       
-      {/* Robots */}
-      {noIndex && <meta name="robots" content="noindex, nofollow" />}
+      {/* Enhanced Robots and Indexing */}
+      <meta name="robots" content={noIndex ? "noindex, nofollow" : "index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large"} />
+      <meta name="googlebot" content={noIndex ? "noindex, nofollow" : "index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large"} />
+      <meta name="bingbot" content={noIndex ? "noindex, nofollow" : "index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large"} />
       
       {/* Open Graph */}
       <meta property="og:title" content={pageTitle} />
@@ -84,9 +86,14 @@ const SEOHead = ({
       <meta name="geo.country" content="India" />
       <meta name="geo.placename" content="India" />
       
-      {/* Mobile optimization */}
+      {/* Mobile and language optimization */}
       <meta name="format-detection" content="telephone=yes" />
       <meta name="theme-color" content="#2EB883" />
+      <link rel="alternate" type="application/rss+xml" title="Money Bharat Finance Blog" href="https://moneybharat.co/rss.xml" />
+      
+      {/* Hreflang for Indian market */}
+      <link rel="alternate" hrefLang="en-in" href={canonicalUrl} />
+      <link rel="alternate" hrefLang="hi-in" href={canonicalUrl} />
     </Helmet>
   );
 };

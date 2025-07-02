@@ -72,9 +72,12 @@ Allow: /*.woff2
 Allow: /*.ttf
 Allow: /*.otf
 
-# Primary XML Sitemap - CANONICAL URLS ONLY
+# Primary XML Sitemap and RSS Feed - CANONICAL URLS ONLY
 # All URLs in sitemap follow canonical format: https://moneybharat.co
 Sitemap: https://moneybharat.co/sitemap.xml
+
+# RSS Feed for Blog Content
+# Regular content updates signal fresh content to search engines
 
 # Host directive - Specify preferred canonical domain
 Host: https://moneybharat.co
