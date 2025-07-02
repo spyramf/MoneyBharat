@@ -117,23 +117,7 @@ const OptimizedHeroSection = () => {
                     <p className="text-xs font-semibold leading-tight">No Charges to<br />Invest in a SIP</p>
                   </div>
                 </div>
-                
-                {/* Center connecting lines */}
-                {/* <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-2 h-2 bg-white rounded-full shadow-md z-10"></div>
-                
-                {/* Floating benefit text */}
-                {/* <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 text-center">
-                  <p className="text-sm font-medium text-gray-700">Why Choose SIP?</p>
-                  <p className="text-xs text-gray-500">Smart Investment Benefits</p>
-                </div> */}
-              </div> */}
-              
-              {/* Floating growth indicator */}
-              {/* <div className="absolute -top-4 right-4 w-20 h-20 bg-white shadow-lg rounded-lg p-2 flex flex-col items-center justify-center">
-                <div className="w-4 h-4 rounded-full bg-gradient-to-r from-green-400 to-fintech-green mb-1"></div>
-                <p className="text-xs text-gray-600">Growth</p>
-                <p className="text-sm font-bold text-green-600">+18.7%</p>
-              </div> */}
+              </div>
             </div>
           </div>
         </div>
