@@ -1,7 +1,7 @@
-
 import { ArrowRight, ArrowRightCircle, TrendingUp, Shield, Target, DollarSign } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import OptimizedImage from "@/components/ui/optimized-image";
 
 const OptimizedHeroSection = () => {
   return (
@@ -78,45 +78,22 @@ const OptimizedHeroSection = () => {
             </div>
           </div>
           
-          {/* Right diamond benefits visualization */}
+          {/* Right hero image */}
           <div className="w-full md:w-1/2">
             <div className="relative flex items-center justify-center min-h-[400px]">
               {/* Background decoration */}
               <div className="absolute -top-10 -left-10 w-64 h-64 bg-fintech-green/5 rounded-full blur-xl"></div>
               
-              {/* Diamond grid container */}
-              <div className="relative w-80 h-80">
-                {/* Top diamond */}
-                <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-32 h-32 rotate-45 bg-gradient-to-br from-fintech-blue to-fintech-blue/80 rounded-lg shadow-lg flex items-center justify-center group hover:scale-105 transition-transform duration-300">
-                  <div className="transform -rotate-45 text-center text-white">
-                    <TrendingUp className="w-6 h-6 mx-auto mb-1" />
-                    <p className="text-xs font-semibold leading-tight">Disciplines your<br />Financial Habit</p>
-                  </div>
-                </div>
-                
-                {/* Left diamond */}
-                <div className="absolute top-1/2 left-0 transform -translate-y-1/2 w-32 h-32 rotate-45 bg-gradient-to-br from-fintech-green to-fintech-green/80 rounded-lg shadow-lg flex items-center justify-center group hover:scale-105 transition-transform duration-300">
-                  <div className="transform -rotate-45 text-center text-white">
-                    <DollarSign className="w-6 h-6 mx-auto mb-1" />
-                    <p className="text-xs font-semibold leading-tight">Get Compounding<br />Interest Benefits</p>
-                  </div>
-                </div>
-                
-                {/* Right diamond */}
-                <div className="absolute top-1/2 right-0 transform -translate-y-1/2 w-32 h-32 rotate-45 bg-gradient-to-br from-fintech-orange to-fintech-orange/80 rounded-lg shadow-lg flex items-center justify-center group hover:scale-105 transition-transform duration-300">
-                  <div className="transform -rotate-45 text-center text-white">
-                    <Shield className="w-6 h-6 mx-auto mb-1" />
-                    <p className="text-xs font-semibold leading-tight">Helps to Manage<br />Market Volatility</p>
-                  </div>
-                </div>
-                
-                {/* Bottom diamond */}
-                <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-32 h-32 rotate-45 bg-gradient-to-br from-purple-500 to-purple-400 rounded-lg shadow-lg flex items-center justify-center group hover:scale-105 transition-transform duration-300">
-                  <div className="transform -rotate-45 text-center text-white">
-                    <Target className="w-6 h-6 mx-auto mb-1" />
-                    <p className="text-xs font-semibold leading-tight">No Charges to<br />Invest in a SIP</p>
-                  </div>
-                </div>
+              {/* Hero Image */}
+              <div className="relative w-full max-w-md mx-auto">
+                <OptimizedImage
+                  src="/lovable-uploads/4e2c31d4-0602-4d3c-affe-581b6a3c2d63.png"
+                  alt="Money Bharat Finance - Wealth Management and Investment Platform"
+                  className="w-full h-auto rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300"
+                  width={800}
+                  height={600}
+                  priority={true}
+                />
               </div>
             </div>
           </div>
