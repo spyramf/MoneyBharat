@@ -129,12 +129,12 @@ const OptimizedHeroSection = () => {
               </div> */}
               
               {/* Floating growth indicator */}
-              <div className="absolute -top-4 right-4 w-20 h-20 bg-white shadow-lg rounded-lg p-2 flex flex-col items-center justify-center">
+              {/* <div className="absolute -top-4 right-4 w-20 h-20 bg-white shadow-lg rounded-lg p-2 flex flex-col items-center justify-center">
                 <div className="w-4 h-4 rounded-full bg-gradient-to-r from-green-400 to-fintech-green mb-1"></div>
                 <p className="text-xs text-gray-600">Growth</p>
                 <p className="text-sm font-bold text-green-600">+18.7%</p>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
