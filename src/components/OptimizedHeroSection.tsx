@@ -84,7 +84,7 @@ const OptimizedHeroSection = () => {
               {/* Hero Image */}
               <div className="w-full max-w-sm md:max-w-md lg:max-w-lg">
                 <img
-                  src="https://www.finedge.in/public/uploads/blog/24665-2.jpg"
+                  src="https://www.kindpng.com/picc/m/559-5594980_taxes-illustration-financial-management-hd-png-download.png"
                   alt="Money Bharat Finance - Wealth Management and Investment Platform"
                   className="w-full h-auto rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300"
                 />
