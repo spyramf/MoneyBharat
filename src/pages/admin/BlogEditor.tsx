@@ -86,9 +86,9 @@ const BlogEditor = () => {
     
     try {
       const tags = values.tags.split(",").map(tag => tag.trim());
-      const authorObject = Object.values(blogAuthors).find(
+      const authorObject = blogAuthors.find(
         author => author.name === values.author
-      ) || blogAuthors.admin;
+      ) || blogAuthors[0]; // Use first author as fallback
       
       if (isEditing && id) {
         const updatedPost = {
@@ -107,7 +107,6 @@ const BlogEditor = () => {
         };
         
         updatePost(updatedPost);
-        toast.success("Blog post updated successfully!");
       } else {
         const newPost = {
           title: values.title,
@@ -124,7 +123,6 @@ const BlogEditor = () => {
         };
         
         addPost(newPost);
-        toast.success("Blog post created successfully!");
       }
       
       navigate("/admin/blogs");
@@ -270,7 +268,7 @@ const BlogEditor = () => {
                             </SelectTrigger>
                           </FormControl>
                           <SelectContent>
-                            {Object.values(blogAuthors).map((author) => (
+                            {blogAuthors.map((author) => (
                               <SelectItem key={author.name} value={author.name}>
                                 {author.name}
                               </SelectItem>

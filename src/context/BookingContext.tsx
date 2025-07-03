@@ -16,7 +16,10 @@ export type Booking = {
 };
 
 interface BookingContextType {
+  bookings: Booking[];
   addBooking: (booking: Omit<Booking, 'id' | 'status' | 'createdAt'>) => Promise<void>;
+  updateBookingStatus: (id: number, status: 'confirmed' | 'cancelled') => void;
+  deleteBooking: (id: number) => void;
   isLoading: boolean;
   error: Error | null;
 }
@@ -39,6 +42,32 @@ export const BookingProvider = ({ children }: BookingProviderProps) => {
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
   const [error] = useState<Error | null>(null);
+  const [bookings, setBookings] = useState<Booking[]>([
+    {
+      id: 1,
+      name: "John Doe",
+      email: "john@example.com",
+      phone: "+91-9876543210",
+      service: "Financial Planning",
+      date: "2024-01-15",
+      time: "10:00 AM",
+      message: "Need help with retirement planning",
+      status: "pending",
+      createdAt: "2024-01-10T10:00:00Z"
+    },
+    {
+      id: 2,
+      name: "Sarah Smith",
+      email: "sarah@example.com",
+      phone: "+91-9876543211",
+      service: "Investment Advisory",
+      date: "2024-01-16",
+      time: "2:00 PM",
+      message: "Looking for mutual fund investment options",
+      status: "confirmed",
+      createdAt: "2024-01-11T14:00:00Z"
+    }
+  ]);
 
   const addBooking = async (booking: Omit<Booking, 'id' | 'status' | 'createdAt'>) => {
     setIsLoading(true);
@@ -63,6 +92,15 @@ export const BookingProvider = ({ children }: BookingProviderProps) => {
       });
 
       if (response.ok) {
+        // Add to local state
+        const newBooking: Booking = {
+          ...booking,
+          id: Math.max(...bookings.map(b => b.id), 0) + 1,
+          status: 'pending',
+          createdAt: new Date().toISOString()
+        };
+        setBookings(prev => [...prev, newBooking]);
+        
         toast({
           title: "Booking submitted successfully!",
           description: "We'll get back to you within 24 hours to confirm your appointment.",
@@ -82,8 +120,23 @@ export const BookingProvider = ({ children }: BookingProviderProps) => {
     }
   };
 
+  const updateBookingStatus = (id: number, status: 'confirmed' | 'cancelled') => {
+    setBookings(prevBookings =>
+      prevBookings.map(booking =>
+        booking.id === id ? { ...booking, status } : booking
+      )
+    );
+  };
+
+  const deleteBooking = (id: number) => {
+    setBookings(prevBookings => prevBookings.filter(booking => booking.id !== id));
+  };
+
   const value = {
+    bookings,
     addBooking,
+    updateBookingStatus,
+    deleteBooking,
     isLoading,
     error,
   };
