@@ -17,8 +17,8 @@ const OptimizedHeroSection = () => {
           <div className="w-full md:w-1/2 space-y-6">
             <div>
               <h1 className="text-4xl md:text-5xl font-bold leading-tight lg:text-5xl">
-                Start Your <span className="text-fintech-green">Journey</span> <br />
-                <span className="text-black">with Mutual Funds, SIP & Insurance</span>
+                Start Your <span className="text-fintech-green">Wealth Journey</span> <br />
+                <span className="text-black">with Money Bharat</span>
               </h1>
               <p className="text-lg text-gray-700 max-w-lg mt-6 md:text-lg">
                 Experience a new era of financial freedom with Money Bharat's 
