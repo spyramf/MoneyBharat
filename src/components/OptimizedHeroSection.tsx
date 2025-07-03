@@ -103,7 +103,7 @@ const OptimizedHeroSection = () => {
 
 
 <div className="w-full">
-  <div className="flex items-center justify-center min-h-[500px] -mt-40">
+  <div className="flex items-center justify-center min-h-[500px] -mt-30">
     {/* Hero Image */}
     <div className="w-full max-w-5xl px-4">
       <img
