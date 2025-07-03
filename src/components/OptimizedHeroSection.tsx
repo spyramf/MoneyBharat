@@ -79,7 +79,7 @@ const OptimizedHeroSection = () => {
           </div>
           
           {/* Right hero image */}
-          <div className="w-full md:w-1/2">
+          {/* <div className="w-full md:w-1/2">
             <div className="relative flex items-center justify-center min-h-[400px]">
               {/* Background decoration */}
               <div className="absolute -top-10 -left-10 w-64 h-64 bg-fintech-green/5 rounded-full blur-xl"></div>
@@ -96,7 +96,31 @@ const OptimizedHeroSection = () => {
                 />
               </div>
             </div>
-          </div>
+          </div> */}
+
+<div className="w-full">
+  <div className="flex items-center justify-center min-h-[500px]">
+    {/* Hero Image */}
+    <div className="w-full max-w-5xl px-4">
+      <img
+        src="https://www.finedge.in/public/uploads/blog/24665-2.jpg"
+        alt="Money Bharat Finance - Wealth Management and Investment Platform"
+        className="w-full h-auto rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300"
+      />
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+      
         </div>
       </div>
       
