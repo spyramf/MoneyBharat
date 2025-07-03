@@ -21,35 +21,40 @@ export default defineConfig(({ mode }) => ({
     },
   },
   build: {
-    // Optimize bundle size and splitting
+    // Optimize for static hosting
     rollupOptions: {
       output: {
         manualChunks: {
           vendor: ['react', 'react-dom'],
           router: ['react-router-dom'],
           ui: ['@radix-ui/react-accordion', '@radix-ui/react-dialog', '@radix-ui/react-dropdown-menu'],
-          charts: ['recharts'],
-          animations: ['framer-motion'],
-          forms: ['react-hook-form', '@hookform/resolvers', 'zod'],
           icons: ['lucide-react']
         }
       }
     },
-    // Reduce chunk size warnings threshold
+    // Optimize for Hostinger
     chunkSizeWarningLimit: 1000,
-    // Enable source maps for better debugging
-    sourcemap: mode === 'development',
-    // Enable minification in production
-    minify: mode === 'production' ? 'esbuild' : false,
-    // Remove problematic terser configuration
+    sourcemap: false, // Disable source maps for production
+    minify: 'esbuild',
+    // Generate relative paths for assets
+    assetsDir: 'assets',
+    // Ensure proper file naming
+    rollupOptions: {
+      output: {
+        entryFileNames: 'assets/[name]-[hash].js',
+        chunkFileNames: 'assets/[name]-[hash].js',
+        assetFileNames: 'assets/[name]-[hash].[ext]'
+      }
+    }
   },
+  // Base path for deployment
+  base: './',
   // Optimize dependencies
   optimizeDeps: {
     include: [
       'react',
       'react-dom',
       'react-router-dom',
-      'framer-motion',
       'lucide-react'
     ]
   }
