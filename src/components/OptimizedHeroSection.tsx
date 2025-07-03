@@ -80,7 +80,8 @@ const OptimizedHeroSection = () => {
           
           {/* Right hero image */}
           <div className="w-full">
-            <div className="flex items-center justify-center min-h-[500px] -mt-40">
+            <div className="flex items-center justify-center min-h-[400px] -mt-40">
+              
               {/* Hero Image */}
               <div className="w-full max-w-sm md:max-w-md lg:max-w-lg">
                 <img
