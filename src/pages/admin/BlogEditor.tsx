@@ -11,11 +11,12 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Switch } from '@/components/ui/switch';
 import { Card, CardContent } from '@/components/ui/card';
 import { ImageUpload } from '@/components/ui/image-upload';
+import { RichTextEditor } from '@/components/ui/rich-text-editor';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { toast } from "sonner";
-import { Loader2 } from 'lucide-react';
+import { Loader2, Save, Eye } from 'lucide-react';
 
 const formSchema = z.object({
   title: z.string().min(5, "Title must be at least 5 characters"),
@@ -37,6 +38,7 @@ const BlogEditor = () => {
   const isEditing = id !== "new" && !!id;
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isDraft, setIsDraft] = useState(false);
   
   const { blogPosts, addPost, updatePost, getPostById, categories } = useBlog();
   
@@ -49,13 +51,31 @@ const BlogEditor = () => {
       content: "",
       category: "",
       author: "",
-      publishedDate: "",
-      readTime: "",
+      publishedDate: new Date().toLocaleDateString('en-US', { 
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric' 
+      }),
+      readTime: "5 min read",
       tags: "",
       isFeatured: false,
       featuredImage: "/placeholder.svg",
     },
   });
+
+  // Auto-generate slug from title
+  const watchTitle = form.watch('title');
+  useEffect(() => {
+    if (watchTitle && !isEditing) {
+      const slug = watchTitle
+        .toLowerCase()
+        .replace(/[^a-z0-9\s-]/g, '')
+        .replace(/\s+/g, '-')
+        .replace(/-+/g, '-')
+        .trim();
+      form.setValue('slug', slug);
+    }
+  }, [watchTitle, isEditing, form]);
 
   useEffect(() => {
     if (isEditing) {
@@ -88,7 +108,7 @@ const BlogEditor = () => {
       const tags = values.tags.split(",").map(tag => tag.trim());
       const authorObject = blogAuthors.find(
         author => author.name === values.author
-      ) || blogAuthors[0]; // Use first author as fallback
+      ) || blogAuthors[0];
       
       if (isEditing && id) {
         const updatedPost = {
@@ -107,6 +127,7 @@ const BlogEditor = () => {
         };
         
         updatePost(updatedPost);
+        toast.success("Blog post updated successfully!");
       } else {
         const newPost = {
           title: values.title,
@@ -123,6 +144,7 @@ const BlogEditor = () => {
         };
         
         addPost(newPost);
+        toast.success("Blog post created successfully!");
       }
       
       navigate("/admin/blogs");
@@ -134,14 +156,27 @@ const BlogEditor = () => {
     }
   };
 
+  const handlePreview = () => {
+    const formData = form.getValues();
+    // Store preview data in localStorage for preview page
+    localStorage.setItem('blogPreview', JSON.stringify(formData));
+    window.open('/blog/preview', '_blank');
+  };
+
   return (
     <AdminLayout>
       <div className="p-8">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold">{isEditing ? "Edit Blog Post" : "Create New Blog Post"}</h1>
-          <p className="text-gray-500">
-            {isEditing ? "Update the existing blog post details below." : "Fill out the form below to create a new blog post."}
-          </p>
+        <div className="mb-8 flex justify-between items-center">
+          <div>
+            <h1 className="text-3xl font-bold">{isEditing ? "Edit Blog Post" : "Create New Blog Post"}</h1>
+            <p className="text-gray-500">
+              {isEditing ? "Update the existing blog post details below." : "Fill out the form below to create a new blog post."}
+            </p>
+          </div>
+          <Button type="button" variant="outline" onClick={handlePreview}>
+            <Eye className="mr-2 h-4 w-4" />
+            Preview
+          </Button>
         </div>
         
         <Card>
@@ -206,15 +241,14 @@ const BlogEditor = () => {
                     <FormItem>
                       <FormLabel>Content</FormLabel>
                       <FormControl>
-                        <Textarea 
-                          placeholder="Write your blog post content here..." 
-                          {...field}
-                          className="min-h-[300px]"
-                          rows={12}
+                        <RichTextEditor
+                          value={field.value}
+                          onChange={field.onChange}
+                          placeholder="Write your blog post content here..."
                         />
                       </FormControl>
                       <FormDescription>
-                        Supports HTML formatting for rich text editing
+                        Use markdown syntax for formatting. Supports bold, italic, links, images, and more.
                       </FormDescription>
                       <FormMessage />
                     </FormItem>
@@ -384,7 +418,10 @@ const BlogEditor = () => {
                         {isEditing ? "Updating..." : "Creating..."}
                       </>
                     ) : (
-                      isEditing ? "Update Post" : "Create Post"
+                      <>
+                        <Save className="mr-2 h-4 w-4" />
+                        {isEditing ? "Update Post" : "Create Post"}
+                      </>
                     )}
                   </Button>
                 </div>

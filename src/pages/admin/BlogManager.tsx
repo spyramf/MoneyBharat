@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useBlog } from '@/context/BlogContext';
@@ -9,8 +8,10 @@ import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
-import { Plus, Search, Edit, Trash2 } from 'lucide-react';
+import { Plus, Search, Edit, Trash2, Download, FileDown } from 'lucide-react';
 import { toast } from 'sonner';
+import { exportContent, exportBlogsToCSV } from '@/utils/contentExport';
+import { useBooking } from '@/context/BookingContext';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -21,15 +22,22 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const BlogManager = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [categoryFilter, setCategoryFilter] = useState('all');
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
   const [postToDelete, setPostToDelete] = useState<number | null>(null);
-  const [refreshKey, setRefreshKey] = useState(0); // Add a refresh key to force re-render
+  const [refreshKey, setRefreshKey] = useState(0);
   
   const { blogPosts, deletePost } = useBlog();
+  const { bookings } = useBooking();
   
   // Force component to refresh when navigating back to this page
   useEffect(() => {
@@ -65,17 +73,47 @@ const BlogManager = () => {
     }
   };
 
+  const handleExportAll = () => {
+    exportContent(blogPosts, bookings);
+    toast.success("Content exported successfully!");
+  };
+
+  const handleExportBlogsCSV = () => {
+    exportBlogsToCSV(filteredBlogs);
+    toast.success("Blog posts exported to CSV!");
+  };
+
   return (
     <AdminLayout>
       <div className="p-8">
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-3xl font-bold">Blog Management</h1>
-          <Button asChild>
-            <Link to="/admin/blogs/new">
-              <Plus className="mr-2 h-4 w-4" />
-              Create New Post
-            </Link>
-          </Button>
+          <div className="flex gap-2">
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="outline">
+                  <Download className="mr-2 h-4 w-4" />
+                  Export
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent>
+                <DropdownMenuItem onClick={handleExportBlogsCSV}>
+                  <FileDown className="mr-2 h-4 w-4" />
+                  Export Blogs (CSV)
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={handleExportAll}>
+                  <Download className="mr-2 h-4 w-4" />
+                  Export All Content (JSON)
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+            <Button asChild>
+              <Link to="/admin/blogs/new">
+                <Plus className="mr-2 h-4 w-4" />
+                Create New Post
+              </Link>
+            </Button>
+          </div>
         </div>
         
         <div className="flex gap-4 mb-6">
