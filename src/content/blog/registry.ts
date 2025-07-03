@@ -3,12 +3,32 @@ import { BlogPost } from './types';
 import { mutualFunds2024Post } from './posts/mutual-funds-2024';
 import { sipInvestmentPost } from './posts/sip-investment-strategy';
 import { healthVsLifeInsurancePost } from './posts/health-vs-life-insurance';
+import { taxSavingStrategiesPost } from './posts/tax-saving-strategies-2024';
+import { homeLoanGuidePost } from './posts/home-loan-guide-2024';
+import { sipVsLumpsumPost } from './posts/sip-vs-lump-sum';
+import { termVsWholeLifePost } from './posts/term-vs-whole-life-insurance';
+import { emergencyFundGuidePost } from './posts/emergency-fund-guide';
+import { creditCardsGuidePost } from './posts/credit-cards-guide';
+import { capitalGainsTaxPost } from './posts/capital-gains-tax-guide';
+import { indexVsActiveFundsPost } from './posts/index-vs-active-funds';
+import { digitalBudgetingToolsPost } from './posts/digital-budgeting-tools';
+import { personalLoanGuidePost } from './posts/personal-loan-guide';
 
 // Registry of all blog posts - add new posts here
 export const blogPostsRegistry: BlogPost[] = [
   mutualFunds2024Post,
   sipInvestmentPost,
   healthVsLifeInsurancePost,
+  taxSavingStrategiesPost,
+  homeLoanGuidePost,
+  sipVsLumpsumPost,
+  termVsWholeLifePost,
+  emergencyFundGuidePost,
+  creditCardsGuidePost,
+  capitalGainsTaxPost,
+  indexVsActiveFundsPost,
+  digitalBudgetingToolsPost,
+  personalLoanGuidePost,
   // Add more posts here as you create them
 ];
 
