@@ -22,7 +22,7 @@ export const LocalImageUpload = ({ value, onChange, placeholder = "Upload image 
     return new Promise((resolve) => {
       const canvas = document.createElement('canvas');
       const ctx = canvas.getContext('2d');
-      const img = new Image();
+      const img = document.createElement('img') as HTMLImageElement;
       
       img.onload = () => {
         const ratio = Math.min(maxWidth / img.width, maxWidth / img.height);
