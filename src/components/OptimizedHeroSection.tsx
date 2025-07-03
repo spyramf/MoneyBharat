@@ -105,7 +105,7 @@ const OptimizedHeroSection = () => {
 <div className="w-full">
   <div className="flex items-center justify-center min-h-[500px] -mt-40">
     {/* Hero Image */}
-    <div className="w-full max-w-5xl px-4">
+    <div className="w-full max-w-2xl px-4">
       <img
         src="https://www.finedge.in/public/uploads/blog/24665-2.jpg"
         alt="Money Bharat Finance - Wealth Management and Investment Platform"
