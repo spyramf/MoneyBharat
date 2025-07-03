@@ -29,7 +29,10 @@ export default defineConfig(({ mode }) => ({
           router: ['react-router-dom'],
           ui: ['@radix-ui/react-accordion', '@radix-ui/react-dialog', '@radix-ui/react-dropdown-menu'],
           icons: ['lucide-react']
-        }
+        },
+        entryFileNames: 'assets/[name]-[hash].js',
+        chunkFileNames: 'assets/[name]-[hash].js',
+        assetFileNames: 'assets/[name]-[hash].[ext]'
       }
     },
     // Optimize for Hostinger
@@ -37,15 +40,7 @@ export default defineConfig(({ mode }) => ({
     sourcemap: false, // Disable source maps for production
     minify: 'esbuild',
     // Generate relative paths for assets
-    assetsDir: 'assets',
-    // Ensure proper file naming
-    rollupOptions: {
-      output: {
-        entryFileNames: 'assets/[name]-[hash].js',
-        chunkFileNames: 'assets/[name]-[hash].js',
-        assetFileNames: 'assets/[name]-[hash].[ext]'
-      }
-    }
+    assetsDir: 'assets'
   },
   // Base path for deployment
   base: './',
