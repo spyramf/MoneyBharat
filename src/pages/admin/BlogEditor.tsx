@@ -10,7 +10,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Switch } from '@/components/ui/switch';
 import { Card, CardContent } from '@/components/ui/card';
-import { ImageUpload } from '@/components/ui/image-upload';
+import { LocalImageUpload } from '@/components/ui/local-image-upload';
 import { RichTextEditor } from '@/components/ui/rich-text-editor';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -38,9 +38,8 @@ const BlogEditor = () => {
   const isEditing = id !== "new" && !!id;
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isDraft, setIsDraft] = useState(false);
   
-  const { blogPosts, addPost, updatePost, getPostById, categories } = useBlog();
+  const { addPost, updatePost, getPostById, categories } = useBlog();
   
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -59,7 +58,7 @@ const BlogEditor = () => {
       readTime: "5 min read",
       tags: "",
       isFeatured: false,
-      featuredImage: "/placeholder.svg",
+      featuredImage: "",
     },
   });
 
@@ -127,7 +126,6 @@ const BlogEditor = () => {
         };
         
         updatePost(updatedPost);
-        toast.success("Blog post updated successfully!");
       } else {
         const newPost = {
           title: values.title,
@@ -144,7 +142,6 @@ const BlogEditor = () => {
         };
         
         addPost(newPost);
-        toast.success("Blog post created successfully!");
       }
       
       navigate("/admin/blogs");
@@ -158,7 +155,6 @@ const BlogEditor = () => {
 
   const handlePreview = () => {
     const formData = form.getValues();
-    // Store preview data in localStorage for preview page
     localStorage.setItem('blogPreview', JSON.stringify(formData));
     window.open('/blog/preview', '_blank');
   };
@@ -367,7 +363,7 @@ const BlogEditor = () => {
                     <FormItem>
                       <FormLabel>Featured Image</FormLabel>
                       <FormControl>
-                        <ImageUpload
+                        <LocalImageUpload
                           value={field.value}
                           onChange={field.onChange}
                           placeholder="Upload featured image for your blog post"

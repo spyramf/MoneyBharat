@@ -1,6 +1,7 @@
 
-import React, { createContext, useContext, useState, ReactNode } from 'react';
-import { blogPosts as staticBlogPosts, BlogPost, blogCategories as initialCategories, blogAuthors } from '@/data/blogData';
+import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { BlogPost, blogCategories as initialCategories } from '@/data/blogData';
+import { blogDataService } from '@/services/blogDataService';
 import { toast } from 'sonner';
 
 interface BlogContextType {
@@ -11,6 +12,7 @@ interface BlogContextType {
   addPost: (post: Omit<BlogPost, 'id'>) => void;
   updatePost: (post: BlogPost) => void;
   deletePost: (id: number) => void;
+  refreshPosts: () => void;
   isLoading: boolean;
   error: Error | null;
 }
@@ -31,40 +33,48 @@ interface BlogProviderProps {
 
 export const BlogProvider = ({ children }: BlogProviderProps) => {
   const [categories] = useState(initialCategories);
-  const [blogPosts, setBlogPosts] = useState(staticBlogPosts);
-  const [isLoading] = useState(false);
+  const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [error] = useState<Error | null>(null);
 
+  const refreshPosts = () => {
+    const posts = blogDataService.getAllPosts();
+    setBlogPosts(posts);
+  };
+
+  useEffect(() => {
+    refreshPosts();
+    setIsLoading(false);
+  }, []);
+
   const getPostById = (id: number) => {
-    return blogPosts.find(post => post.id === id);
+    return blogDataService.getPostById(id);
   };
 
   const getPostBySlug = (slug: string) => {
-    return blogPosts.find(post => post.slug === slug);
+    return blogDataService.getPostBySlug(slug);
   };
 
   const addPost = (newPostData: Omit<BlogPost, 'id'>) => {
-    const newId = Math.max(...blogPosts.map(p => p.id)) + 1;
-    const newPost: BlogPost = {
-      ...newPostData,
-      id: newId,
-    };
-    setBlogPosts(prevPosts => [...prevPosts, newPost]);
+    const newPost = blogDataService.addPost(newPostData);
+    refreshPosts();
     toast.success('Blog post created successfully!');
   };
 
   const updatePost = (updatedPost: BlogPost) => {
-    setBlogPosts(prevPosts => 
-      prevPosts.map(post => 
-        post.id === updatedPost.id ? updatedPost : post
-      )
-    );
+    blogDataService.updatePost(updatedPost);
+    refreshPosts();
     toast.success('Blog post updated successfully!');
   };
 
   const deletePost = (id: number) => {
-    setBlogPosts(prevPosts => prevPosts.filter(post => post.id !== id));
-    toast.success('Blog post deleted successfully!');
+    const success = blogDataService.deletePost(id);
+    if (success) {
+      refreshPosts();
+      toast.success('Blog post deleted successfully!');
+    } else {
+      toast.error('Failed to delete blog post');
+    }
   };
 
   const value = {
@@ -75,6 +85,7 @@ export const BlogProvider = ({ children }: BlogProviderProps) => {
     addPost,
     updatePost,
     deletePost,
+    refreshPosts,
     isLoading,
     error,
   };

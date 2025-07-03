@@ -1,17 +1,18 @@
+
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useBlog } from '@/context/BlogContext';
 import { blogCategories } from '@/data/blogData';
+import { blogDataService } from '@/services/blogDataService';
 import AdminLayout from '@/components/AdminLayout';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
-import { Plus, Search, Edit, Trash2, Download, FileDown } from 'lucide-react';
+import { Plus, Search, Edit, Trash2, Download, Upload, FileDown } from 'lucide-react';
 import { toast } from 'sonner';
-import { exportContent, exportBlogsToCSV } from '@/utils/contentExport';
-import { useBooking } from '@/context/BookingContext';
+import { exportBlogsToCSV } from '@/utils/contentExport';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -36,22 +37,16 @@ const BlogManager = () => {
   const [postToDelete, setPostToDelete] = useState<number | null>(null);
   const [refreshKey, setRefreshKey] = useState(0);
   
-  const { blogPosts, deletePost } = useBlog();
-  const { bookings } = useBooking();
+  const { blogPosts, deletePost, refreshPosts } = useBlog();
   
-  // Force component to refresh when navigating back to this page
   useEffect(() => {
-    const refreshData = () => setRefreshKey(prev => prev + 1);
-    window.addEventListener('focus', refreshData);
-    return () => window.removeEventListener('focus', refreshData);
-  }, []);
+    refreshPosts();
+  }, [refreshKey, refreshPosts]);
   
   const filteredBlogs = blogPosts.filter(post => {
-    // Apply search filter
     const matchesSearch = post.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
                           post.excerpt.toLowerCase().includes(searchTerm.toLowerCase());
     
-    // Apply category filter
     const matchesCategory = categoryFilter === 'all' ? true : post.category.toLowerCase().replace(/\s+/g, '-') === categoryFilter;
     
     return matchesSearch && matchesCategory;
@@ -65,17 +60,51 @@ const BlogManager = () => {
   const handleDeleteConfirm = () => {
     if (postToDelete) {
       deletePost(postToDelete);
-      toast.success("Blog post deleted successfully");
       setIsDeleteDialogOpen(false);
       setPostToDelete(null);
-      // Force refresh to ensure UI is updated
       setRefreshKey(prev => prev + 1);
     }
   };
 
-  const handleExportAll = () => {
-    exportContent(blogPosts, bookings);
-    toast.success("Content exported successfully!");
+  const handleExportJSON = () => {
+    const data = blogDataService.exportData();
+    const blob = new Blob([data], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `blog-data-${new Date().toISOString().split('T')[0]}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+    toast.success("Blog data exported successfully!");
+  };
+
+  const handleImportJSON = () => {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = '.json';
+    input.onchange = (e) => {
+      const file = (e.target as HTMLInputElement).files?.[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          try {
+            const data = e.target?.result as string;
+            const success = blogDataService.importData(data);
+            if (success) {
+              refreshPosts();
+              setRefreshKey(prev => prev + 1);
+              toast.success("Blog data imported successfully!");
+            } else {
+              toast.error("Failed to import data");
+            }
+          } catch (error) {
+            toast.error("Invalid JSON file");
+          }
+        };
+        reader.readAsText(file);
+      }
+    };
+    input.click();
   };
 
   const handleExportBlogsCSV = () => {
@@ -101,12 +130,16 @@ const BlogManager = () => {
                   <FileDown className="mr-2 h-4 w-4" />
                   Export Blogs (CSV)
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={handleExportAll}>
+                <DropdownMenuItem onClick={handleExportJSON}>
                   <Download className="mr-2 h-4 w-4" />
-                  Export All Content (JSON)
+                  Export All Data (JSON)
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
+            <Button variant="outline" onClick={handleImportJSON}>
+              <Upload className="mr-2 h-4 w-4" />
+              Import
+            </Button>
             <Button asChild>
               <Link to="/admin/blogs/new">
                 <Plus className="mr-2 h-4 w-4" />
