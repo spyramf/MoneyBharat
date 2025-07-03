@@ -90,8 +90,8 @@ const OptimizedHeroSection = () => {
                   src="/lovable-uploads/4e2c31d4-0602-4d3c-affe-581b6a3c2d63.png"
                   alt="Money Bharat Finance - Wealth Management and Investment Platform"
                   className="w-full h-auto rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300"
-                  width={800}
-                  height={600}
+                  width={1000}
+                  height={800}
                   priority={true}
                 />
               </div>
