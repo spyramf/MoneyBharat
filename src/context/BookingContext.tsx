@@ -1,6 +1,7 @@
 
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { useToast } from '@/hooks/use-toast';
+import { bookingDataService } from '@/services/bookingDataService';
 
 export type Booking = {
   id: number;
@@ -20,6 +21,9 @@ interface BookingContextType {
   addBooking: (booking: Omit<Booking, 'id' | 'status' | 'createdAt'>) => Promise<void>;
   updateBookingStatus: (id: number, status: 'confirmed' | 'cancelled') => void;
   deleteBooking: (id: number) => void;
+  refreshBookings: () => void;
+  exportBookings: () => string;
+  importBookings: (jsonData: string) => { success: boolean; error?: string };
   isLoading: boolean;
   error: Error | null;
 }
@@ -40,40 +44,28 @@ interface BookingProviderProps {
 
 export const BookingProvider = ({ children }: BookingProviderProps) => {
   const { toast } = useToast();
+  const [bookings, setBookings] = useState<Booking[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error] = useState<Error | null>(null);
-  const [bookings, setBookings] = useState<Booking[]>([
-    {
-      id: 1,
-      name: "John Doe",
-      email: "john@example.com",
-      phone: "+91-9876543210",
-      service: "Financial Planning",
-      date: "2024-01-15",
-      time: "10:00 AM",
-      message: "Need help with retirement planning",
-      status: "pending",
-      createdAt: "2024-01-10T10:00:00Z"
-    },
-    {
-      id: 2,
-      name: "Sarah Smith",
-      email: "sarah@example.com",
-      phone: "+91-9876543211",
-      service: "Investment Advisory",
-      date: "2024-01-16",
-      time: "2:00 PM",
-      message: "Looking for mutual fund investment options",
-      status: "confirmed",
-      createdAt: "2024-01-11T14:00:00Z"
-    }
-  ]);
+
+  // Load bookings on mount
+  useEffect(() => {
+    refreshBookings();
+  }, []);
+
+  const refreshBookings = () => {
+    setBookings(bookingDataService.getAllBookings());
+  };
 
   const addBooking = async (booking: Omit<Booking, 'id' | 'status' | 'createdAt'>) => {
     setIsLoading(true);
     
     try {
-      // Create FormSubmit form data
+      // Add to local storage
+      const newBooking = bookingDataService.addBooking(booking);
+      setBookings(bookingDataService.getAllBookings());
+
+      // Send email notification via FormSubmit
       const formData = new FormData();
       formData.append('name', booking.name);
       formData.append('email', booking.email);
@@ -84,36 +76,32 @@ export const BookingProvider = ({ children }: BookingProviderProps) => {
       formData.append('message', booking.message || '');
       formData.append('_subject', `New Booking Request from ${booking.name}`);
       formData.append('_template', 'table');
+      formData.append('_captcha', 'false');
 
-      // Submit to FormSubmit
+      // Submit to FormSubmit (this will handle email sending)
       const response = await fetch('https://formsubmit.co/spyraexim@gmail.com', {
         method: 'POST',
         body: formData
       });
 
       if (response.ok) {
-        // Add to local state
-        const newBooking: Booking = {
-          ...booking,
-          id: Math.max(...bookings.map(b => b.id), 0) + 1,
-          status: 'pending',
-          createdAt: new Date().toISOString()
-        };
-        setBookings(prev => [...prev, newBooking]);
-        
         toast({
           title: "Booking submitted successfully!",
           description: "We'll get back to you within 24 hours to confirm your appointment.",
         });
       } else {
-        throw new Error('Failed to submit booking');
+        // Even if email fails, booking is saved locally
+        toast({
+          title: "Booking saved locally",
+          description: "Your booking has been saved, but email notification may have failed.",
+        });
       }
     } catch (error) {
       console.error('Error submitting booking:', error);
+      // Booking is still saved locally even if email fails
       toast({
-        title: "Error submitting booking",
-        description: "Please try again or contact us directly at spyraexim@gmail.com",
-        variant: "destructive",
+        title: "Booking saved",
+        description: "Your booking has been saved locally. Email notification may have failed.",
       });
     } finally {
       setIsLoading(false);
@@ -121,15 +109,47 @@ export const BookingProvider = ({ children }: BookingProviderProps) => {
   };
 
   const updateBookingStatus = (id: number, status: 'confirmed' | 'cancelled') => {
-    setBookings(prevBookings =>
-      prevBookings.map(booking =>
-        booking.id === id ? { ...booking, status } : booking
-      )
-    );
+    const success = bookingDataService.updateBookingStatus(id, status);
+    if (success) {
+      setBookings(bookingDataService.getAllBookings());
+      toast({
+        title: status === 'confirmed' ? "Booking confirmed" : "Booking cancelled",
+        description: `Booking has been ${status} successfully.`,
+      });
+    }
   };
 
   const deleteBooking = (id: number) => {
-    setBookings(prevBookings => prevBookings.filter(booking => booking.id !== id));
+    const success = bookingDataService.deleteBooking(id);
+    if (success) {
+      setBookings(bookingDataService.getAllBookings());
+      toast({
+        title: "Booking deleted",
+        description: "Booking has been removed successfully.",
+      });
+    }
+  };
+
+  const exportBookings = (): string => {
+    return bookingDataService.exportBookings();
+  };
+
+  const importBookings = (jsonData: string): { success: boolean; error?: string } => {
+    const result = bookingDataService.importBookings(jsonData);
+    if (result.success) {
+      setBookings(bookingDataService.getAllBookings());
+      toast({
+        title: "Bookings imported",
+        description: "Bookings have been imported successfully.",
+      });
+    } else {
+      toast({
+        title: "Import failed",
+        description: result.error || "Failed to import bookings.",
+        variant: "destructive",
+      });
+    }
+    return result;
   };
 
   const value = {
@@ -137,6 +157,9 @@ export const BookingProvider = ({ children }: BookingProviderProps) => {
     addBooking,
     updateBookingStatus,
     deleteBooking,
+    refreshBookings,
+    exportBookings,
+    importBookings,
     isLoading,
     error,
   };

@@ -1,6 +1,7 @@
 
 import { BlogPost } from '@/content/blog/types';
 import { Booking } from '@/context/BookingContext';
+import { bookingDataService } from '@/services/bookingDataService';
 
 export interface ExportData {
   blogs: BlogPost[];
@@ -88,6 +89,43 @@ export const exportBookingsToCSV = (bookings: Booking[]): void => {
   document.body.removeChild(link);
   
   URL.revokeObjectURL(url);
+};
+
+// Enhanced booking-specific export functions
+export const exportBookingsToJSON = (): void => {
+  const bookings = bookingDataService.getAllBookings();
+  const dataStr = JSON.stringify(bookings, null, 2);
+  const dataBlob = new Blob([dataStr], { type: 'application/json' });
+  
+  const url = URL.createObjectURL(dataBlob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = `bookings-backup-${new Date().toISOString().split('T')[0]}.json`;
+  
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  
+  URL.revokeObjectURL(url);
+};
+
+export const importBookingsFromFile = (file: File): Promise<{ success: boolean; error?: string }> => {
+  return new Promise((resolve) => {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      try {
+        const content = e.target?.result as string;
+        const result = bookingDataService.importBookings(content);
+        resolve(result);
+      } catch (error) {
+        resolve({ success: false, error: 'Failed to read file' });
+      }
+    };
+    reader.onerror = () => {
+      resolve({ success: false, error: 'Failed to read file' });
+    };
+    reader.readAsText(file);
+  });
 };
 
 export const validateImportData = (data: any): data is ExportData => {

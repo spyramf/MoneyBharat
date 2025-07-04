@@ -4,17 +4,17 @@ import { Helmet } from 'react-helmet-async';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-import { Check, Calendar, Loader2 } from 'lucide-react';
+import { Check, Calendar } from 'lucide-react';
 import { toast } from "sonner";
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Card, CardContent } from '@/components/ui/card';
-import { supabase } from '@/integrations/supabase/client';
+import { useBooking } from '@/context/BookingContext';
 
 const formSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
@@ -44,6 +44,7 @@ const Booking = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
+  const { addBooking } = useBooking();
   
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -63,45 +64,19 @@ const Booking = () => {
     console.log("Form values:", values);
     
     try {
-      // Direct Supabase insertion without authentication dependencies
-      const { error: supabaseError } = await supabase
-        .from('bookings')
-        .insert({
-          name: values.name,
-          email: values.email,
-          phone: values.phone,
-          service: values.service,
-          date: values.preferredDate,
-          time: values.preferredTime,
-          message: values.message || '',
-          status: 'pending'
-        });
+      // Add booking to local storage and send email
+      await addBooking({
+        name: values.name,
+        email: values.email,
+        phone: values.phone,
+        service: values.service,
+        date: values.preferredDate,
+        time: values.preferredTime,
+        message: values.message || '',
+      });
 
-      if (supabaseError) {
-        console.error('Supabase error:', supabaseError);
-        // Continue with FormSubmit even if Supabase fails
-        toast.error("Booking saved with limited functionality. Email notification will still be sent.");
-      } else {
-        console.log('Booking saved to Supabase successfully');
-        toast.success("Booking submitted successfully!");
-      }
-      
-      // Submit to FormSubmit for email notifications (as backup and for email functionality)
-      if (formRef.current) {
-        const serviceLabel = services.find(s => s.value === values.service)?.label || values.service;
-        
-        const serviceInput = formRef.current.querySelector('input[name="_subject"]') as HTMLInputElement;
-        if (serviceInput) {
-          serviceInput.value = `Booking Request: ${serviceLabel}`;
-        }
-        
-        formRef.current.submit();
-        setIsSubmitted(true);
-        form.reset();
-      } else {
-        setIsSubmitted(true);
-        form.reset();
-      }
+      setIsSubmitted(true);
+      form.reset();
     } catch (error) {
       console.error("Error during submission:", error);
       toast.error("There was a problem submitting your request. Please try again.");
@@ -156,19 +131,7 @@ const Booking = () => {
               <Card>
                 <CardContent className="p-6">
                   <Form {...form}>
-                    <form 
-                      ref={formRef}
-                      onSubmit={form.handleSubmit(onSubmit)}
-                      action="https://formsubmit.co/spyraexim@gmail.com"
-                      method="POST"
-                      className="space-y-6"
-                    >
-                      {/* FormSubmit configuration */}
-                      <input type="hidden" name="_captcha" value="false" />
-                      <input type="hidden" name="_next" value={window.location.href} />
-                      <input type="hidden" name="_subject" value="New Booking Request" />
-                      <input type="hidden" name="_template" value="table" />
-                      
+                    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <FormField
                           control={form.control}
@@ -177,7 +140,7 @@ const Booking = () => {
                             <FormItem>
                               <FormLabel>Full Name</FormLabel>
                               <FormControl>
-                                <Input placeholder="John Doe" {...field} name="Full Name" />
+                                <Input placeholder="John Doe" {...field} />
                               </FormControl>
                               <FormMessage />
                             </FormItem>
@@ -191,7 +154,7 @@ const Booking = () => {
                             <FormItem>
                               <FormLabel>Email</FormLabel>
                               <FormControl>
-                                <Input type="email" placeholder="john.doe@example.com" {...field} name="Email" />
+                                <Input type="email" placeholder="john.doe@example.com" {...field} />
                               </FormControl>
                               <FormMessage />
                             </FormItem>
@@ -207,7 +170,7 @@ const Booking = () => {
                             <FormItem>
                               <FormLabel>Phone Number</FormLabel>
                               <FormControl>
-                                <Input placeholder="+91 9876543210" {...field} name="Phone Number" />
+                                <Input placeholder="+91 9876543210" {...field} />
                               </FormControl>
                               <FormMessage />
                             </FormItem>
@@ -220,23 +183,7 @@ const Booking = () => {
                           render={({ field }) => (
                             <FormItem>
                               <FormLabel>Service</FormLabel>
-                              <Select 
-                                onValueChange={(value) => {
-                                  field.onChange(value);
-                                  const serviceLabel = services.find(s => s.value === value)?.label || value;
-                                  const serviceInput = formRef.current?.querySelector('input[name="Service"]') as HTMLInputElement;
-                                  if (serviceInput) {
-                                    serviceInput.value = serviceLabel;
-                                  } else {
-                                    const input = document.createElement('input');
-                                    input.type = 'hidden';
-                                    input.name = 'Service';
-                                    input.value = serviceLabel;
-                                    formRef.current?.appendChild(input);
-                                  }
-                                }}
-                                defaultValue={field.value}
-                              >
+                              <Select onValueChange={field.onChange} defaultValue={field.value}>
                                 <FormControl>
                                   <SelectTrigger>
                                     <SelectValue placeholder="Select a service" />
@@ -250,7 +197,6 @@ const Booking = () => {
                                   ))}
                                 </SelectContent>
                               </Select>
-                              <input type="hidden" name="Service" value="" />
                               <FormMessage />
                             </FormItem>
                           )}
@@ -265,11 +211,7 @@ const Booking = () => {
                             <FormItem>
                               <FormLabel>Preferred Date</FormLabel>
                               <FormControl>
-                                <Input 
-                                  type="date" 
-                                  {...field} 
-                                  name="Preferred Date"
-                                />
+                                <Input type="date" {...field} />
                               </FormControl>
                               <FormMessage />
                             </FormItem>
@@ -282,22 +224,7 @@ const Booking = () => {
                           render={({ field }) => (
                             <FormItem>
                               <FormLabel>Preferred Time</FormLabel>
-                              <Select 
-                                onValueChange={(value) => {
-                                  field.onChange(value);
-                                  const timeInput = formRef.current?.querySelector('input[name="Preferred Time"]') as HTMLInputElement;
-                                  if (timeInput) {
-                                    timeInput.value = value;
-                                  } else {
-                                    const input = document.createElement('input');
-                                    input.type = 'hidden';
-                                    input.name = 'Preferred Time';
-                                    input.value = value;
-                                    formRef.current?.appendChild(input);
-                                  }
-                                }}
-                                defaultValue={field.value}
-                              >
+                              <Select onValueChange={field.onChange} defaultValue={field.value}>
                                 <FormControl>
                                   <SelectTrigger>
                                     <SelectValue placeholder="Select a time slot" />
@@ -311,7 +238,6 @@ const Booking = () => {
                                   ))}
                                 </SelectContent>
                               </Select>
-                              <input type="hidden" name="Preferred Time" value="" />
                               <FormMessage />
                             </FormItem>
                           )}
@@ -330,7 +256,6 @@ const Booking = () => {
                                 className="resize-none"
                                 rows={4}
                                 {...field}
-                                name="Additional Information"
                               />
                             </FormControl>
                             <FormMessage />

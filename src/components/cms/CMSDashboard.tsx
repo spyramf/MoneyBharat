@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { useBlog } from '@/context/BlogContext';
@@ -8,7 +8,12 @@ import { FileText, Calendar, TrendingUp, Users } from 'lucide-react';
 
 export const CMSDashboard = () => {
   const { blogPosts } = useBlog();
-  const { bookings } = useBooking();
+  const { bookings, refreshBookings } = useBooking();
+
+  // Refresh bookings when component mounts to ensure latest data
+  useEffect(() => {
+    refreshBookings();
+  }, [refreshBookings]);
 
   const blogStats = {
     total: blogPosts.length,
@@ -31,7 +36,7 @@ export const CMSDashboard = () => {
       date: post.publishedDate,
       status: 'published'
     })),
-    ...bookings.slice(0, 3).map(booking => ({
+    ...bookings.slice(-3).map(booking => ({
       type: 'booking',
       title: `Booking: ${booking.name} - ${booking.service}`,
       date: booking.createdAt,
@@ -101,28 +106,34 @@ export const CMSDashboard = () => {
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
-            {recentActivity.map((activity, index) => (
-              <div key={index} className="flex items-center justify-between">
-                <div className="flex items-center space-x-3">
-                  {activity.type === 'blog' ? (
-                    <FileText className="h-4 w-4 text-blue-500" />
-                  ) : (
-                    <Calendar className="h-4 w-4 text-green-500" />
-                  )}
-                  <div>
-                    <p className="text-sm font-medium">{activity.title}</p>
-                    <p className="text-xs text-muted-foreground">{activity.date}</p>
+            {recentActivity.length > 0 ? (
+              recentActivity.map((activity, index) => (
+                <div key={index} className="flex items-center justify-between">
+                  <div className="flex items-center space-x-3">
+                    {activity.type === 'blog' ? (
+                      <FileText className="h-4 w-4 text-blue-500" />
+                    ) : (
+                      <Calendar className="h-4 w-4 text-green-500" />
+                    )}
+                    <div>
+                      <p className="text-sm font-medium">{activity.title}</p>
+                      <p className="text-xs text-muted-foreground">
+                        {new Date(activity.date).toLocaleDateString()}
+                      </p>
+                    </div>
                   </div>
+                  <Badge variant={
+                    activity.status === 'published' ? 'default' :
+                    activity.status === 'confirmed' ? 'default' :
+                    activity.status === 'pending' ? 'outline' : 'destructive'
+                  }>
+                    {activity.status}
+                  </Badge>
                 </div>
-                <Badge variant={
-                  activity.status === 'published' ? 'default' :
-                  activity.status === 'confirmed' ? 'default' :
-                  activity.status === 'pending' ? 'outline' : 'destructive'
-                }>
-                  {activity.status}
-                </Badge>
-              </div>
-            ))}
+              ))
+            ) : (
+              <p className="text-muted-foreground text-center py-4">No recent activity</p>
+            )}
           </div>
         </CardContent>
       </Card>
