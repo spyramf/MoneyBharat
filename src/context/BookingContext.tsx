@@ -64,45 +64,11 @@ export const BookingProvider = ({ children }: BookingProviderProps) => {
       // Add to local storage
       const newBooking = bookingDataService.addBooking(booking);
       setBookings(bookingDataService.getAllBookings());
-
-      // Send email notification via FormSubmit
-      const formData = new FormData();
-      formData.append('name', booking.name);
-      formData.append('email', booking.email);
-      formData.append('phone', booking.phone);
-      formData.append('service', booking.service);
-      formData.append('date', booking.date);
-      formData.append('time', booking.time);
-      formData.append('message', booking.message || '');
-      formData.append('_subject', `New Booking Request from ${booking.name}`);
-      formData.append('_template', 'table');
-      formData.append('_captcha', 'false');
-
-      // Submit to FormSubmit (this will handle email sending)
-      const response = await fetch('https://formsubmit.co/spyraexim@gmail.com', {
-        method: 'POST',
-        body: formData
-      });
-
-      if (response.ok) {
-        toast({
-          title: "Booking submitted successfully!",
-          description: "We'll get back to you within 24 hours to confirm your appointment.",
-        });
-      } else {
-        // Even if email fails, booking is saved locally
-        toast({
-          title: "Booking saved locally",
-          description: "Your booking has been saved, but email notification may have failed.",
-        });
-      }
+      
+      console.log('Booking saved to localStorage:', newBooking);
     } catch (error) {
-      console.error('Error submitting booking:', error);
-      // Booking is still saved locally even if email fails
-      toast({
-        title: "Booking saved",
-        description: "Your booking has been saved locally. Email notification may have failed.",
-      });
+      console.error('Error saving booking:', error);
+      throw error;
     } finally {
       setIsLoading(false);
     }

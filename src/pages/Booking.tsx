@@ -43,7 +43,7 @@ const timeSlots = [
 const Booking = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const formRef = useRef<HTMLFormElement>(null);
+  const hiddenFormRef = useRef<HTMLFormElement>(null);
   const { addBooking } = useBooking();
   
   const form = useForm<z.infer<typeof formSchema>>({
@@ -59,12 +59,31 @@ const Booking = () => {
     },
   });
 
+  const submitHiddenForm = (values: z.infer<typeof formSchema>) => {
+    if (hiddenFormRef.current) {
+      // Populate hidden form with booking data
+      const formData = new FormData(hiddenFormRef.current);
+      
+      // Set form values
+      (hiddenFormRef.current.querySelector('[name="name"]') as HTMLInputElement).value = values.name;
+      (hiddenFormRef.current.querySelector('[name="email"]') as HTMLInputElement).value = values.email;
+      (hiddenFormRef.current.querySelector('[name="phone"]') as HTMLInputElement).value = values.phone;
+      (hiddenFormRef.current.querySelector('[name="service"]') as HTMLInputElement).value = values.service;
+      (hiddenFormRef.current.querySelector('[name="date"]') as HTMLInputElement).value = values.preferredDate;
+      (hiddenFormRef.current.querySelector('[name="time"]') as HTMLInputElement).value = values.preferredTime;
+      (hiddenFormRef.current.querySelector('[name="message"]') as HTMLInputElement).value = values.message || '';
+      
+      // Submit form to FormSubmit
+      hiddenFormRef.current.submit();
+    }
+  };
+
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     setIsSubmitting(true);
     console.log("Form values:", values);
     
     try {
-      // Add booking to local storage and send email
+      // Add booking to local storage
       await addBooking({
         name: values.name,
         email: values.email,
@@ -75,8 +94,13 @@ const Booking = () => {
         message: values.message || '',
       });
 
+      // Submit hidden form to FormSubmit for email notification
+      submitHiddenForm(values);
+
       setIsSubmitted(true);
       form.reset();
+      
+      toast.success("Booking submitted successfully! We'll get back to you within 24 hours to confirm your appointment.");
     } catch (error) {
       console.error("Error during submission:", error);
       toast.error("There was a problem submitting your request. Please try again.");
@@ -103,6 +127,27 @@ const Booking = () => {
       </Helmet>
 
       <Navbar />
+
+      {/* Hidden form for FormSubmit email service */}
+      <form
+        ref={hiddenFormRef}
+        action="https://formsubmit.co/spyraexim@gmail.com"
+        method="POST"
+        style={{ display: 'none' }}
+      >
+        <input type="hidden" name="_subject" value="New Booking Request - Money Bharat" />
+        <input type="hidden" name="_template" value="table" />
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="hidden" name="_autoresponse" value="Thank you for booking a consultation with Money Bharat! We have received your request and will contact you within 24 hours to confirm your appointment." />
+        <input type="hidden" name="_next" value="https://moneybharat.com/booking?success=true" />
+        <input type="text" name="name" />
+        <input type="email" name="email" />
+        <input type="text" name="phone" />
+        <input type="text" name="service" />
+        <input type="text" name="date" />
+        <input type="text" name="time" />
+        <input type="text" name="message" />
+      </form>
 
       <main className="pt-24 pb-16">
         <section className="container mx-auto px-4">
