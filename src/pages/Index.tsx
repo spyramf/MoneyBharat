@@ -78,8 +78,8 @@ const Index = () => {
 
   return (
     <div className="min-h-screen">
-      {/* Handle URL canonicalization */}
-      <URLRedirectHandler enableRedirect={true} />
+      {/* Handle URL canonicalization - disabled in development to prevent redirect errors */}
+      <URLRedirectHandler enableRedirect={process.env.NODE_ENV === 'production'} />
       
       <SEOHead 
         title="Money Bharat Finance - Mutual Funds, Insurance & Loans"
