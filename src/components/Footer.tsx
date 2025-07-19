@@ -1,6 +1,7 @@
 import { Facebook, Instagram, Linkedin, Twitter, Mail, Phone, MapPin, Download, ArrowUp } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+
 const Footer = () => {
   const scrollToTop = () => {
     window.scrollTo({
@@ -8,15 +9,16 @@ const Footer = () => {
       behavior: 'smooth'
     });
   };
+
   const quickTools = [{
     name: "SIP Calculator",
-    path: "/sip-calculator"
+    path: "/tools/sip-calculator"
   }, {
     name: "EMI Calculator",
-    path: "/emi-calculator"
+    path: "/tools/emi-calculator"
   }, {
     name: "Tax Saving",
-    path: "/tax-saving"
+    path: "/tools/tax-saving"
   }, {
     name: "Book Consultation",
     path: "/booking"
@@ -27,6 +29,7 @@ const Footer = () => {
     name: "Blog",
     path: "/blog"
   }];
+
   const trustBadges = [{
     text: "AMFI Registered",
     subtext: "ARN - 225204"
@@ -40,6 +43,7 @@ const Footer = () => {
     text: "ISO 27001",
     subtext: "Certified Security"
   }];
+
   return <footer className="relative overflow-hidden bg-gradient-to-br from-gray-900 to-gray-800">
       {/* Main Footer Content */}
       <div className="relative z-10 py-16 md:py-20">
@@ -247,4 +251,5 @@ const Footer = () => {
       </div>
     </footer>;
 };
+
 export default Footer;
