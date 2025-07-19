@@ -26,6 +26,7 @@ export const getPageDescription = (page: string): string => {
     'term-insurance': 'High coverage term life insurance plans with affordable premiums. Secure your family\'s financial future with trusted insurance providers.',
     'vehicle-insurance': 'Motor and vehicle insurance with comprehensive coverage, instant quotes, and hassle-free claims. Protect your vehicle with the best insurance plans.',
     'about': 'Learn about Money Bharat Finance - India\'s trusted financial platform serving 50,000+ clients with expert advisory and innovative financial solutions.',
+    'contact': 'Contact Money Bharat Finance for personalized financial advice on mutual funds, insurance, and loans. Call +91 9970735694 or email contact@moneybharat.co. Free consultation available.',
     'blog': 'Financial insights, investment tips, and market analysis from Money Bharat\'s expert team. Stay updated with latest trends in mutual funds, insurance, and loans.',
     'booking': 'Book a free consultation with Money Bharat\'s certified financial advisors. Get personalized investment advice and financial planning guidance.',
   };

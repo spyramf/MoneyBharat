@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -28,6 +29,7 @@ import HomeLoan from "./pages/HomeLoan";
 import EducationLoan from "./pages/EducationLoan";
 import LoanAgainstMutualFunds from "./pages/LoanAgainstMutualFunds";
 import AboutUs from "./pages/AboutUs";
+import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 import SipCalculator from "./pages/SipCalculator";
 import EmiCalculator from "./pages/EmiCalculator";
@@ -100,6 +102,7 @@ const App = () => (
                     <Route path="/loans/education" element={<EducationLoan />} />
                     <Route path="/loans/mutual-funds" element={<LoanAgainstMutualFunds />} />
                     <Route path="/about" element={<AboutUs />} />
+                    <Route path="/contact" element={<Contact />} />
                     <Route path="/tools/sip-calculator" element={<SipCalculator />} />
                     <Route path="/tools/emi-calculator" element={<EmiCalculator />} />
                     <Route path="/tools/tax-saving" element={<TaxSaving />} />
