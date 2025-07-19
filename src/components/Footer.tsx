@@ -14,7 +14,7 @@ const Footer = () => {
     name: "SIP Calculator",
     path: "/tools/sip-calculator"
   }, {
-    name: "EMI Calculator",
+    name: "EMI Calculator", 
     path: "/tools/emi-calculator"
   }, {
     name: "Tax Saving",
@@ -144,6 +144,12 @@ const Footer = () => {
             <div>
               <h3 className="font-semibold mb-6 text-white text-lg">Legal</h3>
               <ul className="space-y-3 mb-8">
+                <li>
+                  <Link to="/contact" className="text-gray-300 hover:text-fintech-green transition-colors duration-200 flex items-center group">
+                    <span className="w-2 h-2 bg-fintech-green rounded-full mr-3 opacity-0 group-hover:opacity-100 transition-opacity"></span>
+                    Contact Us
+                  </Link>
+                </li>
                 <li>
                   <Link to="/terms-of-service" className="text-gray-300 hover:text-fintech-green transition-colors duration-200 flex items-center group">
                     <span className="w-2 h-2 bg-fintech-green rounded-full mr-3 opacity-0 group-hover:opacity-100 transition-opacity"></span>
