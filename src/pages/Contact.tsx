@@ -9,6 +9,7 @@ import ContactForm from "@/components/contact/ContactForm";
 import ContactInfo from "@/components/contact/ContactInfo";
 import ContactFAQ from "@/components/contact/ContactFAQ";
 import SupportChannels from "@/components/contact/SupportChannels";
+import ContactLegal from "@/components/contact/ContactLegal";
 
 const Contact = () => {
   return (
@@ -51,6 +52,7 @@ const Contact = () => {
           
           <SupportChannels />
           <ContactFAQ />
+          <ContactLegal />
         </div>
       </main>
       
