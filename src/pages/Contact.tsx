@@ -2,7 +2,6 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/seo/SEOHead";
-import BreadcrumbSEO from "@/components/seo/BreadcrumbSEO";
 import StructuredData from "@/components/seo/StructuredData";
 import ContactHero from "@/components/contact/ContactHero";
 import ContactForm from "@/components/contact/ContactForm";
@@ -39,7 +38,6 @@ const Contact = () => {
       />
       
       <Navbar />
-      <BreadcrumbSEO />
       
       <ContactHero />
       
