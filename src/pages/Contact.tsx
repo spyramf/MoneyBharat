@@ -12,7 +12,7 @@ import SupportChannels from "@/components/contact/SupportChannels";
 
 const Contact = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-green-50">
+    <div className="min-h-screen bg-white">
       <SEOHead 
         title="Contact Us - Money Bharat Finance | Get Expert Financial Advice"
         description="Contact Money Bharat Finance for personalized financial advice on mutual funds, insurance, and loans. Call +91 9970735694 or email contact@moneybharat.co. Free consultation available."
@@ -37,12 +37,12 @@ const Contact = () => {
         ]}
       />
       
-      <BreadcrumbSEO />
       <Navbar />
+      <BreadcrumbSEO />
       
       <ContactHero />
       
-      <main className="py-16">
+      <main className="py-16 bg-gradient-to-br from-blue-50 to-green-50">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-16">
             <ContactForm />

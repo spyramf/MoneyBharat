@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const ContactHero = () => {
   return (
-    <section className="relative pt-32 pb-16 bg-gradient-to-br from-fintech-green to-blue-600 text-white overflow-hidden">
+    <section className="relative pt-24 pb-16 bg-gradient-to-br from-fintech-green to-blue-600 text-white overflow-hidden">
       {/* Background decoration */}
       <div className="absolute inset-0 bg-black/10"></div>
       <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2"></div>
