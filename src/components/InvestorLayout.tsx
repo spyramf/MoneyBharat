@@ -1,7 +1,6 @@
 
 import React from 'react';
 import { Button } from '@/components/ui/button';
-import { useInvestorAuth } from '@/context/InvestorAuthContext';
 import { 
   LogOut, 
   Calendar,
@@ -21,7 +20,10 @@ interface InvestorLayoutProps {
 }
 
 const InvestorLayout = ({ children, currentPage = 'dashboard' }: InvestorLayoutProps) => {
-  const { signOut } = useInvestorAuth();
+  const handleSignOut = () => {
+    // Remove authentication - just redirect to login
+    window.location.href = '/investor/login';
+  };
 
   const navItems = [
     { name: 'Dashboard', path: '/investor/dashboard', icon: BarChart3, key: 'dashboard' },
@@ -85,7 +87,7 @@ const InvestorLayout = ({ children, currentPage = 'dashboard' }: InvestorLayoutP
                 <span className="text-sm text-gray-600">NAV Date: 07 Jun 2025</span>
               </div>
               <Button 
-                onClick={signOut}
+                onClick={handleSignOut}
                 variant="outline"
                 size="sm"
                 className="flex items-center gap-2"

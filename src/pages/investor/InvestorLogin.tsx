@@ -4,7 +4,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { useInvestorAuth } from '@/context/InvestorAuthContext';
 import { Eye, EyeOff, User, Lock } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -19,7 +18,6 @@ type LoginFormData = z.infer<typeof loginSchema>;
 
 const InvestorLogin = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const { signIn, user } = useInvestorAuth();
   const navigate = useNavigate();
 
   const {
@@ -30,17 +28,9 @@ const InvestorLogin = () => {
     resolver: zodResolver(loginSchema),
   });
 
-  useEffect(() => {
-    if (user) {
-      navigate('/investor/dashboard');
-    }
-  }, [user, navigate]);
-
   const onSubmit = async (data: LoginFormData) => {
-    const { error } = await signIn(data.email, data.password);
-    if (!error) {
-      navigate('/investor/dashboard');
-    }
+    // Remove authentication - directly navigate to dashboard
+    navigate('/investor/dashboard');
   };
 
   return (

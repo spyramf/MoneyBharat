@@ -18,9 +18,14 @@ const InvestorPageLayout = ({
   onSignOut, 
   children 
 }: InvestorPageLayoutProps) => {
+  const handleSignOut = () => {
+    // Remove authentication - just redirect to login
+    window.location.href = '/investor/login';
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-600 to-blue-800">
-      <InvestorPageHeader title={title} onSignOut={onSignOut} />
+      <InvestorPageHeader title={title} onSignOut={handleSignOut} />
 
       <div className="flex items-center justify-center p-8">
         <div className="w-full max-w-4xl">
