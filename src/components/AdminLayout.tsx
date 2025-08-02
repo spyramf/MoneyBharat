@@ -1,96 +1,125 @@
 
-import { ReactNode } from 'react';
+import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarProvider } from '@/components/ui/sidebar';
-import { Button } from '@/components/ui/button';
-import { LucideIcon, Home, FileText, Calendar, LogOut } from 'lucide-react';
-import { useAuth } from '@/context/AuthContext';
-
-interface NavItemProps {
-  href: string;
-  icon: LucideIcon;
-  title: string;
-  isActive: boolean;
-}
-
-const NavItem = ({ href, icon: Icon, title, isActive }: NavItemProps) => (
-  <Link to={href}>
-    <Button 
-      variant={isActive ? "secondary" : "ghost"} 
-      className={`w-full justify-start mb-1 ${isActive ? 'text-fintech-green' : ''}`}
-    >
-      <Icon className="mr-2 h-4 w-4" />
-      {title}
-    </Button>
-  </Link>
-);
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
+import { 
+  LayoutDashboard, 
+  Calendar, 
+  FileText, 
+  Users, 
+  Settings,
+  LogOut,
+  Database,
+  Newspaper,
+  BarChart3
+} from 'lucide-react';
 
 interface AdminLayoutProps {
-  children: ReactNode;
+  children: React.ReactNode;
 }
 
 const AdminLayout = ({ children }: AdminLayoutProps) => {
   const location = useLocation();
-  const currentPath = location.pathname;
-  const { logout } = useAuth();
-  
+
+  const navigation = [
+    { name: 'Dashboard', href: '/admin/dashboard', icon: LayoutDashboard },
+    { name: 'Bookings', href: '/admin/bookings', icon: Calendar },
+    { 
+      name: 'Blog Management', 
+      icon: FileText,
+      subItems: [
+        { name: 'Legacy Blog', href: '/admin/blogs', icon: FileText },
+        { name: 'Supabase Blog', href: '/admin/blogs/supabase', icon: Database },
+      ]
+    },
+  ];
+
+  const isActive = (href: string) => location.pathname === href;
+  const isParentActive = (subItems: any[]) => subItems.some(item => location.pathname.startsWith(item.href.split('/').slice(0, -1).join('/')));
+
   return (
-    <SidebarProvider>
-      <div className="min-h-screen flex w-full">
-        <Sidebar className="border-r">
-          <SidebarHeader className="p-4 border-b">
-            <div className="flex items-center">
-              <div className="h-8 w-8 mr-2">
-                <img 
-                  src="/lovable-uploads/92affb7c-7e35-42da-9aff-b0f55a689428.png" 
-                  alt="Money Bharat Logo" 
-                  className="h-full w-full object-contain" 
-                />
-              </div>
-              <h2 className="text-xl font-bold">
-                <span className="text-[#F97316]">MONEY</span>
-                <span className="text-[#2EB883]">BHARAT</span> CMS
-              </h2>
+    <div className="min-h-screen bg-gray-100 flex">
+      {/* Sidebar */}
+      <div className="w-64 bg-white shadow-sm">
+        <div className="p-6">
+          <Link to="/" className="flex items-center space-x-2">
+            <BarChart3 className="h-8 w-8 text-fintech-purple" />
+            <span className="text-xl font-bold text-gray-900">Money Bharat</span>
+          </Link>
+          <p className="text-sm text-gray-500 mt-1">Admin Panel</p>
+        </div>
+        
+        <nav className="mt-6 px-4">
+          {navigation.map((item, index) => (
+            <div key={index} className="mb-1">
+              {item.subItems ? (
+                <div className="space-y-1">
+                  <div className={cn(
+                    "flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors",
+                    isParentActive(item.subItems)
+                      ? "bg-fintech-purple/10 text-fintech-purple"
+                      : "text-gray-700 hover:bg-gray-100"
+                  )}>
+                    <item.icon className="mr-3 h-4 w-4" />
+                    {item.name}
+                  </div>
+                  <div className="ml-6 space-y-1">
+                    {item.subItems.map((subItem) => (
+                      <Link
+                        key={subItem.href}
+                        to={subItem.href}
+                        className={cn(
+                          "flex items-center px-3 py-2 text-sm rounded-md transition-colors",
+                          isActive(subItem.href) || location.pathname.startsWith(subItem.href)
+                            ? "bg-fintech-purple text-white"
+                            : "text-gray-600 hover:bg-gray-100"
+                        )}
+                      >
+                        <subItem.icon className="mr-3 h-3 w-3" />
+                        {subItem.name}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              ) : (
+                <Link
+                  to={item.href}
+                  className={cn(
+                    "flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors",
+                    isActive(item.href)
+                      ? "bg-fintech-purple text-white"
+                      : "text-gray-700 hover:bg-gray-100"
+                  )}
+                >
+                  <item.icon className="mr-3 h-4 w-4" />
+                  {item.name}
+                </Link>
+              )}
             </div>
-          </SidebarHeader>
-          <SidebarContent className="p-4">
-            <nav className="flex flex-col">
-              <NavItem 
-                href="/admin" 
-                icon={Home} 
-                title="Dashboard" 
-                isActive={currentPath === "/admin"}
-              />
-              <NavItem 
-                href="/admin/blogs" 
-                icon={FileText} 
-                title="Blog Management" 
-                isActive={currentPath.startsWith("/admin/blogs")}
-              />
-              <NavItem 
-                href="/admin/bookings" 
-                icon={Calendar} 
-                title="Bookings" 
-                isActive={currentPath.startsWith("/admin/bookings")}
-              />
-            </nav>
-          </SidebarContent>
-          <SidebarFooter className="p-4 border-t">
-            <Button 
-              variant="ghost" 
-              className="w-full justify-start text-red-500" 
-              onClick={logout}
-            >
-              <LogOut className="mr-2 h-4 w-4" />
-              Logout
-            </Button>
-          </SidebarFooter>
-        </Sidebar>
-        <main className="flex-1">
-          {children}
-        </main>
+          ))}
+        </nav>
+
+        <div className="absolute bottom-0 left-0 right-0 p-4 border-t">
+          <Button 
+            variant="outline" 
+            className="w-full justify-start"
+            onClick={() => {
+              localStorage.removeItem('adminAuth');
+              window.location.href = '/admin/login';
+            }}
+          >
+            <LogOut className="mr-2 h-4 w-4" />
+            Sign Out
+          </Button>
+        </div>
       </div>
-    </SidebarProvider>
+
+      {/* Main Content */}
+      <div className="flex-1 overflow-hidden">
+        {children}
+      </div>
+    </div>
   );
 };
 

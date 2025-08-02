@@ -7,58 +7,332 @@ export type Json =
   | Json[]
 
 export type Database = {
+  // Allows to automatically instanciate createClient with right options
+  // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
+  __InternalSupabase: {
+    PostgrestVersion: "12.2.12 (cd3cf9e)"
+  }
   public: {
     Tables: {
-      blogs: {
+      blog_analytics: {
         Row: {
-          author: Json | null
-          category: string | null
-          content: string | null
+          blog_id: string | null
           created_at: string | null
-          excerpt: string | null
-          featuredimage: string | null
-          id: number
-          isfeatured: boolean | null
-          publisheddate: string | null
-          readtime: string | null
+          id: string
+          metric_data: Json | null
+          metric_name: string
+          metric_value: number | null
+          recorded_date: string | null
+        }
+        Insert: {
+          blog_id?: string | null
+          created_at?: string | null
+          id?: string
+          metric_data?: Json | null
+          metric_name: string
+          metric_value?: number | null
+          recorded_date?: string | null
+        }
+        Update: {
+          blog_id?: string | null
+          created_at?: string | null
+          id?: string
+          metric_data?: Json | null
+          metric_name?: string
+          metric_value?: number | null
+          recorded_date?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "blog_analytics_blog_id_fkey"
+            columns: ["blog_id"]
+            isOneToOne: false
+            referencedRelation: "blogs"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      blog_authors: {
+        Row: {
+          avatar_url: string | null
+          bio: string | null
+          created_at: string | null
+          email: string | null
+          id: string
+          meta_description: string | null
+          meta_title: string | null
+          name: string
+          role: string | null
           slug: string
-          tags: string[] | null
-          title: string
+          social_links: Json | null
           updated_at: string | null
         }
         Insert: {
-          author?: Json | null
-          category?: string | null
-          content?: string | null
+          avatar_url?: string | null
+          bio?: string | null
           created_at?: string | null
-          excerpt?: string | null
-          featuredimage?: string | null
-          id?: number
-          isfeatured?: boolean | null
-          publisheddate?: string | null
-          readtime?: string | null
+          email?: string | null
+          id?: string
+          meta_description?: string | null
+          meta_title?: string | null
+          name: string
+          role?: string | null
           slug: string
-          tags?: string[] | null
-          title: string
+          social_links?: Json | null
           updated_at?: string | null
         }
         Update: {
-          author?: Json | null
-          category?: string | null
-          content?: string | null
+          avatar_url?: string | null
+          bio?: string | null
           created_at?: string | null
-          excerpt?: string | null
-          featuredimage?: string | null
-          id?: number
-          isfeatured?: boolean | null
-          publisheddate?: string | null
-          readtime?: string | null
+          email?: string | null
+          id?: string
+          meta_description?: string | null
+          meta_title?: string | null
+          name?: string
+          role?: string | null
           slug?: string
-          tags?: string[] | null
-          title?: string
+          social_links?: Json | null
           updated_at?: string | null
         }
         Relationships: []
+      }
+      blog_categories: {
+        Row: {
+          created_at: string | null
+          description: string | null
+          id: string
+          meta_description: string | null
+          meta_title: string | null
+          name: string
+          seo_keywords: string[] | null
+          slug: string
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          meta_description?: string | null
+          meta_title?: string | null
+          name: string
+          seo_keywords?: string[] | null
+          slug: string
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          meta_description?: string | null
+          meta_title?: string | null
+          name?: string
+          seo_keywords?: string[] | null
+          slug?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      blog_post_tags: {
+        Row: {
+          blog_id: string | null
+          created_at: string | null
+          id: string
+          tag_id: string | null
+        }
+        Insert: {
+          blog_id?: string | null
+          created_at?: string | null
+          id?: string
+          tag_id?: string | null
+        }
+        Update: {
+          blog_id?: string | null
+          created_at?: string | null
+          id?: string
+          tag_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "blog_post_tags_blog_id_fkey"
+            columns: ["blog_id"]
+            isOneToOne: false
+            referencedRelation: "blogs"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "blog_post_tags_tag_id_fkey"
+            columns: ["tag_id"]
+            isOneToOne: false
+            referencedRelation: "blog_tags"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      blog_seo_settings: {
+        Row: {
+          created_at: string | null
+          description: string | null
+          id: string
+          setting_key: string
+          setting_value: Json | null
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          setting_key: string
+          setting_value?: Json | null
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          setting_key?: string
+          setting_value?: Json | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      blog_tags: {
+        Row: {
+          color: string | null
+          created_at: string | null
+          description: string | null
+          id: string
+          name: string
+          slug: string
+          updated_at: string | null
+        }
+        Insert: {
+          color?: string | null
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          name: string
+          slug: string
+          updated_at?: string | null
+        }
+        Update: {
+          color?: string | null
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          name?: string
+          slug?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      blogs: {
+        Row: {
+          author_id: string | null
+          canonical_url: string | null
+          category_id: string | null
+          content: string | null
+          content_score: Json | null
+          created_at: string | null
+          excerpt: string | null
+          featured_image: string | null
+          focus_keywords: string[] | null
+          id: string
+          is_featured: boolean | null
+          meta_description: string | null
+          meta_title: string | null
+          og_description: string | null
+          og_image: string | null
+          og_title: string | null
+          published_date: string | null
+          read_time: string | null
+          robots_directive: string | null
+          seo_score: number | null
+          slug: string
+          status: string | null
+          title: string
+          twitter_description: string | null
+          twitter_image: string | null
+          twitter_title: string | null
+          updated_at: string | null
+          updated_date: string | null
+        }
+        Insert: {
+          author_id?: string | null
+          canonical_url?: string | null
+          category_id?: string | null
+          content?: string | null
+          content_score?: Json | null
+          created_at?: string | null
+          excerpt?: string | null
+          featured_image?: string | null
+          focus_keywords?: string[] | null
+          id?: string
+          is_featured?: boolean | null
+          meta_description?: string | null
+          meta_title?: string | null
+          og_description?: string | null
+          og_image?: string | null
+          og_title?: string | null
+          published_date?: string | null
+          read_time?: string | null
+          robots_directive?: string | null
+          seo_score?: number | null
+          slug: string
+          status?: string | null
+          title: string
+          twitter_description?: string | null
+          twitter_image?: string | null
+          twitter_title?: string | null
+          updated_at?: string | null
+          updated_date?: string | null
+        }
+        Update: {
+          author_id?: string | null
+          canonical_url?: string | null
+          category_id?: string | null
+          content?: string | null
+          content_score?: Json | null
+          created_at?: string | null
+          excerpt?: string | null
+          featured_image?: string | null
+          focus_keywords?: string[] | null
+          id?: string
+          is_featured?: boolean | null
+          meta_description?: string | null
+          meta_title?: string | null
+          og_description?: string | null
+          og_image?: string | null
+          og_title?: string | null
+          published_date?: string | null
+          read_time?: string | null
+          robots_directive?: string | null
+          seo_score?: number | null
+          slug?: string
+          status?: string | null
+          title?: string
+          twitter_description?: string | null
+          twitter_image?: string | null
+          twitter_title?: string | null
+          updated_at?: string | null
+          updated_date?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "blogs_author_id_fkey"
+            columns: ["author_id"]
+            isOneToOne: false
+            referencedRelation: "blog_authors"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "blogs_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "blog_categories"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       bookings: {
         Row: {
@@ -610,7 +884,7 @@ export type Database = {
     Functions: {
       get_user_role: {
         Args: Record<PropertyKey, never> | { _user_id: string }
-        Returns: Database["public"]["Enums"]["app_role"]
+        Returns: string
       }
       has_role: {
         Args:
@@ -628,21 +902,25 @@ export type Database = {
   }
 }
 
-type DefaultSchema = Database[Extract<keyof Database, "public">]
+type DatabaseWithoutInternals = Omit<Database, "__InternalSupabase">
+
+type DefaultSchema = DatabaseWithoutInternals[Extract<keyof Database, "public">]
 
 export type Tables<
   DefaultSchemaTableNameOrOptions extends
     | keyof (DefaultSchema["Tables"] & DefaultSchema["Views"])
-    | { schema: keyof Database },
+    | { schema: keyof DatabaseWithoutInternals },
   TableName extends DefaultSchemaTableNameOrOptions extends {
-    schema: keyof Database
+    schema: keyof DatabaseWithoutInternals
   }
-    ? keyof (Database[DefaultSchemaTableNameOrOptions["schema"]]["Tables"] &
-        Database[DefaultSchemaTableNameOrOptions["schema"]]["Views"])
+    ? keyof (DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"] &
+        DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Views"])
     : never = never,
-> = DefaultSchemaTableNameOrOptions extends { schema: keyof Database }
-  ? (Database[DefaultSchemaTableNameOrOptions["schema"]]["Tables"] &
-      Database[DefaultSchemaTableNameOrOptions["schema"]]["Views"])[TableName] extends {
+> = DefaultSchemaTableNameOrOptions extends {
+  schema: keyof DatabaseWithoutInternals
+}
+  ? (DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"] &
+      DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Views"])[TableName] extends {
       Row: infer R
     }
     ? R
@@ -660,14 +938,16 @@ export type Tables<
 export type TablesInsert<
   DefaultSchemaTableNameOrOptions extends
     | keyof DefaultSchema["Tables"]
-    | { schema: keyof Database },
+    | { schema: keyof DatabaseWithoutInternals },
   TableName extends DefaultSchemaTableNameOrOptions extends {
-    schema: keyof Database
+    schema: keyof DatabaseWithoutInternals
   }
-    ? keyof Database[DefaultSchemaTableNameOrOptions["schema"]]["Tables"]
+    ? keyof DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"]
     : never = never,
-> = DefaultSchemaTableNameOrOptions extends { schema: keyof Database }
-  ? Database[DefaultSchemaTableNameOrOptions["schema"]]["Tables"][TableName] extends {
+> = DefaultSchemaTableNameOrOptions extends {
+  schema: keyof DatabaseWithoutInternals
+}
+  ? DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"][TableName] extends {
       Insert: infer I
     }
     ? I
@@ -683,14 +963,16 @@ export type TablesInsert<
 export type TablesUpdate<
   DefaultSchemaTableNameOrOptions extends
     | keyof DefaultSchema["Tables"]
-    | { schema: keyof Database },
+    | { schema: keyof DatabaseWithoutInternals },
   TableName extends DefaultSchemaTableNameOrOptions extends {
-    schema: keyof Database
+    schema: keyof DatabaseWithoutInternals
   }
-    ? keyof Database[DefaultSchemaTableNameOrOptions["schema"]]["Tables"]
+    ? keyof DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"]
     : never = never,
-> = DefaultSchemaTableNameOrOptions extends { schema: keyof Database }
-  ? Database[DefaultSchemaTableNameOrOptions["schema"]]["Tables"][TableName] extends {
+> = DefaultSchemaTableNameOrOptions extends {
+  schema: keyof DatabaseWithoutInternals
+}
+  ? DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"][TableName] extends {
       Update: infer U
     }
     ? U
@@ -706,14 +988,16 @@ export type TablesUpdate<
 export type Enums<
   DefaultSchemaEnumNameOrOptions extends
     | keyof DefaultSchema["Enums"]
-    | { schema: keyof Database },
+    | { schema: keyof DatabaseWithoutInternals },
   EnumName extends DefaultSchemaEnumNameOrOptions extends {
-    schema: keyof Database
+    schema: keyof DatabaseWithoutInternals
   }
-    ? keyof Database[DefaultSchemaEnumNameOrOptions["schema"]]["Enums"]
+    ? keyof DatabaseWithoutInternals[DefaultSchemaEnumNameOrOptions["schema"]]["Enums"]
     : never = never,
-> = DefaultSchemaEnumNameOrOptions extends { schema: keyof Database }
-  ? Database[DefaultSchemaEnumNameOrOptions["schema"]]["Enums"][EnumName]
+> = DefaultSchemaEnumNameOrOptions extends {
+  schema: keyof DatabaseWithoutInternals
+}
+  ? DatabaseWithoutInternals[DefaultSchemaEnumNameOrOptions["schema"]]["Enums"][EnumName]
   : DefaultSchemaEnumNameOrOptions extends keyof DefaultSchema["Enums"]
     ? DefaultSchema["Enums"][DefaultSchemaEnumNameOrOptions]
     : never
@@ -721,14 +1005,16 @@ export type Enums<
 export type CompositeTypes<
   PublicCompositeTypeNameOrOptions extends
     | keyof DefaultSchema["CompositeTypes"]
-    | { schema: keyof Database },
+    | { schema: keyof DatabaseWithoutInternals },
   CompositeTypeName extends PublicCompositeTypeNameOrOptions extends {
-    schema: keyof Database
+    schema: keyof DatabaseWithoutInternals
   }
-    ? keyof Database[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"]
+    ? keyof DatabaseWithoutInternals[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"]
     : never = never,
-> = PublicCompositeTypeNameOrOptions extends { schema: keyof Database }
-  ? Database[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"][CompositeTypeName]
+> = PublicCompositeTypeNameOrOptions extends {
+  schema: keyof DatabaseWithoutInternals
+}
+  ? DatabaseWithoutInternals[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"][CompositeTypeName]
   : PublicCompositeTypeNameOrOptions extends keyof DefaultSchema["CompositeTypes"]
     ? DefaultSchema["CompositeTypes"][PublicCompositeTypeNameOrOptions]
     : never
