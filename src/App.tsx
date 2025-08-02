@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -40,8 +39,8 @@ import Dashboard from "./pages/admin/Dashboard";
 import BookingManager from "./pages/admin/BookingManager";
 import BlogManager from "./pages/admin/BlogManager";
 import BlogEditor from "./pages/admin/BlogEditor";
-import SupabaseBlogManager from "./components/cms/SupabaseBlogManager";
-import SupabaseBlogEditor from "./components/cms/SupabaseBlogEditor";
+import SupabaseBlogManager from "@/components/cms/SupabaseBlogManager";
+import SupabaseBlogEditor from "@/components/cms/SupabaseBlogEditor";
 
 // Investor Pages
 import InvestorLogin from "./pages/investor/InvestorLogin";
@@ -67,13 +66,13 @@ function App() {
     <HelmetProvider>
       <QueryClientProvider client={queryClient}>
         <TooltipProvider>
-          <AuthProvider>
-            <InvestorAuthProvider>
-              <BlogProvider>
-                <BookingProvider>
-                  <Toaster />
-                  <Sonner />
-                  <BrowserRouter>
+          <BrowserRouter>
+            <AuthProvider>
+              <InvestorAuthProvider>
+                <BlogProvider>
+                  <BookingProvider>
+                    <Toaster />
+                    <Sonner />
                     <ScrollToTop />
                     <Routes>
                       {/* Public Routes */}
@@ -197,11 +196,11 @@ function App() {
                       {/* 404 Route */}
                       <Route path="*" element={<NotFound />} />
                     </Routes>
-                  </BrowserRouter>
-                </BookingProvider>
-              </BlogProvider>
-            </InvestorAuthProvider>
-          </AuthProvider>
+                  </BookingProvider>
+                </BlogProvider>
+              </InvestorAuthProvider>
+            </AuthProvider>
+          </BrowserRouter>
         </TooltipProvider>
       </QueryClientProvider>
     </HelmetProvider>
