@@ -148,7 +148,7 @@ const SupabaseBlog = () => {
       <SEOHead 
         title="Financial Blog - Expert Insights | Money Bharat Finance"
         description="Stay updated with the latest financial insights, investment strategies, and money management tips from Money Bharat Finance experts."
-        keywords={['financial blog', 'investment advice', 'money management', 'mutual funds', 'insurance', 'loans']}
+        keywords="financial blog, investment advice, money management, mutual funds, insurance, loans"
       />
       
       <div className="min-h-screen bg-gray-50">

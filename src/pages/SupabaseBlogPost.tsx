@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Calendar, Clock, ArrowLeft, Share2 } from 'lucide-react';
 import { format } from 'date-fns';
 import SEOHead from '@/components/seo/SEOHead';
-import { ShareButtonGroup } from '@/components/ui/ShareButtonGroup';
+import ShareButtonGroup from '@/components/ui/ShareButtonGroup';
 
 const SupabaseBlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -76,7 +76,7 @@ const SupabaseBlogPost = () => {
       <SEOHead 
         title={post.meta_title || `${post.title} | Money Bharat Finance Blog`}
         description={post.meta_description || post.excerpt || ''}
-        keywords={post.focus_keywords || []}
+        keywords={post.focus_keywords?.join(', ') || ''}
         canonicalUrl={post.canonical_url || currentUrl}
         ogTitle={post.og_title || post.title}
         ogDescription={post.og_description || post.excerpt || ''}
@@ -171,7 +171,7 @@ const SupabaseBlogPost = () => {
                 <ShareButtonGroup
                   url={currentUrl}
                   title={post.title}
-                  description={post.excerpt || ''}
+                  text={post.excerpt || ''}
                 />
               </div>
               
