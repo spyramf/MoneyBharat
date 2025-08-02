@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { supabaseBlogService, type SupabaseBlogPost } from '@/services/supabaseBlogService';
@@ -77,14 +76,12 @@ const SupabaseBlogPost = () => {
         title={post.meta_title || `${post.title} | Money Bharat Finance Blog`}
         description={post.meta_description || post.excerpt || ''}
         keywords={post.focus_keywords?.join(', ') || ''}
-        canonicalUrl={post.canonical_url || currentUrl}
-        ogTitle={post.og_title || post.title}
-        ogDescription={post.og_description || post.excerpt || ''}
-        ogImage={post.og_image || post.featured_image}
-        twitterTitle={post.twitter_title || post.title}
-        twitterDescription={post.twitter_description || post.excerpt || ''}
-        twitterImage={post.twitter_image || post.featured_image}
-        robots={post.robots_directive}
+        image={post.og_image || post.featured_image}
+        type="article"
+        publishedTime={post.published_date}
+        modifiedTime={post.updated_date}
+        author={post.author?.name}
+        noIndex={post.robots_directive === 'noindex'}
       />
 
       <div className="min-h-screen bg-gray-50">
