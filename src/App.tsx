@@ -12,9 +12,9 @@ import ScrollToTop from "@/components/ScrollToTop";
 
 // Lazy load pages for better performance
 const Index = lazy(() => import("./pages/Index"));
-const About = lazy(() => import("./pages/About"));
+const About = lazy(() => import("./pages/AboutUs"));
 const Contact = lazy(() => import("./pages/Contact"));
-const AdminDashboard = lazy(() => import("./pages/AdminDashboard"));
+const AdminDashboard = lazy(() => import("./pages/admin/Dashboard"));
 const SupabaseBlogPost = lazy(() => import("./pages/SupabaseBlogPost"));
 
 const queryClient = new QueryClient();

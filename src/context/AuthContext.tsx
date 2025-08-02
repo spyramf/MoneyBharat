@@ -7,6 +7,8 @@ interface AuthContextType {
   user: User | null;
   session: Session | null;
   isLoading: boolean;
+  isAuthenticated: boolean;
+  login: (username: string, password: string) => boolean;
   signIn: (email: string, password: string) => Promise<{ error: any }>;
   signUp: (email: string, password: string) => Promise<{ error: any }>;
   signOut: () => Promise<void>;
@@ -31,6 +33,17 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [user, setUser] = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+
+  const isAuthenticated = !!session && !!user;
+
+  // Simple login function for backward compatibility
+  const login = (username: string, password: string): boolean => {
+    // For demo purposes - replace with actual logic
+    if (username === 'admin' && password === 'password') {
+      return true;
+    }
+    return false;
+  };
 
   useEffect(() => {
     // Set up auth state listener
@@ -106,6 +119,8 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     user,
     session,
     isLoading,
+    isAuthenticated,
+    login,
     signIn,
     signUp,
     signOut,
