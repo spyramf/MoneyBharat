@@ -3,17 +3,17 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Toaster } from '@/components/ui/toaster';
 import { AuthProvider } from '@/context/AuthContext';
 import Index from '@/pages/Index';
-import About from '@/pages/About';
+import AboutUs from '@/pages/AboutUs';
 import ProtectedRoute from '@/components/ProtectedRoute';
-import AdminDashboard from '@/pages/AdminDashboard';
+import Dashboard from '@/pages/admin/Dashboard';
 import BlogPost from '@/pages/BlogPost';
 import Blog from '@/pages/Blog';
 import Contact from '@/pages/Contact';
 import Login from '@/pages/admin/Login';
-import HealthInsurance from '@/pages/insurance/HealthInsurance';
-import TermInsurance from '@/pages/insurance/TermInsurance';
-import VehicleInsurance from '@/pages/insurance/VehicleInsurance';
-import PersonalLoan from '@/pages/loans/PersonalLoan';
+import HealthInsurance from '@/pages/HealthInsurance';
+import TermInsurance from '@/pages/TermInsurance';
+import VehicleInsurance from '@/pages/VehicleInsurance';
+import PersonalLoan from '@/pages/PersonalLoan';
 import Loans from '@/pages/Loans';
 import Insurance from '@/pages/Insurance';
 import Booking from '@/pages/Booking';
@@ -26,7 +26,7 @@ function App() {
         <div className="App">
           <Routes>
             <Route path="/" element={<Index />} />
-            <Route path="/about" element={<About />} />
+            <Route path="/about" element={<AboutUs />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="/contact" element={<Contact />} />
@@ -47,7 +47,7 @@ function App() {
             <Route path="/admin/login" element={<Login />} />
             <Route path="/admin/dashboard" element={
               <ProtectedRoute>
-                <AdminDashboard />
+                <Dashboard />
               </ProtectedRoute>
             } />
           </Routes>
