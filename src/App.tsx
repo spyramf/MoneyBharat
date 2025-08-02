@@ -1,4 +1,5 @@
 
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Toaster } from '@/components/ui/toaster';
 import { AuthProvider } from '@/context/AuthContext';
@@ -22,42 +23,44 @@ import MutualFunds from '@/pages/MutualFunds';
 
 function App() {
   return (
-    <AuthProvider>
-      <BookingProvider>
-        <Router>
-          <div className="App">
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/about" element={<AboutUs />} />
-              <Route path="/blog" element={<Blog />} />
-              <Route path="/blog/:slug" element={<BlogPost />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/mutual-funds" element={<MutualFunds />} />
-              <Route path="/insurance" element={<Insurance />} />
-              <Route path="/loans" element={<Loans />} />
-              <Route path="/booking" element={<Booking />} />
-              
-              {/* Insurance Routes */}
-              <Route path="/health-insurance" element={<HealthInsurance />} />
-              <Route path="/term-insurance" element={<TermInsurance />} />
-              <Route path="/vehicle-insurance" element={<VehicleInsurance />} />
-              
-              {/* Loan Routes */}
-              <Route path="/loans/personal" element={<PersonalLoan />} />
-              
-              {/* Admin Routes */}
-              <Route path="/admin/login" element={<Login />} />
-              <Route path="/admin/dashboard" element={
-                <ProtectedRoute>
-                  <Dashboard />
-                </ProtectedRoute>
-              } />
-            </Routes>
-            <Toaster />
-          </div>
-        </Router>
-      </BookingProvider>
-    </AuthProvider>
+    <HelmetProvider>
+      <AuthProvider>
+        <BookingProvider>
+          <Router>
+            <div className="App">
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="/about" element={<AboutUs />} />
+                <Route path="/blog" element={<Blog />} />
+                <Route path="/blog/:slug" element={<BlogPost />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/mutual-funds" element={<MutualFunds />} />
+                <Route path="/insurance" element={<Insurance />} />
+                <Route path="/loans" element={<Loans />} />
+                <Route path="/booking" element={<Booking />} />
+                
+                {/* Insurance Routes */}
+                <Route path="/health-insurance" element={<HealthInsurance />} />
+                <Route path="/term-insurance" element={<TermInsurance />} />
+                <Route path="/vehicle-insurance" element={<VehicleInsurance />} />
+                
+                {/* Loan Routes */}
+                <Route path="/loans/personal" element={<PersonalLoan />} />
+                
+                {/* Admin Routes */}
+                <Route path="/admin/login" element={<Login />} />
+                <Route path="/admin/dashboard" element={
+                  <ProtectedRoute>
+                    <Dashboard />
+                  </ProtectedRoute>
+                } />
+              </Routes>
+              <Toaster />
+            </div>
+          </Router>
+        </BookingProvider>
+      </AuthProvider>
+    </HelmetProvider>
   );
 }
 
