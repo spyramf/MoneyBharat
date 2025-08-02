@@ -1,26 +1,17 @@
 
 interface TestimonialCardProps {
-  quote?: string;
-  content?: string;
+  quote: string;
   name: string;
-  title?: string;
-  role?: string;
-  rating?: number;
+  title: string;
   avatar?: string;
 }
 
 const TestimonialCard = ({
   quote,
-  content,
   name,
   title,
-  role,
-  rating = 5,
   avatar,
 }: TestimonialCardProps) => {
-  const displayContent = content || quote || "";
-  const displayTitle = role || title || "";
-
   return (
     <div className="glass-card p-6 rounded-xl">
       <div className="mb-4">
@@ -37,7 +28,7 @@ const TestimonialCard = ({
         </svg>
       </div>
 
-      <p className="text-gray-700 mb-6 italic">{displayContent}</p>
+      <p className="text-gray-700 mb-6 italic">{quote}</p>
 
       <div className="flex items-center gap-3">
         {avatar ? (
@@ -53,16 +44,7 @@ const TestimonialCard = ({
         )}
         <div>
           <p className="font-semibold">{name}</p>
-          {displayTitle && <p className="text-xs text-gray-600">{displayTitle}</p>}
-          {rating && (
-            <div className="flex items-center mt-1">
-              {[...Array(rating)].map((_, i) => (
-                <svg key={i} className="w-3 h-3 text-yellow-400 fill-current" viewBox="0 0 20 20">
-                  <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
-                </svg>
-              ))}
-            </div>
-          )}
+          <p className="text-xs text-gray-600">{title}</p>
         </div>
       </div>
     </div>
