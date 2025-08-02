@@ -7,6 +7,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from 'react-helmet-async';
 import { BookingProvider } from "./context/BookingContext";
+import { BlogProvider } from "./context/BlogContext";
 
 // Layouts
 import MainLayout from "./layouts/MainLayout";
@@ -37,123 +38,125 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <HelmetProvider>
-        <BookingProvider>
-          <TooltipProvider>
-            <Toaster />
-            <Sonner />
-            <BrowserRouter>
-              <ScrollToTop />
-              <Routes>
-                {/* Main Pages */}
-                <Route path="/" element={<Index />} />
-                
-                {/* Public Pages with Layout */}
-                <Route path="/about" element={
-                  <MainLayout>
-                    <Suspense fallback={<LoadingSpinner />}>
-                      <About />
-                    </Suspense>
-                  </MainLayout>
-                } />
-                
-                <Route path="/blog" element={
-                  <MainLayout>
-                    <Suspense fallback={<LoadingSpinner />}>
-                      <Blog />
-                    </Suspense>
-                  </MainLayout>
-                } />
-                
-                <Route path="/booking" element={
-                  <MainLayout>
-                    <Suspense fallback={<LoadingSpinner />}>
-                      <Booking />
-                    </Suspense>
-                  </MainLayout>
-                } />
-                
-                <Route path="/contact" element={
-                  <MainLayout>
-                    <Suspense fallback={<LoadingSpinner />}>
-                      <Contact />
-                    </Suspense>
-                  </MainLayout>
-                } />
-                
-                {/* Financial Service Pages */}
-                <Route path="/mutual-funds" element={
-                  <MainLayout>
-                    <Suspense fallback={<LoadingSpinner />}>
-                      <MutualFunds />
-                    </Suspense>
-                  </MainLayout>
-                } />
-                
-                <Route path="/insurance" element={
-                  <MainLayout>
-                    <Suspense fallback={<LoadingSpinner />}>
-                      <Insurance />
-                    </Suspense>
-                  </MainLayout>
-                } />
-                
-                <Route path="/loans" element={
-                  <MainLayout>
-                    <Suspense fallback={<LoadingSpinner />}>
-                      <Loans />
-                    </Suspense>
-                  </MainLayout>
-                } />
-                
-                {/* Insurance Sub-pages */}
-                <Route path="/health-insurance" element={
-                  <MainLayout>
-                    <Suspense fallback={<LoadingSpinner />}>
-                      <HealthInsurance />
-                    </Suspense>
-                  </MainLayout>
-                } />
-                
-                <Route path="/term-insurance" element={
-                  <MainLayout>
-                    <Suspense fallback={<LoadingSpinner />}>
-                      <TermInsurance />
-                    </Suspense>
-                  </MainLayout>
-                } />
-                
-                <Route path="/vehicle-insurance" element={
-                  <MainLayout>
-                    <Suspense fallback={<LoadingSpinner />}>
-                      <VehicleInsurance />
-                    </Suspense>
-                  </MainLayout>
-                } />
-                
-                {/* Loan Sub-pages */}
-                <Route path="/loans/personal" element={
-                  <MainLayout>
-                    <Suspense fallback={<LoadingSpinner />}>
-                      <PersonalLoan />
-                    </Suspense>
-                  </MainLayout>
-                } />
-                
-                {/* Admin Routes */}
-                <Route 
-                  path="/admin" 
-                  element={
-                    <ProtectedRoute>
+        <BlogProvider>
+          <BookingProvider>
+            <TooltipProvider>
+              <Toaster />
+              <Sonner />
+              <BrowserRouter>
+                <ScrollToTop />
+                <Routes>
+                  {/* Main Pages */}
+                  <Route path="/" element={<Index />} />
+                  
+                  {/* Public Pages with Layout */}
+                  <Route path="/about" element={
+                    <MainLayout>
                       <Suspense fallback={<LoadingSpinner />}>
-                        <AdminDashboard />
+                        <About />
                       </Suspense>
-                    </ProtectedRoute>
-                  } 
-                />
-              </Routes>
-            </BrowserRouter>
-          </TooltipProvider>
-        </BookingProvider>
+                    </MainLayout>
+                  } />
+                  
+                  <Route path="/blog" element={
+                    <MainLayout>
+                      <Suspense fallback={<LoadingSpinner />}>
+                        <Blog />
+                      </Suspense>
+                    </MainLayout>
+                  } />
+                  
+                  <Route path="/booking" element={
+                    <MainLayout>
+                      <Suspense fallback={<LoadingSpinner />}>
+                        <Booking />
+                      </Suspense>
+                    </MainLayout>
+                  } />
+                  
+                  <Route path="/contact" element={
+                    <MainLayout>
+                      <Suspense fallback={<LoadingSpinner />}>
+                        <Contact />
+                      </Suspense>
+                    </MainLayout>
+                  } />
+                  
+                  {/* Financial Service Pages */}
+                  <Route path="/mutual-funds" element={
+                    <MainLayout>
+                      <Suspense fallback={<LoadingSpinner />}>
+                        <MutualFunds />
+                      </Suspense>
+                    </MainLayout>
+                  } />
+                  
+                  <Route path="/insurance" element={
+                    <MainLayout>
+                      <Suspense fallback={<LoadingSpinner />}>
+                        <Insurance />
+                      </Suspense>
+                    </MainLayout>
+                  } />
+                  
+                  <Route path="/loans" element={
+                    <MainLayout>
+                      <Suspense fallback={<LoadingSpinner />}>
+                        <Loans />
+                      </Suspense>
+                    </MainLayout>
+                  } />
+                  
+                  {/* Insurance Sub-pages */}
+                  <Route path="/health-insurance" element={
+                    <MainLayout>
+                      <Suspense fallback={<LoadingSpinner />}>
+                        <HealthInsurance />
+                      </Suspense>
+                    </MainLayout>
+                  } />
+                  
+                  <Route path="/term-insurance" element={
+                    <MainLayout>
+                      <Suspense fallback={<LoadingSpinner />}>
+                        <TermInsurance />
+                      </Suspense>
+                    </MainLayout>
+                  } />
+                  
+                  <Route path="/vehicle-insurance" element={
+                    <MainLayout>
+                      <Suspense fallback={<LoadingSpinner />}>
+                        <VehicleInsurance />
+                      </Suspense>
+                    </MainLayout>
+                  } />
+                  
+                  {/* Loan Sub-pages */}
+                  <Route path="/loans/personal" element={
+                    <MainLayout>
+                      <Suspense fallback={<LoadingSpinner />}>
+                        <PersonalLoan />
+                      </Suspense>
+                    </MainLayout>
+                  } />
+                  
+                  {/* Admin Routes */}
+                  <Route 
+                    path="/admin" 
+                    element={
+                      <ProtectedRoute>
+                        <Suspense fallback={<LoadingSpinner />}>
+                          <AdminDashboard />
+                        </Suspense>
+                      </ProtectedRoute>
+                    } 
+                  />
+                </Routes>
+              </BrowserRouter>
+            </TooltipProvider>
+          </BookingProvider>
+        </BlogProvider>
       </HelmetProvider>
     </QueryClientProvider>
   );
