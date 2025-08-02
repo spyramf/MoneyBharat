@@ -44,7 +44,7 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
       <div className="w-64 bg-white shadow-sm">
         <div className="p-6">
           <Link to="/" className="flex items-center space-x-2">
-            <BarChart3 className="h-8 w-8 text-blue-600" />
+            <BarChart3 className="h-8 w-8 text-fintech-purple" />
             <span className="text-xl font-bold text-gray-900">Money Bharat</span>
           </Link>
           <p className="text-sm text-gray-500 mt-1">Admin Panel</p>
@@ -58,7 +58,7 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
                   <div className={cn(
                     "flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors",
                     isParentActive(item.subItems)
-                      ? "bg-blue-50 text-blue-600"
+                      ? "bg-fintech-purple/10 text-fintech-purple"
                       : "text-gray-700 hover:bg-gray-100"
                   )}>
                     <item.icon className="mr-3 h-4 w-4" />
@@ -72,7 +72,7 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
                         className={cn(
                           "flex items-center px-3 py-2 text-sm rounded-md transition-colors",
                           isActive(subItem.href) || location.pathname.startsWith(subItem.href)
-                            ? "bg-blue-600 text-white"
+                            ? "bg-fintech-purple text-white"
                             : "text-gray-600 hover:bg-gray-100"
                         )}
                       >
@@ -88,7 +88,7 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
                   className={cn(
                     "flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors",
                     isActive(item.href)
-                      ? "bg-blue-600 text-white"
+                      ? "bg-fintech-purple text-white"
                       : "text-gray-700 hover:bg-gray-100"
                   )}
                 >

@@ -1,12 +1,15 @@
 
 export const APP_CONFIG = {
   name: 'Money Bharat',
-  tagline: 'Your Financial Freedom Partner',
-  description: 'Expert financial services including mutual funds, insurance, and investment planning',
+  description: 'Your trusted financial partner',
   contact: {
-    phone: '+91-XXXXXXXXXX',
-    email: 'info@moneybharat.co',
-    address: 'Your Business Address Here'
+    email: 'info@moneybharat.com',
+    phone: '+91-1234567890',
+  },
+  social: {
+    facebook: 'https://facebook.com/moneybharat',
+    twitter: 'https://twitter.com/moneybharat',
+    linkedin: 'https://linkedin.com/company/moneybharat',
   }
 };
 
@@ -14,24 +17,20 @@ export const ROUTES = {
   HOME: '/',
   ABOUT: '/about',
   CONTACT: '/contact',
-  MUTUAL_FUNDS: '/mutual-funds',
-  INSURANCE: '/insurance',
-  HEALTH_INSURANCE: '/health-insurance',
-  TERM_INSURANCE: '/term-insurance',
-  VEHICLE_INSURANCE: '/vehicle-insurance',
-  LOANS: '/loans',
-  PERSONAL_LOAN: '/loans/personal',
   BLOG: '/blog',
-  BOOKING: '/booking',
   ADMIN: '/admin',
-  ADMIN_LOGIN: '/admin/login',
-  ADMIN_DASHBOARD: '/admin/dashboard',
 } as const;
 
-export const SEO_CONFIG = {
-  defaultTitle: 'Money Bharat - Your Financial Freedom Partner',
-  titleTemplate: '%s | Money Bharat',
-  defaultDescription: 'Expert financial services including mutual funds, insurance, and investment planning',
-  siteUrl: 'https://moneybharat.co',
-  twitterHandle: '@moneybharat',
-};
+export const API_ENDPOINTS = {
+  AUTH: {
+    SIGN_IN: '/auth/signin',
+    SIGN_UP: '/auth/signup',
+    SIGN_OUT: '/auth/signout',
+    RESET_PASSWORD: '/auth/reset-password',
+  },
+  BLOG: {
+    POSTS: '/blog/posts',
+    CATEGORIES: '/blog/categories',
+    AUTHORS: '/blog/authors',
+  }
+} as const;

@@ -58,6 +58,6 @@ function App() {
       </QueryClientProvider>
     </HelmetProvider>
   );
-};
+}
 
 export default App;
