@@ -7,11 +7,8 @@ import {
   LayoutDashboard, 
   Calendar, 
   FileText, 
-  Users, 
-  Settings,
   LogOut,
   Database,
-  Newspaper,
   BarChart3
 } from 'lucide-react';
 

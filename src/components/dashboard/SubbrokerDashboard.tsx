@@ -2,6 +2,7 @@
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Users, TrendingUp, DollarSign, Percent } from 'lucide-react';
+import StatsCard from './widgets/StatsCard';
 
 const SubbrokerDashboard = () => {
   const subbrokerStats = [
@@ -17,19 +18,7 @@ const SubbrokerDashboard = () => {
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {subbrokerStats.map((stat, index) => (
-          <Card key={index}>
-            <CardContent className="p-4">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm text-gray-600 mb-1">{stat.label}</p>
-                  <p className="text-xl font-bold">{stat.value}</p>
-                </div>
-                <div className={`p-2 rounded-full ${stat.color}`}>
-                  <stat.icon className="h-6 w-6 text-white" />
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+          <StatsCard key={index} {...stat} />
         ))}
       </div>
 

@@ -6,10 +6,16 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from 'react-helmet-async';
-import Index from "./pages/Index";
-import ProtectedRoute from "./components/ProtectedRoute";
-import ScrollToTop from "./components/ScrollToTop";
 import { BookingProvider } from "./context/BookingContext";
+
+// Layouts
+import MainLayout from "./layouts/MainLayout";
+
+// Pages - Direct imports for critical pages
+import Index from "./pages/Index";
+import ScrollToTop from "./components/ScrollToTop";
+import ProtectedRoute from "./components/ProtectedRoute";
+import LoadingSpinner from "./components/common/LoadingSpinner";
 
 // Lazy load pages
 const About = lazy(() => import("./pages/AboutUs"));
@@ -38,61 +44,99 @@ const App = () => {
             <BrowserRouter>
               <ScrollToTop />
               <Routes>
+                {/* Main Pages */}
                 <Route path="/" element={<Index />} />
+                
+                {/* Public Pages with Layout */}
                 <Route path="/about" element={
-                  <Suspense fallback={<div>Loading...</div>}>
-                    <About />
-                  </Suspense>
+                  <MainLayout>
+                    <Suspense fallback={<LoadingSpinner />}>
+                      <About />
+                    </Suspense>
+                  </MainLayout>
                 } />
+                
                 <Route path="/blog" element={
-                  <Suspense fallback={<div>Loading...</div>}>
-                    <Blog />
-                  </Suspense>
+                  <MainLayout>
+                    <Suspense fallback={<LoadingSpinner />}>
+                      <Blog />
+                    </Suspense>
+                  </MainLayout>
                 } />
+                
                 <Route path="/booking" element={
-                  <Suspense fallback={<div>Loading...</div>}>
-                    <Booking />
-                  </Suspense>
+                  <MainLayout>
+                    <Suspense fallback={<LoadingSpinner />}>
+                      <Booking />
+                    </Suspense>
+                  </MainLayout>
                 } />
+                
                 <Route path="/contact" element={
-                  <Suspense fallback={<div>Loading...</div>}>
-                    <Contact />
-                  </Suspense>
+                  <MainLayout>
+                    <Suspense fallback={<LoadingSpinner />}>
+                      <Contact />
+                    </Suspense>
+                  </MainLayout>
                 } />
+                
+                {/* Financial Service Pages */}
                 <Route path="/mutual-funds" element={
-                  <Suspense fallback={<div>Loading...</div>}>
-                    <MutualFunds />
-                  </Suspense>
+                  <MainLayout>
+                    <Suspense fallback={<LoadingSpinner />}>
+                      <MutualFunds />
+                    </Suspense>
+                  </MainLayout>
                 } />
+                
                 <Route path="/insurance" element={
-                  <Suspense fallback={<div>Loading...</div>}>
-                    <Insurance />
-                  </Suspense>
+                  <MainLayout>
+                    <Suspense fallback={<LoadingSpinner />}>
+                      <Insurance />
+                    </Suspense>
+                  </MainLayout>
                 } />
+                
                 <Route path="/loans" element={
-                  <Suspense fallback={<div>Loading...</div>}>
-                    <Loans />
-                  </Suspense>
+                  <MainLayout>
+                    <Suspense fallback={<LoadingSpinner />}>
+                      <Loans />
+                    </Suspense>
+                  </MainLayout>
                 } />
+                
+                {/* Insurance Sub-pages */}
                 <Route path="/health-insurance" element={
-                  <Suspense fallback={<div>Loading...</div>}>
-                    <HealthInsurance />
-                  </Suspense>
+                  <MainLayout>
+                    <Suspense fallback={<LoadingSpinner />}>
+                      <HealthInsurance />
+                    </Suspense>
+                  </MainLayout>
                 } />
+                
                 <Route path="/term-insurance" element={
-                  <Suspense fallback={<div>Loading...</div>}>
-                    <TermInsurance />
-                  </Suspense>
+                  <MainLayout>
+                    <Suspense fallback={<LoadingSpinner />}>
+                      <TermInsurance />
+                    </Suspense>
+                  </MainLayout>
                 } />
+                
                 <Route path="/vehicle-insurance" element={
-                  <Suspense fallback={<div>Loading...</div>}>
-                    <VehicleInsurance />
-                  </Suspense>
+                  <MainLayout>
+                    <Suspense fallback={<LoadingSpinner />}>
+                      <VehicleInsurance />
+                    </Suspense>
+                  </MainLayout>
                 } />
+                
+                {/* Loan Sub-pages */}
                 <Route path="/loans/personal" element={
-                  <Suspense fallback={<div>Loading...</div>}>
-                    <PersonalLoan />
-                  </Suspense>
+                  <MainLayout>
+                    <Suspense fallback={<LoadingSpinner />}>
+                      <PersonalLoan />
+                    </Suspense>
+                  </MainLayout>
                 } />
                 
                 {/* Admin Routes */}
@@ -100,7 +144,7 @@ const App = () => {
                   path="/admin" 
                   element={
                     <ProtectedRoute>
-                      <Suspense fallback={<div>Loading...</div>}>
+                      <Suspense fallback={<LoadingSpinner />}>
                         <AdminDashboard />
                       </Suspense>
                     </ProtectedRoute>
