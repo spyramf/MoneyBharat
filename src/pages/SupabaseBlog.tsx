@@ -8,7 +8,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Search, Calendar, Clock, User } from 'lucide-react';
+import { Search, Calendar, Clock } from 'lucide-react';
 import { format } from 'date-fns';
 import SEOHead from '@/components/seo/SEOHead';
 

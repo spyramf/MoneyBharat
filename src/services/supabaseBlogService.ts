@@ -95,6 +95,7 @@ class SupabaseBlogService {
 
     return data?.map(post => ({
       ...post,
+      status: post.status as 'draft' | 'published' | 'archived',
       tags: post.tags?.map((t: any) => t.blog_tags) || []
     })) || [];
   }
@@ -115,6 +116,7 @@ class SupabaseBlogService {
 
     return {
       ...data,
+      status: data.status as 'draft' | 'published' | 'archived',
       tags: data.tags?.map((t: any) => t.blog_tags) || []
     };
   }
@@ -135,6 +137,7 @@ class SupabaseBlogService {
 
     return {
       ...data,
+      status: data.status as 'draft' | 'published' | 'archived',
       tags: data.tags?.map((t: any) => t.blog_tags) || []
     };
   }
@@ -156,6 +159,7 @@ class SupabaseBlogService {
 
     return data?.map(post => ({
       ...post,
+      status: post.status as 'draft' | 'published' | 'archived',
       tags: post.tags?.map((t: any) => t.blog_tags) || []
     })) || [];
   }
@@ -177,6 +181,7 @@ class SupabaseBlogService {
 
     return data?.map(post => ({
       ...post,
+      status: post.status as 'draft' | 'published' | 'archived',
       tags: post.tags?.map((t: any) => t.blog_tags) || []
     })) || [];
   }
@@ -189,7 +194,10 @@ class SupabaseBlogService {
       .single();
 
     if (error) throw error;
-    return data;
+    return {
+      ...data,
+      status: data.status as 'draft' | 'published' | 'archived'
+    };
   }
 
   async updatePost(id: string, updates: Partial<SupabaseBlogPost>): Promise<SupabaseBlogPost> {
@@ -201,7 +209,10 @@ class SupabaseBlogService {
       .single();
 
     if (error) throw error;
-    return data;
+    return {
+      ...data,
+      status: data.status as 'draft' | 'published' | 'archived'
+    };
   }
 
   async deletePost(id: string): Promise<void> {
