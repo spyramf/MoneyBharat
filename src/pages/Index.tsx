@@ -1,150 +1,148 @@
 
-import React from 'react';
-import PageLayout from '@/components/layout/PageLayout';
-import EnhancedHeroSection from '@/components/EnhancedHeroSection';
-import ProductCard from '@/components/ProductCard';
-import TestimonialCard from '@/components/TestimonialCard';
-import FinancialToolCard from '@/components/FinancialToolCard';
-import { TrendingUp, Shield, CreditCard, Calculator, Target, ShieldCheck } from 'lucide-react';
+import { lazy, Suspense } from "react";
+import Navbar from "@/components/Navbar";
+import OptimizedHeroSection from "@/components/OptimizedHeroSection";
+import Footer from "@/components/Footer";
+import StructuredData from "@/components/seo/StructuredData";
+import SEOHead from "@/components/seo/SEOHead";
+import BreadcrumbSEO from "@/components/seo/BreadcrumbSEO";
+import URLRedirectHandler from "@/components/seo/URLRedirectHandler";
+
+// Import critical above-the-fold sections directly
+import ServicesSection from "@/components/home/ServicesSection";
+import HowItWorksSection from "@/components/home/HowItWorksSection";
+
+// Keep lazy loading only for below-the-fold sections
+const FeaturesSection = lazy(() => import("@/components/home/FeaturesSection"));
+const FinancialToolsSection = lazy(() => import("@/components/home/FinancialToolsSection"));
+const MutualFundSection = lazy(() => import("@/components/home/MutualFundSection"));
+const InsuranceSection = lazy(() => import("@/components/home/InsuranceSection"));
+const LoanSection = lazy(() => import("@/components/home/LoanSection"));
+const TrustSecuritySection = lazy(() => import("@/components/home/TrustSecuritySection"));
+const TestimonialsSection = lazy(() => import("@/components/home/TestimonialsSection"));
+const FAQSection = lazy(() => import("@/components/home/FAQSection"));
+const CTASection = lazy(() => import("@/components/home/CTASection"));
+
+// Simplified loading fallback
+const SectionLoader = () => (
+  <div className="py-8">
+    <div className="container mx-auto px-4">
+      <div className="animate-pulse space-y-4">
+        <div className="h-6 bg-gray-200 rounded w-1/4 mx-auto"></div>
+        <div className="h-4 bg-gray-200 rounded w-1/2 mx-auto"></div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+          {[1, 2, 3].map((i) => (
+            <div key={i} className="h-32 bg-gray-200 rounded"></div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+);
 
 const Index = () => {
-  const products = [
+  // FAQ data for structured markup
+  const homeFaqData = [
     {
-      title: "Mutual Funds",
-      icon: <TrendingUp className="w-6 h-6" />,
-      description: "Grow your wealth with our expertly managed mutual fund portfolios",
-      features: ["SIP Planning", "Goal-based Investing", "Expert Advisory"],
-      linkText: "Explore Mutual Funds",
-      linkHref: "/mutual-funds",
-      gradient: "bg-gradient-to-r from-blue-500 to-blue-600"
+      question: "What makes Money Bharat different from other financial platforms?",
+      answer: "Money Bharat combines cutting-edge technology with personalized financial advice. We offer zero-commission mutual funds, comprehensive insurance coverage, and instant loan approvals through our AI-powered platform."
     },
     {
-      title: "Insurance",
-      icon: <Shield className="w-6 h-6" />,
-      description: "Comprehensive insurance solutions for life, health, and assets",
-      features: ["Life Insurance", "Health Coverage", "Asset Protection"],
-      linkText: "View Insurance Plans",
-      linkHref: "/insurance",
-      gradient: "bg-gradient-to-r from-green-500 to-green-600"
+      question: "How secure is Money Bharat for online financial transactions?",
+      answer: "Money Bharat employs bank-grade 256-bit SSL encryption, multi-factor authentication, and follows RBI guidelines for financial security."
     },
     {
-      title: "Personal Loans",
-      icon: <CreditCard className="w-6 h-6" />,
-      description: "Quick and easy personal loans with competitive interest rates",
-      features: ["Instant Approval", "Low Interest", "Flexible Tenure"],
-      linkText: "Apply for Loan",
-      linkHref: "/loans/personal",
-      gradient: "bg-gradient-to-r from-purple-500 to-purple-600"
+      question: "What types of mutual funds can I invest in through Money Bharat?",
+      answer: "We offer over 2,000+ mutual fund schemes including equity funds, debt funds, hybrid funds, ELSS tax-saving funds, international funds, and sectoral funds from top AMCs."
     }
   ];
 
-  const testimonials = [
+  // Review data for structured markup
+  const reviewData = [
     {
-      quote: "Money Bharat helped me achieve my financial goals with their expert guidance.",
-      name: "Priya Sharma",
-      title: "Software Engineer"
+      name: "Rajesh Sharma",
+      quote: "Money Bharat's mutual fund recommendations helped me achieve 18% returns in just one year.",
+      rating: "5"
     },
     {
-      quote: "Excellent service and support. Highly recommended for financial planning.",
-      name: "Rajesh Kumar", 
-      title: "Business Owner"
+      name: "Priya Mehta", 
+      quote: "Money Bharat's experts guided me to a comprehensive insurance plan that saved us 30% on premiums.",
+      rating: "5"
     },
     {
-      quote: "Professional team and great investment advice. Very satisfied with results.",
-      name: "Anita Singh",
-      title: "Doctor"
-    }
-  ];
-
-  const tools = [
-    {
-      title: "SIP Calculator",
-      description: "Calculate your SIP returns",
-      icon: <Calculator className="w-8 h-8" />,
-      bgColor: "bg-blue-50",
-      linkText: "Calculate Now",
-      linkHref: "/sip-calculator"
-    },
-    {
-      title: "Goal Planner",
-      description: "Plan your financial goals",
-      icon: <Target className="w-8 h-8" />,
-      bgColor: "bg-green-50",
-      linkText: "Plan Goals",
-      linkHref: "/goal-planner"
-    },
-    {
-      title: "Risk Profiler",
-      description: "Assess your risk appetite",
-      icon: <ShieldCheck className="w-8 h-8" />,
-      bgColor: "bg-purple-50",
-      linkText: "Assess Risk",
-      linkHref: "/risk-profiler"
+      name: "Vikram Singh",
+      quote: "Getting a home loan through Money Bharat was incredibly fast and easy.",
+      rating: "5"
     }
   ];
 
   return (
-    <PageLayout>
-      <EnhancedHeroSection />
+    <div className="min-h-screen">
+      {/* Handle URL canonicalization - disabled in development to prevent redirect errors */}
+      <URLRedirectHandler enableRedirect={process.env.NODE_ENV === 'production'} />
       
-      {/* Products Section */}
-      <section className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12">Our Services</h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            {products.map((product, index) => (
-              <ProductCard
-                key={index}
-                title={product.title}
-                icon={product.icon}
-                description={product.description}
-                features={product.features}
-                linkText={product.linkText}
-                linkHref={product.linkHref}
-                gradient={product.gradient}
-              />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Financial Tools */}
-      <section className="py-16">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12">Financial Tools</h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            {tools.map((tool, index) => (
-              <FinancialToolCard
-                key={index}
-                title={tool.title}
-                description={tool.description}
-                icon={tool.icon}
-                bgColor={tool.bgColor}
-                linkText={tool.linkText}
-                linkHref={tool.linkHref}
-              />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials */}
-      <section className="py-16 bg-blue-50">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12">What Our Clients Say</h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, index) => (
-              <TestimonialCard
-                key={index}
-                quote={testimonial.quote}
-                name={testimonial.name}
-                title={testimonial.title}
-              />
-            ))}
-          </div>
-        </div>
-      </section>
-    </PageLayout>
+      <SEOHead 
+        title="Money Bharat Finance - Mutual Funds, Insurance & Loans"
+        description="Grow your wealth with Money Bharat Finance - India's AI-powered platform for mutual funds, SIP investments, health & life insurance, and instant personal loans. Expert advisory with ₹5000Cr+ AUM."
+        keywords="mutual funds India, SIP investment, health insurance, personal loans, financial planning, investment advisory, Money Bharat, wealth management"
+      />
+      
+      <StructuredData 
+        page="home" 
+        faqData={homeFaqData}
+        reviewData={reviewData}
+      />
+      
+      <Navbar />
+      <BreadcrumbSEO />
+      
+      {/* Critical above-the-fold content */}
+      <OptimizedHeroSection />
+      
+      {/* Load services section without Suspense (critical) */}
+      <ServicesSection />
+      
+      {/* How it works section for content expansion */}
+      <HowItWorksSection />
+      
+      <Suspense fallback={<SectionLoader />}>
+        <FeaturesSection />
+      </Suspense>
+      
+      <Suspense fallback={<SectionLoader />}>
+        <MutualFundSection />
+      </Suspense>
+      
+      <Suspense fallback={<SectionLoader />}>
+        <InsuranceSection />
+      </Suspense>
+      
+      <Suspense fallback={<SectionLoader />}>
+        <LoanSection />
+      </Suspense>
+      
+      <Suspense fallback={<SectionLoader />}>
+        <FinancialToolsSection />
+      </Suspense>
+      
+      <Suspense fallback={<SectionLoader />}>
+        <TrustSecuritySection />
+      </Suspense>
+      
+      <Suspense fallback={<SectionLoader />}>
+        <TestimonialsSection />
+      </Suspense>
+      
+      <Suspense fallback={<SectionLoader />}>
+        <FAQSection />
+      </Suspense>
+      
+      <Suspense fallback={<SectionLoader />}>
+        <CTASection />
+      </Suspense>
+      
+      <Footer />
+    </div>
   );
 };
 

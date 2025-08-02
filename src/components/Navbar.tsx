@@ -1,127 +1,95 @@
-
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { Menu, X } from 'lucide-react';
+import { Button } from "@/components/ui/button";
+import { cn } from '@/lib/utils';
 import { Link } from 'react-router-dom';
-import { Button } from '@/components/ui/button';
-import { Menu, X, ChevronDown } from 'lucide-react';
-import { navItems, loanNavItems, insuranceNavItems } from '@/data/navigationData';
-
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [dropdownOpen, setDropdownOpen] = useState<string | null>(null);
-
-  const toggleMenu = () => setIsOpen(!isOpen);
-  
-  const handleDropdownToggle = (item: string) => {
-    setDropdownOpen(dropdownOpen === item ? null : item);
-  };
-
-  return (
-    <nav className="bg-white shadow-lg sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          {/* Logo */}
-          <Link to="/" className="flex-shrink-0">
-            <img 
-              src="/lovable-uploads/aaa1dbf8-5b73-4620-a205-6193e82f8185.png" 
-              alt="Money Bharat" 
-              className="h-10 w-auto"
-            />
-          </Link>
-
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            {navItems.map((item) => {
-              const hasSubmenu = item.name === 'Loans' || item.name === 'Insurance';
-              
-              return (
-                <div key={item.name} className="relative">
-                  {hasSubmenu ? (
-                    <div
-                      className="flex items-center space-x-1 cursor-pointer text-gray-700 hover:text-blue-600 transition-colors"
-                      onMouseEnter={() => handleDropdownToggle(item.name)}
-                      onMouseLeave={() => handleDropdownToggle('')}
-                    >
-                      <span>{item.name}</span>
-                      <ChevronDown className="h-4 w-4" />
-                      
-                      {/* Dropdown Menu */}
-                      {dropdownOpen === item.name && (
-                        <div className="absolute top-full left-0 mt-2 w-48 bg-white rounded-md shadow-lg border border-gray-200 py-2 z-10">
-                          {(item.name === 'Loans' ? loanNavItems : insuranceNavItems).map((subItem) => (
-                            <Link
-                              key={subItem.name}
-                              to={subItem.path}
-                              className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
-                              onClick={() => setDropdownOpen(null)}
-                            >
-                              {subItem.name}
-                            </Link>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  ) : (
-                    <Link
-                      to={item.path}
-                      className="text-gray-700 hover:text-blue-600 transition-colors font-medium"
-                    >
-                      {item.name}
-                    </Link>
-                  )}
-                </div>
-              );
-            })}
-            
-            <Button 
-              asChild
-              className="bg-blue-600 hover:bg-blue-700 text-white"
-            >
-              <Link to="/admin/login">
-                Admin Login
-              </Link>
-            </Button>
-          </div>
-
-          {/* Mobile menu button */}
-          <div className="md:hidden">
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={toggleMenu}
-              className="p-2"
-            >
-              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-            </Button>
-          </div>
-        </div>
-      </div>
-
-      {/* Mobile Navigation */}
-      {isOpen && (
-        <div className="md:hidden">
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t">
-            {navItems.map((item) => (
-              <Link
-                key={item.name}
-                to={item.path}
-                className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-md transition-colors"
-                onClick={() => setIsOpen(false)}
-              >
-                {item.name}
-              </Link>
-            ))}
-            <Link
-              to="/admin/login"
-              className="block px-3 py-2 text-base font-medium text-blue-600 hover:bg-blue-50 rounded-md transition-colors"
-              onClick={() => setIsOpen(false)}
-            >
-              Admin Login
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 10) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+  return <nav className={cn('fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-4', scrolled ? 'bg-white/90 backdrop-blur-md shadow-sm' : 'bg-transparent')}>
+      <div className="container mx-auto px-4">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center">
+            <Link to="/" className="flex items-center">
+              <div className="h-10 w-10 mr-2">
+                <img src="/lovable-uploads/92affb7c-7e35-42da-9aff-b0f55a689428.png" alt="Money Bharat Logo" className="h-full w-full object-contain" />
+              </div>
+              <span className="text-2xl font-bold">
+                <span className="gradient-text">Money</span>
+                <span className="text-[#2EB883]"> Bharat</span>
+              </span>
             </Link>
           </div>
-        </div>
-      )}
-    </nav>
-  );
-};
 
+          {/* Desktop Menu */}
+          <div className="hidden md:flex items-center gap-8">
+            <Link to="/mutual-funds" className="font-medium text-gray-700 hover:text-fintech-green transition-colors">
+              Mutual Funds
+            </Link>
+            <Link to="/insurance" className="font-medium text-gray-700 hover:text-fintech-green transition-colors">
+              Insurance
+            </Link>
+            <Link to="/loans" className="font-medium text-gray-700 hover:text-fintech-green transition-colors">
+              Loans
+            </Link>
+            <Link to="/blog" className="font-medium text-gray-700 hover:text-fintech-green transition-colors">
+              Blog
+            </Link>
+            <Link to="/about" className="font-medium text-gray-700 hover:text-fintech-green transition-colors">
+              About Us
+            </Link>
+<a href="https://moneybharat.net/Home/Login" target="_blank" rel="noopener noreferrer">
+  <Button className="bg-gradient-to-r from-fintech-green to-fintech-green hover:opacity-90 text-white px-8 py-6">
+    Get Started
+  </Button>
+</a>
+          </div>
+
+          {/* Mobile Menu Toggle */}
+          <button className="md:hidden text-gray-700" onClick={() => setIsOpen(!isOpen)}>
+            {isOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
+
+        {/* Mobile Menu */}
+        {isOpen && <div className="md:hidden mt-4 bg-white shadow-lg rounded-lg p-4 absolute left-4 right-4">
+            <div className="flex flex-col gap-4">
+              <Link to="/mutual-funds" className="font-medium text-gray-700 hover:text-fintech-green transition-colors" onClick={() => setIsOpen(false)}>
+                Mutual Funds
+              </Link>
+              <Link to="/insurance" className="font-medium text-gray-700 hover:text-fintech-green transition-colors" onClick={() => setIsOpen(false)}>
+                Insurance
+              </Link>
+              <Link to="/loans" className="font-medium text-gray-700 hover:text-fintech-green transition-colors" onClick={() => setIsOpen(false)}>
+                Loans
+              </Link>
+              <Link to="/blog" className="font-medium text-gray-700 hover:text-fintech-green transition-colors" onClick={() => setIsOpen(false)}>
+                Blog
+              </Link>
+              <Link to="/about" className="font-medium text-gray-700 hover:text-fintech-green transition-colors" onClick={() => setIsOpen(false)}>
+                About Us
+              </Link>
+<a href="https://moneybharat.net/Home/Login" target="_blank" rel="noopener noreferrer">
+  <Button className="bg-fintech-green hover:bg-fintech-green/90 text-white w-full rounded-full">
+    Get Started
+  </Button>
+</a>
+            </div>
+          </div>}
+      </div>
+    </nav>;
+};
 export default Navbar;
