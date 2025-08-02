@@ -1,8 +1,7 @@
-
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { supabaseBlogService, type SupabaseBlogPost, type SupabaseBlogAuthor, type SupabaseBlogCategory, type SupabaseBlogTag } from '@/services/supabaseBlogService';
-import AdminLayout from '@/components/AdminLayout';
+import AdminLayout from '@/layouts/AdminLayout';
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';

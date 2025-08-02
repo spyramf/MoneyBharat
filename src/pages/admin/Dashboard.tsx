@@ -1,5 +1,5 @@
 
-import AdminLayout from '@/components/AdminLayout';
+import AdminLayout from '@/layouts/AdminLayout';
 import { CMSDashboard } from '@/components/cms/CMSDashboard';
 
 const Dashboard = () => {

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useBlog } from '@/context/BlogContext';
 import { blogAuthors } from '@/data/blogData';
-import AdminLayout from '@/components/AdminLayout';
+import AdminLayout from '@/layouts/AdminLayout';
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
