@@ -1,95 +1,146 @@
-import { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
-import { Button } from "@/components/ui/button";
-import { cn } from '@/lib/utils';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Button } from '@/components/ui/button';
+import { Menu, X, ChevronDown } from 'lucide-react';
+import { ROUTES, APP_CONFIG } from '@/utils/constants';
+
 const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 10) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
-  return <nav className={cn('fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-4', scrolled ? 'bg-white/90 backdrop-blur-md shadow-sm' : 'bg-transparent')}>
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isServicesOpen, setIsServicesOpen] = useState(false);
+
+  const navigationItems = [
+    { name: 'Home', href: ROUTES.HOME },
+    { name: 'About', href: ROUTES.ABOUT },
+    { 
+      name: 'Services',
+      href: '#',
+      hasDropdown: true,
+      dropdownItems: [
+        { name: 'Mutual Funds', href: '/services/mutual-funds' },
+        { name: 'Insurance', href: '/services/insurance' },
+        { name: 'Fixed Deposits', href: '/services/fixed-deposits' },
+        { name: 'Financial Planning', href: '/services/financial-planning' },
+      ]
+    },
+    { name: 'Contact', href: ROUTES.CONTACT },
+  ];
+
+  return (
+    <nav className="bg-white shadow-sm sticky top-0 z-50">
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center">
-            <Link to="/" className="flex items-center">
-              <div className="h-10 w-10 mr-2">
-                <img src="/lovable-uploads/92affb7c-7e35-42da-9aff-b0f55a689428.png" alt="Money Bharat Logo" className="h-full w-full object-contain" />
+        <div className="flex justify-between items-center h-16">
+          {/* Logo */}
+          <Link to={ROUTES.HOME} className="flex items-center space-x-2">
+            <img 
+              src="/lovable-uploads/aaa1dbf8-5b73-4620-a205-6193e82f8185.png" 
+              alt={`${APP_CONFIG.name} Logo`}
+              className="h-8 w-auto"
+            />
+            <span className="text-xl font-bold text-blue-600">{APP_CONFIG.name}</span>
+          </Link>
+
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center space-x-8">
+            {navigationItems.map((item) => (
+              <div key={item.name} className="relative">
+                {item.hasDropdown ? (
+                  <div 
+                    className="relative"
+                    onMouseEnter={() => setIsServicesOpen(true)}
+                    onMouseLeave={() => setIsServicesOpen(false)}
+                  >
+                    <button className="flex items-center text-gray-700 hover:text-blue-600 transition-colors">
+                      {item.name}
+                      <ChevronDown className="ml-1 h-4 w-4" />
+                    </button>
+                    {isServicesOpen && (
+                      <div className="absolute top-full left-0 mt-1 w-48 bg-white rounded-md shadow-lg border border-gray-200">
+                        <div className="py-1">
+                          {item.dropdownItems?.map((dropdownItem) => (
+                            <Link
+                              key={dropdownItem.name}
+                              to={dropdownItem.href}
+                              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-blue-600 transition-colors"
+                            >
+                              {dropdownItem.name}
+                            </Link>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  <Link 
+                    to={item.href}
+                    className="text-gray-700 hover:text-blue-600 transition-colors"
+                  >
+                    {item.name}
+                  </Link>
+                )}
               </div>
-              <span className="text-2xl font-bold">
-                <span className="gradient-text">Money</span>
-                <span className="text-[#2EB883]"> Bharat</span>
-              </span>
+            ))}
+          </div>
+
+          {/* CTA Button */}
+          <div className="hidden md:block">
+            <Link to={ROUTES.CONTACT}>
+              <Button className="bg-blue-600 hover:bg-blue-700 text-white">
+                Get Started
+              </Button>
             </Link>
           </div>
 
-          {/* Desktop Menu */}
-          <div className="hidden md:flex items-center gap-8">
-            <Link to="/mutual-funds" className="font-medium text-gray-700 hover:text-fintech-green transition-colors">
-              Mutual Funds
-            </Link>
-            <Link to="/insurance" className="font-medium text-gray-700 hover:text-fintech-green transition-colors">
-              Insurance
-            </Link>
-            <Link to="/loans" className="font-medium text-gray-700 hover:text-fintech-green transition-colors">
-              Loans
-            </Link>
-            <Link to="/blog" className="font-medium text-gray-700 hover:text-fintech-green transition-colors">
-              Blog
-            </Link>
-            <Link to="/about" className="font-medium text-gray-700 hover:text-fintech-green transition-colors">
-              About Us
-            </Link>
-<a href="https://moneybharat.net/Home/Login" target="_blank" rel="noopener noreferrer">
-  <Button className="bg-gradient-to-r from-fintech-green to-fintech-green hover:opacity-90 text-white px-8 py-6">
-    Get Started
-  </Button>
-</a>
-          </div>
-
-          {/* Mobile Menu Toggle */}
-          <button className="md:hidden text-gray-700" onClick={() => setIsOpen(!isOpen)}>
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
+          {/* Mobile Menu Button */}
+          <button
+            className="md:hidden p-2"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
+            {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
         </div>
 
         {/* Mobile Menu */}
-        {isOpen && <div className="md:hidden mt-4 bg-white shadow-lg rounded-lg p-4 absolute left-4 right-4">
-            <div className="flex flex-col gap-4">
-              <Link to="/mutual-funds" className="font-medium text-gray-700 hover:text-fintech-green transition-colors" onClick={() => setIsOpen(false)}>
-                Mutual Funds
+        {isMenuOpen && (
+          <div className="md:hidden py-4 border-t border-gray-200">
+            {navigationItems.map((item) => (
+              <div key={item.name}>
+                {item.hasDropdown ? (
+                  <div className="space-y-2">
+                    <div className="px-3 py-2 text-gray-900 font-medium">{item.name}</div>
+                    {item.dropdownItems?.map((dropdownItem) => (
+                      <Link
+                        key={dropdownItem.name}
+                        to={dropdownItem.href}
+                        className="block px-6 py-2 text-gray-600 hover:text-blue-600 transition-colors"
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        {dropdownItem.name}
+                      </Link>
+                    ))}
+                  </div>
+                ) : (
+                  <Link
+                    to={item.href}
+                    className="block px-3 py-2 text-gray-700 hover:text-blue-600 transition-colors"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    {item.name}
+                  </Link>
+                )}
+              </div>
+            ))}
+            <div className="px-3 py-2">
+              <Link to={ROUTES.CONTACT}>
+                <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white">
+                  Get Started
+                </Button>
               </Link>
-              <Link to="/insurance" className="font-medium text-gray-700 hover:text-fintech-green transition-colors" onClick={() => setIsOpen(false)}>
-                Insurance
-              </Link>
-              <Link to="/loans" className="font-medium text-gray-700 hover:text-fintech-green transition-colors" onClick={() => setIsOpen(false)}>
-                Loans
-              </Link>
-              <Link to="/blog" className="font-medium text-gray-700 hover:text-fintech-green transition-colors" onClick={() => setIsOpen(false)}>
-                Blog
-              </Link>
-              <Link to="/about" className="font-medium text-gray-700 hover:text-fintech-green transition-colors" onClick={() => setIsOpen(false)}>
-                About Us
-              </Link>
-<a href="https://moneybharat.net/Home/Login" target="_blank" rel="noopener noreferrer">
-  <Button className="bg-fintech-green hover:bg-fintech-green/90 text-white w-full rounded-full">
-    Get Started
-  </Button>
-</a>
             </div>
-          </div>}
+          </div>
+        )}
       </div>
-    </nav>;
+    </nav>
+  );
 };
+
 export default Navbar;
