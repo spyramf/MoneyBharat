@@ -3,8 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { useParams, Navigate } from 'react-router-dom';
 import { useBlog } from '@/context/BlogContext';
 import { supabaseBlogService, type SupabaseBlogPost } from '@/services/supabaseBlogService';
-import { SEOHead } from '@/components/seo/SEOHead';
-import { StructuredData } from '@/components/seo/StructuredData';
+import SEOHead from '@/components/seo/SEOHead';
+import StructuredData from '@/components/seo/StructuredData';
 import { BlogPostHeader } from '@/components/blog/BlogPostHeader';
 import { BlogPostContent } from '@/components/blog/BlogPostContent';
 import { RelatedArticles } from '@/components/blog/RelatedArticles';
@@ -116,15 +116,7 @@ const BlogPost = () => {
       <SEOHead 
         title={post.meta_title || `${post.title} | Money Bharat Finance`}
         description={post.meta_description || post.excerpt}
-        keywords={post.focus_keywords || []}
-        canonicalUrl={post.canonical_url || `https://moneybharatfinance.com/blog/${post.slug}`}
-        ogTitle={post.og_title}
-        ogDescription={post.og_description}
-        ogImage={post.og_image}
-        twitterTitle={post.twitter_title}
-        twitterDescription={post.twitter_description}
-        twitterImage={post.twitter_image}
-        robotsDirective={post.robots_directive}
+        keywords={post.focus_keywords?.join(', ') || ''}
       />
       <StructuredData data={structuredData} />
       

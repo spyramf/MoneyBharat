@@ -1,10 +1,9 @@
-
 import React, { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { useBlog } from '@/context/BlogContext';
 import { BlogPostCard } from '@/components/BlogPostCard';
-import { SEOHead } from '@/components/seo/SEOHead';
-import { StructuredData } from '@/components/seo/StructuredData';
+import SEOHead from '@/components/seo/SEOHead';
+import StructuredData from '@/components/seo/StructuredData';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -77,8 +76,7 @@ const Blog = () => {
       <SEOHead 
         title="Financial Blog - Expert Money Management Tips | Money Bharat Finance"
         description="Read expert insights on mutual funds, insurance, loans, and investment strategies. Get the latest financial advice from certified professionals."
-        keywords={['financial blog', 'investment tips', 'mutual funds', 'insurance', 'money management']}
-        canonicalUrl="https://moneybharatfinance.com/blog"
+        keywords="financial blog, investment tips, mutual funds, insurance, money management"
       />
       <StructuredData data={structuredData} />
       

@@ -1,244 +1,225 @@
 
 import { supabase } from '@/integrations/supabase/client';
-import type { Tables } from '@/integrations/supabase/types';
+import { Database } from '@/integrations/supabase/types';
 
-export type SupabaseBlogPost = Tables<'blogs'> & {
-  category?: Tables<'blog_categories'> | null;
-  author?: Tables<'blog_authors'> | null;
-  tags?: Tables<'blog_tags'>[];
+export type SupabaseBlogPost = Database['public']['Tables']['blogs']['Row'] & {
+  author?: SupabaseBlogAuthor;
+  category?: SupabaseBlogCategory;
+  tags?: SupabaseBlogTag[];
 };
 
-export type SupabaseBlogCategory = Tables<'blog_categories'>;
-export type SupabaseBlogAuthor = Tables<'blog_authors'>;
-export type SupabaseBlogTag = Tables<'blog_tags'>;
+export type SupabaseBlogCategory = Database['public']['Tables']['blog_categories']['Row'];
+export type SupabaseBlogAuthor = Database['public']['Tables']['blog_authors']['Row'];
+export type SupabaseBlogTag = Database['public']['Tables']['blog_tags']['Row'];
 
-export const supabaseBlogService = {
-  getAllPosts: async (): Promise<SupabaseBlogPost[]> => {
+export type BlogPostInsert = Database['public']['Tables']['blogs']['Insert'];
+export type BlogPostUpdate = Database['public']['Tables']['blogs']['Update'];
+
+class SupabaseBlogService {
+  async getAllPosts(): Promise<SupabaseBlogPost[]> {
     const { data, error } = await supabase
       .from('blogs')
       .select(`
         *,
-        category:category_id (
-          *
-        ),
-        author:author_id (
-          *
-        )
+        author:blog_authors(*),
+        category:blog_categories(*),
+        tags:blog_post_tags(blog_tags(*))
       `)
-      .order('created_at', { ascending: false });
+      .eq('status', 'published')
+      .order('published_date', { ascending: false });
 
     if (error) {
-      throw new Error(`Error fetching posts: ${error.message}`);
+      console.error('Error fetching blog posts:', error);
+      throw new Error('Failed to fetch blog posts');
     }
 
-    return data || [];
-  },
+    return data?.map(post => ({
+      ...post,
+      tags: post.tags?.map((tagRelation: any) => tagRelation.blog_tags) || []
+    })) || [];
+  }
 
-  getPostById: async (id: string): Promise<SupabaseBlogPost | null> => {
+  async getPostBySlug(slug: string): Promise<SupabaseBlogPost> {
     const { data, error } = await supabase
       .from('blogs')
       .select(`
         *,
-        category:category_id (
-          *
-        ),
-        author:author_id (
-          *
-        )
-      `)
-      .eq('id', id)
-      .single();
-
-    if (error) {
-      if (error.code === 'PGRST116') return null; // Not found
-      throw new Error(`Error fetching post by ID: ${error.message}`);
-    }
-
-    return data;
-  },
-
-  getPostBySlug: async (slug: string): Promise<SupabaseBlogPost | null> => {
-    const { data, error } = await supabase
-      .from('blogs')
-      .select(`
-        *,
-        category:category_id (
-          *
-        ),
-        author:author_id (
-          *
-        )
+        author:blog_authors(*),
+        category:blog_categories(*),
+        tags:blog_post_tags(blog_tags(*))
       `)
       .eq('slug', slug)
       .single();
 
     if (error) {
-      if (error.code === 'PGRST116') return null; // Not found
-      throw new Error(`Error fetching post by slug: ${error.message}`);
+      console.error('Error fetching blog post:', error);
+      throw new Error('Failed to fetch blog post');
+    }
+
+    return {
+      ...data,
+      tags: data.tags?.map((tagRelation: any) => tagRelation.blog_tags) || []
+    };
+  }
+
+  async getPostById(id: string): Promise<SupabaseBlogPost> {
+    const { data, error } = await supabase
+      .from('blogs')
+      .select(`
+        *,
+        author:blog_authors(*),
+        category:blog_categories(*),
+        tags:blog_post_tags(blog_tags(*))
+      `)
+      .eq('id', id)
+      .single();
+
+    if (error) {
+      console.error('Error fetching blog post by ID:', error);
+      throw new Error('Failed to fetch blog post');
+    }
+
+    return {
+      ...data,
+      tags: data.tags?.map((tagRelation: any) => tagRelation.blog_tags) || []
+    };
+  }
+
+  async createPost(post: Partial<BlogPostInsert>): Promise<SupabaseBlogPost> {
+    const { data, error } = await supabase
+      .from('blogs')
+      .insert({
+        ...post,
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
+        updated_date: new Date().toISOString(),
+      } as BlogPostInsert)
+      .select()
+      .single();
+
+    if (error) {
+      console.error('Error creating blog post:', error);
+      throw new Error('Failed to create blog post');
     }
 
     return data;
-  },
+  }
 
-  createPost: async (post: Tables<'blogs', 'Insert'>): Promise<SupabaseBlogPost | null> => {
+  async updatePost(id: string, updates: Partial<BlogPostUpdate>): Promise<SupabaseBlogPost> {
     const { data, error } = await supabase
       .from('blogs')
-      .insert([post])
-      .select(`
-        *,
-        category:category_id (
-          *
-        ),
-        author:author_id (
-          *
-        )
-      `)
-      .single();
-
-    if (error) {
-      throw new Error(`Error creating post: ${error.message}`);
-    }
-
-    return data || null;
-  },
-
-  updatePost: async (id: string, updates: Tables<'blogs', 'Update'>): Promise<SupabaseBlogPost | null> => {
-    const { data, error } = await supabase
-      .from('blogs')
-      .update(updates)
+      .update({
+        ...updates,
+        updated_at: new Date().toISOString(),
+        updated_date: new Date().toISOString(),
+      })
       .eq('id', id)
-      .select(`
-        *,
-        category:category_id (
-          *
-        ),
-        author:author_id (
-          *
-        )
-      `)
+      .select()
       .single();
 
     if (error) {
-      throw new Error(`Error updating post: ${error.message}`);
+      console.error('Error updating blog post:', error);
+      throw new Error('Failed to update blog post');
     }
 
-    return data || null;
-  },
+    return data;
+  }
 
-  deletePost: async (id: string): Promise<void> => {
+  async deletePost(id: string): Promise<void> {
     const { error } = await supabase
       .from('blogs')
       .delete()
       .eq('id', id);
 
     if (error) {
-      throw new Error(`Error deleting post: ${error.message}`);
+      console.error('Error deleting blog post:', error);
+      throw new Error('Failed to delete blog post');
     }
-  },
+  }
 
-  getAllCategories: async (): Promise<SupabaseBlogCategory[]> => {
+  async getAllCategories(): Promise<SupabaseBlogCategory[]> {
     const { data, error } = await supabase
       .from('blog_categories')
       .select('*')
       .order('name');
 
     if (error) {
-      throw new Error(`Error fetching categories: ${error.message}`);
+      console.error('Error fetching categories:', error);
+      throw new Error('Failed to fetch categories');
     }
 
     return data || [];
-  },
+  }
 
-  createCategory: async (category: Tables<'blog_categories', 'Insert'>): Promise<SupabaseBlogCategory | null> => {
-    const { data, error } = await supabase
-      .from('blog_categories')
-      .insert([category])
-      .select('*')
-      .single();
-
-    if (error) {
-      throw new Error(`Error creating category: ${error.message}`);
-    }
-
-    return data || null;
-  },
-
-  updateCategory: async (id: string, updates: Tables<'blog_categories', 'Update'>): Promise<SupabaseBlogCategory | null> => {
-    const { data, error } = await supabase
-      .from('blog_categories')
-      .update(updates)
-      .eq('id', id)
-      .select('*')
-      .single();
-
-    if (error) {
-      throw new Error(`Error updating category: ${error.message}`);
-    }
-
-    return data || null;
-  },
-
-  deleteCategory: async (id: string): Promise<void> => {
-    const { error } = await supabase
-      .from('blog_categories')
-      .delete()
-      .eq('id', id);
-
-    if (error) {
-      throw new Error(`Error deleting category: ${error.message}`);
-    }
-  },
-
-  getAllAuthors: async (): Promise<SupabaseBlogAuthor[]> => {
+  async getAllAuthors(): Promise<SupabaseBlogAuthor[]> {
     const { data, error } = await supabase
       .from('blog_authors')
       .select('*')
       .order('name');
-    
-    if (error) {
-      throw new Error(`Error fetching authors: ${error.message}`);
-    }
-    
-    return data || [];
-  },
 
-  getAllTags: async (): Promise<SupabaseBlogTag[]> => {
+    if (error) {
+      console.error('Error fetching authors:', error);
+      throw new Error('Failed to fetch authors');
+    }
+
+    return data || [];
+  }
+
+  async getAllTags(): Promise<SupabaseBlogTag[]> {
     const { data, error } = await supabase
       .from('blog_tags')
       .select('*')
       .order('name');
-    
-    if (error) {
-      throw new Error(`Error fetching tags: ${error.message}`);
-    }
-    
-    return data || [];
-  },
 
-  calculateSEOScore: (post: Partial<SupabaseBlogPost>): number => {
+    if (error) {
+      console.error('Error fetching tags:', error);
+      throw new Error('Failed to fetch tags');
+    }
+
+    return data || [];
+  }
+
+  calculateSEOScore(post: Partial<SupabaseBlogPost>): number {
     let score = 0;
     
-    // Title length check (30-60 characters)
-    if (post.title && post.title.length >= 30 && post.title.length <= 60) score += 20;
-    else if (post.title && post.title.length > 0) score += 10;
+    // Title optimization (20 points)
+    if (post.title && post.title.length >= 30 && post.title.length <= 60) {
+      score += 20;
+    } else if (post.title && post.title.length > 0) {
+      score += 10;
+    }
     
-    // Meta description length check (120-160 characters)
-    if (post.meta_description && post.meta_description.length >= 120 && post.meta_description.length <= 160) score += 20;
-    else if (post.meta_description && post.meta_description.length > 0) score += 10;
+    // Meta description (20 points)
+    if (post.meta_description && post.meta_description.length >= 120 && post.meta_description.length <= 160) {
+      score += 20;
+    } else if (post.meta_description && post.meta_description.length > 0) {
+      score += 10;
+    }
     
-    // Content length check (minimum 300 words)
-    if (post.content && post.content.length > 1500) score += 20;
-    else if (post.content && post.content.length > 500) score += 10;
+    // Focus keywords (20 points)
+    if (post.focus_keywords && post.focus_keywords.length > 0) {
+      score += 20;
+    }
     
-    // Featured image check
-    if (post.featured_image) score += 10;
+    // Content length (20 points)
+    if (post.content && post.content.length >= 1000) {
+      score += 20;
+    } else if (post.content && post.content.length >= 500) {
+      score += 10;
+    }
     
-    // Focus keywords check
-    if (post.focus_keywords && post.focus_keywords.length > 0) score += 15;
+    // Featured image (10 points)
+    if (post.featured_image) {
+      score += 10;
+    }
     
-    // Excerpt check
-    if (post.excerpt && post.excerpt.length > 20) score += 15;
+    // Canonical URL (10 points)
+    if (post.canonical_url) {
+      score += 10;
+    }
     
     return Math.min(score, 100);
-  },
-};
+  }
+}
+
+export const supabaseBlogService = new SupabaseBlogService();
