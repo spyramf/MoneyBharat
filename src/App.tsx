@@ -60,8 +60,8 @@ function App() {
                     <Route path="/insurance" element={<Insurance />} />
                     <Route path="/health-insurance" element={<HealthInsurance />} />
                     <Route path="/loans" element={<Loans />} />
-                    <Route path="/blog" element={<SupabaseBlog />} />
-                    <Route path="/blog/:slug" element={<SupabaseBlogPost />} />
+                    <Route path="/blog" element={<Blog />} />
+                    <Route path="/blog/:slug" element={<BlogPost />} />
                     <Route path="/contact" element={<Contact />} />
                     
                     {/* Admin Routes */}
