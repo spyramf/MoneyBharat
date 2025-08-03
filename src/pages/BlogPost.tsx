@@ -73,16 +73,29 @@ const BlogPost = () => {
         `}</script>
       </Helmet>
 
-      <article className="pt-24">
-        <div className="container mx-auto px-4 py-8">
-          <div className="max-w-4xl mx-auto">
-            <BlogPostHeader post={post} />
+      <div className="min-h-screen bg-gray-50">
+        {/* Hero Background */}
+        <div className="bg-gradient-to-br from-fintech-purple via-blue-600 to-purple-700">
+          <div className="absolute inset-0 bg-black/10"></div>
+          <div className="relative">
+            <div className="pt-24 pb-16">
+              <div className="container mx-auto px-4 py-8">
+                <BlogPostHeader post={post} />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Main Content */}
+        <div className="bg-white">
+          <div className="container mx-auto px-4 py-12">
             <BlogPostContent post={post} />
           </div>
         </div>
-      </article>
 
-      <RelatedArticles relatedPosts={relatedPosts} />
+        {/* Related Articles */}
+        <RelatedArticles relatedPosts={relatedPosts} />
+      </div>
     </MainLayout>
   );
 };
