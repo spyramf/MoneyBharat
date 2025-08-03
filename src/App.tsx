@@ -1,3 +1,4 @@
+
 import React, { Suspense } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Toaster } from '@/components/ui/sonner';
@@ -41,7 +42,6 @@ const NotFound = React.lazy(() => import('./pages/NotFound'));
 const AdminLogin = React.lazy(() => import('./pages/admin/AdminLogin'));
 const CMSDashboard = React.lazy(() => import('./components/cms/CMSDashboard'));
 const SEOBlogManager = React.lazy(() => import('./components/cms/SEOBlogManager'));
-const SupabaseBlogEditor = React.lazy(() => import('./components/cms/SupabaseBlogEditor'));
 const BookingManager = React.lazy(() => import('./pages/admin/BookingManager'));
 
 const queryClient = new QueryClient();
@@ -50,97 +50,73 @@ function App() {
   return (
     <HelmetProvider>
       <QueryClientProvider client={queryClient}>
-        <AuthProvider>
-          <BlogProvider>
-            <BookingProvider>
-              <BrowserRouter>
+        <BrowserRouter>
+          <AuthProvider>
+            <BlogProvider>
+              <BookingProvider>
                 <ScrollToTop />
-                <Routes>
-                  {/* Public Routes */}
-                  <Route path="/" element={<Index />} />
-                  <Route path="/mutual-funds" element={<MutualFunds />} />
-                  <Route path="/loans" element={<Loans />} />
-                  <Route path="/insurance" element={<Insurance />} />
-                  <Route path="/blog" element={<SupabaseBlog />} />
-                  <Route path="/blog/:slug" element={<SupabaseBlogPost />} />
-                  <Route path="/contact" element={<Contact />} />
-                  <Route path="/about" element={<AboutUs />} />
-                  <Route path="/booking" element={<Booking />} />
-                  <Route path="/sip-calculator" element={<SipCalculator />} />
-                  <Route path="/emi-calculator" element={<EmiCalculator />} />
-                  <Route path="/tax-saving" element={<TaxSaving />} />
-                  <Route path="/home-loan" element={<HomeLoan />} />
-                  <Route path="/personal-loan" element={<PersonalLoan />} />
-                  <Route path="/car-loan" element={<CarLoan />} />
-                  <Route path="/education-loan" element={<EducationLoan />} />
-                  <Route path="/business-loan" element={<BusinessLoan />} />
-                  <Route path="/loan-against-mutual-funds" element={<LoanAgainstMutualFunds />} />
-                  <Route path="/health-insurance" element={<HealthInsurance />} />
-                  <Route path="/term-insurance" element={<TermInsurance />} />
-                  <Route path="/vehicle-insurance" element={<VehicleInsurance />} />
-                  <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-                  <Route path="/terms-of-service" element={<TermsOfService />} />
-                  <Route path="/sitemap" element={<Sitemap />} />
+                <Suspense fallback={<LoadingSpinner />}>
+                  <Routes>
+                    {/* Public Routes */}
+                    <Route path="/" element={<Index />} />
+                    <Route path="/mutual-funds" element={<MutualFunds />} />
+                    <Route path="/loans" element={<Loans />} />
+                    <Route path="/insurance" element={<Insurance />} />
+                    <Route path="/blog" element={<SupabaseBlog />} />
+                    <Route path="/blog/:slug" element={<SupabaseBlogPost />} />
+                    <Route path="/contact" element={<Contact />} />
+                    <Route path="/about" element={<AboutUs />} />
+                    <Route path="/booking" element={<Booking />} />
+                    <Route path="/sip-calculator" element={<SipCalculator />} />
+                    <Route path="/emi-calculator" element={<EmiCalculator />} />
+                    <Route path="/tax-saving" element={<TaxSaving />} />
+                    <Route path="/home-loan" element={<HomeLoan />} />
+                    <Route path="/personal-loan" element={<PersonalLoan />} />
+                    <Route path="/car-loan" element={<CarLoan />} />
+                    <Route path="/education-loan" element={<EducationLoan />} />
+                    <Route path="/business-loan" element={<BusinessLoan />} />
+                    <Route path="/loan-against-mutual-funds" element={<LoanAgainstMutualFunds />} />
+                    <Route path="/health-insurance" element={<HealthInsurance />} />
+                    <Route path="/term-insurance" element={<TermInsurance />} />
+                    <Route path="/vehicle-insurance" element={<VehicleInsurance />} />
+                    <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                    <Route path="/terms-of-service" element={<TermsOfService />} />
+                    <Route path="/sitemap" element={<Sitemap />} />
 
-                  {/* Admin Routes */}
-                  <Route path="/admin/login" element={<AdminLogin />} />
-                  <Route 
-                    path="/admin" 
-                    element={
-                      <ProtectedAdminRoute>
-                        <Suspense fallback={<LoadingSpinner />}>
+                    {/* Admin Routes */}
+                    <Route path="/admin/login" element={<AdminLogin />} />
+                    <Route 
+                      path="/admin" 
+                      element={
+                        <ProtectedAdminRoute>
                           <CMSDashboard />
-                        </Suspense>
-                      </ProtectedAdminRoute>
-                    } 
-                  />
-                  <Route 
-                    path="/admin/blogs/manage" 
-                    element={
-                      <ProtectedAdminRoute>
-                        <Suspense fallback={<LoadingSpinner />}>
+                        </ProtectedAdminRoute>
+                      } 
+                    />
+                    <Route 
+                      path="/admin/blogs" 
+                      element={
+                        <ProtectedAdminRoute>
                           <SEOBlogManager />
-                        </Suspense>
-                      </ProtectedAdminRoute>
-                    } 
-                  />
-                  <Route 
-                    path="/admin/blogs/new" 
-                    element={
-                      <ProtectedAdminRoute>
-                        <Suspense fallback={<LoadingSpinner />}>
-                          <SupabaseBlogEditor />
-                        </Suspense>
-                      </ProtectedAdminRoute>
-                    } 
-                  />
-                  <Route 
-                    path="/admin/blogs/edit/:id" 
-                    element={
-                      <ProtectedAdminRoute>
-                        <Suspense fallback={<LoadingSpinner />}>
-                          <SupabaseBlogEditor />
-                        </Suspense>
-                      </ProtectedAdminRoute>
-                    } 
-                  />
-                  <Route 
-                    path="/admin/bookings" 
-                    element={
-                      <ProtectedAdminRoute>
-                        <Suspense fallback={<LoadingSpinner />}>
+                        </ProtectedAdminRoute>
+                      } 
+                    />
+                    <Route 
+                      path="/admin/bookings" 
+                      element={
+                        <ProtectedAdminRoute>
                           <BookingManager />
-                        </Suspense>
-                      </ProtectedAdminRoute>
-                    } 
-                  />
-                  
-                  <Route path="*" element={<NotFound />} />
-                </Routes>
-              </BrowserRouter>
-            </BookingProvider>
-          </BlogProvider>
-        </AuthProvider>
+                        </ProtectedAdminRoute>
+                      } 
+                    />
+                    
+                    <Route path="*" element={<NotFound />} />
+                  </Routes>
+                </Suspense>
+              </BookingProvider>
+            </BlogProvider>
+          </AuthProvider>
+        </BrowserRouter>
       </QueryClientProvider>
       <Toaster />
     </HelmetProvider>

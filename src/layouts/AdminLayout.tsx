@@ -8,7 +8,6 @@ import {
   Calendar, 
   FileText, 
   LogOut,
-  Database,
   BarChart3
 } from 'lucide-react';
 
@@ -20,20 +19,12 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
   const location = useLocation();
 
   const navigation = [
-    { name: 'Dashboard', href: '/admin/dashboard', icon: LayoutDashboard },
+    { name: 'Dashboard', href: '/admin', icon: LayoutDashboard },
+    { name: 'Blog Management', href: '/admin/blogs', icon: FileText },
     { name: 'Bookings', href: '/admin/bookings', icon: Calendar },
-    { 
-      name: 'Blog Management', 
-      icon: FileText,
-      subItems: [
-        { name: 'Legacy Blog', href: '/admin/blogs', icon: FileText },
-        { name: 'Supabase Blog', href: '/admin/blogs/supabase', icon: Database },
-      ]
-    },
   ];
 
   const isActive = (href: string) => location.pathname === href;
-  const isParentActive = (subItems: any[]) => subItems.some(item => location.pathname.startsWith(item.href.split('/').slice(0, -1).join('/')));
 
   return (
     <div className="min-h-screen bg-gray-100 flex">
@@ -49,51 +40,19 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
         
         <nav className="mt-6 px-4">
           {navigation.map((item, index) => (
-            <div key={index} className="mb-1">
-              {item.subItems ? (
-                <div className="space-y-1">
-                  <div className={cn(
-                    "flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors",
-                    isParentActive(item.subItems)
-                      ? "bg-fintech-purple/10 text-fintech-purple"
-                      : "text-gray-700 hover:bg-gray-100"
-                  )}>
-                    <item.icon className="mr-3 h-4 w-4" />
-                    {item.name}
-                  </div>
-                  <div className="ml-6 space-y-1">
-                    {item.subItems.map((subItem) => (
-                      <Link
-                        key={subItem.href}
-                        to={subItem.href}
-                        className={cn(
-                          "flex items-center px-3 py-2 text-sm rounded-md transition-colors",
-                          isActive(subItem.href) || location.pathname.startsWith(subItem.href)
-                            ? "bg-fintech-purple text-white"
-                            : "text-gray-600 hover:bg-gray-100"
-                        )}
-                      >
-                        <subItem.icon className="mr-3 h-3 w-3" />
-                        {subItem.name}
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              ) : (
-                <Link
-                  to={item.href}
-                  className={cn(
-                    "flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors",
-                    isActive(item.href)
-                      ? "bg-fintech-purple text-white"
-                      : "text-gray-700 hover:bg-gray-100"
-                  )}
-                >
-                  <item.icon className="mr-3 h-4 w-4" />
-                  {item.name}
-                </Link>
+            <Link
+              key={index}
+              to={item.href}
+              className={cn(
+                "flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors mb-1",
+                isActive(item.href)
+                  ? "bg-fintech-purple text-white"
+                  : "text-gray-700 hover:bg-gray-100"
               )}
-            </div>
+            >
+              <item.icon className="mr-3 h-4 w-4" />
+              {item.name}
+            </Link>
           ))}
         </nav>
 
