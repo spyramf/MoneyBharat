@@ -40,6 +40,7 @@ export interface SupabaseBlogAuthor {
   email?: string;
   bio?: string;
   avatar_url?: string;
+  role?: string;
   created_at?: string;
 }
 
@@ -64,9 +65,9 @@ export interface SupabaseBlogTag {
 
 class SupabaseBlogService {
   // Blog Posts CRUD Operations
-  async getAllPosts(): Promise<SupabaseBlogPost[]> {
+  async getAllPosts(status?: string): Promise<SupabaseBlogPost[]> {
     try {
-      const { data, error } = await supabase
+      let query = supabase
         .from('blogs')
         .select(`
           *,
@@ -76,10 +77,39 @@ class SupabaseBlogService {
         `)
         .order('published_date', { ascending: false });
 
+      if (status) {
+        query = query.eq('status', status);
+      }
+
+      const { data, error } = await query;
+
       if (error) throw error;
-      return data || [];
+      return (data || []) as SupabaseBlogPost[];
     } catch (error) {
       console.error('Error fetching posts:', error);
+      throw error;
+    }
+  }
+
+  async getFeaturedPosts(): Promise<SupabaseBlogPost[]> {
+    try {
+      const { data, error } = await supabase
+        .from('blogs')
+        .select(`
+          *,
+          author:blog_authors(*),
+          category:blog_categories(*),
+          tags:blog_post_tags(blog_tags(*))
+        `)
+        .eq('is_featured', true)
+        .eq('status', 'published')
+        .order('published_date', { ascending: false })
+        .limit(5);
+
+      if (error) throw error;
+      return (data || []) as SupabaseBlogPost[];
+    } catch (error) {
+      console.error('Error fetching featured posts:', error);
       throw error;
     }
   }
@@ -98,9 +128,52 @@ class SupabaseBlogService {
         .single();
 
       if (error) throw error;
-      return data;
+      return data as SupabaseBlogPost;
     } catch (error) {
       console.error('Error fetching post by ID:', error);
+      throw error;
+    }
+  }
+
+  async getPostBySlug(slug: string): Promise<SupabaseBlogPost | null> {
+    try {
+      const { data, error } = await supabase
+        .from('blogs')
+        .select(`
+          *,
+          author:blog_authors(*),
+          category:blog_categories(*),
+          tags:blog_post_tags(blog_tags(*))
+        `)
+        .eq('slug', slug)
+        .single();
+
+      if (error) throw error;
+      return data as SupabaseBlogPost;
+    } catch (error) {
+      console.error('Error fetching post by slug:', error);
+      throw error;
+    }
+  }
+
+  async getPostsByCategory(categorySlug: string): Promise<SupabaseBlogPost[]> {
+    try {
+      const { data, error } = await supabase
+        .from('blogs')
+        .select(`
+          *,
+          author:blog_authors(*),
+          category:blog_categories(*),
+          tags:blog_post_tags(blog_tags(*))
+        `)
+        .eq('category.slug', categorySlug)
+        .eq('status', 'published')
+        .order('published_date', { ascending: false });
+
+      if (error) throw error;
+      return (data || []) as SupabaseBlogPost[];
+    } catch (error) {
+      console.error('Error fetching posts by category:', error);
       throw error;
     }
   }
@@ -118,7 +191,7 @@ class SupabaseBlogService {
         .single();
 
       if (error) throw error;
-      return data;
+      return data as SupabaseBlogPost;
     } catch (error) {
       console.error('Error creating post:', error);
       throw error;
@@ -139,7 +212,7 @@ class SupabaseBlogService {
         .single();
 
       if (error) throw error;
-      return data;
+      return data as SupabaseBlogPost;
     } catch (error) {
       console.error('Error updating post:', error);
       throw error;
@@ -156,6 +229,23 @@ class SupabaseBlogService {
       if (error) throw error;
     } catch (error) {
       console.error('Error deleting post:', error);
+      throw error;
+    }
+  }
+
+  async trackAnalytics(postId: string, metricName: string, value: number): Promise<void> {
+    try {
+      const { error } = await supabase
+        .from('blog_analytics')
+        .insert({
+          blog_id: postId,
+          metric_name: metricName,
+          metric_value: value,
+        });
+
+      if (error) throw error;
+    } catch (error) {
+      console.error('Error tracking analytics:', error);
       throw error;
     }
   }

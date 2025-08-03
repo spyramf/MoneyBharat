@@ -2,25 +2,24 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Toaster } from '@/components/ui/sonner';
-import { AuthProvider } from '@/components/auth/AuthProvider';
+import { AuthProvider } from '@/context/AuthContext';
 import { BlogProvider } from '@/context/BlogContext';
-import { ProtectedRoute } from '@/components/ProtectedRoute';
-import { ProtectedAdminRoute } from '@/components/ProtectedAdminRoute';
+import ProtectedRoute from '@/components/ProtectedRoute';
+import ProtectedAdminRoute from '@/components/ProtectedAdminRoute';
 import LoadingSpinner from '@/components/common/LoadingSpinner';
 import { Suspense, lazy } from 'react';
 
 // Lazy load pages for better performance
-const HomePage = lazy(() => import('@/pages/HomePage'));
-const MutualFundsPage = lazy(() => import('@/pages/MutualFundsPage'));
-const InsurancePage = lazy(() => import('@/pages/InsurancePage'));
-const HealthInsurancePage = lazy(() => import('@/pages/HealthInsurancePage'));
-const LoansPage = lazy(() => import('@/pages/LoansPage'));
-const BlogPage = lazy(() => import('@/pages/BlogPage'));
-const BlogPostPage = lazy(() => import('@/pages/BlogPostPage'));
-const ContactPage = lazy(() => import('@/pages/ContactPage'));
-const LoginPage = lazy(() => import('@/pages/LoginPage'));
-const RegisterPage = lazy(() => import('@/pages/RegisterPage'));
-const DashboardPage = lazy(() => import('@/pages/DashboardPage'));
+const Index = lazy(() => import('@/pages/Index'));
+const MutualFunds = lazy(() => import('@/pages/MutualFunds'));
+const Insurance = lazy(() => import('@/pages/Insurance'));
+const HealthInsurance = lazy(() => import('@/pages/HealthInsurance'));
+const Loans = lazy(() => import('@/pages/Loans'));
+const Blog = lazy(() => import('@/pages/Blog'));
+const BlogPost = lazy(() => import('@/pages/BlogPost'));
+const Contact = lazy(() => import('@/pages/Contact'));
+const SupabaseBlog = lazy(() => import('@/pages/SupabaseBlog'));
+const SupabaseBlogPost = lazy(() => import('@/pages/SupabaseBlogPost'));
 const NotFound = lazy(() => import('@/pages/NotFound'));
 
 // Admin Pages
@@ -52,23 +51,14 @@ function App() {
               }>
                 <Routes>
                   {/* Public Routes */}
-                  <Route path="/" element={<HomePage />} />
-                  <Route path="/mutual-funds" element={<MutualFundsPage />} />
-                  <Route path="/insurance" element={<InsurancePage />} />
-                  <Route path="/health-insurance" element={<HealthInsurancePage />} />
-                  <Route path="/loans" element={<LoansPage />} />
-                  <Route path="/blog" element={<BlogPage />} />
-                  <Route path="/blog/:slug" element={<BlogPostPage />} />
-                  <Route path="/contact" element={<ContactPage />} />
-                  <Route path="/login" element={<LoginPage />} />
-                  <Route path="/register" element={<RegisterPage />} />
-                  
-                  {/* Protected User Routes */}
-                  <Route path="/dashboard" element={
-                    <ProtectedRoute>
-                      <DashboardPage />
-                    </ProtectedRoute>
-                  } />
+                  <Route path="/" element={<Index />} />
+                  <Route path="/mutual-funds" element={<MutualFunds />} />
+                  <Route path="/insurance" element={<Insurance />} />
+                  <Route path="/health-insurance" element={<HealthInsurance />} />
+                  <Route path="/loans" element={<Loans />} />
+                  <Route path="/blog" element={<SupabaseBlog />} />
+                  <Route path="/blog/:slug" element={<SupabaseBlogPost />} />
+                  <Route path="/contact" element={<Contact />} />
                   
                   {/* Admin Routes */}
                   <Route path="/admin" element={
