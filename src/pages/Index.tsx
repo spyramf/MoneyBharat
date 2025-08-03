@@ -1,8 +1,6 @@
-
 import { lazy, Suspense } from "react";
-import Navbar from "@/components/Navbar";
+import MainLayout from "@/layouts/MainLayout";
 import OptimizedHeroSection from "@/components/OptimizedHeroSection";
-import Footer from "@/components/Footer";
 import StructuredData from "@/components/seo/StructuredData";
 import SEOHead from "@/components/seo/SEOHead";
 import BreadcrumbSEO from "@/components/seo/BreadcrumbSEO";
@@ -77,7 +75,7 @@ const Index = () => {
   ];
 
   return (
-    <div className="min-h-screen">
+    <MainLayout>
       {/* Handle URL canonicalization - disabled in development to prevent redirect errors */}
       <URLRedirectHandler enableRedirect={process.env.NODE_ENV === 'production'} />
       
@@ -93,7 +91,6 @@ const Index = () => {
         reviewData={reviewData}
       />
       
-      <Navbar />
       <BreadcrumbSEO />
       
       {/* Critical above-the-fold content */}
@@ -140,9 +137,7 @@ const Index = () => {
       <Suspense fallback={<SectionLoader />}>
         <CTASection />
       </Suspense>
-      
-      <Footer />
-    </div>
+    </MainLayout>
   );
 };
 
