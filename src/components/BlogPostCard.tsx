@@ -1,120 +1,122 @@
 
-import { BlogPost } from "@/data/blogData";
-import { Card, CardContent } from "@/components/ui/card";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Badge } from "@/components/ui/badge";
-import { Link } from "react-router-dom";
-import { format } from "date-fns";
-import { Calendar, Clock, User, ArrowRight } from "lucide-react";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Calendar, Clock, User, Star } from 'lucide-react';
+import { type SupabaseBlogPost } from '@/services/supabaseBlogService';
 
 interface BlogPostCardProps {
-  post: BlogPost;
+  post: SupabaseBlogPost;
   featured?: boolean;
-  compact?: boolean;
 }
 
-const BlogPostCard = ({ post, featured = false, compact = false }: BlogPostCardProps) => {
-  const initials = post.author.name
-    .split(' ')
-    .map(name => name[0])
-    .join('');
-
-  if (compact) {
-    return (
-      <Link to={`/blog/${post.slug}`} className="group block">
-        <Card className="transition-all duration-300 hover:shadow-md border-0 bg-background/50 backdrop-blur">
-          <div className="flex gap-4 p-4">
-            <div className="relative h-16 w-16 flex-shrink-0 overflow-hidden rounded-lg">
-              <img 
-                src={post.featuredImage} 
-                alt={post.title} 
-                className="absolute inset-0 h-full w-full object-cover transition-transform group-hover:scale-110"
-              />
-            </div>
-            <div className="flex-1 min-w-0">
-              <h3 className="line-clamp-2 font-semibold text-sm group-hover:text-primary transition-colors">
-                {post.title}
-              </h3>
-              <div className="flex items-center gap-2 mt-2 text-xs text-muted-foreground">
-                <Calendar className="h-3 w-3" />
-                <span>{post.publishedDate && format(new Date(post.publishedDate), 'MMM d')}</span>
-                <Clock className="h-3 w-3 ml-1" />
-                <span>{post.readTime}</span>
-              </div>
-            </div>
-          </div>
-        </Card>
-      </Link>
-    );
-  }
+export const BlogPostCard: React.FC<BlogPostCardProps> = ({ post, featured = false }) => {
+  const formattedDate = post.published_date 
+    ? new Date(post.published_date).toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      })
+    : 'Draft';
 
   return (
-    <Link to={`/blog/${post.slug}`} className="group block h-full">
-      <Card className={`h-full transition-all duration-300 hover:shadow-xl hover:-translate-y-1 border-0 bg-background/80 backdrop-blur overflow-hidden ${featured ? 'lg:col-span-1' : ''}`}>
+    <Card className={`group hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden ${
+      featured ? 'border-fintech-purple/20 shadow-lg' : ''
+    }`}>
+      {post.featured_image && (
         <div className="relative overflow-hidden">
-          <div className={`relative ${featured ? 'h-48' : 'h-40'} overflow-hidden`}>
-            <img 
-              src={post.featuredImage} 
-              alt={post.title} 
-              className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
-            <div className="absolute top-3 right-3">
-              <Badge className="bg-primary/90 hover:bg-primary text-primary-foreground border-0">
-                {post.category}
+          <img 
+            src={post.featured_image} 
+            alt={post.title}
+            className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+          />
+          {featured && (
+            <div className="absolute top-4 left-4">
+              <Badge className="bg-fintech-purple text-white">
+                <Star className="w-3 h-3 mr-1" />
+                Featured
               </Badge>
             </div>
-            {featured && (
-              <div className="absolute top-3 left-3">
-                <Badge variant="secondary" className="bg-secondary/90 text-secondary-foreground border-0">
-                  Featured
-                </Badge>
-              </div>
-            )}
+          )}
+          {post.is_featured && !featured && (
+            <div className="absolute top-4 left-4">
+              <Badge variant="secondary">
+                <Star className="w-3 h-3 mr-1" />
+                Featured
+              </Badge>
+            </div>
+          )}
+        </div>
+      )}
+      
+      <CardHeader className="pb-3">
+        <div className="flex items-center gap-2 mb-2">
+          {post.category && (
+            <Badge variant="outline" className="text-xs">
+              {post.category.name}
+            </Badge>
+          )}
+          <div className="flex items-center text-xs text-gray-500 gap-1">
+            <Calendar className="w-3 h-3" />
+            {formattedDate}
           </div>
         </div>
         
-        <CardContent className="p-6">
-          <div className="space-y-4">
-            <div>
-              <h3 className={`font-bold leading-tight group-hover:text-primary transition-colors line-clamp-2 ${featured ? 'text-xl' : 'text-lg'}`}>
-                {post.title}
-              </h3>
-              <p className={`text-muted-foreground mt-2 line-clamp-3 ${featured ? 'text-base' : 'text-sm'}`}>
-                {post.excerpt}
-              </p>
+        <h3 className="text-lg font-semibold text-gray-900 group-hover:text-fintech-purple transition-colors line-clamp-2">
+          <Link to={`/blog/${post.slug}`} className="hover:underline">
+            {post.title}
+          </Link>
+        </h3>
+      </CardHeader>
+
+      <CardContent className="pb-3">
+        <p className="text-gray-600 text-sm line-clamp-3 mb-4">
+          {post.excerpt}
+        </p>
+        
+        <div className="flex items-center justify-between text-xs text-gray-500">
+          {post.read_time && (
+            <div className="flex items-center gap-1">
+              <Clock className="w-3 h-3" />
+              {post.read_time}
             </div>
-            
-            <div className="flex items-center justify-between pt-4 border-t border-border/50">
-              <div className="flex items-center gap-3">
-                <Avatar className="h-8 w-8 ring-2 ring-background">
-                  <AvatarImage src={post.author.avatar} alt={post.author.name} />
-                  <AvatarFallback className="text-xs font-medium">{initials}</AvatarFallback>
-                </Avatar>
-                <div className="min-w-0">
-                  <p className="font-medium text-sm truncate">{post.author.name}</p>
-                  <div className="flex items-center gap-3 text-xs text-muted-foreground">
-                    <div className="flex items-center gap-1">
-                      <Calendar className="h-3 w-3" />
-                      <span>{post.publishedDate && format(new Date(post.publishedDate), 'MMM d, yyyy')}</span>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <Clock className="h-3 w-3" />
-                      <span>{post.readTime}</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
-              <div className="opacity-0 group-hover:opacity-100 transition-opacity">
-                <ArrowRight className="h-4 w-4 text-primary" />
-              </div>
+          )}
+          
+          {post.seo_score && (
+            <div className={`flex items-center gap-1 ${
+              post.seo_score >= 80 ? 'text-green-600' : 
+              post.seo_score >= 60 ? 'text-yellow-600' : 'text-red-600'
+            }`}>
+              SEO: {post.seo_score}/100
             </div>
-          </div>
-        </CardContent>
-      </Card>
-    </Link>
+          )}
+        </div>
+      </CardContent>
+
+      <CardFooter className="pt-0 border-t">
+        <div className="flex items-center justify-between w-full">
+          {post.author && (
+            <div className="flex items-center gap-2">
+              <Avatar className="w-6 h-6">
+                <AvatarImage src={post.author.avatar_url} alt={post.author.name} />
+                <AvatarFallback className="text-xs">
+                  {post.author.name.split(' ').map(n => n[0]).join('')}
+                </AvatarFallback>
+              </Avatar>
+              <span className="text-xs text-gray-600">{post.author.name}</span>
+            </div>
+          )}
+          
+          <Link 
+            to={`/blog/${post.slug}`}
+            className="text-xs text-fintech-purple hover:text-fintech-purple/80 font-medium"
+          >
+            Read More →
+          </Link>
+        </div>
+      </CardFooter>
+    </Card>
   );
 };
-
-export default BlogPostCard;

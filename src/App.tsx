@@ -1,111 +1,81 @@
-
+import React, { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { HelmetProvider } from 'react-helmet-async';
-import { Toaster } from '@/components/ui/sonner';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { Toaster } from 'sonner';
 import { AuthProvider } from '@/context/AuthContext';
-import { BlogProvider } from '@/context/BlogContext';
-import ProtectedRoute from '@/components/ProtectedRoute';
-import ProtectedAdminRoute from '@/components/ProtectedAdminRoute';
-import LoadingSpinner from '@/components/common/LoadingSpinner';
+import { BookingProvider } from '@/context/BookingContext';
 import ScrollToTop from '@/components/ScrollToTop';
-import { Suspense, lazy } from 'react';
-
-// Lazy load pages for better performance
-const Index = lazy(() => import('@/pages/Index'));
-const MutualFunds = lazy(() => import('@/pages/MutualFunds'));
-const Insurance = lazy(() => import('@/pages/Insurance'));
-const HealthInsurance = lazy(() => import('@/pages/HealthInsurance'));
-const Loans = lazy(() => import('@/pages/Loans'));
-const Blog = lazy(() => import('@/pages/Blog'));
-const BlogPost = lazy(() => import('@/pages/BlogPost'));
-const Contact = lazy(() => import('@/pages/Contact'));
-const SupabaseBlog = lazy(() => import('@/pages/SupabaseBlog'));
-const SupabaseBlogPost = lazy(() => import('@/pages/SupabaseBlogPost'));
-const NotFound = lazy(() => import('@/pages/NotFound'));
-
-// Admin Pages
-const AdminDashboard = lazy(() => import('@/pages/admin/Dashboard'));
-const CMSDashboard = lazy(() => import('@/components/cms/CMSDashboard'));
-const SEOBlogManager = lazy(() => import('@/components/cms/SEOBlogManager'));
-const SupabaseBlogEditor = lazy(() => import('@/components/cms/SupabaseBlogEditor'));
-
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      staleTime: 1000 * 60 * 5, // 5 minutes
-      refetchOnWindowFocus: false,
-    },
-  },
-});
+import PerformanceMonitor from '@/components/PerformanceMonitor';
+import Home from '@/pages/Home';
+import About from '@/pages/About';
+import Services from '@/pages/Services';
+import Contact from '@/pages/Contact';
+import Login from '@/pages/Login';
+import Register from '@/pages/Register';
+import Dashboard from '@/pages/Dashboard';
+import Bookings from '@/pages/Bookings';
+import AdminDashboard from '@/pages/admin/AdminDashboard';
+import AdminBookings from '@/pages/admin/AdminBookings';
+import AdminUsers from '@/pages/admin/AdminUsers';
+import NotFound from '@/pages/NotFound';
+import Unauthorized from '@/pages/Unauthorized';
+import RequireAuth from '@/components/RequireAuth';
+import RequireAdmin from '@/components/RequireAdmin';
+import SupabaseBlogManager from '@/components/cms/SupabaseBlogManager';
+import SupabaseBlogEditor from '@/components/cms/SupabaseBlogEditor';
+import Blog from '@/pages/Blog';
+import BlogPost from '@/pages/BlogPost';
+import { BlogProvider } from '@/context/BlogContext';
 
 function App() {
+  const [queryClient] = useState(() => new QueryClient());
+
   return (
-    <HelmetProvider>
-      <BrowserRouter>
-        <QueryClientProvider client={queryClient}>
-          <AuthProvider>
-            <BlogProvider>
-              <div className="min-h-screen bg-background">
-                <ScrollToTop />
-                <Suspense fallback={
-                  <div className="flex items-center justify-center min-h-screen">
-                    <LoadingSpinner />
-                  </div>
-                }>
-                  <Routes>
-                    {/* Public Routes */}
-                    <Route path="/" element={<Index />} />
-                    <Route path="/mutual-funds" element={<MutualFunds />} />
-                    <Route path="/insurance" element={<Insurance />} />
-                    <Route path="/health-insurance" element={<HealthInsurance />} />
-                    <Route path="/loans" element={<Loans />} />
-                    <Route path="/blog" element={<Blog />} />
-                    <Route path="/blog/:slug" element={<BlogPost />} />
-                    <Route path="/contact" element={<Contact />} />
-                    
-                    {/* Admin Routes */}
-                    <Route path="/admin" element={
-                      <ProtectedAdminRoute>
-                        <AdminDashboard />
-                      </ProtectedAdminRoute>
-                    } />
-                    
-                    <Route path="/admin/cms" element={
-                      <ProtectedAdminRoute>
-                        <CMSDashboard />
-                      </ProtectedAdminRoute>
-                    } />
-                    
-                    <Route path="/admin/blogs" element={
-                      <ProtectedAdminRoute>
-                        <SEOBlogManager />
-                      </ProtectedAdminRoute>
-                    } />
-                    
-                    <Route path="/admin/blogs/new" element={
-                      <ProtectedAdminRoute>
-                        <SupabaseBlogEditor />
-                      </ProtectedAdminRoute>
-                    } />
-                    
-                    <Route path="/admin/blogs/edit/:id" element={
-                      <ProtectedAdminRoute>
-                        <SupabaseBlogEditor />
-                      </ProtectedAdminRoute>
-                    } />
-                    
-                    {/* 404 Route */}
-                    <Route path="*" element={<NotFound />} />
-                  </Routes>
-                </Suspense>
-                <Toaster />
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider>
+        <BlogProvider>
+          <BookingProvider>
+            <BrowserRouter>
+              <ScrollToTop />
+              <PerformanceMonitor />
+              <div className="min-h-screen bg-white">
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/about" element={<About />} />
+                  <Route path="/services" element={<Services />} />
+                  <Route path="/contact" element={<Contact />} />
+                  <Route path="/login" element={<Login />} />
+                  <Route path="/register" element={<Register />} />
+                  <Route path="/unauthorized" element={<Unauthorized />} />
+                  <Route path="/blog" element={<Blog />} />
+                  <Route path="/blog/:slug" element={<BlogPost />} />
+
+                  {/* Protected Routes */}
+                  <Route element={<RequireAuth />}>
+                    <Route path="/dashboard" element={<Dashboard />} />
+                    <Route path="/bookings" element={<Bookings />} />
+                  </Route>
+
+                  {/* Admin Routes */}
+                  <Route element={<RequireAdmin />}>
+                    <Route path="/admin" element={<AdminDashboard />} />
+                    <Route path="/admin/bookings" element={<AdminBookings />} />
+                    <Route path="/admin/users" element={<AdminUsers />} />
+                    <Route path="/admin/blogs/supabase" element={<SupabaseBlogManager />} />
+                    <Route path="/admin/blogs/supabase/new" element={<SupabaseBlogEditor />} />
+                    <Route path="/admin/blogs/supabase/edit/:id" element={<SupabaseBlogEditor />} />
+                  </Route>
+
+                  {/* Catch All Route */}
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
               </div>
-            </BlogProvider>
-          </AuthProvider>
-        </QueryClientProvider>
-      </BrowserRouter>
-    </HelmetProvider>
+              <Toaster />
+            </BrowserRouter>
+          </BookingProvider>
+        </BlogProvider>
+      </AuthProvider>
+    </QueryClientProvider>
   );
 }
 

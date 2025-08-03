@@ -1,93 +1,85 @@
 
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { BlogPost, blogCategories as initialCategories } from '@/data/blogData';
-import { blogDataService } from '@/services/blogDataService';
-import { toast } from 'sonner';
+import { supabaseBlogService, type SupabaseBlogPost, type SupabaseBlogCategory, type SupabaseBlogAuthor } from '@/services/supabaseBlogService';
 
 interface BlogContextType {
-  blogPosts: BlogPost[];
-  categories: typeof initialCategories;
-  getPostById: (id: number) => BlogPost | undefined;
-  getPostBySlug: (slug: string) => BlogPost | undefined;
-  addPost: (post: Omit<BlogPost, 'id'>) => void;
-  updatePost: (post: BlogPost) => void;
-  deletePost: (id: number) => void;
-  refreshPosts: () => void;
+  posts: SupabaseBlogPost[];
+  categories: SupabaseBlogCategory[];
+  authors: SupabaseBlogAuthor[];
   isLoading: boolean;
-  error: Error | null;
+  error: string | null;
+  featuredPosts: SupabaseBlogPost[];
+  getPostBySlug: (slug: string) => SupabaseBlogPost | undefined;
+  getPostsByCategory: (categorySlug: string) => SupabaseBlogPost[];
+  refreshData: () => Promise<void>;
 }
 
 const BlogContext = createContext<BlogContextType | undefined>(undefined);
-
-export const useBlog = () => {
-  const context = useContext(BlogContext);
-  if (context === undefined) {
-    throw new Error('useBlog must be used within a BlogProvider');
-  }
-  return context;
-};
 
 interface BlogProviderProps {
   children: ReactNode;
 }
 
-export const BlogProvider = ({ children }: BlogProviderProps) => {
-  const [categories] = useState(initialCategories);
-  const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
+export const BlogProvider: React.FC<BlogProviderProps> = ({ children }) => {
+  const [posts, setPosts] = useState<SupabaseBlogPost[]>([]);
+  const [categories, setCategories] = useState<SupabaseBlogCategory[]>([]);
+  const [authors, setAuthors] = useState<SupabaseBlogAuthor[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [error] = useState<Error | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
-  const refreshPosts = () => {
-    const posts = blogDataService.getAllPosts();
-    setBlogPosts(posts);
-  };
+  const loadData = async () => {
+    try {
+      setIsLoading(true);
+      setError(null);
+      
+      const [postsData, categoriesData, authorsData] = await Promise.all([
+        supabaseBlogService.getAllPosts(),
+        supabaseBlogService.getAllCategories(),
+        supabaseBlogService.getAllAuthors()
+      ]);
 
-  useEffect(() => {
-    refreshPosts();
-    setIsLoading(false);
-  }, []);
-
-  const getPostById = (id: number) => {
-    return blogDataService.getPostById(id);
-  };
-
-  const getPostBySlug = (slug: string) => {
-    return blogDataService.getPostBySlug(slug);
-  };
-
-  const addPost = (newPostData: Omit<BlogPost, 'id'>) => {
-    const newPost = blogDataService.addPost(newPostData);
-    refreshPosts();
-    toast.success('Blog post created successfully!');
-  };
-
-  const updatePost = (updatedPost: BlogPost) => {
-    blogDataService.updatePost(updatedPost);
-    refreshPosts();
-    toast.success('Blog post updated successfully!');
-  };
-
-  const deletePost = (id: number) => {
-    const success = blogDataService.deletePost(id);
-    if (success) {
-      refreshPosts();
-      toast.success('Blog post deleted successfully!');
-    } else {
-      toast.error('Failed to delete blog post');
+      setPosts(postsData);
+      setCategories(categoriesData);
+      setAuthors(authorsData);
+    } catch (err) {
+      console.error('Error loading blog data:', err);
+      setError('Failed to load blog data');
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  const value = {
-    blogPosts,
+  useEffect(() => {
+    loadData();
+  }, []);
+
+  const featuredPosts = posts.filter(post => post.is_featured && post.status === 'published');
+
+  const getPostBySlug = (slug: string): SupabaseBlogPost | undefined => {
+    return posts.find(post => post.slug === slug && post.status === 'published');
+  };
+
+  const getPostsByCategory = (categorySlug: string): SupabaseBlogPost[] => {
+    return posts.filter(post => 
+      post.category?.slug === categorySlug && 
+      post.status === 'published'
+    );
+  };
+
+  const refreshData = async () => {
+    await loadData();
+  };
+
+  const value: BlogContextType = {
+    posts: posts.filter(post => post.status === 'published'),
     categories,
-    getPostById,
-    getPostBySlug,
-    addPost,
-    updatePost,
-    deletePost,
-    refreshPosts,
+    authors,
     isLoading,
     error,
+    featuredPosts,
+    getPostBySlug,
+    getPostsByCategory,
+    refreshData,
   };
 
   return (
@@ -95,4 +87,12 @@ export const BlogProvider = ({ children }: BlogProviderProps) => {
       {children}
     </BlogContext.Provider>
   );
+};
+
+export const useBlog = (): BlogContextType => {
+  const context = useContext(BlogContext);
+  if (context === undefined) {
+    throw new Error('useBlog must be used within a BlogProvider');
+  }
+  return context;
 };

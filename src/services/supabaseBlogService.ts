@@ -1,362 +1,176 @@
-
 import { supabase } from '@/integrations/supabase/client';
-import { toast } from 'sonner';
+import type { Tables } from '@/integrations/supabase/types';
 
-export interface SupabaseBlogPost {
-  id: string;
-  title: string;
-  slug: string;
-  excerpt?: string;
-  content?: string;
-  meta_title?: string;
-  meta_description?: string;
-  focus_keywords?: string[];
-  canonical_url?: string;
-  robots_directive?: string;
-  og_title?: string;
-  og_description?: string;
-  og_image?: string;
-  twitter_title?: string;
-  twitter_description?: string;
-  twitter_image?: string;
-  category_id?: string;
-  author_id?: string;
-  featured_image?: string;
-  published_date?: string;
-  read_time?: string;
-  is_featured?: boolean;
-  status?: 'draft' | 'published' | 'archived';
-  seo_score?: number;
-  created_at?: string;
-  updated_at?: string;
-  author?: SupabaseBlogAuthor;
-  category?: SupabaseBlogCategory;
-  tags?: SupabaseBlogTag[];
-}
+export type SupabaseBlogPost = Tables<'blogs', 'Row'> & {
+  category?: Tables<'blog_categories', 'Row'> | null;
+  author?: Tables<'blog_authors', 'Row'> | null;
+};
 
-export interface SupabaseBlogAuthor {
-  id: string;
-  name: string;
-  email?: string;
-  bio?: string;
-  avatar_url?: string;
-  role?: string;
-  created_at?: string;
-}
+export type SupabaseBlogCategory = Tables<'blog_categories', 'Row'>;
+export type SupabaseBlogAuthor = Tables<'blog_authors', 'Row'>;
 
-export interface SupabaseBlogCategory {
-  id: string;
-  name: string;
-  slug: string;
-  description?: string;
-  meta_title?: string;
-  meta_description?: string;
-  created_at?: string;
-}
+export const supabaseBlogService = {
+  getAllPosts: async (): Promise<SupabaseBlogPost[]> => {
+    const { data, error } = await supabase
+      .from('blogs')
+      .select(`
+        *,
+        category:category_id (
+          *
+        ),
+        author:author_id (
+          *
+        )
+      `)
+      .order('created_at', { ascending: false });
 
-export interface SupabaseBlogTag {
-  id: string;
-  name: string;
-  slug: string;
-  description?: string;
-  color?: string;
-  created_at?: string;
-}
-
-// Helper function to transform Supabase response to our format
-function transformBlogPost(data: any): SupabaseBlogPost {
-  return {
-    ...data,
-    tags: data.tags?.map((tagRelation: any) => tagRelation.blog_tags) || []
-  };
-}
-
-class SupabaseBlogService {
-  // Blog Posts CRUD Operations
-  async getAllPosts(status?: string): Promise<SupabaseBlogPost[]> {
-    try {
-      let query = supabase
-        .from('blogs')
-        .select(`
-          *,
-          author:blog_authors(*),
-          category:blog_categories(*),
-          tags:blog_post_tags(blog_tags(*))
-        `)
-        .order('published_date', { ascending: false });
-
-      if (status) {
-        query = query.eq('status', status);
-      }
-
-      const { data, error } = await query;
-
-      if (error) throw error;
-      return (data || []).map(transformBlogPost);
-    } catch (error) {
-      console.error('Error fetching posts:', error);
-      throw error;
+    if (error) {
+      throw new Error(`Error fetching posts: ${error.message}`);
     }
-  }
 
-  async getFeaturedPosts(): Promise<SupabaseBlogPost[]> {
-    try {
-      const { data, error } = await supabase
-        .from('blogs')
-        .select(`
-          *,
-          author:blog_authors(*),
-          category:blog_categories(*),
-          tags:blog_post_tags(blog_tags(*))
-        `)
-        .eq('is_featured', true)
-        .eq('status', 'published')
-        .order('published_date', { ascending: false })
-        .limit(5);
+    return data || [];
+  },
 
-      if (error) throw error;
-      return (data || []).map(transformBlogPost);
-    } catch (error) {
-      console.error('Error fetching featured posts:', error);
-      throw error;
+  getPostBySlug: async (slug: string): Promise<SupabaseBlogPost | null> => {
+    const { data, error } = await supabase
+      .from('blogs')
+      .select(`
+        *,
+        category:category_id (
+          *
+        ),
+        author:author_id (
+          *
+        )
+      `)
+      .eq('slug', slug)
+      .single();
+
+    if (error) {
+      throw new Error(`Error fetching post by slug: ${error.message}`);
     }
-  }
 
-  async getPostById(id: string): Promise<SupabaseBlogPost | null> {
-    try {
-      const { data, error } = await supabase
-        .from('blogs')
-        .select(`
-          *,
-          author:blog_authors(*),
-          category:blog_categories(*),
-          tags:blog_post_tags(blog_tags(*))
-        `)
-        .eq('id', id)
-        .single();
+    return data || null;
+  },
 
-      if (error) throw error;
-      return transformBlogPost(data);
-    } catch (error) {
-      console.error('Error fetching post by ID:', error);
-      throw error;
+  createPost: async (post: Tables<'blogs', 'Insert'>): Promise<SupabaseBlogPost | null> => {
+    const { data, error } = await supabase
+      .from('blogs')
+      .insert([post])
+      .select(`
+        *,
+        category:category_id (
+          *
+        ),
+        author:author_id (
+          *
+        )
+      `)
+      .single();
+
+    if (error) {
+      throw new Error(`Error creating post: ${error.message}`);
     }
-  }
 
-  async getPostBySlug(slug: string): Promise<SupabaseBlogPost | null> {
-    try {
-      const { data, error } = await supabase
-        .from('blogs')
-        .select(`
-          *,
-          author:blog_authors(*),
-          category:blog_categories(*),
-          tags:blog_post_tags(blog_tags(*))
-        `)
-        .eq('slug', slug)
-        .single();
+    return data || null;
+  },
 
-      if (error) throw error;
-      return transformBlogPost(data);
-    } catch (error) {
-      console.error('Error fetching post by slug:', error);
-      throw error;
+  updatePost: async (id: string, updates: Tables<'blogs', 'Update'>): Promise<SupabaseBlogPost | null> => {
+    const { data, error } = await supabase
+      .from('blogs')
+      .update(updates)
+      .eq('id', id)
+      .select(`
+        *,
+        category:category_id (
+          *
+        ),
+        author:author_id (
+          *
+        )
+      `)
+      .single();
+
+    if (error) {
+      throw new Error(`Error updating post: ${error.message}`);
     }
-  }
 
-  async getPostsByCategory(categorySlug: string): Promise<SupabaseBlogPost[]> {
-    try {
-      const { data, error } = await supabase
-        .from('blogs')
-        .select(`
-          *,
-          author:blog_authors(*),
-          category:blog_categories(*),
-          tags:blog_post_tags(blog_tags(*))
-        `)
-        .eq('category.slug', categorySlug)
-        .eq('status', 'published')
-        .order('published_date', { ascending: false });
+    return data || null;
+  },
 
-      if (error) throw error;
-      return (data || []).map(transformBlogPost);
-    } catch (error) {
-      console.error('Error fetching posts by category:', error);
-      throw error;
+  deletePost: async (id: string): Promise<void> => {
+    const { error } = await supabase
+      .from('blogs')
+      .delete()
+      .eq('id', id);
+
+    if (error) {
+      throw new Error(`Error deleting post: ${error.message}`);
     }
-  }
+  },
 
-  async createPost(postData: Omit<SupabaseBlogPost, 'id' | 'created_at' | 'updated_at' | 'author' | 'category' | 'tags'>): Promise<SupabaseBlogPost> {
-    try {
-      const { data, error } = await supabase
-        .from('blogs')
-        .insert([postData])
-        .select(`
-          *,
-          author:blog_authors(*),
-          category:blog_categories(*)
-        `)
-        .single();
+  getAllCategories: async (): Promise<SupabaseBlogCategory[]> => {
+    const { data, error } = await supabase
+      .from('blog_categories')
+      .select('*')
+      .order('name');
 
-      if (error) throw error;
-      return transformBlogPost(data);
-    } catch (error) {
-      console.error('Error creating post:', error);
-      throw error;
+    if (error) {
+      throw new Error(`Error fetching categories: ${error.message}`);
     }
-  }
 
-  async updatePost(id: string, updates: Partial<Omit<SupabaseBlogPost, 'id' | 'created_at' | 'updated_at' | 'author' | 'category' | 'tags'>>): Promise<SupabaseBlogPost> {
-    try {
-      const { data, error } = await supabase
-        .from('blogs')
-        .update(updates)
-        .eq('id', id)
-        .select(`
-          *,
-          author:blog_authors(*),
-          category:blog_categories(*)
-        `)
-        .single();
+    return data || [];
+  },
 
-      if (error) throw error;
-      return transformBlogPost(data);
-    } catch (error) {
-      console.error('Error updating post:', error);
-      throw error;
+  createCategory: async (category: Tables<'blog_categories', 'Insert'>): Promise<SupabaseBlogCategory | null> => {
+    const { data, error } = await supabase
+      .from('blog_categories')
+      .insert([category])
+      .select('*')
+      .single();
+
+    if (error) {
+      throw new Error(`Error creating category: ${error.message}`);
     }
-  }
 
-  async deletePost(id: string): Promise<void> {
-    try {
-      const { error } = await supabase
-        .from('blogs')
-        .delete()
-        .eq('id', id);
+    return data || null;
+  },
 
-      if (error) throw error;
-    } catch (error) {
-      console.error('Error deleting post:', error);
-      throw error;
+  updateCategory: async (id: string, updates: Tables<'blog_categories', 'Update'>): Promise<SupabaseBlogCategory | null> => {
+    const { data, error } = await supabase
+      .from('blog_categories')
+      .update(updates)
+      .eq('id', id)
+      .select('*')
+      .single();
+
+    if (error) {
+      throw new Error(`Error updating category: ${error.message}`);
     }
-  }
 
-  async trackAnalytics(postId: string, metricName: string, value: number): Promise<void> {
-    try {
-      const { error } = await supabase
-        .from('blog_analytics')
-        .insert({
-          blog_id: postId,
-          metric_name: metricName,
-          metric_value: value,
-        });
+    return data || null;
+  },
 
-      if (error) throw error;
-    } catch (error) {
-      console.error('Error tracking analytics:', error);
-      throw error;
+  deleteCategory: async (id: string): Promise<void> => {
+    const { error } = await supabase
+      .from('blog_categories')
+      .delete()
+      .eq('id', id);
+
+    if (error) {
+      throw new Error(`Error deleting category: ${error.message}`);
     }
-  }
-
-  // Authors CRUD Operations
-  async getAllAuthors(): Promise<SupabaseBlogAuthor[]> {
-    try {
-      const { data, error } = await supabase
-        .from('blog_authors')
-        .select('*')
-        .order('name');
-
-      if (error) throw error;
-      return data || [];
-    } catch (error) {
-      console.error('Error fetching authors:', error);
-      throw error;
-    }
-  }
-
-  // Categories CRUD Operations
-  async getAllCategories(): Promise<SupabaseBlogCategory[]> {
-    try {
-      const { data, error } = await supabase
-        .from('blog_categories')
-        .select('*')
-        .order('name');
-
-      if (error) throw error;
-      return data || [];
-    } catch (error) {
-      console.error('Error fetching categories:', error);
-      throw error;
-    }
-  }
-
-  // Tags CRUD Operations
-  async getAllTags(): Promise<SupabaseBlogTag[]> {
-    try {
-      const { data, error } = await supabase
-        .from('blog_tags')
-        .select('*')
-        .order('name');
-
-      if (error) throw error;
-      return data || [];
-    } catch (error) {
-      console.error('Error fetching tags:', error);
-      throw error;
-    }
-  }
-
-  // SEO Score Calculation
-  calculateSEOScore(post: Partial<SupabaseBlogPost>): number {
-    let score = 0;
+  },
+  getAllAuthors: async (): Promise<SupabaseBlogAuthor[]> => {
+    const { data, error } = await supabase
+      .from('blog_authors')
+      .select('*')
+      .order('name');
     
-    // Title optimization (20 points)
-    if (post.title) {
-      if (post.title.length >= 30 && post.title.length <= 60) score += 15;
-      else if (post.title.length > 0) score += 10;
-      
-      if (post.focus_keywords && post.focus_keywords.length > 0) {
-        const titleLower = post.title.toLowerCase();
-        const hasKeyword = post.focus_keywords.some(keyword => 
-          titleLower.includes(keyword.toLowerCase())
-        );
-        if (hasKeyword) score += 5;
-      }
+    if (error) {
+      throw new Error(`Error fetching authors: ${error.message}`);
     }
-
-    // Meta description (15 points)
-    if (post.meta_description) {
-      if (post.meta_description.length >= 120 && post.meta_description.length <= 160) score += 15;
-      else if (post.meta_description.length > 0) score += 10;
-    }
-
-    // Content length (20 points)
-    if (post.content) {
-      if (post.content.length >= 1500) score += 20;
-      else if (post.content.length >= 800) score += 15;
-      else if (post.content.length >= 300) score += 10;
-    }
-
-    // Featured image (10 points)
-    if (post.featured_image) score += 10;
-
-    // Focus keywords (15 points)
-    if (post.focus_keywords && post.focus_keywords.length > 0) {
-      score += Math.min(post.focus_keywords.length * 3, 15);
-    }
-
-    // Social media optimization (10 points)
-    if (post.og_title || post.og_description) score += 5;
-    if (post.twitter_title || post.twitter_description) score += 5;
-
-    // URL structure (10 points)
-    if (post.slug && post.slug.length > 0) {
-      if (post.slug.includes('-') && post.slug.length <= 60) score += 10;
-      else score += 5;
-    }
-
-    return Math.min(score, 100);
-  }
-}
-
-export const supabaseBlogService = new SupabaseBlogService();
+    
+    return data || [];
+  },
+};
