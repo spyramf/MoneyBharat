@@ -4,7 +4,6 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { AlertTriangle, CheckCircle, Clock, X } from 'lucide-react';
-import { supabase } from '@/integrations/supabase/client';
 
 interface ComplianceAlert {
   id: string;
@@ -22,40 +21,35 @@ const ComplianceAlertsWidget = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    fetchAlerts();
-  }, []);
+    // Mock data since compliance_alerts table doesn't exist yet
+    const mockAlerts: ComplianceAlert[] = [
+      {
+        id: '1',
+        alert_type: 'kyc_expiry',
+        severity: 'high',
+        title: 'KYC Document Expiring Soon',
+        description: 'Client KYC documents will expire in 30 days',
+        status: 'open',
+        due_date: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
+        client_id: 'client_1'
+      },
+      {
+        id: '2',
+        alert_type: 'annual_review',
+        severity: 'medium',
+        title: 'Annual Portfolio Review Due',
+        description: 'Scheduled annual review for high net worth client',
+        status: 'open',
+        due_date: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(),
+        client_id: 'client_2'
+      }
+    ];
 
-  const fetchAlerts = async () => {
-    try {
-      const { data, error } = await supabase
-        .from('compliance_alerts')
-        .select('*')
-        .eq('status', 'open')
-        .order('severity', { ascending: false })
-        .limit(5);
-
-      if (error) throw error;
-      
-      const typedData = (data || []).map(item => ({
-        id: item.id,
-        alert_type: item.alert_type,
-        severity: (item.severity === 'low' || item.severity === 'medium' || item.severity === 'high' || item.severity === 'critical')
-          ? item.severity as 'low' | 'medium' | 'high' | 'critical'
-          : 'medium' as 'low' | 'medium' | 'high' | 'critical',
-        title: item.title,
-        description: item.description || '',
-        status: item.status,
-        due_date: item.due_date,
-        client_id: item.client_id
-      }));
-      
-      setAlerts(typedData);
-    } catch (error) {
-      console.error('Error fetching compliance alerts:', error);
-    } finally {
+    setTimeout(() => {
+      setAlerts(mockAlerts);
       setIsLoading(false);
-    }
-  };
+    }, 1000);
+  }, []);
 
   const getSeverityColor = (severity: string) => {
     switch (severity) {

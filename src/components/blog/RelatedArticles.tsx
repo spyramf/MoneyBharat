@@ -1,10 +1,10 @@
 
 import BlogPostCard from '@/components/BlogPostCard';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { BlogPost as BlogPostType } from '@/data/blogData';
+import { SupabaseBlogPost } from '@/services/supabaseBlogService';
 
 interface RelatedArticlesProps {
-  relatedPosts: BlogPostType[];
+  relatedPosts: SupabaseBlogPost[];
 }
 
 const RelatedArticles = ({ relatedPosts }: RelatedArticlesProps) => {
