@@ -1,13 +1,16 @@
+
 import { supabase } from '@/integrations/supabase/client';
 import type { Tables } from '@/integrations/supabase/types';
 
-export type SupabaseBlogPost = Tables<'blogs', 'Row'> & {
-  category?: Tables<'blog_categories', 'Row'> | null;
-  author?: Tables<'blog_authors', 'Row'> | null;
+export type SupabaseBlogPost = Tables<'blogs'> & {
+  category?: Tables<'blog_categories'> | null;
+  author?: Tables<'blog_authors'> | null;
+  tags?: Tables<'blog_tags'>[];
 };
 
-export type SupabaseBlogCategory = Tables<'blog_categories', 'Row'>;
-export type SupabaseBlogAuthor = Tables<'blog_authors', 'Row'>;
+export type SupabaseBlogCategory = Tables<'blog_categories'>;
+export type SupabaseBlogAuthor = Tables<'blog_authors'>;
+export type SupabaseBlogTag = Tables<'blog_tags'>;
 
 export const supabaseBlogService = {
   getAllPosts: async (): Promise<SupabaseBlogPost[]> => {
@@ -31,6 +34,29 @@ export const supabaseBlogService = {
     return data || [];
   },
 
+  getPostById: async (id: string): Promise<SupabaseBlogPost | null> => {
+    const { data, error } = await supabase
+      .from('blogs')
+      .select(`
+        *,
+        category:category_id (
+          *
+        ),
+        author:author_id (
+          *
+        )
+      `)
+      .eq('id', id)
+      .single();
+
+    if (error) {
+      if (error.code === 'PGRST116') return null; // Not found
+      throw new Error(`Error fetching post by ID: ${error.message}`);
+    }
+
+    return data;
+  },
+
   getPostBySlug: async (slug: string): Promise<SupabaseBlogPost | null> => {
     const { data, error } = await supabase
       .from('blogs')
@@ -47,10 +73,11 @@ export const supabaseBlogService = {
       .single();
 
     if (error) {
+      if (error.code === 'PGRST116') return null; // Not found
       throw new Error(`Error fetching post by slug: ${error.message}`);
     }
 
-    return data || null;
+    return data;
   },
 
   createPost: async (post: Tables<'blogs', 'Insert'>): Promise<SupabaseBlogPost | null> => {
@@ -161,6 +188,7 @@ export const supabaseBlogService = {
       throw new Error(`Error deleting category: ${error.message}`);
     }
   },
+
   getAllAuthors: async (): Promise<SupabaseBlogAuthor[]> => {
     const { data, error } = await supabase
       .from('blog_authors')
@@ -172,5 +200,45 @@ export const supabaseBlogService = {
     }
     
     return data || [];
+  },
+
+  getAllTags: async (): Promise<SupabaseBlogTag[]> => {
+    const { data, error } = await supabase
+      .from('blog_tags')
+      .select('*')
+      .order('name');
+    
+    if (error) {
+      throw new Error(`Error fetching tags: ${error.message}`);
+    }
+    
+    return data || [];
+  },
+
+  calculateSEOScore: (post: Partial<SupabaseBlogPost>): number => {
+    let score = 0;
+    
+    // Title length check (30-60 characters)
+    if (post.title && post.title.length >= 30 && post.title.length <= 60) score += 20;
+    else if (post.title && post.title.length > 0) score += 10;
+    
+    // Meta description length check (120-160 characters)
+    if (post.meta_description && post.meta_description.length >= 120 && post.meta_description.length <= 160) score += 20;
+    else if (post.meta_description && post.meta_description.length > 0) score += 10;
+    
+    // Content length check (minimum 300 words)
+    if (post.content && post.content.length > 1500) score += 20;
+    else if (post.content && post.content.length > 500) score += 10;
+    
+    // Featured image check
+    if (post.featured_image) score += 10;
+    
+    // Focus keywords check
+    if (post.focus_keywords && post.focus_keywords.length > 0) score += 15;
+    
+    // Excerpt check
+    if (post.excerpt && post.excerpt.length > 20) score += 15;
+    
+    return Math.min(score, 100);
   },
 };

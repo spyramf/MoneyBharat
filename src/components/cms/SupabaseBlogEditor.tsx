@@ -162,8 +162,7 @@ const SupabaseBlogEditor = () => {
   // Calculate SEO score in real-time
   const watchFields = form.watch();
   useEffect(() => {
-    const mockPost: SupabaseBlogPost = {
-      id: '',
+    const score = supabaseBlogService.calculateSEOScore({
       title: watchFields.title,
       slug: watchFields.slug,
       excerpt: watchFields.excerpt,
@@ -174,9 +173,7 @@ const SupabaseBlogEditor = () => {
       og_title: watchFields.og_title,
       og_description: watchFields.og_description,
       read_time: watchFields.read_time,
-    };
-    
-    const score = supabaseBlogService.calculateSEOScore(mockPost);
+    });
     setSeoScore(score);
   }, [watchFields]);
 
