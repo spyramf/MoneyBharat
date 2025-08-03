@@ -1,125 +1,116 @@
 
-import React, { Suspense } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Toaster } from '@/components/ui/sonner';
-import { AuthProvider } from '@/context/AuthContext';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { HelmetProvider } from 'react-helmet-async';
-import ScrollToTop from './components/ScrollToTop';
-import LoadingSpinner from '@/components/common/LoadingSpinner';
+import { AuthProvider } from '@/components/auth/AuthProvider';
 import { BlogProvider } from '@/context/BlogContext';
-import { BookingProvider } from '@/context/BookingContext';
-import ProtectedAdminRoute from '@/components/ProtectedAdminRoute';
+import { ProtectedRoute } from '@/components/ProtectedRoute';
+import { ProtectedAdminRoute } from '@/components/ProtectedAdminRoute';
+import LoadingSpinner from '@/components/common/LoadingSpinner';
+import { Suspense, lazy } from 'react';
 
-// Lazy load components
-const Index = React.lazy(() => import('./pages/Index'));
-const MutualFunds = React.lazy(() => import('./pages/MutualFunds'));
-const Loans = React.lazy(() => import('./pages/Loans'));
-const Insurance = React.lazy(() => import('./pages/Insurance'));
-const SupabaseBlog = React.lazy(() => import('./pages/SupabaseBlog'));
-const SupabaseBlogPost = React.lazy(() => import('./pages/SupabaseBlogPost'));
-const Contact = React.lazy(() => import('./pages/Contact'));
-const AboutUs = React.lazy(() => import('./pages/AboutUs'));
-const Booking = React.lazy(() => import('./pages/Booking'));
-const SipCalculator = React.lazy(() => import('./pages/SipCalculator'));
-const EmiCalculator = React.lazy(() => import('./pages/EmiCalculator'));
-const TaxSaving = React.lazy(() => import('./pages/TaxSaving'));
-const HomeLoan = React.lazy(() => import('./pages/HomeLoan'));
-const PersonalLoan = React.lazy(() => import('./pages/PersonalLoan'));
-const CarLoan = React.lazy(() => import('./pages/CarLoan'));
-const EducationLoan = React.lazy(() => import('./pages/EducationLoan'));
-const BusinessLoan = React.lazy(() => import('./pages/BusinessLoan'));
-const LoanAgainstMutualFunds = React.lazy(() => import('./pages/LoanAgainstMutualFunds'));
-const HealthInsurance = React.lazy(() => import('./pages/HealthInsurance'));
-const TermInsurance = React.lazy(() => import('./pages/TermInsurance'));
-const VehicleInsurance = React.lazy(() => import('./pages/VehicleInsurance'));
-const PrivacyPolicy = React.lazy(() => import('./pages/PrivacyPolicy'));
-const TermsOfService = React.lazy(() => import('./pages/TermsOfService'));
-const Sitemap = React.lazy(() => import('./pages/Sitemap'));
-const NotFound = React.lazy(() => import('./pages/NotFound'));
+// Lazy load pages for better performance
+const HomePage = lazy(() => import('@/pages/HomePage'));
+const MutualFundsPage = lazy(() => import('@/pages/MutualFundsPage'));
+const InsurancePage = lazy(() => import('@/pages/InsurancePage'));
+const HealthInsurancePage = lazy(() => import('@/pages/HealthInsurancePage'));
+const LoansPage = lazy(() => import('@/pages/LoansPage'));
+const BlogPage = lazy(() => import('@/pages/BlogPage'));
+const BlogPostPage = lazy(() => import('@/pages/BlogPostPage'));
+const ContactPage = lazy(() => import('@/pages/ContactPage'));
+const LoginPage = lazy(() => import('@/pages/LoginPage'));
+const RegisterPage = lazy(() => import('@/pages/RegisterPage'));
+const DashboardPage = lazy(() => import('@/pages/DashboardPage'));
+const NotFound = lazy(() => import('@/pages/NotFound'));
 
-// Admin components
-const AdminLogin = React.lazy(() => import('./pages/admin/AdminLogin'));
-const CMSDashboard = React.lazy(() => import('./components/cms/CMSDashboard'));
-const SEOBlogManager = React.lazy(() => import('./components/cms/SEOBlogManager'));
-const BookingManager = React.lazy(() => import('./pages/admin/BookingManager'));
+// Admin Pages
+const AdminDashboard = lazy(() => import('@/pages/admin/Dashboard'));
+const CMSDashboard = lazy(() => import('@/components/cms/CMSDashboard'));
+const SEOBlogManager = lazy(() => import('@/components/cms/SEOBlogManager'));
+const SupabaseBlogEditor = lazy(() => import('@/components/cms/SupabaseBlogEditor'));
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 1000 * 60 * 5, // 5 minutes
+      refetchOnWindowFocus: false,
+    },
+  },
+});
 
 function App() {
   return (
-    <HelmetProvider>
+    <BrowserRouter>
       <QueryClientProvider client={queryClient}>
-        <BrowserRouter>
-          <AuthProvider>
-            <BlogProvider>
-              <BookingProvider>
-                <ScrollToTop />
-                <Suspense fallback={<LoadingSpinner />}>
-                  <Routes>
-                    {/* Public Routes */}
-                    <Route path="/" element={<Index />} />
-                    <Route path="/mutual-funds" element={<MutualFunds />} />
-                    <Route path="/loans" element={<Loans />} />
-                    <Route path="/insurance" element={<Insurance />} />
-                    <Route path="/blog" element={<SupabaseBlog />} />
-                    <Route path="/blog/:slug" element={<SupabaseBlogPost />} />
-                    <Route path="/contact" element={<Contact />} />
-                    <Route path="/about" element={<AboutUs />} />
-                    <Route path="/booking" element={<Booking />} />
-                    <Route path="/sip-calculator" element={<SipCalculator />} />
-                    <Route path="/emi-calculator" element={<EmiCalculator />} />
-                    <Route path="/tax-saving" element={<TaxSaving />} />
-                    <Route path="/home-loan" element={<HomeLoan />} />
-                    <Route path="/personal-loan" element={<PersonalLoan />} />
-                    <Route path="/car-loan" element={<CarLoan />} />
-                    <Route path="/education-loan" element={<EducationLoan />} />
-                    <Route path="/business-loan" element={<BusinessLoan />} />
-                    <Route path="/loan-against-mutual-funds" element={<LoanAgainstMutualFunds />} />
-                    <Route path="/health-insurance" element={<HealthInsurance />} />
-                    <Route path="/term-insurance" element={<TermInsurance />} />
-                    <Route path="/vehicle-insurance" element={<VehicleInsurance />} />
-                    <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-                    <Route path="/terms-of-service" element={<TermsOfService />} />
-                    <Route path="/sitemap" element={<Sitemap />} />
-
-                    {/* Admin Routes */}
-                    <Route path="/admin/login" element={<AdminLogin />} />
-                    <Route 
-                      path="/admin" 
-                      element={
-                        <ProtectedAdminRoute>
-                          <CMSDashboard />
-                        </ProtectedAdminRoute>
-                      } 
-                    />
-                    <Route 
-                      path="/admin/blogs" 
-                      element={
-                        <ProtectedAdminRoute>
-                          <SEOBlogManager />
-                        </ProtectedAdminRoute>
-                      } 
-                    />
-                    <Route 
-                      path="/admin/bookings" 
-                      element={
-                        <ProtectedAdminRoute>
-                          <BookingManager />
-                        </ProtectedAdminRoute>
-                      } 
-                    />
-                    
-                    <Route path="*" element={<NotFound />} />
-                  </Routes>
-                </Suspense>
-              </BookingProvider>
-            </BlogProvider>
-          </AuthProvider>
-        </BrowserRouter>
+        <AuthProvider>
+          <BlogProvider>
+            <div className="min-h-screen bg-background">
+              <Suspense fallback={
+                <div className="flex items-center justify-center min-h-screen">
+                  <LoadingSpinner />
+                </div>
+              }>
+                <Routes>
+                  {/* Public Routes */}
+                  <Route path="/" element={<HomePage />} />
+                  <Route path="/mutual-funds" element={<MutualFundsPage />} />
+                  <Route path="/insurance" element={<InsurancePage />} />
+                  <Route path="/health-insurance" element={<HealthInsurancePage />} />
+                  <Route path="/loans" element={<LoansPage />} />
+                  <Route path="/blog" element={<BlogPage />} />
+                  <Route path="/blog/:slug" element={<BlogPostPage />} />
+                  <Route path="/contact" element={<ContactPage />} />
+                  <Route path="/login" element={<LoginPage />} />
+                  <Route path="/register" element={<RegisterPage />} />
+                  
+                  {/* Protected User Routes */}
+                  <Route path="/dashboard" element={
+                    <ProtectedRoute>
+                      <DashboardPage />
+                    </ProtectedRoute>
+                  } />
+                  
+                  {/* Admin Routes */}
+                  <Route path="/admin" element={
+                    <ProtectedAdminRoute>
+                      <AdminDashboard />
+                    </ProtectedAdminRoute>
+                  } />
+                  
+                  <Route path="/admin/cms" element={
+                    <ProtectedAdminRoute>
+                      <CMSDashboard />
+                    </ProtectedAdminRoute>
+                  } />
+                  
+                  <Route path="/admin/blogs" element={
+                    <ProtectedAdminRoute>
+                      <SEOBlogManager />
+                    </ProtectedAdminRoute>
+                  } />
+                  
+                  <Route path="/admin/blogs/new" element={
+                    <ProtectedAdminRoute>
+                      <SupabaseBlogEditor />
+                    </ProtectedAdminRoute>
+                  } />
+                  
+                  <Route path="/admin/blogs/edit/:id" element={
+                    <ProtectedAdminRoute>
+                      <SupabaseBlogEditor />
+                    </ProtectedAdminRoute>
+                  } />
+                  
+                  {/* 404 Route */}
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </Suspense>
+              <Toaster />
+            </div>
+          </BlogProvider>
+        </AuthProvider>
       </QueryClientProvider>
-      <Toaster />
-    </HelmetProvider>
+    </BrowserRouter>
   );
 }
 
