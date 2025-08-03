@@ -79,7 +79,7 @@ const BlogPost = () => {
           <div className="absolute inset-0 bg-black/10"></div>
           <div className="relative">
             <div className="pt-24 pb-16">
-              <div className="container mx-auto px-4 py-8">
+              <div className="container mx-auto py-8">
                 <BlogPostHeader post={post} />
               </div>
             </div>
@@ -88,7 +88,7 @@ const BlogPost = () => {
 
         {/* Main Content */}
         <div className="bg-white">
-          <div className="container mx-auto px-4 py-12">
+          <div className="container mx-auto py-12">
             <BlogPostContent post={post} />
           </div>
         </div>

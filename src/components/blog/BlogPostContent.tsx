@@ -10,7 +10,7 @@ interface BlogPostContentProps {
 
 const BlogPostContent = ({ post }: BlogPostContentProps) => {
   return (
-    <div className="max-w-4xl mx-auto">
+    <div className="max-w-6xl mx-auto px-4 md:px-6 lg:px-8">
       {/* Featured Image */}
       {post.featuredImage && (
         <div className="mb-12 rounded-2xl overflow-hidden shadow-lg">
