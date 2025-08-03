@@ -80,7 +80,7 @@ const SupabaseBlogPost = () => {
         image={post.og_image || post.featured_image}
         type="article"
         publishedTime={post.published_date}
-        modifiedTime={post.updated_date}
+        modifiedTime={post.updated_at}
         author={post.author?.name}
         noIndex={post.robots_directive === 'noindex'}
       />

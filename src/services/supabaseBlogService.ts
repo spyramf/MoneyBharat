@@ -63,6 +63,14 @@ export interface SupabaseBlogTag {
   created_at?: string;
 }
 
+// Helper function to transform Supabase response to our format
+function transformBlogPost(data: any): SupabaseBlogPost {
+  return {
+    ...data,
+    tags: data.tags?.map((tagRelation: any) => tagRelation.blog_tags) || []
+  };
+}
+
 class SupabaseBlogService {
   // Blog Posts CRUD Operations
   async getAllPosts(status?: string): Promise<SupabaseBlogPost[]> {
@@ -84,7 +92,7 @@ class SupabaseBlogService {
       const { data, error } = await query;
 
       if (error) throw error;
-      return (data || []) as SupabaseBlogPost[];
+      return (data || []).map(transformBlogPost);
     } catch (error) {
       console.error('Error fetching posts:', error);
       throw error;
@@ -107,7 +115,7 @@ class SupabaseBlogService {
         .limit(5);
 
       if (error) throw error;
-      return (data || []) as SupabaseBlogPost[];
+      return (data || []).map(transformBlogPost);
     } catch (error) {
       console.error('Error fetching featured posts:', error);
       throw error;
@@ -128,7 +136,7 @@ class SupabaseBlogService {
         .single();
 
       if (error) throw error;
-      return data as SupabaseBlogPost;
+      return transformBlogPost(data);
     } catch (error) {
       console.error('Error fetching post by ID:', error);
       throw error;
@@ -149,7 +157,7 @@ class SupabaseBlogService {
         .single();
 
       if (error) throw error;
-      return data as SupabaseBlogPost;
+      return transformBlogPost(data);
     } catch (error) {
       console.error('Error fetching post by slug:', error);
       throw error;
@@ -171,14 +179,14 @@ class SupabaseBlogService {
         .order('published_date', { ascending: false });
 
       if (error) throw error;
-      return (data || []) as SupabaseBlogPost[];
+      return (data || []).map(transformBlogPost);
     } catch (error) {
       console.error('Error fetching posts by category:', error);
       throw error;
     }
   }
 
-  async createPost(postData: Partial<SupabaseBlogPost>): Promise<SupabaseBlogPost> {
+  async createPost(postData: Omit<SupabaseBlogPost, 'id' | 'created_at' | 'updated_at' | 'author' | 'category' | 'tags'>): Promise<SupabaseBlogPost> {
     try {
       const { data, error } = await supabase
         .from('blogs')
@@ -191,14 +199,14 @@ class SupabaseBlogService {
         .single();
 
       if (error) throw error;
-      return data as SupabaseBlogPost;
+      return transformBlogPost(data);
     } catch (error) {
       console.error('Error creating post:', error);
       throw error;
     }
   }
 
-  async updatePost(id: string, updates: Partial<SupabaseBlogPost>): Promise<SupabaseBlogPost> {
+  async updatePost(id: string, updates: Partial<Omit<SupabaseBlogPost, 'id' | 'created_at' | 'updated_at' | 'author' | 'category' | 'tags'>>): Promise<SupabaseBlogPost> {
     try {
       const { data, error } = await supabase
         .from('blogs')
@@ -212,7 +220,7 @@ class SupabaseBlogService {
         .single();
 
       if (error) throw error;
-      return data as SupabaseBlogPost;
+      return transformBlogPost(data);
     } catch (error) {
       console.error('Error updating post:', error);
       throw error;
