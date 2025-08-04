@@ -1,4 +1,5 @@
 
+import { Helmet } from 'react-helmet-async';
 import SchemaMarkup from './SchemaMarkup';
 
 interface StructuredDataProps {
@@ -11,13 +12,15 @@ interface StructuredDataProps {
     category: string;
     price?: string;
   };
+  structuredData?: any; // For custom structured data
 }
 
 const StructuredData = ({ 
   page = 'home', 
   faqData, 
   reviewData, 
-  productData 
+  productData,
+  structuredData
 }: StructuredDataProps) => {
   const getPageSpecificSchema = () => {
     switch (page) {
@@ -100,6 +103,15 @@ const StructuredData = ({
       
       {productData && (
         <SchemaMarkup type="product" data={productData} />
+      )}
+
+      {/* Custom structured data */}
+      {structuredData && (
+        <Helmet>
+          <script type="application/ld+json">
+            {JSON.stringify(structuredData)}
+          </script>
+        </Helmet>
       )}
     </>
   );

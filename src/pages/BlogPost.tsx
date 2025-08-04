@@ -111,6 +111,27 @@ const BlogPost = () => {
     .filter(p => p.id !== post.id && p.category?.slug === post.category?.slug)
     .slice(0, 3);
 
+  // Create a BlogPost object that matches the expected interface
+  const blogPostData = {
+    id: parseInt(post.id),
+    title: post.title,
+    author: {
+      id: Number(post.author?.id) || 0,
+      name: post.author?.name || 'Unknown',
+      role: post.author?.role || 'Author',
+      avatar: post.author?.avatar_url || ''
+    },
+    publishedDate: post.published_date || '',
+    readTime: post.read_time || '',
+    category: post.category?.name || '',
+    featuredImage: post.featured_image || '',
+    slug: post.slug,
+    excerpt: post.excerpt || '',
+    content: post.content || '',
+    tags: post.tags?.map(tag => tag.name) || [],
+    isFeatured: post.is_featured || false
+  };
+
   return (
     <>
       <SEOHead 
@@ -123,46 +144,10 @@ const BlogPost = () => {
       <div className="min-h-screen bg-gradient-to-br from-fintech-light via-white to-fintech-light/30">
         <article className="container mx-auto px-4 py-16">
           <div className="max-w-4xl mx-auto">
-            <BlogPostHeader 
-              post={{
-                title: post.title,
-                author: {
-                  id: Number(post.author?.id) || 0,
-                  name: post.author?.name || 'Unknown',
-                  role: post.author?.role || 'Author',
-                  avatar: post.author?.avatar_url || ''
-                },
-                publishedDate: post.published_date || '',
-                readTime: post.read_time || '',
-                category: post.category?.name || '',
-                featuredImage: post.featured_image || '',
-                slug: post.slug,
-                excerpt: post.excerpt || '',
-                content: post.content || '',
-                tags: post.tags?.map(tag => tag.name) || [],
-                isFeatured: post.is_featured || false
-              }}
-            />
+            <BlogPostHeader post={blogPostData} />
             
             <BlogPostContent 
-              post={{
-                title: post.title,
-                author: {
-                  id: Number(post.author?.id) || 0,
-                  name: post.author?.name || 'Unknown',
-                  role: post.author?.role || 'Author',
-                  avatar: post.author?.avatar_url || ''
-                },
-                publishedDate: post.published_date || '',
-                readTime: post.read_time || '',
-                category: post.category?.name || '',
-                featuredImage: post.featured_image || '',
-                slug: post.slug,
-                excerpt: post.excerpt || '',
-                content: post.content || '',
-                tags: post.tags?.map(tag => tag.name) || [],
-                isFeatured: post.is_featured || false
-              }}
+              post={blogPostData}
             />
             
             <BlogCTA />
@@ -170,7 +155,7 @@ const BlogPost = () => {
         </article>
 
         {relatedPosts.length > 0 && (
-          <RelatedArticles relatedPosts={relatedPosts} />
+          <RelatedArticles posts={relatedPosts} />
         )}
       </div>
     </>

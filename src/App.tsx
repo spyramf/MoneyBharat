@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { HelmetProvider } from 'react-helmet-async';
 import { Toaster } from 'sonner';
 import { AuthProvider } from '@/context/AuthContext';
 import { BookingProvider } from '@/context/BookingContext';
@@ -22,34 +23,36 @@ function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-        <AuthProvider>
-          <BlogProvider>
-            <BookingProvider>
-              <ScrollToTop />
-              <PerformanceMonitor />
-              <div className="min-h-screen bg-white">
-                <Routes>
-                  <Route path="/" element={<Index />} />
-                  <Route path="/about" element={<AboutUs />} />
-                  <Route path="/contact" element={<Contact />} />
-                  <Route path="/blog" element={<Blog />} />
-                  <Route path="/blog/:slug" element={<BlogPost />} />
+      <HelmetProvider>
+        <BrowserRouter>
+          <AuthProvider>
+            <BlogProvider>
+              <BookingProvider>
+                <ScrollToTop />
+                <PerformanceMonitor />
+                <div className="min-h-screen bg-white">
+                  <Routes>
+                    <Route path="/" element={<Index />} />
+                    <Route path="/about" element={<AboutUs />} />
+                    <Route path="/contact" element={<Contact />} />
+                    <Route path="/blog" element={<Blog />} />
+                    <Route path="/blog/:slug" element={<BlogPost />} />
 
-                  {/* Admin Routes - Simplified for now */}
-                  <Route path="/admin/blogs/supabase" element={<SupabaseBlogManager />} />
-                  <Route path="/admin/blogs/supabase/new" element={<SupabaseBlogEditor />} />
-                  <Route path="/admin/blogs/supabase/edit/:id" element={<SupabaseBlogEditor />} />
+                    {/* Admin Routes - Simplified for now */}
+                    <Route path="/admin/blogs/supabase" element={<SupabaseBlogManager />} />
+                    <Route path="/admin/blogs/supabase/new" element={<SupabaseBlogEditor />} />
+                    <Route path="/admin/blogs/supabase/edit/:id" element={<SupabaseBlogEditor />} />
 
-                  {/* Catch All Route */}
-                  <Route path="*" element={<NotFound />} />
-                </Routes>
-              </div>
-              <Toaster />
-            </BookingProvider>
-          </BlogProvider>
-        </AuthProvider>
-      </BrowserRouter>
+                    {/* Catch All Route */}
+                    <Route path="*" element={<NotFound />} />
+                  </Routes>
+                </div>
+                <Toaster />
+              </BookingProvider>
+            </BlogProvider>
+          </AuthProvider>
+        </BrowserRouter>
+      </HelmetProvider>
     </QueryClientProvider>
   );
 }

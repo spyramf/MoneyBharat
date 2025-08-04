@@ -1,5 +1,6 @@
+
 import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useBlog } from '@/context/BlogContext';
 import { toast } from 'sonner';
 import { Input } from '@/components/ui/input';
@@ -7,10 +8,11 @@ import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import Editor from '@/components/Editor';
+import Editor from '@/components/ui/Editor';
 
-const BlogEditor = ({ id }: { id?: string }) => {
-  const router = useRouter();
+const BlogEditor = () => {
+  const navigate = useNavigate();
+  const { id } = useParams<{ id: string }>();
   const { addPost, updatePost, getPostById, categories, authors } = useBlog();
   const [editingPost, setEditingPost] = useState(null);
 
@@ -35,8 +37,8 @@ const BlogEditor = ({ id }: { id?: string }) => {
         setSlug(post.slug);
         setExcerpt(post.excerpt || '');
         setContent(post.content || '');
-        setCategory(post.category_id || '');
-        setAuthor(post.author_id?.toString() || '');
+        setCategory(post.category?.id || '');
+        setAuthor(post.author?.id || '');
         setPublishedDate(post.published_date || '');
         setReadTime(post.read_time || '');
         setIsFeatured(post.is_featured || false);
@@ -64,8 +66,8 @@ const BlogEditor = ({ id }: { id?: string }) => {
         meta_title: title,
         meta_description: excerpt,
         status: 'draft' as const,
-        // Convert tag strings to proper tag objects for Supabase
-        tags: tags.map(tag => ({ name: tag, slug: tag.toLowerCase().replace(/\s+/g, '-') }))
+        // For tags, we just need the tag names as strings for now
+        focus_keywords: tags
       };
 
       if (id && editingPost) {
@@ -76,7 +78,7 @@ const BlogEditor = ({ id }: { id?: string }) => {
         toast.success('Post created successfully!');
       }
       
-      router.push('/admin/blogs');
+      navigate('/admin/blogs/supabase');
     } catch (error) {
       console.error('Error saving post:', error);
       toast.error('Failed to save post');
@@ -143,7 +145,7 @@ const BlogEditor = ({ id }: { id?: string }) => {
             </SelectTrigger>
             <SelectContent>
               {authors.map((auth) => (
-                <SelectItem key={auth.id} value={auth.id.toString()}>
+                <SelectItem key={auth.id} value={auth.id}>
                   {auth.name}
                 </SelectItem>
               ))}
@@ -168,16 +170,15 @@ const BlogEditor = ({ id }: { id?: string }) => {
             onChange={(e) => setReadTime(e.target.value)}
           />
         </div>
-        <div className="mb-4">
-          <label className="inline-flex items-center">
-            <Input
-              type="checkbox"
-              className="mr-2"
-              checked={isFeatured}
-              onChange={(e) => setIsFeatured(e.target.checked)}
-            />
-            <span>Is Featured</span>
-          </label>
+        <div className="mb-4 flex items-center space-x-2">
+          <input
+            type="checkbox"
+            id="isFeatured"
+            checked={isFeatured}
+            onChange={(e) => setIsFeatured(e.target.checked)}
+            className="rounded border-gray-300"
+          />
+          <Label htmlFor="isFeatured">Is Featured</Label>
         </div>
         <div className="mb-4">
           <Label htmlFor="featuredImage">Featured Image URL</Label>
@@ -193,11 +194,11 @@ const BlogEditor = ({ id }: { id?: string }) => {
           <Input
             type="text"
             id="tags"
-            value={tags.join(',')}
-            onChange={(e) => setTags(e.target.value.split(',').map(tag => tag.trim()))}
+            value={tags.join(', ')}
+            onChange={(e) => setTags(e.target.value.split(',').map(tag => tag.trim()).filter(tag => tag))}
           />
         </div>
-        <Button type="submit" variant="primary">
+        <Button type="submit">
           {id ? 'Update Post' : 'Create Post'}
         </Button>
       </form>
