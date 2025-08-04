@@ -5,10 +5,10 @@ import { useBlog } from '@/context/BlogContext';
 import { supabaseBlogService, type SupabaseBlogPost } from '@/services/supabaseBlogService';
 import SEOHead from '@/components/seo/SEOHead';
 import StructuredData from '@/components/seo/StructuredData';
-import { BlogPostHeader } from '@/components/blog/BlogPostHeader';
-import { BlogPostContent } from '@/components/blog/BlogPostContent';
-import { RelatedArticles } from '@/components/blog/RelatedArticles';
-import { BlogCTA } from '@/components/blog/BlogCTA';
+import BlogPostHeader from '@/components/blog/BlogPostHeader';
+import BlogPostContent from '@/components/blog/BlogPostContent';
+import RelatedArticles from '@/components/blog/RelatedArticles';
+import BlogCTA from '@/components/blog/BlogCTA';
 import { Button } from '@/components/ui/button';
 
 const BlogPost = () => {
@@ -118,7 +118,7 @@ const BlogPost = () => {
         description={post.meta_description || post.excerpt}
         keywords={post.focus_keywords?.join(', ') || ''}
       />
-      <StructuredData data={structuredData} />
+      <StructuredData structuredData={structuredData} />
       
       <div className="min-h-screen bg-gradient-to-br from-fintech-light via-white to-fintech-light/30">
         <article className="container mx-auto px-4 py-16">

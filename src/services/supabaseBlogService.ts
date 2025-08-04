@@ -16,17 +16,23 @@ export type BlogPostInsert = Database['public']['Tables']['blogs']['Insert'];
 export type BlogPostUpdate = Database['public']['Tables']['blogs']['Update'];
 
 class SupabaseBlogService {
-  async getAllPosts(): Promise<SupabaseBlogPost[]> {
-    const { data, error } = await supabase
+  async getAllPosts(status?: string): Promise<SupabaseBlogPost[]> {
+    let query = supabase
       .from('blogs')
       .select(`
         *,
         author:blog_authors(*),
         category:blog_categories(*),
         tags:blog_post_tags(blog_tags(*))
-      `)
-      .eq('status', 'published')
-      .order('published_date', { ascending: false });
+      `);
+
+    if (status) {
+      query = query.eq('status', status);
+    } else {
+      query = query.eq('status', 'published');
+    }
+
+    const { data, error } = await query.order('published_date', { ascending: false });
 
     if (error) {
       console.error('Error fetching blog posts:', error);
@@ -37,6 +43,69 @@ class SupabaseBlogService {
       ...post,
       tags: post.tags?.map((tagRelation: any) => tagRelation.blog_tags) || []
     })) || [];
+  }
+
+  async getFeaturedPosts(): Promise<SupabaseBlogPost[]> {
+    const { data, error } = await supabase
+      .from('blogs')
+      .select(`
+        *,
+        author:blog_authors(*),
+        category:blog_categories(*),
+        tags:blog_post_tags(blog_tags(*))
+      `)
+      .eq('status', 'published')
+      .eq('is_featured', true)
+      .order('published_date', { ascending: false });
+
+    if (error) {
+      console.error('Error fetching featured posts:', error);
+      throw new Error('Failed to fetch featured posts');
+    }
+
+    return data?.map(post => ({
+      ...post,
+      tags: post.tags?.map((tagRelation: any) => tagRelation.blog_tags) || []
+    })) || [];
+  }
+
+  async getPostsByCategory(categorySlug: string): Promise<SupabaseBlogPost[]> {
+    const { data, error } = await supabase
+      .from('blogs')
+      .select(`
+        *,
+        author:blog_authors(*),
+        category:blog_categories(*),
+        tags:blog_post_tags(blog_tags(*))
+      `)
+      .eq('status', 'published')
+      .eq('category.slug', categorySlug)
+      .order('published_date', { ascending: false });
+
+    if (error) {
+      console.error('Error fetching posts by category:', error);
+      throw new Error('Failed to fetch posts by category');
+    }
+
+    return data?.map(post => ({
+      ...post,
+      tags: post.tags?.map((tagRelation: any) => tagRelation.blog_tags) || []
+    })) || [];
+  }
+
+  async trackAnalytics(blogId: string, metricName: string, value: number): Promise<void> {
+    const { error } = await supabase
+      .from('blog_analytics')
+      .insert({
+        blog_id: blogId,
+        metric_name: metricName,
+        metric_value: value,
+        recorded_date: new Date().toISOString()
+      });
+
+    if (error) {
+      console.error('Error tracking analytics:', error);
+    }
   }
 
   async getPostBySlug(slug: string): Promise<SupabaseBlogPost> {

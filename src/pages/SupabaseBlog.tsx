@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { supabaseBlogService, type SupabaseBlogPost, type SupabaseBlogCategory } from '@/services/supabaseBlogService';
@@ -37,7 +36,7 @@ const SupabaseBlog = () => {
     try {
       setIsLoading(true);
       const [allPosts, categoriesData, featured] = await Promise.all([
-        supabaseBlogService.getAllPosts('published'),
+        supabaseBlogService.getAllPosts(),
         supabaseBlogService.getAllCategories(),
         supabaseBlogService.getFeaturedPosts()
       ]);

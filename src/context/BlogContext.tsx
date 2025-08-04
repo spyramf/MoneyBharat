@@ -12,6 +12,13 @@ interface BlogContextType {
   getPostBySlug: (slug: string) => SupabaseBlogPost | undefined;
   getPostsByCategory: (categorySlug: string) => SupabaseBlogPost[];
   refreshData: () => Promise<void>;
+  // Additional methods for admin functionality
+  blogPosts: SupabaseBlogPost[];
+  addPost: (post: Partial<SupabaseBlogPost>) => Promise<void>;
+  updatePost: (id: string, post: Partial<SupabaseBlogPost>) => Promise<void>;
+  deletePost: (id: string) => Promise<void>;
+  getPostById: (id: string) => SupabaseBlogPost | undefined;
+  refreshPosts: () => Promise<void>;
 }
 
 const BlogContext = createContext<BlogContextType | undefined>(undefined);
@@ -70,6 +77,45 @@ export const BlogProvider: React.FC<BlogProviderProps> = ({ children }) => {
     await loadData();
   };
 
+  // Admin methods
+  const addPost = async (postData: Partial<SupabaseBlogPost>) => {
+    try {
+      const newPost = await supabaseBlogService.createPost(postData);
+      setPosts(prev => [newPost, ...prev]);
+    } catch (error) {
+      console.error('Error adding post:', error);
+      throw error;
+    }
+  };
+
+  const updatePost = async (id: string, postData: Partial<SupabaseBlogPost>) => {
+    try {
+      const updatedPost = await supabaseBlogService.updatePost(id, postData);
+      setPosts(prev => prev.map(post => post.id === id ? updatedPost : post));
+    } catch (error) {
+      console.error('Error updating post:', error);
+      throw error;
+    }
+  };
+
+  const deletePost = async (id: string) => {
+    try {
+      await supabaseBlogService.deletePost(id);
+      setPosts(prev => prev.filter(post => post.id !== id));
+    } catch (error) {
+      console.error('Error deleting post:', error);
+      throw error;
+    }
+  };
+
+  const getPostById = (id: string): SupabaseBlogPost | undefined => {
+    return posts.find(post => post.id === id);
+  };
+
+  const refreshPosts = async () => {
+    await loadData();
+  };
+
   const value: BlogContextType = {
     posts: posts.filter(post => post.status === 'published'),
     categories,
@@ -80,6 +126,13 @@ export const BlogProvider: React.FC<BlogProviderProps> = ({ children }) => {
     getPostBySlug,
     getPostsByCategory,
     refreshData,
+    // Admin methods
+    blogPosts: posts,
+    addPost,
+    updatePost,
+    deletePost,
+    getPostById,
+    refreshPosts,
   };
 
   return (
