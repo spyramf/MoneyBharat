@@ -5,7 +5,6 @@ import { Users, TrendingUp, DollarSign, Activity, Target, AlertCircle } from 'lu
 import ClientSearchBar from './ClientSearchBar';
 import PortfolioSummaryCard from './PortfolioSummaryCard';
 import QuickActionsPanel from './QuickActionsPanel';
-import { supabase } from '@/integrations/supabase/client';
 
 const EnhancedRMDashboard = () => {
   const [rmStats, setRmStats] = useState({
@@ -35,33 +34,19 @@ const EnhancedRMDashboard = () => {
 
   const fetchRMStats = async () => {
     try {
-      // In a real implementation, this would filter by RM ID
-      const { count: clientsCount } = await supabase
-        .from('clients')
-        .select('*', { count: 'exact', head: true });
-
-      const { data: sipData } = await supabase
-        .from('sip_registrations')
-        .select('sip_amount, status');
-
-      const activeSIPs = sipData?.filter(sip => sip.status === 'active').length || 0;
-      const monthlySIP = sipData?.reduce((sum, sip) => sum + (sip.sip_amount || 0), 0) || 0;
-
-      const { count: pendingKYCCount } = await supabase
-        .from('kyc_details')
-        .select('*', { count: 'exact', head: true })
-        .eq('verification_status', 'pending');
-
-      setRmStats({
-        myClients: clientsCount || 0,
-        totalAUM: 24000000, // This would come from portfolios aggregation
-        monthlySIP,
-        activeSIPs,
+      // Mock data since the required tables don't exist yet
+      const mockStats = {
+        myClients: 85,
+        totalAUM: 24000000,
+        monthlySIP: 350000,
+        activeSIPs: 45,
         targetAchievement: 85,
         newClients: 12,
-        pendingKYC: pendingKYCCount || 0,
+        pendingKYC: 8,
         sipCollectionRate: 94
-      });
+      };
+
+      setRmStats(mockStats);
     } catch (error) {
       console.error('Error fetching RM stats:', error);
     }
@@ -69,29 +54,17 @@ const EnhancedRMDashboard = () => {
 
   const fetchPortfolioSummary = async () => {
     try {
-      const { data: portfolios } = await supabase
-        .from('portfolios')
-        .select('current_value, invested_amount, gain_loss');
+      // Mock data since the required tables don't exist yet
+      const mockSummary = {
+        totalValue: 24000000,
+        totalInvestment: 22000000,
+        gainLoss: 2000000,
+        gainLossPercentage: 9.09,
+        activeSIPs: 45,
+        sipAmount: 350000
+      };
 
-      const totalValue = portfolios?.reduce((sum, p) => sum + (p.current_value || 0), 0) || 0;
-      const totalInvestment = portfolios?.reduce((sum, p) => sum + (p.invested_amount || 0), 0) || 0;
-      const gainLoss = portfolios?.reduce((sum, p) => sum + (p.gain_loss || 0), 0) || 0;
-
-      const { data: sipData } = await supabase
-        .from('sip_registrations')
-        .select('sip_amount, status');
-
-      const activeSIPs = sipData?.filter(sip => sip.status === 'active').length || 0;
-      const sipAmount = sipData?.reduce((sum, sip) => sum + (sip.sip_amount || 0), 0) || 0;
-
-      setPortfolioSummary({
-        totalValue,
-        totalInvestment,
-        gainLoss,
-        gainLossPercentage: totalInvestment > 0 ? (gainLoss / totalInvestment) * 100 : 0,
-        activeSIPs,
-        sipAmount
-      });
+      setPortfolioSummary(mockSummary);
     } catch (error) {
       console.error('Error fetching portfolio summary:', error);
     }
