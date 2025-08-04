@@ -16,7 +16,15 @@ import SupabaseBlogManager from '@/components/cms/SupabaseBlogManager';
 import SupabaseBlogEditor from '@/components/cms/SupabaseBlogEditor';
 import Blog from '@/pages/Blog';
 import BlogPost from '@/pages/BlogPost';
+import SupabaseBlog from '@/pages/SupabaseBlog';
 import { BlogProvider } from '@/context/BlogContext';
+import AdminLayout from '@/layouts/AdminLayout';
+import ProtectedAdminRoute from '@/components/ProtectedAdminRoute';
+import AdminLogin from '@/pages/admin/AdminLogin';
+import Dashboard from '@/pages/admin/Dashboard';
+import BlogManager from '@/pages/admin/BlogManager';
+import BlogEditor from '@/pages/admin/BlogEditor';
+import BookingManager from '@/pages/admin/BookingManager';
 
 function App() {
   const [queryClient] = useState(() => new QueryClient());
@@ -35,10 +43,54 @@ function App() {
                     <Route path="/" element={<Index />} />
                     <Route path="/about" element={<AboutUs />} />
                     <Route path="/contact" element={<Contact />} />
-                    <Route path="/blog" element={<Blog />} />
+                    <Route path="/blog" element={<SupabaseBlog />} />
                     <Route path="/blog/:slug" element={<BlogPost />} />
 
-                    {/* Admin Routes - Simplified for now */}
+                    {/* Admin Login */}
+                    <Route path="/admin/login" element={<AdminLogin />} />
+
+                    {/* Protected Admin Routes */}
+                    <Route path="/admin" element={
+                      <ProtectedAdminRoute>
+                        <AdminLayout>
+                          <Dashboard />
+                        </AdminLayout>
+                      </ProtectedAdminRoute>
+                    } />
+                    
+                    <Route path="/admin/blogs" element={
+                      <ProtectedAdminRoute>
+                        <AdminLayout>
+                          <BlogManager />
+                        </AdminLayout>
+                      </ProtectedAdminRoute>
+                    } />
+
+                    <Route path="/admin/blogs/new" element={
+                      <ProtectedAdminRoute>
+                        <AdminLayout>
+                          <BlogEditor />
+                        </AdminLayout>
+                      </ProtectedAdminRoute>
+                    } />
+
+                    <Route path="/admin/blogs/edit/:id" element={
+                      <ProtectedAdminRoute>
+                        <AdminLayout>
+                          <BlogEditor />
+                        </AdminLayout>
+                      </ProtectedAdminRoute>
+                    } />
+
+                    <Route path="/admin/bookings" element={
+                      <ProtectedAdminRoute>
+                        <AdminLayout>
+                          <BookingManager />
+                        </AdminLayout>
+                      </ProtectedAdminRoute>
+                    } />
+
+                    {/* Legacy Supabase Blog Routes */}
                     <Route path="/admin/blogs/supabase" element={<SupabaseBlogManager />} />
                     <Route path="/admin/blogs/supabase/new" element={<SupabaseBlogEditor />} />
                     <Route path="/admin/blogs/supabase/edit/:id" element={<SupabaseBlogEditor />} />

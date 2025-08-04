@@ -10,6 +10,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Search, Calendar, Clock } from 'lucide-react';
 import { format } from 'date-fns';
 import SEOHead from '@/components/seo/SEOHead';
+import MainLayout from '@/layouts/MainLayout';
 
 const SupabaseBlog = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -132,25 +133,27 @@ const SupabaseBlog = () => {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gray-50">
-        <div className="container mx-auto px-4 py-16">
-          <div className="flex items-center justify-center">
-            <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-fintech-purple"></div>
+      <MainLayout>
+        <div className="min-h-screen bg-gray-50">
+          <div className="container mx-auto px-4 py-16">
+            <div className="flex items-center justify-center">
+              <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-fintech-purple"></div>
+            </div>
           </div>
         </div>
-      </div>
+      </MainLayout>
     );
   }
 
   return (
-    <>
+    <MainLayout>
       <SEOHead 
         title="Financial Blog - Expert Insights | Money Bharat Finance"
         description="Stay updated with the latest financial insights, investment strategies, and money management tips from Money Bharat Finance experts."
         keywords="financial blog, investment advice, money management, mutual funds, insurance, loans"
       />
       
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-gray-50 pt-20">
         {/* Hero Section */}
         <div className="bg-gradient-to-r from-fintech-purple to-purple-700 text-white">
           <div className="container mx-auto px-4 py-16 text-center">
@@ -256,7 +259,7 @@ const SupabaseBlog = () => {
           </div>
         </section>
       </div>
-    </>
+    </MainLayout>
   );
 };
 
