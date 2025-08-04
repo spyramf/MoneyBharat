@@ -118,7 +118,7 @@ const BlogPost = () => {
         description={post.meta_description || post.excerpt}
         keywords={post.focus_keywords?.join(', ') || ''}
       />
-      <StructuredData data={structuredData} />
+      <StructuredData structuredData={structuredData} />
       
       <div className="min-h-screen bg-gradient-to-br from-fintech-light via-white to-fintech-light/30">
         <article className="container mx-auto px-4 py-16">
@@ -127,7 +127,7 @@ const BlogPost = () => {
               post={{
                 title: post.title,
                 author: {
-                  id: post.author?.id || 0,
+                  id: Number(post.author?.id) || 0,
                   name: post.author?.name || 'Unknown',
                   role: post.author?.role || 'Author',
                   avatar: post.author?.avatar_url || ''
@@ -148,7 +148,7 @@ const BlogPost = () => {
               post={{
                 title: post.title,
                 author: {
-                  id: post.author?.id || 0,
+                  id: Number(post.author?.id) || 0,
                   name: post.author?.name || 'Unknown',
                   role: post.author?.role || 'Author',
                   avatar: post.author?.avatar_url || ''

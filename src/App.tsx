@@ -22,10 +22,10 @@ function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <AuthProvider>
-        <BlogProvider>
-          <BookingProvider>
-            <BrowserRouter>
+      <BrowserRouter>
+        <AuthProvider>
+          <BlogProvider>
+            <BookingProvider>
               <ScrollToTop />
               <PerformanceMonitor />
               <div className="min-h-screen bg-white">
@@ -46,10 +46,10 @@ function App() {
                 </Routes>
               </div>
               <Toaster />
-            </BrowserRouter>
-          </BookingProvider>
-        </BlogProvider>
-      </AuthProvider>
+            </BookingProvider>
+          </BlogProvider>
+        </AuthProvider>
+      </BrowserRouter>
     </QueryClientProvider>
   );
 }

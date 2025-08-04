@@ -78,7 +78,7 @@ const Blog = () => {
         description="Read expert insights on mutual funds, insurance, loans, and investment strategies. Get the latest financial advice from certified professionals."
         keywords="financial blog, investment tips, mutual funds, insurance, money management"
       />
-      <StructuredData data={structuredData} />
+      <StructuredData structuredData={structuredData} />
       
       <div className="min-h-screen bg-gradient-to-br from-fintech-light via-white to-fintech-light/30">
         <div className="container mx-auto px-4 py-16">
