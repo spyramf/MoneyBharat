@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { supabaseBlogService, type SupabaseBlogPost, type SupabaseBlogCategory } from '@/services/supabaseBlogService';
@@ -7,7 +8,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Search, Calendar, Clock } from 'lucide-react';
+import { Search, Calendar, Clock, TrendingUp, ArrowRight } from 'lucide-react';
 import { format } from 'date-fns';
 import SEOHead from '@/components/seo/SEOHead';
 import MainLayout from '@/layouts/MainLayout';
@@ -64,68 +65,104 @@ const SupabaseBlog = () => {
     return matchesSearch && matchesCategory;
   });
 
-  const BlogCard = ({ post, featured = false }: { post: SupabaseBlogPost; featured?: boolean }) => (
-    <Link to={`/blog/${post.slug}`} className="group">
-      <Card className={`h-full overflow-hidden transition-all hover:shadow-lg ${featured ? 'border-fintech-purple' : ''}`}>
-        {post.featured_image && (
-          <div className={`relative overflow-hidden ${featured ? 'h-64' : 'h-48'}`}>
+  const FeaturedPostCard = ({ post }: { post: SupabaseBlogPost }) => (
+    <Link to={`/blog/${post.slug}`} className="group block">
+      <Card className="h-full overflow-hidden border-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-white">
+        <div className="relative h-64 overflow-hidden">
+          {post.featured_image ? (
             <img 
               src={post.featured_image} 
               alt={post.title} 
-              className="absolute inset-0 h-full w-full object-cover transition-transform group-hover:scale-105"
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
             />
-            <div className="absolute top-3 left-3 flex gap-2">
-              {post.category && (
-                <Badge className="bg-fintech-purple">{post.category.name}</Badge>
-              )}
-              {featured && (
-                <Badge variant="secondary">Featured</Badge>
-              )}
+          ) : (
+            <div className="w-full h-full bg-gradient-to-br from-primary/20 to-primary/40 flex items-center justify-center">
+              <TrendingUp className="w-16 h-16 text-primary/60" />
             </div>
+          )}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+          <div className="absolute top-4 left-4">
+            <Badge className="bg-primary text-primary-foreground font-semibold">
+              Featured
+            </Badge>
           </div>
-        )}
+          <div className="absolute bottom-4 left-4 right-4">
+            <h3 className="text-xl font-bold text-white mb-2 line-clamp-2">
+              {post.title}
+            </h3>
+            <p className="text-white/90 text-sm line-clamp-2">
+              {post.excerpt}
+            </p>
+          </div>
+        </div>
+      </Card>
+    </Link>
+  );
+
+  const RegularPostCard = ({ post }: { post: SupabaseBlogPost }) => (
+    <Link to={`/blog/${post.slug}`} className="group block">
+      <Card className="h-full overflow-hidden border border-gray-200 hover:border-primary/30 hover:shadow-lg transition-all duration-300 bg-white">
+        <div className="relative h-48 overflow-hidden">
+          {post.featured_image ? (
+            <img 
+              src={post.featured_image} 
+              alt={post.title} 
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            />
+          ) : (
+            <div className="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
+              <Calendar className="w-12 h-12 text-gray-400" />
+            </div>
+          )}
+          {post.category && (
+            <div className="absolute top-3 left-3">
+              <Badge variant="secondary" className="bg-white/90 text-gray-800 font-medium">
+                {post.category.name}
+              </Badge>
+            </div>
+          )}
+        </div>
         
-        <CardContent className="pt-6">
-          <h3 className={`mb-3 font-bold group-hover:text-fintech-purple line-clamp-2 ${featured ? 'text-xl' : 'text-lg'}`}>
+        <CardContent className="p-6">
+          <h3 className="text-lg font-semibold text-gray-900 mb-3 line-clamp-2 group-hover:text-primary transition-colors">
             {post.title}
           </h3>
-          <p className="text-sm text-gray-600 line-clamp-3 mb-4">
+          <p className="text-gray-600 text-sm mb-4 line-clamp-3">
             {post.excerpt}
           </p>
           
-          <div className="flex items-center gap-4 text-xs text-gray-500">
+          <div className="flex items-center justify-between text-xs text-gray-500">
             {post.published_date && (
               <div className="flex items-center gap-1">
-                <Calendar className="h-3 w-3" />
+                <Calendar className="w-3 h-3" />
                 {format(new Date(post.published_date), 'MMM dd, yyyy')}
               </div>
             )}
             {post.read_time && (
               <div className="flex items-center gap-1">
-                <Clock className="h-3 w-3" />
+                <Clock className="w-3 h-3" />
                 {post.read_time}
               </div>
             )}
           </div>
         </CardContent>
         
-        <CardFooter className="border-t pt-4">
+        <CardFooter className="px-6 pb-6 pt-0 flex items-center justify-between">
           {post.author && (
-            <div className="flex items-center gap-3">
-              <Avatar className="h-8 w-8">
+            <div className="flex items-center gap-2">
+              <Avatar className="w-6 h-6">
                 <AvatarImage src={post.author.avatar_url} alt={post.author.name} />
-                <AvatarFallback>
+                <AvatarFallback className="text-xs">
                   {post.author.name.split(' ').map(n => n[0]).join('')}
                 </AvatarFallback>
               </Avatar>
-              <div>
-                <p className="text-sm font-medium">{post.author.name}</p>
-                {post.author.role && (
-                  <p className="text-xs text-gray-500">{post.author.role}</p>
-                )}
-              </div>
+              <span className="text-xs text-gray-600 font-medium">{post.author.name}</span>
             </div>
           )}
+          
+          <div className="flex items-center gap-1 text-primary text-xs font-medium group-hover:gap-2 transition-all">
+            Read More <ArrowRight className="w-3 h-3" />
+          </div>
         </CardFooter>
       </Card>
     </Link>
@@ -134,10 +171,10 @@ const SupabaseBlog = () => {
   if (isLoading) {
     return (
       <MainLayout>
-        <div className="min-h-screen bg-gray-50">
-          <div className="container mx-auto px-4 py-16">
-            <div className="flex items-center justify-center">
-              <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-fintech-purple"></div>
+        <div className="min-h-screen bg-gray-50/30">
+          <div className="container mx-auto px-4 py-20">
+            <div className="flex items-center justify-center min-h-[400px]">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
             </div>
           </div>
         </div>
@@ -153,54 +190,69 @@ const SupabaseBlog = () => {
         keywords="financial blog, investment advice, money management, mutual funds, insurance, loans"
       />
       
-      <div className="min-h-screen bg-gray-50 pt-20">
+      <div className="min-h-screen bg-gray-50/30">
         {/* Hero Section */}
-        <div className="bg-gradient-to-r from-fintech-purple to-purple-700 text-white">
-          <div className="container mx-auto px-4 py-16 text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              Money Bharat Finance Blog
-            </h1>
-            <p className="text-xl text-purple-100 max-w-2xl mx-auto">
-              Expert financial insights, investment strategies, and money management tips to help you achieve your financial goals
-            </p>
+        <div className="bg-white border-b">
+          <div className="container mx-auto px-4 py-16">
+            <div className="max-w-4xl mx-auto text-center">
+              <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+                Financial Insights & Expert Advice
+              </h1>
+              <p className="text-xl text-gray-600 mb-8 leading-relaxed">
+                Stay informed with the latest trends in finance, investment strategies, and money management tips from certified professionals
+              </p>
+              
+              {/* Search Bar */}
+              <div className="max-w-2xl mx-auto relative">
+                <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
+                <Input
+                  placeholder="Search articles, topics, or keywords..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="pl-12 pr-4 py-3 text-lg border-2 border-gray-200 rounded-xl focus:border-primary shadow-sm"
+                />
+              </div>
+            </div>
           </div>
         </div>
 
-        {/* Search and Filters */}
-        <div className="container mx-auto px-4 py-8">
-          <div className="flex flex-col md:flex-row gap-4 items-center justify-between mb-8">
-            <div className="relative flex-1 max-w-md">
-              <Search className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
-              <Input
-                placeholder="Search articles..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10"
-              />
+        <div className="container mx-auto px-4 py-12">
+          {/* Category Filter */}
+          <div className="mb-12">
+            <div className="flex flex-wrap items-center gap-3 justify-center">
+              <Button
+                variant={selectedCategory === 'all' ? 'default' : 'outline'}
+                onClick={() => setSelectedCategory('all')}
+                className="rounded-full"
+              >
+                All Articles ({posts.length})
+              </Button>
+              {categories.map(category => {
+                const count = posts.filter(post => post.category?.slug === category.slug).length;
+                return (
+                  <Button
+                    key={category.id}
+                    variant={selectedCategory === category.slug ? 'default' : 'outline'}
+                    onClick={() => setSelectedCategory(category.slug)}
+                    className="rounded-full"
+                  >
+                    {category.name} ({count})
+                  </Button>
+                );
+              })}
             </div>
-            
-            <Select value={selectedCategory} onValueChange={setSelectedCategory}>
-              <SelectTrigger className="w-[200px]">
-                <SelectValue placeholder="All Categories" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">All Categories</SelectItem>
-                {categories.map(category => (
-                  <SelectItem key={category.id} value={category.slug}>
-                    {category.name}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
           </div>
 
           {/* Featured Posts */}
           {featuredPosts.length > 0 && !searchTerm && selectedCategory === 'all' && (
-            <section className="mb-12">
-              <h2 className="text-2xl font-bold mb-6">Featured Articles</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <section className="mb-16">
+              <div className="flex items-center gap-2 mb-8">
+                <TrendingUp className="w-6 h-6 text-primary" />
+                <h2 className="text-2xl font-bold text-gray-900">Featured Articles</h2>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {featuredPosts.slice(0, 3).map(post => (
-                  <BlogCard key={post.id} post={post} featured={true} />
+                  <FeaturedPostCard key={post.id} post={post} />
                 ))}
               </div>
             </section>
@@ -208,22 +260,28 @@ const SupabaseBlog = () => {
 
           {/* All Posts */}
           <section>
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-2xl font-bold">
+            <div className="flex items-center justify-between mb-8">
+              <h2 className="text-2xl font-bold text-gray-900">
                 {searchTerm ? `Search Results for "${searchTerm}"` : 
                  selectedCategory !== 'all' ? `${categories.find(c => c.slug === selectedCategory)?.name} Articles` : 
                  'Latest Articles'}
               </h2>
-              <span className="text-gray-500">
+              <span className="text-gray-500 bg-gray-100 px-3 py-1 rounded-full text-sm font-medium">
                 {filteredPosts.length} article{filteredPosts.length !== 1 ? 's' : ''}
               </span>
             </div>
 
             {filteredPosts.length === 0 ? (
-              <div className="text-center py-12">
-                <div className="text-gray-500 text-lg mb-4">
-                  {searchTerm ? 'No articles found matching your search.' : 'No articles found in this category.'}
+              <div className="text-center py-16 bg-white rounded-xl border">
+                <div className="text-gray-400 mb-4">
+                  <Search className="w-16 h-16 mx-auto mb-4" />
                 </div>
+                <h3 className="text-xl font-semibold text-gray-700 mb-2">
+                  {searchTerm ? 'No articles found' : 'No articles in this category'}
+                </h3>
+                <p className="text-gray-500 mb-6">
+                  {searchTerm ? 'Try adjusting your search terms' : 'Check back soon for new content'}
+                </p>
                 {(searchTerm || selectedCategory !== 'all') && (
                   <Button 
                     variant="outline" 
@@ -231,33 +289,34 @@ const SupabaseBlog = () => {
                       setSearchTerm('');
                       setSelectedCategory('all');
                     }}
+                    className="rounded-full"
                   >
                     Clear Filters
                   </Button>
                 )}
               </div>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {filteredPosts.map(post => (
-                  <BlogCard key={post.id} post={post} />
+                  <RegularPostCard key={post.id} post={post} />
                 ))}
               </div>
             )}
           </section>
-        </div>
 
-        {/* Newsletter CTA */}
-        <section className="bg-white border-t">
-          <div className="container mx-auto px-4 py-16 text-center">
-            <h2 className="text-3xl font-bold mb-4">Stay Updated</h2>
-            <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
-              Get the latest financial insights and investment tips delivered straight to your inbox.
-            </p>
-            <Button asChild size="lg">
-              <Link to="/contact">Subscribe to Newsletter</Link>
-            </Button>
-          </div>
-        </section>
+          {/* Newsletter CTA */}
+          <section className="mt-20">
+            <div className="bg-gradient-to-r from-primary to-primary/90 text-white rounded-2xl p-8 md:p-12 text-center">
+              <h2 className="text-3xl font-bold mb-4">Never Miss a Financial Update</h2>
+              <p className="text-primary-foreground/90 mb-8 max-w-2xl mx-auto text-lg">
+                Get expert financial insights, investment tips, and market updates delivered directly to your inbox every week.
+              </p>
+              <Button asChild size="lg" className="bg-white text-primary hover:bg-gray-100 font-semibold">
+                <Link to="/contact">Subscribe Now</Link>
+              </Button>
+            </div>
+          </section>
+        </div>
       </div>
     </MainLayout>
   );
