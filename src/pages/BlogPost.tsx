@@ -139,7 +139,7 @@ const BlogPost = () => {
         description={post.meta_description || post.excerpt}
         keywords={post.focus_keywords?.join(', ') || ''}
       />
-      <StructuredData data={structuredData} />
+      <StructuredData structuredData={structuredData} />
       
       <div className="min-h-screen bg-gradient-to-br from-fintech-light via-white to-fintech-light/30">
         <article className="container mx-auto px-4 py-16">
