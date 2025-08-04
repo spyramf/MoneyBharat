@@ -10,7 +10,6 @@ import { BlogProvider } from '@/context/BlogContext';
 import ScrollToTop from '@/components/ScrollToTop';
 import PerformanceMonitor from '@/components/PerformanceMonitor';
 import MainLayout from '@/layouts/MainLayout';
-import AdminLayout from '@/layouts/AdminLayout';
 import ProtectedAdminRoute from '@/components/ProtectedAdminRoute';
 
 // Pages
@@ -18,7 +17,6 @@ import Index from '@/pages/Index';
 import AboutUs from '@/pages/AboutUs';
 import Contact from '@/pages/Contact';
 import NotFound from '@/pages/NotFound';
-import Blog from '@/pages/Blog';
 import BlogPost from '@/pages/BlogPost';
 import SupabaseBlog from '@/pages/SupabaseBlog';
 
@@ -49,6 +47,7 @@ function App() {
                 <PerformanceMonitor />
                 <div className="min-h-screen bg-white">
                   <Routes>
+                    {/* Public Routes */}
                     <Route path="/" element={
                       <MainLayout>
                         <Index />
@@ -75,47 +74,55 @@ function App() {
                       </MainLayout>
                     } />
 
-                    {/* Admin Login */}
+                    {/* Admin Login - Public */}
                     <Route path="/admin/login" element={<AdminLogin />} />
 
                     {/* Protected Admin Routes */}
                     <Route path="/admin" element={
                       <ProtectedAdminRoute>
-                        <AdminLayout>
-                          <Dashboard />
-                        </AdminLayout>
+                        <Dashboard />
+                      </ProtectedAdminRoute>
+                    } />
+                    
+                    <Route path="/admin/dashboard" element={
+                      <ProtectedAdminRoute>
+                        <Dashboard />
                       </ProtectedAdminRoute>
                     } />
                     
                     <Route path="/admin/blogs" element={
                       <ProtectedAdminRoute>
-                        <AdminLayout>
-                          <BlogManager />
-                        </AdminLayout>
+                        <BlogManager />
                       </ProtectedAdminRoute>
                     } />
 
                     <Route path="/admin/blogs/new" element={
                       <ProtectedAdminRoute>
-                        <AdminLayout>
-                          <BlogEditor />
-                        </AdminLayout>
+                        <BlogEditor />
+                      </ProtectedAdminRoute>
+                    } />
+
+                    <Route path="/admin/blog/new" element={
+                      <ProtectedAdminRoute>
+                        <BlogEditor />
                       </ProtectedAdminRoute>
                     } />
 
                     <Route path="/admin/blogs/edit/:id" element={
                       <ProtectedAdminRoute>
-                        <AdminLayout>
-                          <BlogEditor />
-                        </AdminLayout>
+                        <BlogEditor />
+                      </ProtectedAdminRoute>
+                    } />
+
+                    <Route path="/admin/blog/edit/:id" element={
+                      <ProtectedAdminRoute>
+                        <BlogEditor />
                       </ProtectedAdminRoute>
                     } />
 
                     <Route path="/admin/bookings" element={
                       <ProtectedAdminRoute>
-                        <AdminLayout>
-                          <BookingManager />
-                        </AdminLayout>
+                        <BookingManager />
                       </ProtectedAdminRoute>
                     } />
 

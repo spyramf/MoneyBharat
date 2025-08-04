@@ -9,6 +9,7 @@ import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import Editor from '@/components/ui/Editor';
+import AdminLayout from '@/layouts/AdminLayout';
 
 const BlogEditor = () => {
   const navigate = useNavigate();
@@ -66,7 +67,6 @@ const BlogEditor = () => {
         meta_title: title,
         meta_description: excerpt,
         status: 'draft' as const,
-        // For tags, we just need the tag names as strings for now
         focus_keywords: tags
       };
 
@@ -78,7 +78,7 @@ const BlogEditor = () => {
         toast.success('Post created successfully!');
       }
       
-      navigate('/admin/blogs/supabase');
+      navigate('/admin/blogs');
     } catch (error) {
       console.error('Error saving post:', error);
       toast.error('Failed to save post');
@@ -86,123 +86,125 @@ const BlogEditor = () => {
   };
 
   return (
-    <div className="container mx-auto py-10">
-      <h1 className="text-2xl font-bold mb-4">{id ? 'Edit Blog Post' : 'Create New Blog Post'}</h1>
-      <form onSubmit={handleSubmit} className="max-w-3xl mx-auto">
-        <div className="mb-4">
-          <Label htmlFor="title">Title</Label>
-          <Input
-            type="text"
-            id="title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            required
-          />
-        </div>
-        <div className="mb-4">
-          <Label htmlFor="slug">Slug</Label>
-          <Input
-            type="text"
-            id="slug"
-            value={slug}
-            onChange={(e) => setSlug(e.target.value)}
-            required
-          />
-        </div>
-        <div className="mb-4">
-          <Label htmlFor="excerpt">Excerpt</Label>
-          <Textarea
-            id="excerpt"
-            value={excerpt}
-            onChange={(e) => setExcerpt(e.target.value)}
-            rows={3}
-          />
-        </div>
-        <div className="mb-4">
-          <Label htmlFor="content">Content</Label>
-          <Editor value={content} onChange={setContent} />
-        </div>
-        <div className="mb-4">
-          <Label htmlFor="category">Category</Label>
-          <Select value={category} onValueChange={setCategory}>
-            <SelectTrigger className="w-full">
-              <SelectValue placeholder="Select a category" />
-            </SelectTrigger>
-            <SelectContent>
-              {categories.map((cat) => (
-                <SelectItem key={cat.id} value={cat.id}>
-                  {cat.name}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
-        <div className="mb-4">
-          <Label htmlFor="author">Author</Label>
-          <Select value={author} onValueChange={setAuthor}>
-            <SelectTrigger className="w-full">
-              <SelectValue placeholder="Select an author" />
-            </SelectTrigger>
-            <SelectContent>
-              {authors.map((auth) => (
-                <SelectItem key={auth.id} value={auth.id}>
-                  {auth.name}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
-        <div className="mb-4">
-          <Label htmlFor="publishedDate">Published Date</Label>
-          <Input
-            type="date"
-            id="publishedDate"
-            value={publishedDate}
-            onChange={(e) => setPublishedDate(e.target.value)}
-          />
-        </div>
-        <div className="mb-4">
-          <Label htmlFor="readTime">Read Time</Label>
-          <Input
-            type="text"
-            id="readTime"
-            value={readTime}
-            onChange={(e) => setReadTime(e.target.value)}
-          />
-        </div>
-        <div className="mb-4 flex items-center space-x-2">
-          <input
-            type="checkbox"
-            id="isFeatured"
-            checked={isFeatured}
-            onChange={(e) => setIsFeatured(e.target.checked)}
-            className="rounded border-gray-300"
-          />
-          <Label htmlFor="isFeatured">Is Featured</Label>
-        </div>
-        <div className="mb-4">
-          <Label htmlFor="featuredImage">Featured Image URL</Label>
-          <Input
-            type="text"
-            id="featuredImage"
-            value={featuredImage}
-            onChange={(e) => setFeaturedImage(e.target.value)}
-          />
-        </div>
-        <div className="mb-4">
-          <Label htmlFor="tags">Tags (comma separated)</Label>
-          <Input
-            type="text"
-            id="tags"
-            value={tags.join(', ')}
-            onChange={(e) => setTags(e.target.value.split(',').map(tag => tag.trim()).filter(tag => tag))}
-          />
-        </div>
-        <Button type="submit">
-          {id ? 'Update Post' : 'Create Post'}
-        </Button>
-      </form>
-    </div>
+    <AdminLayout>
+      <div className="container mx-auto py-10">
+        <h1 className="text-2xl font-bold mb-4">{id ? 'Edit Blog Post' : 'Create New Blog Post'}</h1>
+        <form onSubmit={handleSubmit} className="max-w-3xl mx-auto">
+          <div className="mb-4">
+            <Label htmlFor="title">Title</Label>
+            <Input
+              type="text"
+              id="title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              required
+            />
+          </div>
+          <div className="mb-4">
+            <Label htmlFor="slug">Slug</Label>
+            <Input
+              type="text"
+              id="slug"
+              value={slug}
+              onChange={(e) => setSlug(e.target.value)}
+              required
+            />
+          </div>
+          <div className="mb-4">
+            <Label htmlFor="excerpt">Excerpt</Label>
+            <Textarea
+              id="excerpt"
+              value={excerpt}
+              onChange={(e) => setExcerpt(e.target.value)}
+              rows={3}
+            />
+          </div>
+          <div className="mb-4">
+            <Label htmlFor="content">Content</Label>
+            <Editor value={content} onChange={setContent} />
+          </div>
+          <div className="mb-4">
+            <Label htmlFor="category">Category</Label>
+            <Select value={category} onValueChange={setCategory}>
+              <SelectTrigger className="w-full">
+                <SelectValue placeholder="Select a category" />
+              </SelectTrigger>
+              <SelectContent>
+                {categories.map((cat) => (
+                  <SelectItem key={cat.id} value={cat.id}>
+                    {cat.name}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+          <div className="mb-4">
+            <Label htmlFor="author">Author</Label>
+            <Select value={author} onValueChange={setAuthor}>
+              <SelectTrigger className="w-full">
+                <SelectValue placeholder="Select an author" />
+              </SelectTrigger>
+              <SelectContent>
+                {authors.map((auth) => (
+                  <SelectItem key={auth.id} value={auth.id}>
+                    {auth.name}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+          <div className="mb-4">
+            <Label htmlFor="publishedDate">Published Date</Label>
+            <Input
+              type="date"
+              id="publishedDate"
+              value={publishedDate}
+              onChange={(e) => setPublishedDate(e.target.value)}
+            />
+          </div>
+          <div className="mb-4">
+            <Label htmlFor="readTime">Read Time</Label>
+            <Input
+              type="text"
+              id="readTime"
+              value={readTime}
+              onChange={(e) => setReadTime(e.target.value)}
+            />
+          </div>
+          <div className="mb-4 flex items-center space-x-2">
+            <input
+              type="checkbox"
+              id="isFeatured"
+              checked={isFeatured}
+              onChange={(e) => setIsFeatured(e.target.checked)}
+              className="rounded border-gray-300"
+            />
+            <Label htmlFor="isFeatured">Is Featured</Label>
+          </div>
+          <div className="mb-4">
+            <Label htmlFor="featuredImage">Featured Image URL</Label>
+            <Input
+              type="text"
+              id="featuredImage"
+              value={featuredImage}
+              onChange={(e) => setFeaturedImage(e.target.value)}
+            />
+          </div>
+          <div className="mb-4">
+            <Label htmlFor="tags">Tags (comma separated)</Label>
+            <Input
+              type="text"
+              id="tags"
+              value={tags.join(', ')}
+              onChange={(e) => setTags(e.target.value.split(',').map(tag => tag.trim()).filter(tag => tag))}
+            />
+          </div>
+          <Button type="submit">
+            {id ? 'Update Post' : 'Create Post'}
+          </Button>
+        </form>
+      </div>
+    </AdminLayout>
   );
 };
 
