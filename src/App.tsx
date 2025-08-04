@@ -6,20 +6,23 @@ import { HelmetProvider } from 'react-helmet-async';
 import { Toaster } from 'sonner';
 import { AuthProvider } from '@/context/AuthContext';
 import { BookingProvider } from '@/context/BookingContext';
+import { BlogProvider } from '@/context/BlogContext';
 import ScrollToTop from '@/components/ScrollToTop';
 import PerformanceMonitor from '@/components/PerformanceMonitor';
+import MainLayout from '@/layouts/MainLayout';
+import AdminLayout from '@/layouts/AdminLayout';
+import ProtectedAdminRoute from '@/components/ProtectedAdminRoute';
+
+// Pages
 import Index from '@/pages/Index';
 import AboutUs from '@/pages/AboutUs';
 import Contact from '@/pages/Contact';
 import NotFound from '@/pages/NotFound';
-import SupabaseBlogManager from '@/components/cms/SupabaseBlogManager';
-import SupabaseBlogEditor from '@/components/cms/SupabaseBlogEditor';
 import Blog from '@/pages/Blog';
 import BlogPost from '@/pages/BlogPost';
 import SupabaseBlog from '@/pages/SupabaseBlog';
-import { BlogProvider } from '@/context/BlogContext';
-import AdminLayout from '@/layouts/AdminLayout';
-import ProtectedAdminRoute from '@/components/ProtectedAdminRoute';
+
+// Admin Pages
 import AdminLogin from '@/pages/admin/AdminLogin';
 import Dashboard from '@/pages/admin/Dashboard';
 import BlogManager from '@/pages/admin/BlogManager';
@@ -27,7 +30,13 @@ import BlogEditor from '@/pages/admin/BlogEditor';
 import BookingManager from '@/pages/admin/BookingManager';
 
 function App() {
-  const [queryClient] = useState(() => new QueryClient());
+  const [queryClient] = useState(() => new QueryClient({
+    defaultOptions: {
+      queries: {
+        staleTime: 60 * 1000,
+      },
+    },
+  }));
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -40,11 +49,31 @@ function App() {
                 <PerformanceMonitor />
                 <div className="min-h-screen bg-white">
                   <Routes>
-                    <Route path="/" element={<Index />} />
-                    <Route path="/about" element={<AboutUs />} />
-                    <Route path="/contact" element={<Contact />} />
-                    <Route path="/blog" element={<SupabaseBlog />} />
-                    <Route path="/blog/:slug" element={<BlogPost />} />
+                    <Route path="/" element={
+                      <MainLayout>
+                        <Index />
+                      </MainLayout>
+                    } />
+                    <Route path="/about" element={
+                      <MainLayout>
+                        <AboutUs />
+                      </MainLayout>
+                    } />
+                    <Route path="/contact" element={
+                      <MainLayout>
+                        <Contact />
+                      </MainLayout>
+                    } />
+                    <Route path="/blog" element={
+                      <MainLayout>
+                        <SupabaseBlog />
+                      </MainLayout>
+                    } />
+                    <Route path="/blog/:slug" element={
+                      <MainLayout>
+                        <BlogPost />
+                      </MainLayout>
+                    } />
 
                     {/* Admin Login */}
                     <Route path="/admin/login" element={<AdminLogin />} />
@@ -90,13 +119,12 @@ function App() {
                       </ProtectedAdminRoute>
                     } />
 
-                    {/* Legacy Supabase Blog Routes */}
-                    <Route path="/admin/blogs/supabase" element={<SupabaseBlogManager />} />
-                    <Route path="/admin/blogs/supabase/new" element={<SupabaseBlogEditor />} />
-                    <Route path="/admin/blogs/supabase/edit/:id" element={<SupabaseBlogEditor />} />
-
                     {/* Catch All Route */}
-                    <Route path="*" element={<NotFound />} />
+                    <Route path="*" element={
+                      <MainLayout>
+                        <NotFound />
+                      </MainLayout>
+                    } />
                   </Routes>
                 </div>
                 <Toaster />

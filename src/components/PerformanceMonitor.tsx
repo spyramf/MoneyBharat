@@ -1,5 +1,5 @@
 
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 
 // Type definitions for Web Performance API
 interface PerformanceEventTiming extends PerformanceEntry {
@@ -18,7 +18,7 @@ const safeLog = (message: string, value?: number) => {
   }
 };
 
-const PerformanceMonitor = () => {
+const PerformanceMonitor: React.FC = () => {
   useEffect(() => {
     // Monitor Core Web Vitals in development only
     if (typeof window !== 'undefined' && 'performance' in window && import.meta.env.DEV) {
