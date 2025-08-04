@@ -1,432 +1,340 @@
-import { useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+
+import React, { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useBlog } from '@/context/BlogContext';
-import { blogAuthors } from '@/data/blogData';
-import AdminLayout from '@/layouts/AdminLayout';
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Switch } from '@/components/ui/switch';
-import { Card, CardContent } from '@/components/ui/card';
-import { LocalImageUpload } from '@/components/ui/local-image-upload';
-import { RichTextEditor } from '@/components/ui/rich-text-editor';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import * as z from 'zod';
-import { toast } from "sonner";
-import { Loader2, Save, Eye } from 'lucide-react';
-
-const formSchema = z.object({
-  title: z.string().min(5, "Title must be at least 5 characters"),
-  slug: z.string().min(3, "Slug must be at least 3 characters")
-    .regex(/^[a-z0-9-]+$/, "Slug can only contain lowercase letters, numbers, and hyphens"),
-  excerpt: z.string().min(20, "Excerpt must be at least 20 characters"),
-  content: z.string().min(50, "Content must be at least 50 characters"),
-  category: z.string().min(1, "Please select a category"),
-  author: z.string().min(1, "Please select an author"),
-  publishedDate: z.string().min(1, "Please provide a published date"),
-  readTime: z.string().min(1, "Please provide a read time"),
-  tags: z.string().min(1, "Please provide at least one tag"),
-  isFeatured: z.boolean().default(false),
-  featuredImage: z.string().min(1, "Please provide a featured image"),
-});
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { ArrowLeft, Save } from 'lucide-react';
+import { toast } from 'sonner';
 
 const BlogEditor = () => {
   const { id } = useParams<{ id: string }>();
-  const isEditing = id !== "new" && !!id;
   const navigate = useNavigate();
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  
-  const { addPost, updatePost, getPostById, categories } = useBlog();
-  
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      title: "",
-      slug: "",
-      excerpt: "",
-      content: "",
-      category: "",
-      author: "",
-      publishedDate: new Date().toLocaleDateString('en-US', { 
-        year: 'numeric', 
-        month: 'long', 
-        day: 'numeric' 
-      }),
-      readTime: "5 min read",
-      tags: "",
-      isFeatured: false,
-      featuredImage: "",
-    },
+  const { addPost, updatePost, getPostById, categories, authors } = useBlog();
+  const isEditing = Boolean(id);
+
+  const [formData, setFormData] = useState({
+    title: '',
+    slug: '',
+    excerpt: '',
+    content: '',
+    category_id: '',
+    author_id: '',
+    published_date: '',
+    read_time: '',
+    tags: [] as string[],
+    is_featured: false,
+    featured_image: '',
+    meta_title: '',
+    meta_description: '',
+    status: 'draft' as 'draft' | 'published'
   });
 
-  // Auto-generate slug from title
-  const watchTitle = form.watch('title');
-  useEffect(() => {
-    if (watchTitle && !isEditing) {
-      const slug = watchTitle
-        .toLowerCase()
-        .replace(/[^a-z0-9\s-]/g, '')
-        .replace(/\s+/g, '-')
-        .replace(/-+/g, '-')
-        .trim();
-      form.setValue('slug', slug);
-    }
-  }, [watchTitle, isEditing, form]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (isEditing) {
-      const post = getPostById(Number(id));
+    if (isEditing && id) {
+      const post = getPostById(id);
       if (post) {
-        form.reset({
+        setFormData({
           title: post.title,
           slug: post.slug,
-          excerpt: post.excerpt,
-          content: post.content,
-          category: post.category,
-          author: post.author.name,
-          publishedDate: post.publishedDate,
-          readTime: post.readTime,
-          tags: post.tags.join(", "),
-          isFeatured: post.isFeatured,
-          featuredImage: post.featuredImage,
+          excerpt: post.excerpt || '',
+          content: post.content || '',
+          category_id: post.category_id || '',
+          author_id: post.author_id || '',
+          published_date: post.published_date || '',
+          read_time: post.read_time || '',
+          tags: post.tags?.map(tag => tag.name) || [],
+          is_featured: post.is_featured || false,
+          featured_image: post.featured_image || '',
+          meta_title: post.meta_title || '',
+          meta_description: post.meta_description || '',
+          status: post.status as 'draft' | 'published' || 'draft'
         });
-      } else {
-        toast.error("Blog post not found");
-        navigate("/admin/blogs");
       }
     }
-  }, [isEditing, id, form, getPostById, navigate]);
+  }, [id, isEditing, getPostById]);
 
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
-    setIsSubmitting(true);
-    
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+
     try {
-      const tags = values.tags.split(",").map(tag => tag.trim());
-      const authorObject = blogAuthors.find(
-        author => author.name === values.author
-      ) || blogAuthors[0];
-      
+      const postData = {
+        ...formData,
+        tags: formData.tags
+      };
+
       if (isEditing && id) {
-        const updatedPost = {
-          id: Number(id),
-          title: values.title,
-          slug: values.slug,
-          excerpt: values.excerpt,
-          content: values.content,
-          category: values.category,
-          author: authorObject,
-          publishedDate: values.publishedDate,
-          readTime: values.readTime,
-          tags: tags,
-          isFeatured: values.isFeatured,
-          featuredImage: values.featuredImage,
-        };
-        
-        updatePost(updatedPost);
+        await updatePost(id, postData);
+        toast.success('Post updated successfully');
       } else {
-        const newPost = {
-          title: values.title,
-          slug: values.slug,
-          excerpt: values.excerpt,
-          content: values.content,
-          category: values.category,
-          author: authorObject,
-          publishedDate: values.publishedDate,
-          readTime: values.readTime,
-          tags: tags,
-          isFeatured: values.isFeatured,
-          featuredImage: values.featuredImage,
-        };
-        
-        addPost(newPost);
+        await addPost(postData);
+        toast.success('Post created successfully');
       }
       
-      navigate("/admin/blogs");
+      navigate('/admin/blog');
     } catch (error) {
-      console.error("Error saving blog post:", error);
-      toast.error("Failed to save blog post");
+      console.error('Error saving post:', error);
+      toast.error('Error saving post');
     } finally {
-      setIsSubmitting(false);
+      setLoading(false);
     }
   };
 
-  const handlePreview = () => {
-    const formData = form.getValues();
-    localStorage.setItem('blogPreview', JSON.stringify(formData));
-    window.open('/blog/preview', '_blank');
+  const generateSlug = (title: string) => {
+    return title
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-|-$/g, '');
+  };
+
+  const handleTitleChange = (title: string) => {
+    setFormData(prev => ({
+      ...prev,
+      title,
+      slug: generateSlug(title)
+    }));
   };
 
   return (
-    <AdminLayout>
-      <div className="p-8">
-        <div className="mb-8 flex justify-between items-center">
-          <div>
-            <h1 className="text-3xl font-bold">{isEditing ? "Edit Blog Post" : "Create New Blog Post"}</h1>
-            <p className="text-gray-500">
-              {isEditing ? "Update the existing blog post details below." : "Fill out the form below to create a new blog post."}
-            </p>
+    <div className="container mx-auto px-4 py-8">
+      <div className="mb-6">
+        <Button 
+          variant="ghost" 
+          onClick={() => navigate('/admin/blog')}
+          className="mb-4"
+        >
+          <ArrowLeft className="mr-2 h-4 w-4" />
+          Back to Blog Manager
+        </Button>
+        <h1 className="text-3xl font-bold">
+          {isEditing ? 'Edit Post' : 'Create New Post'}
+        </h1>
+      </div>
+
+      <form onSubmit={handleSubmit} className="space-y-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* Main Content */}
+          <div className="lg:col-span-2 space-y-6">
+            <Card>
+              <CardHeader>
+                <CardTitle>Post Content</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div>
+                  <Label htmlFor="title">Title</Label>
+                  <Input
+                    id="title"
+                    value={formData.title}
+                    onChange={(e) => handleTitleChange(e.target.value)}
+                    placeholder="Enter post title"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <Label htmlFor="slug">Slug</Label>
+                  <Input
+                    id="slug"
+                    value={formData.slug}
+                    onChange={(e) => setFormData(prev => ({ ...prev, slug: e.target.value }))}
+                    placeholder="post-slug"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <Label htmlFor="excerpt">Excerpt</Label>
+                  <Textarea
+                    id="excerpt"
+                    value={formData.excerpt}
+                    onChange={(e) => setFormData(prev => ({ ...prev, excerpt: e.target.value }))}
+                    placeholder="Brief description of the post"
+                    rows={3}
+                  />
+                </div>
+
+                <div>
+                  <Label htmlFor="content">Content</Label>
+                  <Textarea
+                    id="content"
+                    value={formData.content}
+                    onChange={(e) => setFormData(prev => ({ ...prev, content: e.target.value }))}
+                    placeholder="Post content (HTML supported)"
+                    rows={15}
+                    className="font-mono"
+                  />
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle>SEO Settings</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div>
+                  <Label htmlFor="meta_title">Meta Title</Label>
+                  <Input
+                    id="meta_title"
+                    value={formData.meta_title}
+                    onChange={(e) => setFormData(prev => ({ ...prev, meta_title: e.target.value }))}
+                    placeholder="SEO title"
+                  />
+                </div>
+
+                <div>
+                  <Label htmlFor="meta_description">Meta Description</Label>
+                  <Textarea
+                    id="meta_description"
+                    value={formData.meta_description}
+                    onChange={(e) => setFormData(prev => ({ ...prev, meta_description: e.target.value }))}
+                    placeholder="SEO description"
+                    rows={3}
+                  />
+                </div>
+              </CardContent>
+            </Card>
           </div>
-          <Button type="button" variant="outline" onClick={handlePreview}>
-            <Eye className="mr-2 h-4 w-4" />
-            Preview
+
+          {/* Sidebar */}
+          <div className="space-y-6">
+            <Card>
+              <CardHeader>
+                <CardTitle>Post Settings</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div>
+                  <Label htmlFor="category">Category</Label>
+                  <Select
+                    value={formData.category_id}
+                    onValueChange={(value) => setFormData(prev => ({ ...prev, category_id: value }))}
+                  >
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select category" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {categories.map((category) => (
+                        <SelectItem key={category.id} value={category.id}>
+                          {category.name}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                <div>
+                  <Label htmlFor="author">Author</Label>
+                  <Select
+                    value={formData.author_id}
+                    onValueChange={(value) => setFormData(prev => ({ ...prev, author_id: value }))}
+                  >
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select author" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {authors.map((author) => (
+                        <SelectItem key={author.id} value={author.id}>
+                          {author.name}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                <div>
+                  <Label htmlFor="status">Status</Label>
+                  <Select
+                    value={formData.status}
+                    onValueChange={(value: 'draft' | 'published') => setFormData(prev => ({ ...prev, status: value }))}
+                  >
+                    <SelectTrigger>
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="draft">Draft</SelectItem>
+                      <SelectItem value="published">Published</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                <div>
+                  <Label htmlFor="published_date">Published Date</Label>
+                  <Input
+                    id="published_date"
+                    type="datetime-local"
+                    value={formData.published_date}
+                    onChange={(e) => setFormData(prev => ({ ...prev, published_date: e.target.value }))}
+                  />
+                </div>
+
+                <div>
+                  <Label htmlFor="read_time">Read Time</Label>
+                  <Input
+                    id="read_time"
+                    value={formData.read_time}
+                    onChange={(e) => setFormData(prev => ({ ...prev, read_time: e.target.value }))}
+                    placeholder="5 min read"
+                  />
+                </div>
+
+                <div className="flex items-center space-x-2">
+                  <Switch
+                    id="is_featured"
+                    checked={formData.is_featured}
+                    onCheckedChange={(checked) => setFormData(prev => ({ ...prev, is_featured: checked }))}
+                  />
+                  <Label htmlFor="is_featured">Featured Post</Label>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle>Featured Image</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div>
+                  <Label htmlFor="featured_image">Image URL</Label>
+                  <Input
+                    id="featured_image"
+                    value={formData.featured_image}
+                    onChange={(e) => setFormData(prev => ({ ...prev, featured_image: e.target.value }))}
+                    placeholder="https://example.com/image.jpg"
+                  />
+                </div>
+                {formData.featured_image && (
+                  <div className="mt-2">
+                    <img
+                      src={formData.featured_image}
+                      alt="Featured"
+                      className="w-full h-32 object-cover rounded"
+                    />
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+
+        <div className="flex justify-end space-x-4">
+          <Button type="button" variant="outline" onClick={() => navigate('/admin/blog')}>
+            Cancel
+          </Button>
+          <Button type="submit" disabled={loading}>
+            <Save className="mr-2 h-4 w-4" />
+            {loading ? 'Saving...' : 'Save Post'}
           </Button>
         </div>
-        
-        <Card>
-          <CardContent className="p-6">
-            <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <FormField
-                    control={form.control}
-                    name="title"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Title</FormLabel>
-                        <FormControl>
-                          <Input placeholder="Blog post title" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  
-                  <FormField
-                    control={form.control}
-                    name="slug"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Slug</FormLabel>
-                        <FormControl>
-                          <Input placeholder="blog-post-slug" {...field} />
-                        </FormControl>
-                        <FormDescription>Used in the URL, e.g., /blog/blog-post-slug</FormDescription>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
-                
-                <FormField
-                  control={form.control}
-                  name="excerpt"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Excerpt</FormLabel>
-                      <FormControl>
-                        <Textarea 
-                          placeholder="Brief summary of the blog post" 
-                          {...field}
-                          className="resize-none"
-                          rows={2}
-                        />
-                      </FormControl>
-                      <FormDescription>A short description that appears on the blog card</FormDescription>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                
-                <FormField
-                  control={form.control}
-                  name="content"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Content</FormLabel>
-                      <FormControl>
-                        <RichTextEditor
-                          value={field.value}
-                          onChange={field.onChange}
-                          placeholder="Write your blog post content here..."
-                        />
-                      </FormControl>
-                      <FormDescription>
-                        Use markdown syntax for formatting. Supports bold, italic, links, images, and more.
-                      </FormDescription>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <FormField
-                    control={form.control}
-                    name="category"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Category</FormLabel>
-                        <Select 
-                          onValueChange={field.onChange} 
-                          defaultValue={field.value}
-                          value={field.value}
-                        >
-                          <FormControl>
-                            <SelectTrigger>
-                              <SelectValue placeholder="Select a category" />
-                            </SelectTrigger>
-                          </FormControl>
-                          <SelectContent>
-                            {categories.filter(cat => cat.slug !== 'all').map((category) => (
-                              <SelectItem key={category.slug} value={category.name}>
-                                {category.name}
-                              </SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  
-                  <FormField
-                    control={form.control}
-                    name="author"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Author</FormLabel>
-                        <Select 
-                          onValueChange={field.onChange} 
-                          defaultValue={field.value}
-                          value={field.value}
-                        >
-                          <FormControl>
-                            <SelectTrigger>
-                              <SelectValue placeholder="Select an author" />
-                            </SelectTrigger>
-                          </FormControl>
-                          <SelectContent>
-                            {blogAuthors.map((author) => (
-                              <SelectItem key={author.name} value={author.name}>
-                                {author.name}
-                              </SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
-                
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <FormField
-                    control={form.control}
-                    name="publishedDate"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Published Date</FormLabel>
-                        <FormControl>
-                          <Input placeholder="May 10, 2025" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  
-                  <FormField
-                    control={form.control}
-                    name="readTime"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Read Time</FormLabel>
-                        <FormControl>
-                          <Input placeholder="5 min read" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
-                
-                <FormField
-                  control={form.control}
-                  name="tags"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Tags</FormLabel>
-                      <FormControl>
-                        <Input placeholder="Investing, SIP, Mutual Funds" {...field} />
-                      </FormControl>
-                      <FormDescription>Separate tags by commas</FormDescription>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                
-                <FormField
-                  control={form.control}
-                  name="featuredImage"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Featured Image</FormLabel>
-                      <FormControl>
-                        <LocalImageUpload
-                          value={field.value}
-                          onChange={field.onChange}
-                          placeholder="Upload featured image for your blog post"
-                        />
-                      </FormControl>
-                      <FormDescription>
-                        Upload an image or provide a URL. This image will be displayed as the blog post thumbnail.
-                      </FormDescription>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                
-                <FormField
-                  control={form.control}
-                  name="isFeatured"
-                  render={({ field }) => (
-                    <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
-                      <div className="space-y-0.5">
-                        <FormLabel className="text-base">Feature this post</FormLabel>
-                        <FormDescription>
-                          Featured posts will appear at the top of the blog page
-                        </FormDescription>
-                      </div>
-                      <FormControl>
-                        <Switch
-                          checked={field.value}
-                          onCheckedChange={field.onChange}
-                        />
-                      </FormControl>
-                    </FormItem>
-                  )}
-                />
-                
-                <div className="flex justify-end gap-4">
-                  <Button
-                    type="button"
-                    variant="outline"
-                    onClick={() => navigate("/admin/blogs")}
-                    disabled={isSubmitting}
-                  >
-                    Cancel
-                  </Button>
-                  <Button type="submit" disabled={isSubmitting}>
-                    {isSubmitting ? (
-                      <>
-                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                        {isEditing ? "Updating..." : "Creating..."}
-                      </>
-                    ) : (
-                      <>
-                        <Save className="mr-2 h-4 w-4" />
-                        {isEditing ? "Update Post" : "Create Post"}
-                      </>
-                    )}
-                  </Button>
-                </div>
-              </form>
-            </Form>
-          </CardContent>
-        </Card>
-      </div>
-    </AdminLayout>
+      </form>
+    </div>
   );
 };
 

@@ -118,28 +118,59 @@ const BlogPost = () => {
         description={post.meta_description || post.excerpt}
         keywords={post.focus_keywords?.join(', ') || ''}
       />
-      <StructuredData structuredData={structuredData} />
+      <StructuredData data={structuredData} />
       
       <div className="min-h-screen bg-gradient-to-br from-fintech-light via-white to-fintech-light/30">
         <article className="container mx-auto px-4 py-16">
           <div className="max-w-4xl mx-auto">
             <BlogPostHeader 
-              title={post.title}
-              author={post.author}
-              publishedDate={post.published_date}
-              readTime={post.read_time}
-              category={post.category}
-              featuredImage={post.featured_image}
+              post={{
+                title: post.title,
+                author: {
+                  id: post.author?.id || 0,
+                  name: post.author?.name || 'Unknown',
+                  role: post.author?.role || 'Author',
+                  avatar: post.author?.avatar_url || ''
+                },
+                publishedDate: post.published_date || '',
+                readTime: post.read_time || '',
+                category: post.category?.name || '',
+                featuredImage: post.featured_image || '',
+                slug: post.slug,
+                excerpt: post.excerpt || '',
+                content: post.content || '',
+                tags: post.tags?.map(tag => tag.name) || [],
+                isFeatured: post.is_featured || false
+              }}
             />
             
-            <BlogPostContent content={post.content} />
+            <BlogPostContent 
+              post={{
+                title: post.title,
+                author: {
+                  id: post.author?.id || 0,
+                  name: post.author?.name || 'Unknown',
+                  role: post.author?.role || 'Author',
+                  avatar: post.author?.avatar_url || ''
+                },
+                publishedDate: post.published_date || '',
+                readTime: post.read_time || '',
+                category: post.category?.name || '',
+                featuredImage: post.featured_image || '',
+                slug: post.slug,
+                excerpt: post.excerpt || '',
+                content: post.content || '',
+                tags: post.tags?.map(tag => tag.name) || [],
+                isFeatured: post.is_featured || false
+              }}
+            />
             
             <BlogCTA />
           </div>
         </article>
 
         {relatedPosts.length > 0 && (
-          <RelatedArticles posts={relatedPosts} />
+          <RelatedArticles relatedPosts={relatedPosts} />
         )}
       </div>
     </>
