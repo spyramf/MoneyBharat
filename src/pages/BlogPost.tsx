@@ -139,7 +139,7 @@ const BlogPost = () => {
         description={post.meta_description || post.excerpt}
         keywords={post.focus_keywords?.join(', ') || ''}
       />
-      <StructuredData structuredData={structuredData} />
+      <StructuredData data={structuredData} />
       
       <div className="min-h-screen bg-gradient-to-br from-fintech-light via-white to-fintech-light/30">
         <article className="container mx-auto px-4 py-16">
@@ -155,7 +155,7 @@ const BlogPost = () => {
         </article>
 
         {relatedPosts.length > 0 && (
-          <RelatedArticles posts={relatedPosts} />
+          <RelatedArticles relatedPosts={relatedPosts} />
         )}
       </div>
     </>
