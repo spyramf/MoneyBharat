@@ -77,18 +77,38 @@ const BlogEditorForm: React.FC<BlogEditorFormProps> = ({ postId }) => {
     setLoading(true);
     setDataError(null);
     try {
-      console.log('BlogEditorForm: Starting to load categories and authors...');
-      
-      const [categoriesData, authorsData] = await Promise.all([
+      console.log('BlogEditorForm: Starting to load categories and authors (robust mode)...');
+
+      const [categoriesResult, authorsResult] = await Promise.allSettled([
         supabaseBlogService.getAllCategories(),
         supabaseBlogService.getAllAuthors(),
       ]);
-      
-      console.log('BlogEditorForm: Categories loaded:', categoriesData);
-      console.log('BlogEditorForm: Authors loaded:', authorsData);
-      
-      setCategories(categoriesData || []);
-      setAuthors(authorsData || []);
+
+      if (categoriesResult.status === 'fulfilled') {
+        console.log('BlogEditorForm: Categories loaded:', categoriesResult.value?.length ?? 0);
+        setCategories(categoriesResult.value || []);
+      } else {
+        console.error('BlogEditorForm: Failed to load categories:', categoriesResult.reason);
+        setCategories([]);
+        toast.message('Could not load categories. You can still proceed if authors load.');
+      }
+
+      if (authorsResult.status === 'fulfilled') {
+        console.log('BlogEditorForm: Authors loaded:', authorsResult.value?.length ?? 0);
+        setAuthors(authorsResult.value || []);
+      } else {
+        console.error('BlogEditorForm: Failed to load authors:', authorsResult.reason);
+        setAuthors([]);
+        toast.message('Could not load authors. You can still proceed if categories load.');
+      }
+
+      const bothFailed = categoriesResult.status === 'rejected' && authorsResult.status === 'rejected';
+      if (bothFailed) {
+        setDataError('Failed to load categories and authors. Please try refreshing the page.');
+        toast.error('Failed to load categories and authors.');
+      } else {
+        setDataError(null);
+      }
 
       if (postId) {
         const post = await supabaseBlogService.getPostById(postId);
@@ -120,7 +140,7 @@ const BlogEditorForm: React.FC<BlogEditorFormProps> = ({ postId }) => {
         }
       }
     } catch (error) {
-      console.error('BlogEditorForm: Error loading data:', error);
+      console.error('BlogEditorForm: Unexpected error loading data:', error);
       setDataError('Failed to load categories and authors. Please try refreshing the page.');
       toast.error('Error loading data');
     } finally {
