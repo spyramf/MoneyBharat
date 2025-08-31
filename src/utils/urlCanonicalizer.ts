@@ -19,10 +19,42 @@ export class URLCanonicalizer {
   }
 
   /**
+   * Check if we're in an iframe
+   */
+  private isInIframe(): boolean {
+    if (typeof window === 'undefined') return false;
+    try {
+      return window.self !== window.top;
+    } catch {
+      return true; // If we can't access window.top, we're likely in an iframe
+    }
+  }
+
+  /**
+   * Check if current host is allowed for canonicalization
+   */
+  private isAllowedHost(): boolean {
+    if (typeof window === 'undefined') return false;
+    
+    const currentHost = window.location.hostname;
+    const allowedHosts = [
+      this.config.baseUrl,
+      `www.${this.config.baseUrl}`,
+    ];
+    
+    return allowedHosts.includes(currentHost);
+  }
+
+  /**
    * Detect if current URL needs canonicalization
    */
   needsRedirect(): boolean {
     if (typeof window === 'undefined') return false;
+    
+    // Skip redirect if in iframe or not on allowed host
+    if (this.isInIframe() || !this.isAllowedHost()) {
+      return false;
+    }
     
     const currentUrl = window.location.href;
     const canonicalUrl = this.getCanonicalUrl(window.location.pathname);
@@ -56,6 +88,11 @@ export class URLCanonicalizer {
    */
   redirectIfNeeded(): boolean {
     if (!this.needsRedirect()) return false;
+    
+    // Additional safety check
+    if (this.isInIframe() || !this.isAllowedHost()) {
+      return false;
+    }
     
     const canonicalUrl = this.getCanonicalUrl(window.location.pathname + window.location.search);
     

@@ -12,7 +12,23 @@ const URLRedirectHandler = ({
   onRedirect 
 }: URLRedirectHandlerProps) => {
   useEffect(() => {
-    if (!enableRedirect || typeof window === 'undefined') return;
+    // Skip in development or if explicitly disabled
+    if (!enableRedirect || !import.meta.env.PROD || typeof window === 'undefined') {
+      return;
+    }
+    
+    // Additional safety checks - don't redirect if in iframe or localhost
+    const isInIframe = window.self !== window.top;
+    const isLocalhost = window.location.hostname === 'localhost' || 
+                       window.location.hostname === '127.0.0.1' ||
+                       window.location.hostname.includes('lovable.app') ||
+                       window.location.hostname.includes('netlify.app') ||
+                       window.location.hostname.includes('vercel.app');
+    
+    if (isInIframe || isLocalhost) {
+      console.log('Skipping canonicalization - iframe or development environment detected');
+      return;
+    }
     
     // Check if redirect is needed and perform it
     if (needsCanonicalRedirect()) {

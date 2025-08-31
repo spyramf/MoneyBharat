@@ -1,4 +1,3 @@
-
 import { lazy, Suspense } from "react";
 import Navbar from "@/components/Navbar";
 import OptimizedHeroSection from "@/components/OptimizedHeroSection";
@@ -78,8 +77,8 @@ const Index = () => {
 
   return (
     <div className="min-h-screen">
-      {/* Handle URL canonicalization - disabled in development to prevent redirect errors */}
-      <URLRedirectHandler enableRedirect={process.env.NODE_ENV === 'production'} />
+      {/* Handle URL canonicalization - only enable in production */}
+      <URLRedirectHandler enableRedirect={import.meta.env.PROD} />
       
       <SEOHead 
         title="Money Bharat Finance - Mutual Funds, Insurance & Loans"
