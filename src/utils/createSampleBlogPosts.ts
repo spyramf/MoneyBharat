@@ -3,60 +3,113 @@ import { supabaseBlogService } from '@/services/supabaseBlogService';
 
 const samplePosts = [
   {
-    title: "Getting Started with Mutual Fund Investments",
-    slug: "getting-started-mutual-fund-investments",
-    excerpt: "A comprehensive guide to help beginners understand the basics of mutual fund investing and make informed decisions.",
-    content: "# Getting Started with Mutual Fund Investments\n\nMutual funds are one of the most popular investment vehicles for both beginners and experienced investors. This comprehensive guide will walk you through everything you need to know to get started with mutual fund investments.\n\n## What are Mutual Funds?\n\nMutual funds are investment vehicles that pool money from multiple investors to purchase a diversified portfolio of stocks, bonds, or other securities. Professional fund managers make investment decisions on behalf of the investors.\n\n## Benefits of Mutual Fund Investing\n\n1. **Diversification**: Spread risk across multiple securities\n2. **Professional Management**: Experienced fund managers make investment decisions\n3. **Liquidity**: Easy to buy and sell fund shares\n4. **Affordability**: Start investing with small amounts\n\n## Types of Mutual Funds\n\n- **Equity Funds**: Invest primarily in stocks\n- **Debt Funds**: Invest in bonds and fixed-income securities\n- **Hybrid Funds**: Mix of equity and debt investments\n- **Index Funds**: Track a specific market index\n\n## How to Start Investing\n\n1. Assess your risk tolerance\n2. Define your investment goals\n3. Choose the right fund category\n4. Start with SIP (Systematic Investment Plan)\n5. Monitor and review regularly\n\nRemember, mutual fund investments are subject to market risks. Always read the scheme-related documents carefully before investing.",
-    category_id: "", // Will be filled when category exists
-    author_id: "", // Will be filled when author exists
-    status: "published" as const,
+    category_id: '',
+    author_id: '',
+    title: 'Top 10 Mutual Funds to Invest in 2024',
+    slug: 'top-10-mutual-funds-2024',
+    excerpt: 'Discover the best performing mutual funds for 2024 with detailed analysis and expert recommendations.',
+    content: `<h2>Introduction</h2><p>Investing in mutual funds is one of the best ways to build wealth over time. Here are our top picks for 2024.</p>
+
+<h2>1. Large Cap Equity Funds</h2><p>These funds invest in established companies with strong fundamentals...</p>
+
+<h2>2. Mid Cap Growth Funds</h2><p>For investors looking for higher growth potential...</p>`,
+    status: 'published' as const,
     is_featured: true,
-    read_time: "8 min read",
-    featured_image: "/images/blog/mutual-funds-guide.jpg",
-    meta_title: "Mutual Fund Investment Guide for Beginners | Money Bharat",
-    meta_description: "Learn the basics of mutual fund investing with our comprehensive beginner's guide. Understand types, benefits, and how to start investing today.",
-    focus_keywords: ["mutual funds", "investment guide", "SIP", "diversification"],
-    published_date: new Date().toISOString(),
+    read_time: '8 min read',
+    featured_image: '/images/blog/mutual-funds-2024.jpg',
+    meta_title: 'Best Mutual Funds 2024 - Expert Picks & Analysis',
+    meta_description: 'Discover top-performing mutual funds for 2024. Expert analysis, performance data, and investment strategies to maximize returns.',
+    focus_keywords: ['mutual funds 2024', 'best mutual funds', 'investment strategy'],
+    published_date: '2024-01-15',
     seo_score: 85,
+    canonical_url: '/blog/top-10-mutual-funds-2024',
+    robots_directive: 'index, follow',
+    og_title: 'Top 10 Mutual Funds to Invest in 2024',
+    og_description: 'Expert analysis of the best performing mutual funds for 2024 with detailed investment strategies.',
+    og_image: '/images/blog/mutual-funds-2024-og.jpg',
+    twitter_title: 'Top 10 Mutual Funds 2024 - Expert Picks',
+    twitter_description: 'Discover the best mutual funds for 2024 with expert analysis and investment strategies.',
+    twitter_image: '/images/blog/mutual-funds-2024-twitter.jpg',
   },
-  // Add more sample posts as needed...
+  {
+    category_id: '',
+    author_id: '',
+    title: 'SIP vs Lump Sum: Which Investment Strategy is Better?',
+    slug: 'sip-vs-lump-sum-investment-strategy',
+    excerpt: 'A comprehensive comparison between SIP and lump sum investments to help you make the right choice.',
+    content: `<h2>Understanding SIP and Lump Sum</h2><p>Both SIP and lump sum investments have their advantages. Let's explore which might be better for you.</p>
+
+<h2>Benefits of SIP</h2><p>Systematic Investment Plans offer several advantages...</p>
+
+<h2>When to Choose Lump Sum</h2><p>Lump sum investments work best when...</p>`,
+    status: 'published' as const,
+    is_featured: false,
+    read_time: '6 min read',
+    featured_image: '/images/blog/sip-vs-lumpsum.jpg',
+    meta_title: 'SIP vs Lump Sum Investment: Complete Comparison Guide',
+    meta_description: 'Compare SIP and Lump Sum investment strategies. Learn which approach works best for your financial goals and risk profile.',
+    focus_keywords: ['sip vs lump sum', 'investment strategy', 'systematic investment plan'],
+    published_date: '2024-01-20',
+    seo_score: 80,
+    canonical_url: '/blog/sip-vs-lump-sum-investment-strategy',
+    robots_directive: 'index, follow',
+    og_title: 'SIP vs Lump Sum: Which Investment Strategy is Better?',
+    og_description: 'Complete comparison of SIP and Lump Sum investment strategies to help you choose the right approach.',
+    og_image: '/images/blog/sip-vs-lumpsum-og.jpg',
+    twitter_title: 'SIP vs Lump Sum Investment Guide',
+    twitter_description: 'Comprehensive comparison to help you choose between SIP and Lump Sum investments.',
+    twitter_image: '/images/blog/sip-vs-lumpsum-twitter.jpg',
+  }
 ];
 
 export const createSampleBlogPosts = async () => {
   try {
-    console.log('Creating sample blog posts...');
+    // First create sample categories and authors if they don't exist
+    const categories = await supabaseBlogService.getAllCategories();
+    const authors = await supabaseBlogService.getAllAuthors();
     
-    // Get existing categories and authors
-    const [categories, authors] = await Promise.all([
-      supabaseBlogService.getAllCategories(),
-      supabaseBlogService.getAllAuthors()
-    ]);
+    let categoryId = categories[0]?.id;
+    let authorId = authors[0]?.id;
 
-    if (categories.length === 0 || authors.length === 0) {
-      console.log('No categories or authors found. Please create them first.');
-      return;
+    // Create default category if none exists
+    if (!categoryId) {
+      const newCategory = await supabaseBlogService.createCategory({
+        name: 'Investment Guide',
+        slug: 'investment-guide',
+        description: 'Expert guides on investment strategies and financial planning',
+        meta_title: 'Investment Guide - Money Bharat',
+        meta_description: 'Comprehensive investment guides and strategies from Money Bharat experts'
+      });
+      categoryId = newCategory.id;
     }
 
-    const categoryId = categories[0].id;
-    const authorId = authors[0].id;
+    // Create default author if none exists
+    if (!authorId) {
+      const newAuthor = await supabaseBlogService.createAuthor({
+        name: 'Money Bharat Team',
+        email: 'team@moneybharat.co',
+        role: 'Financial Advisor',
+        bio: 'Expert financial advisors with years of experience in mutual funds, insurance, and investment planning.',
+        meta_title: 'Money Bharat Financial Experts',
+        meta_description: 'Meet our team of certified financial advisors and investment experts'
+      });
+      authorId = newAuthor.id;
+    }
 
+    // Create sample posts
     for (const postData of samplePosts) {
-      try {
-        const post = {
-          ...postData,
-          category_id: categoryId,
-          author_id: authorId,
-        };
-        
-        await supabaseBlogService.createPost(post);
-        console.log(`Created post: ${post.title}`);
-      } catch (error) {
-        console.error(`Error creating post ${postData.title}:`, error);
-      }
+      const postWithIds = {
+        ...postData,
+        category_id: categoryId,
+        author_id: authorId
+      };
+      
+      await supabaseBlogService.createPost(postWithIds);
     }
 
-    console.log('Sample blog posts creation completed!');
+    console.log('Sample blog posts created successfully');
   } catch (error) {
     console.error('Error creating sample blog posts:', error);
+    throw error;
   }
 };

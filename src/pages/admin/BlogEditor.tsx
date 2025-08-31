@@ -193,7 +193,7 @@ const BlogEditor = ({ postId }: { postId?: string }) => {
                     <Input id="title" {...field} placeholder="Enter title" />
                   )}
                 />
-                {errors.title && <p className="text-red-500">{errors.title.message}</p>}
+                {errors.title && <p className="text-red-500 text-sm mt-1">{String(errors.title.message)}</p>}
               </div>
               <div>
                 <Label htmlFor="slug">Slug</Label>
@@ -263,7 +263,7 @@ const BlogEditor = ({ postId }: { postId?: string }) => {
                     </Select>
                   )}
                 />
-                {errors.category_id && <p className="text-red-500">{errors.category_id.message}</p>}
+                {errors.category_id && <p className="text-red-500 text-sm mt-1">{String(errors.category_id.message)}</p>}
               </div>
               <div>
                 <Label htmlFor="author_id">Author</Label>
@@ -286,7 +286,7 @@ const BlogEditor = ({ postId }: { postId?: string }) => {
                     </Select>
                   )}
                 />
-                {errors.author_id && <p className="text-red-500">{errors.author_id.message}</p>}
+                {errors.author_id && <p className="text-red-500 text-sm mt-1">{String(errors.author_id.message)}</p>}
               </div>
             </div>
 

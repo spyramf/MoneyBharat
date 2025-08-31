@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
@@ -187,7 +186,7 @@ const SupabaseBlogPost = () => {
                 <SocialShareButtons
                   url={currentUrl}
                   title={post.title}
-                  description={post.excerpt || ''}
+                  text={post.excerpt || ''}
                 />
               </div>
             </div>
@@ -243,8 +242,7 @@ const SupabaseBlogPost = () => {
           {/* Related Articles */}
           {post.category_id && (
             <RelatedArticles 
-              currentPostId={post.id} 
-              categoryId={post.category_id} 
+              relatedPosts={[]} 
             />
           )}
 
