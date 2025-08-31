@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useBlog } from '@/context/BlogContext';
@@ -10,10 +11,11 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Switch } from '@/components/ui/switch';
-import Editor from '@/components/ui/Editor';
+import { RichTextEditor } from '@/components/ui/rich-text-editor';
 import AdminLayout from '@/layouts/AdminLayout';
 import { ArrowLeft, Save, Eye, AlertCircle } from 'lucide-react';
-import { supabaseBlogService } from '@/services/supabaseBlogService';
+import { supabaseBlogService, type SupabaseBlogAuthor } from '@/services/supabaseBlogService';
+import { AddAuthorDialog } from '@/components/cms/AddAuthorDialog';
 
 const BlogEditor = () => {
   const navigate = useNavigate();
@@ -23,6 +25,7 @@ const BlogEditor = () => {
   const [isSaving, setIsSaving] = useState(false);
   const [editingPost, setEditingPost] = useState(null);
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [localAuthors, setLocalAuthors] = useState<SupabaseBlogAuthor[]>([]);
 
   // Form state
   const [title, setTitle] = useState('');
@@ -39,6 +42,13 @@ const BlogEditor = () => {
   const [metaTitle, setMetaTitle] = useState('');
   const [metaDescription, setMetaDescription] = useState('');
   const [focusKeywords, setFocusKeywords] = useState('');
+
+  // Initialize local authors from context
+  useEffect(() => {
+    if (authors) {
+      setLocalAuthors(authors);
+    }
+  }, [authors]);
 
   // Generate slug from title
   const generateSlug = (title: string) => {
@@ -149,6 +159,17 @@ const BlogEditor = () => {
       featured_image: featuredImage,
       canonical_url: `https://moneybharat.co/blog/${slug}`,
     });
+  };
+
+  const handleAuthorCreated = async (newAuthorId: string) => {
+    // Refresh authors list
+    const updatedAuthors = await supabaseBlogService.getAllAuthors();
+    setLocalAuthors(updatedAuthors);
+    setAuthorId(newAuthorId);
+    // Clear author error if it exists
+    if (errors.authorId) {
+      setErrors({ ...errors, authorId: '' });
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -338,9 +359,10 @@ const BlogEditor = () => {
                 </CardHeader>
                 <CardContent>
                   <div className={errors.content ? 'border border-red-300 rounded-md' : ''}>
-                    <Editor 
+                    <RichTextEditor 
                       value={content} 
                       onChange={setContent}
+                      placeholder="Write your blog post content here. Use the toolbar above for formatting options..."
                     />
                   </div>
                   {errors.content && (
@@ -463,7 +485,12 @@ const BlogEditor = () => {
                 <CardContent className="space-y-4">
                   <div>
                     <Label htmlFor="category">Category *</Label>
-                    <Select value={categoryId} onValueChange={setCategoryId}>
+                    <Select value={categoryId} onValueChange={(value) => {
+                      setCategoryId(value);
+                      if (errors.categoryId) {
+                        setErrors({ ...errors, categoryId: '' });
+                      }
+                    }}>
                       <SelectTrigger className={errors.categoryId ? 'border-red-300' : ''}>
                         <SelectValue placeholder="Select a category" />
                       </SelectTrigger>
@@ -484,17 +511,40 @@ const BlogEditor = () => {
                   </div>
 
                   <div>
-                    <Label htmlFor="author">Author *</Label>
-                    <Select value={authorId} onValueChange={setAuthorId}>
+                    <div className="flex items-center justify-between mb-2">
+                      <Label htmlFor="author">Author *</Label>
+                      <AddAuthorDialog onAuthorCreated={handleAuthorCreated} />
+                    </div>
+                    <Select value={authorId} onValueChange={(value) => {
+                      setAuthorId(value);
+                      if (errors.authorId) {
+                        setErrors({ ...errors, authorId: '' });
+                      }
+                    }}>
                       <SelectTrigger className={errors.authorId ? 'border-red-300' : ''}>
-                        <SelectValue placeholder="Select an author" />
+                        <SelectValue placeholder={
+                          localAuthors.length === 0 
+                            ? "No authors available - create one first" 
+                            : "Select an author"
+                        } />
                       </SelectTrigger>
                       <SelectContent>
-                        {authors?.map((author) => (
-                          <SelectItem key={author.id} value={author.id}>
-                            {author.name}
-                          </SelectItem>
-                        ))}
+                        {localAuthors.length === 0 ? (
+                          <div className="p-2 text-sm text-gray-500 text-center">
+                            No authors found. Create one using the "Add Author" button above.
+                          </div>
+                        ) : (
+                          localAuthors.map((author) => (
+                            <SelectItem key={author.id} value={author.id}>
+                              <div className="flex flex-col">
+                                <span>{author.name}</span>
+                                {author.role && (
+                                  <span className="text-xs text-gray-500">{author.role}</span>
+                                )}
+                              </div>
+                            </SelectItem>
+                          ))
+                        )}
                       </SelectContent>
                     </Select>
                     {errors.authorId && (

@@ -1,8 +1,8 @@
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
-import { Bold, Italic, List, Link, Image } from 'lucide-react';
+import { Bold, Italic, List, Link, Image, Code, Quote, Heading1, Heading2 } from 'lucide-react';
 
 interface RichTextEditorProps {
   value: string;
@@ -12,9 +12,10 @@ interface RichTextEditorProps {
 
 export const RichTextEditor = ({ value, onChange, placeholder }: RichTextEditorProps) => {
   const [isPreview, setIsPreview] = useState(false);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   const insertMarkdown = (prefix: string, suffix = '') => {
-    const textarea = document.querySelector('textarea') as HTMLTextAreaElement;
+    const textarea = textareaRef.current;
     if (!textarea) return;
 
     const start = textarea.selectionStart;
@@ -29,82 +30,154 @@ export const RichTextEditor = ({ value, onChange, placeholder }: RichTextEditorP
     // Set cursor position
     setTimeout(() => {
       textarea.focus();
-      textarea.setSelectionRange(start + prefix.length, start + prefix.length + selectedText.length);
+      const newCursorPos = start + prefix.length + selectedText.length;
+      textarea.setSelectionRange(newCursorPos, newCursorPos);
     }, 0);
   };
 
   const formatPreview = (text: string) => {
     return text
+      .replace(/^### (.*$)/gm, '<h3 class="text-lg font-semibold mt-4 mb-2">$1</h3>')
+      .replace(/^## (.*$)/gm, '<h2 class="text-xl font-bold mt-6 mb-3">$1</h2>')
+      .replace(/^# (.*$)/gm, '<h1 class="text-2xl font-bold mt-8 mb-4">$1</h1>')
       .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
       .replace(/\*(.*?)\*/g, '<em>$1</em>')
+      .replace(/`(.*?)`/g, '<code class="bg-gray-100 px-1 rounded">$1</code>')
+      .replace(/^> (.*$)/gm, '<blockquote class="border-l-4 border-gray-300 pl-4 italic">$1</blockquote>')
+      .replace(/^- (.*$)/gm, '<li class="ml-4">$1</li>')
+      .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" class="text-blue-600 underline" target="_blank">$1</a>')
       .replace(/\n/g, '<br />');
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.ctrlKey || e.metaKey) {
+      switch (e.key) {
+        case 'b':
+          e.preventDefault();
+          insertMarkdown('**', '**');
+          break;
+        case 'i':
+          e.preventDefault();
+          insertMarkdown('*', '*');
+          break;
+        case 'k':
+          e.preventDefault();
+          insertMarkdown('[', '](url)');
+          break;
+      }
+    }
+  };
+
   return (
-    <div className="space-y-2">
-      <div className="flex gap-2 mb-2">
+    <div className="space-y-2 border rounded-lg overflow-hidden">
+      <div className="flex gap-1 p-2 bg-gray-50 border-b">
         <Button
           type="button"
-          variant="outline"
+          variant="ghost"
+          size="sm"
+          onClick={() => insertMarkdown('# ')}
+          title="Heading 1"
+        >
+          <Heading1 className="h-4 w-4" />
+        </Button>
+        <Button
+          type="button"
+          variant="ghost"
+          size="sm"
+          onClick={() => insertMarkdown('## ')}
+          title="Heading 2"
+        >
+          <Heading2 className="h-4 w-4" />
+        </Button>
+        <Button
+          type="button"
+          variant="ghost"
           size="sm"
           onClick={() => insertMarkdown('**', '**')}
+          title="Bold (Ctrl+B)"
         >
           <Bold className="h-4 w-4" />
         </Button>
         <Button
           type="button"
-          variant="outline"
+          variant="ghost"
           size="sm"
           onClick={() => insertMarkdown('*', '*')}
+          title="Italic (Ctrl+I)"
         >
           <Italic className="h-4 w-4" />
         </Button>
         <Button
           type="button"
-          variant="outline"
+          variant="ghost"
+          size="sm"
+          onClick={() => insertMarkdown('`', '`')}
+          title="Code"
+        >
+          <Code className="h-4 w-4" />
+        </Button>
+        <Button
+          type="button"
+          variant="ghost"
+          size="sm"
+          onClick={() => insertMarkdown('> ')}
+          title="Quote"
+        >
+          <Quote className="h-4 w-4" />
+        </Button>
+        <Button
+          type="button"
+          variant="ghost"
           size="sm"
           onClick={() => insertMarkdown('- ')}
+          title="List"
         >
           <List className="h-4 w-4" />
         </Button>
         <Button
           type="button"
-          variant="outline"
+          variant="ghost"
           size="sm"
           onClick={() => insertMarkdown('[', '](url)')}
+          title="Link (Ctrl+K)"
         >
           <Link className="h-4 w-4" />
         </Button>
         <Button
           type="button"
-          variant="outline"
+          variant="ghost"
           size="sm"
           onClick={() => insertMarkdown('![alt](', ')')}
+          title="Image"
         >
           <Image className="h-4 w-4" />
         </Button>
-        <Button
-          type="button"
-          variant="outline"
-          size="sm"
-          onClick={() => setIsPreview(!isPreview)}
-        >
-          {isPreview ? 'Edit' : 'Preview'}
-        </Button>
+        <div className="ml-auto">
+          <Button
+            type="button"
+            variant="ghost"
+            size="sm"
+            onClick={() => setIsPreview(!isPreview)}
+          >
+            {isPreview ? 'Edit' : 'Preview'}
+          </Button>
+        </div>
       </div>
       
       {isPreview ? (
         <div 
-          className="min-h-[200px] p-3 border rounded-md prose max-w-none"
+          className="min-h-[300px] p-4 prose max-w-none bg-white"
           dangerouslySetInnerHTML={{ __html: formatPreview(value) }}
         />
       ) : (
         <Textarea
+          ref={textareaRef}
           value={value}
           onChange={(e) => onChange(e.target.value)}
+          onKeyDown={handleKeyDown}
           placeholder={placeholder}
-          className="min-h-[200px] resize-none"
-          rows={10}
+          className="min-h-[300px] resize-none border-0 focus-visible:ring-0 font-mono text-sm"
+          rows={15}
         />
       )}
     </div>

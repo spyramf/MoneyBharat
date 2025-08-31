@@ -261,6 +261,25 @@ class SupabaseBlogService {
     }
   }
 
+  async createAuthor(authorData: Partial<SupabaseBlogAuthor>): Promise<SupabaseBlogAuthor> {
+    const { data, error } = await supabase
+      .from('blog_authors')
+      .insert({
+        ...authorData,
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
+      })
+      .select()
+      .single();
+
+    if (error) {
+      console.error('Error creating author:', error);
+      throw new Error('Failed to create author');
+    }
+
+    return data;
+  }
+
   async getAllCategories(): Promise<SupabaseBlogCategory[]> {
     try {
       const { data, error } = await supabase
