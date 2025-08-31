@@ -2,6 +2,13 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { supabaseBlogService, type SupabaseBlogPost, type SupabaseBlogCategory, type SupabaseBlogAuthor } from '@/services/supabaseBlogService';
 
+export interface Category {
+  id: string;
+  name: string;
+  slug: string;
+  description?: string;
+}
+
 interface BlogContextType {
   posts: SupabaseBlogPost[];
   categories: SupabaseBlogCategory[];
@@ -14,8 +21,8 @@ interface BlogContextType {
   refreshData: () => Promise<void>;
   // Additional methods for admin functionality
   blogPosts: SupabaseBlogPost[];
-  addPost: (post: Partial<SupabaseBlogPost>) => Promise<void>;
-  updatePost: (id: string, post: Partial<SupabaseBlogPost>) => Promise<void>;
+  addPost: (post: Omit<SupabaseBlogPost, 'id' | 'created_at' | 'updated_at' | 'category' | 'author'>) => Promise<void>;
+  updatePost: (id: string, post: Partial<Omit<SupabaseBlogPost, 'id' | 'created_at' | 'updated_at' | 'category' | 'author'>>) => Promise<void>;
   deletePost: (id: string) => Promise<void>;
   getPostById: (id: string) => SupabaseBlogPost | undefined;
   refreshPosts: () => Promise<void>;
@@ -110,7 +117,7 @@ export const BlogProvider: React.FC<BlogProviderProps> = ({ children }) => {
   };
 
   // Admin methods
-  const addPost = async (postData: Partial<SupabaseBlogPost>) => {
+  const addPost = async (postData: Omit<SupabaseBlogPost, 'id' | 'created_at' | 'updated_at' | 'category' | 'author'>) => {
     try {
       const newPost = await supabaseBlogService.createPost(postData);
       setPosts(prev => [newPost, ...prev]);
@@ -120,10 +127,12 @@ export const BlogProvider: React.FC<BlogProviderProps> = ({ children }) => {
     }
   };
 
-  const updatePost = async (id: string, postData: Partial<SupabaseBlogPost>) => {
+  const updatePost = async (id: string, postData: Partial<Omit<SupabaseBlogPost, 'id' | 'created_at' | 'updated_at' | 'category' | 'author'>>) => {
     try {
       const updatedPost = await supabaseBlogService.updatePost(id, postData);
-      setPosts(prev => prev.map(post => post.id === id ? updatedPost : post));
+      if (updatedPost) {
+        setPosts(prev => prev.map(post => post.id === id ? updatedPost : post));
+      }
     } catch (error) {
       console.error('Error updating post:', error);
       throw error;

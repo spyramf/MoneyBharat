@@ -1,5 +1,5 @@
-import { supabase } from '@/lib/supabaseClient';
-import { type Category } from '@/context/BlogContext';
+
+import { supabase } from '@/integrations/supabase/client';
 
 export interface SupabaseBlogCategory {
   id: string;
@@ -14,6 +14,7 @@ export interface SupabaseBlogCategory {
 export interface SupabaseBlogPost {
   id: string;
   created_at: string;
+  updated_at: string;
   title: string;
   slug: string;
   excerpt: string | null;
@@ -24,13 +25,22 @@ export interface SupabaseBlogPost {
   read_time: string | null;
   is_featured: boolean | null;
   featured_image: string | null;
-  status: 'draft' | 'published';
+  status: 'draft' | 'published' | 'archived';
   meta_title: string | null;
   meta_description: string | null;
   focus_keywords: string[] | null;
   seo_score: number | null;
+  canonical_url: string | null;
+  robots_directive: string | null;
+  og_title: string | null;
+  og_description: string | null;
+  og_image: string | null;
+  twitter_title: string | null;
+  twitter_description: string | null;
+  twitter_image: string | null;
   category?: SupabaseBlogCategory | null;
   author?: SupabaseBlogAuthor | null;
+  tags?: SupabaseBlogTag[];
 }
 
 export interface SupabaseBlogAuthor {
@@ -45,6 +55,16 @@ export interface SupabaseBlogAuthor {
   social_links: any | null;
   meta_title: string | null;
   meta_description: string | null;
+}
+
+export interface SupabaseBlogTag {
+  id: string;
+  name: string;
+  slug: string;
+  description: string | null;
+  color: string;
+  created_at: string;
+  updated_at: string;
 }
 
 export interface SEOScoreParams {
@@ -66,9 +86,9 @@ const slugify = (text: string) =>
     .replace(/-+/g, "-");
 
 export const supabaseBlogService = {
-  getAllPosts: async (): Promise<SupabaseBlogPost[]> => {
+  getAllPosts: async (includeAll: boolean = false): Promise<SupabaseBlogPost[]> => {
     try {
-      const { data, error } = await supabase
+      let query = supabase
         .from('blog_posts')
         .select(`
           *,
@@ -77,6 +97,12 @@ export const supabaseBlogService = {
         `)
         .order('created_at', { ascending: false });
 
+      if (!includeAll) {
+        query = query.eq('status', 'published');
+      }
+
+      const { data, error } = await query;
+
       if (error) {
         console.error('Error fetching posts:', error);
         throw error;
@@ -84,6 +110,31 @@ export const supabaseBlogService = {
       return data as SupabaseBlogPost[];
     } catch (error) {
       console.error('Unexpected error fetching posts:', error);
+      throw error;
+    }
+  },
+
+  getFeaturedPosts: async (): Promise<SupabaseBlogPost[]> => {
+    try {
+      const { data, error } = await supabase
+        .from('blog_posts')
+        .select(`
+          *,
+          category:blog_categories(*),
+          author:blog_authors(*)
+        `)
+        .eq('status', 'published')
+        .eq('is_featured', true)
+        .order('created_at', { ascending: false })
+        .limit(6);
+
+      if (error) {
+        console.error('Error fetching featured posts:', error);
+        throw error;
+      }
+      return data as SupabaseBlogPost[];
+    } catch (error) {
+      console.error('Unexpected error fetching featured posts:', error);
       throw error;
     }
   },
@@ -107,6 +158,30 @@ export const supabaseBlogService = {
       return data as SupabaseBlogPost;
     } catch (error) {
       console.error('Unexpected error fetching post by ID:', error);
+      return null;
+    }
+  },
+
+  getPostBySlug: async (slug: string): Promise<SupabaseBlogPost | null> => {
+    try {
+      const { data, error } = await supabase
+        .from('blog_posts')
+        .select(`
+          *,
+          category:blog_categories(*),
+          author:blog_authors(*)
+        `)
+        .eq('slug', slug)
+        .eq('status', 'published')
+        .single();
+
+      if (error) {
+        console.error('Error fetching post by slug:', error);
+        return null;
+      }
+      return data as SupabaseBlogPost;
+    } catch (error) {
+      console.error('Unexpected error fetching post by slug:', error);
       return null;
     }
   },
@@ -180,7 +255,7 @@ export const supabaseBlogService = {
     }
   },
 
-  createPost: async (post: Omit<SupabaseBlogPost, 'id' | 'created_at' | 'category' | 'author'>): Promise<SupabaseBlogPost> => {
+  createPost: async (post: Omit<SupabaseBlogPost, 'id' | 'created_at' | 'updated_at' | 'category' | 'author'>): Promise<SupabaseBlogPost> => {
     try {
       const { data, error } = await supabase
         .from('blog_posts')
@@ -203,7 +278,7 @@ export const supabaseBlogService = {
     }
   },
 
-  updatePost: async (id: string, updates: Partial<Omit<SupabaseBlogPost, 'id' | 'created_at' | 'category' | 'author'>>): Promise<SupabaseBlogPost | null> => {
+  updatePost: async (id: string, updates: Partial<Omit<SupabaseBlogPost, 'id' | 'created_at' | 'updated_at' | 'category' | 'author'>>): Promise<SupabaseBlogPost | null> => {
     try {
       const { data, error } = await supabase
         .from('blog_posts')
@@ -376,27 +451,23 @@ export const supabaseBlogService = {
     }
   },
 
-  // Fixed: ensure required fields (name, slug) are present; remove created_at/updated_at from insert payload.
-  // Also return inserted row with id so the caller can auto-select it.
   createAuthor: async (data: {
     name: string;
     email?: string | null;
     role?: string | null;
     avatar_url?: string | null;
     bio?: string | null;
-    social_links?: any; // keep broad to satisfy Json type in supabase
+    social_links?: any;
     meta_title?: string | null;
     meta_description?: string | null;
     slug?: string;
   }) => {
-    // Validate and prepare required fields
     const name = (data.name ?? "").trim();
     if (!name) {
       throw new Error("Author name is required");
     }
     const slug = (data.slug ?? slugify(name)).trim();
 
-    // Prepare insert payload with only allowed/defined fields
     const payload: Record<string, any> = {
       name,
       slug,
@@ -409,10 +480,8 @@ export const supabaseBlogService = {
     if (data.meta_title) payload.meta_title = data.meta_title;
     if (data.meta_description) payload.meta_description = data.meta_description;
 
-    // Important: Do NOT send created_at or updated_at; let DB defaults handle them.
     const { data: row, error } = await supabase
       .from("blog_authors")
-      // Casting payload to any prevents TS from enforcing generated column types too strictly
       .insert(payload as any)
       .select("*")
       .single();
@@ -459,6 +528,42 @@ export const supabaseBlogService = {
     } catch (error) {
       console.error('Unexpected error deleting author:', error);
       return false;
+    }
+  },
+
+  getAllTags: async (): Promise<SupabaseBlogTag[]> => {
+    try {
+      const { data, error } = await supabase
+        .from('blog_tags')
+        .select('*')
+        .order('name');
+
+      if (error) {
+        console.error('Error fetching tags:', error);
+        throw error;
+      }
+      return data as SupabaseBlogTag[];
+    } catch (error) {
+      console.error('Unexpected error fetching tags:', error);
+      throw error;
+    }
+  },
+
+  trackAnalytics: async (postId: string, metricName: string, metricValue: number = 1) => {
+    try {
+      const { error } = await supabase
+        .from('blog_analytics')
+        .insert({
+          blog_id: postId,
+          metric_name: metricName,
+          metric_value: metricValue,
+        });
+
+      if (error) {
+        console.error('Error tracking analytics:', error);
+      }
+    } catch (error) {
+      console.error('Unexpected error tracking analytics:', error);
     }
   },
 

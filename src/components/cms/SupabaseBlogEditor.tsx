@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { supabaseBlogService, type SupabaseBlogPost, type SupabaseBlogCategory, type SupabaseBlogAuthor, type SupabaseBlogTag } from '@/services/supabaseBlogService';
+import { supabaseBlogService, type SupabaseBlogPost, type SupabaseBlogCategory, type SupabaseBlogAuthor } from '@/services/supabaseBlogService';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -71,8 +71,6 @@ const SupabaseBlogEditor = () => {
 
   const [categories, setCategories] = useState<SupabaseBlogCategory[]>([]);
   const [authors, setAuthors] = useState<SupabaseBlogAuthor[]>([]);
-  const [tags, setTags] = useState<SupabaseBlogTag[]>([]);
-  const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [keywordInput, setKeywordInput] = useState('');
@@ -85,42 +83,42 @@ const SupabaseBlogEditor = () => {
   const loadInitialData = async () => {
     setIsLoading(true);
     try {
-      const [categoriesData, authorsData, tagsData] = await Promise.all([
+      const [categoriesData, authorsData] = await Promise.all([
         supabaseBlogService.getAllCategories(),
-        supabaseBlogService.getAllAuthors(),
-        supabaseBlogService.getAllTags()
+        supabaseBlogService.getAllAuthors()
       ]);
 
       setCategories(categoriesData);
       setAuthors(authorsData);
-      setTags(tagsData);
 
       if (isEditing && id) {
         const post = await supabaseBlogService.getPostById(id);
-        setFormData({
-          title: post.title,
-          slug: post.slug,
-          excerpt: post.excerpt || '',
-          content: post.content,
-          meta_title: post.meta_title || '',
-          meta_description: post.meta_description || '',
-          focus_keywords: post.focus_keywords || [],
-          canonical_url: post.canonical_url || '',
-          robots_directive: post.robots_directive || 'index, follow',
-          og_title: post.og_title || '',
-          og_description: post.og_description || '',
-          og_image: post.og_image || '',
-          twitter_title: post.twitter_title || '',
-          twitter_description: post.twitter_description || '',
-          twitter_image: post.twitter_image || '',
-          featured_image: post.featured_image || '',
-          author_id: post.author_id,
-          category_id: post.category_id,
-          status: post.status as BlogStatus,
-          is_featured: post.is_featured || false,
-          read_time: post.read_time || '5 min read',
-          published_date: post.published_date ? new Date(post.published_date).toISOString().split('T')[0] : new Date().toISOString().split('T')[0],
-        });
+        if (post) {
+          setFormData({
+            title: post.title,
+            slug: post.slug,
+            excerpt: post.excerpt || '',
+            content: post.content || '',
+            meta_title: post.meta_title || '',
+            meta_description: post.meta_description || '',
+            focus_keywords: post.focus_keywords || [],
+            canonical_url: post.canonical_url || '',
+            robots_directive: post.robots_directive || 'index, follow',
+            og_title: post.og_title || '',
+            og_description: post.og_description || '',
+            og_image: post.og_image || '',
+            twitter_title: post.twitter_title || '',
+            twitter_description: post.twitter_description || '',
+            twitter_image: post.twitter_image || '',
+            featured_image: post.featured_image || '',
+            author_id: post.author_id || '',
+            category_id: post.category_id || '',
+            status: post.status as BlogStatus,
+            is_featured: post.is_featured || false,
+            read_time: post.read_time || '5 min read',
+            published_date: post.published_date ? new Date(post.published_date).toISOString().split('T')[0] : new Date().toISOString().split('T')[0],
+          });
+        }
       }
     } catch (error) {
       toast.error('Failed to load data');
@@ -132,7 +130,14 @@ const SupabaseBlogEditor = () => {
 
   // Update SEO score when relevant fields change
   useEffect(() => {
-    const score = supabaseBlogService.calculateSEOScore(formData);
+    const score = supabaseBlogService.calculateSEOScore({
+      title: formData.title,
+      meta_description: formData.meta_description,
+      focus_keywords: formData.focus_keywords,
+      content: formData.content,
+      featured_image: formData.featured_image,
+      canonical_url: formData.canonical_url,
+    });
     setSeoScore(score);
   }, [formData.title, formData.meta_description, formData.focus_keywords, formData.content, formData.featured_image, formData.canonical_url]);
 
