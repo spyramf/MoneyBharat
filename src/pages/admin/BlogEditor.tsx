@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useBlog } from '@/context/BlogContext';
@@ -338,11 +337,12 @@ const BlogEditor = () => {
                   <CardTitle>Content *</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <Editor 
-                    value={content} 
-                    onChange={setContent}
-                    className={errors.content ? 'border-red-300' : ''}
-                  />
+                  <div className={errors.content ? 'border border-red-300 rounded-md' : ''}>
+                    <Editor 
+                      value={content} 
+                      onChange={setContent}
+                    />
+                  </div>
                   {errors.content && (
                     <p className="text-sm text-red-600 mt-1 flex items-center">
                       <AlertCircle className="mr-1 h-3 w-3" />

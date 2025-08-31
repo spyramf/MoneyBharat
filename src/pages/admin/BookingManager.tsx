@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import AdminLayout from '@/layouts/AdminLayout';
 import { Calendar } from '@/components/ui/calendar';
@@ -351,7 +350,7 @@ const BookingManager = () => {
                         <div key={booking.id} className="p-3 rounded-lg bg-gray-50 border text-sm">
                           <div className="flex items-center justify-between mb-2">
                             <span className="font-medium">{booking.time}</span>
-                            <Badge className={getStatusColor(booking.status)} size="sm">
+                            <Badge className={getStatusColor(booking.status)}>
                               {booking.status}
                             </Badge>
                           </div>
