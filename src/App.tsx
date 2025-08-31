@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { HelmetProvider } from 'react-helmet-async';
@@ -27,15 +27,16 @@ import BlogManager from '@/pages/admin/BlogManager';
 import BlogEditor from '@/pages/admin/BlogEditor';
 import BookingManager from '@/pages/admin/BookingManager';
 
-function App() {
-  const [queryClient] = useState(() => new QueryClient({
-    defaultOptions: {
-      queries: {
-        staleTime: 60 * 1000,
-      },
+// Initialize QueryClient once at module scope (no React hook needed)
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 60 * 1000,
     },
-  }));
+  },
+});
 
+function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <HelmetProvider>
