@@ -1,4 +1,3 @@
-
 import { supabase } from '@/integrations/supabase/client';
 
 export interface SupabaseBlogCategory {
@@ -89,7 +88,7 @@ export const supabaseBlogService = {
   getAllPosts: async (includeAll: boolean = false): Promise<SupabaseBlogPost[]> => {
     try {
       let query = supabase
-        .from('blog_posts')
+        .from('blogs')
         .select(`
           *,
           category:blog_categories(*),
@@ -117,7 +116,7 @@ export const supabaseBlogService = {
   getFeaturedPosts: async (): Promise<SupabaseBlogPost[]> => {
     try {
       const { data, error } = await supabase
-        .from('blog_posts')
+        .from('blogs')
         .select(`
           *,
           category:blog_categories(*),
@@ -142,7 +141,7 @@ export const supabaseBlogService = {
   getPostById: async (id: string): Promise<SupabaseBlogPost | null> => {
     try {
       const { data, error } = await supabase
-        .from('blog_posts')
+        .from('blogs')
         .select(`
           *,
           category:blog_categories(*),
@@ -165,7 +164,7 @@ export const supabaseBlogService = {
   getPostBySlug: async (slug: string): Promise<SupabaseBlogPost | null> => {
     try {
       const { data, error } = await supabase
-        .from('blog_posts')
+        .from('blogs')
         .select(`
           *,
           category:blog_categories(*),
@@ -189,7 +188,7 @@ export const supabaseBlogService = {
   getPostsByCategory: async (categoryId: string): Promise<SupabaseBlogPost[]> => {
     try {
       const { data, error } = await supabase
-        .from('blog_posts')
+        .from('blogs')
         .select(`
           *,
           category:blog_categories(*),
@@ -212,7 +211,7 @@ export const supabaseBlogService = {
   getPostsByAuthor: async (authorId: string): Promise<SupabaseBlogPost[]> => {
     try {
       const { data, error } = await supabase
-        .from('blog_posts')
+        .from('blogs')
         .select(`
           *,
           category:blog_categories(*),
@@ -235,7 +234,7 @@ export const supabaseBlogService = {
   getPostsBySearch: async (searchTerm: string): Promise<SupabaseBlogPost[]> => {
     try {
       const { data, error } = await supabase
-        .from('blog_posts')
+        .from('blogs')
         .select(`
           *,
           category:blog_categories(*),
@@ -258,7 +257,7 @@ export const supabaseBlogService = {
   createPost: async (post: Omit<SupabaseBlogPost, 'id' | 'created_at' | 'updated_at' | 'category' | 'author'>): Promise<SupabaseBlogPost> => {
     try {
       const { data, error } = await supabase
-        .from('blog_posts')
+        .from('blogs')
         .insert([post])
         .select(`
           *,
@@ -281,7 +280,7 @@ export const supabaseBlogService = {
   updatePost: async (id: string, updates: Partial<Omit<SupabaseBlogPost, 'id' | 'created_at' | 'updated_at' | 'category' | 'author'>>): Promise<SupabaseBlogPost | null> => {
     try {
       const { data, error } = await supabase
-        .from('blog_posts')
+        .from('blogs')
         .update(updates)
         .eq('id', id)
         .select(`
@@ -305,7 +304,7 @@ export const supabaseBlogService = {
   deletePost: async (id: string): Promise<boolean> => {
     try {
       const { error } = await supabase
-        .from('blog_posts')
+        .from('blogs')
         .delete()
         .eq('id', id);
 

@@ -7,9 +7,9 @@ import { supabaseBlogService, type SupabaseBlogPost } from '@/services/supabaseB
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
-import { SocialShareButtons } from '@/components/ui/SocialShareButtons';
-import { RelatedArticles } from '@/components/blog/RelatedArticles';
-import { BlogCTA } from '@/components/blog/BlogCTA';
+import SocialShareButtons from '@/components/ui/SocialShareButtons';
+import RelatedArticles from '@/components/blog/RelatedArticles';
+import BlogCTA from '@/components/blog/BlogCTA';
 import { getCanonicalUrl, getPageTitle } from '@/utils/seoUtils';
 import { format } from 'date-fns';
 import { toast } from 'sonner';
