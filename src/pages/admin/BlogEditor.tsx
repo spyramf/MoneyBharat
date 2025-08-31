@@ -1,8 +1,6 @@
-
 import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm, Controller } from 'react-hook-form';
-import { Editor } from '@tinymce/tinymce-react';
 import { Calendar } from 'lucide-react';
 import { format, parseISO } from 'date-fns';
 import { DatePicker } from "@/components/ui/date-picker"
@@ -15,6 +13,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Switch } from '@/components/ui/switch';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { RichTextEditor } from '@/components/ui/rich-text-editor';
 import { toast } from 'sonner';
 
 // Helper function to generate URL-friendly slugs
@@ -193,7 +192,7 @@ const BlogEditor = ({ postId }: { postId?: string }) => {
                     <Input id="title" {...field} placeholder="Enter title" />
                   )}
                 />
-                {errors.title && <p className="text-red-500 text-sm mt-1">{String(errors.title.message)}</p>}
+                {errors.title && <p className="text-red-500 text-sm mt-1">{errors.title.message as string}</p>}
               </div>
               <div>
                 <Label htmlFor="slug">Slug</Label>
@@ -220,25 +219,10 @@ const BlogEditor = ({ postId }: { postId?: string }) => {
 
             <div>
               <Label htmlFor="content">Content</Label>
-              <Editor
-                apiKey="60w2qr14y2fs9zorrzxd08r4zq0z8c9zuna0who0fnogn14v"
+              <RichTextEditor
                 value={editorContent}
-                init={{
-                  height: 500,
-                  menubar: true,
-                  plugins: [
-                    'advlist autolink lists link image charmap print preview anchor',
-                    'searchreplace visualblocks code fullscreen',
-                    'insertdatetime media table paste code help wordcount'
-                  ],
-                  toolbar:
-                    'undo redo | formatselect | ' +
-                    'bold italic backcolor | alignleft aligncenter ' +
-                    'alignright alignjustify | bullist numlist outdent indent | ' +
-                    'removeformat | help',
-                  content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
-                }}
-                onEditorChange={handleEditorChange}
+                onChange={handleEditorChange}
+                placeholder="Write your blog post content here..."
               />
             </div>
 
@@ -264,7 +248,7 @@ const BlogEditor = ({ postId }: { postId?: string }) => {
                     </Select>
                   )}
                 />
-                {errors.category_id && <p className="text-red-500 text-sm mt-1">{String(errors.category_id.message)}</p>}
+                {errors.category_id && <p className="text-red-500 text-sm mt-1">{errors.category_id.message as string}</p>}
               </div>
               <div>
                 <Label htmlFor="author_id">Author</Label>
@@ -287,7 +271,7 @@ const BlogEditor = ({ postId }: { postId?: string }) => {
                     </Select>
                   )}
                 />
-                {errors.author_id && <p className="text-red-500 text-sm mt-1">{String(errors.author_id.message)}</p>}
+                {errors.author_id && <p className="text-red-500 text-sm mt-1">{errors.author_id.message as string}</p>}
               </div>
             </div>
 
