@@ -22,6 +22,9 @@ export const CategoryAuthorSection: React.FC<CategoryAuthorSectionProps> = ({
   categories,
   authors,
 }) => {
+  console.log('CategoryAuthorSection - Categories:', categories);
+  console.log('CategoryAuthorSection - Authors:', authors);
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
       <div>
@@ -42,15 +45,19 @@ export const CategoryAuthorSection: React.FC<CategoryAuthorSectionProps> = ({
               <SelectTrigger className="w-full">
                 <SelectValue placeholder="Select a category" />
               </SelectTrigger>
-              <SelectContent className="bg-white z-50">
-                {categories.length > 0 ? (
+              <SelectContent className="bg-white border border-gray-200 shadow-lg z-50 max-h-60 overflow-y-auto">
+                {categories && categories.length > 0 ? (
                   categories.map((category) => (
-                    <SelectItem key={category.id} value={category.id}>
+                    <SelectItem 
+                      key={category.id} 
+                      value={category.id}
+                      className="cursor-pointer hover:bg-gray-100 px-3 py-2"
+                    >
                       {category.name}
                     </SelectItem>
                   ))
                 ) : (
-                  <SelectItem value="no-categories" disabled>
+                  <SelectItem value="no-categories" disabled className="text-gray-500">
                     No categories available
                   </SelectItem>
                 )}
@@ -81,15 +88,19 @@ export const CategoryAuthorSection: React.FC<CategoryAuthorSectionProps> = ({
               <SelectTrigger className="w-full">
                 <SelectValue placeholder="Select an author" />
               </SelectTrigger>
-              <SelectContent className="bg-white z-50">
-                {authors.length > 0 ? (
+              <SelectContent className="bg-white border border-gray-200 shadow-lg z-50 max-h-60 overflow-y-auto">
+                {authors && authors.length > 0 ? (
                   authors.map((author) => (
-                    <SelectItem key={author.id} value={author.id}>
+                    <SelectItem 
+                      key={author.id} 
+                      value={author.id}
+                      className="cursor-pointer hover:bg-gray-100 px-3 py-2"
+                    >
                       {author.name}
                     </SelectItem>
                   ))
                 ) : (
-                  <SelectItem value="no-authors" disabled>
+                  <SelectItem value="no-authors" disabled className="text-gray-500">
                     No authors available
                   </SelectItem>
                 )}

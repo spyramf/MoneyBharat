@@ -26,6 +26,7 @@ const BlogEditorForm: React.FC<BlogEditorFormProps> = ({ postId }) => {
   const [categories, setCategories] = useState<SupabaseBlogCategory[]>([]);
   const [authors, setAuthors] = useState<SupabaseBlogAuthor[]>([]);
   const [loading, setLoading] = useState(true);
+  const [dataError, setDataError] = useState<string | null>(null);
   const [editorContent, setEditorContent] = useState('');
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
   const [hasUserInteracted, setHasUserInteracted] = useState(false);
@@ -72,58 +73,62 @@ const BlogEditorForm: React.FC<BlogEditorFormProps> = ({ postId }) => {
     }
   }, [watchedTitle, setValue, postId]);
 
-  useEffect(() => {
-    const loadData = async () => {
-      setLoading(true);
-      try {
-        const [categoriesData, authorsData] = await Promise.all([
-          supabaseBlogService.getAllCategories(),
-          supabaseBlogService.getAllAuthors(),
-        ]);
-        
-        console.log('Categories loaded:', categoriesData);
-        console.log('Authors loaded:', authorsData);
-        
-        setCategories(categoriesData);
-        setAuthors(authorsData);
+  const loadData = async () => {
+    setLoading(true);
+    setDataError(null);
+    try {
+      console.log('BlogEditorForm: Starting to load categories and authors...');
+      
+      const [categoriesData, authorsData] = await Promise.all([
+        supabaseBlogService.getAllCategories(),
+        supabaseBlogService.getAllAuthors(),
+      ]);
+      
+      console.log('BlogEditorForm: Categories loaded:', categoriesData);
+      console.log('BlogEditorForm: Authors loaded:', authorsData);
+      
+      setCategories(categoriesData || []);
+      setAuthors(authorsData || []);
 
-        if (postId) {
-          const post = await supabaseBlogService.getPostById(postId);
-          if (post) {
-            // Populate form with existing post data
-            setValue('title', post.title);
-            setValue('slug', post.slug);
-            setValue('excerpt', post.excerpt || '');
-            setEditorContent(post.content || '');
-            setValue('category_id', post.category_id || '');
-            setValue('author_id', post.author_id || '');
-            setSelectedDate(post.published_date ? parseISO(post.published_date) : undefined);
-            setValue('published_date', post.published_date ? parseISO(post.published_date) : null);
-            setValue('read_time', post.read_time || '');  
-            setValue('is_featured', post.is_featured || false);
-            setValue('featured_image', post.featured_image || '');
-            setValue('status', post.status);
-            setValue('meta_title', post.meta_title || '');
-            setValue('meta_description', post.meta_description || '');
-            setValue('focus_keywords', post.focus_keywords || []);
-            setValue('canonical_url', post.canonical_url || '');
-            setValue('robots_directive', post.robots_directive || 'index, follow');
-            setValue('og_title', post.og_title || '');
-            setValue('og_description', post.og_description || '');
-            setValue('og_image', post.og_image || '');
-            setValue('twitter_title', post.twitter_title || '');
-            setValue('twitter_description', post.twitter_description || '');
-            setValue('twitter_image', post.twitter_image || '');
-          }
+      if (postId) {
+        const post = await supabaseBlogService.getPostById(postId);
+        if (post) {
+          // Populate form with existing post data
+          setValue('title', post.title);
+          setValue('slug', post.slug);
+          setValue('excerpt', post.excerpt || '');
+          setEditorContent(post.content || '');
+          setValue('category_id', post.category_id || '');
+          setValue('author_id', post.author_id || '');
+          setSelectedDate(post.published_date ? parseISO(post.published_date) : undefined);
+          setValue('published_date', post.published_date ? parseISO(post.published_date) : null);
+          setValue('read_time', post.read_time || '');  
+          setValue('is_featured', post.is_featured || false);
+          setValue('featured_image', post.featured_image || '');
+          setValue('status', post.status);
+          setValue('meta_title', post.meta_title || '');
+          setValue('meta_description', post.meta_description || '');
+          setValue('focus_keywords', post.focus_keywords || []);
+          setValue('canonical_url', post.canonical_url || '');
+          setValue('robots_directive', post.robots_directive || 'index, follow');
+          setValue('og_title', post.og_title || '');
+          setValue('og_description', post.og_description || '');
+          setValue('og_image', post.og_image || '');
+          setValue('twitter_title', post.twitter_title || '');
+          setValue('twitter_description', post.twitter_description || '');
+          setValue('twitter_image', post.twitter_image || '');
         }
-      } catch (error) {
-        console.error('Error loading data:', error);
-        toast.error('Error loading data');
-      } finally {
-        setLoading(false);
       }
-    };
+    } catch (error) {
+      console.error('BlogEditorForm: Error loading data:', error);
+      setDataError('Failed to load categories and authors. Please try refreshing the page.');
+      toast.error('Error loading data');
+    } finally {
+      setLoading(false);
+    }
+  };
 
+  useEffect(() => {
     loadData();
   }, [postId, setValue]);
 
@@ -183,7 +188,27 @@ const BlogEditorForm: React.FC<BlogEditorFormProps> = ({ postId }) => {
   }, []);
 
   if (loading) {
-    return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+          <p>Loading blog editor...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (dataError) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <p className="text-red-600 mb-4">{dataError}</p>
+          <Button onClick={loadData} variant="outline">
+            Try Again
+          </Button>
+        </div>
+      </div>
+    );
   }
 
   return (
