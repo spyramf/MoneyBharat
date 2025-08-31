@@ -1,4 +1,3 @@
-
 import { supabase } from '@/integrations/supabase/client';
 import { Database } from '@/integrations/supabase/types';
 
@@ -16,57 +15,113 @@ export type BlogPostInsert = Database['public']['Tables']['blogs']['Insert'];
 export type BlogPostUpdate = Database['public']['Tables']['blogs']['Update'];
 
 class SupabaseBlogService {
-  async getAllPosts(status?: string): Promise<SupabaseBlogPost[]> {
-    let query = supabase
-      .from('blogs')
-      .select(`
-        *,
-        author:blog_authors(*),
-        category:blog_categories(*),
-        tags:blog_post_tags(blog_tags(*))
-      `);
+  async getAllPosts(includeAllStatuses: boolean = false): Promise<SupabaseBlogPost[]> {
+    try {
+      // First, try to get posts with all relations
+      let query = supabase
+        .from('blogs')
+        .select(`
+          *,
+          author:blog_authors(*),
+          category:blog_categories(*),
+          tags:blog_post_tags(blog_tags(*))
+        `);
 
-    if (status) {
-      query = query.eq('status', status);
-    } else {
-      query = query.eq('status', 'published');
+      // If we're not including all statuses, filter to published only
+      if (!includeAllStatuses) {
+        query = query.eq('status', 'published');
+      }
+
+      const { data, error } = await query.order('created_at', { ascending: false });
+
+      if (error) {
+        console.error('Error fetching blog posts with relations:', error);
+        
+        // Fallback: Try to get posts without author relation if it fails
+        const fallbackQuery = supabase
+          .from('blogs')
+          .select(`
+            *,
+            category:blog_categories(*),
+            tags:blog_post_tags(blog_tags(*))
+          `);
+
+        if (!includeAllStatuses) {
+          fallbackQuery.eq('status', 'published');
+        }
+
+        const { data: fallbackData, error: fallbackError } = await fallbackQuery.order('created_at', { ascending: false });
+
+        if (fallbackError) {
+          console.error('Fallback query also failed:', fallbackError);
+          throw new Error('Failed to fetch blog posts');
+        }
+
+        return fallbackData?.map(post => ({
+          ...post,
+          author: null, // Set author to null if we can't fetch it
+          tags: post.tags?.map((tagRelation: any) => tagRelation.blog_tags) || []
+        })) || [];
+      }
+
+      return data?.map(post => ({
+        ...post,
+        tags: post.tags?.map((tagRelation: any) => tagRelation.blog_tags) || []
+      })) || [];
+    } catch (error) {
+      console.error('Error in getAllPosts:', error);
+      throw error;
     }
-
-    const { data, error } = await query.order('published_date', { ascending: false });
-
-    if (error) {
-      console.error('Error fetching blog posts:', error);
-      throw new Error('Failed to fetch blog posts');
-    }
-
-    return data?.map(post => ({
-      ...post,
-      tags: post.tags?.map((tagRelation: any) => tagRelation.blog_tags) || []
-    })) || [];
   }
 
   async getFeaturedPosts(): Promise<SupabaseBlogPost[]> {
-    const { data, error } = await supabase
-      .from('blogs')
-      .select(`
-        *,
-        author:blog_authors(*),
-        category:blog_categories(*),
-        tags:blog_post_tags(blog_tags(*))
-      `)
-      .eq('status', 'published')
-      .eq('is_featured', true)
-      .order('published_date', { ascending: false });
+    try {
+      const { data, error } = await supabase
+        .from('blogs')
+        .select(`
+          *,
+          author:blog_authors(*),
+          category:blog_categories(*),
+          tags:blog_post_tags(blog_tags(*))
+        `)
+        .eq('status', 'published')
+        .eq('is_featured', true)
+        .order('published_date', { ascending: false });
 
-    if (error) {
-      console.error('Error fetching featured posts:', error);
-      throw new Error('Failed to fetch featured posts');
+      if (error) {
+        console.error('Error fetching featured posts:', error);
+        
+        // Fallback without author relation
+        const { data: fallbackData, error: fallbackError } = await supabase
+          .from('blogs')
+          .select(`
+            *,
+            category:blog_categories(*),
+            tags:blog_post_tags(blog_tags(*))
+          `)
+          .eq('status', 'published')
+          .eq('is_featured', true)
+          .order('published_date', { ascending: false });
+
+        if (fallbackError) {
+          throw new Error('Failed to fetch featured posts');
+        }
+
+        return fallbackData?.map(post => ({
+          ...post,
+          author: null,
+          tags: post.tags?.map((tagRelation: any) => tagRelation.blog_tags) || []
+        })) || [];
+      }
+
+      return data?.map(post => ({
+        ...post,
+        tags: post.tags?.map((tagRelation: any) => tagRelation.blog_tags) || []
+      })) || [];
+    } catch (error) {
+      console.error('Error in getFeaturedPosts:', error);
+      throw error;
     }
-
-    return data?.map(post => ({
-      ...post,
-      tags: post.tags?.map((tagRelation: any) => tagRelation.blog_tags) || []
-    })) || [];
   }
 
   async getPostsByCategory(categorySlug: string): Promise<SupabaseBlogPost[]> {
@@ -207,45 +262,60 @@ class SupabaseBlogService {
   }
 
   async getAllCategories(): Promise<SupabaseBlogCategory[]> {
-    const { data, error } = await supabase
-      .from('blog_categories')
-      .select('*')
-      .order('name');
+    try {
+      const { data, error } = await supabase
+        .from('blog_categories')
+        .select('*')
+        .order('name');
 
-    if (error) {
-      console.error('Error fetching categories:', error);
-      throw new Error('Failed to fetch categories');
+      if (error) {
+        console.error('Error fetching categories:', error);
+        return []; // Return empty array instead of throwing
+      }
+
+      return data || [];
+    } catch (error) {
+      console.error('Error in getAllCategories:', error);
+      return [];
     }
-
-    return data || [];
   }
 
   async getAllAuthors(): Promise<SupabaseBlogAuthor[]> {
-    const { data, error } = await supabase
-      .from('blog_authors')
-      .select('*')
-      .order('name');
+    try {
+      const { data, error } = await supabase
+        .from('blog_authors')
+        .select('*')
+        .order('name');
 
-    if (error) {
-      console.error('Error fetching authors:', error);
-      throw new Error('Failed to fetch authors');
+      if (error) {
+        console.error('Error fetching authors:', error);
+        return []; // Return empty array instead of throwing
+      }
+
+      return data || [];
+    } catch (error) {
+      console.error('Error in getAllAuthors:', error);
+      return [];
     }
-
-    return data || [];
   }
 
   async getAllTags(): Promise<SupabaseBlogTag[]> {
-    const { data, error } = await supabase
-      .from('blog_tags')
-      .select('*')
-      .order('name');
+    try {
+      const { data, error } = await supabase
+        .from('blog_tags')
+        .select('*')
+        .order('name');
 
-    if (error) {
-      console.error('Error fetching tags:', error);
-      throw new Error('Failed to fetch tags');
+      if (error) {
+        console.error('Error fetching tags:', error);
+        return [];
+      }
+
+      return data || [];
+    } catch (error) {
+      console.error('Error in getAllTags:', error);
+      return [];
     }
-
-    return data || [];
   }
 
   calculateSEOScore(post: Partial<SupabaseBlogPost>): number {

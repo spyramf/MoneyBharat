@@ -39,17 +39,49 @@ export const BlogProvider: React.FC<BlogProviderProps> = ({ children }) => {
       setIsLoading(true);
       setError(null);
       
-      const [postsData, categoriesData, authorsData] = await Promise.all([
-        supabaseBlogService.getAllPosts(),
+      console.log('BlogContext: Starting to load data...');
+      
+      // Load all data with error handling for each
+      const [postsData, categoriesData, authorsData] = await Promise.allSettled([
+        supabaseBlogService.getAllPosts(true), // Include all statuses for admin
         supabaseBlogService.getAllCategories(),
         supabaseBlogService.getAllAuthors()
       ]);
 
-      setPosts(postsData);
-      setCategories(categoriesData);
-      setAuthors(authorsData);
+      // Handle posts result
+      if (postsData.status === 'fulfilled') {
+        console.log('BlogContext: Posts loaded successfully:', postsData.value.length);
+        setPosts(postsData.value);
+      } else {
+        console.error('BlogContext: Failed to load posts:', postsData.reason);
+        setPosts([]);
+      }
+
+      // Handle categories result
+      if (categoriesData.status === 'fulfilled') {
+        console.log('BlogContext: Categories loaded successfully:', categoriesData.value.length);
+        setCategories(categoriesData.value);
+      } else {
+        console.error('BlogContext: Failed to load categories:', categoriesData.reason);
+        setCategories([]);
+      }
+
+      // Handle authors result
+      if (authorsData.status === 'fulfilled') {
+        console.log('BlogContext: Authors loaded successfully:', authorsData.value.length);
+        setAuthors(authorsData.value);
+      } else {
+        console.error('BlogContext: Failed to load authors:', authorsData.reason);
+        setAuthors([]);
+      }
+
+      // Only set error if ALL requests failed
+      if (postsData.status === 'rejected' && categoriesData.status === 'rejected' && authorsData.status === 'rejected') {
+        setError('Failed to load blog data');
+      }
+
     } catch (err) {
-      console.error('Error loading blog data:', err);
+      console.error('BlogContext: Error loading blog data:', err);
       setError('Failed to load blog data');
     } finally {
       setIsLoading(false);
@@ -127,7 +159,7 @@ export const BlogProvider: React.FC<BlogProviderProps> = ({ children }) => {
     getPostsByCategory,
     refreshData,
     // Admin methods
-    blogPosts: posts,
+    blogPosts: posts, // All posts for admin
     addPost,
     updatePost,
     deletePost,
