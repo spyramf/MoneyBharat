@@ -7,7 +7,7 @@ export type Json =
   | Json[]
 
 export type Database = {
-  // Allows to automatically instanciate createClient with right options
+  // Allows to automatically instantiate createClient with right options
   // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
   __InternalSupabase: {
     PostgrestVersion: "12.2.12 (cd3cf9e)"
@@ -322,6 +322,13 @@ export type Database = {
             foreignKeyName: "blogs_author_id_fkey"
             columns: ["author_id"]
             isOneToOne: false
+            referencedRelation: "author_profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "blogs_author_id_fkey"
+            columns: ["author_id"]
+            isOneToOne: false
             referencedRelation: "blog_authors"
             referencedColumns: ["id"]
           },
@@ -373,6 +380,27 @@ export type Database = {
         }
         Relationships: []
       }
+      bse_token_store: {
+        Row: {
+          access_token: string
+          expires_at: string
+          tenant_id: string
+          updated_at: string
+        }
+        Insert: {
+          access_token: string
+          expires_at: string
+          tenant_id: string
+          updated_at?: string
+        }
+        Update: {
+          access_token?: string
+          expires_at?: string
+          tenant_id?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       business_metrics: {
         Row: {
           branch_id: string | null
@@ -417,17 +445,74 @@ export type Database = {
       }
     }
     Views: {
-      [_ in never]: never
+      author_profiles: {
+        Row: {
+          avatar_url: string | null
+          bio: string | null
+          created_at: string | null
+          id: string | null
+          meta_description: string | null
+          meta_title: string | null
+          name: string | null
+          role: string | null
+          slug: string | null
+          social_links: Json | null
+          updated_at: string | null
+        }
+        Insert: {
+          avatar_url?: string | null
+          bio?: string | null
+          created_at?: string | null
+          id?: string | null
+          meta_description?: string | null
+          meta_title?: string | null
+          name?: string | null
+          role?: string | null
+          slug?: string | null
+          social_links?: Json | null
+          updated_at?: string | null
+        }
+        Update: {
+          avatar_url?: string | null
+          bio?: string | null
+          created_at?: string | null
+          id?: string | null
+          meta_description?: string | null
+          meta_title?: string | null
+          name?: string | null
+          role?: string | null
+          slug?: string | null
+          social_links?: Json | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
+      get_author_info: {
+        Args: { author_id: string }
+        Returns: {
+          avatar_url: string
+          bio: string
+          created_at: string
+          id: string
+          meta_description: string
+          meta_title: string
+          name: string
+          role: string
+          slug: string
+          social_links: Json
+          updated_at: string
+        }[]
+      }
       get_user_role: {
         Args: Record<PropertyKey, never> | { _user_id: string }
         Returns: string
       }
       has_role: {
         Args:
-          | { _user_id: string; _role: Database["public"]["Enums"]["app_role"] }
-          | { user_id: number; role_name: string }
+          | { _role: Database["public"]["Enums"]["app_role"]; _user_id: string }
+          | { role_name: string; user_id: number }
         Returns: boolean
       }
     }
