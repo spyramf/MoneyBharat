@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm, Controller } from 'react-hook-form';
@@ -131,19 +132,18 @@ const BlogEditor = ({ postId }: { postId?: string }) => {
         is_featured: formData.is_featured,
         featured_image: formData.featured_image || null,
         status: formData.status,
-        meta_title: formData.meta_title,
+        meta_title: formData.meta_title || formData.title,
         meta_description: formData.meta_description,
         focus_keywords: formData.focus_keywords,
         seo_score: 0,
-        // Add all the new required SEO fields
-        canonical_url: null,
-        robots_directive: 'index, follow',
-        og_title: null,
-        og_description: null,
-        og_image: null,
-        twitter_title: null,
-        twitter_description: null,
-        twitter_image: null,
+        canonical_url: formData.canonical_url || null,
+        robots_directive: formData.robots_directive || 'index, follow',
+        og_title: formData.og_title || formData.title,
+        og_description: formData.og_description || formData.meta_description,
+        og_image: formData.og_image || null,
+        twitter_title: formData.twitter_title || formData.title,
+        twitter_description: formData.twitter_description || formData.meta_description,
+        twitter_image: formData.twitter_image || null,
       };
 
       if (postId) {
@@ -221,7 +221,7 @@ const BlogEditor = ({ postId }: { postId?: string }) => {
             <div>
               <Label htmlFor="content">Content</Label>
               <Editor
-                apiKey="YOUR_TINYMCE_API_KEY"
+                apiKey="60w2qr14y2fs9zorrzxd08r4zq0z8c9zuna0who0fnogn14v"
                 value={editorContent}
                 init={{
                   height: 500,
@@ -235,7 +235,8 @@ const BlogEditor = ({ postId }: { postId?: string }) => {
                     'undo redo | formatselect | ' +
                     'bold italic backcolor | alignleft aligncenter ' +
                     'alignright alignjustify | bullist numlist outdent indent | ' +
-                    'removeformat | help'
+                    'removeformat | help',
+                  content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
                 }}
                 onEditorChange={handleEditorChange}
               />
