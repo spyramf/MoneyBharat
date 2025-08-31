@@ -28,13 +28,16 @@ const BlogEditor = ({ postId }: { postId?: string }) => {
   const [loading, setLoading] = useState(true);
   const [editorContent, setEditorContent] = useState('');
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
+  const [hasUserInteracted, setHasUserInteracted] = useState(false);
 
   const {
     control,
     handleSubmit,
     setValue,
+    watch,
     formState: { errors },
   } = useForm<any>({
+    mode: 'onBlur', // Only validate on blur instead of onChange
     defaultValues: {
       title: '',
       slug: '',
@@ -60,6 +63,14 @@ const BlogEditor = ({ postId }: { postId?: string }) => {
       twitter_image: '',
     },
   });
+
+  // Watch title changes to auto-generate slug
+  const watchedTitle = watch('title');
+  useEffect(() => {
+    if (watchedTitle && !postId) {
+      setValue('slug', generateSlug(watchedTitle));
+    }
+  }, [watchedTitle, setValue, postId]);
 
   useEffect(() => {
     const loadData = async () => {
@@ -113,6 +124,8 @@ const BlogEditor = ({ postId }: { postId?: string }) => {
   }, [postId, setValue]);
 
   const onSubmit = async (formData: any) => {
+    setHasUserInteracted(true);
+    
     try {
       setLoading(true);
 
@@ -121,7 +134,7 @@ const BlogEditor = ({ postId }: { postId?: string }) => {
 
       const postData = {
         title: formData.title,
-        slug: generateSlug(formData.title),
+        slug: formData.slug || generateSlug(formData.title),
         excerpt: formData.excerpt,
         content: editorContent,
         category_id: formData.category_id,
@@ -183,16 +196,23 @@ const BlogEditor = ({ postId }: { postId?: string }) => {
           <form onSubmit={handleSubmit(onSubmit)} className="grid gap-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <Label htmlFor="title">Title</Label>
+                <Label htmlFor="title">Title *</Label>
                 <Controller
                   name="title"
                   control={control}
                   rules={{ required: 'Title is required' }}
                   render={({ field }) => (
-                    <Input id="title" {...field} placeholder="Enter title" />
+                    <Input 
+                      id="title" 
+                      {...field} 
+                      placeholder="Enter title"
+                      onBlur={() => setHasUserInteracted(true)}
+                    />
                   )}
                 />
-                {errors.title && <p className="text-red-500 text-sm mt-1">{errors.title.message as string}</p>}
+                {hasUserInteracted && errors.title && (
+                  <p className="text-red-500 text-sm mt-1">{errors.title.message as string}</p>
+                )}
               </div>
               <div>
                 <Label htmlFor="slug">Slug</Label>
@@ -200,7 +220,7 @@ const BlogEditor = ({ postId }: { postId?: string }) => {
                   name="slug"
                   control={control}
                   render={({ field }) => (
-                    <Input id="slug" {...field} placeholder="Enter slug" disabled />
+                    <Input id="slug" {...field} placeholder="Auto-generated from title" />
                   )}
                 />
               </div>
@@ -228,13 +248,19 @@ const BlogEditor = ({ postId }: { postId?: string }) => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <Label htmlFor="category_id">Category</Label>
+                <Label htmlFor="category_id">Category *</Label>
                 <Controller
                   name="category_id"
                   control={control}
                   rules={{ required: 'Category is required' }}
                   render={({ field }) => (
-                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                    <Select 
+                      onValueChange={(value) => {
+                        field.onChange(value);
+                        setHasUserInteracted(true);
+                      }} 
+                      value={field.value}
+                    >
                       <SelectTrigger className="w-full">
                         <SelectValue placeholder="Select a category" />
                       </SelectTrigger>
@@ -248,16 +274,24 @@ const BlogEditor = ({ postId }: { postId?: string }) => {
                     </Select>
                   )}
                 />
-                {errors.category_id && <p className="text-red-500 text-sm mt-1">{errors.category_id.message as string}</p>}
+                {hasUserInteracted && errors.category_id && (
+                  <p className="text-red-500 text-sm mt-1">{errors.category_id.message as string}</p>
+                )}
               </div>
               <div>
-                <Label htmlFor="author_id">Author</Label>
+                <Label htmlFor="author_id">Author *</Label>
                 <Controller
                   name="author_id"
                   control={control}
                   rules={{ required: 'Author is required' }}
                   render={({ field }) => (
-                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                    <Select 
+                      onValueChange={(value) => {
+                        field.onChange(value);
+                        setHasUserInteracted(true);
+                      }} 
+                      value={field.value}
+                    >
                       <SelectTrigger className="w-full">
                         <SelectValue placeholder="Select an author" />
                       </SelectTrigger>
@@ -271,7 +305,9 @@ const BlogEditor = ({ postId }: { postId?: string }) => {
                     </Select>
                   )}
                 />
-                {errors.author_id && <p className="text-red-500 text-sm mt-1">{errors.author_id.message as string}</p>}
+                {hasUserInteracted && errors.author_id && (
+                  <p className="text-red-500 text-sm mt-1">{errors.author_id.message as string}</p>
+                )}
               </div>
             </div>
 
@@ -291,7 +327,7 @@ const BlogEditor = ({ postId }: { postId?: string }) => {
                       selected={selectedDate}
                       onSelect={(date) => {
                         setSelectedDate(date);
-                        field.onChange(date); // Update the form value
+                        field.onChange(date);
                       }}
                       placeholder="Select date"
                     />
@@ -342,7 +378,7 @@ const BlogEditor = ({ postId }: { postId?: string }) => {
                 name="status"
                 control={control}
                 render={({ field }) => (
-                  <Select onValueChange={field.onChange} defaultValue={field.value}>
+                  <Select onValueChange={field.onChange} value={field.value}>
                     <SelectTrigger className="w-full">
                       <SelectValue placeholder="Select status" />
                     </SelectTrigger>
@@ -356,42 +392,55 @@ const BlogEditor = ({ postId }: { postId?: string }) => {
               />
             </div>
 
-            <h2>SEO Settings</h2>
-            <div>
-              <Label htmlFor="meta_title">Meta Title</Label>
-              <Controller
-                name="meta_title"
-                control={control}
-                render={({ field }) => (
-                  <Input id="meta_title" {...field} placeholder="Enter meta title" />
-                )}
-              />
-            </div>
-            <div>
-              <Label htmlFor="meta_description">Meta Description</Label>
-              <Controller
-                name="meta_description"
-                control={control}
-                render={({ field }) => (
-                  <Textarea id="meta_description" {...field} placeholder="Enter meta description" />
-                )}
-              />
-            </div>
-             <div>
-              <Label htmlFor="focus_keywords">Focus Keywords</Label>
-              <Controller
-                name="focus_keywords"
-                control={control}
-                render={({ field }) => (
-                  <Input id="focus_keywords" {...field} placeholder="Enter focus keywords" />
-                )}
-              />
+            <div className="border-t pt-6">
+              <h3 className="text-lg font-semibold mb-4">SEO Settings</h3>
+              <div className="grid gap-4">
+                <div>
+                  <Label htmlFor="meta_title">Meta Title</Label>
+                  <Controller
+                    name="meta_title"
+                    control={control}
+                    render={({ field }) => (
+                      <Input id="meta_title" {...field} placeholder="Enter meta title (defaults to post title)" />
+                    )}
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="meta_description">Meta Description</Label>
+                  <Controller
+                    name="meta_description"
+                    control={control}
+                    render={({ field }) => (
+                      <Textarea id="meta_description" {...field} placeholder="Enter meta description" />
+                    )}
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="focus_keywords">Focus Keywords</Label>
+                  <Controller
+                    name="focus_keywords"
+                    control={control}
+                    render={({ field }) => (
+                      <Input id="focus_keywords" {...field} placeholder="Enter focus keywords (comma-separated)" />
+                    )}
+                  />
+                </div>
+              </div>
             </div>
 
-            <CardFooter>
-              <Button type="submit" disabled={loading}>
-                {loading ? 'Saving...' : 'Save Post'}
-              </Button>
+            <CardFooter className="px-0">
+              <div className="flex gap-2">
+                <Button 
+                  type="button" 
+                  variant="outline" 
+                  onClick={() => navigate('/admin/blog')}
+                >
+                  Cancel
+                </Button>
+                <Button type="submit" disabled={loading}>
+                  {loading ? 'Saving...' : postId ? 'Update Post' : 'Create Post'}
+                </Button>
+              </div>
             </CardFooter>
           </form>
         </CardContent>
