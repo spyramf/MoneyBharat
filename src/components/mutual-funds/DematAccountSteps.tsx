@@ -33,10 +33,8 @@ const DematAccountSteps = ({ steps }: DematAccountStepsProps) => {
             {steps.map((step, index) => (
               <div
                 key={index}
-                className="bg-white border border-gray-200 rounded-xl p-6 shadow-md hover:shadow-xl transition-all duration-300 relative overflow-hidden animate-fade-in"
-                style={{
-                  animationDelay: `${index * 200}ms`
-                }}
+                className="card-step card-fade-in"
+                style={{ "--animation-delay": `${index * 200}ms` } as React.CSSProperties}
               >
                 <div className="flex flex-col items-center text-center">
                   <div className="relative mb-4">

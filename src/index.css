@@ -113,6 +113,77 @@
     animation: fadeIn 0.6s ease-out forwards;
     animation-fill-mode: both;
   }
+
+  /* Progress Bar Classes */
+  .progress-bar-primary {
+    @apply h-full bg-primary transition-all;
+    transform: var(--progress-transform, translateX(-100%));
+  }
+
+  .progress-bar-invested {
+    @apply h-full bg-fintech-purple;
+    width: var(--progress-width, 0%);
+  }
+
+  .progress-bar-interest {
+    @apply h-full bg-fintech-blue;
+    width: var(--progress-width, 0%);
+  }
+
+  .progress-bar-loan {
+    @apply h-full bg-fintech-purple;
+    width: var(--progress-width, 0%);
+  }
+
+  .progress-bar-completion {
+    @apply h-full bg-gradient-to-r from-fintech-green to-fintech-blue rounded-full;
+    width: var(--progress-width, 0%);
+  }
+
+  /* Bank/Institution Avatar Classes */
+  .bank-avatar {
+    @apply w-10 h-10 rounded-full flex items-center justify-center mr-3 text-white font-bold;
+    background-color: var(--bank-color, #6366f1);
+  }
+
+  .bank-avatar-1 { --bank-color: #6366f1; }
+  .bank-avatar-2 { --bank-color: #8b5cf6; }
+  .bank-avatar-3 { --bank-color: #0369a1; }
+  .bank-avatar-4 { --bank-color: #14b8a6; }
+  .bank-avatar-5 { --bank-color: #f59e0b; }
+
+  /* Card Animation Classes */
+  .card-fade-in {
+    @apply animate-fade-in;
+    animation-delay: var(--animation-delay, 0ms);
+  }
+
+  .card-feature {
+    @apply bg-white border border-gray-100 rounded-xl p-6 shadow-md hover:shadow-lg hover:border-fintech-purple/30 transition-all duration-300;
+  }
+
+  .card-step {
+    @apply bg-white border border-gray-200 rounded-xl p-6 shadow-md hover:shadow-xl transition-all duration-300 relative overflow-hidden;
+  }
+
+  .card-benefit {
+    @apply bg-white backdrop-blur-sm border border-gray-200 p-6 rounded-xl transform transition-all duration-300 hover:-translate-y-1 hover:shadow-xl;
+  }
+
+  .card-fund-category {
+    @apply p-8 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 h-full;
+  }
+
+  /* Sidebar Styles */
+  .sidebar-skeleton {
+    --skeleton-width: var(--skeleton-width, 100%);
+    width: var(--skeleton-width);
+  }
+
+  /* Chart Color Variables */
+  .chart-item {
+    background-color: var(--chart-color, currentColor);
+  }
   
   @keyframes fadeIn {
     from {
@@ -126,7 +197,8 @@
   }
   
   @media (prefers-reduced-motion: reduce) {
-    .animate-fade-in {
+    .animate-fade-in,
+    .card-fade-in {
       animation: none;
     }
   }

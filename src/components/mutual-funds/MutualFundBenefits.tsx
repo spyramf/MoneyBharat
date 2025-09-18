@@ -27,10 +27,8 @@ const MutualFundBenefits = ({ benefits }: MutualFundBenefitsProps) => {
           {benefits.map((benefit, index) => (
             <div
               key={index}
-              className="bg-white backdrop-blur-sm border border-gray-200 p-6 rounded-xl transform transition-all duration-300 hover:-translate-y-1 hover:shadow-xl animate-fade-in"
-              style={{
-                animationDelay: `${index * 150}ms`
-              }}
+              className="card-benefit card-fade-in"
+              style={{ "--animation-delay": `${index * 150}ms` } as React.CSSProperties}
             >
               <div className="flex items-center mb-4">
                 {benefit.icon}

@@ -30,10 +30,8 @@ const AdditionalFeatures = ({ features }: AdditionalFeaturesProps) => {
             {features.map((feature, index) => (
               <div
                 key={index}
-                className="bg-white border border-gray-100 rounded-xl p-6 shadow-md hover:shadow-lg hover:border-fintech-purple/30 transition-all duration-300 animate-fade-in"
-                style={{
-                  animationDelay: `${index * 100}ms`
-                }}
+                className="card-feature card-fade-in"
+                style={{ "--animation-delay": `${index * 100}ms` } as React.CSSProperties}
               >
                 <div className="flex flex-col items-center text-center gap-4">
                   <div className="relative">

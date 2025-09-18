@@ -361,8 +361,8 @@ const EmiCalculator = () => {
                             </div>
                             <div className="h-2 w-full bg-gray-100 rounded-full overflow-hidden">
                               <div 
-                                className="h-full bg-fintech-purple" 
-                                style={{ width: `${(form.watch("loanAmount") / totalAmount) * 100}%` }}
+                                className="progress-bar-loan" 
+                                style={{ "--progress-width": `${(form.watch("loanAmount") / totalAmount) * 100}%` } as React.CSSProperties}
                               ></div>
                             </div>
                           </div>
@@ -374,8 +374,8 @@ const EmiCalculator = () => {
                             </div>
                             <div className="h-2 w-full bg-gray-100 rounded-full overflow-hidden">
                               <div 
-                                className="h-full bg-fintech-blue" 
-                                style={{ width: `${(totalInterest / totalAmount) * 100}%` }}
+                                className="progress-bar-interest" 
+                                style={{ "--progress-width": `${(totalInterest / totalAmount) * 100}%` } as React.CSSProperties}
                               ></div>
                             </div>
                           </div>

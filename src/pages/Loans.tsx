@@ -455,12 +455,11 @@ const Loans = () => {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {loanComparisons.map((bank, index) => <TableRow key={index} className={`border-b border-gray-200 hover:bg-gray-50/70 transition-colors ${index % 2 === 0 ? 'bg-white' : 'bg-gray-50/50'}`}>
+                  {loanComparisons.map((bank, index) => (
+                    <TableRow key={index} className={`border-b border-gray-200 hover:bg-gray-50/70 transition-colors ${index % 2 === 0 ? 'bg-white' : 'bg-gray-50/50'}`}>
                       <TableCell className="py-4 px-6">
                         <div className="flex items-center">
-                          <div className="w-10 h-10 bg-fintech-purple/10 rounded-full flex items-center justify-center mr-3 text-white font-bold" style={{
-                        backgroundColor: index === 0 ? "#6366f1" : index === 1 ? "#8b5cf6" : index === 2 ? "#0369a1" : index === 3 ? "#14b8a6" : "#f59e0b"
-                      }}>
+                          <div className={`bank-avatar bank-avatar-${(index % 5) + 1}`}>
                             {bank.bank.charAt(0)}
                           </div>
                           <div>
@@ -489,7 +488,8 @@ const Loans = () => {
                           Apply
                         </Button>
                       </TableCell>
-                    </TableRow>)}
+                    </TableRow>
+                  ))}
                 </TableBody>
               </Table>
             </div>

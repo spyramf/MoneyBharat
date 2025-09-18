@@ -270,8 +270,8 @@ const SipCalculator = () => {
                       </div>
                       <div className="h-2 w-full bg-gray-100 rounded-full overflow-hidden">
                         <div 
-                          className="h-full bg-fintech-purple" 
-                          style={{ width: `${(investedAmount / totalValue) * 100}%` }}
+                          className="progress-bar-invested" 
+                          style={{ "--progress-width": `${(investedAmount / totalValue) * 100}%` } as React.CSSProperties}
                         ></div>
                       </div>
                       <div className="flex justify-between text-xs mt-1">

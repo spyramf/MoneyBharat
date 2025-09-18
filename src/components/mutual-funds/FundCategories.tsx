@@ -32,10 +32,8 @@ const FundCategories = ({ categories }: FundCategoriesProps) => {
           {categories.map((fund, index) => (
             <div
               key={index}
-              className={`${fund.bgColor} p-8 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 animate-fade-in h-full`}
-              style={{
-                animationDelay: `${index * 150}ms`
-              }}
+              className={`${fund.bgColor} card-fund-category card-fade-in`}
+              style={{ "--animation-delay": `${index * 150}ms` } as React.CSSProperties}
             >
               <div className="flex justify-center mb-6">
                 <div className={`w-16 h-16 rounded-full flex items-center justify-center ${fund.iconBg}`}>

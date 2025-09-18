@@ -121,9 +121,7 @@ const EnhancedHeroSection = () => {
                         <span className="font-medium">₹8.2L</span>
                       </div>
                       <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
-                        <div className="h-full bg-gradient-to-r from-fintech-green to-fintech-blue rounded-full" style={{
-                        width: "82%"
-                      }}></div>
+                        <div className="progress-bar-completion" style={{ "--progress-width": "82%" } as React.CSSProperties}></div>
                       </div>
                       <div className="flex justify-between text-xs text-gray-600 mt-1">
                         <span>Target: ₹10L</span>
