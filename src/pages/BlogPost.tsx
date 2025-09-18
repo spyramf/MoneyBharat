@@ -80,11 +80,13 @@ const BlogPost = () => {
       <SEOHead
         title={post.meta_title || post.title}
         description={post.meta_description || post.excerpt}
-        canonical={`https://moneybharat.in/blog/${post.slug}`}
-        ogImage={post.featured_image}
-        ogType="article"
+        image={post.featured_image}
+        type="article"
+        publishedTime={post.published_at || post.created_at}
+        modifiedTime={post.updated_at}
+        author={author?.name}
       />
-      <StructuredData data={structuredData} />
+      <StructuredData structuredData={structuredData} />
       
       <article className="container mx-auto px-4 py-8">
         <div className="max-w-4xl mx-auto">
@@ -181,7 +183,8 @@ const BlogPost = () => {
             <SocialShareButtons
               url={`https://moneybharat.in/blog/${post.slug}`}
               title={post.title}
-              description={post.excerpt || ''}
+              text={post.excerpt || ''}
+              showText
             />
           </div>
 
