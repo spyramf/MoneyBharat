@@ -1,14 +1,11 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { ArrowLeft, Calendar, Clock, User, Tag, Share2 } from 'lucide-react';
+import { ArrowLeft, Calendar, Clock, User, Tag } from 'lucide-react';
 import { useBlog } from '@/context/BlogContext';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
-import SEOHead from '@/components/seo/SEOHead';
-import StructuredData from '@/components/seo/StructuredData';
-import SocialShareButtons from '@/components/ui/SocialShareButtons';
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -49,44 +46,15 @@ const BlogPost = () => {
     });
   };
 
-  const structuredData = {
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    "headline": post.title,
-    "description": post.excerpt,
-    "image": post.featured_image,
-    "author": {
-      "@type": "Person",
-      "name": author?.name || "Unknown Author"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "MoneyBharat",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "https://moneybharat.in/logo.png"
-      }
-    },
-    "datePublished": post.published_at || post.created_at,
-    "dateModified": post.updated_at,
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": `https://moneybharat.in/blog/${post.slug}`
-    }
-  };
-
   return (
     <>
-      <SEOHead
-        title={post.meta_title || post.title}
-        description={post.meta_description || post.excerpt}
-        image={post.featured_image}
-        type="article"
-        publishedTime={post.published_at || post.created_at}
-        modifiedTime={post.updated_at}
-        author={author?.name}
-      />
-      <StructuredData structuredData={structuredData} />
+      {/* Basic SEO Meta Tags */}
+      <title>{post.meta_title || post.title}</title>
+      <meta name="description" content={post.meta_description || post.excerpt} />
+      <meta property="og:title" content={post.title} />
+      <meta property="og:description" content={post.excerpt || ''} />
+      <meta property="og:image" content={post.featured_image || ''} />
+      <meta property="og:type" content="article" />
       
       <article className="container mx-auto px-4 py-8">
         <div className="max-w-4xl mx-auto">
@@ -173,20 +141,6 @@ const BlogPost = () => {
               </div>
             </div>
           )}
-
-          {/* Social Share */}
-          <div className="mb-12">
-            <h3 className="font-semibold mb-3 flex items-center gap-2">
-              <Share2 className="h-4 w-4" />
-              Share this article
-            </h3>
-            <SocialShareButtons
-              url={`https://moneybharat.in/blog/${post.slug}`}
-              title={post.title}
-              text={post.excerpt || ''}
-              showText
-            />
-          </div>
 
           {/* Related Posts */}
           {relatedPosts.length > 0 && (
