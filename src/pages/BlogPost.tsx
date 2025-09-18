@@ -6,9 +6,9 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
-import { SEOHead } from '@/components/seo/SEOHead';
-import { StructuredData } from '@/components/seo/StructuredData';
-import { SocialShareButtons } from '@/components/ui/SocialShareButtons';
+import SEOHead from '@/components/seo/SEOHead';
+import StructuredData from '@/components/seo/StructuredData';
+import SocialShareButtons from '@/components/ui/SocialShareButtons';
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
