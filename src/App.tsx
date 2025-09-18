@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -44,212 +43,213 @@ import BlogDashboard from '@/pages/admin/BlogDashboard';
 import BlogEditor from '@/pages/admin/BlogEditor';
 import BookingManager from '@/pages/admin/BookingManager';
 
-// Initialize QueryClient once at module scope (no React hook needed)
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      staleTime: 60 * 1000,
-    },
-  },
-});
+// Initialize QueryClient with simpler config
+const queryClient = new QueryClient();
 
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <HelmetProvider>
-        <BrowserRouter>
-          <AuthProvider>
-            <BlogProvider>
-              <BookingProvider>
-                <ScrollToTop />
-                <PerformanceMonitor />
-                <div className="min-h-screen bg-white">
-                  <Routes>
-                    {/* Public Routes */}
-                    <Route path="/" element={
-                      <MainLayout>
-                        <Index />
-                      </MainLayout>
-                    } />
-                    <Route path="/about" element={
-                      <MainLayout>
-                        <AboutUs />
-                      </MainLayout>
-                    } />
-                    <Route path="/contact" element={
-                      <MainLayout>
-                        <Contact />
-                      </MainLayout>
-                    } />
-                    <Route path="/blog" element={
-                      <MainLayout>
-                        <Blog />
-                      </MainLayout>
-                    } />
+    <React.StrictMode>
+      <QueryClientProvider client={queryClient}>
+        <HelmetProvider>
+          <BrowserRouter>
+            <AuthProvider>
+              <BlogProvider>
+                <BookingProvider>
+                  <ScrollToTop />
+                  <PerformanceMonitor />
+                  <div className="min-h-screen bg-white">
+                    <Routes>
+                      {/* Public Routes */}
+                      <Route path="/" element={
+                        <MainLayout>
+                          <Index />
+                        </MainLayout>
+                      } />
+                      <Route path="/about" element={
+                        <MainLayout>
+                          <AboutUs />
+                        </MainLayout>
+                      } />
+                      <Route path="/contact" element={
+                        <MainLayout>
+                          <Contact />
+                        </MainLayout>
+                      } />
+                      <Route path="/blog" element={
+                        <MainLayout>
+                          <Blog />
+                        </MainLayout>
+                      } />
 
-                    {/* Financial Services */}
-                    <Route path="/mutual-funds" element={
-                      <MainLayout>
-                        <MutualFunds />
-                      </MainLayout>
-                    } />
-                    <Route path="/insurance" element={
-                      <MainLayout>
-                        <Insurance />
-                      </MainLayout>
-                    } />
-                    <Route path="/health-insurance" element={
-                      <MainLayout>
-                        <HealthInsurance />
-                      </MainLayout>
-                    } />
-                    <Route path="/term-insurance" element={
-                      <MainLayout>
-                        <TermInsurance />
-                      </MainLayout>
-                    } />
-                    <Route path="/vehicle-insurance" element={
-                      <MainLayout>
-                        <VehicleInsurance />
-                      </MainLayout>
-                    } />
-                    <Route path="/loans" element={
-                      <MainLayout>
-                        <Loans />
-                      </MainLayout>
-                    } />
-                    <Route path="/loans/personal" element={
-                      <MainLayout>
-                        <PersonalLoan />
-                      </MainLayout>
-                    } />
-                    <Route path="/loans/home" element={
-                      <MainLayout>
-                        <HomeLoan />
-                      </MainLayout>
-                    } />
-                    <Route path="/loans/car" element={
-                      <MainLayout>
-                        <CarLoan />
-                      </MainLayout>
-                    } />
-                    <Route path="/loans/business" element={
-                      <MainLayout>
-                        <BusinessLoan />
-                      </MainLayout>
-                    } />
-                    <Route path="/loans/education" element={
-                      <MainLayout>
-                        <EducationLoan />
-                      </MainLayout>
-                    } />
-                    <Route path="/loans/mutual-funds" element={
-                      <MainLayout>
-                        <LoanAgainstMutualFunds />
-                      </MainLayout>
-                    } />
+                      {/* Financial Services */}
+                      <Route path="/mutual-funds" element={
+                        <MainLayout>
+                          <MutualFunds />
+                        </MainLayout>
+                      } />
+                      <Route path="/insurance" element={
+                        <MainLayout>
+                          <Insurance />
+                        </MainLayout>
+                      } />
+                      <Route path="/health-insurance" element={
+                        <MainLayout>
+                          <HealthInsurance />
+                        </MainLayout>
+                      } />
+                      <Route path="/term-insurance" element={
+                        <MainLayout>
+                          <TermInsurance />
+                        </MainLayout>
+                      } />
+                      <Route path="/vehicle-insurance" element={
+                        <MainLayout>
+                          <VehicleInsurance />
+                        </MainLayout>
+                      } />
+                      <Route path="/loans" element={
+                        <MainLayout>
+                          <Loans />
+                        </MainLayout>
+                      } />
+                      <Route path="/loans/personal" element={
+                        <MainLayout>
+                          <PersonalLoan />
+                        </MainLayout>
+                      } />
+                      <Route path="/loans/home" element={
+                        <MainLayout>
+                          <HomeLoan />
+                        </MainLayout>
+                      } />
+                      <Route path="/loans/car" element={
+                        <MainLayout>
+                          <CarLoan />
+                        </MainLayout>
+                      } />
+                      <Route path="/loans/business" element={
+                        <MainLayout>
+                          <BusinessLoan />
+                        </MainLayout>
+                      } />
+                      <Route path="/loans/education" element={
+                        <MainLayout>
+                          <EducationLoan />
+                        </MainLayout>
+                      } />
+                      <Route path="/loans/mutual-funds" element={
+                        <MainLayout>
+                          <LoanAgainstMutualFunds />
+                        </MainLayout>
+                      } />
 
-                    {/* Calculators */}
-                    <Route path="/calculators/sip" element={
-                      <MainLayout>
-                        <SipCalculator />
-                      </MainLayout>
-                    } />
-                    <Route path="/calculators/emi" element={
-                      <MainLayout>
-                        <EmiCalculator />
-                      </MainLayout>
-                    } />
-                    <Route path="/tax-saving" element={
-                      <MainLayout>
-                        <TaxSaving />
-                      </MainLayout>
-                    } />
+                      {/* Calculators */}
+                      <Route path="/calculators/sip" element={
+                        <MainLayout>
+                          <SipCalculator />
+                        </MainLayout>
+                      } />
+                      <Route path="/calculators/emi" element={
+                        <MainLayout>
+                          <EmiCalculator />
+                        </MainLayout>
+                      } />
+                      <Route path="/tax-saving" element={
+                        <MainLayout>
+                          <TaxSaving />
+                        </MainLayout>
+                      } />
 
-                    {/* Other Pages */}
-                    <Route path="/booking" element={
-                      <MainLayout>
-                        <Booking />
-                      </MainLayout>
-                    } />
-                    <Route path="/privacy-policy" element={
-                      <MainLayout>
-                        <PrivacyPolicy />
-                      </MainLayout>
-                    } />
-                    <Route path="/terms-of-service" element={
-                      <MainLayout>
-                        <TermsOfService />
-                      </MainLayout>
-                    } />
+                      {/* Other Pages */}
+                      <Route path="/booking" element={
+                        <MainLayout>
+                          <Booking />
+                        </MainLayout>
+                      } />
+                      <Route path="/privacy-policy" element={
+                        <MainLayout>
+                          <PrivacyPolicy />
+                        </MainLayout>
+                      } />
+                      <Route path="/terms-of-service" element={
+                        <MainLayout>
+                          <TermsOfService />
+                        </MainLayout>
+                      } />
 
-                    {/* Admin Login - Public */}
-                    <Route path="/admin/login" element={<AdminLogin />} />
+                      {/* Admin Login - Public */}
+                      <Route path="/admin/login" element={<AdminLogin />} />
 
-                    {/* Protected Admin Routes */}
-                    <Route path="/admin" element={
-                      <ProtectedAdminRoute>
-                        <Dashboard />
-                      </ProtectedAdminRoute>
-                    } />
-                    
-                    <Route path="/admin/dashboard" element={
-                      <ProtectedAdminRoute>
-                        <Dashboard />
-                      </ProtectedAdminRoute>
-                    } />
-                    
-                    <Route path="/admin/blog" element={
-                      <ProtectedAdminRoute>
-                        <BlogDashboard />
-                      </ProtectedAdminRoute>
-                    } />
+                      {/* Protected Admin Routes */}
+                      <Route path="/admin" element={
+                        <ProtectedAdminRoute>
+                          <Dashboard />
+                        </ProtectedAdminRoute>
+                      } />
+                      
+                      <Route path="/admin/dashboard" element={
+                        <ProtectedAdminRoute>
+                          <Dashboard />
+                        </ProtectedAdminRoute>
+                      } />
+                      
+                      <Route path="/admin/blog" element={
+                        <ProtectedAdminRoute>
+                          <BlogDashboard />
+                        </ProtectedAdminRoute>
+                      } />
 
-                    <Route path="/admin/blogs/new" element={
-                      <ProtectedAdminRoute>
-                        <BlogEditor />
-                      </ProtectedAdminRoute>
-                    } />
+                      <Route path="/admin/blogs/new" element={
+                        <ProtectedAdminRoute>
+                          <BlogEditor />
+                        </ProtectedAdminRoute>
+                      } />
 
-                    <Route path="/admin/blog/new" element={
-                      <ProtectedAdminRoute>
-                        <BlogEditor />
-                      </ProtectedAdminRoute>
-                    } />
+                      <Route path="/admin/blog/new" element={
+                        <ProtectedAdminRoute>
+                          <BlogEditor />
+                        </ProtectedAdminRoute>
+                      } />
 
-                    <Route path="/admin/blogs/edit/:id" element={
-                      <ProtectedAdminRoute>
-                        <BlogEditor />
-                      </ProtectedAdminRoute>
-                    } />
+                      <Route path="/admin/blogs/edit/:id" element={
+                        <ProtectedAdminRoute>
+                          <BlogEditor />
+                        </ProtectedAdminRoute>
+                      } />
 
-                    <Route path="/admin/blog/edit/:id" element={
-                      <ProtectedAdminRoute>
-                        <BlogEditor />
-                      </ProtectedAdminRoute>
-                    } />
+                      <Route path="/admin/blog/edit/:id" element={
+                        <ProtectedAdminRoute>
+                          <BlogEditor />
+                        </ProtectedAdminRoute>
+                      } />
 
-                    <Route path="/admin/bookings" element={
-                      <ProtectedAdminRoute>
-                        <BookingManager />
-                      </ProtectedAdminRoute>
-                    } />
+                      <Route path="/admin/bookings" element={
+                        <ProtectedAdminRoute>
+                          <BookingManager />
+                        </ProtectedAdminRoute>
+                      } />
 
-                    {/* Catch All Route */}
-                    <Route path="*" element={
-                      <MainLayout>
-                        <NotFound />
-                      </MainLayout>
-                    } />
-                  </Routes>
-                </div>
-                <Toaster />
-              </BookingProvider>
-            </BlogProvider>
-          </AuthProvider>
-        </BrowserRouter>
-      </HelmetProvider>
-    </QueryClientProvider>
+                      {/* Catch All Route */}
+                      <Route path="*" element={
+                        <MainLayout>
+                          <NotFound />
+                        </MainLayout>
+                      } />
+                    </Routes>
+                  </div>
+                  <Toaster 
+                    position="top-right"
+                    richColors
+                    closeButton
+                    duration={5000}
+                  />
+                </BookingProvider>
+              </BlogProvider>
+            </AuthProvider>
+          </BrowserRouter>
+        </HelmetProvider>
+      </QueryClientProvider>
+    </React.StrictMode>
   );
 }
 
