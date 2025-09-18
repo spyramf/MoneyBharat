@@ -536,17 +536,8 @@ export const supabaseBlogService = {
 
   trackAnalytics: async (postId: string, metricName: string, metricValue: number = 1) => {
     try {
-      const { error } = await supabase
-        .from('blog_analytics')
-        .insert({
-          blog_id: postId,
-          metric_name: metricName,
-          metric_value: metricValue,
-        });
-
-      if (error) {
-        console.error('Error tracking analytics:', error);
-      }
+      // Analytics tracking is disabled for now
+      console.log(`Analytics: ${metricName} for post ${postId}: ${metricValue}`);
     } catch (error) {
       console.error('Unexpected error tracking analytics:', error);
     }

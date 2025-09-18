@@ -12,8 +12,8 @@ interface BlogPostCardProps {
 }
 
 export const BlogPostCard: React.FC<BlogPostCardProps> = ({ post, featured = false }) => {
-  const formattedDate = post.published_date 
-    ? new Date(post.published_date).toLocaleDateString('en-US', {
+  const formattedDate = post.published_at 
+    ? new Date(post.published_at).toLocaleDateString('en-US', {
         year: 'numeric',
         month: 'long',
         day: 'numeric'
@@ -79,16 +79,7 @@ export const BlogPostCard: React.FC<BlogPostCardProps> = ({ post, featured = fal
           {post.read_time && (
             <div className="flex items-center gap-1">
               <Clock className="w-3 h-3" />
-              {post.read_time}
-            </div>
-          )}
-          
-          {post.seo_score && (
-            <div className={`flex items-center gap-1 ${
-              post.seo_score >= 80 ? 'text-green-600' : 
-              post.seo_score >= 60 ? 'text-yellow-600' : 'text-red-600'
-            }`}>
-              SEO: {post.seo_score}/100
+              {post.read_time} min read
             </div>
           )}
         </div>

@@ -140,7 +140,7 @@ const Dashboard = () => {
                             <Badge className="bg-yellow-100 text-yellow-800">Featured</Badge>
                           )}
                           <span className="text-sm text-gray-500">
-                            {post.published_date ? format(new Date(post.published_date), 'MMM dd') : 'Not published'}
+                            {post.published_at ? format(new Date(post.published_at), 'MMM dd') : 'Not published'}
                           </span>
                         </div>
                       </div>

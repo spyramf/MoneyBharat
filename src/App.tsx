@@ -17,8 +17,7 @@ import Index from '@/pages/Index';
 import AboutUs from '@/pages/AboutUs';
 import Contact from '@/pages/Contact';
 import NotFound from '@/pages/NotFound';
-import BlogPost from '@/pages/BlogPost';
-import SupabaseBlog from '@/pages/SupabaseBlog';
+import Blog from '@/pages/Blog';
 import MutualFunds from '@/pages/MutualFunds';
 import Insurance from '@/pages/Insurance';
 import HealthInsurance from '@/pages/HealthInsurance';
@@ -41,7 +40,7 @@ import TermsOfService from '@/pages/TermsOfService';
 // Admin Pages
 import AdminLogin from '@/pages/admin/AdminLogin';
 import Dashboard from '@/pages/admin/Dashboard';
-import BlogManager from '@/pages/admin/BlogManager';
+import BlogDashboard from '@/pages/admin/BlogDashboard';
 import BlogEditor from '@/pages/admin/BlogEditor';
 import BookingManager from '@/pages/admin/BookingManager';
 
@@ -84,12 +83,7 @@ function App() {
                     } />
                     <Route path="/blog" element={
                       <MainLayout>
-                        <SupabaseBlog />
-                      </MainLayout>
-                    } />
-                    <Route path="/blog/:slug" element={
-                      <MainLayout>
-                        <BlogPost />
+                        <Blog />
                       </MainLayout>
                     } />
 
@@ -205,9 +199,9 @@ function App() {
                       </ProtectedAdminRoute>
                     } />
                     
-                    <Route path="/admin/blogs" element={
+                    <Route path="/admin/blog" element={
                       <ProtectedAdminRoute>
-                        <BlogManager />
+                        <BlogDashboard />
                       </ProtectedAdminRoute>
                     } />
 
