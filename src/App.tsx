@@ -19,6 +19,24 @@ import Contact from '@/pages/Contact';
 import NotFound from '@/pages/NotFound';
 import BlogPost from '@/pages/BlogPost';
 import SupabaseBlog from '@/pages/SupabaseBlog';
+import MutualFunds from '@/pages/MutualFunds';
+import Insurance from '@/pages/Insurance';
+import HealthInsurance from '@/pages/HealthInsurance';
+import TermInsurance from '@/pages/TermInsurance';
+import VehicleInsurance from '@/pages/VehicleInsurance';
+import Loans from '@/pages/Loans';
+import PersonalLoan from '@/pages/PersonalLoan';
+import HomeLoan from '@/pages/HomeLoan';
+import CarLoan from '@/pages/CarLoan';
+import BusinessLoan from '@/pages/BusinessLoan';
+import EducationLoan from '@/pages/EducationLoan';
+import LoanAgainstMutualFunds from '@/pages/LoanAgainstMutualFunds';
+import SipCalculator from '@/pages/SipCalculator';
+import EmiCalculator from '@/pages/EmiCalculator';
+import TaxSaving from '@/pages/TaxSaving';
+import Booking from '@/pages/Booking';
+import PrivacyPolicy from '@/pages/PrivacyPolicy';
+import TermsOfService from '@/pages/TermsOfService';
 
 // Admin Pages
 import AdminLogin from '@/pages/admin/AdminLogin';
@@ -72,6 +90,102 @@ function App() {
                     <Route path="/blog/:slug" element={
                       <MainLayout>
                         <BlogPost />
+                      </MainLayout>
+                    } />
+
+                    {/* Financial Services */}
+                    <Route path="/mutual-funds" element={
+                      <MainLayout>
+                        <MutualFunds />
+                      </MainLayout>
+                    } />
+                    <Route path="/insurance" element={
+                      <MainLayout>
+                        <Insurance />
+                      </MainLayout>
+                    } />
+                    <Route path="/health-insurance" element={
+                      <MainLayout>
+                        <HealthInsurance />
+                      </MainLayout>
+                    } />
+                    <Route path="/term-insurance" element={
+                      <MainLayout>
+                        <TermInsurance />
+                      </MainLayout>
+                    } />
+                    <Route path="/vehicle-insurance" element={
+                      <MainLayout>
+                        <VehicleInsurance />
+                      </MainLayout>
+                    } />
+                    <Route path="/loans" element={
+                      <MainLayout>
+                        <Loans />
+                      </MainLayout>
+                    } />
+                    <Route path="/loans/personal" element={
+                      <MainLayout>
+                        <PersonalLoan />
+                      </MainLayout>
+                    } />
+                    <Route path="/loans/home" element={
+                      <MainLayout>
+                        <HomeLoan />
+                      </MainLayout>
+                    } />
+                    <Route path="/loans/car" element={
+                      <MainLayout>
+                        <CarLoan />
+                      </MainLayout>
+                    } />
+                    <Route path="/loans/business" element={
+                      <MainLayout>
+                        <BusinessLoan />
+                      </MainLayout>
+                    } />
+                    <Route path="/loans/education" element={
+                      <MainLayout>
+                        <EducationLoan />
+                      </MainLayout>
+                    } />
+                    <Route path="/loans/mutual-funds" element={
+                      <MainLayout>
+                        <LoanAgainstMutualFunds />
+                      </MainLayout>
+                    } />
+
+                    {/* Calculators */}
+                    <Route path="/calculators/sip" element={
+                      <MainLayout>
+                        <SipCalculator />
+                      </MainLayout>
+                    } />
+                    <Route path="/calculators/emi" element={
+                      <MainLayout>
+                        <EmiCalculator />
+                      </MainLayout>
+                    } />
+                    <Route path="/tax-saving" element={
+                      <MainLayout>
+                        <TaxSaving />
+                      </MainLayout>
+                    } />
+
+                    {/* Other Pages */}
+                    <Route path="/booking" element={
+                      <MainLayout>
+                        <Booking />
+                      </MainLayout>
+                    } />
+                    <Route path="/privacy-policy" element={
+                      <MainLayout>
+                        <PrivacyPolicy />
+                      </MainLayout>
+                    } />
+                    <Route path="/terms-of-service" element={
+                      <MainLayout>
+                        <TermsOfService />
                       </MainLayout>
                     } />
 
