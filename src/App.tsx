@@ -17,6 +17,7 @@ import AboutUs from '@/pages/AboutUs';
 import Contact from '@/pages/Contact';
 import NotFound from '@/pages/NotFound';
 import Blog from '@/pages/Blog';
+import BlogPost from '@/pages/BlogPost';
 import MutualFunds from '@/pages/MutualFunds';
 import Insurance from '@/pages/Insurance';
 import HealthInsurance from '@/pages/HealthInsurance';
@@ -75,11 +76,16 @@ function App() {
                           <Contact />
                         </MainLayout>
                       } />
-                      <Route path="/blog" element={
-                        <MainLayout>
-                          <Blog />
-                        </MainLayout>
-                      } />
+                       <Route path="/blog" element={
+                         <MainLayout>
+                           <Blog />
+                         </MainLayout>
+                       } />
+                       <Route path="/blog/:slug" element={
+                         <MainLayout>
+                           <BlogPost />
+                         </MainLayout>
+                       } />
 
                       {/* Financial Services */}
                       <Route path="/mutual-funds" element={
