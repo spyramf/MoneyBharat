@@ -3,11 +3,10 @@ import { supabase } from '@/integrations/supabase/client';
 export interface SupabaseBlogCategory {
   id: string;
   created_at: string;
+  updated_at: string;
   name: string;
   slug: string;
   description: string | null;
-  meta_title: string | null;
-  meta_description: string | null;
 }
 
 export interface SupabaseBlogPost {
@@ -20,40 +19,27 @@ export interface SupabaseBlogPost {
   content: string | null;
   category_id: string | null;
   author_id: string | null;
-  published_date: string | null;
-  read_time: string | null;
-  is_featured: boolean | null;
+  published_at: string | null;
+  read_time: number;
+  is_featured: boolean;
   featured_image: string | null;
   status: 'draft' | 'published' | 'archived';
   meta_title: string | null;
   meta_description: string | null;
-  focus_keywords: string[] | null;
-  seo_score: number | null;
-  canonical_url: string | null;
-  robots_directive: string | null;
-  og_title: string | null;
-  og_description: string | null;
-  og_image: string | null;
-  twitter_title: string | null;
-  twitter_description: string | null;
-  twitter_image: string | null;
+  tags: string[] | null;
   category?: SupabaseBlogCategory | null;
   author?: SupabaseBlogAuthor | null;
-  tags?: SupabaseBlogTag[];
 }
 
 export interface SupabaseBlogAuthor {
   id: string;
   created_at: string;
+  updated_at: string;
   name: string;
-  slug: string;
   email: string | null;
   role: string | null;
   avatar_url: string | null;
   bio: string | null;
-  social_links: any | null;
-  meta_title: string | null;
-  meta_description: string | null;
 }
 
 export interface SupabaseBlogTag {
