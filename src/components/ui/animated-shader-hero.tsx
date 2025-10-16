@@ -383,6 +383,7 @@ const AnimatedShaderHero: React.FC<HeroProps> = ({ trustBadge, headline, subtitl
       {/* Hero Content Overlay */}
       <div className="absolute inset-40 z-30 flex flex-col items-center justify-center">
         {/* Trust Badge */}
+        /*{" "}
         {trustBadge && (
           <div className="mb-8 animate-fade-in-down">
             <div className="flex items-center gap-2 px-6 py-3 bg-white/10 backdrop-blur-md border border-white/30 rounded-full text-sm shadow-lg">
@@ -390,8 +391,8 @@ const AnimatedShaderHero: React.FC<HeroProps> = ({ trustBadge, headline, subtitl
               <span className="text-white font-medium">{trustBadge.text}</span>
             </div>
           </div>
-        )}
-
+        )}{" "}
+        */
         <div className="text-center space-y-6 max-w-5xl mx-auto px-4">
           {/* Main Heading with Animation */}
           <div className="space-y-2">
