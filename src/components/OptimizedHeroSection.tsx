@@ -27,7 +27,7 @@ const OptimizedHeroSection = () => {
                 most trusted fintech platform.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 pt-6">
-                <a href="https://moneybharat.net/Home/Login" target="_blank" rel="noopener noreferrer">
+                <a href="https://client.moneybharat.co/Home/Login" target="_blank" rel="noopener noreferrer">
                   <Button className="bg-gradient-to-r from-fintech-green to-fintech-green hover:opacity-90 text-white px-8 py-6">
                     Start Investing
                   </Button>

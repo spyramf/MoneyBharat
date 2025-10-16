@@ -142,7 +142,7 @@ const MutualFundSection = () => {
         
         <motion.div className="mt-12 text-center" variants={itemVariants}>
 <Button
-  onClick={() => window.location.href = "https://moneybharat.net/NewOnBoarding/SignUp"}
+  onClick={() => window.location.href = "https://client.moneybharat.co/NewOnBoarding/SignUp"}
   className="bg-gradient-to-r from-fintech-green to-fintech-green hover:opacity-90 text-white px-8 py-6 rounded-sm"
 >
   Start Investing Now

@@ -3,7 +3,7 @@ export const SITE_CONFIG = {
   name: 'Money Bharat Finance',
   title: 'Money Bharat Finance - Mutual Funds, Insurance & Loans',
   description: 'Grow your wealth with Money Bharat Finance - India\'s AI-powered platform for mutual funds, SIP investments, health & life insurance, and instant personal loans.',
-  url: 'https://moneybharat.net',
+  url: 'https://client.moneybharat.co',
   ogImage: '/images/og-image.jpg',
   
   // SEO Keywords

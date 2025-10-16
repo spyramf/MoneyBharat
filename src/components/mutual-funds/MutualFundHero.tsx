@@ -29,7 +29,7 @@ const MutualFundHero = () => {
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
 <Button
-  onClick={() => window.open("https://moneybharat.net/Home/Login", "_blank")}
+  onClick={() => window.open("https://client.moneybharat.co/Home/Login", "_blank")}
   className="bg-gradient-to-r from-fintech-green to-fintech-blue hover:opacity-90 text-white px-8 py-4 text-lg"
 >
   Start SIP Investment

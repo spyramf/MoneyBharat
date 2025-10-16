@@ -38,7 +38,7 @@ const CTASection = () => {
             Join thousands of satisfied clients who have taken control of their finances with Money Bharat's innovative solutions.
           </p>
 <Button
-  onClick={() => window.location.href = "https://moneybharat.net/NewOnBoarding/SignUp"}
+  onClick={() => window.location.href = "https://client.moneybharat.co/NewOnBoarding/SignUp"}
   className="bg-white hover:bg-gray-100 px-8 py-6 text-lg text-fintech-green"
 >
   Get Started Now

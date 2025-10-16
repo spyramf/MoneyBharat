@@ -109,7 +109,7 @@ const Index = () => {
         buttons={{
           primary: {
             text: "Start Investing Now",
-            onClick: () => window.location.href = "https://moneybharat.net/NewOnBoarding/SignUp"
+            onClick: () => window.location.href = "https://client.moneybharat.co/NewOnBoarding/SignUp"
           },
           secondary: {
             text: "Explore Services",
