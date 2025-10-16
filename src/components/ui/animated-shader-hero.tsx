@@ -1,6 +1,6 @@
-import React, { useRef, useEffect } from 'react';
-import { Button } from '@/components/ui/button';
-import { ArrowRight } from 'lucide-react';
+import React, { useRef, useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import { ArrowRight } from "lucide-react";
 
 // Types for component props
 interface HeroProps {
@@ -58,7 +58,7 @@ void main(){gl_Position=position;}`;
     constructor(canvas: HTMLCanvasElement, scale: number) {
       this.canvas = canvas;
       this.scale = scale;
-      this.gl = canvas.getContext('webgl2')!;
+      this.gl = canvas.getContext("webgl2")!;
       this.gl.viewport(0, 0, canvas.width * scale, canvas.height * scale);
       this.shaderSource = defaultShaderSource;
     }
@@ -98,7 +98,7 @@ void main(){gl_Position=position;}`;
 
       if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
         const error = gl.getShaderInfoLog(shader);
-        console.error('Shader compilation error:', error);
+        console.error("Shader compilation error:", error);
       }
     }
 
@@ -150,34 +150,34 @@ void main(){gl_Position=position;}`;
     init() {
       const gl = this.gl;
       const program = this.program!;
-      
+
       this.buffer = gl.createBuffer();
       gl.bindBuffer(gl.ARRAY_BUFFER, this.buffer);
       gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.vertices), gl.STATIC_DRAW);
 
-      const position = gl.getAttribLocation(program, 'position');
+      const position = gl.getAttribLocation(program, "position");
       gl.enableVertexAttribArray(position);
       gl.vertexAttribPointer(position, 2, gl.FLOAT, false, 0, 0);
 
-      (program as any).resolution = gl.getUniformLocation(program, 'resolution');
-      (program as any).time = gl.getUniformLocation(program, 'time');
-      (program as any).move = gl.getUniformLocation(program, 'move');
-      (program as any).touch = gl.getUniformLocation(program, 'touch');
-      (program as any).pointerCount = gl.getUniformLocation(program, 'pointerCount');
-      (program as any).pointers = gl.getUniformLocation(program, 'pointers');
+      (program as any).resolution = gl.getUniformLocation(program, "resolution");
+      (program as any).time = gl.getUniformLocation(program, "time");
+      (program as any).move = gl.getUniformLocation(program, "move");
+      (program as any).touch = gl.getUniformLocation(program, "touch");
+      (program as any).pointerCount = gl.getUniformLocation(program, "pointerCount");
+      (program as any).pointers = gl.getUniformLocation(program, "pointers");
     }
 
     render(now = 0) {
       const gl = this.gl;
       const program = this.program;
-      
+
       if (!program || gl.getProgramParameter(program, gl.DELETE_STATUS)) return;
 
       gl.clearColor(0, 0, 0, 1);
       gl.clear(gl.COLOR_BUFFER_BIT);
       gl.useProgram(program);
       gl.bindBuffer(gl.ARRAY_BUFFER, this.buffer);
-      
+
       gl.uniform2f((program as any).resolution, this.canvas.width, this.canvas.height);
       gl.uniform1f((program as any).time, now * 1e-3);
       gl.uniform2f((program as any).move, this.mouseMove[0], this.mouseMove[1]);
@@ -198,16 +198,18 @@ void main(){gl_Position=position;}`;
 
     constructor(element: HTMLCanvasElement, scale: number) {
       this.scale = scale;
-      
-      const map = (element: HTMLCanvasElement, scale: number, x: number, y: number) => 
-        [x * scale, element.height - y * scale];
 
-      element.addEventListener('pointerdown', (e) => {
+      const map = (element: HTMLCanvasElement, scale: number, x: number, y: number) => [
+        x * scale,
+        element.height - y * scale,
+      ];
+
+      element.addEventListener("pointerdown", (e) => {
         this.active = true;
         this.pointers.set(e.pointerId, map(element, this.getScale(), e.clientX, e.clientY));
       });
 
-      element.addEventListener('pointerup', (e) => {
+      element.addEventListener("pointerup", (e) => {
         if (this.count === 1) {
           this.lastCoords = this.first;
         }
@@ -215,7 +217,7 @@ void main(){gl_Position=position;}`;
         this.active = this.pointers.size > 0;
       });
 
-      element.addEventListener('pointerleave', (e) => {
+      element.addEventListener("pointerleave", (e) => {
         if (this.count === 1) {
           this.lastCoords = this.first;
         }
@@ -223,7 +225,7 @@ void main(){gl_Position=position;}`;
         this.active = this.pointers.size > 0;
       });
 
-      element.addEventListener('pointermove', (e) => {
+      element.addEventListener("pointermove", (e) => {
         if (!this.active) return;
         this.lastCoords = [e.clientX, e.clientY];
         this.pointers.set(e.pointerId, map(element, this.getScale(), e.clientX, e.clientY));
@@ -248,9 +250,7 @@ void main(){gl_Position=position;}`;
     }
 
     get coords() {
-      return this.pointers.size > 0 
-        ? Array.from(this.pointers.values()).flat() 
-        : [0, 0];
+      return this.pointers.size > 0 ? Array.from(this.pointers.values()).flat() : [0, 0];
     }
 
     get first() {
@@ -260,13 +260,13 @@ void main(){gl_Position=position;}`;
 
   const resize = () => {
     if (!canvasRef.current) return;
-    
+
     const canvas = canvasRef.current;
     const dpr = Math.max(1, 0.5 * window.devicePixelRatio);
-    
+
     canvas.width = window.innerWidth * dpr;
     canvas.height = window.innerHeight * dpr;
-    
+
     if (rendererRef.current) {
       rendererRef.current.updateScale(dpr);
     }
@@ -274,7 +274,7 @@ void main(){gl_Position=position;}`;
 
   const loop = (now: number) => {
     if (!rendererRef.current || !pointersRef.current) return;
-    
+
     rendererRef.current.updateMouse(pointersRef.current.first);
     rendererRef.current.updatePointerCount(pointersRef.current.count);
     rendererRef.current.updatePointerCoords(pointersRef.current.coords);
@@ -288,25 +288,25 @@ void main(){gl_Position=position;}`;
 
     const canvas = canvasRef.current;
     const dpr = Math.max(1, 0.5 * window.devicePixelRatio);
-    
+
     rendererRef.current = new WebGLRenderer(canvas, dpr);
     pointersRef.current = new PointerHandler(canvas, dpr);
-    
+
     rendererRef.current.setup();
     rendererRef.current.init();
-    
+
     resize();
-    
+
     if (rendererRef.current.test(defaultShaderSource) === null) {
       rendererRef.current.updateShader(defaultShaderSource);
     }
-    
+
     loop(0);
-    
-    window.addEventListener('resize', resize);
-    
+
+    window.addEventListener("resize", resize);
+
     return () => {
-      window.removeEventListener('resize', resize);
+      window.removeEventListener("resize", resize);
       if (animationFrameRef.current) {
         cancelAnimationFrame(animationFrameRef.current);
       }
@@ -320,13 +320,7 @@ void main(){gl_Position=position;}`;
 };
 
 // Reusable Hero Component
-const AnimatedShaderHero: React.FC<HeroProps> = ({
-  trustBadge,
-  headline,
-  subtitle,
-  buttons,
-  className = ""
-}) => {
+const AnimatedShaderHero: React.FC<HeroProps> = ({ trustBadge, headline, subtitle, buttons, className = "" }) => {
   const canvasRef = useShaderBackground();
 
   return (
@@ -379,24 +373,20 @@ const AnimatedShaderHero: React.FC<HeroProps> = ({
           animation-delay: 0.8s;
         }
       `}</style>
-      
+
       <canvas
         ref={canvasRef}
         className="absolute inset-0 w-full h-full object-contain touch-none"
-        style={{ background: 'hsl(var(--background))' }}
+        style={{ background: "hsl(var(--background))" }}
       />
-      
+
       {/* Hero Content Overlay */}
       <div className="absolute inset-0 z-10 flex flex-col items-center justify-center">
         {/* Trust Badge */}
         {trustBadge && (
           <div className="mb-8 animate-fade-in-down">
             <div className="flex items-center gap-2 px-6 py-3 bg-white/10 backdrop-blur-md border border-white/30 rounded-full text-sm shadow-lg">
-              {trustBadge.icon && (
-                <span className="text-primary">
-                  {trustBadge.icon}
-                </span>
-              )}
+              {trustBadge.icon && <span className="text-primary">{trustBadge.icon}</span>}
               <span className="text-white font-medium">{trustBadge.text}</span>
             </div>
           </div>
@@ -405,26 +395,26 @@ const AnimatedShaderHero: React.FC<HeroProps> = ({
         <div className="text-center space-y-6 max-w-5xl mx-auto px-4">
           {/* Main Heading with Animation */}
           <div className="space-y-2">
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold bg-gradient-to-r from-orange-400 via-orange-300 to-primary bg-clip-text text-transparent drop-shadow-lg animate-fade-in-up animation-delay-200">
+            <h1 className="text-5xl md:text-6xl lg:text-8xl font-bold bg-gradient-to-r from-orange-400 via-orange-300 to-primary bg-clip-text text-transparent drop-shadow-lg animate-fade-in-up animation-delay-200">
               {headline.line1}
             </h1>
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold bg-gradient-to-r from-primary via-green-400 to-orange-300 bg-clip-text text-transparent drop-shadow-lg animate-fade-in-up animation-delay-400">
+            <h1 className="text-5xl md:text-6xl lg:text-8xl font-bold bg-gradient-to-r from-primary via-green-400 to-orange-300 bg-clip-text text-transparent drop-shadow-lg animate-fade-in-up animation-delay-400">
               {headline.line2}
             </h1>
           </div>
-          
+
           {/* Subtitle with Animation */}
           <div className="max-w-3xl mx-auto animate-fade-in-up animation-delay-600">
             <p className="text-lg md:text-xl lg:text-2xl text-white/90 font-light leading-relaxed drop-shadow-md">
               {subtitle}
             </p>
           </div>
-          
+
           {/* CTA Buttons with Animation */}
           {buttons && (
             <div className="flex flex-col sm:flex-row gap-4 justify-center mt-10 animate-fade-in-up animation-delay-800">
               {buttons.primary && (
-                <Button 
+                <Button
                   onClick={buttons.primary.onClick}
                   size="lg"
                   className="px-8 py-6 text-lg bg-primary hover:bg-primary/90 text-primary-foreground"
@@ -434,7 +424,7 @@ const AnimatedShaderHero: React.FC<HeroProps> = ({
                 </Button>
               )}
               {buttons.secondary && (
-                <Button 
+                <Button
                   onClick={buttons.secondary.onClick}
                   size="lg"
                   variant="outline"
