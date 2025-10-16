@@ -381,7 +381,7 @@ const AnimatedShaderHero: React.FC<HeroProps> = ({ trustBadge, headline, subtitl
       />
 
       {/* Hero Content Overlay */}
-      <div className="absolute inset-0 z-30 flex flex-col items-center justify-center">
+      <div className="absolute inset-0 z-10 flex flex-col items-center justify-center">
         {/* Trust Badge */}
         {trustBadge && (
           <div className="mb-8 animate-fade-in-down">
@@ -394,11 +394,11 @@ const AnimatedShaderHero: React.FC<HeroProps> = ({ trustBadge, headline, subtitl
 
         <div className="text-center space-y-6 max-w-5xl mx-auto px-4">
           {/* Main Heading with Animation */}
-          <div className="space-y-1">
-            <h1 className="text-5xl md:text-8xl lg:text-8xl font-bold bg-gradient-to-r from-orange-400 via-orange-300 to-primary bg-clip-text text-transparent drop-shadow-lg animate-fade-in-up animation-delay-200">
+          <div className="space-y-2">
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold bg-gradient-to-r from-orange-400 via-orange-300 to-primary bg-clip-text text-transparent drop-shadow-lg animate-fade-in-up animation-delay-200">
               {headline.line1}
             </h1>
-            <h1 className="text-5xl md:text-8xl lg:text-8xl font-bold bg-gradient-to-r from-primary via-green-400 to-orange-300 bg-clip-text text-transparent drop-shadow-lg animate-fade-in-up animation-delay-400">
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold bg-gradient-to-r from-primary via-green-400 to-orange-300 bg-clip-text text-transparent drop-shadow-lg animate-fade-in-up animation-delay-400">
               {headline.line2}
             </h1>
           </div>
