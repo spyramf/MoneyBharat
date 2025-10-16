@@ -381,7 +381,7 @@ const AnimatedShaderHero: React.FC<HeroProps> = ({ trustBadge, headline, subtitl
       />
 
       {/* Hero Content Overlay */}
-      <div className="absolute inset-40 z-30 flex flex-col items-center justify-center">
+      <div className="absolute inset-0 z-30 flex flex-col items-center justify-center">
         {/* Trust Badge */}
         {trustBadge && (
           <div className="mb-8 animate-fade-in-down">
