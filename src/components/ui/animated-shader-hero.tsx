@@ -391,13 +391,13 @@ const AnimatedShaderHero: React.FC<HeroProps> = ({
         {/* Trust Badge */}
         {trustBadge && (
           <div className="mb-8 animate-fade-in-down">
-            <div className="flex items-center gap-2 px-6 py-3 bg-primary/10 backdrop-blur-md border border-primary/30 rounded-full text-sm">
+            <div className="flex items-center gap-2 px-6 py-3 bg-white/10 backdrop-blur-md border border-white/30 rounded-full text-sm shadow-lg">
               {trustBadge.icon && (
                 <span className="text-primary">
                   {trustBadge.icon}
                 </span>
               )}
-              <span className="text-foreground">{trustBadge.text}</span>
+              <span className="text-white font-medium">{trustBadge.text}</span>
             </div>
           </div>
         )}
@@ -405,17 +405,17 @@ const AnimatedShaderHero: React.FC<HeroProps> = ({
         <div className="text-center space-y-6 max-w-5xl mx-auto px-4">
           {/* Main Heading with Animation */}
           <div className="space-y-2">
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold gradient-text animate-fade-in-up animation-delay-200">
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold bg-gradient-to-r from-orange-400 via-orange-300 to-primary bg-clip-text text-transparent drop-shadow-lg animate-fade-in-up animation-delay-200">
               {headline.line1}
             </h1>
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold gradient-text animate-fade-in-up animation-delay-400">
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold bg-gradient-to-r from-primary via-green-400 to-orange-300 bg-clip-text text-transparent drop-shadow-lg animate-fade-in-up animation-delay-400">
               {headline.line2}
             </h1>
           </div>
           
           {/* Subtitle with Animation */}
           <div className="max-w-3xl mx-auto animate-fade-in-up animation-delay-600">
-            <p className="text-lg md:text-xl lg:text-2xl text-muted-foreground font-light leading-relaxed">
+            <p className="text-lg md:text-xl lg:text-2xl text-white/90 font-light leading-relaxed drop-shadow-md">
               {subtitle}
             </p>
           </div>
