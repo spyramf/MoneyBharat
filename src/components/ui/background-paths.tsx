@@ -85,28 +85,27 @@ export function BackgroundPaths({
             </span>
           </motion.div>
 
-          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-8 tracking-tight">
-            {words.map((word, wordIndex) => (
-              <span key={wordIndex} className="inline-block mr-3 sm:mr-4 last:mr-0">
-                {word.split("").map((letter, letterIndex) => (
-                  <motion.span
-                    key={`${wordIndex}-${letterIndex}`}
-                    initial={{ y: 100, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{
-                      delay: wordIndex * 0.1 + letterIndex * 0.03,
-                      type: "spring",
-                      stiffness: 150,
-                      damping: 25,
-                    }}
-                    className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-[#FF9E3D] via-[#FFD089] to-[#4FD084] drop-shadow-[0_2px_6px_rgba(0,0,0,0.15)]"
-                  >
-                    {letter}
-                  </motion.span>
-                ))}
-              </span>
-            ))}
-          </h1>
+          <div className="space-y-2">
+            {/* Line 1 */}
+            <motion.h1
+              initial={{ y: 80, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.8, type: "spring", stiffness: 120, damping: 20 }}
+              className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold bg-gradient-to-r from-[#FF9E3D] via-[#FFD089] to-[#4FD084] bg-clip-text text-transparent drop-shadow-[0_2px_6px_rgba(0,0,0,0.15)]"
+            >
+              {headline.line1}
+            </motion.h1>
+
+            {/* Line 2 */}
+            <motion.h1
+              initial={{ y: 80, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.8, type: "spring", stiffness: 120, damping: 20, delay: 0.3 }}
+              className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold bg-gradient-to-r from-[#4FD084] via-[#FFD089] to-[#FF9E3D] bg-clip-text text-transparent drop-shadow-[0_2px_6px_rgba(0,0,0,0.15)]"
+            >
+              {headline.line2}
+            </motion.h1>
+          </div>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
