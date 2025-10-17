@@ -1,6 +1,6 @@
 import { lazy, Suspense } from "react";
 import Navbar from "@/components/Navbar";
-import AnimatedShaderHero from "@/components/ui/animated-shader-hero";
+import { HeroGeometric } from "@/components/ui/shape-landing-hero";
 import Footer from "@/components/Footer";
 import StructuredData from "@/components/seo/StructuredData";
 import SEOHead from "@/components/seo/SEOHead";
@@ -96,26 +96,11 @@ const Index = () => {
       <BreadcrumbSEO />
       
       {/* Critical above-the-fold content */}
-      <AnimatedShaderHero
-        trustBadge={{
-          text: "Trusted by 50,000+ Investors Across India",
-          icon: "✨"
-        }}
-        headline={{
-          line1: "Your Financial Future",
-          line2: "Starts Here"
-        }}
-        subtitle="Grow your wealth with AI-powered mutual funds, comprehensive insurance, and instant loans - all in one platform. Expert advisory backed by ₹5000Cr+ AUM."
-        buttons={{
-          primary: {
-            text: "Start Investing Now",
-            onClick: () => window.location.href = "https://client.moneybharat.co/NewOnBoarding/SignUp"
-          },
-          secondary: {
-            text: "Explore Services",
-            onClick: () => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })
-          }
-        }}
+      <HeroGeometric
+        badge="Trusted by 50,000+ Investors Across India"
+        title1="Your Financial Future"
+        title2="Starts Here"
+        description="Grow your wealth with AI-powered mutual funds, comprehensive insurance, and instant loans - all in one platform. Expert advisory backed by ₹5000Cr+ AUM."
       />
       
       {/* Load services section without Suspense (critical) */}
