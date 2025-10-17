@@ -45,6 +45,22 @@ const Navbar = () => {
             <Link to="/loans" className="font-medium text-gray-700 hover:text-fintech-green transition-colors">
               Loans
             </Link>
+            <div className="relative group">
+              <button className="font-medium text-gray-700 hover:text-fintech-green transition-colors">
+                Tools
+              </button>
+              <div className="absolute left-0 mt-2 w-48 bg-white rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                <Link to="/calculators/sip" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-fintech-green rounded-t-lg">
+                  SIP Calculator
+                </Link>
+                <Link to="/calculators/emi" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-fintech-green">
+                  EMI Calculator
+                </Link>
+                <Link to="/tax-saving" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-fintech-green rounded-b-lg">
+                  Tax Saving
+                </Link>
+              </div>
+            </div>
             <Link to="/blog" className="font-medium text-gray-700 hover:text-fintech-green transition-colors">
               Blog
             </Link>
@@ -76,6 +92,18 @@ const Navbar = () => {
               <Link to="/loans" className="font-medium text-gray-700 hover:text-fintech-green transition-colors" onClick={() => setIsOpen(false)}>
                 Loans
               </Link>
+              <div className="border-t pt-2">
+                <div className="font-medium text-gray-500 text-sm mb-2">Tools</div>
+                <Link to="/calculators/sip" className="block pl-4 py-2 text-gray-700 hover:text-fintech-green transition-colors" onClick={() => setIsOpen(false)}>
+                  SIP Calculator
+                </Link>
+                <Link to="/calculators/emi" className="block pl-4 py-2 text-gray-700 hover:text-fintech-green transition-colors" onClick={() => setIsOpen(false)}>
+                  EMI Calculator
+                </Link>
+                <Link to="/tax-saving" className="block pl-4 py-2 text-gray-700 hover:text-fintech-green transition-colors" onClick={() => setIsOpen(false)}>
+                  Tax Saving
+                </Link>
+              </div>
               <Link to="/blog" className="font-medium text-gray-700 hover:text-fintech-green transition-colors" onClick={() => setIsOpen(false)}>
                 Blog
               </Link>

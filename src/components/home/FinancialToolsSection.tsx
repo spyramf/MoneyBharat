@@ -43,7 +43,7 @@ const FinancialToolsSection = () => {
               description="Calculate your potential returns from systematic investments" 
               bgColor="bg-blue-50" 
               linkText="Use Calculator" 
-              linkHref="/tools/sip-calculator" 
+              linkHref="/calculators/sip" 
             />
           </motion.div>
           
@@ -54,7 +54,7 @@ const FinancialToolsSection = () => {
               description="Plan your loan repayments with our easy EMI calculator" 
               bgColor="bg-green-50" 
               linkText="Use Calculator" 
-              linkHref="/tools/emi-calculator" 
+              linkHref="/calculators/emi" 
             />
           </motion.div>
           
@@ -65,7 +65,7 @@ const FinancialToolsSection = () => {
               description="Find the best tax saving investment options" 
               bgColor="bg-purple-50" 
               linkText="Use Calculator" 
-              linkHref="/tools/tax-saving" 
+              linkHref="/tax-saving"
             />
           </motion.div>
         </div>
