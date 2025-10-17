@@ -1,7 +1,6 @@
 
 import { useState } from 'react';
 import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
 import LoanCalculator from '@/components/loans/LoanCalculator';
 import LoanHero from '@/components/loans/LoanHero';
 import LoanFeatures from '@/components/loans/LoanFeatures';
@@ -103,8 +102,6 @@ const PersonalLoan = () => {
         gradientFrom="from-fintech-purple"
         gradientTo="to-fintech-blue"
       />
-
-      <Footer />
     </div>
   );
 };

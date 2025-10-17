@@ -1,7 +1,6 @@
 
 import { Helmet } from "react-helmet-async";
 import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
 import { ArrowRight, FileText, FileCheck } from "lucide-react";
 
 const TermsOfService = () => {
@@ -159,8 +158,6 @@ const TermsOfService = () => {
           </div>
         </div>
       </div>
-
-      <Footer />
     </>
   );
 };

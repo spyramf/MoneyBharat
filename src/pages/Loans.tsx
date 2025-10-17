@@ -8,7 +8,6 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Separator } from '@/components/ui/separator';
-import Footer from '@/components/Footer';
 import { CreditCard, Calculator, Shield, ArrowDown, ArrowUp, Banknote, Percent, TrendingUp, Star, Clock, BadgeCheck, Users, Building } from 'lucide-react';
 import Home from '@/components/icons/Home';
 import Car from '@/components/icons/Car';
@@ -718,8 +717,6 @@ const Loans = () => {
           </div>
         </div>
       </section>
-
-      <Footer />
     </div>;
 };
 export default Loans;

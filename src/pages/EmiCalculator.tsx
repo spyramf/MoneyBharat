@@ -1,7 +1,6 @@
 
 import React, { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import { Calculator, ArrowRight, HelpCircle } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -408,8 +407,6 @@ const EmiCalculator = () => {
           </div>
         </div>
       </main>
-      
-      <Footer />
     </div>
   );
 };

@@ -1,7 +1,6 @@
 
 import React from "react";
 import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 
 // Import term insurance components
 import TermInsuranceHero from "@/components/term-insurance/TermInsuranceHero";
@@ -33,7 +32,6 @@ const TermInsurance = () => {
         <TermInsuranceFAQs />
         <TermCTA />
       </main>
-      <Footer />
     </div>
   );
 };

@@ -1,7 +1,6 @@
 
 import { Helmet } from "react-helmet-async";
 import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
 import { Link } from "react-router-dom";
 import { ArrowRight, FileText, Map } from "lucide-react";
 
@@ -196,8 +195,6 @@ const Sitemap = () => {
           </div>
         </div>
       </div>
-
-      <Footer />
     </>
   );
 };

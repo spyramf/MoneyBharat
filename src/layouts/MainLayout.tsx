@@ -13,7 +13,7 @@ const MainLayout = ({ children, showNavigation = true, showFooter = true }: Main
     <div className="min-h-screen flex flex-col">
       {showNavigation && <Navbar />}
       <main className="flex-1">{children}</main>
-      /* {showFooter && <Footer />} */
+      {showFooter && <Footer />}
     </div>
   );
 };

@@ -2,7 +2,6 @@
 import { useState } from 'react';
 import { Home, Building, DollarSign, ArrowRight, Calculator } from 'lucide-react';
 import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import StructuredData from '@/components/seo/StructuredData';
@@ -193,8 +192,6 @@ const HomeLoan = () => {
         gradientFrom="from-fintech-blue"
         gradientTo="to-fintech-purple"
       />
-
-      <Footer />
     </div>
   );
 };

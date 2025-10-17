@@ -1,7 +1,6 @@
 import { lazy, Suspense } from "react";
 import Navbar from "@/components/Navbar";
 import { BackgroundPaths } from "@/components/ui/background-paths";
-import Footer from "@/components/Footer";
 import StructuredData from "@/components/seo/StructuredData";
 import SEOHead from "@/components/seo/SEOHead";
 import BreadcrumbSEO from "@/components/seo/BreadcrumbSEO";
@@ -143,8 +142,6 @@ const Index = () => {
       <Suspense fallback={<SectionLoader />}>
         <CTASection />
       </Suspense>
-
-      <Footer />
     </div>
   );
 };

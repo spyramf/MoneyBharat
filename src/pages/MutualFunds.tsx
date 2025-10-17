@@ -2,7 +2,6 @@
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import StructuredData from "@/components/seo/StructuredData";
 
 import MutualFundHero from "@/components/mutual-funds/MutualFundHero";
@@ -68,7 +67,6 @@ const MutualFunds = () => {
       <Case />
       <MutualFundFAQs items={faqItems} />
       {/* <SipCalculator /> */}
-      <Footer />
     </div>
   );
 };

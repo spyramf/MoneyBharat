@@ -1,6 +1,5 @@
 
 import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import SEOHead from "@/components/seo/SEOHead";
 import StructuredData from "@/components/seo/StructuredData";
 import ContactHero from "@/components/contact/ContactHero";
@@ -53,8 +52,6 @@ const Contact = () => {
           <ContactLegal />
         </div>
       </main>
-      
-      <Footer />
     </div>
   );
 };

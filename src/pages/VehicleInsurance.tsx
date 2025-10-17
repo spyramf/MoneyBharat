@@ -1,7 +1,6 @@
 
 import React from "react";
 import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 
 // Import vehicle insurance components
 import VehicleInsuranceHero from "@/components/vehicle-insurance/VehicleInsuranceHero";
@@ -33,7 +32,6 @@ const VehicleInsurance = () => {
         <VehicleInsuranceFAQs />
         <VehicleCTA />
       </main>
-      <Footer />
     </div>
   );
 };

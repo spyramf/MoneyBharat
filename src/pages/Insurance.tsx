@@ -1,7 +1,6 @@
 
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import InsuranceHero from "@/components/insurance/InsuranceHero";
 import ComprehensiveInsuranceSolutions from "@/components/insurance/ComprehensiveInsuranceSolutions";
 import InsuranceCategories from "@/components/insurance/InsuranceCategories";
@@ -49,7 +48,6 @@ const InsurancePage = () => {
       <InsurancePartners />
       <InsuranceFAQs faqs={frequentlyAskedQuestions} />
       <InsuranceCTA />
-       <Footer />
     </div>
   );
 };

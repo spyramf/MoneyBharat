@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { Home, Search, Mail, ArrowLeft, ExternalLink, AlertTriangle } from "lucide-react";
 import { Helmet } from "react-helmet-async";
 import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -225,8 +224,6 @@ const NotFound = () => {
           </div>
         </div>
       </main>
-      
-      <Footer />
     </div>
   );
 };

@@ -7,7 +7,6 @@ import * as z from 'zod';
 import { Check, Calendar } from 'lucide-react';
 import { toast } from "sonner";
 import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -275,8 +274,6 @@ const Booking = () => {
           </div>
         </section>
       </main>
-
-      <Footer />
     </>
   );
 };

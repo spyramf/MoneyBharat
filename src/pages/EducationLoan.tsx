@@ -15,7 +15,6 @@ import {
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Separator } from '@/components/ui/separator';
-import Footer from '@/components/Footer';
 import { Book, Calculator, GraduationCap, School } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
@@ -485,8 +484,6 @@ const EducationLoan = () => {
           </div>
         </div>
       </section>
-
-      <Footer />
     </div>
   );
 };

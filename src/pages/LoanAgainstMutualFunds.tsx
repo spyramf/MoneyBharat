@@ -10,7 +10,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Separator } from '@/components/ui/separator';
 import { ArrowRight, Calculator, Shield, Percent, PiggyBank, TrendingUp } from 'lucide-react';
 import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
 
 const LoanAgainstMutualFunds = () => {
   const [loanAmount, setLoanAmount] = useState<number>(500000);
@@ -551,8 +550,6 @@ const LoanAgainstMutualFunds = () => {
           </div>
         </div>
       </section>
-
-      <Footer />
     </div>
   );
 };

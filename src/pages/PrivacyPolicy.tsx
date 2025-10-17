@@ -1,7 +1,6 @@
 
 import { Helmet } from "react-helmet-async";
 import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
 import { ArrowRight, FileText, Shield } from "lucide-react";
 
 const PrivacyPolicy = () => {
@@ -158,8 +157,6 @@ const PrivacyPolicy = () => {
           </div>
         </div>
       </div>
-
-      <Footer />
     </>
   );
 };

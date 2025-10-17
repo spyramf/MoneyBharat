@@ -1,7 +1,6 @@
 
 import React from "react";
 import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 
 // Import refactored components
 import HealthInsuranceHero from "@/components/health-insurance/HealthInsuranceHero";
@@ -49,7 +48,6 @@ const HealthInsurance = () => {
         <HealthFAQs />
         <HealthCTA />
       </main>
-      <Footer />
     </div>
   );
 };

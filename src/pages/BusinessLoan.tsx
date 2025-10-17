@@ -2,7 +2,6 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Slider } from '@/components/ui/slider';
@@ -496,8 +495,6 @@ const BusinessLoan = () => {
           </div>
         </div>
       </section>
-
-      <Footer />
     </div>
   );
 };
