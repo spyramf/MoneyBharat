@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import { PiggyBank, Briefcase, Handshake, CheckCircle, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -9,8 +8,8 @@ const MutualFundSection = () => {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.2 }
-    }
+      transition: { staggerChildren: 0.2 },
+    },
   };
 
   const itemVariants = {
@@ -18,16 +17,16 @@ const MutualFundSection = () => {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.5 }
-    }
+      transition: { duration: 0.5 },
+    },
   };
 
   return (
-    <motion.section 
-      className="py-16 bg-white md:py-[20px]" 
-      initial="hidden" 
-      whileInView="visible" 
-      viewport={{ once: true, amount: 0.2 }} 
+    <motion.section
+      className="py-16 bg-white md:py-[20px]"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
       variants={containerVariants}
     >
       <div className="container mx-auto px-4">
@@ -35,7 +34,7 @@ const MutualFundSection = () => {
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Mutual Fund Investments</h2>
           <p className="text-gray-600">Grow your wealth with our curated selection of top-performing mutual funds</p>
         </motion.div>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           <motion.div variants={itemVariants}>
             <Card className="border-0 shadow-md hover:shadow-xl transition-shadow duration-300 hover:-translate-y-1">
@@ -63,14 +62,17 @@ const MutualFundSection = () => {
                 </ul>
               </CardContent>
               <CardFooter>
-                <a href="/mutual-funds" className="text-fintech-green hover:text-fintech-green transition-colors font-medium flex items-center">
+                <a
+                  href="/mutual-funds"
+                  className="text-fintech-green hover:text-fintech-green transition-colors font-medium flex items-center"
+                >
                   Explore Equity Funds
                   <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </a>
               </CardFooter>
             </Card>
           </motion.div>
-          
+
           <motion.div variants={itemVariants}>
             <Card className="border-0 shadow-md hover:shadow-xl transition-shadow duration-300 hover:-translate-y-1">
               <CardHeader className="pb-4">
@@ -97,14 +99,17 @@ const MutualFundSection = () => {
                 </ul>
               </CardContent>
               <CardFooter>
-                <a href="/mutual-funds" className="text-fintech-green hover:text-fintech-green transition-colors font-medium flex items-center">
+                <a
+                  href="/mutual-funds"
+                  className="text-fintech-green hover:text-fintech-green transition-colors font-medium flex items-center"
+                >
                   Explore Debt Funds
                   <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </a>
               </CardFooter>
             </Card>
           </motion.div>
-          
+
           <motion.div variants={itemVariants}>
             <Card className="border-0 shadow-md hover:shadow-xl transition-shadow duration-300 hover:-translate-y-1">
               <CardHeader className="pb-4">
@@ -131,7 +136,10 @@ const MutualFundSection = () => {
                 </ul>
               </CardContent>
               <CardFooter>
-                <a href="/mutual-funds" className="text-fintech-green hover:text-fintech-green transition-colors font-medium flex items-center">
+                <a
+                  href="/mutual-funds"
+                  className="text-fintech-green hover:text-fintech-green transition-colors font-medium flex items-center"
+                >
                   Explore Hybrid Funds
                   <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </a>
@@ -139,8 +147,8 @@ const MutualFundSection = () => {
             </Card>
           </motion.div>
         </div>
-        
-        <motion.div className="mt-12 text-center" variants={itemVariants}>
+
+        {/* <motion.div className="mt-12 text-center" variants={itemVariants}>
 <Button
   onClick={() => window.location.href = "https://client.moneybharat.co/NewOnBoarding/SignUp"}
   className="bg-gradient-to-r from-fintech-green to-fintech-green hover:opacity-90 text-white px-8 py-6 rounded-sm"
@@ -148,7 +156,7 @@ const MutualFundSection = () => {
   Start Investing Now
   <ArrowRight className="ml-2 h-4 w-4" />
 </Button>
-        </motion.div>
+        </motion.div> */}
       </div>
     </motion.section>
   );
