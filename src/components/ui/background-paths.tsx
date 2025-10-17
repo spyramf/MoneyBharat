@@ -99,7 +99,7 @@ export function BackgroundPaths({
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 1.2 }}
-            className="text-lg sm:text-xl md:text-2xl text-white/90 font-light leading-relaxed drop-shadow-md"
+            className="text-lg sm:text-xl md:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto leading-relaxed"
           >
             {subtitle}
           </motion.p>
