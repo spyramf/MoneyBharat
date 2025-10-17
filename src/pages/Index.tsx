@@ -8,7 +8,7 @@ import BreadcrumbSEO from "@/components/seo/BreadcrumbSEO";
 import URLRedirectHandler from "@/components/seo/URLRedirectHandler";
 
 // Import critical above-the-fold sections directly
-import ServicesSection from "@/components/home/ServicesSection";
+import ServicesTabSection from "@/components/home/ServicesTabSection";
 import HowItWorksSection from "@/components/home/HowItWorksSection";
 
 // Keep lazy loading only for below-the-fold sections
@@ -119,7 +119,7 @@ const Index = () => {
       />
       
       {/* Load services section without Suspense (critical) */}
-      <ServicesSection />
+      <ServicesTabSection />
       
       {/* How it works section for content expansion */}
       <HowItWorksSection />
