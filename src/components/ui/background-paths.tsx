@@ -79,7 +79,7 @@ export function BackgroundPaths({
               initial={{ y: 80, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.8, type: "spring", stiffness: 120, damping: 20 }}
-              className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold bg-gradient-to-r from-[#FF9E3D] via-[#FFD089] to-[#4FD084] bg-clip-text text-transparent drop-shadow-[0_2px_6px_rgba(0,0,0,0.15)]"
+              className="text-5xl md:text-7xl lg:text-8xl font-bold bg-gradient-to-r from-orange-400 via-orange-300 to-primary bg-clip-text text-transparent drop-shadow-lg animate-fade-in-up animation-delay-200"
             >
               {line1}
             </motion.h1>
@@ -88,7 +88,7 @@ export function BackgroundPaths({
               initial={{ y: 80, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.8, type: "spring", stiffness: 120, damping: 20, delay: 0.3 }}
-              className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold bg-gradient-to-r from-[#4FD084] via-[#FFD089] to-[#FF9E3D] bg-clip-text text-transparent drop-shadow-[0_2px_6px_rgba(0,0,0,0.15)]"
+              className="text-5xl md:text-7xl lg:text-8xl font-bold bg-gradient-to-r from-primary via-green-400 to-orange-300 bg-clip-text text-transparent drop-shadow-lg animate-fade-in-up animation-delay-400"
             >
               {line2}
             </motion.h1>
