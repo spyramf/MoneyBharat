@@ -1,5 +1,4 @@
-
-import React from 'react';
+import React from "react";
 import Navbar from "@/components/navigation/Navbar";
 import Footer from "@/components/navigation/Footer";
 
@@ -9,18 +8,12 @@ interface MainLayoutProps {
   showFooter?: boolean;
 }
 
-const MainLayout = ({ 
-  children, 
-  showNavigation = true, 
-  showFooter = true 
-}: MainLayoutProps) => {
+const MainLayout = ({ children, showNavigation = true, showFooter = true }: MainLayoutProps) => {
   return (
     <div className="min-h-screen flex flex-col">
       {showNavigation && <Navbar />}
-      <main className="flex-1">
-        {children}
-      </main>
-      {showFooter && <Footer />}
+      <main className="flex-1">{children}</main>
+      /* {showFooter && <Footer />} */
     </div>
   );
 };
