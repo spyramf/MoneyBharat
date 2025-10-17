@@ -99,7 +99,7 @@ export function BackgroundPaths({
                       stiffness: 150,
                       damping: 25,
                     }}
-                    className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-[#FFA654] via-[#C7E6A4] to-[#5CCF8A]"
+                    className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-[#FF9E3D] via-[#FFD089] to-[#4FD084] drop-shadow-[0_2px_6px_rgba(0,0,0,0.15)]"
                   >
                     {letter}
                   </motion.span>
