@@ -1,64 +1,43 @@
 import { Badge } from "@/components/ui/badge";
-import { Feature2 } from "@/components/ui/feature-2";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
+import { FeatureCarousel, type Step } from "@/components/ui/animated-feature-carousel";
 
 const ServicesTabSection = () => {
-  const services = [
+  const steps: readonly Step[] = [
     {
+      id: "1",
+      name: "Mutual Funds",
       title: "Grow Your Wealth with Expert-Curated Mutual Funds",
-      description:
-        "Access top-performing mutual funds, SIP calculators, and personalized investment strategies. Start your journey to financial freedom with as little as ₹500 per month. Build a diversified portfolio with expert guidance.",
-      imageSrc:
-        "https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w=800&h=600&fit=crop&q=80",
-      imageAlt: "Mutual Funds Investment Dashboard",
-      buttonPrimary: {
-        label: "Explore Mutual Funds",
-        href: "/mutual-funds",
-      },
-      buttonSecondary: {
-        label: "Calculate SIP",
-        href: "/sip-calculator",
-      },
+      description: "Access top-performing mutual funds, SIP calculators, and personalized investment strategies. Start your journey to financial freedom with as little as ₹500 per month.",
     },
     {
+      id: "2",
+      name: "Insurance",
       title: "Secure Your Family's Future with Comprehensive Coverage",
-      description:
-        "Compare plans from top insurers for health, life, and vehicle insurance. Get instant quotes, expert guidance, and save up to 30% on premiums with our platform. Protect what matters most with tailored coverage.",
-      imageSrc:
-        "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=800&h=600&fit=crop&q=80",
-      imageAlt: "Insurance Protection Plans",
-      buttonPrimary: {
-        label: "Find Insurance Plans",
-        href: "/insurance",
-      },
-      buttonSecondary: {
-        label: "Get Quote",
-        href: "/insurance",
-      },
+      description: "Compare plans from top insurers for health, life, and vehicle insurance. Get instant quotes, expert guidance, and save up to 30% on premiums with our platform.",
     },
     {
+      id: "3",
+      name: "Loans",
       title: "Get Instant Loans at Competitive Interest Rates",
-      description:
-        "Fast-track your dreams with home, personal, car, and education loans. Enjoy hassle-free digital processing, transparent terms, and approval within 24 hours. Flexible repayment options tailored to your needs.",
-      imageSrc:
-        "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=800&h=600&fit=crop&q=80",
-      imageAlt: "Loan Application Services",
-      buttonPrimary: {
-        label: "Apply for Loans",
-        href: "/loans",
-      },
-      buttonSecondary: {
-        label: "Calculate EMI",
-        href: "/emi-calculator",
-      },
+      description: "Fast-track your dreams with home, personal, car, and education loans. Enjoy hassle-free digital processing, transparent terms, and approval within 24 hours.",
+    },
+    {
+      id: "4",
+      name: "Tax Saving",
+      title: "Maximize Your Returns with Smart Tax Planning",
+      description: "Discover tax-saving investment options like ELSS, PPF, and NPS. Get expert advice on tax-efficient strategies to save more and grow your wealth legally.",
     },
   ];
+
+  const images = {
+    alt: "Financial Services",
+    step1img1: "https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w=800&h=600&fit=crop&q=80",
+    step1img2: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop&q=80",
+    step2img1: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=800&h=600&fit=crop&q=80",
+    step2img2: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&h=600&fit=crop&q=80",
+    step3img: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=800&h=600&fit=crop&q=80",
+    step4img: "https://images.unsplash.com/photo-1554224154-26032ffc0d07?w=800&h=600&fit=crop&q=80",
+  };
 
   return (
     <section className="py-20 lg:py-32 bg-gradient-to-b from-background to-muted/20">
@@ -78,25 +57,7 @@ const ServicesTabSection = () => {
           </p>
         </div>
 
-        <Carousel
-          opts={{
-            align: "start",
-            loop: true,
-          }}
-          className="w-full max-w-6xl mx-auto"
-        >
-          <CarouselContent>
-            {services.map((service, index) => (
-              <CarouselItem key={index}>
-                <div className="py-8">
-                  <Feature2 {...service} />
-                </div>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-          <CarouselPrevious className="hidden md:flex -left-12 lg:-left-16" />
-          <CarouselNext className="hidden md:flex -right-12 lg:-right-16" />
-        </Carousel>
+        <FeatureCarousel image={images} steps={steps} />
       </div>
     </section>
   );
