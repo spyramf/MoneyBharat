@@ -61,12 +61,15 @@ const LoanSection = () => {
                   </li>
                 </ul>
               </CardContent>
-              {/* <CardFooter>
-                <a href="/loans" className="text-fintech-green hover:text-fintech-green transition-colors font-medium flex items-center">
-                  Apply for Personal Loan
+              <CardFooter>
+                <a
+                  href="/loans"
+                  className="text-fintech-green hover:text-fintech-green transition-colors font-medium flex items-center"
+                >
+                  Explore for Personal Loan
                   <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </a>
-              </CardFooter> */}
+              </CardFooter>
             </Card>
           </motion.div>
 
@@ -95,12 +98,15 @@ const LoanSection = () => {
                   </li>
                 </ul>
               </CardContent>
-              {/* <CardFooter>
-                <a href="/loans/home" className="text-fintech-green hover:text-fintech-green transition-colors font-medium flex items-center">
-                  Apply for Home Loan
+              <CardFooter>
+                <a
+                  href="/loans/home"
+                  className="text-fintech-green hover:text-fintech-green transition-colors font-medium flex items-center"
+                >
+                  Explore for Home Loan
                   <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </a>
-              </CardFooter> */}
+              </CardFooter>
             </Card>
           </motion.div>
 
@@ -129,12 +135,15 @@ const LoanSection = () => {
                   </li>
                 </ul>
               </CardContent>
-              {/* <CardFooter>
-                <a href="/loans/business" className="text-fintech-green hover:text-fintech-green transition-colors font-medium flex items-center">
-                  Apply for Business Loan
+              <CardFooter>
+                <a
+                  href="/loans/business"
+                  className="text-fintech-green hover:text-fintech-green transition-colors font-medium flex items-center"
+                >
+                  Explore for Business Loan
                   <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </a>
-              </CardFooter> */}
+              </CardFooter>
             </Card>
           </motion.div>
         </div>
