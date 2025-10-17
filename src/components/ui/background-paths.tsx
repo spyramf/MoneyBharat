@@ -92,15 +92,14 @@ export function BackgroundPaths({
                   <motion.span
                     key={`${wordIndex}-${letterIndex}`}
                     initial={{ y: 100, opacity: 0 }}
-                    animate={{ y: 0, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
                     transition={{
                       delay: wordIndex * 0.1 + letterIndex * 0.03,
                       type: "spring",
                       stiffness: 150,
                       damping: 25,
                     }}
-                    className="inline-block text-transparent bg-clip-text 
-                                        bg-gradient-to-r from-foreground via-primary to-foreground"
+                    className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-[#FFA654] via-[#C7E6A4] to-[#5CCF8A]"
                   >
                     {letter}
                   </motion.span>
