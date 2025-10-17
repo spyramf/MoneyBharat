@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import { CreditCard, BadgeDollarSign, Wallet, CheckCircle, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -9,8 +8,8 @@ const LoanSection = () => {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.2 }
-    }
+      transition: { staggerChildren: 0.2 },
+    },
   };
 
   const itemVariants = {
@@ -18,16 +17,16 @@ const LoanSection = () => {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.5 }
-    }
+      transition: { duration: 0.5 },
+    },
   };
 
   return (
-    <motion.section 
-      className="py-16 md:py-24 bg-white" 
-      initial="hidden" 
-      whileInView="visible" 
-      viewport={{ once: true, amount: 0.2 }} 
+    <motion.section
+      className="py-16 md:py-24 bg-white"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
       variants={containerVariants}
     >
       <div className="container mx-auto px-4">
@@ -35,7 +34,7 @@ const LoanSection = () => {
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Loan Solutions</h2>
           <p className="text-gray-600">Fast and hassle-free loans with competitive interest rates</p>
         </motion.div>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           <motion.div variants={itemVariants}>
             <Card className="border-0 shadow-md hover:shadow-xl transition-shadow duration-300 hover:-translate-y-1">
@@ -62,15 +61,15 @@ const LoanSection = () => {
                   </li>
                 </ul>
               </CardContent>
-              <CardFooter>
+              {/* <CardFooter>
                 <a href="/loans" className="text-fintech-green hover:text-fintech-green transition-colors font-medium flex items-center">
                   Apply for Personal Loan
                   <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </a>
-              </CardFooter>
+              </CardFooter> */}
             </Card>
           </motion.div>
-          
+
           <motion.div variants={itemVariants}>
             <Card className="border-0 shadow-md hover:shadow-xl transition-shadow duration-300 hover:-translate-y-1">
               <CardHeader className="pb-4">
@@ -96,15 +95,15 @@ const LoanSection = () => {
                   </li>
                 </ul>
               </CardContent>
-              <CardFooter>
+              {/* <CardFooter>
                 <a href="/loans/home" className="text-fintech-green hover:text-fintech-green transition-colors font-medium flex items-center">
                   Apply for Home Loan
                   <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </a>
-              </CardFooter>
+              </CardFooter> */}
             </Card>
           </motion.div>
-          
+
           <motion.div variants={itemVariants}>
             <Card className="border-0 shadow-md hover:shadow-xl transition-shadow duration-300 hover:-translate-y-1">
               <CardHeader className="pb-4">
@@ -130,22 +129,22 @@ const LoanSection = () => {
                   </li>
                 </ul>
               </CardContent>
-              <CardFooter>
+              {/* <CardFooter>
                 <a href="/loans/business" className="text-fintech-green hover:text-fintech-green transition-colors font-medium flex items-center">
                   Apply for Business Loan
                   <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </a>
-              </CardFooter>
+              </CardFooter> */}
             </Card>
           </motion.div>
         </div>
-        
-        <motion.div className="mt-12 text-center" variants={itemVariants}>
+
+        {/* <motion.div className="mt-12 text-center" variants={itemVariants}>
           <Button className="bg-gradient-to-r from-fintech-green to-fintech-green hover:opacity-90 text-white px-8 py-6">
             Check Loan Eligibility
             <ArrowRight className="ml-2 h-4 w-4" />
           </Button>
-        </motion.div>
+        </motion.div> */}
       </div>
     </motion.section>
   );
