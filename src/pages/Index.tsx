@@ -1,6 +1,6 @@
 import { lazy, Suspense } from "react";
 import Navbar from "@/components/Navbar";
-import { HeroGeometric } from "@/components/ui/shape-landing-hero";
+import AnimatedShaderHero from "@/components/ui/animated-shader-hero";
 import Footer from "@/components/Footer";
 import StructuredData from "@/components/seo/StructuredData";
 import SEOHead from "@/components/seo/SEOHead";
@@ -44,16 +44,19 @@ const Index = () => {
   const homeFaqData = [
     {
       question: "What makes Money Bharat different from other financial platforms?",
-      answer: "Money Bharat combines cutting-edge technology with personalized financial advice. We offer zero-commission mutual funds, comprehensive insurance coverage, and instant loan approvals through our AI-powered platform."
+      answer:
+        "Money Bharat combines cutting-edge technology with personalized financial advice. We offer zero-commission mutual funds, comprehensive insurance coverage, and instant loan approvals through our AI-powered platform.",
     },
     {
       question: "How secure is Money Bharat for online financial transactions?",
-      answer: "Money Bharat employs bank-grade 256-bit SSL encryption, multi-factor authentication, and follows RBI guidelines for financial security."
+      answer:
+        "Money Bharat employs bank-grade 256-bit SSL encryption, multi-factor authentication, and follows RBI guidelines for financial security.",
     },
     {
       question: "What types of mutual funds can I invest in through Money Bharat?",
-      answer: "We offer over 2,000+ mutual fund schemes including equity funds, debt funds, hybrid funds, ELSS tax-saving funds, international funds, and sectoral funds from top AMCs."
-    }
+      answer:
+        "We offer over 2,000+ mutual fund schemes including equity funds, debt funds, hybrid funds, ELSS tax-saving funds, international funds, and sectoral funds from top AMCs.",
+    },
   ];
 
   // Review data for structured markup
@@ -61,90 +64,101 @@ const Index = () => {
     {
       name: "Rajesh Sharma",
       quote: "Money Bharat's mutual fund recommendations helped me achieve 18% returns in just one year.",
-      rating: "5"
+      rating: "5",
     },
     {
-      name: "Priya Mehta", 
+      name: "Priya Mehta",
       quote: "Money Bharat's experts guided me to a comprehensive insurance plan that saved us 30% on premiums.",
-      rating: "5"
+      rating: "5",
     },
     {
       name: "Vikram Singh",
       quote: "Getting a home loan through Money Bharat was incredibly fast and easy.",
-      rating: "5"
-    }
+      rating: "5",
+    },
   ];
 
   return (
     <div className="min-h-screen">
       {/* Handle URL canonicalization - only enable in production */}
       <URLRedirectHandler enableRedirect={import.meta.env.PROD} />
-      
-      <SEOHead 
+
+      <SEOHead
         title="Money Bharat Finance - Mutual Funds, Insurance & Loans"
         description="Grow your wealth with Money Bharat Finance - India's AI-powered platform for mutual funds, SIP investments, health & life insurance, and instant personal loans. Expert advisory with ₹5000Cr+ AUM."
         keywords="mutual funds India, SIP investment, health insurance, personal loans, financial planning, investment advisory, Money Bharat, wealth management"
       />
-      
-      <StructuredData 
-        page="home" 
-        faqData={homeFaqData}
-        reviewData={reviewData}
-      />
-      
+
+      <StructuredData page="home" faqData={homeFaqData} reviewData={reviewData} />
+
       <Navbar />
       <BreadcrumbSEO />
-      
+
       {/* Critical above-the-fold content */}
-      <HeroGeometric
-        badge="Trusted by 50,000+ Investors Across India"
-        title1="Your Financial Future"
-        title2="Starts Here"
-        description="Grow your wealth with AI-powered mutual funds, comprehensive insurance, and instant loans - all in one platform. Expert advisory backed by ₹5000Cr+ AUM."
+      <AnimatedShaderHero
+        trustBadge={{
+          text: "Trusted by 50,000+ Investors Across India",
+          icon: "✨",
+        }}
+        headline={{
+          line1: "Your Future",
+          line2: "Starts Here",
+        }}
+        subtitle="Grow your wealth with AI-powered mutual funds, comprehensive insurance, and instant loans - all in one platform. Expert advisory backed by ₹5000Cr+ AUM."
+        buttons={{
+          primary: {
+            text: "Start Investing Now",
+            onClick: () => (window.location.href = "https://client.moneybharat.co/NewOnBoarding/SignUp"),
+          },
+          secondary: {
+            text: "Explore Services",
+            onClick: () => window.scrollTo({ top: window.innerHeight, behavior: "smooth" }),
+          },
+        }}
       />
-      
+
       {/* Load services section without Suspense (critical) */}
       <ServicesTabSection />
-      
+
       {/* How it works section for content expansion */}
       <HowItWorksSection />
-      
+
       <Suspense fallback={<SectionLoader />}>
         <FeaturesSection />
       </Suspense>
-      
+
       <Suspense fallback={<SectionLoader />}>
         <MutualFundSection />
       </Suspense>
-      
+
       <Suspense fallback={<SectionLoader />}>
         <InsuranceSection />
       </Suspense>
-      
+
       <Suspense fallback={<SectionLoader />}>
         <LoanSection />
       </Suspense>
-      
+
       <Suspense fallback={<SectionLoader />}>
         <FinancialToolsSection />
       </Suspense>
-      
+
       <Suspense fallback={<SectionLoader />}>
         <TrustSecuritySection />
       </Suspense>
-      
+
       <Suspense fallback={<SectionLoader />}>
         <TestimonialsSection />
       </Suspense>
-      
+
       <Suspense fallback={<SectionLoader />}>
         <FAQSection />
       </Suspense>
-      
+
       <Suspense fallback={<SectionLoader />}>
         <CTASection />
       </Suspense>
-      
+
       <Footer />
     </div>
   );
