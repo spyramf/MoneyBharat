@@ -18,6 +18,7 @@ import MutualFundTerms from "@/components/mutual-funds/MutualFundTerms";
 import ChooseMutualFundsTips from "@/components/mutual-funds/ChooseMutualFundsTips";
 import MutualFundFAQs from "@/components/mutual-funds/MutualFundFAQs";
 import SipCalculator from "@/components/mutual-funds/SipCalculator";
+import { Case } from "@/components/ui/cases-with-infinite-scroll";
 
 import {
   sipFeatures,
@@ -64,6 +65,7 @@ const MutualFunds = () => {
       <MutualFundTerms terms={mutualFundTerms} />
       <FundCategories categories={fundCategories} />
       <TopPerformingFunds funds={topPerformingFunds} />
+      <Case />
       <MutualFundFAQs items={faqItems} />
       {/* <SipCalculator /> */}
       <Footer />
