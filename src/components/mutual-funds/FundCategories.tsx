@@ -1,4 +1,3 @@
-
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -27,7 +26,7 @@ const FundCategories = ({ categories }: FundCategoriesProps) => {
             Discover the right type of mutual fund for your investment goals and risk appetite
           </p>
         </div>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
           {categories.map((fund, index) => (
             <div
@@ -40,27 +39,27 @@ const FundCategories = ({ categories }: FundCategoriesProps) => {
                   {fund.icon}
                 </div>
               </div>
-              
+
               <h3 className={`text-2xl font-bold text-center mb-6 ${fund.textColor}`}>{fund.type}</h3>
-              
+
               <div className="flex justify-between items-center mb-4">
                 <p className="text-gray-600">Expected Returns</p>
                 <p className="font-bold">{fund.expectedReturns}</p>
               </div>
-              
+
               <div className="flex justify-between items-center mb-6">
                 <p className="text-gray-600">Risk Level</p>
                 <p className="font-bold">{fund.riskLevel}</p>
               </div>
-              
+
               <p className="text-gray-600 text-center mb-6">{fund.description}</p>
-              
-              <div className="flex justify-center">
+
+              {/* <div className="flex justify-center">
                 <Button variant="outline" className="bg-white rounded-full hover:bg-gray-50 group">
                   Explore Funds
                   <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </Button>
-              </div>
+              </div> */}
             </div>
           ))}
         </div>
