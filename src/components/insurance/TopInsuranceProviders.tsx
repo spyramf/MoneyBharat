@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
@@ -26,10 +25,11 @@ const TopInsuranceProviders = ({ providers }: TopInsuranceProvidersProps) => {
         <div className="max-w-3xl mx-auto text-center mb-10">
           <h2 className="text-3xl font-bold mb-4">Top Insurance Providers</h2>
           <p className="text-lg text-gray-600">
-            Compare the best insurance companies based on claim settlement ratio, network hospitals, and customer ratings
+            Compare the best insurance companies based on claim settlement ratio, network hospitals, and customer
+            ratings
           </p>
         </div>
-        
+
         <div className="overflow-x-auto rounded-lg border border-gray-100 bg-white shadow-sm">
           <Table>
             <TableHeader className="bg-gray-50">
@@ -56,10 +56,10 @@ const TopInsuranceProviders = ({ providers }: TopInsuranceProvidersProps) => {
                   <TableCell>{provider.networkHospitals}</TableCell>
                   <TableCell>{provider.rating}/5</TableCell>
                   <TableCell>
-                    <Badge 
+                    <Badge
                       className={`${
-                        provider.riskProfile === "Very Good" 
-                          ? "bg-green-100 text-green-800" 
+                        provider.riskProfile === "Very Good"
+                          ? "bg-green-100 text-green-800"
                           : "bg-blue-100 text-blue-800"
                       }`}
                     >
@@ -71,13 +71,13 @@ const TopInsuranceProviders = ({ providers }: TopInsuranceProvidersProps) => {
             </TableBody>
           </Table>
         </div>
-        
-        <div className="text-center mt-8">
+
+        {/* <div className="text-center mt-8">
           <Button variant="outline" className="border-fintech-purple text-fintech-purple">
             View All Insurance Providers
             <ArrowRight className="ml-2 h-4 w-4" />
           </Button>
-        </div>
+        </div> */}
       </div>
     </section>
   );
