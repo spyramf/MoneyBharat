@@ -5,23 +5,28 @@ import {
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel";
+import AxisMF from "@/assets/mutual-fund-partners/AXISMUTUALFUND_MF.png";
+import DspMF from "@/assets/mutual-fund-partners/DSP_MF.png";
+import BajajFinservMF from "@/assets/mutual-fund-partners/BAJAJ_FINSERV_MF.png";
+import BandhanMF from "@/assets/mutual-fund-partners/BANDHANMUTUALFUND_MF.png";
+import BankOfIndiaMF from "@/assets/mutual-fund-partners/BANKOFINDIAMUTUALFUND_MF.png";
+import BarodaBNPParibasMF from "@/assets/mutual-fund-partners/BARODABNPPARIBASMUTUALFUND_MF.png";
+import BirlaSunLifeMF from "@/assets/mutual-fund-partners/BirlaSunLifeMutualFund_MF.png";
+import CanaraRobecoMF from "@/assets/mutual-fund-partners/CANARAROBECOMUTUALFUND_MF.png";
+import EdelweissMF from "@/assets/mutual-fund-partners/EDELWEISSMUTUALFUND_MF.png";
+import ThreeSixtyOneMF from "@/assets/mutual-fund-partners/360_ONE_MUTUALFUND_MF.png";
 
 const mutualFundPartners = [
-  "HDFC MF",
-  "ICICI Prudential",
-  "SBI MF",
-  "Axis MF",
-  "Nippon India",
-  "Kotak MF",
-  "Aditya Birla SL",
-  "UTI MF",
-  "DSP MF",
-  "Franklin Templeton",
-  "IDFC MF",
-  "L&T MF",
-  "Mirae Asset",
-  "Motilal Oswal",
-  "Tata MF"
+  { name: "360 ONE MF", logo: ThreeSixtyOneMF },
+  { name: "Axis MF", logo: AxisMF },
+  { name: "Bajaj Finserv MF", logo: BajajFinservMF },
+  { name: "Bandhan MF", logo: BandhanMF },
+  { name: "Bank of India MF", logo: BankOfIndiaMF },
+  { name: "Baroda BNP Paribas MF", logo: BarodaBNPParibasMF },
+  { name: "Aditya Birla Sun Life MF", logo: BirlaSunLifeMF },
+  { name: "Canara Robeco MF", logo: CanaraRobecoMF },
+  { name: "DSP MF", logo: DspMF },
+  { name: "Edelweiss MF", logo: EdelweissMF },
 ];
 
 function Case() {
@@ -58,10 +63,12 @@ function Case() {
             <CarouselContent>
               {mutualFundPartners.map((partner, index) => (
                 <CarouselItem className="basis-1/2 md:basis-1/3 lg:basis-1/6" key={index}>
-                  <div className="flex rounded-lg aspect-square bg-white border border-gray-200 shadow-sm hover:shadow-md transition-shadow items-center justify-center p-6">
-                    <span className="text-sm md:text-base font-semibold text-fintech-green text-center">
-                      {partner}
-                    </span>
+                  <div className="flex rounded-lg aspect-square bg-white border border-gray-200 shadow-sm hover:shadow-md transition-shadow items-center justify-center p-4">
+                    <img 
+                      src={partner.logo} 
+                      alt={partner.name}
+                      className="w-full h-full object-contain"
+                    />
                   </div>
                 </CarouselItem>
               ))}
