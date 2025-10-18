@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Link } from "react-router-dom";
@@ -29,10 +28,10 @@ const InsuranceCard = ({
       </div>
       <h3 className="text-xl font-semibold mb-2">{title}</h3>
       <p className="text-gray-600 mb-4">{description}</p>
-      <Link to={linkTo} className="inline-flex items-center text-sm font-medium text-fintech-purple">
+      {/* <Link to={linkTo} className="inline-flex items-center text-sm font-medium text-fintech-purple">
         {linkText}
         <ArrowRight className="ml-1 h-4 w-4" />
-      </Link>
+      </Link> */}
     </CardContent>
   </Card>
 );
