@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
@@ -37,10 +36,10 @@ const Login = () => {
   const onSubmit = async (data: LoginFormValues) => {
     const result = await login(data.username, data.password);
     
-    if (!result.error) {
+    if (result.success) {
       navigate('/admin');
     } else {
-      setError(result.error || "Invalid credentials");
+      setError(result.error || "Invalid email or password");
     }
   };
 
@@ -82,18 +81,18 @@ const Login = () => {
                   name="username"
                   render={({ field }) => (
                     <FormItem>
-                  <FormLabel>Email</FormLabel>
-                  <FormControl>
-                    <div className="relative">
-                      <Mail className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
-                      <Input 
-                        className="pl-9" 
-                        type="email"
-                        placeholder="Enter your email" 
-                        {...field} 
-                      />
-                    </div>
-                  </FormControl>
+                      <FormLabel>Email</FormLabel>
+                      <FormControl>
+                        <div className="relative">
+                          <Mail className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                          <Input 
+                            className="pl-9" 
+                            type="email"
+                            placeholder="Enter your email" 
+                            {...field} 
+                          />
+                        </div>
+                      </FormControl>
                       <FormMessage />
                     </FormItem>
                   )}

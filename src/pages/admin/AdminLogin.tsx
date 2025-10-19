@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -6,28 +5,29 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { toast } from 'sonner';
+import { useAuth } from '@/context/AuthContext';
 
 const AdminLogin = () => {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
 
-    try {
-      // Use Supabase authentication - redirect users to main admin login
-      toast.error('Please use the main admin login at /admin/login');
-      setTimeout(() => {
-        navigate('/admin/login');
-      }, 2000);
-    } catch (error) {
-      toast.error('An error occurred');
-    } finally {
-      setIsLoading(false);
+    const result = await login(email, password);
+    
+    if (result.success) {
+      toast.success('Login successful!');
+      navigate('/admin');
+    } else {
+      toast.error(result.error || 'Invalid credentials');
     }
+
+    setIsLoading(false);
   };
 
   return (
@@ -39,13 +39,14 @@ const AdminLogin = () => {
         <CardContent>
           <form onSubmit={handleLogin} className="space-y-4">
             <div>
-              <Label htmlFor="username">Username</Label>
+              <Label htmlFor="email">Email</Label>
               <Input
-                id="username"
-                type="text"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
+                id="email"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 required
+                placeholder="admin@example.com"
               />
             </div>
             <div>
@@ -62,11 +63,6 @@ const AdminLogin = () => {
               {isLoading ? 'Logging in...' : 'Login'}
             </Button>
           </form>
-          <div className="mt-4 text-sm text-gray-600 text-center">
-            <p>Demo credentials:</p>
-            <p>Username: admin</p>
-            <p>Password: admin123</p>
-          </div>
         </CardContent>
       </Card>
     </div>
