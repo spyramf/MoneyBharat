@@ -246,7 +246,7 @@ const TaxSaving = () => {
     <div className="min-h-screen flex flex-col">
       <Navbar />
       
-      <main className="flex-grow py-8 md:py-16 bg-gradient-to-b from-purple-50 to-white">
+      <main className="flex-grow pt-24 pb-8 md:pt-28 md:pb-16 bg-gradient-to-b from-purple-50 to-white">
         <div className="container mx-auto px-4">
           <div className="max-w-5xl mx-auto">
             <div className="mb-10">
