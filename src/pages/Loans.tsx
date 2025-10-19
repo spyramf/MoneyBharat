@@ -349,7 +349,7 @@ const Loans = () => {
                   </div>
                 </CardContent>
                 <CardFooter className="bg-gray-50 border-t border-gray-100">
-                  <Button className="w-full bg-fintech-green hover:bg-fintech-green/90">Apply Now</Button>
+                  <Button className="w-full bg-fintech-green hover:bg-fintech-green/90">Explore Now</Button>
                 </CardFooter>
               </Card>
             ))}
@@ -546,7 +546,9 @@ const Loans = () => {
                   </div>
 
                   <div className="mt-auto">
-                    <Button className="w-full bg-fintech-green text-white hover:bg-fintech-green/90">Apply Now</Button>
+                    <Button className="w-full bg-fintech-green text-white hover:bg-fintech-green/90">
+                      Explore Now
+                    </Button>
                   </div>
                 </div>
               </div>
