@@ -85,7 +85,7 @@ const AboutUs = () => {
       </section>
 
       {/* Leadership Team Section */}
-      <section className="py-16 px-4 bg-gray-50">
+      {/* <section className="py-16 px-4 bg-gray-50">
         <div className="container mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-2xl md:text-3xl font-bold mb-4">Leadership Team</h2>
@@ -160,7 +160,7 @@ const AboutUs = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Our Milestones Section */}
       <section className="py-16 px-4">
