@@ -426,14 +426,14 @@ const Loans = () => {
                     ))}
                   </ul>
                 </CardContent>
-                <CardFooter>
+                {/* <CardFooter>
                   <Button
                     variant="outline"
                     className="w-full text-fintech-blue border-fintech-blue hover:bg-fintech-blue/10"
                   >
                     Check Eligibility
                   </Button>
-                </CardFooter>
+                </CardFooter> */}
               </Card>
             ))}
           </div>
