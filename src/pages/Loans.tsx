@@ -29,7 +29,6 @@ import GraduationCap from "@/components/icons/GraduationCap";
 import { Link } from "react-router-dom";
 import { Badge } from "@/components/ui/badge";
 import ProductCard from "@/components/ProductCard";
-import LoanBankComparison from "@/components/loans/LoanBankComparison";
 const Loans = () => {
   const [loanAmount, setLoanAmount] = useState<number>(500000);
   const [loanTenure, setLoanTenure] = useState<number>(36);
@@ -426,14 +425,14 @@ const Loans = () => {
                     ))}
                   </ul>
                 </CardContent>
-                <CardFooter>
+                {/* <CardFooter>
                   <Button
                     variant="outline"
                     className="w-full text-fintech-blue border-fintech-blue hover:bg-fintech-blue/10"
                   >
                     Check Eligibility
                   </Button>
-                </CardFooter>
+                </CardFooter> */}
               </Card>
             ))}
           </div>
@@ -558,13 +557,95 @@ const Loans = () => {
         </div>
       </section>
 
-      {/* Bank Comparison - Using component */}
-      <LoanBankComparison
-        title="Compare Loan Options"
-        subtitle="Find the best loan rates and terms from our partner banks"
-        badgeText="Compare & Choose"
-        loanComparisons={loanComparisons}
-      />
+      {/* Bank Comparison - Enhanced with better styling */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <Badge variant="outline" className="mb-2 px-3 py-1 text-fintech-orange border-fintech-orange">
+              Compare & Choose
+            </Badge>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Compare Loan Options</h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Find the best loan rates and terms from our partner banks
+            </p>
+          </div>
+
+          <div className="max-w-5xl mx-auto overflow-hidden rounded-xl shadow-lg border border-gray-100">
+            <div className="bg-gradient-to-r from-fintech-green/10 to-fintech-blue/10 p-6 rounded-t-xl">
+              <h3 className="text-xl font-bold text-center">Compare Loan Options</h3>
+              <p className="text-center text-gray-600 text-sm mt-2">Updated as of May 2025</p>
+            </div>
+
+            <div className="overflow-x-auto bg-white rounded-b-xl">
+              <Table>
+                <TableHeader className="bg-gray-50 border-b border-gray-200">
+                  <TableRow>
+                    <TableHead className="py-4 px-6 text-left font-semibold text-gray-700 w-[200px]">
+                      Bank / NBFC
+                    </TableHead>
+                    <TableHead className="py-4 px-6 text-left font-semibold text-gray-700">Interest Rate</TableHead>
+                    <TableHead className="py-4 px-6 text-left font-semibold text-gray-700">Processing Fee</TableHead>
+                    <TableHead className="py-4 px-6 text-left font-semibold text-gray-700">
+                      Prepayment Charges
+                    </TableHead>
+                    <TableHead className="py-4 px-6 text-center font-semibold text-gray-700 w-[120px]">
+                      Action
+                    </TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {loanComparisons.map((bank, index) => (
+                    <TableRow
+                      key={index}
+                      className={`border-b border-gray-200 hover:bg-gray-50/70 transition-colors ${index % 2 === 0 ? "bg-white" : "bg-gray-50/50"}`}
+                    >
+                      <TableCell className="py-4 px-6">
+                        <div className="flex items-center">
+                          <div className={`bank-avatar bank-avatar-${(index % 5) + 1}`}>{bank.bank.charAt(0)}</div>
+                          <div>
+                            <p className="font-medium">{bank.bank}</p>
+                            <p className="text-xs text-gray-500">Personal Loan</p>
+                          </div>
+                        </div>
+                      </TableCell>
+                      <TableCell className="py-4 px-6">
+                        <Badge variant="outline" className="bg-blue-50 text-blue-700 border-blue-200 font-medium">
+                          {bank.interestRate}
+                        </Badge>
+                      </TableCell>
+                      <TableCell className="py-4 px-6">
+                        <Badge variant="outline" className="bg-amber-50 text-amber-700 border-amber-200 font-medium">
+                          {bank.processingFee}
+                        </Badge>
+                      </TableCell>
+                      <TableCell className="py-4 px-6">
+                        <Badge variant="outline" className="bg-purple-50 text-purple-700 border-purple-200 font-medium">
+                          {bank.prepaymentCharges}
+                        </Badge>
+                      </TableCell>
+                      <TableCell className="py-4 px-6 text-center">
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          className="text-fintech-green border-fintech-green hover:bg-fintech-green/10"
+                        >
+                          Apply
+                        </Button>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </div>
+
+            <div className="bg-gray-50 p-4 border-t border-gray-200 text-center">
+              <p className="text-sm text-gray-600">
+                Rates and charges are indicative and may vary based on eligibility criteria and loan amount
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Features Section */}
       <section className="py-16 bg-gray-50">
