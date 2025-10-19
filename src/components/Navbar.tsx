@@ -45,33 +45,16 @@ const Navbar = () => {
             <Link to="/loans" className="font-medium text-gray-700 hover:text-fintech-green transition-colors">
               Loans
             </Link>
-            <div className="relative group">
-              <button className="font-medium text-gray-700 hover:text-fintech-green transition-colors">
-                Tools
-              </button>
-              <div className="absolute left-0 mt-2 w-48 bg-white rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-                <Link to="/calculators/sip" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-fintech-green rounded-t-lg">
-                  SIP Calculator
-                </Link>
-                <Link to="/calculators/emi" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-fintech-green">
-                  EMI Calculator
-                </Link>
-                <Link to="/tax-saving" className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-fintech-green rounded-b-lg">
-                  Tax Saving
-                </Link>
-              </div>
-            </div>
-            <Link to="/blog" className="font-medium text-gray-700 hover:text-fintech-green transition-colors">
-              Blog
+            <Link to="/booking">
+              <Button variant="outline" className="border-fintech-green text-fintech-green hover:bg-fintech-green hover:text-white px-6 py-5">
+                Book Now
+              </Button>
             </Link>
-            <Link to="/about" className="font-medium text-gray-700 hover:text-fintech-green transition-colors">
-              About Us
-            </Link>
-<a href="https://client.moneybharat.co/Home/Login" target="_blank" rel="noopener noreferrer">
-  <Button className="bg-gradient-to-r from-fintech-green to-fintech-green hover:opacity-90 text-white px-8 py-6">
-    Get Started
-  </Button>
-</a>
+            <a href="https://client.moneybharat.co/Home/Login" target="_blank" rel="noopener noreferrer">
+              <Button className="bg-gradient-to-r from-fintech-green to-fintech-green hover:opacity-90 text-white px-8 py-6">
+                Get Started
+              </Button>
+            </a>
           </div>
 
           {/* Mobile Menu Toggle */}
@@ -92,29 +75,16 @@ const Navbar = () => {
               <Link to="/loans" className="font-medium text-gray-700 hover:text-fintech-green transition-colors" onClick={() => setIsOpen(false)}>
                 Loans
               </Link>
-              <div className="border-t pt-2">
-                <div className="font-medium text-gray-500 text-sm mb-2">Tools</div>
-                <Link to="/calculators/sip" className="block pl-4 py-2 text-gray-700 hover:text-fintech-green transition-colors" onClick={() => setIsOpen(false)}>
-                  SIP Calculator
-                </Link>
-                <Link to="/calculators/emi" className="block pl-4 py-2 text-gray-700 hover:text-fintech-green transition-colors" onClick={() => setIsOpen(false)}>
-                  EMI Calculator
-                </Link>
-                <Link to="/tax-saving" className="block pl-4 py-2 text-gray-700 hover:text-fintech-green transition-colors" onClick={() => setIsOpen(false)}>
-                  Tax Saving
-                </Link>
-              </div>
-              <Link to="/blog" className="font-medium text-gray-700 hover:text-fintech-green transition-colors" onClick={() => setIsOpen(false)}>
-                Blog
+              <Link to="/booking" onClick={() => setIsOpen(false)}>
+                <Button variant="outline" className="border-fintech-green text-fintech-green hover:bg-fintech-green hover:text-white w-full">
+                  Book Now
+                </Button>
               </Link>
-              <Link to="/about" className="font-medium text-gray-700 hover:text-fintech-green transition-colors" onClick={() => setIsOpen(false)}>
-                About Us
-              </Link>
-<a href="https://client.moneybharat.co/Home/Login" target="_blank" rel="noopener noreferrer">
-  <Button className="bg-fintech-green hover:bg-fintech-green/90 text-white w-full rounded-full">
-    Get Started
-  </Button>
-</a>
+              <a href="https://client.moneybharat.co/Home/Login" target="_blank" rel="noopener noreferrer">
+                <Button className="bg-fintech-green hover:bg-fintech-green/90 text-white w-full rounded-full">
+                  Get Started
+                </Button>
+              </a>
             </div>
           </div>}
       </div>

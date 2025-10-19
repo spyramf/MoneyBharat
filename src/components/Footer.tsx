@@ -12,22 +12,19 @@ const Footer = () => {
 
   const quickTools = [{
     name: "SIP Calculator",
-    path: "/tools/sip-calculator"
+    path: "/calculators/sip"
   }, {
     name: "EMI Calculator", 
-    path: "/tools/emi-calculator"
+    path: "/calculators/emi"
   }, {
     name: "Tax Saving",
-    path: "/tools/tax-saving"
-  }, {
-    name: "Book Consultation",
-    path: "/booking"
-  }, {
-    name: "About Us",
-    path: "/about"
+    path: "/tax-saving"
   }, {
     name: "Blog",
     path: "/blog"
+  }, {
+    name: "About Us",
+    path: "/about"
   }];
 
   const trustBadges = [{
