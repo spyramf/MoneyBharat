@@ -379,7 +379,7 @@ const Loans = () => {
                 icon={loan.icon}
                 description={loan.description}
                 features={loan.features}
-                linkText="Learn More"
+                {/* linkText="Learn More" */}
                 linkHref={loan.path}
                 gradient={loan.gradient}
               />
