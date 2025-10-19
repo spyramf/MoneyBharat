@@ -13,24 +13,24 @@ const ContactInfo = () => {
       buttonText: "Call Now",
       available: "Mon-Sat 9AM-7PM IST",
     },
-    {
-      icon: Mail,
-      title: "Email Support",
-      description: "Send us detailed queries anytime",
-      value: "contact@moneybharat.co",
-      action: "mailto:contact@moneybharat.co",
-      buttonText: "Send Email",
-      available: "24/7 Response within 6 hours",
-    },
-    {
-      icon: MessageCircle,
-      title: "WhatsApp Chat",
-      description: "Quick responses on your mobile",
-      value: "+91 9970735694",
-      action: "https://wa.me/919970735694",
-      buttonText: "Chat on WhatsApp",
-      available: "Mon-Sat 9AM-9PM IST",
-    },
+    // {
+    //   icon: Mail,
+    //   title: "Email Support",
+    //   description: "Send us detailed queries anytime",
+    //   value: "contact@moneybharat.co",
+    //   action: "mailto:contact@moneybharat.co",
+    //   buttonText: "Send Email",
+    //   available: "24/7 Response within 6 hours",
+    // },
+    // {
+    //   icon: MessageCircle,
+    //   title: "WhatsApp Chat",
+    //   description: "Quick responses on your mobile",
+    //   value: "+91 9970735694",
+    //   action: "https://wa.me/919970735694",
+    //   buttonText: "Chat on WhatsApp",
+    //   available: "Mon-Sat 9AM-9PM IST",
+    // },
   ];
 
   return (
