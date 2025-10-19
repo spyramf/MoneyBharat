@@ -63,7 +63,6 @@ const LoanBankComparison = ({
                   <TableHead className="py-4 px-6 text-left font-semibold text-gray-700">Interest Rate</TableHead>
                   <TableHead className="py-4 px-6 text-left font-semibold text-gray-700">Processing Fee</TableHead>
                   <TableHead className="py-4 px-6 text-left font-semibold text-gray-700">Prepayment Charges</TableHead>
-                  <TableHead className="py-4 px-6 text-center font-semibold text-gray-700 w-[120px]">Action</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -94,16 +93,6 @@ const LoanBankComparison = ({
                       <Badge variant="outline" className="bg-purple-50 text-purple-700 border-purple-200 font-medium">
                         {bank.prepaymentCharges}
                       </Badge>
-                    </TableCell>
-                    <TableCell className="py-4 px-6 text-center">
-                      <Button 
-                        size="sm" 
-                        variant="outline" 
-                        className="text-fintech-green border-fintech-green hover:bg-fintech-green/10"
-                        onClick={() => onApply && onApply(bank.bank)}
-                      >
-                        Apply
-                      </Button>
                     </TableCell>
                   </TableRow>
                 ))}
