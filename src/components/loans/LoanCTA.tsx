@@ -1,4 +1,3 @@
-
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
@@ -25,7 +24,7 @@ const LoanCTA = ({
   onSecondaryClick,
   gradientFrom = "from-fintech-green",
   gradientTo = "to-fintech-blue",
-  className = ""
+  className = "",
 }: LoanCTAProps) => {
   return (
     <section className={`py-16 bg-gradient-to-r ${gradientFrom} ${gradientTo} relative overflow-hidden ${className}`}>
@@ -40,21 +39,19 @@ const LoanCTA = ({
             </Badge>
           )}
           <h2 className="text-3xl md:text-4xl font-bold mb-4">{title}</h2>
-          <p className="text-xl mb-8">
-            {subtitle}
-          </p>
+          <p className="text-xl mb-8">{subtitle}</p>
           <div className="flex flex-wrap gap-4 justify-center">
-            <Button 
+            {/* <Button 
               size="lg" 
               className="bg-white text-fintech-green hover:bg-white/90"
               onClick={onPrimaryClick}
             >
               {primaryButtonText}
-            </Button>
+            </Button> */}
             {secondaryButtonText && (
-              <Button 
-                size="lg" 
-                variant="outline" 
+              <Button
+                size="lg"
+                variant="outline"
                 className="border-white text-white hover:bg-white/10"
                 onClick={onSecondaryClick}
               >
