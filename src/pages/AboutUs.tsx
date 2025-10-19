@@ -1,4 +1,3 @@
-
 import { Shield, Users, TrendingUp, Award, Milestone } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
@@ -21,8 +20,8 @@ const AboutUs = () => {
               <span className="gradient-text">About</span> MoneyBharat
             </h1>
             <p className="text-lg md:text-xl text-gray-700 mb-8">
-              Empowering Indians to make better financial decisions through transparent, 
-              technology-driven financial solutions.
+              Empowering Indians to make better financial decisions through transparent, technology-driven financial
+              solutions.
             </p>
           </div>
         </div>
@@ -35,18 +34,18 @@ const AboutUs = () => {
             <div>
               <h2 className="text-2xl md:text-3xl font-bold mb-6">Our Story</h2>
               <p className="text-gray-700 mb-4">
-                Founded in 2022, MoneyBharat was created with a mission to transform how Indians 
-                interact with financial products. We recognized that despite India's rapid digital 
-                transformation, financial services remained complex and often inaccessible to many.
+                Founded in 2022, MoneyBharat was created with a mission to transform how Indians interact with financial
+                products. We recognized that despite India's rapid digital transformation, financial services remained
+                complex and often inaccessible to many.
               </p>
               <p className="text-gray-700 mb-4">
-                Our founders, with decades of experience in finance and technology, set out to build 
-                a platform that makes financial products transparent, accessible, and easy to understand 
-                for everyone - from first-time investors to seasoned professionals.
+                Our founders, with decades of experience in finance and technology, set out to build a platform that
+                makes financial products transparent, accessible, and easy to understand for everyone - from first-time
+                investors to seasoned professionals.
               </p>
               <p className="text-gray-700">
-                Today, we serve millions of Indians, helping them make informed decisions about investments, 
-                insurance, and loans through our technology-driven approach and customer-first philosophy.
+                Today, we serve millions of Indians, helping them make informed decisions about investments, insurance,
+                and loans through our technology-driven approach and customer-first philosophy.
               </p>
             </div>
             <div className="rounded-lg overflow-hidden shadow-lg">
@@ -68,99 +67,20 @@ const AboutUs = () => {
             <div className="glass-card p-8">
               <h3 className="text-xl font-bold mb-4">Our Vision</h3>
               <p className="text-gray-700">
-                To become India's most trusted financial platform, enabling financial inclusion and 
-                prosperity for every Indian through technology-driven solutions.
+                To become India's most trusted financial platform, enabling financial inclusion and prosperity for every
+                Indian through technology-driven solutions.
               </p>
             </div>
             <div className="glass-card p-8">
               <h3 className="text-xl font-bold mb-4">Our Mission</h3>
               <p className="text-gray-700">
-                To simplify financial decision-making by providing transparent, unbiased information and 
-                innovative tools that help users compare, choose, and manage financial products that best 
-                suit their unique needs.
+                To simplify financial decision-making by providing transparent, unbiased information and innovative
+                tools that help users compare, choose, and manage financial products that best suit their unique needs.
               </p>
             </div>
           </div>
         </div>
       </section>
-
-      {/* Leadership Team Section */}
-      {/* <section className="py-16 px-4 bg-gray-50">
-        <div className="container mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-2xl md:text-3xl font-bold mb-4">Leadership Team</h2>
-            <p className="text-gray-700 max-w-3xl mx-auto">
-              Meet the experienced professionals behind Money Bharat's success.
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {/* Team Member 1 */}
-            <div className="bg-white p-6 rounded-lg shadow-md">
-              <div className="mb-6 flex justify-center">
-                <Avatar className="w-32 h-32 border-4 border-fintech-purple/20">
-                  <AvatarFallback className="bg-fintech-deep-purple text-white text-2xl">
-                    RK
-                  </AvatarFallback>
-                </Avatar>
-              </div>
-              <h3 className="font-bold text-xl mb-1">Rajesh Kumar</h3>
-              <p className="text-fintech-orange font-medium mb-3">Founder & CEO</p>
-              <p className="text-gray-600">
-                15+ years of experience in financial services. Former VP at HDFC Bank.
-              </p>
-            </div>
-            
-            {/* Team Member 2 */}
-            <div className="bg-white p-6 rounded-lg shadow-md">
-              <div className="mb-6 flex justify-center">
-                <Avatar className="w-32 h-32 border-4 border-fintech-purple/20">
-                  <AvatarFallback className="bg-fintech-blue text-white text-2xl">
-                    AV
-                  </AvatarFallback>
-                </Avatar>
-              </div>
-              <h3 className="font-bold text-xl mb-1">Anjali Verma</h3>
-              <p className="text-fintech-orange font-medium mb-3">Chief Investment Officer</p>
-              <p className="text-gray-600">
-                SEBI registered investment advisor with expertise in mutual funds and equity markets.
-              </p>
-            </div>
-            
-            {/* Team Member 3 */}
-            <div className="bg-white p-6 rounded-lg shadow-md">
-              <div className="mb-6 flex justify-center">
-                <Avatar className="w-32 h-32 border-4 border-fintech-purple/20">
-                  <AvatarFallback className="bg-fintech-orange text-white text-2xl">
-                    VS
-                  </AvatarFallback>
-                </Avatar>
-              </div>
-              <h3 className="font-bold text-xl mb-1">Vikram Singh</h3>
-              <p className="text-fintech-orange font-medium mb-3">Head of Technology</p>
-              <p className="text-gray-600">
-                Tech leader with experience at Paytm and PhonePe. Built scalable fintech platforms.
-              </p>
-            </div>
-            
-            {/* Team Member 4 */}
-            <div className="bg-white p-6 rounded-lg shadow-md">
-              <div className="mb-6 flex justify-center">
-                <Avatar className="w-32 h-32 border-4 border-fintech-purple/20">
-                  <AvatarFallback className="bg-fintech-purple text-white text-2xl">
-                    PS
-                  </AvatarFallback>
-                </Avatar>
-              </div>
-              <h3 className="font-bold text-xl mb-1">Priya Sharma</h3>
-              <p className="text-fintech-orange font-medium mb-3">Head of Customer Experience</p>
-              <p className="text-gray-600">
-                Customer service expert focused on building seamless financial journeys.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section> */}
 
       {/* Our Milestones Section */}
       <section className="py-16 px-4">
@@ -171,11 +91,11 @@ const AboutUs = () => {
               Key moments in our journey to transform financial services in India.
             </p>
           </div>
-          
+
           <div className="relative">
             {/* Vertical Timeline Line */}
             <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gray-200"></div>
-            
+
             {/* Milestone 1 */}
             <div className="relative z-10">
               <div className="flex items-center justify-center mb-8">
@@ -192,7 +112,7 @@ const AboutUs = () => {
                 <div className="md:pl-12"></div>
               </div>
             </div>
-            
+
             {/* Milestone 2 */}
             <div className="relative z-10">
               <div className="flex items-center justify-center mb-8">
@@ -203,13 +123,11 @@ const AboutUs = () => {
                 <div className="md:pl-12">
                   <h3 className="text-lg font-bold text-fintech-deep-purple">2019</h3>
                   <h4 className="text-xl font-bold mb-2">AMFI Registration</h4>
-                  <p className="text-gray-600">
-                    Received official AMFI registration and partnered with first 10 AMCs.
-                  </p>
+                  <p className="text-gray-600">Received official AMFI registration and partnered with first 10 AMCs.</p>
                 </div>
               </div>
             </div>
-            
+
             {/* Milestone 3 */}
             <div className="relative z-10">
               <div className="flex items-center justify-center mb-8">
@@ -226,7 +144,7 @@ const AboutUs = () => {
                 <div className="md:pl-12"></div>
               </div>
             </div>
-            
+
             {/* Milestone 4 */}
             <div className="relative z-10">
               <div className="flex items-center justify-center mb-8">
@@ -243,7 +161,7 @@ const AboutUs = () => {
                 </div>
               </div>
             </div>
-            
+
             {/* Milestone 5 */}
             <div className="relative z-10">
               <div className="flex items-center justify-center mb-8">
@@ -260,7 +178,7 @@ const AboutUs = () => {
                 <div className="md:pl-12"></div>
               </div>
             </div>
-            
+
             {/* Milestone 6 */}
             <div className="relative z-10">
               <div className="flex items-center justify-center mb-8">
@@ -290,7 +208,7 @@ const AboutUs = () => {
               These principles guide everything we do at MoneyBharat, from product development to customer service.
             </p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <Card className="border-t-4 border-fintech-purple">
               <CardContent className="pt-6">
@@ -303,7 +221,7 @@ const AboutUs = () => {
                 </p>
               </CardContent>
             </Card>
-            
+
             <Card className="border-t-4 border-fintech-blue">
               <CardContent className="pt-6">
                 <div className="mb-4">
@@ -315,7 +233,7 @@ const AboutUs = () => {
                 </p>
               </CardContent>
             </Card>
-            
+
             <Card className="border-t-4 border-fintech-orange">
               <CardContent className="pt-6">
                 <div className="mb-4">
@@ -327,7 +245,7 @@ const AboutUs = () => {
                 </p>
               </CardContent>
             </Card>
-            
+
             <Card className="border-t-4 border-fintech-deep-purple">
               <CardContent className="pt-6">
                 <div className="mb-4">
@@ -352,7 +270,7 @@ const AboutUs = () => {
               We offer a comprehensive suite of financial products designed to meet the diverse needs of our users.
             </p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="text-center">
               <div className="bg-gradient-to-r from-fintech-purple/10 to-fintech-blue/10 p-6 rounded-full h-24 w-24 flex items-center justify-center mx-auto mb-4">
@@ -363,7 +281,7 @@ const AboutUs = () => {
                 Compare and invest in a wide range of mutual funds with low-cost SIPs starting at just ₹100.
               </p>
             </div>
-            
+
             <div className="text-center">
               <div className="bg-gradient-to-r from-fintech-purple/10 to-fintech-blue/10 p-6 rounded-full h-24 w-24 flex items-center justify-center mx-auto mb-4">
                 <Shield className="h-10 w-10 text-fintech-blue" />
@@ -373,14 +291,15 @@ const AboutUs = () => {
                 Protect yourself and your loved ones with comprehensive insurance solutions at competitive premiums.
               </p>
             </div>
-            
+
             <div className="text-center">
               <div className="bg-gradient-to-r from-fintech-purple/10 to-fintech-blue/10 p-6 rounded-full h-24 w-24 flex items-center justify-center mx-auto mb-4">
                 <Home className="h-10 w-10 text-fintech-orange" />
               </div>
               <h3 className="font-bold text-xl mb-3">Loans</h3>
               <p className="text-gray-600">
-                Access personal, home, and business loans with competitive interest rates and flexible repayment options.
+                Access personal, home, and business loans with competitive interest rates and flexible repayment
+                options.
               </p>
             </div>
           </div>
@@ -396,7 +315,7 @@ const AboutUs = () => {
               We combine financial expertise with cutting-edge technology to offer you the best experience.
             </p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="flex gap-4">
               <div className="flex-shrink-0">
@@ -407,11 +326,12 @@ const AboutUs = () => {
               <div>
                 <h3 className="font-bold text-lg mb-2">Expert Guidance</h3>
                 <p className="text-gray-600">
-                  Our team of SEBI-registered investment advisors provides professional guidance tailored to your financial goals.
+                  Our team of SEBI-registered investment advisors provides professional guidance tailored to your
+                  financial goals.
                 </p>
               </div>
             </div>
-            
+
             <div className="flex gap-4">
               <div className="flex-shrink-0">
                 <div className="bg-fintech-blue/10 p-3 rounded-full">
@@ -425,7 +345,7 @@ const AboutUs = () => {
                 </p>
               </div>
             </div>
-            
+
             <div className="flex gap-4">
               <div className="flex-shrink-0">
                 <div className="bg-fintech-orange/10 p-3 rounded-full">
@@ -439,7 +359,7 @@ const AboutUs = () => {
                 </p>
               </div>
             </div>
-            
+
             <div className="flex gap-4">
               <div className="flex-shrink-0">
                 <div className="bg-fintech-deep-purple/10 p-3 rounded-full">
