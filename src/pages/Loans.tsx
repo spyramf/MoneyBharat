@@ -780,14 +780,14 @@ const Loans = () => {
             </Badge>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to Get Started?</h2>
             <p className="text-xl mb-8">Apply now and get instant approval on your loan application</p>
-            <div className="flex flex-wrap gap-4 justify-center">
+            {/* <div className="flex flex-wrap gap-4 justify-center">
               <Button size="lg" className="bg-white text-fintech-green hover:bg-white/90">
                 Apply for a Loan
               </Button>
               <Button size="lg" variant="outline" className="border-white text-white bg-fintech-green">
                 Speak to an Advisor
               </Button>
-            </div>
+            </div> */}
           </div>
         </div>
       </section>
