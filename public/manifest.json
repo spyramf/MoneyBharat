@@ -1,12 +1,13 @@
 {
-  "name": "Money Bharat Finance",
+  "name": "Money Bharat Finance - Spyra Exim Pvt Ltd",
   "short_name": "Money Bharat",
-  "description": "India's AI-powered financial platform for mutual funds, SIP investments, health & life insurance, and instant personal loans",
-  "start_url": "/",
+  "description": "Mutual Funds, Insurance & Loans - India's AI-powered financial platform",
+  "start_url": "https://www.moneybharatfinance.com/",
+  "scope": "/",
   "display": "standalone",
   "theme_color": "#2EB883",
   "background_color": "#ffffff",
-  "orientation": "portrait",
+  "orientation": "portrait-primary",
   "icons": [
     {
       "src": "/lovable-uploads/92affb7c-7e35-42da-9aff-b0f55a689428.png",
@@ -29,7 +30,7 @@
       "name": "Mutual Funds",
       "short_name": "MF",
       "description": "Invest in mutual funds",
-      "url": "/mutual-funds",
+      "url": "https://www.moneybharatfinance.com/mutual-funds",
       "icons": [
         {
           "src": "/lovable-uploads/92affb7c-7e35-42da-9aff-b0f55a689428.png",
@@ -41,7 +42,7 @@
       "name": "Insurance",
       "short_name": "Insurance",
       "description": "Get insurance coverage",
-      "url": "/insurance",
+      "url": "https://www.moneybharatfinance.com/insurance",
       "icons": [
         {
           "src": "/lovable-uploads/92affb7c-7e35-42da-9aff-b0f55a689428.png",
@@ -53,7 +54,7 @@
       "name": "Loans",
       "short_name": "Loans",
       "description": "Apply for loans",
-      "url": "/loans",
+      "url": "https://www.moneybharatfinance.com/loans",
       "icons": [
         {
           "src": "/lovable-uploads/92affb7c-7e35-42da-9aff-b0f55a689428.png",

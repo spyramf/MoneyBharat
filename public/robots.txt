@@ -1,8 +1,9 @@
 
 # Money Bharat Finance - Robots.txt
-# Website: https://moneybharat.co
-# Preferred Domain: moneybharat.co (without www)
-# Updated: 2025-06-24
+# Website: https://www.moneybharatfinance.com/
+# Preferred Domain: www.moneybharatfinance.com (with www and https)
+# Company: Spyra Exim Pvt Ltd
+# Updated: 2025-01-19
 
 # Primary search engine bots
 User-agent: Googlebot
@@ -43,6 +44,8 @@ Disallow: /admin/
 Disallow: /investor/dashboard/
 Disallow: /api/
 Disallow: /private/
+Disallow: /_next/
+Disallow: /static/
 
 # Disallow duplicate content and tracking parameters
 Disallow: /*?utm_*
@@ -51,6 +54,9 @@ Disallow: /*?source=*
 Disallow: /*?campaign=*
 Disallow: /*?fbclid=*
 Disallow: /*?gclid=*
+Disallow: /*?sort=*
+Disallow: /*?filter=*
+Disallow: /*?page=*
 
 # Allow important files and assets
 Allow: /robots.txt
@@ -58,32 +64,33 @@ Allow: /sitemap.xml
 Allow: /favicon.ico
 Allow: /humans.txt
 Allow: /manifest.json
+Allow: /security.txt
+Allow: /.well-known/security.txt
 Allow: /sw.js
-Allow: /*.css
-Allow: /*.js
-Allow: /*.png
-Allow: /*.jpg
-Allow: /*.jpeg
-Allow: /*.gif
-Allow: /*.svg
-Allow: /*.webp
-Allow: /*.woff
-Allow: /*.woff2
-Allow: /*.ttf
-Allow: /*.otf
+Allow: /*.css$
+Allow: /*.js$
+Allow: /*.png$
+Allow: /*.jpg$
+Allow: /*.jpeg$
+Allow: /*.gif$
+Allow: /*.svg$
+Allow: /*.webp$
+Allow: /*.woff$
+Allow: /*.woff2$
+Allow: /*.ttf$
+Allow: /*.otf$
 
-# Primary XML Sitemap and RSS Feed - CANONICAL URLS ONLY
-# All URLs in sitemap follow canonical format: https://moneybharat.co
-Sitemap: https://moneybharat.co/sitemap.xml
+# Primary XML Sitemap - CANONICAL URLS ONLY (https://www.moneybharatfinance.com/)
+Sitemap: https://www.moneybharatfinance.com/sitemap.xml
 
 # RSS Feed for Blog Content
-# Regular content updates signal fresh content to search engines
+Sitemap: https://www.moneybharatfinance.com/rss.xml
 
-# Host directive - Specify preferred canonical domain
-Host: https://moneybharat.co
+# Host directive - Specify preferred canonical domain with www
+Host: https://www.moneybharatfinance.com
 
-# SEO TOOL COMPATIBILITY NOTES:
-# - All sitemap URLs are canonical (HTTPS, no www, no trailing slashes)
-# - WWW redirects are handled server-side via _redirects and vercel.json
-# - 404 errors return proper HTTP status codes
-# - Custom 404 page provides user-friendly experience
+# SEO NOTES:
+# - All URLs follow canonical format: https://www.moneybharatfinance.com/
+# - Non-www redirects handled server-side via _redirects and vercel.json
+# - 301 permanent redirects ensure proper SEO signals
+# - Operated by Spyra Exim Pvt Ltd

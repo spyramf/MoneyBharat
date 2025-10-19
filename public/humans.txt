@@ -1,9 +1,10 @@
 /* TEAM */
-Website: Money Bharat Finance
-Designer: Money Bharat Design Team
-Developer: Money Bharat Tech Team
-Contact: contact@moneybharat.com
-Location: Mumbai, Maharashtra, India
+
+Company: Spyra Exim Pvt Ltd
+Website: https://www.moneybharatfinance.com/
+Contact: contact@moneybharatfinance.com
+Support: spyraexim@gmail.com
+Location: India
 
 /* THANKS */
 Node.js
@@ -14,13 +15,14 @@ TypeScript
 Vite
 
 /* SITE */
-Domain: moneybharat.co
+
+Domain: https://www.moneybharatfinance.com/
 Language: English, Hindi
-Technology: React, TypeScript, Tailwind CSS
-Last Update: 2025-01-02
-Standards: HTML5, CSS3, ECMAScript 6+
+Technology: React, TypeScript, Tailwind CSS, Vite
+Last Update: 2025-01-19
+Standards: HTML5, CSS3, JavaScript ES6+
 Components: Responsive Design, PWA, SEO Optimized
-Software: Visual Studio Code, Git, Figma
+Software: Visual Studio Code, Git
 
 /* SEO */
 - Structured Data (JSON-LD)
@@ -34,13 +36,25 @@ Software: Visual Studio Code, Git, Figma
 - Progressive Web App
 - Service Worker Caching
 
-/* FINANCIAL SERVICES */
-- Mutual Funds Investment
-- SIP (Systematic Investment Plan)
-- Health Insurance
-- Life & Term Insurance
-- Vehicle Insurance
-- Personal Loans
-- Home Loans
-- Business Loans
-- Financial Planning Advisory
+/* SERVICES */
+
+Mutual Funds Investment
+SIP (Systematic Investment Plan)
+Health Insurance
+Life Insurance
+Term Insurance
+Vehicle Insurance
+Personal Loans
+Home Loans
+Education Loans
+Car Loans
+Business Loans
+Loan Against Mutual Funds
+
+/* THANKS */
+
+Built with care for our clients
+Powered by modern web technologies
+Committed to financial literacy and growth
+
+Canonical: https://www.moneybharatfinance.com/
