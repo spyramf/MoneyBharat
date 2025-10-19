@@ -43,7 +43,7 @@ export default defineConfig(({ mode }) => ({
     assetsDir: 'assets'
   },
   // Base path for deployment
-  base: './',
+  base: '/',
   // Optimize dependencies
   optimizeDeps: {
     include: [
