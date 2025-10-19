@@ -1,33 +1,32 @@
-
-import { useState } from 'react';
-import Navbar from '@/components/Navbar';
-import LoanCalculator from '@/components/loans/LoanCalculator';
-import LoanHero from '@/components/loans/LoanHero';
-import LoanFeatures from '@/components/loans/LoanFeatures';
-import LoanEligibilityDocuments from '@/components/loans/LoanEligibilityDocuments';
-import LoanProcess from '@/components/loans/LoanProcess';
-import LoanFAQ from '@/components/loans/LoanFAQ';
-import LoanCTA from '@/components/loans/LoanCTA';
-import { 
-  personalLoanFeatures, 
-  personalLoanEligibilityCriteria, 
-  personalLoanRequiredDocuments, 
+import { useState } from "react";
+import Navbar from "@/components/Navbar";
+import LoanCalculator from "@/components/loans/LoanCalculator";
+import LoanHero from "@/components/loans/LoanHero";
+import LoanFeatures from "@/components/loans/LoanFeatures";
+import LoanEligibilityDocuments from "@/components/loans/LoanEligibilityDocuments";
+import LoanProcess from "@/components/loans/LoanProcess";
+import LoanFAQ from "@/components/loans/LoanFAQ";
+import LoanCTA from "@/components/loans/LoanCTA";
+import {
+  personalLoanFeatures,
+  personalLoanEligibilityCriteria,
+  personalLoanRequiredDocuments,
   personalLoanProcess,
-  personalLoanFAQs
-} from '@/data/loanData';
+  personalLoanFAQs,
+} from "@/data/loanData";
 
 const PersonalLoan = () => {
   return (
     <div className="flex min-h-screen flex-col">
       <Navbar />
-      
+
       {/* Hero Section */}
       <LoanHero
         title="Personal Loan"
         subtitle="Quick unsecured loans for your personal needs with competitive interest rates"
         gradientFrom="from-fintech-purple"
         gradientTo="to-fintech-blue"
-        primaryButtonText="Apply Now"
+        primaryButtonText="Book Now"
         className="mt-16"
       />
 
@@ -48,7 +47,7 @@ const PersonalLoan = () => {
                 Plan your finances better with our easy-to-use Personal Loan EMI calculator
               </p>
             </div>
-            
+
             <LoanCalculator
               initialLoanAmount={300000}
               initialInterestRate={10.99}
