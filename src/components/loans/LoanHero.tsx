@@ -64,15 +64,12 @@ const LoanHero = ({
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </Link>
-            <Link to="/booking">
-              <Button
-                variant="outline"
-                className="border-fintech-purple text-fintech-purple hover:bg-fintech-purple hover:text-white px-8 py-4 text-lg"
-              >
+            {/* <Link to="/booking">
+              <Button variant="outline" className="border-fintech-purple text-fintech-purple hover:bg-fintech-purple hover:text-white px-8 py-4 text-lg">
                 {secondaryButtonText}
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
-            </Link>
+            </Link> */}
           </div>
         </motion.div>
       </div>
