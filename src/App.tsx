@@ -49,17 +49,16 @@ const queryClient = new QueryClient();
 
 function App() {
   return (
-    <React.StrictMode>
-      <QueryClientProvider client={queryClient}>
-        <HelmetProvider>
-          <BrowserRouter>
-            <AuthProvider>
-              <BlogProvider>
-                <BookingProvider>
-                  <ScrollToTop />
-                  <PerformanceMonitor />
-                  <div className="min-h-screen bg-white">
-                    <Routes>
+    <QueryClientProvider client={queryClient}>
+      <HelmetProvider>
+        <BrowserRouter>
+          <AuthProvider>
+            <BlogProvider>
+              <BookingProvider>
+                <ScrollToTop />
+                <PerformanceMonitor />
+                <div className="min-h-screen bg-white">
+                  <Routes>
                       {/* Public Routes */}
                       <Route path="/" element={
                         <MainLayout>
@@ -255,7 +254,6 @@ function App() {
           </BrowserRouter>
         </HelmetProvider>
       </QueryClientProvider>
-    </React.StrictMode>
   );
 }
 
