@@ -1,19 +1,16 @@
 
 import React from 'react';
 import { Navigate } from 'react-router-dom';
+import { useAuth } from '@/context/AuthContext';
 
 interface ProtectedAdminRouteProps {
   children: React.ReactNode;
 }
 
 const ProtectedAdminRoute = ({ children }: ProtectedAdminRouteProps) => {
-  // Check for admin authentication
-  const isAuthenticated = localStorage.getItem('adminAuth') === 'true';
+  const { isAuthenticated, isAdmin } = useAuth();
   
-  console.log('ProtectedAdminRoute: isAuthenticated =', isAuthenticated);
-  
-  if (!isAuthenticated) {
-    console.log('ProtectedAdminRoute: Redirecting to login');
+  if (!isAuthenticated || !isAdmin) {
     return <Navigate to="/admin/login" replace />;
   }
 

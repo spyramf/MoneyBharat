@@ -3,6 +3,7 @@ import { useState, useRef } from 'react';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { Bold, Italic, List, Link, Image, Code, Quote, Heading1, Heading2 } from 'lucide-react';
+import { sanitizeHtml } from '@/utils/sanitize';
 
 interface RichTextEditorProps {
   value: string;
@@ -167,7 +168,7 @@ export const RichTextEditor = ({ value, onChange, placeholder }: RichTextEditorP
       {isPreview ? (
         <div 
           className="min-h-[300px] p-4 prose max-w-none bg-white"
-          dangerouslySetInnerHTML={{ __html: formatPreview(value) }}
+          dangerouslySetInnerHTML={{ __html: sanitizeHtml(formatPreview(value)) }}
         />
       ) : (
         <Textarea

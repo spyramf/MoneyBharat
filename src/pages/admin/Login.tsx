@@ -15,7 +15,7 @@ import { Helmet } from 'react-helmet-async';
 
 // Form validation schema
 const loginSchema = z.object({
-  username: z.string().min(1, "Username is required"),
+  username: z.string().email("Please enter a valid email address"),
   password: z.string().min(6, "Password must be at least 6 characters"),
 });
 
@@ -34,13 +34,13 @@ const Login = () => {
     },
   });
 
-  const onSubmit = (data: LoginFormValues) => {
-    const success = login(data.username, data.password);
+  const onSubmit = async (data: LoginFormValues) => {
+    const result = await login(data.username, data.password);
     
-    if (success) {
+    if (!result.error) {
       navigate('/admin');
     } else {
-      setError("Invalid username or password");
+      setError(result.error || "Invalid credentials");
     }
   };
 
@@ -82,17 +82,18 @@ const Login = () => {
                   name="username"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Username</FormLabel>
-                      <FormControl>
-                        <div className="relative">
-                          <Mail className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
-                          <Input 
-                            className="pl-9" 
-                            placeholder="Enter your username" 
-                            {...field} 
-                          />
-                        </div>
-                      </FormControl>
+                  <FormLabel>Email</FormLabel>
+                  <FormControl>
+                    <div className="relative">
+                      <Mail className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                      <Input 
+                        className="pl-9" 
+                        type="email"
+                        placeholder="Enter your email" 
+                        {...field} 
+                      />
+                    </div>
+                  </FormControl>
                       <FormMessage />
                     </FormItem>
                   )}

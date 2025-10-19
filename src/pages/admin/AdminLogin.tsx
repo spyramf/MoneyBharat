@@ -17,16 +17,17 @@ const AdminLogin = () => {
     e.preventDefault();
     setIsLoading(true);
 
-    // Simple authentication check - in production, use proper authentication
-    if (username === 'admin' && password === 'admin123') {
-      localStorage.setItem('adminAuth', 'true');
-      toast.success('Login successful!');
-      navigate('/admin');
-    } else {
-      toast.error('Invalid credentials');
+    try {
+      // Use Supabase authentication - redirect users to main admin login
+      toast.error('Please use the main admin login at /admin/login');
+      setTimeout(() => {
+        navigate('/admin/login');
+      }, 2000);
+    } catch (error) {
+      toast.error('An error occurred');
+    } finally {
+      setIsLoading(false);
     }
-
-    setIsLoading(false);
   };
 
   return (

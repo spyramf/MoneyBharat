@@ -6,6 +6,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
+import { sanitizeHtml } from '@/utils/sanitize';
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -124,7 +125,7 @@ const BlogPost = () => {
 
           {/* Article Content */}
           <div className="prose prose-lg max-w-none mb-12">
-            <div dangerouslySetInnerHTML={{ __html: post.content || '' }} />
+            <div dangerouslySetInnerHTML={{ __html: sanitizeHtml(post.content || '') }} />
           </div>
 
           {/* Tags */}

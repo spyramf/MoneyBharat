@@ -3,6 +3,7 @@ import { BlogPost as BlogPostType } from '@/data/blogData';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import ShareButtonGroup from '@/components/ui/ShareButtonGroup';
+import { sanitizeHtml } from '@/utils/sanitize';
 
 interface BlogPostContentProps {
   post: BlogPostType;
@@ -38,7 +39,7 @@ const BlogPostContent = ({ post }: BlogPostContentProps) => {
                      [&>table_tr:nth-child(even)]:bg-gray-50
                      [&_strong]:text-fintech-purple [&_strong]:font-semibold
                      [&_em]:text-gray-600"
-          dangerouslySetInnerHTML={{ __html: post.content || '' }}
+          dangerouslySetInnerHTML={{ __html: sanitizeHtml(post.content || '') }}
         />
       </article>
 
