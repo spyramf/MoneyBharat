@@ -52,10 +52,14 @@ const InsurancePartners = () => {
       <div className="container mx-auto">
         <div className="max-w-3xl mx-auto text-center mb-12">
           <h2 className="text-3xl md:text-4xl lg:text-5xl tracking-tighter font-bold mb-4">
-            Our Insurance <span className="gradient-text bg-gradient-to-r from-fintech-purple to-fintech-blue bg-clip-text text-transparent">Partners</span>
+            Our Insurance{" "}
+            <span className="gradient-text bg-gradient-to-r from-fintech-purple to-fintech-blue bg-clip-text text-transparent">
+              Partners
+            </span>
           </h2>
           <p className="text-lg md:text-xl text-gray-600 mb-8">
-            We partner with India's most trusted insurance providers to bring you the best coverage options at competitive prices
+            We partner with India's most trusted insurance providers to bring you the best coverage options at
+            competitive prices
           </p>
           <div className="flex justify-center gap-8 text-sm text-gray-500 mb-8">
             <div className="text-center">
@@ -72,7 +76,7 @@ const InsurancePartners = () => {
             </div>
           </div>
         </div>
-        
+
         {/* Partner Carousel */}
         <div className="relative">
           <Carousel setApi={setApi} className="w-full max-w-7xl mx-auto">
@@ -80,11 +84,7 @@ const InsurancePartners = () => {
               {insurancePartners.map((partner, index) => (
                 <CarouselItem key={index} className="basis-1/2 md:basis-1/3 lg:basis-1/6">
                   <div className="flex rounded-lg aspect-square bg-white border border-gray-200 shadow-sm hover:shadow-md transition-shadow items-center justify-center p-4">
-                    <img 
-                      src={partner.logo} 
-                      alt={partner.name}
-                      className="w-full h-full object-contain"
-                    />
+                    <img src={partner.logo} alt={partner.name} className="w-full h-full object-contain" />
                   </div>
                 </CarouselItem>
               ))}
@@ -107,15 +107,15 @@ const InsurancePartners = () => {
             <p className="text-gray-600 text-sm">Customer Support</p>
           </div>
         </div>
-        
-        <div className="mt-12 text-center">
+
+        {/* <div className="mt-12 text-center">
           <Button className="bg-gradient-to-r from-fintech-purple to-fintech-blue text-white hover:from-fintech-purple/90 hover:to-fintech-blue/90 px-8 py-3">
             View All Partners & Coverage
           </Button>
           <p className="text-sm text-gray-500 mt-3">
             Compare policies from all our partners in one place
           </p>
-        </div>
+        </div> */}
       </div>
     </section>
   );
