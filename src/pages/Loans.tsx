@@ -349,9 +349,9 @@ const Loans = () => {
                     </ul>
                   </div>
                 </CardContent>
-                <CardFooter className="bg-gray-50 border-t border-gray-100">
+                {/* <CardFooter className="bg-gray-50 border-t border-gray-100">
                   <Button className="w-full bg-fintech-green hover:bg-fintech-green/90">Explore Now</Button>
-                </CardFooter>
+                </CardFooter> */}
               </Card>
             ))}
           </div>
