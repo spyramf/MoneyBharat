@@ -40,9 +40,9 @@ const Contact = () => {
       
       <ContactHero />
       
-      <main className="py-12 bg-gray-50">
+      <main className="py-16 bg-gradient-to-br from-blue-50 to-green-50">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-16">
             <ContactForm />
             <ContactInfo />
           </div>
