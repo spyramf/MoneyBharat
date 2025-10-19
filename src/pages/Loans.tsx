@@ -546,11 +546,11 @@ const Loans = () => {
                     </div>
                   </div>
 
-                  <div className="mt-auto">
+                  {/* <div className="mt-auto">
                     <Button className="w-full bg-fintech-green text-white hover:bg-fintech-green/90">
                       Explore Now
                     </Button>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
