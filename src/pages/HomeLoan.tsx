@@ -1,28 +1,27 @@
+import { useState } from "react";
+import { Home, Building, DollarSign, ArrowRight, Calculator } from "lucide-react";
+import Navbar from "@/components/Navbar";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import StructuredData from "@/components/seo/StructuredData";
 
-import { useState } from 'react';
-import { Home, Building, DollarSign, ArrowRight, Calculator } from 'lucide-react';
-import Navbar from '@/components/Navbar';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import StructuredData from '@/components/seo/StructuredData';
+import LoanHero from "@/components/loans/LoanHero";
+import LoanCalculator from "@/components/loans/LoanCalculator";
+import LoanFeatures from "@/components/loans/LoanFeatures";
+import LoanBankComparison from "@/components/loans/LoanBankComparison";
+import LoanEligibilityDocuments from "@/components/loans/LoanEligibilityDocuments";
+import LoanBenefits from "@/components/loans/LoanBenefits";
+import LoanFAQ from "@/components/loans/LoanFAQ";
+import LoanCTA from "@/components/loans/LoanCTA";
 
-import LoanHero from '@/components/loans/LoanHero';
-import LoanCalculator from '@/components/loans/LoanCalculator';
-import LoanFeatures from '@/components/loans/LoanFeatures';
-import LoanBankComparison from '@/components/loans/LoanBankComparison';
-import LoanEligibilityDocuments from '@/components/loans/LoanEligibilityDocuments';
-import LoanBenefits from '@/components/loans/LoanBenefits';
-import LoanFAQ from '@/components/loans/LoanFAQ';
-import LoanCTA from '@/components/loans/LoanCTA';
-
-import { 
-  homeLoanFeatures, 
-  homeLoanTypes, 
-  homeLoanBankComparisons, 
+import {
+  homeLoanFeatures,
+  homeLoanTypes,
+  homeLoanBankComparisons,
   homeLoanFAQs,
-  homeLoanEligibilityCriteria, 
-  homeLoanRequiredDocuments 
-} from '@/data/loanData';
+  homeLoanEligibilityCriteria,
+  homeLoanRequiredDocuments,
+} from "@/data/loanData";
 
 const HomeLoan = () => {
   const [propertyValue, setPropertyValue] = useState<number>(4000000);
@@ -30,19 +29,22 @@ const HomeLoan = () => {
   const homeLoanBenefits = [
     {
       title: "Tax Benefits",
-      description: "Get tax benefits under Section 80C for principal repayment (up to ₹1.5 lakhs) and Section 24(b) for interest payments (up to ₹2 lakhs) on your home loan.",
-      icon: <DollarSign className="h-6 w-6 text-fintech-blue" />
+      description:
+        "Get tax benefits under Section 80C for principal repayment (up to ₹1.5 lakhs) and Section 24(b) for interest payments (up to ₹2 lakhs) on your home loan.",
+      icon: <DollarSign className="h-6 w-6 text-fintech-blue" />,
     },
     {
       title: "Wealth Creation",
-      description: "Build equity in your property over time as you pay down your loan and as property values appreciate, helping you create long-term wealth.",
-      icon: <Calculator className="h-6 w-6 text-fintech-purple" />
+      description:
+        "Build equity in your property over time as you pay down your loan and as property values appreciate, helping you create long-term wealth.",
+      icon: <Calculator className="h-6 w-6 text-fintech-purple" />,
     },
     {
       title: "Affordable EMIs",
-      description: "Home loans come with longer tenures (up to 30 years), making EMIs affordable and helping you manage your monthly budget effectively.",
-      icon: <Home className="h-6 w-6 text-fintech-orange" />
-    }
+      description:
+        "Home loans come with longer tenures (up to 30 years), making EMIs affordable and helping you manage your monthly budget effectively.",
+      icon: <Home className="h-6 w-6 text-fintech-orange" />,
+    },
   ];
 
   const handleCheckEligibility = () => {
@@ -51,31 +53,31 @@ const HomeLoan = () => {
   };
 
   const handleApply = (bank?: string) => {
-    console.log(`Applying for home loan${bank ? ' from ' + bank : ''}`);
+    console.log(`Applying for home loan${bank ? " from " + bank : ""}`);
     // Logic to handle loan application
   };
 
   // Convert FAQ items to structured data format
-  const faqData = homeLoanFAQs.map(faq => ({
+  const faqData = homeLoanFAQs.map((faq) => ({
     question: faq.question,
-    answer: faq.answer
+    answer: faq.answer,
   }));
 
   return (
     <div className="flex min-h-screen flex-col">
-      <StructuredData 
-        page="loans" 
+      <StructuredData
+        page="loans"
         faqData={faqData}
         productData={{
           name: "Home Loan",
           description: "Competitive home loans with lowest interest rates and flexible EMI options",
           category: "Loan",
-          price: "8.5"
+          price: "8.5",
         }}
       />
-      
+
       <Navbar />
-      
+
       {/* Hero Section */}
       <LoanHero
         title="Home Loan"
@@ -96,7 +98,7 @@ const HomeLoan = () => {
                 Plan your dream home purchase with our easy-to-use EMI calculator
               </p>
             </div>
-            
+
             <LoanCalculator
               initialLoanAmount={3000000}
               initialInterestRate={8.5}
@@ -122,7 +124,7 @@ const HomeLoan = () => {
               Find the perfect home loan solution that matches your specific needs
             </p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {homeLoanTypes.map((loan, index) => (
               <Card key={index} className="hover:shadow-lg transition-shadow duration-300 hover:-translate-y-1">
@@ -136,15 +138,17 @@ const HomeLoan = () => {
                   <CardDescription className="text-base mb-4">{loan.description}</CardDescription>
                   <ul className="list-disc pl-5 space-y-1">
                     {loan.features.map((feature, idx) => (
-                      <li key={idx} className="text-sm text-gray-600">{feature}</li>
+                      <li key={idx} className="text-sm text-gray-600">
+                        {feature}
+                      </li>
                     ))}
                   </ul>
                 </CardContent>
-                <CardFooter>
+                {/* <CardFooter>
                   <Button variant="outline" className="w-full">
                     Learn More
                   </Button>
-                </CardFooter>
+                </CardFooter> */}
               </Card>
             ))}
           </div>
