@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { HelmetProvider } from 'react-helmet-async';
 import { Toaster } from 'sonner';
@@ -36,6 +36,7 @@ import TaxSaving from '@/pages/TaxSaving';
 import Booking from '@/pages/Booking';
 import PrivacyPolicy from '@/pages/PrivacyPolicy';
 import TermsOfService from '@/pages/TermsOfService';
+import Sitemap from '@/pages/Sitemap';
 
 // Admin Pages
 import AdminLogin from '@/pages/admin/AdminLogin';
@@ -181,6 +182,11 @@ function App() {
                           <TermsOfService />
                         </MainLayout>
                       } />
+                      <Route path="/sitemap" element={
+                        <MainLayout>
+                          <Sitemap />
+                        </MainLayout>
+                      } />
 
                       {/* Admin Login - Public */}
                       <Route path="/admin/login" element={<AdminLogin />} />
@@ -233,6 +239,16 @@ function App() {
                           <BookingManager />
                         </ProtectedAdminRoute>
                       } />
+
+                      {/* Redirects for old URLs (for SEO) */}
+                      <Route path="/personal-loan" element={<Navigate to="/loans/personal" replace />} />
+                      <Route path="/home-loan" element={<Navigate to="/loans/home" replace />} />
+                      <Route path="/car-loan" element={<Navigate to="/loans/car" replace />} />
+                      <Route path="/business-loan" element={<Navigate to="/loans/business" replace />} />
+                      <Route path="/education-loan" element={<Navigate to="/loans/education" replace />} />
+                      <Route path="/loan-against-mutual-funds" element={<Navigate to="/loans/mutual-funds" replace />} />
+                      <Route path="/sip-calculator" element={<Navigate to="/calculators/sip" replace />} />
+                      <Route path="/emi-calculator" element={<Navigate to="/calculators/emi" replace />} />
 
                       {/* Catch All Route */}
                       <Route path="*" element={
