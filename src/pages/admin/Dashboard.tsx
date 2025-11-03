@@ -106,7 +106,7 @@ const Dashboard = () => {
           <Card>
             <CardHeader className="flex flex-row items-center justify-between">
               <CardTitle className="text-lg font-semibold">Recent Blog Posts</CardTitle>
-              <Link to="/admin/blogs/new">
+              <Link to="/admin/blog/new">
                 <Button size="sm">
                   <Plus className="mr-2 h-4 w-4" />
                   New Post
@@ -157,7 +157,7 @@ const Dashboard = () => {
                   <FileText className="h-12 w-12 text-gray-400 mx-auto mb-4" />
                   <h3 className="text-lg font-medium text-gray-900 mb-2">No blog posts yet</h3>
                   <p className="text-gray-500 mb-4">Get started by creating your first blog post.</p>
-                  <Link to="/admin/blogs/new">
+                  <Link to="/admin/blog/new">
                     <Button>
                       <Plus className="mr-2 h-4 w-4" />
                       Create First Post
@@ -222,7 +222,7 @@ const Dashboard = () => {
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              <Link to="/admin/blogs/new">
+              <Link to="/admin/blog/new">
                 <Button variant="outline" className="w-full justify-start">
                   <Plus className="mr-2 h-4 w-4" />
                   Create New Post

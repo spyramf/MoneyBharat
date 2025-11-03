@@ -208,6 +208,12 @@ function App() {
                         </ProtectedAdminRoute>
                       } />
                       
+                      <Route path="/admin/blogs" element={
+                        <ProtectedAdminRoute>
+                          <BlogDashboard />
+                        </ProtectedAdminRoute>
+                      } />
+
                       <Route path="/admin/blog" element={
                         <ProtectedAdminRoute>
                           <BlogDashboard />

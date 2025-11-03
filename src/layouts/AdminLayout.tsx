@@ -1,8 +1,9 @@
 
 import React from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { useAuth } from '@/context/AuthContext';
 import { 
   LayoutDashboard, 
   Calendar, 
@@ -17,7 +18,7 @@ interface AdminLayoutProps {
 
 const AdminLayout = ({ children }: AdminLayoutProps) => {
   const location = useLocation();
-  const navigate = useNavigate();
+  const { logout } = useAuth();
 
   const navigation = [
     { name: 'Dashboard', href: '/admin', icon: LayoutDashboard },
@@ -30,11 +31,6 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
       return location.pathname === href;
     }
     return location.pathname.startsWith(href);
-  };
-
-  const handleLogout = () => {
-    localStorage.removeItem('adminAuth');
-    navigate('/admin/login');
   };
 
   return (
@@ -75,7 +71,7 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
             <Button 
               variant="outline" 
               className="w-full justify-start text-gray-600 hover:text-gray-900"
-              onClick={handleLogout}
+              onClick={logout}
             >
               <LogOut className="mr-2 h-4 w-4" />
               Sign Out
