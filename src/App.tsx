@@ -41,6 +41,7 @@ import BlogDataSeeder from '@/pages/BlogDataSeeder';
 
 // Admin Pages
 import AdminLogin from '@/pages/admin/AdminLogin';
+import CreateAdminUser from '@/pages/admin/CreateAdminUser';
 import Dashboard from '@/pages/admin/Dashboard';
 import BlogDashboard from '@/pages/admin/BlogDashboard';
 import BlogEditor from '@/pages/admin/BlogEditor';
@@ -190,8 +191,9 @@ function App() {
                       } />
                       <Route path="/seed-blog-data" element={<BlogDataSeeder />} />
 
-                      {/* Admin Login - Public */}
+                      {/* Admin Routes - Public */}
                       <Route path="/admin/login" element={<AdminLogin />} />
+                      <Route path="/admin/create-user" element={<CreateAdminUser />} />
 
                       {/* Protected Admin Routes */}
                       <Route path="/admin" element={
