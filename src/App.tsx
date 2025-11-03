@@ -37,6 +37,7 @@ import Booking from '@/pages/Booking';
 import PrivacyPolicy from '@/pages/PrivacyPolicy';
 import TermsOfService from '@/pages/TermsOfService';
 import Sitemap from '@/pages/Sitemap';
+import BlogDataSeeder from '@/pages/BlogDataSeeder';
 
 // Admin Pages
 import AdminLogin from '@/pages/admin/AdminLogin';
@@ -187,6 +188,7 @@ function App() {
                           <Sitemap />
                         </MainLayout>
                       } />
+                      <Route path="/seed-blog-data" element={<BlogDataSeeder />} />
 
                       {/* Admin Login - Public */}
                       <Route path="/admin/login" element={<AdminLogin />} />
