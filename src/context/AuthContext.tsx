@@ -87,7 +87,25 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       }
 
       if (data.session) {
-        await checkAdminRole(data.user.id);
+        setSession(data.session);
+        setUser(data.user);
+        
+        // Check admin role and wait for it to complete
+        const { data: roleData } = await supabase
+          .from('user_roles')
+          .select('role')
+          .eq('user_id', data.user.id)
+          .eq('role', 'admin')
+          .maybeSingle();
+        
+        const hasAdminRole = !!roleData;
+        setIsAdmin(hasAdminRole);
+        
+        if (!hasAdminRole) {
+          await supabase.auth.signOut();
+          return { success: false, error: 'Access denied. Admin privileges required.' };
+        }
+        
         return { success: true };
       }
 

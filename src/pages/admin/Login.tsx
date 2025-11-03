@@ -34,10 +34,14 @@ const Login = () => {
   });
 
   const onSubmit = async (data: LoginFormValues) => {
+    setError("");
     const result = await login(data.username, data.password);
     
     if (result.success) {
-      navigate('/admin');
+      // Small delay to ensure state is updated
+      setTimeout(() => {
+        navigate('/admin', { replace: true });
+      }, 100);
     } else {
       setError(result.error || "Invalid email or password");
     }
