@@ -183,7 +183,7 @@ Systematic Investment Plans (SIP) have become the preferred investment method fo
 
 ### 5. Consider Expense Ratio
 - Lower expense ratio = Higher returns for you
-- Direct plans have 1-1.5% lower expense ratio than regular plans
+- Lower expense ratios help maximize your returns over time
 - Index funds typically have lowest expense ratios
 
 ### 6. Review Asset Allocation
@@ -278,8 +278,8 @@ Systematic Investment Plans (SIP) have become the preferred investment method fo
 - Historical performance analysis
 - Expert ratings and reviews
 
-### Zero Commission Direct Plans
-- Invest in direct mutual fund plans
+### Expert Advisory Services
+- Get professional guidance on mutual fund selection
 - Save 1-1.5% annually on expense ratio
 - No hidden charges or commissions
 - Significant impact on long-term returns
@@ -339,7 +339,7 @@ Investing in the **best mutual funds for SIP** is one of the smartest financial 
 ✅ Review and rebalance annually
 ✅ Don't panic during market corrections
 
-**Money Bharat makes SIP investing simple:** Compare top-performing funds, invest in zero-commission direct plans, and get expert guidance—all in one platform.
+**Money Bharat makes SIP investing simple:** Compare top-performing funds, get expert advisory services, and receive professional guidance—all in one platform.
 
 ### Ready to Start Your SIP Investment?
 

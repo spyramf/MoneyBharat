@@ -44,8 +44,8 @@ const MutualFunds = () => {
     <div className="min-h-screen flex flex-col">
       <SEOHead
         title="Best Mutual Funds for SIP Investment Online in India 2024 | Money Bharat"
-        description="Invest in top performing mutual funds & start SIP online with zero commission. Compare 2000+ direct mutual fund schemes, ELSS tax saving funds, equity & debt funds. Expert advisory with ₹5000Cr+ AUM. Start SIP from ₹500/month."
-        keywords="best mutual funds for SIP, SIP investment online, top performing mutual funds India, direct mutual fund investment, zero commission mutual funds, ELSS tax saving funds, equity mutual funds, debt funds India, SIP calculator, mutual fund returns, how to invest in mutual funds"
+        description="Invest in top performing mutual funds & start SIP online with expert guidance. Compare 2000+ mutual fund schemes, ELSS tax saving funds, equity & debt funds. Expert advisory with ₹5000Cr+ AUM. Start SIP from ₹500/month."
+        keywords="best mutual funds for SIP, SIP investment online, top performing mutual funds India, mutual fund investment, mutual fund distributor, ELSS tax saving funds, equity mutual funds, debt funds India, SIP calculator, mutual fund returns, how to invest in mutual funds"
       />
       
       <StructuredData 
@@ -53,7 +53,7 @@ const MutualFunds = () => {
         faqData={faqData}
         productData={{
           name: "Mutual Fund Investment Plans",
-          description: "Expert-guided direct mutual fund plans and SIP investments with zero commission",
+          description: "Expert-guided mutual fund plans and SIP investments with professional advisory",
           category: "Investment",
           price: "500"
         }}

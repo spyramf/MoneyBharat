@@ -70,7 +70,7 @@ const HowItWorksSection = () => {
               <div className="bg-green-50 p-4 rounded-lg">
                 <h4 className="font-semibold text-fintech-green mb-2">Expert Advisory Services</h4>
                 <p className="text-sm text-gray-600">
-                  Get professional guidance on direct mutual fund plans and investment strategies
+                  Get professional guidance on mutual fund plans and investment strategies
                 </p>
               </div>
               <div className="bg-blue-50 p-4 rounded-lg">
