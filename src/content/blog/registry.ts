@@ -13,9 +13,11 @@ import { capitalGainsTaxPost } from './posts/capital-gains-tax-guide';
 import { indexVsActiveFundsPost } from './posts/index-vs-active-funds';
 import { digitalBudgetingToolsPost } from './posts/digital-budgeting-tools';
 import { personalLoanGuidePost } from './posts/personal-loan-guide';
+import { bestMutualFundsSip2024 } from './posts/best-mutual-funds-sip-2024';
 
 // Registry of all blog posts - add new posts here
 export const blogPostsRegistry: BlogPost[] = [
+  bestMutualFundsSip2024,
   mutualFunds2024Post,
   sipInvestmentPost,
   healthVsLifeInsurancePost,

@@ -3,6 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import StructuredData from "@/components/seo/StructuredData";
+import SEOHead from "@/components/seo/SEOHead";
 
 import MutualFundHero from "@/components/mutual-funds/MutualFundHero";
 import SIPFeatures from "@/components/mutual-funds/SIPFeatures";
@@ -41,6 +42,12 @@ const MutualFunds = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <SEOHead
+        title="Best Mutual Funds for SIP Investment Online in India 2024 | Money Bharat"
+        description="Invest in top performing mutual funds & start SIP online with zero commission. Compare 2000+ direct mutual fund schemes, ELSS tax saving funds, equity & debt funds. Expert advisory with ₹5000Cr+ AUM. Start SIP from ₹500/month."
+        keywords="best mutual funds for SIP, SIP investment online, top performing mutual funds India, direct mutual fund investment, zero commission mutual funds, ELSS tax saving funds, equity mutual funds, debt funds India, SIP calculator, mutual fund returns, how to invest in mutual funds"
+      />
+      
       <StructuredData 
         page="mutual-funds" 
         faqData={faqData}

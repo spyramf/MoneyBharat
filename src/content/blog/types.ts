@@ -26,4 +26,7 @@ export interface BlogPost {
   publishedDate: string;
   readTime: string;
   isFeatured: boolean;
+  meta_title?: string;
+  meta_description?: string;
+  focus_keywords?: string[];
 }

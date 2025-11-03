@@ -83,9 +83,9 @@ const Index = () => {
       <URLRedirectHandler enableRedirect={import.meta.env.PROD} />
 
       <SEOHead
-        title="Money Bharat Finance - Mutual Funds, Insurance & Loans"
-        description="Grow your wealth with Money Bharat Finance - India's AI-powered platform for mutual funds, SIP investments, health & life insurance, and instant personal loans. Expert advisory with ₹5000Cr+ AUM."
-        keywords="mutual funds India, SIP investment, health insurance, personal loans, financial planning, investment advisory, Money Bharat, wealth management"
+        title="Best Mutual Funds, SIP Investment & Insurance Plans in India | Money Bharat Finance"
+        description="Start your wealth journey with Money Bharat Finance - India's leading AI-powered platform for mutual funds, SIP investments, health & life insurance, and instant personal loans. Expert advisory, zero commission, ₹5000Cr+ AUM. Compare top insurance plans & mutual funds online."
+        keywords="best mutual funds for SIP, SIP investment online, health insurance plans India, personal loan instant approval, top performing mutual funds, financial planning platform, zero commission mutual funds, tax saving ELSS funds, term insurance calculator, home loan interest rates"
       />
 
       <StructuredData page="home" faqData={homeFaqData} reviewData={reviewData} />
@@ -95,9 +95,9 @@ const Index = () => {
 
       {/* Critical above-the-fold content */}
       <BackgroundPaths
-        title="Your Financial Future Starts Here"
-        subtitle="Grow your wealth with AI-powered mutual funds, comprehensive insurance, and instant loans - all in one platform. Expert advisory backed by ₹5000Cr+ AUM."
-        primaryButtonText="Start Investing Now"
+        title="India's Best Platform for Mutual Funds, SIP & Insurance"
+        subtitle="Start your wealth journey with AI-powered investment in best mutual funds for SIP, comprehensive health & term insurance plans, and instant personal loans. Expert financial advisory backed by ₹5000Cr+ AUM. Zero commission on direct mutual funds."
+        primaryButtonText="Start SIP Investment Now"
         primaryButtonLink="https://client.moneybharat.co/NewOnBoarding/SignUp"
       />
 
