@@ -38,7 +38,7 @@ const FAQSection = () => {
     },
     {
       question: "Is Money Bharat registered with financial regulators?",
-      answer: "Yes, Money Bharat is AMFI-registered for mutual fund distribution, IRDAI-approved for insurance broking, and RBI-compliant for loan facilitation. We maintain all necessary regulatory approvals and follow strict compliance standards to ensure investor protection."
+      answer: "Yes, Money Bharat is an AMFI-registered mutual fund distributor (ARN-225204). We maintain all necessary regulatory approvals and follow strict compliance standards to ensure investor protection."
     },
     {
       question: "How does Money Bharat help with tax planning and ELSS investments?",

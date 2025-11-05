@@ -5,6 +5,7 @@ import StructuredData from "@/components/seo/StructuredData";
 import SEOHead from "@/components/seo/SEOHead";
 import BreadcrumbSEO from "@/components/seo/BreadcrumbSEO";
 import URLRedirectHandler from "@/components/seo/URLRedirectHandler";
+import FAQSchema from "@/components/seo/FAQSchema";
 
 // Import critical above-the-fold sections directly
 import ServicesTabSection from "@/components/home/ServicesTabSection";
@@ -89,6 +90,7 @@ const Index = () => {
       />
 
       <StructuredData page="home" faqData={homeFaqData} reviewData={reviewData} />
+      <FAQSchema faqs={homeFaqData} />
 
       <Navbar />
       <BreadcrumbSEO />

@@ -36,7 +36,7 @@ const Footer = () => {
   const trustBadges = [
     {
       text: "AMFI Registered",
-      subtext: "ARN - 225204",
+      subtext: "ARN-225204",
     },
     {
       text: "256-bit SSL",
@@ -293,7 +293,7 @@ const Footer = () => {
               <p className="text-gray-400 text-sm">
                 © {new Date().getFullYear()} Money Bharat Finance. All rights reserved.
               </p>
-              <p className="text-gray-500 text-xs mt-1">AMFI Registered Investment Advisor - ARN - 225204</p>
+              <p className="text-gray-500 text-xs mt-1">AMFI-registered mutual fund distributor (ARN-225204)</p>
             </div>
 
             {/* Back to Top Button */}

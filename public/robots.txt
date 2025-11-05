@@ -80,7 +80,7 @@ Allow: /*.woff2$
 Allow: /*.ttf$
 Allow: /*.otf$
 
-# Primary XML Sitemap - CANONICAL URLS ONLY (https://www.moneybharatfinance.com/)
+# Primary XML Sitemap
 Sitemap: https://www.moneybharatfinance.com/sitemap.xml
 
 # RSS Feed for Blog Content

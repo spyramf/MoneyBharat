@@ -65,7 +65,7 @@ const SEOHead = ({
       <meta property="og:description" content={pageDescription} />
       <meta property="og:type" content={type} />
       <meta property="og:url" content={canonicalUrl} />
-      <meta property="og:image" content={`https://moneybharatfinance.com${image}`} />
+      <meta property="og:image" content={`https://www.moneybharatfinance.com${image}`} />
       <meta property="og:site_name" content="Money Bharat Finance" />
       <meta property="og:locale" content="en_IN" />
 
@@ -73,7 +73,7 @@ const SEOHead = ({
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={pageTitle} />
       <meta name="twitter:description" content={pageDescription} />
-      <meta name="twitter:image" content={`https://moneybharatfinance.com${image}`} />
+      <meta name="twitter:image" content={`https://www.moneybharatfinance.com${image}`} />
       <meta name="twitter:site" content="@moneybharatfin" />
 
       {/* Article specific meta tags */}
@@ -96,12 +96,12 @@ const SEOHead = ({
 
       {/* Mobile and language optimization */}
       <meta name="format-detection" content="telephone=yes" />
-      <meta name="theme-color" content="#2EB883" />
+      <meta name="theme-color" content="#10b981" />
       <link
         rel="alternate"
         type="application/rss+xml"
         title="Money Bharat Finance Blog"
-        href="https://moneybharatfinance.com/rss.xml"
+        href="https://www.moneybharatfinance.com/rss.xml"
       />
 
       {/* Hreflang for Indian market */}

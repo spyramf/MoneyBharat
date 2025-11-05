@@ -139,7 +139,7 @@ const ContactLegal = () => {
             • Past performance is not indicative of future returns. Please consider your specific investment
             requirements before choosing a fund, or designing a portfolio that suits your needs.
           </p>
-          <p>• Money Bharat Finance is a AMFI registered Mutual Fund Distributor (ARN - 225204).</p>
+          <p>• Money Bharat Finance is an AMFI-registered mutual fund distributor (ARN-225204).</p>
           <p>
             • For any grievances related to our services, please contact our grievance officer at
             grievance@moneybharatfinance.com
