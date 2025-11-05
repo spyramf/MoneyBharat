@@ -46,7 +46,7 @@ const ServicesSection = () => {
               icon={<PiggyBank size={28} />} 
               description="Tech-driven investments with expert portfolio management for optimal returns." 
               features={[
-                "Expert-guided investment plans",
+                "Expert-guided direct plans",
                 "Personalized portfolio recommendations", 
                 "Real-time performance tracking",
                 "Automatic SIP management"

@@ -44,7 +44,7 @@ const Index = () => {
     {
       question: "What makes Money Bharat different from other financial platforms?",
       answer:
-        "Money Bharat combines cutting-edge technology with personalized financial advice. We offer expert-guided mutual fund investments, comprehensive insurance coverage, and instant loan approvals through our AI-powered platform.",
+        "Money Bharat combines cutting-edge technology with personalized financial advice. We offer zero-commission mutual funds, comprehensive insurance coverage, and instant loan approvals through our AI-powered platform.",
     },
     {
       question: "How secure is Money Bharat for online financial transactions?",
@@ -84,8 +84,8 @@ const Index = () => {
 
       <SEOHead
         title="Best Mutual Funds, SIP Investment & Insurance Plans in India | Money Bharat Finance"
-        description="Start your wealth journey with Money Bharat Finance - India's leading AI-powered platform for mutual funds, SIP investments, health & life insurance, and instant personal loans. Expert advisory, trusted distributor, ₹5000Cr+ AUM. Compare top insurance plans & mutual funds online."
-        keywords="best mutual funds for SIP, SIP investment online, health insurance plans India, personal loan instant approval, top performing mutual funds, financial planning platform, mutual fund distributor India, tax saving ELSS funds, term insurance calculator, home loan interest rates"
+        description="Start your wealth journey with Money Bharat Finance - India's leading AI-powered platform for mutual funds, SIP investments, health & life insurance, and instant personal loans. Expert advisory, zero commission, ₹5000Cr+ AUM. Compare top insurance plans & mutual funds online."
+        keywords="best mutual funds for SIP, SIP investment online, health insurance plans India, personal loan instant approval, top performing mutual funds, financial planning platform, zero commission mutual funds, tax saving ELSS funds, term insurance calculator, home loan interest rates"
       />
 
       <StructuredData page="home" faqData={homeFaqData} reviewData={reviewData} />
@@ -95,8 +95,8 @@ const Index = () => {
 
       {/* Critical above-the-fold content */}
       <BackgroundPaths
-        title="Best Mutual Funds, SIP & Insurance Plans"
-        subtitle="Expert guidance for wealth creation. Start SIP from ₹500, compare top mutual funds & insurance plans. AMFI registered with ₹5000Cr+ AUM."
+        title="India's Best Platform for Mutual Funds, SIP & Insurance"
+        subtitle="Start your wealth journey with AI-powered investment in best mutual funds for SIP, comprehensive health & term insurance plans, and instant personal loans. Expert financial advisory backed by ₹5000Cr+ AUM. Zero commission on direct mutual funds."
         primaryButtonText="Start SIP Investment Now"
         primaryButtonLink="https://client.moneybharat.co/NewOnBoarding/SignUp"
       />

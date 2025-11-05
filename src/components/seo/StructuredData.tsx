@@ -27,7 +27,7 @@ const StructuredData = ({
       case 'mutual-funds':
         return {
           name: "Mutual Fund Investment Services",
-          description: "Expert-guided mutual fund investments and SIP plans with professional advisory",
+          description: "Expert-guided mutual fund investments and SIP plans with direct plan benefits",
           serviceType: "Investment Advisory",
           products: [
             {
