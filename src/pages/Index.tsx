@@ -41,42 +41,42 @@ const SectionLoader = () => (
 
 const Index = () => {
   // FAQ data for structured markup
-  // const homeFaqData = [
-  //   {
-  //     question: "What makes Money Bharat different from other financial platforms?",
-  //     answer:
-  //       "Money Bharat combines cutting-edge technology with personalized financial advice. We offer expert-guided mutual fund investments, comprehensive insurance coverage, and instant loan approvals through our AI-powered platform.",
-  //   },
-  //   {
-  //     question: "How secure is Money Bharat for online financial transactions?",
-  //     answer:
-  //       "Money Bharat employs bank-grade 256-bit SSL encryption, multi-factor authentication, and follows RBI guidelines for financial security.",
-  //   },
-  //   {
-  //     question: "What types of mutual funds can I invest in through Money Bharat?",
-  //     answer:
-  //       "We offer over 2,000+ mutual fund schemes including equity funds, debt funds, hybrid funds, ELSS tax-saving funds, international funds, and sectoral funds from top AMCs.",
-  //   },
-  // ];
+  const homeFaqData = [
+    {
+      question: "What makes Money Bharat different from other financial platforms?",
+      answer:
+        "Money Bharat combines cutting-edge technology with personalized financial advice. We offer expert-guided mutual fund investments, comprehensive insurance coverage, and instant loan approvals through our AI-powered platform.",
+    },
+    {
+      question: "How secure is Money Bharat for online financial transactions?",
+      answer:
+        "Money Bharat employs bank-grade 256-bit SSL encryption, multi-factor authentication, and follows RBI guidelines for financial security.",
+    },
+    {
+      question: "What types of mutual funds can I invest in through Money Bharat?",
+      answer:
+        "We offer over 2,000+ mutual fund schemes including equity funds, debt funds, hybrid funds, ELSS tax-saving funds, international funds, and sectoral funds from top AMCs.",
+    },
+  ];
 
-  // // Review data for structured markup
-  // const reviewData = [
-  //   {
-  //     name: "Rajesh Sharma",
-  //     quote: "Money Bharat's mutual fund recommendations helped me achieve 18% returns in just one year.",
-  //     rating: "5",
-  //   },
-  //   {
-  //     name: "Priya Mehta",
-  //     quote: "Money Bharat's experts guided me to a comprehensive insurance plan that saved us 30% on premiums.",
-  //     rating: "5",
-  //   },
-  //   {
-  //     name: "Vikram Singh",
-  //     quote: "Getting a home loan through Money Bharat was incredibly fast and easy.",
-  //     rating: "5",
-  //   },
-  // ];
+  // Review data for structured markup
+  const reviewData = [
+    {
+      name: "Rajesh Sharma",
+      quote: "Money Bharat's mutual fund recommendations helped me achieve 18% returns in just one year.",
+      rating: "5",
+    },
+    {
+      name: "Priya Mehta",
+      quote: "Money Bharat's experts guided me to a comprehensive insurance plan that saved us 30% on premiums.",
+      rating: "5",
+    },
+    {
+      name: "Vikram Singh",
+      quote: "Getting a home loan through Money Bharat was incredibly fast and easy.",
+      rating: "5",
+    },
+  ];
 
   return (
     <div className="min-h-screen">
@@ -89,8 +89,8 @@ const Index = () => {
         keywords="best mutual funds for SIP, SIP investment online, money bharat, money bharat finance, top performing mutual funds, financial planning platform, moneybharat, tax saving ELSS funds, moneybharatfinance, home loan interest rates"
       />
 
-      {/* <StructuredData page="home" faqData={homeFaqData} reviewData={reviewData} />
-      <FAQSchema faqs={homeFaqData} /> */}
+      <StructuredData page="home" faqData={homeFaqData} reviewData={reviewData} />
+      <FAQSchema faqs={homeFaqData} />
 
       <Navbar />
       <BreadcrumbSEO />
