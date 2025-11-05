@@ -12,13 +12,3 @@ createRoot(rootElement).render(
     <App />
   </StrictMode>
 );
-
-// Register service worker only in production, with error handling
-if ('serviceWorker' in navigator && import.meta.env.PROD) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker
-      .register('/sw.js')
-      .then(() => console.log('SW registered'))
-      .catch((err) => console.warn('SW registration failed:', err));
-  });
-}

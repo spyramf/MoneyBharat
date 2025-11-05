@@ -51,14 +51,14 @@ const getOrganizationSchema = () => ({
   "name": "Money Bharat Finance",
   "alternateName": "Money Bharat",
   "description": "AI-powered financial platform offering mutual funds, SIP investments, health & life insurance, and instant personal loans with expert advisory services.",
-  "url": "https://moneybharatfinance.com",
+  "url": "https://moneybharat.co",
   "logo": {
     "@type": "ImageObject",
-    "url": "https://moneybharatfinance.com/lovable-uploads/92affb7c-7e35-42da-9aff-b0f55a689428.png",
+    "url": "https://moneybharat.co/lovable-uploads/92affb7c-7e35-42da-9aff-b0f55a689428.png",
     "width": 400,
     "height": 400
   },
-  "image": "https://moneybharatfinance.com/lovable-uploads/92affb7c-7e35-42da-9aff-b0f55a689428.png",
+  "image": "https://moneybharat.co/lovable-uploads/92affb7c-7e35-42da-9aff-b0f55a689428.png",
   "telephone": "+91 98765 43210",
   "email": "contact@moneybharat.com",
   "address": {
