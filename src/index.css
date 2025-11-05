@@ -16,10 +16,12 @@
     src: local('Inter'), url(https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiA.woff2) format('woff2');
   }
 
-  /* Image lazy loading fade-in */
+  /* Enhanced image lazy loading with fade-in */
   img {
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
+    height: auto;
+    max-width: 100%;
   }
   
   img.loaded,
@@ -27,9 +29,30 @@
     opacity: 1;
   }
 
-  /* Reduce layout shift */
+  /* Prevent layout shift for all images */
   img[width][height] {
-    height: auto;
+    aspect-ratio: attr(width) / attr(height);
+  }
+
+  /* Blur-up placeholder effect */
+  .image-placeholder {
+    filter: blur(10px);
+    transform: scale(1.1);
+    transition: filter 0.3s, transform 0.3s;
+  }
+
+  .image-loaded {
+    filter: blur(0);
+    transform: scale(1);
+  }
+
+  /* Picture element optimization */
+  picture {
+    display: contents;
+  }
+
+  picture img {
+    display: block;
   }
 }
 
