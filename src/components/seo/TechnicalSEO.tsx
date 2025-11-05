@@ -55,12 +55,12 @@ const TechnicalSEO = () => {
         '@type': 'FinancialService',
         name: 'Money Bharat Finance',
         description: 'AI-powered financial platform offering mutual funds, SIP investments, health & life insurance, and instant personal loans',
-        url: 'https://moneybharatfinance.com',
+        url: 'https://moneybharat.co',
         telephone: '+91-98765-43210',
         email: 'contact@moneybharat.com',
         logo: {
           '@type': 'ImageObject',
-          url: 'https://moneybharatfinance.com/lovable-uploads/92affb7c-7e35-42da-9aff-b0f55a689428.png',
+          url: 'https://moneybharat.co/lovable-uploads/92affb7c-7e35-42da-9aff-b0f55a689428.png',
           width: 400,
           height: 400
         },
@@ -156,7 +156,7 @@ const TechnicalSEO = () => {
       const twitterTags = [
         { name: 'twitter:creator', content: '@moneybharatfin' },
         { name: 'twitter:image:alt', content: 'Money Bharat Finance - Financial Services Platform' },
-        { name: 'twitter:domain', content: 'moneybharatfinance.com' }
+        { name: 'twitter:domain', content: 'moneybharat.co' }
       ];
 
       twitterTags.forEach(tag => {

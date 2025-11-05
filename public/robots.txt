@@ -1,7 +1,7 @@
 
 # Money Bharat Finance - Robots.txt
-# Website: https://moneybharatfinance.com/
-# Preferred Domain: moneybharatfinance.com (non-www with https)
+# Website: https://www.moneybharatfinance.com/
+# Preferred Domain: www.moneybharatfinance.com (with www and https)
 # Company: Spyra Exim Pvt Ltd
 # Updated: 2025-01-19
 
@@ -80,17 +80,17 @@ Allow: /*.woff2$
 Allow: /*.ttf$
 Allow: /*.otf$
 
-# Primary XML Sitemap - CANONICAL URLS ONLY (https://moneybharatfinance.com/)
-Sitemap: https://moneybharatfinance.com/sitemap.xml
+# Primary XML Sitemap - CANONICAL URLS ONLY (https://www.moneybharatfinance.com/)
+Sitemap: https://www.moneybharatfinance.com/sitemap.xml
 
 # RSS Feed for Blog Content
-Sitemap: https://moneybharatfinance.com/rss.xml
+Sitemap: https://www.moneybharatfinance.com/rss.xml
 
-# Host directive - Specify preferred canonical domain (non-www)
-Host: https://moneybharatfinance.com
+# Host directive - Specify preferred canonical domain with www
+Host: https://www.moneybharatfinance.com
 
 # SEO NOTES:
-# - All URLs follow canonical format: https://moneybharatfinance.com/
-# - WWW redirects handled server-side via _redirects and vercel.json
+# - All URLs follow canonical format: https://www.moneybharatfinance.com/
+# - Non-www redirects handled server-side via _redirects and vercel.json
 # - 301 permanent redirects ensure proper SEO signals
 # - Operated by Spyra Exim Pvt Ltd

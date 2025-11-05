@@ -6,7 +6,7 @@ export interface CanonicalUrlConfig {
 }
 
 const DEFAULT_CONFIG: CanonicalUrlConfig = {
-  preferWww: false, // Enforce non-www (naked domain)
+  preferWww: true, // Enforce www subdomain
   baseUrl: 'moneybharatfinance.com',
   forceHttps: true,
 };

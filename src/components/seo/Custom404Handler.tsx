@@ -63,7 +63,7 @@ const Custom404Handler = () => {
           type: 'SET_HTTP_STATUS',
           status: 404,
           path: currentPath,
-          canonical: `https://moneybharatfinance.com${currentPath}`
+          canonical: `https://moneybharat.co${currentPath}`
         }, '*');
       }
 
@@ -91,7 +91,7 @@ const Custom404Handler = () => {
         canonicalLink.rel = 'canonical';
         document.head.appendChild(canonicalLink);
       }
-      canonicalLink.href = 'https://moneybharatfinance.com/404';
+      canonicalLink.href = 'https://moneybharat.co/404';
 
       // Method 5: Custom response header simulation (for server-side detection)
       if (typeof window !== 'undefined' && (window as any).gtag) {
@@ -112,7 +112,7 @@ const Custom404Handler = () => {
 Path: ${currentPath}
 Expected: Custom 404 page should be detected
 Status: 404 (Page Not Found)
-Canonical: https://moneybharatfinance.com/404
+Canonical: https://moneybharat.co/404
 Time: ${new Date().toISOString()}
 ═══════════════════════════════════
       `);
@@ -132,7 +132,7 @@ Time: ${new Date().toISOString()}
           "@type": "WebPage",
           "name": "404 - Page Not Found",
           "description": "The requested page could not be found.",
-          "url": `https://moneybharatfinance.com${currentPath}`,
+          "url": `https://moneybharat.co${currentPath}`,
           "mainEntity": {
             "@type": "ErrorPage",
             "name": "404 Error",
@@ -142,7 +142,7 @@ Time: ${new Date().toISOString()}
           "isPartOf": {
             "@type": "WebSite",
             "name": "Money Bharat Finance",
-            "url": "https://moneybharatfinance.com"
+            "url": "https://moneybharat.co"
           }
         });
         document.head.appendChild(script);

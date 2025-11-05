@@ -11,7 +11,7 @@ const IndexingOptimizer = () => {
       links.forEach(link => {
         const href = link.getAttribute('href');
         if (href && !href.startsWith('http')) {
-          link.setAttribute('href', `https://moneybharatfinance.com${href}`);
+          link.setAttribute('href', `https://moneybharat.co${href}`);
         }
       });
     };
@@ -82,7 +82,7 @@ const IndexingOptimizer = () => {
         '@context': 'https://schema.org',
         '@type': 'Organization',
         name: 'Money Bharat Finance',
-        url: 'https://moneybharatfinance.com',
+        url: 'https://moneybharat.co',
         aggregateRating: {
           '@type': 'AggregateRating',
           ratingValue: '4.8',
