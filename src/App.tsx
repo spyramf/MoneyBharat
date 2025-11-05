@@ -8,6 +8,7 @@ import { BookingProvider } from '@/context/BookingContext';
 import { BlogProvider } from '@/context/BlogContext';
 import ScrollToTop from '@/components/ScrollToTop';
 import PerformanceMonitor from '@/components/PerformanceMonitor';
+import GoogleAnalytics from '@/components/analytics/GoogleAnalytics';
 import MainLayout from '@/layouts/MainLayout';
 import ProtectedAdminRoute from '@/components/ProtectedAdminRoute';
 
@@ -54,6 +55,7 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <HelmetProvider>
+        <GoogleAnalytics />
         <BrowserRouter>
           <AuthProvider>
             <BlogProvider>
