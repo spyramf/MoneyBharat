@@ -11,7 +11,7 @@ const BreadcrumbEnhanced = () => {
   
   const generateBreadcrumbs = (pathname: string): BreadcrumbItem[] => {
     const breadcrumbs: BreadcrumbItem[] = [
-      { name: 'Home', url: 'https://moneybharat.co' }
+      { name: 'Home', url: 'https://moneybharatfinance.com' }
     ];
     
     const pathSegments = pathname.split('/').filter(segment => segment);
@@ -47,7 +47,7 @@ const BreadcrumbEnhanced = () => {
       const name = breadcrumbMap[segment] || segment.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
       breadcrumbs.push({
         name,
-        url: `https://moneybharat.co${currentPath}`
+        url: `https://moneybharatfinance.com${currentPath}`
       });
     });
     

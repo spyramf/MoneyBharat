@@ -95,8 +95,8 @@ const Index = () => {
 
       {/* Critical above-the-fold content */}
       <BackgroundPaths
-        title="India's Best Platform for Mutual Funds, SIP & Insurance"
-        subtitle="Start your wealth journey with AI-powered investment in best mutual funds for SIP, comprehensive health & term insurance plans, and instant personal loans. Expert financial advisory backed by ₹5000Cr+ AUM. Trusted mutual fund distributor platform."
+        title="Best Mutual Funds, SIP & Insurance Plans"
+        subtitle="Expert guidance for wealth creation. Start SIP from ₹500, compare top mutual funds & insurance plans. AMFI registered with ₹5000Cr+ AUM."
         primaryButtonText="Start SIP Investment Now"
         primaryButtonLink="https://client.moneybharat.co/NewOnBoarding/SignUp"
       />

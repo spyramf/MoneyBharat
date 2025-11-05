@@ -115,7 +115,7 @@ const SEOOptimizations = () => {
             '@type': 'SearchAction',
             target: {
               '@type': 'EntryPoint',
-              urlTemplate: 'https://moneybharat.co/blog?search={search_term_string}'
+              urlTemplate: 'https://moneybharatfinance.com/blog?search={search_term_string}'
             },
             'query-input': 'required name=search_term_string'
           }
@@ -131,13 +131,13 @@ const SEOOptimizations = () => {
       script.textContent = JSON.stringify({
         '@context': 'https://schema.org',
         '@type': schemaType,
-        url: `https://moneybharat.co${path}`,
+        url: `https://moneybharatfinance.com${path}`,
         name: document.title,
         description: document.querySelector('meta[name="description"]')?.getAttribute('content') || '',
         isPartOf: {
           '@type': 'WebSite',
           name: 'Money Bharat Finance',
-          url: 'https://moneybharat.co'
+          url: 'https://moneybharatfinance.com'
         },
         ...additionalProps
       });

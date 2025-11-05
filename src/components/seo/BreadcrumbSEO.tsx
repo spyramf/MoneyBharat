@@ -33,7 +33,7 @@ const BreadcrumbSEO = () => {
       "@type": "ListItem",
       "position": index + 1,
       "name": item.name,
-      "item": `https://moneybharat.co${item.href}`
+      "item": `https://moneybharatfinance.com${item.href}`
     }))
   };
   

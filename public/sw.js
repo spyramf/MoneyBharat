@@ -1,49 +1,89 @@
-// Service Worker for caching and performance optimization
-const CACHE_NAME = 'money-bharat-v1';
-const urlsToCache = [
-  '/',
-  '/src/index.css',
-  '/src/main.tsx',
-  '/lovable-uploads/92affb7c-7e35-42da-9aff-b0f55a689428.png',
-  'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap'
-];
+const CACHE_VERSION = 'v3';
+const STATIC_CACHE = `static-${CACHE_VERSION}`;
+const DYNAMIC_CACHE = `dynamic-${CACHE_VERSION}`;
+const IMAGE_CACHE = `images-${CACHE_VERSION}`;
 
-// Install event
-self.addEventListener('install', function(event) {
+// Install and activate immediately without blocking
+self.addEventListener('install', (event) => {
+  self.skipWaiting();
   event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then(function(cache) {
-        return cache.addAll(urlsToCache);
-      })
+    caches.open(STATIC_CACHE)
+      .then((cache) => cache.addAll(['/manifest.json']).catch(() => {}))
   );
 });
 
-// Fetch event
-self.addEventListener('fetch', function(event) {
-  event.respondWith(
-    caches.match(event.request)
-      .then(function(response) {
-        // Return cached version or fetch from network
-        if (response) {
-          return response;
-        }
-        return fetch(event.request);
-      }
-    )
+self.addEventListener('activate', (event) => {
+  event.waitUntil(
+    Promise.all([
+      self.clients.claim(),
+      caches.keys().then((keys) => 
+        Promise.all(
+          keys
+            .filter((key) => key !== STATIC_CACHE && key !== DYNAMIC_CACHE && key !== IMAGE_CACHE)
+            .map((key) => caches.delete(key))
+        )
+      )
+    ])
   );
 });
 
-// Activate event
-self.addEventListener('activate', function(event) {
-  event.waitUntil(
-    caches.keys().then(function(cacheNames) {
-      return Promise.all(
-        cacheNames.map(function(cacheName) {
-          if (cacheName !== CACHE_NAME) {
-            return caches.delete(cacheName);
-          }
+self.addEventListener('fetch', (event) => {
+  const { request } = event;
+  const url = new URL(request.url);
+
+  // Skip chrome extension requests
+  if (url.protocol === 'chrome-extension:') return;
+
+  // Images: Cache first, network fallback
+  if (request.destination === 'image') {
+    event.respondWith(
+      caches.open(IMAGE_CACHE).then((cache) =>
+        cache.match(request).then((cached) => {
+          if (cached) return cached;
+          return fetch(request).then((response) => {
+            if (response.ok) cache.put(request, response.clone());
+            return response;
+          });
         })
-      );
-    })
+      )
+    );
+    return;
+  }
+
+  // Static assets: Cache first
+  if (request.destination === 'script' || request.destination === 'style' || request.destination === 'font') {
+    event.respondWith(
+      caches.match(request).then((cached) => {
+        if (cached) return cached;
+        return fetch(request).then((response) => {
+          if (response.ok) {
+            caches.open(STATIC_CACHE).then((cache) => cache.put(request, response.clone()));
+          }
+          return response;
+        });
+      })
+    );
+    return;
+  }
+
+  // HTML/API: Network first, cache fallback (for offline support)
+  event.respondWith(
+    fetch(request)
+      .then((response) => {
+        // Only cache successful HTML responses
+        if (response.ok && request.destination === 'document') {
+          caches.open(DYNAMIC_CACHE).then((cache) => cache.put(request, response.clone()));
+        }
+        return response;
+      })
+      .catch(() => {
+        // Return cached version if network fails
+        return caches.match(request).then((cached) => {
+          return cached || new Response('Offline - please check your connection', {
+            status: 503,
+            statusText: 'Service Unavailable'
+          });
+        });
+      })
   );
 });

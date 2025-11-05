@@ -1,10 +1,25 @@
 
+// Dynamic base URL - works in both dev and production
+const getBaseUrl = () => {
+  if (typeof window !== 'undefined') {
+    // In browser, use current origin for development
+    if (window.location.hostname === 'localhost' || 
+        window.location.hostname.includes('lovable.app') ||
+        window.location.hostname.includes('netlify.app') ||
+        window.location.hostname.includes('vercel.app')) {
+      return window.location.origin;
+    }
+  }
+  // Production domain
+  return 'https://moneybharatfinance.com';
+};
+
 export const SITE_CONFIG = {
   name: 'Money Bharat Finance',
   title: 'Money Bharat Finance - Mutual Funds, Insurance & Loans',
   description: 'Grow your wealth with Money Bharat Finance - India\'s AI-powered platform for mutual funds, SIP investments, health & life insurance, and instant personal loans.',
-  url: 'https://www.moneybharatfinance.com',
-  canonicalDomain: 'www.moneybharatfinance.com',
+  url: getBaseUrl(),
+  canonicalDomain: 'moneybharatfinance.com',
   protocol: 'https',
   ogImage: '/images/og-image.jpg',
   

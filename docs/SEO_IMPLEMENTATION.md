@@ -1,7 +1,7 @@
 # SEO Implementation Guide
 ## Money Bharat Finance - Spyra Exim Pvt Ltd
 
-**Canonical Domain:** `https://www.moneybharatfinance.com/`  
+**Canonical Domain:** `https://moneybharatfinance.com/`  
 **Updated:** 2025-01-19
 
 ---
@@ -23,21 +23,21 @@
 ## 🌐 Domain Configuration
 
 ### Primary Domain
-- **Canonical URL:** `https://www.moneybharatfinance.com/`
+- **Canonical URL:** `https://moneybharatfinance.com/`
 - **Protocol:** HTTPS (enforced)
-- **Subdomain:** www (enforced)
+- **Subdomain:** Non-www / naked domain (enforced)
 - **Company:** Spyra Exim Pvt Ltd
 
 ### URL Format Rules
 ✅ **Correct Format:**
-- `https://www.moneybharatfinance.com/` (homepage)
-- `https://www.moneybharatfinance.com/mutual-funds` (no trailing slash)
-- `https://www.moneybharatfinance.com/blog/post-title` (lowercase, hyphens)
+- `https://moneybharatfinance.com/` (homepage)
+- `https://moneybharatfinance.com/mutual-funds` (no trailing slash)
+- `https://moneybharatfinance.com/blog/post-title` (lowercase, hyphens)
 
 ❌ **Incorrect Formats (will redirect):**
-- `http://www.moneybharatfinance.com/` → redirects to HTTPS
-- `https://moneybharatfinance.com/` → redirects to www version
-- `https://www.moneybharatfinance.com/page/` → removes trailing slash
+- `http://moneybharatfinance.com/` → redirects to HTTPS
+- `https://www.moneybharatfinance.com/` → redirects to non-www version
+- `https://moneybharatfinance.com/page/` → removes trailing slash
 - `https://moneybharat.co/` → redirects to new domain
 
 ---
@@ -52,8 +52,8 @@ export const SITE_CONFIG = {
   name: 'Money Bharat Finance',
   title: 'Money Bharat Finance - Mutual Funds, Insurance & Loans',
   description: 'Grow your wealth with Money Bharat Finance - India\'s AI-powered platform for mutual funds, SIP investments, health & life insurance, and instant personal loans.',
-  url: 'https://www.moneybharatfinance.com',
-  canonicalDomain: 'www.moneybharatfinance.com',
+  url: 'https://moneybharatfinance.com',
+  canonicalDomain: 'moneybharatfinance.com',
   protocol: 'https',
   ogImage: '/images/og-image.jpg',
   
@@ -79,7 +79,7 @@ export const SITE_CONFIG = {
 #### 2. `src/utils/urlCanonicalizer.ts`
 ```typescript
 const DEFAULT_CONFIG: CanonicalUrlConfig = {
-  preferWww: true,              // Enforce www subdomain
+  preferWww: false,             // Enforce non-www (naked domain)
   baseUrl: 'moneybharatfinance.com',
   forceHttps: true,
 };
@@ -91,7 +91,7 @@ import { getCanonicalUrl } from '@/utils/seoUtils';
 
 // In any component
 const canonicalUrl = getCanonicalUrl('/mutual-funds');
-// Returns: https://www.moneybharatfinance.com/mutual-funds
+// Returns: https://moneybharatfinance.com/mutual-funds
 ```
 
 ---
@@ -100,16 +100,16 @@ const canonicalUrl = getCanonicalUrl('/mutual-funds');
 
 ### 1. Netlify/Static Hosting (`public/_redirects`)
 ```
-# Non-www to www
-https://moneybharatfinance.com/* https://www.moneybharatfinance.com/:splat 301!
-http://moneybharatfinance.com/* https://www.moneybharatfinance.com/:splat 301!
+# WWW to non-www
+https://www.moneybharatfinance.com/* https://moneybharatfinance.com/:splat 301!
+http://www.moneybharatfinance.com/* https://moneybharatfinance.com/:splat 301!
 
 # Old domain to new domain
-https://moneybharat.co/* https://www.moneybharatfinance.com/:splat 301!
-https://www.moneybharat.co/* https://www.moneybharatfinance.com/:splat 301!
+https://moneybharat.co/* https://moneybharatfinance.com/:splat 301!
+https://www.moneybharat.co/* https://moneybharatfinance.com/:splat 301!
 
 # Force HTTPS
-http://www.moneybharatfinance.com/* https://www.moneybharatfinance.com/:splat 301!
+http://moneybharatfinance.com/* https://moneybharatfinance.com/:splat 301!
 
 # SPA fallback
 /* /index.html 200
@@ -117,7 +117,7 @@ http://www.moneybharatfinance.com/* https://www.moneybharatfinance.com/:splat 30
 
 ### 2. Vercel Configuration (`public/vercel.json`)
 Includes:
-- Host-based redirects for non-www → www
+- Host-based redirects for www → non-www
 - Old domain redirects
 - Security headers (X-Content-Type-Options, X-Frame-Options, etc.)
 - Cache control for sitemap and robots.txt
@@ -130,13 +130,13 @@ RewriteEngine On
 RewriteCond %{HTTPS} off
 RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
 
-# Force WWW
-RewriteCond %{HTTP_HOST} ^moneybharatfinance\.com [NC]
-RewriteRule ^(.*)$ https://www.moneybharatfinance.com/$1 [R=301,L]
+# Redirect WWW to non-www
+RewriteCond %{HTTP_HOST} ^www\.moneybharatfinance\.com [NC]
+RewriteRule ^(.*)$ https://moneybharatfinance.com/$1 [R=301,L]
 
 # Redirect old domain
 RewriteCond %{HTTP_HOST} ^(www\.)?moneybharat\.co [NC]
-RewriteRule ^(.*)$ https://www.moneybharatfinance.com/$1 [R=301,L]
+RewriteRule ^(.*)$ https://moneybharatfinance.com/$1 [R=301,L]
 ```
 
 ---
@@ -151,7 +151,7 @@ RewriteRule ^(.*)$ https://www.moneybharatfinance.com/$1 [R=301,L]
   title="Money Bharat Finance - Mutual Funds, Insurance & Loans"
   description="Grow your wealth with Money Bharat Finance - India's AI-powered platform for mutual funds, SIP investments, health & life insurance, and instant personal loans."
   keywords="mutual funds India, SIP investment, health insurance, personal loans"
-  url="https://www.moneybharatfinance.com/"
+  url="https://moneybharatfinance.com/"
   type="website"
 />
 ```
@@ -162,7 +162,7 @@ RewriteRule ^(.*)$ https://www.moneybharatfinance.com/$1 [R=301,L]
   title="Understanding SIP Investment - Complete Guide 2025"
   description="Learn everything about SIP investments, returns, and strategies."
   keywords="SIP, mutual funds, investment guide"
-  url="https://www.moneybharatfinance.com/blog/sip-investment-guide"
+  url="https://moneybharatfinance.com/blog/sip-investment-guide"
   type="article"
   publishedTime="2025-01-15T10:00:00+05:30"
   modifiedTime="2025-01-19T14:30:00+05:30"
@@ -176,7 +176,7 @@ RewriteRule ^(.*)$ https://www.moneybharatfinance.com/$1 [R=301,L]
 
 ### Key Meta Tags Included
 - **Basic SEO:** title, description, keywords, author
-- **Canonical URL:** enforces www version
+- **Canonical URL:** enforces non-www version
 - **Robots:** index, follow directives
 - **Open Graph:** complete OG tags for social sharing
 - **Twitter Cards:** large image cards
@@ -197,7 +197,7 @@ RewriteRule ^(.*)$ https://www.moneybharatfinance.com/$1 [R=301,L]
   "@type": "FinancialService",
   "name": "Money Bharat Finance",
   "legalName": "Spyra Exim Pvt Ltd",
-  "url": "https://www.moneybharatfinance.com/",
+  "url": "https://moneybharatfinance.com/",
   "contactPoint": [{
     "telephone": "+91-9970735694",
     "email": "contact@moneybharatfinance.com"
@@ -222,10 +222,10 @@ RewriteRule ^(.*)$ https://www.moneybharatfinance.com/$1 [R=301,L]
 {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  "url": "https://www.moneybharatfinance.com/",
+  "url": "https://moneybharatfinance.com/",
   "potentialAction": {
     "@type": "SearchAction",
-    "target": "https://www.moneybharatfinance.com/search?q={search_term}"
+    "target": "https://moneybharatfinance.com/search?q={search_term}"
   }
 }
 ```
@@ -249,8 +249,8 @@ function App() {
 ## 🗺️ Sitemap & Robots
 
 ### Sitemap (`public/sitemap.xml`)
-- **Location:** `https://www.moneybharatfinance.com/sitemap.xml`
-- **Format:** All URLs use canonical format (https, www, no trailing slash)
+- **Location:** `https://moneybharatfinance.com/sitemap.xml`
+- **Format:** All URLs use canonical format (https, non-www, no trailing slash)
 - **Updates:** Updated 2025-01-19
 - **Priority Levels:**
   - Homepage: 1.00
@@ -273,11 +273,11 @@ Disallow: /*?utm_*
 Disallow: /*?fbclid=*
 
 # Sitemaps
-Sitemap: https://www.moneybharatfinance.com/sitemap.xml
-Sitemap: https://www.moneybharatfinance.com/rss.xml
+Sitemap: https://moneybharatfinance.com/sitemap.xml
+Sitemap: https://moneybharatfinance.com/rss.xml
 
 # Preferred domain
-Host: https://www.moneybharatfinance.com
+Host: https://moneybharatfinance.com
 ```
 
 ---
@@ -290,7 +290,7 @@ Contact: mailto:security@moneybharatfinance.com
 Contact: mailto:spyraexim@gmail.com
 Expires: 2026-12-31T23:59:59.000Z
 Preferred-Languages: en, hi
-Canonical: https://www.moneybharatfinance.com/.well-known/security.txt
+Canonical: https://moneybharatfinance.com/.well-known/security.txt
 ```
 
 **Purpose:** Responsible vulnerability disclosure
@@ -299,11 +299,11 @@ Canonical: https://www.moneybharatfinance.com/.well-known/security.txt
 ```
 /* TEAM */
 Company: Spyra Exim Pvt Ltd
-Website: https://www.moneybharatfinance.com/
+Website: https://moneybharatfinance.com/
 Contact: contact@moneybharatfinance.com
 
 /* SITE */
-Domain: https://www.moneybharatfinance.com/
+Domain: https://moneybharatfinance.com/
 Technology: React, TypeScript, Tailwind CSS
 Last Update: 2025-01-19
 ```
@@ -315,7 +315,7 @@ Last Update: 2025-01-19
 {
   "name": "Money Bharat Finance - Spyra Exim Pvt Ltd",
   "short_name": "Money Bharat",
-  "start_url": "https://www.moneybharatfinance.com/",
+  "start_url": "https://moneybharatfinance.com/",
   "scope": "/",
   "display": "standalone",
   "theme_color": "#2EB883"
@@ -332,8 +332,8 @@ Last Update: 2025-01-19
 Add to `<head>` for critical resources:
 ```html
 <!-- Preconnect to own domain -->
-<link rel="preconnect" href="https://www.moneybharatfinance.com" />
-<link rel="dns-prefetch" href="https://www.moneybharatfinance.com" />
+<link rel="preconnect" href="https://moneybharatfinance.com" />
+<link rel="dns-prefetch" href="https://moneybharatfinance.com" />
 
 <!-- Preload critical assets -->
 <link rel="preload" href="/fonts/inter.woff2" as="font" type="font/woff2" crossorigin />
@@ -386,8 +386,8 @@ Add to `<head>` for critical resources:
 
 ### Phase 1: Domain & Redirects
 - [x] Update `siteConfig.ts` with new domain
-- [x] Update `urlCanonicalizer.ts` to prefer www
-- [x] Configure `_redirects` for non-www → www
+- [x] Update `urlCanonicalizer.ts` to prefer non-www
+- [x] Configure `_redirects` for www → non-www
 - [x] Configure `vercel.json` redirects
 - [x] Update `.htaccess` for Apache/Hostinger
 - [x] Add old domain redirects (moneybharat.co → moneybharatfinance.com)
@@ -416,7 +416,7 @@ Add to `<head>` for critical resources:
 - [ ] Add security headers
 
 ### Phase 5: Testing & Validation
-- [ ] Test all redirects (non-www → www, http → https, old domain)
+- [ ] Test all redirects (www → non-www, http → https, old domain)
 - [ ] Validate sitemap.xml in Google Search Console
 - [ ] Test structured data with Google Rich Results Test
 - [ ] Verify canonical tags on all pages
@@ -428,7 +428,7 @@ Add to `<head>` for critical resources:
 ### Phase 6: Search Console Setup
 - [ ] Verify domain in Google Search Console
 - [ ] Submit sitemap.xml
-- [ ] Set preferred domain (www)
+- [ ] Set preferred domain (non-www)
 - [ ] Monitor indexing status
 - [ ] Set up Bing Webmaster Tools
 - [ ] Submit to other search engines (Yandex, Baidu if applicable)
@@ -440,7 +440,7 @@ Add to `<head>` for critical resources:
 **Company:** Spyra Exim Pvt Ltd  
 **Email:** contact@moneybharatfinance.com  
 **Support:** spyraexim@gmail.com  
-**Website:** https://www.moneybharatfinance.com/
+**Website:** https://moneybharatfinance.com/
 
 ---
 
