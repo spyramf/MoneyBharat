@@ -1,81 +1,49 @@
-const CACHE_VERSION = 'v2';
-const STATIC_CACHE = `static-${CACHE_VERSION}`;
-const DYNAMIC_CACHE = `dynamic-${CACHE_VERSION}`;
-const IMAGE_CACHE = `images-${CACHE_VERSION}`;
-
-const STATIC_ASSETS = [
+// Service Worker for caching and performance optimization
+const CACHE_NAME = 'money-bharat-v1';
+const urlsToCache = [
   '/',
-  '/manifest.json'
+  '/src/index.css',
+  '/src/main.tsx',
+  '/lovable-uploads/92affb7c-7e35-42da-9aff-b0f55a689428.png',
+  'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap'
 ];
 
-self.addEventListener('install', (event) => {
+// Install event
+self.addEventListener('install', function(event) {
   event.waitUntil(
-    caches.open(STATIC_CACHE).then((cache) => cache.addAll(STATIC_ASSETS))
+    caches.open(CACHE_NAME)
+      .then(function(cache) {
+        return cache.addAll(urlsToCache);
+      })
   );
-  self.skipWaiting();
 });
 
-self.addEventListener('activate', (event) => {
-  event.waitUntil(
-    caches.keys().then((keys) => 
-      Promise.all(
-        keys
-          .filter((key) => key !== STATIC_CACHE && key !== DYNAMIC_CACHE && key !== IMAGE_CACHE)
-          .map((key) => caches.delete(key))
-      )
+// Fetch event
+self.addEventListener('fetch', function(event) {
+  event.respondWith(
+    caches.match(event.request)
+      .then(function(response) {
+        // Return cached version or fetch from network
+        if (response) {
+          return response;
+        }
+        return fetch(event.request);
+      }
     )
   );
-  self.clients.claim();
 });
 
-self.addEventListener('fetch', (event) => {
-  const { request } = event;
-  const url = new URL(request.url);
-
-  // Skip chrome extension requests
-  if (url.protocol === 'chrome-extension:') return;
-
-  // Images: Cache first, network fallback
-  if (request.destination === 'image') {
-    event.respondWith(
-      caches.open(IMAGE_CACHE).then((cache) =>
-        cache.match(request).then((cached) => {
-          if (cached) return cached;
-          return fetch(request).then((response) => {
-            if (response.ok) cache.put(request, response.clone());
-            return response;
-          });
-        })
-      )
-    );
-    return;
-  }
-
-  // Static assets: Cache first
-  if (request.destination === 'script' || request.destination === 'style' || request.destination === 'font') {
-    event.respondWith(
-      caches.match(request).then((cached) => {
-        if (cached) return cached;
-        return fetch(request).then((response) => {
-          if (response.ok) {
-            caches.open(STATIC_CACHE).then((cache) => cache.put(request, response.clone()));
+// Activate event
+self.addEventListener('activate', function(event) {
+  event.waitUntil(
+    caches.keys().then(function(cacheNames) {
+      return Promise.all(
+        cacheNames.map(function(cacheName) {
+          if (cacheName !== CACHE_NAME) {
+            return caches.delete(cacheName);
           }
-          return response;
-        });
-      })
-    );
-    return;
-  }
-
-  // HTML: Network first, cache fallback
-  event.respondWith(
-    fetch(request)
-      .then((response) => {
-        if (response.ok) {
-          caches.open(DYNAMIC_CACHE).then((cache) => cache.put(request, response.clone()));
-        }
-        return response;
-      })
-      .catch(() => caches.match(request))
+        })
+      );
+    })
   );
 });
