@@ -6,7 +6,7 @@ const FAQSection = () => {
   const faqs = [
     {
       question: "What makes Money Bharat different from other financial platforms?",
-      answer: "Money Bharat combines cutting-edge technology with personalized financial advice. We offer zero-commission mutual funds, comprehensive insurance coverage, and instant loan approvals through our AI-powered platform. Our AMFI-registered advisors provide expert guidance tailored to your financial goals."
+      answer: "Money Bharat combines cutting-edge technology with personalized financial advice. We offer expert-guided mutual fund investments, comprehensive insurance coverage, and instant loan approvals through our AI-powered platform. Our AMFI-registered advisors provide expert guidance tailored to your financial goals."
     },
     {
       question: "How secure is Money Bharat for online financial transactions?",
@@ -30,7 +30,7 @@ const FAQSection = () => {
     },
     {
       question: "What are the charges for using Money Bharat services?",
-      answer: "Money Bharat offers zero-commission mutual fund investments through direct plans. Insurance products have standard industry premiums with no additional charges. Loan processing fees are competitive and transparently disclosed upfront. We believe in transparent pricing with no hidden costs."
+      answer: "Money Bharat offers professional mutual fund advisory services as a registered distributor. Insurance products have standard industry premiums with no additional charges. Loan processing fees are competitive and transparently disclosed upfront. We believe in transparent pricing with no hidden costs."
     },
     {
       question: "Can I track all my investments in one place on Money Bharat?",

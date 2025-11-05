@@ -25,7 +25,7 @@ const MutualFundHero = () => {
             <span className="text-gray-800">Expert Guidance & High Returns</span>
           </h1>
           
-          <p className="text-xl text-gray-700 mb-8 max-w-3xl mx-auto leading-relaxed">Start your wealth creation journey with India's most trusted mutual fund platform. Get expert advisory, zero paperwork, and Best plan benefits with Money Bharat Finance.</p>
+          <p className="text-xl text-gray-700 mb-8 max-w-3xl mx-auto leading-relaxed">Start your wealth creation journey with India's most trusted mutual fund platform. Get expert advisory, zero paperwork, and professional guidance with Money Bharat Finance.</p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
 <Button
