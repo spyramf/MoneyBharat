@@ -17,7 +17,7 @@ interface SEOHeadProps {
 const SEOHead = ({
   title,
   description,
-  keywords = "mutual funds, SIP investment, health insurance, personal loans, financial planning, Money Bharat",
+  keywords = "Money Bharat, Money Bharat Finance, money bharat mutual funds, money bharat insurance, money bharat loans, mutual funds India, SIP investment, health insurance, personal loans, financial planning",
   image = "/lovable-uploads/92affb7c-7e35-42da-9aff-b0f55a689428.png",
   type = "website",
   publishedTime,

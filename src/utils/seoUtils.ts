@@ -15,26 +15,26 @@ export const getPageTitle = (pageName: string, includeCompany: boolean = true): 
 
 export const getPageDescription = (page: string): string => {
   const descriptions: Record<string, string> = {
-    home: "Grow your wealth with Money Bharat Finance - India's AI-powered platform for mutual funds, SIP investments, health & life insurance, and instant personal loans. Expert advisory with ₹5000Cr+ AUM.",
+    home: "Money Bharat Finance - India's trusted platform for mutual funds, SIP investments, health & life insurance, and instant loans. Money Bharat offers expert financial advisory with ₹5000Cr+ AUM.",
     "mutual-funds":
-      "Invest in top-performing mutual funds with expert guidance. Professional advisory, SIP starting ₹500. Get 15%+ returns with Money Bharat's curated fund selection.",
+      "Money Bharat mutual funds - Invest in top-performing funds with expert guidance. Money Bharat Finance offers professional SIP advisory starting ₹500 with 15%+ returns.",
     insurance:
-      "Comprehensive insurance solutions - Health, Life, Term, Vehicle insurance with instant quotes. Compare plans from top insurers and get best coverage at competitive premiums.",
+      "Money Bharat insurance solutions - Health, Life, Term, Vehicle insurance with instant quotes. Money Bharat Finance helps you compare plans from top insurers.",
     loans:
-      "Quick approval personal, home, business loans with competitive interest rates. Instant online application, minimal documentation, and flexible repayment options.",
+      "Money Bharat loans - Quick approval for personal, home, business loans with competitive rates. Money Bharat Finance offers instant online application with minimal documentation.",
     "health-insurance":
-      "Family health insurance with cashless treatment, comprehensive coverage, and affordable premiums. Compare plans from leading insurers.",
+      "Money Bharat health insurance - Family coverage with cashless treatment and affordable premiums. Compare leading health insurance plans at Money Bharat Finance.",
     "term-insurance":
-      "High coverage term life insurance plans with affordable premiums. Secure your family's financial future with trusted insurance providers.",
+      "Money Bharat term insurance - High coverage life insurance plans with affordable premiums. Secure your family's future with Money Bharat Finance.",
     "vehicle-insurance":
-      "Motor and vehicle insurance with comprehensive coverage, instant quotes, and hassle-free claims. Protect your vehicle with the best insurance plans.",
+      "Money Bharat vehicle insurance - Comprehensive motor insurance with instant quotes and hassle-free claims. Get the best vehicle insurance at Money Bharat Finance.",
     about:
-      "Learn about Money Bharat Finance - India's trusted financial platform serving 50,000+ clients with expert advisory and innovative financial solutions.",
+      "About Money Bharat Finance - India's trusted financial platform serving 50,000+ clients. Learn how Money Bharat delivers expert advisory and innovative solutions.",
     contact:
-      "Contact Money Bharat Finance for personalized financial advice on mutual funds, insurance, and loans. Call +91 9970735694 or email contact@moneybharatfinance.com. Free consultation available.",
-    blog: "Financial insights, investment tips, and market analysis from Money Bharat's expert team. Stay updated with latest trends in mutual funds, insurance, and loans.",
+      "Contact Money Bharat Finance for personalized financial advice. Call Money Bharat at +91 9970735694 or email for free consultation on mutual funds, insurance, and loans.",
+    blog: "Money Bharat Finance blog - Financial insights, investment tips, and market analysis. Stay updated with Money Bharat's expert guidance on mutual funds, insurance, and loans.",
     booking:
-      "Book a free consultation with Money Bharat's certified financial advisors. Get personalized investment advice and financial planning guidance.",
+      "Book consultation with Money Bharat Finance - Free session with certified financial advisors. Get personalized investment advice from Money Bharat's experts.",
   };
 
   return descriptions[page] || `${page.charAt(0).toUpperCase() + page.slice(1)} - Money Bharat Finance`;
