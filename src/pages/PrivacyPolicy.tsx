@@ -1,4 +1,3 @@
-
 import { Helmet } from "react-helmet-async";
 import Navbar from "../components/Navbar";
 import { ArrowRight, FileText, Shield } from "lucide-react";
@@ -24,12 +23,10 @@ const PrivacyPolicy = () => {
               Privacy Policy
             </h1>
           </div>
-          
+
           <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-sm border border-gray-100 p-8 md:p-10">
-            <p className="text-gray-500 mb-8 pb-4 border-b border-gray-100">
-              Last Updated: May 19, 2025
-            </p>
-            
+            <p className="text-gray-500 mb-8 pb-4 border-b border-gray-100">Last Updated: May 19, 2025</p>
+
             <div className="prose max-w-none text-gray-600">
               <section className="mb-8">
                 <h2 className="text-2xl font-semibold mb-4 text-gray-800 flex items-center">
@@ -39,10 +36,12 @@ const PrivacyPolicy = () => {
                   Introduction
                 </h2>
                 <p className="mb-4">
-                  Money Bharat Finance ("we", "our", or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website or use our services.
+                  Money Bharat Finance ("we", "our", or "us") is committed to protecting your privacy. This Privacy
+                  Policy explains how we collect, use, disclose, and safeguard your information when you visit our
+                  website or use our services.
                 </p>
               </section>
-              
+
               <section className="mb-8">
                 <h2 className="text-2xl font-semibold mb-4 text-gray-800 flex items-center">
                   <span className="bg-fintech-purple/10 text-fintech-purple p-2 rounded-full mr-3">
@@ -58,7 +57,7 @@ const PrivacyPolicy = () => {
                   <li>Information you provide when filling out forms on our website</li>
                 </ul>
               </section>
-              
+
               <section className="mb-8">
                 <h2 className="text-2xl font-semibold mb-4 text-gray-800 flex items-center">
                   <span className="bg-fintech-purple/10 text-fintech-purple p-2 rounded-full mr-3">
@@ -78,7 +77,7 @@ const PrivacyPolicy = () => {
                   <li>Detect, investigate, and prevent fraudulent transactions and other illegal activities</li>
                 </ul>
               </section>
-              
+
               <section className="mb-8">
                 <h2 className="text-2xl font-semibold mb-4 text-gray-800 flex items-center">
                   <span className="bg-fintech-purple/10 text-fintech-purple p-2 rounded-full mr-3">
@@ -96,7 +95,7 @@ const PrivacyPolicy = () => {
                   <li>With your consent or at your direction</li>
                 </ul>
               </section>
-              
+
               <section className="mb-8">
                 <h2 className="text-2xl font-semibold mb-4 text-gray-800 flex items-center">
                   <span className="bg-fintech-purple/10 text-fintech-purple p-2 rounded-full mr-3">
@@ -105,10 +104,12 @@ const PrivacyPolicy = () => {
                   Data Security
                 </h2>
                 <p className="mb-4">
-                  We have implemented appropriate security measures to protect your personal information from unauthorized access, alteration, disclosure, or destruction. However, no method of transmission over the Internet or electronic storage is 100% secure, so we cannot guarantee absolute security.
+                  We have implemented appropriate security measures to protect your personal information from
+                  unauthorized access, alteration, disclosure, or destruction. However, no method of transmission over
+                  the Internet or electronic storage is 100% secure, so we cannot guarantee absolute security.
                 </p>
               </section>
-              
+
               <section className="mb-8">
                 <h2 className="text-2xl font-semibold mb-4 text-gray-800 flex items-center">
                   <span className="bg-fintech-purple/10 text-fintech-purple p-2 rounded-full mr-3">
@@ -117,10 +118,11 @@ const PrivacyPolicy = () => {
                   Your Rights
                 </h2>
                 <p className="mb-4">
-                  Depending on your location, you may have certain rights regarding your personal information, such as the right to access, correct, delete, or restrict processing of your personal information.
+                  Depending on your location, you may have certain rights regarding your personal information, such as
+                  the right to access, correct, delete, or restrict processing of your personal information.
                 </p>
               </section>
-              
+
               <section className="mb-8">
                 <h2 className="text-2xl font-semibold mb-4 text-gray-800 flex items-center">
                   <span className="bg-fintech-purple/10 text-fintech-purple p-2 rounded-full mr-3">
@@ -129,10 +131,11 @@ const PrivacyPolicy = () => {
                   Changes to This Privacy Policy
                 </h2>
                 <p className="mb-4">
-                  We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the "Last Updated" date.
+                  We may update our Privacy Policy from time to time. We will notify you of any changes by posting the
+                  new Privacy Policy on this page and updating the "Last Updated" date.
                 </p>
               </section>
-              
+
               <section className="mb-8">
                 <h2 className="text-2xl font-semibold mb-4 text-gray-800 flex items-center">
                   <span className="bg-fintech-purple/10 text-fintech-purple p-2 rounded-full mr-3">
@@ -142,15 +145,22 @@ const PrivacyPolicy = () => {
                 </h2>
                 <p className="mb-4">
                   If you have any questions about this Privacy Policy, please contact us at{" "}
-                  <a href="mailto:privacy@moneybharat.com" className="text-fintech-blue hover:text-fintech-purple underline">
-                    privacy@moneybharat.com
-                  </a>.
+                  <a
+                    href="mailto:privacy@moneybharatfinance.com"
+                    className="text-fintech-blue hover:text-fintech-purple underline"
+                  >
+                    privacy@moneybharatfinance.com
+                  </a>
+                  .
                 </p>
               </section>
             </div>
-            
+
             <div className="mt-12 pt-4 border-t border-gray-100">
-              <a href="/" className="inline-flex items-center text-fintech-blue hover:text-fintech-purple transition-colors">
+              <a
+                href="/"
+                className="inline-flex items-center text-fintech-blue hover:text-fintech-purple transition-colors"
+              >
                 <ArrowRight size={16} className="mr-2" /> Back to Home
               </a>
             </div>

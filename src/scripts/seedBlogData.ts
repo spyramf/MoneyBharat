@@ -1,90 +1,92 @@
-import { supabase } from '@/integrations/supabase/client';
+import { supabase } from "@/integrations/supabase/client";
 
 export async function seedBlogData() {
   try {
-    console.log('Starting blog data seeding...');
+    console.log("Starting blog data seeding...");
 
     // Get existing categories and author
-    const { data: categories } = await supabase
-      .from('blog_categories')
-      .select('id, slug');
-    
-    const { data: existingAuthors } = await supabase
-      .from('blog_authors')
-      .select('id, email');
+    const { data: categories } = await supabase.from("blog_categories").select("id, slug");
+
+    const { data: existingAuthors } = await supabase.from("blog_authors").select("id, email");
 
     if (!categories || !existingAuthors) {
-      throw new Error('Failed to fetch existing data');
+      throw new Error("Failed to fetch existing data");
     }
 
-    const categoryMap = categories.reduce((acc, cat) => {
-      acc[cat.slug] = cat.id;
-      return acc;
-    }, {} as Record<string, string>);
+    const categoryMap = categories.reduce(
+      (acc, cat) => {
+        acc[cat.slug] = cat.id;
+        return acc;
+      },
+      {} as Record<string, string>,
+    );
 
     // Add more authors
     const newAuthors = [
       {
-        name: 'Priya Sharma',
-        email: 'priya.sharma@moneybharat.com',
-        role: 'Senior Investment Analyst',
-        bio: 'With over 10 years of experience in mutual fund analysis and portfolio management, Priya helps investors make informed investment decisions.',
-        avatar_url: '/images/authors/priya-sharma.jpg'
+        name: "Priya Sharma",
+        email: "priya.sharma@moneybharatfinance.com",
+        role: "Senior Investment Analyst",
+        bio: "With over 10 years of experience in mutual fund analysis and portfolio management, Priya helps investors make informed investment decisions.",
+        avatar_url: "/images/authors/priya-sharma.jpg",
       },
       {
-        name: 'Rahul Gupta',
-        email: 'rahul.gupta@moneybharat.com',
-        role: 'Tax Planning Expert',
-        bio: 'Rahul specializes in tax-efficient investment strategies and has helped thousands of clients optimize their tax savings.',
-        avatar_url: '/images/authors/rahul-gupta.jpg'
+        name: "Rahul Gupta",
+        email: "rahul.gupta@moneybharatfinance.com",
+        role: "Tax Planning Expert",
+        bio: "Rahul specializes in tax-efficient investment strategies and has helped thousands of clients optimize their tax savings.",
+        avatar_url: "/images/authors/rahul-gupta.jpg",
       },
       {
-        name: 'Anjali Patel',
-        email: 'anjali.patel@moneybharat.com',
-        role: 'Insurance Specialist',
-        bio: 'Anjali has extensive knowledge in life and health insurance products, helping clients choose the right coverage for their needs.',
-        avatar_url: '/images/authors/anjali-patel.jpg'
-      }
+        name: "Anjali Patel",
+        email: "anjali.patel@moneybharatfinance.com",
+        role: "Insurance Specialist",
+        bio: "Anjali has extensive knowledge in life and health insurance products, helping clients choose the right coverage for their needs.",
+        avatar_url: "/images/authors/anjali-patel.jpg",
+      },
     ];
 
     // Filter out authors that already exist
     const authorsToInsert = newAuthors.filter(
-      author => !existingAuthors.some(existing => existing.email === author.email)
+      (author) => !existingAuthors.some((existing) => existing.email === author.email),
     );
 
     let authorIds: Record<string, string> = {};
-    
+
     if (authorsToInsert.length > 0) {
       const { data: insertedAuthors, error: authorsError } = await supabase
-        .from('blog_authors')
+        .from("blog_authors")
         .insert(authorsToInsert)
-        .select('id, email');
+        .select("id, email");
 
       if (authorsError) {
-        console.error('Error inserting authors:', authorsError);
+        console.error("Error inserting authors:", authorsError);
       } else if (insertedAuthors) {
-        insertedAuthors.forEach(author => {
+        insertedAuthors.forEach((author) => {
           authorIds[author.email] = author.id;
         });
       }
     }
 
     // Get all authors for blog posts
-    const { data: allAuthors } = await supabase
-      .from('blog_authors')
-      .select('id, email');
+    const { data: allAuthors } = await supabase.from("blog_authors").select("id, email");
 
-    const authorMap = allAuthors?.reduce((acc, author) => {
-      acc[author.email] = author.id;
-      return acc;
-    }, {} as Record<string, string>) || {};
+    const authorMap =
+      allAuthors?.reduce(
+        (acc, author) => {
+          acc[author.email] = author.id;
+          return acc;
+        },
+        {} as Record<string, string>,
+      ) || {};
 
     // Add comprehensive blog posts
     const blogPosts = [
       {
-        title: 'Understanding Mutual Fund Returns: A Complete Guide',
-        slug: 'understanding-mutual-fund-returns-guide',
-        excerpt: 'Learn how to analyze and compare mutual fund returns effectively to make better investment decisions.',
+        title: "Understanding Mutual Fund Returns: A Complete Guide",
+        slug: "understanding-mutual-fund-returns-guide",
+        excerpt:
+          "Learn how to analyze and compare mutual fund returns effectively to make better investment decisions.",
         content: `
           <h2>Introduction to Mutual Fund Returns</h2>
           <p>Understanding mutual fund returns is crucial for making informed investment decisions. In this comprehensive guide, we'll explore different types of returns, how to calculate them, and what they mean for your investments.</p>
@@ -105,21 +107,23 @@ export async function seedBlogData() {
           <h3>Conclusion</h3>
           <p>Remember, past performance doesn't guarantee future results. Use returns as one of many factors in your investment decision-making process.</p>
         `,
-        category_id: categoryMap['mutual-funds'],
-        author_id: authorMap['priya.sharma@moneybharat.com'] || authorMap['admin@moneybharat.com'],
-        status: 'published',
+        category_id: categoryMap["mutual-funds"],
+        author_id: authorMap["priya.sharma@moneybharatfinance.com"] || authorMap["admin@moneybharatfinance.com"],
+        status: "published",
         is_featured: true,
         read_time: 8,
-        featured_image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=400&fit=crop',
-        tags: ['mutual funds', 'returns', 'investment', 'CAGR'],
-        meta_title: 'Understanding Mutual Fund Returns: Complete Guide 2024',
-        meta_description: 'Learn how to analyze mutual fund returns, understand CAGR, XIRR, and make better investment decisions with our comprehensive guide.',
-        published_at: new Date().toISOString()
+        featured_image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=400&fit=crop",
+        tags: ["mutual funds", "returns", "investment", "CAGR"],
+        meta_title: "Understanding Mutual Fund Returns: Complete Guide 2024",
+        meta_description:
+          "Learn how to analyze mutual fund returns, understand CAGR, XIRR, and make better investment decisions with our comprehensive guide.",
+        published_at: new Date().toISOString(),
       },
       {
-        title: 'Top Tax Saving Investment Options for 2024',
-        slug: 'tax-saving-investment-options-2024',
-        excerpt: 'Discover the best tax-saving investment options under Section 80C and other sections to minimize your tax liability.',
+        title: "Top Tax Saving Investment Options for 2024",
+        slug: "tax-saving-investment-options-2024",
+        excerpt:
+          "Discover the best tax-saving investment options under Section 80C and other sections to minimize your tax liability.",
         content: `
           <h2>Maximize Your Tax Savings</h2>
           <p>Tax planning is an essential part of financial planning. Here are the best tax-saving investment options available in 2024.</p>
@@ -142,21 +146,23 @@ export async function seedBlogData() {
           <h3>Planning Tips</h3>
           <p>Start early in the financial year, diversify across different instruments, and don't invest just for tax savings—ensure the investment aligns with your financial goals.</p>
         `,
-        category_id: categoryMap['tax-planning'],
-        author_id: authorMap['rahul.gupta@moneybharat.com'] || authorMap['admin@moneybharat.com'],
-        status: 'published',
+        category_id: categoryMap["tax-planning"],
+        author_id: authorMap["rahul.gupta@moneybharat.com"] || authorMap["admin@moneybharat.com"],
+        status: "published",
         is_featured: true,
         read_time: 10,
-        featured_image: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=800&h=400&fit=crop',
-        tags: ['tax planning', '80C', 'ELSS', 'PPF', 'tax savings'],
-        meta_title: 'Top Tax Saving Investment Options 2024 | Save Tax Legally',
-        meta_description: 'Explore the best tax-saving investments under Section 80C and other sections. Learn about ELSS, PPF, NPS and more to reduce your tax liability.',
-        published_at: new Date().toISOString()
+        featured_image: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=800&h=400&fit=crop",
+        tags: ["tax planning", "80C", "ELSS", "PPF", "tax savings"],
+        meta_title: "Top Tax Saving Investment Options 2024 | Save Tax Legally",
+        meta_description:
+          "Explore the best tax-saving investments under Section 80C and other sections. Learn about ELSS, PPF, NPS and more to reduce your tax liability.",
+        published_at: new Date().toISOString(),
       },
       {
-        title: 'Health Insurance: What You Need to Know',
-        slug: 'health-insurance-complete-guide',
-        excerpt: 'Everything you need to know about choosing the right health insurance policy for you and your family.',
+        title: "Health Insurance: What You Need to Know",
+        slug: "health-insurance-complete-guide",
+        excerpt:
+          "Everything you need to know about choosing the right health insurance policy for you and your family.",
         content: `
           <h2>Why Health Insurance is Essential</h2>
           <p>Medical costs are rising rapidly. A comprehensive health insurance policy protects your finances from unexpected medical expenses and ensures quality healthcare for your family.</p>
@@ -178,21 +184,22 @@ export async function seedBlogData() {
           <h3>Claim Process</h3>
           <p>Familiarize yourself with both cashless and reimbursement claim processes. Keep all medical documents organized for smooth claim settlement.</p>
         `,
-        category_id: categoryMap['insurance'],
-        author_id: authorMap['anjali.patel@moneybharat.com'] || authorMap['admin@moneybharat.com'],
-        status: 'published',
+        category_id: categoryMap["insurance"],
+        author_id: authorMap["anjali.patel@moneybharat.com"] || authorMap["admin@moneybharat.com"],
+        status: "published",
         is_featured: false,
         read_time: 12,
-        featured_image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&h=400&fit=crop',
-        tags: ['health insurance', 'family floater', 'medical insurance', 'coverage'],
-        meta_title: 'Health Insurance Guide 2024: Choose the Right Policy',
-        meta_description: 'Complete guide to health insurance in India. Learn about types, coverage, claim process, and how to choose the best policy for your family.',
-        published_at: new Date().toISOString()
+        featured_image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&h=400&fit=crop",
+        tags: ["health insurance", "family floater", "medical insurance", "coverage"],
+        meta_title: "Health Insurance Guide 2024: Choose the Right Policy",
+        meta_description:
+          "Complete guide to health insurance in India. Learn about types, coverage, claim process, and how to choose the best policy for your family.",
+        published_at: new Date().toISOString(),
       },
       {
-        title: 'Personal Loan vs Credit Card: Which is Better?',
-        slug: 'personal-loan-vs-credit-card-comparison',
-        excerpt: 'Understanding when to use a personal loan versus a credit card for your financing needs.',
+        title: "Personal Loan vs Credit Card: Which is Better?",
+        slug: "personal-loan-vs-credit-card-comparison",
+        excerpt: "Understanding when to use a personal loan versus a credit card for your financing needs.",
         content: `
           <h2>Making the Right Choice</h2>
           <p>Both personal loans and credit cards offer access to funds, but they work differently and suit different financial needs.</p>
@@ -221,21 +228,22 @@ export async function seedBlogData() {
             <li>Earning rewards and cashback</li>
           </ul>
         `,
-        category_id: categoryMap['loans'],
-        author_id: authorMap['admin@moneybharat.com'],
-        status: 'published',
+        category_id: categoryMap["loans"],
+        author_id: authorMap["admin@moneybharat.com"],
+        status: "published",
         is_featured: false,
         read_time: 7,
-        featured_image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=400&fit=crop',
-        tags: ['personal loan', 'credit card', 'borrowing', 'finance'],
-        meta_title: 'Personal Loan vs Credit Card: Which One to Choose in 2024',
-        meta_description: 'Compare personal loans and credit cards. Learn when to use each option, their pros and cons, and make the right financial decision.',
-        published_at: new Date().toISOString()
+        featured_image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=400&fit=crop",
+        tags: ["personal loan", "credit card", "borrowing", "finance"],
+        meta_title: "Personal Loan vs Credit Card: Which One to Choose in 2024",
+        meta_description:
+          "Compare personal loans and credit cards. Learn when to use each option, their pros and cons, and make the right financial decision.",
+        published_at: new Date().toISOString(),
       },
       {
-        title: 'Building an Emergency Fund: Complete Roadmap',
-        slug: 'emergency-fund-building-guide',
-        excerpt: 'Step-by-step guide to building and maintaining an emergency fund for financial security.',
+        title: "Building an Emergency Fund: Complete Roadmap",
+        slug: "emergency-fund-building-guide",
+        excerpt: "Step-by-step guide to building and maintaining an emergency fund for financial security.",
         content: `
           <h2>Why You Need an Emergency Fund</h2>
           <p>An emergency fund is your financial safety net. It protects you from unexpected expenses and provides peace of mind during uncertain times.</p>
@@ -261,21 +269,23 @@ export async function seedBlogData() {
           <h3>Common Mistakes to Avoid</h3>
           <p>Don't invest emergency funds in equity, don't dip into it for non-emergencies, and don't keep it all in one place. Maintain liquidity while earning reasonable returns.</p>
         `,
-        category_id: categoryMap['financial-planning'],
-        author_id: authorMap['priya.sharma@moneybharat.com'] || authorMap['admin@moneybharat.com'],
-        status: 'published',
+        category_id: categoryMap["financial-planning"],
+        author_id: authorMap["priya.sharma@moneybharat.com"] || authorMap["admin@moneybharat.com"],
+        status: "published",
         is_featured: false,
         read_time: 9,
-        featured_image: 'https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=800&h=400&fit=crop',
-        tags: ['emergency fund', 'financial planning', 'savings', 'security'],
-        meta_title: 'How to Build an Emergency Fund: Complete Guide 2024',
-        meta_description: 'Learn how to build and maintain an emergency fund. Step-by-step guide covering amount needed, best places to keep funds, and common mistakes to avoid.',
-        published_at: new Date().toISOString()
+        featured_image: "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=800&h=400&fit=crop",
+        tags: ["emergency fund", "financial planning", "savings", "security"],
+        meta_title: "How to Build an Emergency Fund: Complete Guide 2024",
+        meta_description:
+          "Learn how to build and maintain an emergency fund. Step-by-step guide covering amount needed, best places to keep funds, and common mistakes to avoid.",
+        published_at: new Date().toISOString(),
       },
       {
-        title: 'Diversification in Investment Portfolio: Why It Matters',
-        slug: 'portfolio-diversification-guide',
-        excerpt: 'Understanding the importance of diversification and how to build a well-balanced investment portfolio.',
+        title: "Diversification in Investment Portfolio: Why It Matters",
+        slug: "portfolio-diversification-guide",
+        excerpt:
+          "Understanding the importance of diversification and how to build a well-balanced investment portfolio.",
         content: `
           <h2>The Power of Diversification</h2>
           <p>Don't put all your eggs in one basket. Diversification is the key to managing investment risk while optimizing returns.</p>
@@ -300,48 +310,42 @@ export async function seedBlogData() {
           <h3>Common Diversification Mistakes</h3>
           <p>Over-diversification can dilute returns. Having too many similar funds doesn't add value. Focus on meaningful diversification across uncorrelated assets.</p>
         `,
-        category_id: categoryMap['investment'],
-        author_id: authorMap['priya.sharma@moneybharat.com'] || authorMap['admin@moneybharat.com'],
-        status: 'published',
+        category_id: categoryMap["investment"],
+        author_id: authorMap["priya.sharma@moneybharat.com"] || authorMap["admin@moneybharat.com"],
+        status: "published",
         is_featured: false,
         read_time: 11,
-        featured_image: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&h=400&fit=crop',
-        tags: ['diversification', 'portfolio', 'asset allocation', 'risk management'],
-        meta_title: 'Portfolio Diversification Guide: Build a Balanced Portfolio',
-        meta_description: 'Learn how to diversify your investment portfolio effectively. Understand asset allocation, rebalancing strategies, and avoid common mistakes.',
-        published_at: new Date().toISOString()
-      }
+        featured_image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&h=400&fit=crop",
+        tags: ["diversification", "portfolio", "asset allocation", "risk management"],
+        meta_title: "Portfolio Diversification Guide: Build a Balanced Portfolio",
+        meta_description:
+          "Learn how to diversify your investment portfolio effectively. Understand asset allocation, rebalancing strategies, and avoid common mistakes.",
+        published_at: new Date().toISOString(),
+      },
     ];
 
     // Check for existing blog posts
-    const { data: existingPosts } = await supabase
-      .from('blogs')
-      .select('slug');
+    const { data: existingPosts } = await supabase.from("blogs").select("slug");
 
-    const postsToInsert = blogPosts.filter(
-      post => !existingPosts?.some(existing => existing.slug === post.slug)
-    );
+    const postsToInsert = blogPosts.filter((post) => !existingPosts?.some((existing) => existing.slug === post.slug));
 
     if (postsToInsert.length > 0) {
-      const { error: postsError } = await supabase
-        .from('blogs')
-        .insert(postsToInsert);
+      const { error: postsError } = await supabase.from("blogs").insert(postsToInsert);
 
       if (postsError) {
-        console.error('Error inserting blog posts:', postsError);
+        console.error("Error inserting blog posts:", postsError);
         throw postsError;
       }
 
       console.log(`Successfully inserted ${postsToInsert.length} blog posts`);
     } else {
-      console.log('All blog posts already exist');
+      console.log("All blog posts already exist");
     }
 
-    console.log('Blog data seeding completed successfully!');
+    console.log("Blog data seeding completed successfully!");
     return { success: true, inserted: postsToInsert.length };
-    
   } catch (error) {
-    console.error('Error seeding blog data:', error);
+    console.error("Error seeding blog data:", error);
     throw error;
   }
 }

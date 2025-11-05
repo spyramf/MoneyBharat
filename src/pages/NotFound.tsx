@@ -1,4 +1,3 @@
-
 import { useLocation, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Home, Search, Mail, ArrowLeft, ExternalLink, AlertTriangle } from "lucide-react";
@@ -7,23 +6,26 @@ import Navbar from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
 
 const NotFound = () => {
   const location = useLocation();
   const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
-    console.error(
-      "404 Error: User attempted to access non-existent route:",
-      location.pathname
-    );
-    
+    console.error("404 Error: User attempted to access non-existent route:", location.pathname);
+
     // Track 404 errors for analytics
-    if (typeof window !== 'undefined' && (window as any).gtag) {
-      (window as any).gtag('event', 'page_not_found', {
+    if (typeof window !== "undefined" && (window as any).gtag) {
+      (window as any).gtag("event", "page_not_found", {
         page_path: location.pathname,
-        page_title: '404 - Page Not Found'
+        page_title: "404 - Page Not Found",
       });
     }
   }, [location.pathname]);
@@ -34,7 +36,7 @@ const NotFound = () => {
     { title: "Personal Loans", path: "/loans/personal", description: "Quick approval loans" },
     { title: "Home Loans", path: "/loans/home", description: "Make your dream home reality" },
     { title: "SIP Calculator", path: "/tools/sip-calculator", description: "Plan your investments" },
-    { title: "Blog", path: "/blog", description: "Financial insights and tips" }
+    { title: "Blog", path: "/blog", description: "Financial insights and tips" },
   ];
 
   const handleSearch = () => {
@@ -47,52 +49,60 @@ const NotFound = () => {
 
   const handleReportIssue = () => {
     const subject = `Broken Link Report - ${location.pathname}`;
-    const body = `I found a broken link on your website:\n\nURL: ${window.location.href}\nReferrer: ${document.referrer || 'Direct access'}\n\nAdditional details: `;
-    window.location.href = `mailto:support@moneybharat.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    const body = `I found a broken link on your website:\n\nURL: ${window.location.href}\nReferrer: ${document.referrer || "Direct access"}\n\nAdditional details: `;
+    window.location.href = `mailto:support@moneybharatfinance.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   };
 
   return (
     <div className="min-h-screen flex flex-col">
       <Helmet>
         <title>404 - Page Not Found | Money Bharat Finance</title>
-        <meta name="description" content="The page you're looking for doesn't exist. Explore Money Bharat's financial services including mutual funds, insurance, and loans." />
+        <meta
+          name="description"
+          content="The page you're looking for doesn't exist. Explore Money Bharat's financial services including mutual funds, insurance, and loans."
+        />
         <meta name="robots" content="noindex, nofollow" />
         <meta property="og:title" content="404 - Page Not Found | Money Bharat Finance" />
-        <meta property="og:description" content="The page you're looking for doesn't exist. Explore our financial services instead." />
+        <meta
+          property="og:description"
+          content="The page you're looking for doesn't exist. Explore our financial services instead."
+        />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:title" content="404 - Page Not Found | Money Bharat Finance" />
-        <meta name="twitter:description" content="The page you're looking for doesn't exist. Explore our financial services instead." />
-        <link rel="canonical" href="https://moneybharat.co/404" />
-        
+        <meta
+          name="twitter:description"
+          content="The page you're looking for doesn't exist. Explore our financial services instead."
+        />
+        <link rel="canonical" href="https://moneybharatfinance.com/404" />
+
         {/* Structured Data for 404 Page */}
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
             "@type": "WebPage",
-            "name": "404 - Page Not Found",
-            "description": "The requested page could not be found on Money Bharat Finance website.",
-            "url": `https://moneybharat.co${location.pathname}`,
-            "isPartOf": {
+            name: "404 - Page Not Found",
+            description: "The requested page could not be found on Money Bharat Finance website.",
+            url: `https://moneybharatfinance.com${location.pathname}`,
+            isPartOf: {
               "@type": "WebSite",
-              "name": "Money Bharat Finance",
-              "url": "https://moneybharat.co"
+              name: "Money Bharat Finance",
+              url: "https://moneybharatfinance.com",
             },
-            "mainEntity": {
+            mainEntity: {
               "@type": "ErrorPage",
-              "name": "404 Error",
-              "description": "Page not found error"
-            }
+              name: "404 Error",
+              description: "Page not found error",
+            },
           })}
         </script>
       </Helmet>
-      
+
       <Navbar />
-      
+
       <main className="flex-1 bg-gradient-to-br from-gray-50 via-white to-blue-50">
         <div className="container mx-auto px-4 py-16">
           <div className="max-w-4xl mx-auto">
-            
             {/* Enhanced Breadcrumbs for SEO */}
             <Breadcrumb className="mb-8">
               <BreadcrumbList>
@@ -114,15 +124,12 @@ const NotFound = () => {
                 <div className="w-24 h-24 mx-auto mb-6 bg-fintech-orange/10 rounded-full flex items-center justify-center">
                   <AlertTriangle className="w-12 h-12 text-fintech-orange" />
                 </div>
-                
+
                 <h1 className="text-6xl md:text-7xl font-bold text-gray-900 mb-4">404</h1>
-                <h2 className="text-2xl md:text-3xl font-semibold text-gray-800 mb-4">
-                  Oops! This Page Doesn't Exist
-                </h2>
+                <h2 className="text-2xl md:text-3xl font-semibold text-gray-800 mb-4">Oops! This Page Doesn't Exist</h2>
                 <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
-                  Don't worry - this happens sometimes! The page you're looking for might have been moved, 
-                  deleted, or the URL might be incorrect. Our website is working perfectly, 
-                  just this specific page is missing.
+                  Don't worry - this happens sometimes! The page you're looking for might have been moved, deleted, or
+                  the URL might be incorrect. Our website is working perfectly, just this specific page is missing.
                 </p>
               </div>
 
@@ -133,9 +140,7 @@ const NotFound = () => {
                     <Search className="w-5 h-5" />
                     Looking for something specific?
                   </CardTitle>
-                  <CardDescription>
-                    Try searching for what you need or explore our popular pages below
-                  </CardDescription>
+                  <CardDescription>Try searching for what you need or explore our popular pages below</CardDescription>
                 </CardHeader>
                 <CardContent>
                   <div className="flex gap-2">
@@ -143,7 +148,7 @@ const NotFound = () => {
                       placeholder="Search for mutual funds, insurance, loans..."
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
-                      onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
+                      onKeyPress={(e) => e.key === "Enter" && handleSearch()}
                       className="flex-1"
                     />
                     <Button onClick={handleSearch} className="bg-fintech-green hover:bg-fintech-green/90">
@@ -178,12 +183,12 @@ const NotFound = () => {
                     Go to Homepage
                   </Button>
                 </Link>
-                
+
                 <Button variant="outline" onClick={() => window.history.back()} className="px-8 py-3">
                   <ArrowLeft className="w-5 h-5 mr-2" />
                   Go Back
                 </Button>
-                
+
                 <Button variant="ghost" onClick={handleReportIssue} className="px-8 py-3 text-fintech-purple">
                   <Mail className="w-5 h-5 mr-2" />
                   Report Issue
@@ -203,8 +208,8 @@ const NotFound = () => {
                   <Link to="/sitemap" className="text-fintech-blue hover:text-fintech-green transition-colors">
                     Sitemap
                   </Link>
-                  <a 
-                    href="mailto:support@moneybharat.com" 
+                  <a
+                    href="mailto:support@moneybharatfinance.com"
                     className="text-fintech-blue hover:text-fintech-green transition-colors flex items-center gap-1"
                   >
                     Contact Support
@@ -216,8 +221,8 @@ const NotFound = () => {
               {/* Reassurance Message */}
               <div className="mt-8 p-4 bg-green-50 border border-green-200 rounded-lg max-w-2xl mx-auto">
                 <p className="text-green-800 text-sm">
-                  <strong>Good news:</strong> Our website is working perfectly! This is just a missing page, 
-                  and all our services including mutual funds, insurance, and loans are fully operational.
+                  <strong>Good news:</strong> Our website is working perfectly! This is just a missing page, and all our
+                  services including mutual funds, insurance, and loans are fully operational.
                 </p>
               </div>
             </div>
