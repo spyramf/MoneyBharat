@@ -1,4 +1,5 @@
 # SEO Implementation Guide
+
 ## Money Bharat Finance - Spyra Exim Pvt Ltd
 
 **Canonical Domain:** `https://www.moneybharatfinance.com/`  
@@ -23,22 +24,26 @@
 ## 🌐 Domain Configuration
 
 ### Primary Domain
+
 - **Canonical URL:** `https://www.moneybharatfinance.com/`
 - **Protocol:** HTTPS (enforced)
 - **Subdomain:** www (enforced)
 - **Company:** Spyra Exim Pvt Ltd
 
 ### URL Format Rules
+
 ✅ **Correct Format:**
+
 - `https://www.moneybharatfinance.com/` (homepage)
 - `https://www.moneybharatfinance.com/mutual-funds` (no trailing slash)
 - `https://www.moneybharatfinance.com/blog/post-title` (lowercase, hyphens)
 
 ❌ **Incorrect Formats (will redirect):**
+
 - `http://www.moneybharatfinance.com/` → redirects to HTTPS
 - `https://moneybharatfinance.com/` → redirects to www version
 - `https://www.moneybharatfinance.com/page/` → removes trailing slash
-- `https://moneybharat.co/` → redirects to new domain
+- `https://moneybharatfinance.com/` → redirects to new domain
 
 ---
 
@@ -47,6 +52,7 @@
 ### Configuration Files Updated
 
 #### 1. `src/constants/siteConfig.ts`
+
 ```typescript
 export const SITE_CONFIG = {
   name: 'Money Bharat Finance',
@@ -56,17 +62,17 @@ export const SITE_CONFIG = {
   canonicalDomain: 'www.moneybharatfinance.com',
   protocol: 'https',
   ogImage: '/images/og-image.jpg',
-  
+
   // SEO Keywords
   keywords: 'mutual funds India, SIP investment, health insurance, personal loans, financial planning, investment advisory, Money Bharat, wealth management',
-  
+
   // Contact Information
   contact: {
     email: 'spyraexim@gmail.com',
     phone: '+91-XXXXXXXXXX',
     address: 'India'
   },
-  
+
   // Social Links
   social: {
     twitter: 'https://twitter.com/moneybharat',
@@ -77,6 +83,7 @@ export const SITE_CONFIG = {
 ```
 
 #### 2. `src/utils/urlCanonicalizer.ts`
+
 ```typescript
 const DEFAULT_CONFIG: CanonicalUrlConfig = {
   preferWww: true,              // Enforce www subdomain
@@ -86,6 +93,7 @@ const DEFAULT_CONFIG: CanonicalUrlConfig = {
 ```
 
 ### Usage in Components
+
 ```tsx
 import { getCanonicalUrl } from '@/utils/seoUtils';
 
@@ -99,6 +107,7 @@ const canonicalUrl = getCanonicalUrl('/mutual-funds');
 ## ↔️ Redirect Rules
 
 ### 1. Netlify/Static Hosting (`public/_redirects`)
+
 ```
 # Non-www to www
 https://moneybharatfinance.com/* https://www.moneybharatfinance.com/:splat 301!
@@ -116,13 +125,16 @@ http://www.moneybharatfinance.com/* https://www.moneybharatfinance.com/:splat 30
 ```
 
 ### 2. Vercel Configuration (`public/vercel.json`)
+
 Includes:
+
 - Host-based redirects for non-www → www
 - Old domain redirects
 - Security headers (X-Content-Type-Options, X-Frame-Options, etc.)
 - Cache control for sitemap and robots.txt
 
 ### 3. Apache/Hostinger (`.htaccess`)
+
 ```apache
 RewriteEngine On
 
@@ -146,6 +158,7 @@ RewriteRule ^(.*)$ https://www.moneybharatfinance.com/$1 [R=301,L]
 ### Component: `src/components/seo/MetaTagsTemplate.tsx`
 
 #### Homepage Example
+
 ```tsx
 <MetaTagsTemplate
   title="Money Bharat Finance - Mutual Funds, Insurance & Loans"
@@ -157,6 +170,7 @@ RewriteRule ^(.*)$ https://www.moneybharatfinance.com/$1 [R=301,L]
 ```
 
 #### Blog Post Example
+
 ```tsx
 <MetaTagsTemplate
   title="Understanding SIP Investment - Complete Guide 2025"
@@ -175,6 +189,7 @@ RewriteRule ^(.*)$ https://www.moneybharatfinance.com/$1 [R=301,L]
 ```
 
 ### Key Meta Tags Included
+
 - **Basic SEO:** title, description, keywords, author
 - **Canonical URL:** enforces www version
 - **Robots:** index, follow directives
@@ -191,6 +206,7 @@ RewriteRule ^(.*)$ https://www.moneybharatfinance.com/$1 [R=301,L]
 ### Component: `src/components/seo/OrganizationSchema.tsx`
 
 #### 1. Organization Schema
+
 ```json
 {
   "@context": "https://schema.org",
@@ -206,6 +222,7 @@ RewriteRule ^(.*)$ https://www.moneybharatfinance.com/$1 [R=301,L]
 ```
 
 #### 2. Local Business Schema
+
 ```json
 {
   "@context": "https://schema.org",
@@ -218,6 +235,7 @@ RewriteRule ^(.*)$ https://www.moneybharatfinance.com/$1 [R=301,L]
 ```
 
 #### 3. Website Schema
+
 ```json
 {
   "@context": "https://schema.org",
@@ -231,6 +249,7 @@ RewriteRule ^(.*)$ https://www.moneybharatfinance.com/$1 [R=301,L]
 ```
 
 #### Usage
+
 ```tsx
 import { OrganizationSchema } from '@/components/seo/OrganizationSchema';
 
@@ -249,6 +268,7 @@ function App() {
 ## 🗺️ Sitemap & Robots
 
 ### Sitemap (`public/sitemap.xml`)
+
 - **Location:** `https://www.moneybharatfinance.com/sitemap.xml`
 - **Format:** All URLs use canonical format (https, www, no trailing slash)
 - **Updates:** Updated 2025-01-19
@@ -262,6 +282,7 @@ function App() {
   - Legal: 0.40
 
 ### Robots.txt (`public/robots.txt`)
+
 ```
 User-agent: *
 Allow: /
@@ -285,6 +306,7 @@ Host: https://www.moneybharatfinance.com
 ## 🔒 Security & Trust Files
 
 ### 1. Security.txt (`public/security.txt` and `public/.well-known/security.txt`)
+
 ```
 Contact: mailto:security@moneybharatfinance.com
 Contact: mailto:spyraexim@gmail.com
@@ -296,6 +318,7 @@ Canonical: https://www.moneybharatfinance.com/.well-known/security.txt
 **Purpose:** Responsible vulnerability disclosure
 
 ### 2. Humans.txt (`public/humans.txt`)
+
 ```
 /* TEAM */
 Company: Spyra Exim Pvt Ltd
@@ -311,6 +334,7 @@ Last Update: 2025-01-19
 **Purpose:** Humanize the website, show team and technology
 
 ### 3. Manifest.json (`public/manifest.json`)
+
 ```json
 {
   "name": "Money Bharat Finance - Spyra Exim Pvt Ltd",
@@ -329,7 +353,9 @@ Last Update: 2025-01-19
 ## ⚡ Performance Optimization
 
 ### 1. Resource Preloading
+
 Add to `<head>` for critical resources:
+
 ```html
 <!-- Preconnect to own domain -->
 <link rel="preconnect" href="https://www.moneybharatfinance.com" />
@@ -341,6 +367,7 @@ Add to `<head>` for critical resources:
 ```
 
 ### 2. Compression (.htaccess)
+
 ```apache
 <IfModule mod_deflate.c>
     AddOutputFilterByType DEFLATE text/html text/css application/javascript
@@ -349,6 +376,7 @@ Add to `<head>` for critical resources:
 ```
 
 ### 3. Caching (.htaccess)
+
 ```apache
 <IfModule mod_expires.c>
     ExpiresActive on
@@ -360,12 +388,14 @@ Add to `<head>` for critical resources:
 ```
 
 ### 4. Image Optimization
+
 - Use WebP format with JPEG fallback
 - Lazy loading: `loading="lazy"` attribute
 - Responsive images: `srcset` attribute
 - Proper alt tags for SEO and accessibility
 
 ### 5. Security Headers (vercel.json / .htaccess)
+
 ```json
 {
   "headers": [{
@@ -385,6 +415,7 @@ Add to `<head>` for critical resources:
 ## ✅ Implementation Checklist
 
 ### Phase 1: Domain & Redirects
+
 - [x] Update `siteConfig.ts` with new domain
 - [x] Update `urlCanonicalizer.ts` to prefer www
 - [x] Configure `_redirects` for non-www → www
@@ -393,6 +424,7 @@ Add to `<head>` for critical resources:
 - [x] Add old domain redirects (moneybharat.co → moneybharatfinance.com)
 
 ### Phase 2: SEO Files
+
 - [x] Update `robots.txt` with canonical domain
 - [x] Update `sitemap.xml` with all canonical URLs
 - [x] Create `security.txt` and `.well-known/security.txt`
@@ -400,6 +432,7 @@ Add to `<head>` for critical resources:
 - [x] Update `manifest.json` for PWA
 
 ### Phase 3: Meta Tags & Structured Data
+
 - [x] Create `MetaTagsTemplate.tsx` component
 - [x] Create `OrganizationSchema.tsx` component
 - [x] Implement OG tags for social sharing
@@ -408,6 +441,7 @@ Add to `<head>` for critical resources:
 - [x] Add JSON-LD for Organization, LocalBusiness, Website
 
 ### Phase 4: Performance
+
 - [ ] Add preconnect/dns-prefetch links
 - [ ] Implement resource preloading for critical assets
 - [ ] Configure compression (gzip/brotli)
@@ -416,6 +450,7 @@ Add to `<head>` for critical resources:
 - [ ] Add security headers
 
 ### Phase 5: Testing & Validation
+
 - [ ] Test all redirects (non-www → www, http → https, old domain)
 - [ ] Validate sitemap.xml in Google Search Console
 - [ ] Test structured data with Google Rich Results Test
@@ -426,6 +461,7 @@ Add to `<head>` for critical resources:
 - [ ] Check mobile-friendliness
 
 ### Phase 6: Search Console Setup
+
 - [ ] Verify domain in Google Search Console
 - [ ] Submit sitemap.xml
 - [ ] Set preferred domain (www)
@@ -447,18 +483,21 @@ Add to `<head>` for critical resources:
 ## 🔄 Maintenance
 
 ### Monthly Tasks
+
 - Review and update sitemap.xml
 - Check for broken links
 - Monitor Search Console for errors
 - Update meta descriptions for new content
 
 ### Quarterly Tasks
+
 - Review and update structured data
 - Audit redirects
 - Performance optimization review
 - Security headers audit
 
 ### Yearly Tasks
+
 - Renew security.txt expiration
 - Comprehensive SEO audit
 - Competitor analysis

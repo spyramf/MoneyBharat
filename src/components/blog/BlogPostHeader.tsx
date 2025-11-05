@@ -1,12 +1,17 @@
-
-import { Link } from 'react-router-dom';
-import { ArrowLeft, Calendar, Clock, User } from 'lucide-react';
-import { BlogPost as BlogPostType } from '@/data/blogData';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Badge } from '@/components/ui/badge';
-import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbSeparator } from '@/components/ui/breadcrumb';
-import ShareButtonGroup from '@/components/ui/ShareButtonGroup';
-import { format } from 'date-fns';
+import { Link } from "react-router-dom";
+import { ArrowLeft, Calendar, Clock, User } from "lucide-react";
+import { BlogPost as BlogPostType } from "@/data/blogData";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
+import ShareButtonGroup from "@/components/ui/ShareButtonGroup";
+import { format } from "date-fns";
 
 interface BlogPostHeaderProps {
   post: BlogPostType;
@@ -20,13 +25,17 @@ const BlogPostHeader = ({ post }: BlogPostHeaderProps) => {
         <BreadcrumbList>
           <BreadcrumbItem>
             <BreadcrumbLink asChild>
-              <Link to="/" className="text-gray-200 hover:text-white">Home</Link>
+              <Link to="/" className="text-gray-200 hover:text-white">
+                Home
+              </Link>
             </BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator className="text-gray-300" />
           <BreadcrumbItem>
             <BreadcrumbLink asChild>
-              <Link to="/blog" className="text-gray-200 hover:text-white">Blog</Link>
+              <Link to="/blog" className="text-gray-200 hover:text-white">
+                Blog
+              </Link>
             </BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator className="text-gray-300" />
@@ -37,10 +46,7 @@ const BlogPostHeader = ({ post }: BlogPostHeaderProps) => {
       </Breadcrumb>
 
       {/* Back Button */}
-      <Link 
-        to="/blog" 
-        className="inline-flex items-center text-white/90 hover:text-white mb-8 group transition-colors"
-      >
+      <Link to="/blog" className="inline-flex items-center text-white/90 hover:text-white mb-8 group transition-colors">
         <ArrowLeft className="mr-2 h-4 w-4 group-hover:-translate-x-1 transition-transform" />
         Back to All Articles
       </Link>
@@ -53,16 +59,10 @@ const BlogPostHeader = ({ post }: BlogPostHeaderProps) => {
       </div>
 
       {/* Article Title */}
-      <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 leading-tight text-white">
-        {post.title}
-      </h1>
+      <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 leading-tight text-white">{post.title}</h1>
 
       {/* Article Excerpt */}
-      {post.excerpt && (
-        <p className="text-xl text-white/90 mb-8 leading-relaxed">
-          {post.excerpt}
-        </p>
-      )}
+      {post.excerpt && <p className="text-xl text-white/90 mb-8 leading-relaxed">{post.excerpt}</p>}
 
       {/* Article Metadata */}
       <div className="flex flex-wrap items-center gap-8 mb-8 p-6 bg-white/10 backdrop-blur-sm rounded-xl border border-white/20">
@@ -71,7 +71,10 @@ const BlogPostHeader = ({ post }: BlogPostHeaderProps) => {
           <Avatar className="h-12 w-12 ring-2 ring-white/50 shadow-md">
             <AvatarImage src={post.author.avatar} alt={post.author.name} />
             <AvatarFallback className="bg-white/20 text-white font-semibold">
-              {post.author.name.split(' ').map(name => name[0]).join('')}
+              {post.author.name
+                .split(" ")
+                .map((name) => name[0])
+                .join("")}
             </AvatarFallback>
           </Avatar>
           <div>
@@ -85,7 +88,7 @@ const BlogPostHeader = ({ post }: BlogPostHeaderProps) => {
           {post.publishedDate && (
             <div className="flex items-center gap-2">
               <Calendar className="h-4 w-4 text-white/90" />
-              <span>{format(new Date(post.publishedDate), 'MMMM dd, yyyy')}</span>
+              <span>{format(new Date(post.publishedDate), "MMMM dd, yyyy")}</span>
             </div>
           )}
           <div className="flex items-center gap-2">
@@ -105,8 +108,8 @@ const BlogPostHeader = ({ post }: BlogPostHeaderProps) => {
           <ShareButtonGroup
             title={post.title}
             text={`${post.excerpt} - Read more on Money Bharat Finance`}
-            url={`https://moneybharat.co/blog/${post.slug}`}
-            platforms={['whatsapp', 'linkedin', 'twitter', 'email', 'copy']}
+            url={`https://moneybharatfinance.com/blog/${post.slug}`}
+            platforms={["whatsapp", "linkedin", "twitter", "email", "copy"]}
             showLabels={false}
             className="flex-shrink-0"
           />

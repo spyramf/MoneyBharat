@@ -31,7 +31,7 @@ const ContactHero = () => {
             </div>
             <div className="flex items-center justify-center md:justify-start gap-3">
               <Mail className="h-5 w-5 text-yellow-300" />
-              <span className="font-medium">contact@moneybharat.co</span>
+              <span className="font-medium">contact@moneybharatfinance.com</span>
             </div>
             <div className="flex items-center justify-center md:justify-start gap-3">
               <MapPin className="h-5 w-5 text-yellow-300" />
