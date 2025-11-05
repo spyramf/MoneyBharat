@@ -1,6 +1,20 @@
 
 Options -MultiViews
 RewriteEngine On
+
+# Force HTTPS
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+
+# Redirect www to non-www
+RewriteCond %{HTTP_HOST} ^www\.moneybharatfinance\.com [NC]
+RewriteRule ^(.*)$ https://moneybharatfinance.com/$1 [R=301,L]
+
+# Redirect old domain to new domain (non-www)
+RewriteCond %{HTTP_HOST} ^(www\.)?moneybharat\.co [NC]
+RewriteRule ^(.*)$ https://moneybharatfinance.com/$1 [R=301,L]
+
+# SPA fallback
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^ index.html [QR,L]
 
