@@ -5,6 +5,34 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Performance optimizations */
+@layer base {
+  /* Font loading optimization */
+  @font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: local('Inter'), url(https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiA.woff2) format('woff2');
+  }
+
+  /* Image lazy loading fade-in */
+  img {
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+  }
+  
+  img.loaded,
+  img[loading="eager"] {
+    opacity: 1;
+  }
+
+  /* Reduce layout shift */
+  img[width][height] {
+    height: auto;
+  }
+}
+
 @layer base {
   :root {
     --background: 250 100% 99%;
