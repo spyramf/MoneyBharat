@@ -9,7 +9,22 @@ interface OptimizedImageProps {
   height?: number;
   priority?: boolean;
   placeholder?: string;
+  sizes?: string;
+  srcSet?: string;
 }
+
+// Generate responsive image URLs for Unsplash images
+const generateResponsiveSrcSet = (src: string, width?: number): string => {
+  if (!src.includes('unsplash.com')) return '';
+  
+  const baseUrl = src.split('?')[0];
+  const widths = [320, 640, 768, 1024, 1280, 1536];
+  
+  return widths
+    .filter(w => !width || w <= width * 2)
+    .map(w => `${baseUrl}?w=${w}&q=75&auto=format&fit=crop ${w}w`)
+    .join(', ');
+};
 
 const OptimizedImage: React.FC<OptimizedImageProps> = ({
   src,
@@ -18,8 +33,12 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
   width,
   height,
   priority = false,
-  placeholder = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjNmNGY2Ii8+PC9zdmc+'
+  placeholder = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjNmNGY2Ii8+PC9zdmc+',
+  sizes,
+  srcSet,
 }) => {
+  const autoSrcSet = srcSet || generateResponsiveSrcSet(src, width);
+  const autoSizes = sizes || '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw';
   const [loaded, setLoaded] = useState(false);
   const [inView, setInView] = useState(priority);
   const imgRef = useRef<HTMLImageElement>(null);
@@ -58,6 +77,8 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
         <img
           ref={imgRef}
           src={src}
+          srcSet={autoSrcSet}
+          sizes={autoSizes}
           alt={alt}
           width={width}
           height={height}

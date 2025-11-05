@@ -144,14 +144,26 @@ const stepVariants: Variants = {
 }
 
 const StepImage = forwardRef<HTMLImageElement, StepImageProps>(
-  ({ src, alt, className, style, ...props }, ref) => {
+  ({ src, alt, className, style, width = 800, height = 600, ...props }, ref) => {
+    const generateSrcSet = (baseUrl: string) => {
+      if (!baseUrl.includes('unsplash.com')) return undefined;
+      const cleanUrl = baseUrl.split('?')[0];
+      return `${cleanUrl}?w=400&q=75 400w, ${cleanUrl}?w=600&q=75 600w, ${cleanUrl}?w=800&q=75 800w`;
+    };
+    
     return (
       <img
         ref={ref}
         alt={alt}
         className={className}
         src={src}
+        srcSet={generateSrcSet(src)}
+        sizes="(max-width: 768px) 400px, 600px"
+        width={width}
+        height={height}
         style={{ position: "absolute", userSelect: "none", maxWidth: "unset", ...style }}
+        loading="lazy"
+        decoding="async"
         {...props}
       />
     )

@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { cn } from "@/lib/utils"
+import OptimizedImage from "@/components/ui/optimized-image"
 
 interface Feature {
   step: string
@@ -103,11 +104,14 @@ export function FeatureSteps({
                       exit={{ y: -100, opacity: 0, rotateX: 20 }}
                       transition={{ duration: 0.5, ease: "easeInOut" }}
                     >
-                      <img
+                      <OptimizedImage
                         src={feature.image}
                         alt={feature.step}
-                        className="w-full h-full object-cover transition-transform transform"
-                        loading="lazy"
+                        className="w-full h-full"
+                        width={1024}
+                        height={400}
+                        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 600px"
+                        priority={index === 0}
                       />
                       <div className="absolute bottom-0 left-0 right-0 h-2/3 bg-gradient-to-t from-background via-background/50 to-transparent" />
                     </motion.div>

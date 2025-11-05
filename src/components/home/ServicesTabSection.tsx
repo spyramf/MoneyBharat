@@ -31,12 +31,12 @@ const ServicesTabSection = () => {
 
   const images = {
     alt: "Financial Services",
-    step1img1: "https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w=800&h=600&fit=crop&q=80",
-    step1img2: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop&q=80",
-    step2img1: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=800&h=600&fit=crop&q=80",
-    step2img2: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&h=600&fit=crop&q=80",
-    step3img: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=800&h=600&fit=crop&q=80",
-    step4img: "https://images.unsplash.com/photo-1554224154-26032ffc0d07?w=800&h=600&fit=crop&q=80",
+    step1img1: "https://images.unsplash.com/photo-1559526324-4b87b5e36e44",
+    step1img2: "https://images.unsplash.com/photo-1460925895917-afdab827c52f",
+    step2img1: "https://images.unsplash.com/photo-1576091160550-2173dba999ef",
+    step2img2: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85",
+    step3img: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c",
+    step4img: "https://images.unsplash.com/photo-1554224154-26032ffc0d07",
   };
 
   return (
