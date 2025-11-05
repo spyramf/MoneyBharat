@@ -83,9 +83,9 @@ const Index = () => {
       <URLRedirectHandler enableRedirect={import.meta.env.PROD} />
 
       <SEOHead
-        title="Best Mutual Funds, SIP Investment & Insurance Plans in India | Money Bharat Finance"
-        description="Start your wealth journey with Money Bharat Finance - India's leading AI-powered platform for mutual funds, SIP investments, health & life insurance, and instant personal loans. Expert advisory, trusted distributor, ₹5000Cr+ AUM. Compare top insurance plans & mutual funds online."
-        keywords="best mutual funds for SIP, SIP investment online, health insurance plans India, personal loan instant approval, top performing mutual funds, financial planning platform, mutual fund distributor India, tax saving ELSS funds, term insurance calculator, home loan interest rates"
+        title="Best Mutual Funds, Daily SIP in India | Money Bharat Finance"
+        description="Start your wealth journey with Money Bharat Finance — India's trusted platform for mutual fund, Daily SIP, health insurance, and financial planning."
+        keywords="best mutual funds for SIP, SIP investment online, money bharat, money bharat finance, top performing mutual funds, financial planning platform, moneybharat, tax saving ELSS funds, moneybharatfinance, home loan interest rates"
       />
 
       <StructuredData page="home" faqData={homeFaqData} reviewData={reviewData} />
