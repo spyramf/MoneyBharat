@@ -49,9 +49,13 @@ export const ImageUpload = ({ value, onChange, placeholder = "Upload image or en
       
       const { data, error } = await supabase.storage
         .from('blog-images')
-        .upload(fileName, file);
+        .upload(fileName, file, {
+          cacheControl: '3600',
+          upsert: false
+        });
 
       if (error) {
+        console.error('Upload error:', error);
         throw error;
       }
 
@@ -61,9 +65,9 @@ export const ImageUpload = ({ value, onChange, placeholder = "Upload image or en
 
       onChange(publicUrl);
       toast.success('Image uploaded successfully!');
-    } catch (error) {
+    } catch (error: any) {
       console.error('Upload error:', error);
-      toast.error('Failed to upload image');
+      toast.error(error?.message || 'Failed to upload image');
     } finally {
       setIsUploading(false);
     }

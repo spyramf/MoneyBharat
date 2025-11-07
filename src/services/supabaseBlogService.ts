@@ -402,7 +402,7 @@ export const supabaseBlogService = {
   getAllAuthors: async (): Promise<SupabaseBlogAuthor[]> => {
     try {
       const { data, error } = await supabase
-        .from('blog_authors_public')
+        .from('blog_authors')
         .select('*')
         .order('created_at', { ascending: false });
 
