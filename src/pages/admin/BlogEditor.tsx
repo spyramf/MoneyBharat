@@ -16,6 +16,7 @@ import {
   User,
   Folder
 } from 'lucide-react';
+import { ImageUpload } from '@/components/ui/image-upload';
 import { useBlog } from '@/context/BlogContext';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -518,13 +519,11 @@ const BlogEditor = () => {
                       render={({ field }) => (
                         <FormItem>
                           <FormControl>
-                            <div className="space-y-2">
-                              <Input placeholder="Image URL..." {...field} />
-                              <Button type="button" variant="outline" size="sm" className="w-full">
-                                <Upload className="h-4 w-4 mr-2" />
-                                Upload Image
-                              </Button>
-                            </div>
+                            <ImageUpload
+                              value={field.value}
+                              onChange={field.onChange}
+                              placeholder="Upload featured image or enter URL"
+                            />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
