@@ -1,20 +1,29 @@
-
-# Netlify/Vercel redirect rules for non-www to www canonicalization
-# Money Bharat Finance - Canonical Domain: https://www.moneybharatfinance.com/
+# ==========================================
+# Money Bharat Finance - Redirect Rules
+# Canonical Domain: https://www.moneybharatfinance.com
 # Company: Spyra Exim Pvt Ltd
+# ==========================================
 
-# Redirect all non-www traffic to www (301 permanent redirect)
-https://moneybharatfinance.com/* https://www.moneybharatfinance.com/:splat 301!
-http://moneybharatfinance.com/* https://www.moneybharatfinance.com/:splat 301!
+# ------------------------------------------
+# Redirect all non-www to www (force HTTPS)
+# ------------------------------------------
+http://moneybharatfinance.com/*     https://www.moneybharatfinance.com/:splat 301!
+https://moneybharatfinance.com/*    https://www.moneybharatfinance.com/:splat 301!
 
-# Redirect old domain moneybharat.co to new domain (301 permanent)
-https://www.moneybharat.co/* https://www.moneybharatfinance.com/:splat 301!
-https://moneybharat.co/* https://www.moneybharatfinance.com/:splat 301!
-http://www.moneybharat.co/* https://www.moneybharatfinance.com/:splat 301!
-http://moneybharat.co/* https://www.moneybharatfinance.com/:splat 301!
+# ------------------------------------------
+# Redirect old domain moneybharat.co to new domain
+# ------------------------------------------
+http://moneybharat.co/*             https://www.moneybharatfinance.com/:splat 301!
+https://moneybharat.co/*            https://www.moneybharatfinance.com/:splat 301!
+http://www.moneybharat.co/*         https://www.moneybharatfinance.com/:splat 301!
+https://www.moneybharat.co/*        https://www.moneybharatfinance.com/:splat 301!
 
+# ------------------------------------------
 # Force HTTPS for www
+# ------------------------------------------
 http://www.moneybharatfinance.com/* https://www.moneybharatfinance.com/:splat 301!
 
-# Handle 404 errors with proper status code (SPA fallback)
+# ------------------------------------------
+# SPA fallback (React / Vue / Angular, etc.)
+# ------------------------------------------
 /* /index.html 200
