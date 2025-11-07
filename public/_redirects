@@ -4,8 +4,8 @@
 # Company: Spyra Exim Pvt Ltd
 
 # Redirect all non-www traffic to www (301 permanent redirect)
-https://www.moneybharatfinance.com/* https://moneybharatfinance.com/:splat 301!
-http://www.moneybharatfinance.com/* https://moneybharatfinance.com/:splat 301!
+http://moneybharatfinance.com/*     https://www.moneybharatfinance.com/:splat 301!
+https://moneybharatfinance.com/*    https://www.moneybharatfinance.com/:splat 301!
 
 # Redirect old domain moneybharat.co to new domain (301 permanent)
 https://www.moneybharat.co/* https://www.moneybharatfinance.com/:splat 301!
