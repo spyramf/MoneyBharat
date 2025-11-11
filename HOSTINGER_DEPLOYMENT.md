@@ -42,15 +42,49 @@ This website has been converted to a fully static, database-free version optimiz
 
 ## Deployment Steps
 
-### 1. Build the Project
+### Option 1: Git Deployment (Recommended)
+
+#### Step 1: Configure Hostinger Git Deployment
+1. Go to Hostinger Control Panel → Git
+2. Connect your GitHub repository: `git@github.com:spyramf/money-bharat-nexus.git`
+3. **IMPORTANT Configuration:**
+   - **Branch:** main
+   - **Build Command:** `npm install && npm run build`
+   - **Output Directory:** `dist`
+   - **Node Version:** Select Node.js 18 or higher (not PHP/Composer)
+
+#### Step 2: Configure Build Settings in Hostinger
+1. In Hostinger Control Panel → Advanced → Build Configuration:
+   - Enable "Node.js Application"
+   - Set Node.js version to 18.x or higher
+   - Disable PHP/Composer detection
+   - Set deployment path to copy from `dist/` to `public_html/`
+
+#### Step 3: Trigger Deployment
+1. Push to your main branch on GitHub
+2. Hostinger will automatically build and deploy
+
+### Option 2: Manual FTP Upload
+
+#### Step 1: Build Locally
 ```bash
+npm install
 npm run build
 ```
 
-### 2. Upload to Hostinger
-1. Upload the entire `dist` folder contents to your domain's public_html directory
-2. Ensure the `.htaccess` file is uploaded (enables React Router)
-3. Set proper file permissions if needed
+#### Step 2: Upload via FTP
+1. Open your FTP client (FileZilla, etc.)
+2. Connect to your Hostinger account
+3. Navigate to `public_html` directory
+4. Upload **all contents** from the `dist` folder (not the folder itself)
+5. Ensure `.htaccess` file is uploaded and visible
+
+#### Step 3: Verify Files
+Ensure these files are in `public_html`:
+- index.html
+- .htaccess
+- assets/ folder
+- All other static files from dist/
 
 ### 3. Verify Deployment
 - Check that all pages load correctly

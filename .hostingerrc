@@ -1,0 +1,8 @@
+{
+  "node": "18",
+  "buildCommand": "npm install && npm run build",
+  "outputDirectory": "dist",
+  "installCommand": "npm install",
+  "framework": "react",
+  "routing": "spa"
+}
