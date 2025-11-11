@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  Money Bharat Finance - XML Sitemap
+  Company: Spyra Exim Pvt Ltd
+  Generated: 2025-01-19
+  Canonical URL Strategy: All URLs use HTTPS, www subdomain, no trailing slashes, lowercase
+  Preferred Domain: https://www.moneybharatfinance.com/
+  
+  SEO Compliance Notes:
+  - All URLs are in canonical format: https://www.moneybharatfinance.com/
+  - HTTPS enforced for all URLs
+  - WWW subdomain enforced (non-www redirects to www)
+  - No trailing slashes except for root URL
+  - All paths are lowercase
+  - No query parameters in core URLs
+  - Enhanced with hreflang and priority adjustments for indexing
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" 
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <!-- PRIMARY CANONICAL URLS - All URLs follow https://www.moneybharatfinance.com/ pattern -->
+  
+  <!-- Homepage - Highest Priority -->
+  <url>
+    <loc>https://www.moneybharatfinance.com/</loc>
+    <lastmod>2025-01-19T10:00:00+05:30</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.00</priority>
+    <xhtml:link rel="alternate" hreflang="en-in" href="https://www.moneybharatfinance.com/" />
+    <xhtml:link rel="alternate" hreflang="hi-in" href="https://www.moneybharatfinance.com/" />
+    <image:image>
+      <image:loc>https://www.moneybharatfinance.com/lovable-uploads/92affb7c-7e35-42da-9aff-b0f55a689428.png</image:loc>
+      <image:title>Money Bharat Finance Logo</image:title>
+      <image:caption>Money Bharat Finance - Mutual Funds, Insurance and Loans</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Core Service Pages - High Priority -->
+  <url>
+    <loc>https://www.moneybharatfinance.com/mutual-funds</loc>
+    <lastmod>2025-01-19T09:30:00+05:30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+    <xhtml:link rel="alternate" hreflang="en-in" href="https://www.moneybharatfinance.com/mutual-funds" />
+  </url>
+
+  <url>
+    <loc>https://www.moneybharatfinance.com/insurance</loc>
+    <lastmod>2025-01-19T09:30:00+05:30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+    <xhtml:link rel="alternate" hreflang="en-in" href="https://www.moneybharatfinance.com/insurance" />
+  </url>
+
+  <url>
+    <loc>https://www.moneybharatfinance.com/loans</loc>
+    <lastmod>2025-01-19T09:30:00+05:30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+    <xhtml:link rel="alternate" hreflang="en-in" href="https://www.moneybharatfinance.com/loans" />
+  </url>
+
+  <!-- Insurance Product Pages - High Priority -->
+  <url>
+    <loc>https://www.moneybharatfinance.com/health-insurance</loc>
+    <lastmod>2025-01-19T09:20:00+05:30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+    <xhtml:link rel="alternate" hreflang="en-in" href="https://www.moneybharatfinance.com/health-insurance" />
+  </url>
+
+  <url>
+    <loc>https://www.moneybharatfinance.com/term-insurance</loc>
+    <lastmod>2025-01-19T09:20:00+05:30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+    <xhtml:link rel="alternate" hreflang="en-in" href="https://www.moneybharatfinance.com/term-insurance" />
+  </url>
+
+  <url>
+    <loc>https://www.moneybharatfinance.com/vehicle-insurance</loc>
+    <lastmod>2025-01-19T09:20:00+05:30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+    <xhtml:link rel="alternate" hreflang="en-in" href="https://www.moneybharatfinance.com/vehicle-insurance" />
+  </url>
+
+  <!-- Loan Product Pages - High Priority -->
+  <url>
+    <loc>https://www.moneybharatfinance.com/personal-loan</loc>
+    <lastmod>2025-01-19T09:15:00+05:30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+    <xhtml:link rel="alternate" hreflang="en-in" href="https://www.moneybharatfinance.com/personal-loan" />
+  </url>
+
+  <url>
+    <loc>https://www.moneybharatfinance.com/home-loan</loc>
+    <lastmod>2025-01-19T09:15:00+05:30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+    <xhtml:link rel="alternate" hreflang="en-in" href="https://www.moneybharatfinance.com/home-loan" />
+  </url>
+
+  <url>
+    <loc>https://www.moneybharatfinance.com/education-loan</loc>
+    <lastmod>2025-01-19T09:15:00+05:30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+    <xhtml:link rel="alternate" hreflang="en-in" href="https://www.moneybharatfinance.com/education-loan" />
+  </url>
+
+  <url>
+    <loc>https://www.moneybharatfinance.com/car-loan</loc>
+    <lastmod>2025-01-19T09:15:00+05:30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+    <xhtml:link rel="alternate" hreflang="en-in" href="https://www.moneybharatfinance.com/car-loan" />
+  </url>
+
+  <url>
+    <loc>https://www.moneybharatfinance.com/business-loan</loc>
+    <lastmod>2025-01-19T09:15:00+05:30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+    <xhtml:link rel="alternate" hreflang="en-in" href="https://www.moneybharatfinance.com/business-loan" />
+  </url>
+
+  <url>
+    <loc>https://www.moneybharatfinance.com/loan-against-mutual-funds</loc>
+    <lastmod>2025-01-19T09:15:00+05:30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+    <xhtml:link rel="alternate" hreflang="en-in" href="https://www.moneybharatfinance.com/loan-against-mutual-funds" />
+  </url>
+
+  <!-- Financial Tools - Medium-High Priority -->
+  <url>
+    <loc>https://www.moneybharatfinance.com/sip-calculator</loc>
+    <lastmod>2025-01-19T09:10:00+05:30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="en-in" href="https://www.moneybharatfinance.com/sip-calculator" />
+  </url>
+
+  <url>
+    <loc>https://www.moneybharatfinance.com/emi-calculator</loc>
+    <lastmod>2025-01-19T09:10:00+05:30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="en-in" href="https://www.moneybharatfinance.com/emi-calculator" />
+  </url>
+
+  <url>
+    <loc>https://www.moneybharatfinance.com/tax-saving</loc>
+    <lastmod>2025-01-19T09:10:00+05:30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="en-in" href="https://www.moneybharatfinance.com/tax-saving" />
+  </url>
+
+  <!-- Informational Pages - Medium Priority -->
+  <url>
+    <loc>https://www.moneybharatfinance.com/about</loc>
+    <lastmod>2025-01-19T09:05:00+05:30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+    <xhtml:link rel="alternate" hreflang="en-in" href="https://www.moneybharatfinance.com/about" />
+  </url>
+
+  <url>
+    <loc>https://www.moneybharatfinance.com/contact</loc>
+    <lastmod>2025-01-19T09:05:00+05:30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+    <xhtml:link rel="alternate" hreflang="en-in" href="https://www.moneybharatfinance.com/contact" />
+  </url>
+
+  <url>
+    <loc>https://www.moneybharatfinance.com/booking</loc>
+    <lastmod>2025-01-19T09:05:00+05:30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+    <xhtml:link rel="alternate" hreflang="en-in" href="https://www.moneybharatfinance.com/booking" />
+  </url>
+
+  <!-- Blog Section - Medium-High Priority -->
+  <url>
+    <loc>https://www.moneybharatfinance.com/blog</loc>
+    <lastmod>2025-01-19T09:00:00+05:30</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.80</priority>
+    <xhtml:link rel="alternate" hreflang="en-in" href="https://www.moneybharatfinance.com/blog" />
+  </url>
+
+  <!-- Legal Pages - Lower Priority -->
+  <url>
+    <loc>https://www.moneybharatfinance.com/privacy-policy</loc>
+    <lastmod>2025-01-19T08:00:00+05:30</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.40</priority>
+    <xhtml:link rel="alternate" hreflang="en-in" href="https://www.moneybharatfinance.com/privacy-policy" />
+  </url>
+
+  <url>
+    <loc>https://www.moneybharatfinance.com/terms-of-service</loc>
+    <lastmod>2025-01-19T08:00:00+05:30</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.40</priority>
+    <xhtml:link rel="alternate" hreflang="en-in" href="https://www.moneybharatfinance.com/terms-of-service" />
+  </url>
+
+  <url>
+    <loc>https://www.moneybharatfinance.com/sitemap</loc>
+    <lastmod>2025-01-19T08:00:00+05:30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.50</priority>
+    <xhtml:link rel="alternate" hreflang="en-in" href="https://www.moneybharatfinance.com/sitemap" />
+  </url>
+
+</urlset>

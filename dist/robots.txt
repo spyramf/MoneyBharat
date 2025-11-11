@@ -1,0 +1,96 @@
+
+# Money Bharat Finance - Robots.txt
+# Website: https://www.moneybharatfinance.com/
+# Preferred Domain: www.moneybharatfinance.com (with www and https)
+# Company: Spyra Exim Pvt Ltd
+# Updated: 2025-01-19
+
+# Primary search engine bots
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Slurp
+Allow: /
+Crawl-delay: 2
+
+User-agent: DuckDuckBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+User-agent: WhatsApp
+Allow: /
+
+# Default rule for all other bots
+User-agent: *
+Allow: /
+Crawl-delay: 2
+
+# Disallow admin and private areas
+Disallow: /admin/
+Disallow: /investor/dashboard/
+Disallow: /api/
+Disallow: /private/
+Disallow: /_next/
+Disallow: /static/
+
+# Disallow duplicate content and tracking parameters
+Disallow: /*?utm_*
+Disallow: /*?ref=*
+Disallow: /*?source=*
+Disallow: /*?campaign=*
+Disallow: /*?fbclid=*
+Disallow: /*?gclid=*
+Disallow: /*?sort=*
+Disallow: /*?filter=*
+Disallow: /*?page=*
+
+# Allow important files and assets
+Allow: /robots.txt
+Allow: /sitemap.xml
+Allow: /favicon.ico
+Allow: /humans.txt
+Allow: /manifest.json
+Allow: /security.txt
+Allow: /.well-known/security.txt
+Allow: /sw.js
+Allow: /*.css$
+Allow: /*.js$
+Allow: /*.png$
+Allow: /*.jpg$
+Allow: /*.jpeg$
+Allow: /*.gif$
+Allow: /*.svg$
+Allow: /*.webp$
+Allow: /*.woff$
+Allow: /*.woff2$
+Allow: /*.ttf$
+Allow: /*.otf$
+
+# Primary XML Sitemap
+Sitemap: https://www.moneybharatfinance.com/sitemap.xml
+
+# RSS Feed for Blog Content
+Sitemap: https://www.moneybharatfinance.com/rss.xml
+
+# Host directive - Specify preferred canonical domain with www
+Host: https://www.moneybharatfinance.com
+
+# SEO NOTES:
+# - All URLs follow canonical format: https://www.moneybharatfinance.com/
+# - Non-www redirects handled server-side via _redirects and vercel.json
+# - 301 permanent redirects ensure proper SEO signals
+# - Operated by Spyra Exim Pvt Ltd
