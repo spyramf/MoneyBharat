@@ -9,13 +9,13 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import BharatiAXA from "@/assets/insurance-partners/Bharati_AXA.png";
-import HDFCErgo from "@/assets/insurance-partners/hdfc_ergo_logo_sq.jpg";
-import ICICILombard from "@/assets/insurance-partners/ICICI_Lombard.png";
-import IFFCO from "@/assets/insurance-partners/IFFCO.png";
+import BharatiAXA from "@/assets/insurance-partners/Bharati_AXA.webp";
+import HDFCErgo from "@/assets/insurance-partners/hdfc_ergo_logo_sq.webp";
+import ICICILombard from "@/assets/insurance-partners/ICICI_Lombard.webp";
+import IFFCO from "@/assets/insurance-partners/IFFCO.webp";
 import OrientalInsurance from "@/assets/insurance-partners/oriental-insurance-logo.webp";
-import StarHealth from "@/assets/insurance-partners/Star_Health.png";
-import ApolloMunich from "@/assets/insurance-partners/apollo_sq_logo.png";
+import StarHealth from "@/assets/insurance-partners/Star_Health.webp";
+import ApolloMunich from "@/assets/insurance-partners/apollo_sq_logo.webp";
 
 // Insurance partners data with real company logos
 const insurancePartners = [

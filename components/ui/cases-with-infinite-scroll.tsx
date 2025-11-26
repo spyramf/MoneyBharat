@@ -5,16 +5,16 @@ import {
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel";
-import AxisMF from "@/assets/mutual-fund-partners/AXISMUTUALFUND_MF.png";
-import DspMF from "@/assets/mutual-fund-partners/DSP_MF.png";
-import BajajFinservMF from "@/assets/mutual-fund-partners/BAJAJ_FINSERV_MF.png";
-import BandhanMF from "@/assets/mutual-fund-partners/BANDHANMUTUALFUND_MF.png";
-import BankOfIndiaMF from "@/assets/mutual-fund-partners/BANKOFINDIAMUTUALFUND_MF.png";
-import BarodaBNPParibasMF from "@/assets/mutual-fund-partners/BARODABNPPARIBASMUTUALFUND_MF.png";
-import BirlaSunLifeMF from "@/assets/mutual-fund-partners/BirlaSunLifeMutualFund_MF.png";
-import CanaraRobecoMF from "@/assets/mutual-fund-partners/CANARAROBECOMUTUALFUND_MF.png";
-import EdelweissMF from "@/assets/mutual-fund-partners/EDELWEISSMUTUALFUND_MF.png";
-import ThreeSixtyOneMF from "@/assets/mutual-fund-partners/360_ONE_MUTUALFUND_MF.png";
+import AxisMF from "@/assets/mutual-fund-partners/AXISMUTUALFUND_MF.webp";
+import DspMF from "@/assets/mutual-fund-partners/DSP_MF.webp";
+import BajajFinservMF from "@/assets/mutual-fund-partners/BAJAJ_FINSERV_MF.webp";
+import BandhanMF from "@/assets/mutual-fund-partners/BANDHANMUTUALFUND_MF.webp";
+import BankOfIndiaMF from "@/assets/mutual-fund-partners/BANKOFINDIAMUTUALFUND_MF.webp";
+import BarodaBNPParibasMF from "@/assets/mutual-fund-partners/BARODABNPPARIBASMUTUALFUND_MF.webp";
+import BirlaSunLifeMF from "@/assets/mutual-fund-partners/BirlaSunLifeMutualFund_MF.webp";
+import CanaraRobecoMF from "@/assets/mutual-fund-partners/CANARAROBECOMUTUALFUND_MF.webp";
+import EdelweissMF from "@/assets/mutual-fund-partners/EDELWEISSMUTUALFUND_MF.webp";
+import ThreeSixtyOneMF from "@/assets/mutual-fund-partners/360_ONE_MUTUALFUND_MF.webp";
 
 const mutualFundPartners = [
   { name: "360 ONE MF", logo: ThreeSixtyOneMF },
