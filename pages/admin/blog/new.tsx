@@ -4,6 +4,7 @@ import { createPagesServerClient } from '@supabase/auth-helpers-nextjs';
 import BlogEditor from '@/components/admin/BlogEditor';
 import AdminLayout from '@/layouts/AdminLayout';
 import { supabaseBlogService, SupabaseBlogAuthor, SupabaseBlogCategory } from '@/services/supabaseBlogService';
+import { ensureDefaultAuthor } from '@/lib/server/ensureDefaultAuthor';
 
 interface NewBlogPostProps {
   categories: SupabaseBlogCategory[];
@@ -48,17 +49,26 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     };
   }
 
-  const [categories, authors] = await Promise.all([
+  const defaultAuthor = await ensureDefaultAuthor(supabase);
+
+  const [categories, authorsResult] = await Promise.all([
     supabaseBlogService.getAllCategories(),
     supabaseBlogService.getAllAuthors(),
   ]);
+
+  const authors =
+    (authorsResult && authorsResult.length > 0
+      ? authorsResult
+      : defaultAuthor
+        ? [defaultAuthor]
+        : []) || [];
 
   return {
     props: {
       initialSession: session,
       user: session.user,
       categories: categories || [],
-      authors: authors || [],
+      authors,
     },
   };
 };

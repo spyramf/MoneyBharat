@@ -1,6 +1,6 @@
 import React from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { Toaster } from 'sonner';
+import { Toaster as SonnerToaster } from 'sonner';
 import { SessionContextProvider } from '@supabase/auth-helpers-react';
 import { createPagesBrowserClient } from '@supabase/auth-helpers-nextjs';
 import { BlogProvider } from '@/context/BlogContext';
@@ -9,6 +9,7 @@ import ScrollToTop from '@/components/ScrollToTop';
 import PerformanceMonitor from '@/components/PerformanceMonitor';
 import MainLayout from '@/layouts/MainLayout';
 import { useRouter } from 'next/router';
+import { Toaster as AppToaster } from '@/components/ui/toaster';
 import '../styles/global.css';
 
 const queryClient = new QueryClient();
@@ -37,7 +38,8 @@ function MyApp({ Component, pageProps }: AppProps) {
                   <Component {...pageProps} />
                 </MainLayout>
               )}
-              <Toaster 
+              <AppToaster />
+              <SonnerToaster 
                 position="top-right"
                 richColors
                 closeButton

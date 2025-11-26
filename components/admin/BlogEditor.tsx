@@ -30,8 +30,9 @@ import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import { useToast } from '@/hooks/use-toast';
 import { Skeleton } from '@/components/ui/skeleton';
-import { supabaseBlogService, SupabaseBlogPost, SupabaseBlogCategory, SupabaseBlogAuthor } from '@/services/supabaseBlogService';
-import { useSessionContext } from '@supabase/auth-helpers-react';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/components/ui/dialog';
+import { RichTextEditor } from '@/components/admin/RichTextEditor';
+import type { SupabaseBlogPost, SupabaseBlogCategory, SupabaseBlogAuthor } from '@/services/supabaseBlogService';
 
 const blogPostSchema = z.object({
   title: z.string().min(1, 'Title is required'),
@@ -61,9 +62,9 @@ const BlogEditor = ({ post: existingPost, categories, authors }: BlogEditorProps
   const [isSaving, setIsSaving] = useState(false);
   const [tagInput, setTagInput] = useState('');
   const { toast } = useToast();
+  const [isPreviewOpen, setIsPreviewOpen] = useState(false);
 
   const isEditing = !!existingPost;
-  const { supabaseClient } = useSessionContext();
 
   const defaultAuthorId = React.useMemo(() => {
     if (existingPost?.author_id) return existingPost.author_id;
@@ -88,6 +89,7 @@ const BlogEditor = ({ post: existingPost, categories, authors }: BlogEditorProps
       read_time: 5,
     },
   });
+  const previewValues = form.watch();
 
   useEffect(() => {
     if (existingPost) {
@@ -144,9 +146,6 @@ const BlogEditor = ({ post: existingPost, categories, authors }: BlogEditorProps
   const onSubmit = async (data: BlogPostForm) => {
     setIsSaving(true);
     try {
-      if (!supabaseClient) {
-        throw new Error('Supabase client unavailable. Please refresh and sign in again.');
-      }
       const resolvedAuthorId = existingPost?.author_id || defaultAuthorId;
       if (!resolvedAuthorId) {
         toast({
@@ -158,25 +157,43 @@ const BlogEditor = ({ post: existingPost, categories, authors }: BlogEditorProps
         return;
       }
 
-      const postData = {
+      const payload = {
         ...data,
+        tags: (data.tags || []).filter(Boolean),
         author_id: resolvedAuthorId,
-        published_at: data.status === 'published' ? new Date().toISOString() : null,
+        category_id: data.category_id,
+        featured_image: data.featured_image || '',
+        meta_title: data.meta_title || '',
+        meta_description: data.meta_description || '',
+        published_at:
+          data.status === 'published'
+            ? existingPost?.published_at ?? new Date().toISOString()
+            : null,
       };
 
-      if (isEditing && existingPost) {
-        await supabaseBlogService.updatePost(existingPost.id, postData, supabaseClient);
-        toast({
-          title: "Success",
-          description: "Post updated successfully",
-        });
-      } else {
-        await supabaseBlogService.createPost(postData as any, supabaseClient);
-        toast({
-          title: "Success", 
-          description: "Post created successfully",
-        });
+      const endpoint = isEditing && existingPost ? `/api/admin/blogs/${existingPost.id}` : '/api/admin/blogs';
+      const method = isEditing ? 'PUT' : 'POST';
+
+      const response = await fetch(endpoint, {
+        method,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'same-origin',
+        body: JSON.stringify(payload),
+      });
+
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        console.error('Blog save failed', response.status, result);
+        throw new Error(result.error || 'Failed to save post');
       }
+
+      toast({
+        title: "Success",
+        description: isEditing ? "Post updated successfully" : "Post created successfully",
+      });
+
       router.push('/admin/blogs');
     } catch (error) {
       console.error('Failed to save blog post:', error);
@@ -210,7 +227,7 @@ const BlogEditor = ({ post: existingPost, categories, authors }: BlogEditorProps
             </div>
           </div>
           <div className="flex items-center gap-2">
-            <Button variant="outline" size="sm">
+            <Button variant="outline" size="sm" type="button" onClick={() => setIsPreviewOpen(true)}>
               <Eye className="h-4 w-4 mr-2" />
               Preview
             </Button>
@@ -306,12 +323,7 @@ const BlogEditor = ({ post: existingPost, categories, authors }: BlogEditorProps
                       render={({ field }) => (
                         <FormItem>
                           <FormControl>
-                            <Textarea
-                              placeholder="Write your blog post content here..."
-                              rows={20}
-                              className="min-h-[400px]"
-                              {...field}
-                            />
+                            <RichTextEditor value={field.value} onChange={field.onChange} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -542,6 +554,70 @@ const BlogEditor = ({ post: existingPost, categories, authors }: BlogEditorProps
           </form>
         </Form>
       </div>
+
+      <Dialog open={isPreviewOpen} onOpenChange={setIsPreviewOpen}>
+        <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle>
+              Preview: {previewValues.title || 'Untitled Post'}
+            </DialogTitle>
+            <DialogDescription>
+              This preview uses your current form values. Save the post to persist it.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-6">
+            <div className="rounded-lg border p-4 text-sm text-muted-foreground space-y-1">
+              <p><span className="font-medium text-foreground">Slug:</span> {previewValues.slug || 'auto-generated'}</p>
+              <p><span className="font-medium text-foreground">Status:</span> {previewValues.status}</p>
+              <p>
+                <span className="font-medium text-foreground">Category:</span>{' '}
+                {categories.find((category) => category.id === previewValues.category_id)?.name || 'Unassigned'}
+              </p>
+              <p><span className="font-medium text-foreground">Read time:</span> {previewValues.read_time || 0} min</p>
+              <p><span className="font-medium text-foreground">Featured:</span> {previewValues.is_featured ? 'Yes' : 'No'}</p>
+            </div>
+
+            {previewValues.featured_image ? (
+              <img
+                src={previewValues.featured_image}
+                alt="Featured"
+                className="w-full rounded-xl border object-cover max-h-96"
+              />
+            ) : (
+              <p className="text-sm text-muted-foreground italic">No featured image selected.</p>
+            )}
+
+            <div className="space-y-2">
+              <h2 className="text-2xl font-bold">{previewValues.title || 'Untitled Post'}</h2>
+              <p className="text-muted-foreground">{previewValues.excerpt || 'Add an excerpt to summarize the post.'}</p>
+            </div>
+
+            <div className="prose dark:prose-invert max-w-none whitespace-pre-line">
+              {previewValues.content || 'Start writing your content to see it here.'}
+            </div>
+
+            {previewValues.tags?.length ? (
+              <div className="flex flex-wrap gap-2">
+                {previewValues.tags.map((tag) => (
+                  <Badge key={tag} variant="secondary">
+                    #{tag}
+                  </Badge>
+                ))}
+              </div>
+            ) : null}
+
+            <div className="space-y-1 text-sm text-muted-foreground">
+              <p><span className="font-medium text-foreground">Meta title:</span> {previewValues.meta_title || 'Not set'}</p>
+              <p><span className="font-medium text-foreground">Meta description:</span> {previewValues.meta_description || 'Not set'}</p>
+            </div>
+          </div>
+          <DialogFooter>
+            <Button type="button" variant="secondary" onClick={() => setIsPreviewOpen(false)}>
+              Close Preview
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };

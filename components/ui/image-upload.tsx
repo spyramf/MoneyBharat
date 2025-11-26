@@ -4,7 +4,8 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent } from '@/components/ui/card';
 import { Upload, X, Link, Loader2, Image } from 'lucide-react';
-import { supabase } from '@/integrations/supabase/client';
+import { useSupabaseClient } from '@supabase/auth-helpers-react';
+import type { Database } from '@/integrations/supabase/types';
 import { toast } from 'sonner';
 
 interface ImageUploadProps {
@@ -18,6 +19,7 @@ export const ImageUpload = ({ value, onChange, placeholder = "Upload image or en
   const [showUrlInput, setShowUrlInput] = useState(false);
   const [urlValue, setUrlValue] = useState('');
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const supabase = useSupabaseClient<Database>();
 
   const generateFileName = (file: File) => {
     const timestamp = new Date().toISOString().split('T')[0];
@@ -47,6 +49,10 @@ export const ImageUpload = ({ value, onChange, placeholder = "Upload image or en
     try {
       const fileName = generateFileName(file);
       
+      if (!supabase) {
+        throw new Error('Supabase client unavailable. Please refresh and log in again.');
+      }
+
       const { data, error } = await supabase.storage
         .from('blog-images')
         .upload(fileName, file, {
