@@ -65,7 +65,7 @@ export const insuranceTypes = [{
     color: "bg-gradient-to-r from-fintech-blue to-fintech-ocean-blue"
   }, {
     title: "Child Plans",
-    description: "Secure your child's future education and milestones",
+    description: "Secure your child's future education",
     iconName: "User",
     color: "bg-gradient-to-r from-fintech-orange to-fintech-purple"
   }, {
