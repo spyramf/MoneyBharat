@@ -27,7 +27,7 @@ export const carLoanEligibilityCriteria = [
   "Age: 21-65 years",
   "Minimum monthly income: ₹25,000",
   "Employment: Salaried or Self-employed",
-  "CIBIL score: 700 or above",
+  "CIBIL score: 650 or above",
   "Existing EMI to income ratio below 50%"
 ];
 
