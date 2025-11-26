@@ -1,4 +1,5 @@
 import { Helmet } from 'react-helmet-async';
+import { SITE_CONFIG } from '@/constants/siteConfig';
 
 /**
  * Organization and Financial Service Structured Data (JSON-LD)
@@ -6,6 +7,7 @@ import { Helmet } from 'react-helmet-async';
  * Domain: https://www.moneybharatfinance.com/
  */
 export const OrganizationSchema = () => {
+  const brandLogoUrl = `${SITE_CONFIG.url}${SITE_CONFIG.brand.logo}`;
   const organizationSchema = {
     "@context": "https://schema.org",
     "@type": "FinancialService",
@@ -15,11 +17,11 @@ export const OrganizationSchema = () => {
     "url": "https://www.moneybharatfinance.com/",
     "logo": {
       "@type": "ImageObject",
-      "url": "https://www.moneybharatfinance.com/lovable-uploads/92affb7c-7e35-42da-9aff-b0f55a689428.png",
+      "url": brandLogoUrl,
       "width": 512,
       "height": 512
     },
-    "image": "https://www.moneybharatfinance.com/lovable-uploads/92affb7c-7e35-42da-9aff-b0f55a689428.png",
+    "image": brandLogoUrl,
     "description": "Money Bharat Finance is India's AI-powered financial platform operated by Spyra Exim Pvt Ltd, offering mutual funds, SIP investments, health & life insurance, and instant personal loans with expert advisory services.",
     "address": {
       "@type": "PostalAddress",
@@ -149,7 +151,7 @@ export const OrganizationSchema = () => {
     "@type": "LocalBusiness",
     "@id": "https://www.moneybharatfinance.com/#localbusiness",
     "name": "Money Bharat Finance",
-    "image": "https://www.moneybharatfinance.com/lovable-uploads/92affb7c-7e35-42da-9aff-b0f55a689428.png",
+    "image": brandLogoUrl,
     "url": "https://www.moneybharatfinance.com/",
     "telephone": "+91-9970735694",
     "email": "contact@moneybharatfinance.com",

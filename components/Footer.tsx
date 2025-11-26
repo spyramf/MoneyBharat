@@ -1,6 +1,7 @@
 import { Facebook, Instagram, Linkedin, Twitter, Mail, Phone, MapPin, Download, ArrowUp } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { SITE_CONFIG } from "@/constants/siteConfig";
 
 const Footer = () => {
   const scrollToTop = () => {
@@ -64,7 +65,7 @@ const Footer = () => {
               <Link href="/" className="flex items-center">
                 <div className="h-12 w-12 mr-3">
                   <img
-                    src="/lovable-uploads/92affb7c-7e35-42da-9aff-b0f55a689428.png"
+                    src={SITE_CONFIG.brand.logo}
                     alt="Money Bharat Logo"
                     className="h-full w-full object-contain"
                     itemProp="logo"

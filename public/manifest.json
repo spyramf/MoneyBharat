@@ -10,13 +10,13 @@
   "orientation": "portrait-primary",
   "icons": [
     {
-      "src": "/lovable-uploads/92affb7c-7e35-42da-9aff-b0f55a689428.png",
+      "src": "/images/brand/money-bharat-icon.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "maskable any"
     },
     {
-      "src": "/lovable-uploads/92affb7c-7e35-42da-9aff-b0f55a689428.png",
+      "src": "/images/brand/money-bharat-logo.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable any"
@@ -33,7 +33,7 @@
       "url": "https://www.moneybharatfinance.com/mutual-funds",
       "icons": [
         {
-          "src": "/lovable-uploads/92affb7c-7e35-42da-9aff-b0f55a689428.png",
+          "src": "/images/brand/money-bharat-icon.png",
           "sizes": "96x96"
         }
       ]
@@ -45,7 +45,7 @@
       "url": "https://www.moneybharatfinance.com/insurance",
       "icons": [
         {
-          "src": "/lovable-uploads/92affb7c-7e35-42da-9aff-b0f55a689428.png",
+          "src": "/images/brand/money-bharat-icon.png",
           "sizes": "96x96"
         }
       ]
@@ -57,7 +57,7 @@
       "url": "https://www.moneybharatfinance.com/loans",
       "icons": [
         {
-          "src": "/lovable-uploads/92affb7c-7e35-42da-9aff-b0f55a689428.png",
+          "src": "/images/brand/money-bharat-icon.png",
           "sizes": "96x96"
         }
       ]

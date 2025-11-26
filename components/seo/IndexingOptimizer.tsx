@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useRouter } from "next/router";
+import { SITE_CONFIG } from "@/constants/siteConfig";
 
 const IndexingOptimizer = () => {
   const router = useRouter();
@@ -118,7 +119,7 @@ const IndexingOptimizer = () => {
     const addPageSpeedSignals = () => {
       const criticalResources = [
         "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap",
-        "/lovable-uploads/92affb7c-7e35-42da-9aff-b0f55a689428.png",
+        SITE_CONFIG.brand.logo,
       ];
 
       criticalResources.forEach((resource) => {

@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { SITE_CONFIG } from "@/constants/siteConfig";
 
 interface SchemaMarkupProps {
   type?: "organization" | "financial-service" | "faq" | "product" | "review";
@@ -39,6 +40,8 @@ const buildSchema = (type: string, data?: any) => {
   }
 };
 
+const BRAND_LOGO_URL = `${SITE_CONFIG.url}${SITE_CONFIG.brand.logo}`;
+
 const getOrganizationSchema = () => ({
   "@context": "https://schema.org",
   "@type": "FinancialService",
@@ -49,11 +52,11 @@ const getOrganizationSchema = () => ({
   url: "https://moneybharatfinance.com",
   logo: {
     "@type": "ImageObject",
-    url: "https://moneybharatfinance.com/lovable-uploads/92affb7c-7e35-42da-9aff-b0f55a689428.png",
+    url: BRAND_LOGO_URL,
     width: 400,
     height: 400,
   },
-  image: "https://moneybharatfinance.com/lovable-uploads/92affb7c-7e35-42da-9aff-b0f55a689428.png",
+  image: BRAND_LOGO_URL,
   telephone: "+91 98765 43210",
   email: "contact@moneybharatfinance.com",
   address: {

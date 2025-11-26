@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { SITE_CONFIG } from "@/constants/siteConfig";
 
 const TechnicalSEO = () => {
   useEffect(() => {
@@ -65,7 +66,7 @@ const TechnicalSEO = () => {
         email: "contact@moneybharatfinance.com",
         logo: {
           "@type": "ImageObject",
-          url: "https://moneybharatfinance.com/lovable-uploads/92affb7c-7e35-42da-9aff-b0f55a689428.png",
+          url: `${SITE_CONFIG.url}${SITE_CONFIG.brand.logo}`,
           width: 400,
           height: 400,
         },

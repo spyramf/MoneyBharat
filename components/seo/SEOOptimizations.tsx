@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useRouter } from "next/router";
+import { SITE_CONFIG } from "@/constants/siteConfig";
 
 const SEOOptimizations = () => {
   const router = useRouter();
@@ -9,10 +10,7 @@ const SEOOptimizations = () => {
     const currentPath = pathname;
 
     const preloadCriticalResources = () => {
-      const criticalImages = [
-        "/lovable-uploads/92affb7c-7e35-42da-9aff-b0f55a689428.png",
-        "/lovable-uploads/91d78f6e-991f-4f65-883d-f9962eb33219.png",
-      ];
+      const criticalImages = [SITE_CONFIG.brand.logo, SITE_CONFIG.brand.icon];
 
       criticalImages.forEach((src) => {
         if (document.querySelector(`link[rel="preload"][href="${src}"]`)) return;
@@ -51,7 +49,7 @@ const SEOOptimizations = () => {
         { name: "apple-mobile-web-app-status-bar-style", content: "default" },
         { name: "apple-mobile-web-app-title", content: "Money Bharat" },
         { name: "application-name", content: "Money Bharat Finance" },
-        { name: "msapplication-TileImage", content: "/lovable-uploads/92affb7c-7e35-42da-9aff-b0f55a689428.png" },
+        { name: "msapplication-TileImage", content: SITE_CONFIG.brand.logo },
       ];
 
       mobileMeta.forEach((meta) => {

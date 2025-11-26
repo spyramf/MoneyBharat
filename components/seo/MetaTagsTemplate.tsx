@@ -26,7 +26,7 @@ export const MetaTagsTemplate = ({
   title = SITE_CONFIG.title,
   description = SITE_CONFIG.description,
   keywords = SITE_CONFIG.keywords,
-  image = `${SITE_CONFIG.url}/lovable-uploads/92affb7c-7e35-42da-9aff-b0f55a689428.png`,
+  image = `${SITE_CONFIG.url}${SITE_CONFIG.ogImage}`,
   type = 'website',
   url = SITE_CONFIG.url,
   publishedTime,

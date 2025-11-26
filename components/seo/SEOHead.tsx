@@ -1,6 +1,7 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { getCanonicalUrl, getPageTitle, getPageDescription } from "@/utils/seoUtils";
+import { SITE_CONFIG } from "@/constants/siteConfig";
 
 interface SEOHeadProps {
   title?: string;
@@ -18,7 +19,7 @@ const SEOHead = ({
   title,
   description,
   keywords = "Money Bharat, Money Bharat Finance, money bharat mutual funds, money bharat insurance, money bharat loans, mutual funds India, SIP investment, health insurance, personal loans, financial planning",
-  image = "/lovable-uploads/92affb7c-7e35-42da-9aff-b0f55a689428.png",
+  image = SITE_CONFIG.brand.logo,
   type = "website",
   publishedTime,
   modifiedTime,
@@ -28,7 +29,7 @@ const SEOHead = ({
   const router = useRouter();
   const currentPath = (router.asPath || router.pathname || "/").split("?")[0];
   const canonicalUrl = getCanonicalUrl(currentPath);
-  const absoluteImageUrl = image?.startsWith("http") ? image : `https://www.moneybharatfinance.com${image || ""}`;
+  const absoluteImageUrl = image?.startsWith("http") ? image : `${SITE_CONFIG.url}${image || ""}`;
 
   // Auto-generate title and description if not provided
   const pageTitle = title || getPageTitle(getPageNameFromPath(currentPath));
