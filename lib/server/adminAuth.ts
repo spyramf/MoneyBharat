@@ -34,7 +34,14 @@ export async function requireAdminSession(
     return { error: 'Unable to verify permissions', status: 500 }
   }
 
-  if (userRole?.role !== 'admin') {
+  type UserRoleRow = Pick<
+    Database['public']['Tables']['user_roles']['Row'],
+    'role'
+  >
+
+  const roleValue = (userRole as UserRoleRow | null)?.role
+
+  if (roleValue !== 'admin') {
     return { error: 'Forbidden', status: 403 }
   }
 
