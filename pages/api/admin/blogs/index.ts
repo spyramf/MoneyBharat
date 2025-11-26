@@ -41,7 +41,7 @@ export default async function handler(
 
   const parsed = blogPayloadSchema.safeParse(req.body)
   if (!parsed.success) {
-    const message = parsed.error.errors[0]?.message ?? 'Invalid payload'
+    const message = parsed.error.issues?.[0]?.message ?? 'Invalid payload'
     return res.status(400).json({ error: message })
   }
 
