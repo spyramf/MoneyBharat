@@ -9,7 +9,7 @@ import {
   Home,
   Umbrella,
   Briefcase,
-  FileChartLine
+  FileBarChart
 } from "lucide-react";
 
 // Mapping of icon names to their components
@@ -22,7 +22,7 @@ export const iconComponents = {
   Home,
   Umbrella,
   Briefcase,
-  FileChartLine
+  FileBarChart
 };
 
 // Function to render an icon by name

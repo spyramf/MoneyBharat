@@ -1,4 +1,3 @@
-import Head from 'next/head';
 import LoanPageTemplate from "@/templates/LoanPageTemplate";
 import {
   lamfFeatures,
@@ -10,11 +9,6 @@ import {
 
 const LoanAgainstMutualFunds = () => {
   return (
-    <>
-        <Head>
-            <title>Loan Against Mutual Funds - MoneyBharat</title>
-            <meta name="description" content="Unlock the value of your mutual fund investments without selling them. Get instant funds with lower interest rates." />
-        </Head>
         <LoanPageTemplate
             pageTitle="Loan Against Mutual Funds - MoneyBharat"
             metaDescription="Unlock the value of your mutual fund investments without selling them. Get instant funds with lower interest rates."
@@ -50,7 +44,6 @@ const LoanAgainstMutualFunds = () => {
             ctaPrimaryButton="Apply Now"
             ctaSecondaryButton="Calculate Your Loan"
         />
-    </>
   );
 };
 

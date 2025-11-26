@@ -1,131 +1,196 @@
+/* styles/global.css
+   Patched to avoid @apply for color utilities that Tailwind sometimes doesn't generate
+   Uses CSS variables directly for colors and opacity-safe rgb(...) / hsl(...) syntax.
+*/
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
-:root {
-  --background: 0 0% 100%;
-  --foreground: 222.2 84% 4.9%;
-  --card: 0 0% 100%;
-  --card-foreground: 222.2 84% 4.9%;
-  --popover: 0 0% 100%;
-  --popover-foreground: 222.2 84% 4.9%;
-  --primary: 222.2 47.4% 11.2%;
-  --primary-foreground: 210 40% 98%;
-  --secondary: 210 40% 96.1%;
-  --secondary-foreground: 222.2 47.4% 11.2%;
-  --muted: 210 40% 96.1%;
-  --muted-foreground: 215.4 16.3% 46.9%;
-  --accent: 210 40% 96.1%;
-  --accent-foreground: 222.2 47.4% 11.2%;
-  --destructive: 0 84.2% 60.2%;
-  --destructive-foreground: 210 40% 98%;
-  --border: 214.3 31.8% 91.4%;
-  --input: 214.3 31.8% 91.4%;
-  --ring: 222.2 84% 4.9%;
-  --radius: 0.5rem;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-  /* Sidebar Specific Variables */
-  --sidebar-background: 210 40% 98%; /* Light gray */
-  --sidebar-foreground: 222.2 47.4% 11.2%; /* Dark text */
-  --sidebar-primary: 222.2 47.4% 11.2%; /* Primary color for sidebar elements */
-  --sidebar-primary-foreground: 210 40% 98%; /* Light text for primary sidebar elements */
-  --sidebar-accent: 210 40% 96.1%; /* Accent color for sidebar */
-  --sidebar-accent-foreground: 222.2 47.4% 11.2%; /* Dark text for accent sidebar elements */
-  --sidebar-border: 214.3 31.8% 91.4%; /* Border color */
-  --sidebar-ring: 222.2 84% 4.9%; /* Ring color */
-}
-
-@media (prefers-color-scheme: dark) {
+/* ------------------------------
+   Theme variables (kept as you had them)
+   ------------------------------ */
+@layer base {
   :root {
+    --background: 250 100% 99%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 158 61% 45%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 158 61% 45%;
+    --radius: 0.75rem;
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 158 61% 45%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 158 61% 45%;
+  }
+
+  .dark {
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
     --card: 222.2 84% 4.9%;
     --card-foreground: 210 40% 98%;
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
-    --primary: 217.2 91.2% 59.8%;
+    --primary: 158 61% 45%;
     --primary-foreground: 222.2 47.4% 11.2%;
-    --secondary: 217.2 32.4% 17.5%;
+    --secondary: 217.2 32.6% 17.5%;
     --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.4% 17.5%;
+    --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.4% 17.5%;
+    --accent: 217.2 32.6% 17.5%;
     --accent-foreground: 210 40% 98%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.4% 17.5%;
-    --input: 217.2 32.4% 17.5%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
-
-    /* Sidebar Specific Variables for Dark Mode */
-    --sidebar-background: 222.2 84% 4.9%; /* Dark background */
-    --sidebar-foreground: 210 40% 98%; /* Light text */
-    --sidebar-primary: 217.2 91.2% 59.8%; /* Primary color for sidebar elements */
-    --sidebar-primary-foreground: 222.2 47.4% 11.2%; /* Dark text for primary sidebar elements */
-    --sidebar-accent: 217.2 32.4% 17.5%; /* Accent color for sidebar */
-    --sidebar-accent-foreground: 210 40% 98%; /* Light text for accent sidebar elements */
-    --sidebar-border: 217.2 32.4% 17.5%; /* Border color */
-    --sidebar-ring: 212.7 26.8% 83.9%; /* Ring color */
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 158 61% 45%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
   }
 }
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* ------------------------------
+   Global base rules (no fragile @apply)
+   ------------------------------ */
+@layer base {
+  /* default border color for elements that use Tailwind border widths */
+  * {
+    border-color: hsl(var(--border));
+  }
 
-body {
-  @apply bg-background text-foreground;
-  font-feature-settings: "rlig" 1, "calt" 1;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeSpeed;
-  font-display: swap;
+  html, body, #__next {
+    height: 100%;
+  }
+
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: Inter, sans-serif;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeSpeed;
+    font-display: swap;
+  }
+
+  .container {
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem; /* px-4 */
+    padding-right: 1rem;
+    max-width: 1200px;
+  }
+
+  button {
+    outline: none;
+  }
+  button:focus-visible {
+    box-shadow: 0 0 0 3px hsl(var(--ring) / 0.12);
+    outline-offset: 2px;
+  }
+
+  h1, h2, h3 {
+    contain: layout style;
+  }
 }
 
+/* ------------------------------
+   Components (converted color @apply to direct CSS)
+   ------------------------------ */
 @layer components {
   .glass-card {
-    @apply bg-white/70 backdrop-blur-sm shadow-lg border border-white/20 rounded-xl;
+    background-color: rgb(255 255 255 / 0.70); /* bg-white/70 */
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.06);
+    border: 1px solid rgb(255 255 255 / 0.20); /* border-white/20 */
+    border-radius: 1rem; /* rounded-xl */
     contain: layout style paint;
     transform: translate3d(0, 0, 0);
   }
-  
+
   .gradient-text {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-[#F97316] to-[#2EB883];
-    contain: layout style;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    background-image: linear-gradient(90deg, #F97316 0%, #2EB883 100%);
   }
-  
+
   .animate-fade-in {
     animation: fadeIn 0.6s ease-out forwards;
     animation-fill-mode: both;
   }
 
-  /* Progress Bar Classes */
+  /* Progress Bar Classes (use CSS vars / fallbacks) */
   .progress-bar-primary {
-    @apply h-full bg-primary transition-all;
+    height: 100%;
+    background-color: hsl(var(--primary)); /* bg-primary */
+    transition: all .2s ease;
     transform: var(--progress-transform, translateX(-100%));
   }
 
   .progress-bar-invested {
-    @apply h-full bg-fintech-purple;
+    height: 100%;
+    background-color: #9b87f5; /* fintech-purple */
     width: var(--progress-width, 0%);
   }
 
   .progress-bar-interest {
-    @apply h-full bg-fintech-blue;
+    height: 100%;
+    background-color: #0066CC; /* fintech-blue */
     width: var(--progress-width, 0%);
   }
 
   .progress-bar-loan {
-    @apply h-full bg-fintech-purple;
+    height: 100%;
+    background-color: #9b87f5;
     width: var(--progress-width, 0%);
   }
 
   .progress-bar-completion {
-    @apply h-full bg-gradient-to-r from-fintech-green to-fintech-blue rounded-full;
+    height: 100%;
+    background-image: linear-gradient(90deg, #2EB883, #0066CC);
+    border-radius: 9999px;
     width: var(--progress-width, 0%);
   }
 
   /* Bank/Institution Avatar Classes */
   .bank-avatar {
-    @apply w-10 h-10 rounded-full flex items-center justify-center mr-3 text-white font-bold;
+    width: 2.5rem;  /* w-10 */
+    height: 2.5rem;
+    border-radius: 9999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 0.75rem;
+    color: white;
+    font-weight: 700;
     background-color: var(--bank-color, #6366f1);
   }
 
@@ -135,39 +200,50 @@ body {
   .bank-avatar-4 { --bank-color: #14b8a6; }
   .bank-avatar-5 { --bank-color: #f59e0b; }
 
-  /* Card Animation Classes */
+  /* Card styles - replaced bg/border color uses */
   .card-fade-in {
-    @apply animate-fade-in;
+    animation: fadeIn 0.6s ease-out forwards;
     animation-delay: var(--animation-delay, 0ms);
   }
 
   .card-feature {
-    @apply bg-white border border-gray-100 rounded-xl p-6 shadow-md hover:shadow-lg hover:border-fintech-purple/30 transition-all duration-300;
+    background-color: rgb(255 255 255 / 1);
+    border: 1px solid hsl(0 0% 96% / 1); /* gray-100 */
+    border-radius: 1rem;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -2px rgba(0,0,0,0.02);
+    transition: box-shadow .2s ease, border-color .2s ease;
+  }
+  .card-feature:hover {
+    box-shadow: 0 12px 20px -6px rgba(0,0,0,0.12);
+    border-color: rgba(155, 135, 245, 0.15);
   }
 
-  .card-step {
-    @apply bg-white border border-gray-200 rounded-xl p-6 shadow-md hover:shadow-xl transition-all duration-300 relative overflow-hidden;
-  }
-
-  .card-benefit {
-    @apply bg-white backdrop-blur-sm border border-gray-200 p-6 rounded-xl transform transition-all duration-300 hover:-translate-y-1 hover:shadow-xl;
+  .card-step, .card-benefit {
+    background-color: rgb(255 255 255 / 1);
+    border: 1px solid hsl(0 0% 93% / 1);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.04);
   }
 
   .card-fund-category {
-    @apply p-8 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 h-full;
+    padding: 2rem;
+    border-radius: 1.25rem;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+    height: 100%;
+    transition: box-shadow .15s ease;
   }
 
   /* Sidebar Styles */
   .sidebar-skeleton {
-    --skeleton-width: var(--skeleton-width, 100%);
-    width: var(--skeleton-width);
+    width: var(--skeleton-width, 100%);
   }
 
-  /* Chart Color Variables */
   .chart-item {
     background-color: var(--chart-color, currentColor);
   }
-  
+
   @keyframes fadeIn {
     from {
       opacity: 0;
@@ -178,7 +254,7 @@ body {
       transform: translateY(0);
     }
   }
-  
+
   @media (prefers-reduced-motion: reduce) {
     .animate-fade-in,
     .card-fade-in {
@@ -187,18 +263,18 @@ body {
   }
 }
 
-/* Performance optimization: Critical rendering path */
+/* ------------------------------
+   General non-color utilities retained as plain CSS
+   ------------------------------ */
 .glass-card,
 .gradient-text {
   contain: layout style paint;
 }
 
-/* Critical CSS for hero section */
 section:first-of-type {
   contain: layout style;
 }
 
-/* Optimize image loading */
 img {
   content-visibility: auto;
   contain-intrinsic-size: 1px 400px;
@@ -213,7 +289,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Enhanced focus styles for accessibility */
+/* Enhanced focus styles for accessibility (using var) */
 :focus-visible {
   outline: 2px solid hsl(var(--ring));
   outline-offset: 2px;

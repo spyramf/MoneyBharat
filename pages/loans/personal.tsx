@@ -1,4 +1,3 @@
-import Head from 'next/head';
 import LoanPageTemplate from "@/templates/LoanPageTemplate";
 import {
   personalLoanFeatures,
@@ -10,11 +9,6 @@ import {
 
 const PersonalLoan = () => {
   return (
-      <>
-        <Head>
-            <title>Personal Loan - MoneyBharat</title>
-            <meta name="description" content="Quick unsecured loans for your personal needs with competitive interest rates" />
-        </Head>
         <LoanPageTemplate
             pageTitle="Personal Loan - MoneyBharat"
             metaDescription="Quick unsecured loans for your personal needs with competitive interest rates"
@@ -48,7 +42,6 @@ const PersonalLoan = () => {
             ctaPrimaryButton="Apply for a Personal Loan"
             ctaSecondaryButton="Speak to an Advisor"
         />
-      </>
   );
 };
 

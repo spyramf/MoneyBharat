@@ -1,11 +1,17 @@
 import React from 'react';
 import { GetServerSideProps } from 'next';
-import { createServerSupabaseClient } from '@supabase/auth-helpers-nextjs';
+import { createPagesServerClient } from '@supabase/auth-helpers-nextjs';
 import BlogEditor from '@/components/admin/BlogEditor';
-import { supabaseBlogService } from '@/services/supabaseBlogService';
 import AdminLayout from '@/layouts/AdminLayout';
+import { supabaseBlogService, SupabaseBlogAuthor, SupabaseBlogCategory, SupabaseBlogPost } from '@/services/supabaseBlogService';
 
-const EditBlogPost = ({ post, categories, authors }) => {
+interface EditBlogPostProps {
+  post: SupabaseBlogPost;
+  categories: SupabaseBlogCategory[];
+  authors: SupabaseBlogAuthor[];
+}
+
+const EditBlogPost = ({ post, categories, authors }: EditBlogPostProps) => {
   return (
     <AdminLayout>
       <BlogEditor post={post} categories={categories} authors={authors} />
@@ -14,7 +20,7 @@ const EditBlogPost = ({ post, categories, authors }) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const supabase = createServerSupabaseClient(ctx);
+  const supabase = createPagesServerClient(ctx);
   const {
     data: { session },
   } = await supabase.auth.getSession();
@@ -43,9 +49,15 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     };
   }
 
-  const { id } = ctx.params;
+  const { id } = ctx.params ?? {};
+  const postId = Array.isArray(id) ? id[0] : id;
+
+  if (!postId) {
+    return { notFound: true };
+  }
+
   const [post, categories, authors] = await Promise.all([
-    supabaseBlogService.getPostById(id as string),
+    supabaseBlogService.getPostById(postId),
     supabaseBlogService.getAllCategories(),
     supabaseBlogService.getAllAuthors(),
   ]);

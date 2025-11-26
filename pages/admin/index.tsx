@@ -1,6 +1,6 @@
 import React from 'react';
 import { GetServerSideProps } from 'next';
-import { createServerSupabaseClient } from '@supabase/auth-helpers-nextjs';
+import { createPagesServerClient } from '@supabase/auth-helpers-nextjs';
 import AdminLayout from '@/layouts/AdminLayout';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -17,10 +17,16 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 import { format } from 'date-fns';
-import { supabaseBlogService } from '@/services/supabaseBlogService';
+import { SupabaseBlogPost, supabaseBlogService } from '@/services/supabaseBlogService';
 import { bookingDataService } from '@/services/bookingDataService';
+import { Booking } from '@/context/BookingContext';
 
-const Dashboard = ({ blogPosts, bookings }) => {
+interface DashboardProps {
+  blogPosts: SupabaseBlogPost[];
+  bookings: Booking[];
+}
+
+const Dashboard = ({ blogPosts, bookings }: DashboardProps) => {
   // Calculate stats
   const publishedPosts = blogPosts?.filter(post => post.status === 'published').length || 0;
   const draftPosts = blogPosts?.filter(post => post.status === 'draft').length || 0;
@@ -242,7 +248,7 @@ const Dashboard = ({ blogPosts, bookings }) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const supabase = createServerSupabaseClient(ctx);
+  const supabase = createPagesServerClient(ctx);
   const {
     data: { session },
   } = await supabase.auth.getSession();

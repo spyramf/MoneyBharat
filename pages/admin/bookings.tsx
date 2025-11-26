@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { GetServerSideProps } from 'next';
-import { createServerSupabaseClient } from '@supabase/auth-helpers-nextjs';
+import { createPagesServerClient } from '@supabase/auth-helpers-nextjs';
 import AdminLayout from '@/layouts/AdminLayout';
 import { Calendar } from '@/components/ui/calendar';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
@@ -23,9 +23,14 @@ import {
 import { format } from 'date-fns';
 import { CalendarCheck, CalendarX, Trash2, Phone, Mail, Search, Filter, X } from 'lucide-react';
 import { bookingDataService } from '@/services/bookingDataService';
+import { Booking } from '@/context/BookingContext';
 
-const BookingManager = ({ initialBookings }) => {
-  const [bookings, setBookings] = useState(initialBookings);
+interface BookingManagerProps {
+  initialBookings: Booking[];
+}
+
+const BookingManager = ({ initialBookings }: BookingManagerProps) => {
+  const [bookings, setBookings] = useState<Booking[]>(initialBookings);
   const [date, setDate] = useState<Date | undefined>(new Date());
   const [selectedTab, setSelectedTab] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
@@ -429,7 +434,7 @@ const BookingManager = ({ initialBookings }) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const supabase = createServerSupabaseClient(ctx);
+  const supabase = createPagesServerClient(ctx);
   const {
     data: { session },
   } = await supabase.auth.getSession();

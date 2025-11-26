@@ -50,22 +50,22 @@ function Case() {
   }, [api, current]);
 
   return (
-    <div className="w-full py-20 lg:py-40 bg-gradient-to-br from-blue-50 via-white to-green-50">
+    <div className="w-full py-20 lg:py-40 bg-gradient-to-br from-secondary/50 via-background to-primary/10">
       <div className="container mx-auto">
         <div className="flex flex-col gap-10">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl tracking-tighter font-bold text-center text-gray-900">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl tracking-tighter font-bold text-center text-foreground">
             Trusted Mutual Fund Partners
           </h2>
-          <p className="text-lg md:text-xl text-gray-600 text-center max-w-2xl mx-auto mb-6">
+          <p className="text-lg md:text-xl text-muted-foreground text-center max-w-2xl mx-auto mb-6">
             Invest with confidence through India's leading Asset Management Companies
           </p>
           <Carousel setApi={setApi} className="w-full">
             <CarouselContent>
               {mutualFundPartners.map((partner, index) => (
                 <CarouselItem className="basis-1/2 md:basis-1/3 lg:basis-1/6" key={index}>
-                  <div className="flex rounded-lg aspect-square bg-white border border-gray-200 shadow-sm hover:shadow-md transition-shadow items-center justify-center p-4">
+                  <div className="flex rounded-lg aspect-square bg-background border shadow-sm hover:shadow-md transition-shadow items-center justify-center p-4">
                     <img 
-                      src={partner.logo} 
+                      src={partner.logo.src} 
                       alt={partner.name}
                       className="w-full h-full object-contain"
                     />

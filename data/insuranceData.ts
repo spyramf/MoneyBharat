@@ -237,7 +237,7 @@ export const insuranceKeyBenefits = [
   {
     title: "Tax Benefits",
     description: "Many insurance policies offer tax advantages, helping you reduce your tax liability while securing your future.",
-    iconName: "FileChartLine",
+    iconName: "FileBarChart",
     iconBg: "bg-purple-100",
     iconColor: "text-purple-600"
   },

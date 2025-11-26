@@ -1,7 +1,7 @@
 
+import Link from "next/link";
 import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
-import { Link } from "react-router-dom";
 import { ArrowRight, Shield, Heart, Car, Check } from "lucide-react";
 
 const ComprehensiveInsuranceSolutions = () => {
@@ -47,7 +47,7 @@ const ComprehensiveInsuranceSolutions = () => {
                   </li>
                 </ul>
 
-                <Link to="/term-insurance" className="inline-flex items-center font-semibold text-fintech-purple">
+                <Link href="/term-insurance" className="inline-flex items-center font-semibold text-fintech-purple">
                   Explore Life Insurance
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
@@ -84,7 +84,7 @@ const ComprehensiveInsuranceSolutions = () => {
                   </li>
                 </ul>
 
-                <Link to="/health-insurance" className="inline-flex items-center font-semibold text-fintech-purple">
+                <Link href="/health-insurance" className="inline-flex items-center font-semibold text-fintech-purple">
                   Explore Health Insurance
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
@@ -121,7 +121,7 @@ const ComprehensiveInsuranceSolutions = () => {
                   </li>
                 </ul>
 
-                <Link to="/vehicle-insurance" className="inline-flex items-center font-semibold text-fintech-purple">
+                <Link href="/vehicle-insurance" className="inline-flex items-center font-semibold text-fintech-purple">
                   Explore General Insurance
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>

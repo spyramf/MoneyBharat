@@ -1,4 +1,6 @@
 import { supabase } from '@/integrations/supabase/client';
+import type { SupabaseClient } from '@supabase/supabase-js';
+import type { Database } from '@/integrations/supabase/types';
 
 export interface SupabaseBlogCategory {
   id: string;
@@ -70,10 +72,13 @@ const slugify = (text: string) =>
     .replace(/\s+/g, "-")
     .replace(/-+/g, "-");
 
+const getClient = (client?: SupabaseClient<Database>) => client ?? supabase;
+
 export const supabaseBlogService = {
-  getAllPosts: async (includeAll: boolean = false): Promise<SupabaseBlogPost[]> => {
+  getAllPosts: async (includeAll: boolean = false, client?: SupabaseClient<Database>): Promise<SupabaseBlogPost[]> => {
+    const supa = getClient(client);
     try {
-      let query = supabase
+      let query = supa
         .from('blogs')
         .select(`
           *,
@@ -99,9 +104,10 @@ export const supabaseBlogService = {
     }
   },
 
-  getFeaturedPosts: async (): Promise<SupabaseBlogPost[]> => {
+  getFeaturedPosts: async (client?: SupabaseClient<Database>): Promise<SupabaseBlogPost[]> => {
+    const supa = getClient(client);
     try {
-      const { data, error } = await supabase
+      const { data, error } = await supa
         .from('blogs')
         .select(`
           *,
@@ -124,9 +130,10 @@ export const supabaseBlogService = {
     }
   },
 
-  getPostById: async (id: string): Promise<SupabaseBlogPost | null> => {
+  getPostById: async (id: string, client?: SupabaseClient<Database>): Promise<SupabaseBlogPost | null> => {
+    const supa = getClient(client);
     try {
-      const { data, error } = await supabase
+      const { data, error } = await supa
         .from('blogs')
         .select(`
           *,
@@ -147,9 +154,10 @@ export const supabaseBlogService = {
     }
   },
 
-  getPostBySlug: async (slug: string): Promise<SupabaseBlogPost | null> => {
+  getPostBySlug: async (slug: string, client?: SupabaseClient<Database>): Promise<SupabaseBlogPost | null> => {
+    const supa = getClient(client);
     try {
-      const { data, error } = await supabase
+      const { data, error } = await supa
         .from('blogs')
         .select(`
           *,
@@ -171,9 +179,10 @@ export const supabaseBlogService = {
     }
   },
 
-  getPostsByCategory: async (categoryId: string): Promise<SupabaseBlogPost[]> => {
+  getPostsByCategory: async (categoryId: string, client?: SupabaseClient<Database>): Promise<SupabaseBlogPost[]> => {
+    const supa = getClient(client);
     try {
-      const { data, error } = await supabase
+      const { data, error } = await supa
         .from('blogs')
         .select(`
           *,
@@ -194,9 +203,10 @@ export const supabaseBlogService = {
     }
   },
 
-  getPostsByAuthor: async (authorId: string): Promise<SupabaseBlogPost[]> => {
+  getPostsByAuthor: async (authorId: string, client?: SupabaseClient<Database>): Promise<SupabaseBlogPost[]> => {
+    const supa = getClient(client);
     try {
-      const { data, error } = await supabase
+      const { data, error } = await supa
         .from('blogs')
         .select(`
           *,
@@ -217,9 +227,10 @@ export const supabaseBlogService = {
     }
   },
 
-  getPostsBySearch: async (searchTerm: string): Promise<SupabaseBlogPost[]> => {
+  getPostsBySearch: async (searchTerm: string, client?: SupabaseClient<Database>): Promise<SupabaseBlogPost[]> => {
+    const supa = getClient(client);
     try {
-      const { data, error } = await supabase
+      const { data, error } = await supa
         .from('blogs')
         .select(`
           *,
@@ -240,9 +251,13 @@ export const supabaseBlogService = {
     }
   },
 
-  createPost: async (post: Omit<SupabaseBlogPost, 'id' | 'created_at' | 'updated_at' | 'category' | 'author'>): Promise<SupabaseBlogPost> => {
+  createPost: async (
+    post: Omit<SupabaseBlogPost, 'id' | 'created_at' | 'updated_at' | 'category' | 'author'>,
+    client?: SupabaseClient<Database>
+  ): Promise<SupabaseBlogPost> => {
+    const supa = getClient(client);
     try {
-      const { data, error } = await supabase
+      const { data, error } = await supa
         .from('blogs')
         .insert([post])
         .select(`
@@ -263,9 +278,14 @@ export const supabaseBlogService = {
     }
   },
 
-  updatePost: async (id: string, updates: Partial<Omit<SupabaseBlogPost, 'id' | 'created_at' | 'updated_at' | 'category' | 'author'>>): Promise<SupabaseBlogPost | null> => {
+  updatePost: async (
+    id: string,
+    updates: Partial<Omit<SupabaseBlogPost, 'id' | 'created_at' | 'updated_at' | 'category' | 'author'>>,
+    client?: SupabaseClient<Database>
+  ): Promise<SupabaseBlogPost | null> => {
+    const supa = getClient(client);
     try {
-      const { data, error } = await supabase
+      const { data, error } = await supa
         .from('blogs')
         .update(updates)
         .eq('id', id)
@@ -287,9 +307,10 @@ export const supabaseBlogService = {
     }
   },
 
-  deletePost: async (id: string): Promise<boolean> => {
+  deletePost: async (id: string, client?: SupabaseClient<Database>): Promise<boolean> => {
+    const supa = getClient(client);
     try {
-      const { error } = await supabase
+      const { error } = await supa
         .from('blogs')
         .delete()
         .eq('id', id);
@@ -305,9 +326,10 @@ export const supabaseBlogService = {
     }
   },
 
-  getAllCategories: async (): Promise<SupabaseBlogCategory[]> => {
+  getAllCategories: async (client?: SupabaseClient<Database>): Promise<SupabaseBlogCategory[]> => {
+    const supa = getClient(client);
     try {
-      const { data, error } = await supabase
+      const { data, error } = await supa
         .from('blog_categories')
         .select('*')
         .order('created_at', { ascending: false });
@@ -323,9 +345,10 @@ export const supabaseBlogService = {
     }
   },
 
-  getCategoryById: async (id: string): Promise<SupabaseBlogCategory | null> => {
+  getCategoryById: async (id: string, client?: SupabaseClient<Database>): Promise<SupabaseBlogCategory | null> => {
+    const supa = getClient(client);
     try {
-      const { data, error } = await supabase
+      const { data, error } = await supa
         .from('blog_categories')
         .select('*')
         .eq('id', id)
@@ -342,9 +365,10 @@ export const supabaseBlogService = {
     }
   },
 
-  createCategory: async (category: Omit<SupabaseBlogCategory, 'id' | 'created_at'>): Promise<SupabaseBlogCategory> => {
+  createCategory: async (category: Omit<SupabaseBlogCategory, 'id' | 'created_at'>, client?: SupabaseClient<Database>): Promise<SupabaseBlogCategory> => {
+    const supa = getClient(client);
     try {
-      const { data, error } = await supabase
+      const { data, error } = await supa
         .from('blog_categories')
         .insert([category])
         .select('*')
@@ -361,9 +385,10 @@ export const supabaseBlogService = {
     }
   },
 
-  updateCategory: async (id: string, updates: Partial<Omit<SupabaseBlogCategory, 'id' | 'created_at'>>): Promise<SupabaseBlogCategory | null> => {
+  updateCategory: async (id: string, updates: Partial<Omit<SupabaseBlogCategory, 'id' | 'created_at'>>, client?: SupabaseClient<Database>): Promise<SupabaseBlogCategory | null> => {
+    const supa = getClient(client);
     try {
-      const { data, error } = await supabase
+      const { data, error } = await supa
         .from('blog_categories')
         .update(updates)
         .eq('id', id)
@@ -381,9 +406,10 @@ export const supabaseBlogService = {
     }
   },
 
-  deleteCategory: async (id: string): Promise<boolean> => {
+  deleteCategory: async (id: string, client?: SupabaseClient<Database>): Promise<boolean> => {
+    const supa = getClient(client);
     try {
-      const { error } = await supabase
+      const { error } = await supa
         .from('blog_categories')
         .delete()
         .eq('id', id);
@@ -399,9 +425,10 @@ export const supabaseBlogService = {
     }
   },
 
-  getAllAuthors: async (): Promise<SupabaseBlogAuthor[]> => {
+  getAllAuthors: async (client?: SupabaseClient<Database>): Promise<SupabaseBlogAuthor[]> => {
+    const supa = getClient(client);
     try {
-      const { data, error } = await supabase
+      const { data, error } = await supa
         .from('blog_authors')
         .select('*')
         .order('created_at', { ascending: false });
@@ -417,9 +444,10 @@ export const supabaseBlogService = {
     }
   },
 
-  getAuthorById: async (id: string): Promise<SupabaseBlogAuthor | null> => {
+  getAuthorById: async (id: string, client?: SupabaseClient<Database>): Promise<SupabaseBlogAuthor | null> => {
+    const supa = getClient(client);
     try {
-      const { data, error } = await supabase
+      const { data, error } = await supa
         .from('blog_authors')
         .select('*')
         .eq('id', id)
@@ -446,7 +474,8 @@ export const supabaseBlogService = {
     meta_title?: string | null;
     meta_description?: string | null;
     slug?: string;
-  }) => {
+  }, client?: SupabaseClient<Database>) => {
+    const supa = getClient(client);
     const name = (data.name ?? "").trim();
     if (!name) {
       throw new Error("Author name is required");
@@ -465,22 +494,17 @@ export const supabaseBlogService = {
     if (data.meta_title) payload.meta_title = data.meta_title;
     if (data.meta_description) payload.meta_description = data.meta_description;
 
-    const { data: row, error } = await supabase
+    return supa
       .from("blog_authors")
       .insert(payload as any)
       .select("*")
       .single();
-
-    if (error) {
-      console.error("createAuthor error:", error);
-      throw error;
-    }
-    return row;
   },
 
-  updateAuthor: async (id: string, updates: Partial<Omit<SupabaseBlogAuthor, 'id' | 'created_at'>>): Promise<SupabaseBlogAuthor | null> => {
+  updateAuthor: async (id: string, updates: Partial<Omit<SupabaseBlogAuthor, 'id' | 'created_at'>>, client?: SupabaseClient<Database>): Promise<SupabaseBlogAuthor | null> => {
+    const supa = getClient(client);
     try {
-      const { data, error } = await supabase
+      const { data, error } = await supa
         .from('blog_authors')
         .update(updates)
         .eq('id', id)
@@ -498,9 +522,10 @@ export const supabaseBlogService = {
     }
   },
 
-  deleteAuthor: async (id: string): Promise<boolean> => {
+  deleteAuthor: async (id: string, client?: SupabaseClient<Database>): Promise<boolean> => {
+    const supa = getClient(client);
     try {
-      const { error } = await supabase
+      const { error } = await supa
         .from('blog_authors')
         .delete()
         .eq('id', id);
@@ -516,9 +541,10 @@ export const supabaseBlogService = {
     }
   },
 
-  getAllTags: async (): Promise<SupabaseBlogTag[]> => {
+  getAllTags: async (client?: SupabaseClient<Database>): Promise<SupabaseBlogTag[]> => {
+    const supa = getClient(client);
     try {
-      const { data, error } = await supabase
+      const { data, error } = await supa
         .from('blog_tags')
         .select('*')
         .order('name');

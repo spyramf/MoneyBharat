@@ -29,8 +29,11 @@ export function FeatureSteps({
 }: FeatureStepsProps) {
   const [currentFeature, setCurrentFeature] = useState(0)
   const [progress, setProgress] = useState(0)
+  const [isPaused, setIsPaused] = useState(false)
 
   useEffect(() => {
+    if (isPaused) return
+
     const timer = setInterval(() => {
       if (progress < 100) {
         setProgress((prev) => prev + 100 / (autoPlayInterval / 100))
@@ -41,14 +44,23 @@ export function FeatureSteps({
     }, 100)
 
     return () => clearInterval(timer)
-  }, [progress, features.length, autoPlayInterval])
+  }, [progress, features.length, autoPlayInterval, isPaused])
 
   return (
     <div className={cn("p-8 md:p-12", className)}>
       <div className="max-w-7xl mx-auto w-full">
-        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-10 text-center">
-          {title}
-        </h2>
+        <div className="grid grid-cols-3 items-center mb-10">
+          <div />
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-center">
+            {title}
+          </h2>
+          <button
+            onClick={() => setIsPaused(!isPaused)}
+            className="p-2 rounded-full bg-muted hover:bg-muted/80 justify-self-end"
+          >
+            {isPaused ? "▶️" : "⏸️"}
+          </button>
+        </div>
 
         <div className="flex flex-col md:grid md:grid-cols-2 gap-6 md:gap-10">
           <div className="order-2 md:order-1 space-y-8">

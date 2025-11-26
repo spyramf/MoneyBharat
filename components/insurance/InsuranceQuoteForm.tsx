@@ -74,6 +74,7 @@ const InsuranceQuoteForm = ({
   });
 
   const watchInsuranceType = form.watch("insuranceType");
+  const currentUrl = typeof window !== "undefined" ? window.location.href : "";
 
   const onSubmit = async (data: FormValues) => {
     setIsSubmitting(true);
@@ -347,7 +348,7 @@ const InsuranceQuoteForm = ({
             <input type="hidden" name="_subject" value="New Insurance Quote Request" />
             <input type="hidden" name="_captcha" value="false" />
             <input type="hidden" name="_template" value="table" />
-            <input type="hidden" name="_next" value={window.location.href} />
+            <input type="hidden" name="_next" value={currentUrl} />
             
             {currentStep === 1 && (
               <div className="space-y-4">

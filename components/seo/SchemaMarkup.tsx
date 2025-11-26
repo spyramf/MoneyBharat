@@ -1,47 +1,42 @@
-import { useEffect } from "react";
+import Head from "next/head";
 
-interface OrganizationSchemaProps {
+interface SchemaMarkupProps {
   type?: "organization" | "financial-service" | "faq" | "product" | "review";
   data?: any;
 }
 
-const SchemaMarkup = ({ type = "organization", data }: OrganizationSchemaProps) => {
-  useEffect(() => {
-    const addJsonLdScript = (schemaData: any) => {
-      const script = document.createElement("script");
-      script.type = "application/ld+json";
-      script.innerHTML = JSON.stringify(schemaData);
-      script.id = `schema-${type}`;
+const SchemaMarkup = ({ type = "organization", data }: SchemaMarkupProps) => {
+  const schema = buildSchema(type, data);
 
-      // Remove existing schema of same type
-      const existing = document.getElementById(`schema-${type}`);
-      if (existing) {
-        existing.remove();
-      }
+  if (!schema) return null;
 
-      document.head.appendChild(script);
-    };
+  return (
+    <Head>
+      <script
+        key={`schema-${type}`}
+        id={`schema-${type}`}
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      />
+    </Head>
+  );
+};
 
-    switch (type) {
-      case "organization":
-        addJsonLdScript(getOrganizationSchema());
-        break;
-      case "financial-service":
-        addJsonLdScript(getFinancialServiceSchema(data));
-        break;
-      case "faq":
-        addJsonLdScript(getFAQSchema(data));
-        break;
-      case "product":
-        addJsonLdScript(getProductSchema(data));
-        break;
-      case "review":
-        addJsonLdScript(getReviewSchema(data));
-        break;
-    }
-  }, [type, data]);
-
-  return null;
+const buildSchema = (type: string, data?: any) => {
+  switch (type) {
+    case "organization":
+      return getOrganizationSchema();
+    case "financial-service":
+      return getFinancialServiceSchema(data);
+    case "faq":
+      return getFAQSchema(data);
+    case "product":
+      return getProductSchema(data);
+    case "review":
+      return getReviewSchema(data);
+    default:
+      return null;
+  }
 };
 
 const getOrganizationSchema = () => ({
@@ -85,7 +80,7 @@ const getOrganizationSchema = () => ({
   ],
   areaServed: "IN",
   currenciesAccepted: "INR",
-  priceRange: "₹₹",
+  priceRange: "Rs 1 - 1",
   aggregateRating: {
     "@type": "AggregateRating",
     ratingValue: "4.8",
@@ -108,7 +103,7 @@ const getOrganizationSchema = () => ({
       itemOffered: {
         "@type": "FinancialProduct",
         name: "Mutual Fund SIP",
-        description: "Systematic Investment Plans starting from ₹500",
+        description: "Systematic Investment Plans starting from Rs 1500",
       },
     },
     {

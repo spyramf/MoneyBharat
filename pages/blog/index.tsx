@@ -1,15 +1,22 @@
 import React, { useState, useMemo } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
+import type { GetStaticProps } from 'next';
 import { Search, Filter, Calendar, User, ArrowRight, Star, TrendingUp } from 'lucide-react';
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { supabaseBlogService } from '@/services/supabaseBlogService';
+import { supabaseBlogService, SupabaseBlogCategory, SupabaseBlogPost } from '@/services/supabaseBlogService';
 
-const Blog = ({ posts, categories, featuredPosts }) => {
+interface BlogPageProps {
+  posts: SupabaseBlogPost[];
+  categories: SupabaseBlogCategory[];
+  featuredPosts: SupabaseBlogPost[];
+}
+
+const Blog = ({ posts, categories, featuredPosts }: BlogPageProps) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
 
@@ -234,23 +241,21 @@ const Blog = ({ posts, categories, featuredPosts }) => {
   );
 };
 
-export async function getStaticProps() {
-  const { posts, categories, featuredPosts, error } = await supabaseBlogService.getAllPosts();
-
-  if (error) {
-    // In a real app, you might want to log this error
-    console.error(error);
-  }
+export const getStaticProps: GetStaticProps<BlogPageProps> = async () => {
+  const [posts, categories, featuredPosts] = await Promise.all([
+    supabaseBlogService.getAllPosts(),
+    supabaseBlogService.getAllCategories(),
+    supabaseBlogService.getFeaturedPosts(),
+  ]);
 
   return {
     props: {
-      posts: posts || [],
-      categories: categories || [],
-      featuredPosts: featuredPosts || [],
+      posts,
+      categories,
+      featuredPosts,
     },
-    // Re-generate the page at most once per minute
     revalidate: 60,
   };
-}
+};
 
 export default Blog;

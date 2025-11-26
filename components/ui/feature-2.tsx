@@ -1,5 +1,5 @@
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
 
 interface Feature2Props {
   title: string;
@@ -41,12 +41,12 @@ export const Feature2 = ({
           </p>
           <div className="flex w-full flex-col justify-center gap-2 sm:flex-row lg:justify-start">
             <Button asChild>
-              <Link to={buttonPrimary.href}>
+              <Link href={buttonPrimary.href}>
                 {buttonPrimary.label}
               </Link>
             </Button>
             <Button variant="outline" asChild>
-              <Link to={buttonSecondary.href}>
+              <Link href={buttonSecondary.href}>
                 {buttonSecondary.label}
               </Link>
             </Button>

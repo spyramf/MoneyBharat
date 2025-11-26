@@ -1,5 +1,6 @@
+
 import React from "react";
-import { Heart, Stethoscope, PiggyBank, BadgeDollarSign, Hospital, Syringe } from "lucide-react";
+import { Heart, Stethoscope, PiggyBank, BadgeDollarSign, Building, Syringe } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 interface RiderCover {
   id: string;
@@ -16,7 +17,7 @@ const riderCovers: RiderCover[] = [{
   id: "hospital-cash",
   title: "Hospital Cash Benefit",
   description: "Provides a daily cash allowance during hospitalization to cover additional expenses not covered by your base plan.",
-  Icon: Hospital
+  Icon: Building
 }, {
   id: "accidental-death",
   title: "Accidental Death & Disability Cover",
@@ -39,25 +40,25 @@ const riderCovers: RiderCover[] = [{
   Icon: PiggyBank
 }];
 const RiderCovers = () => {
-  return <section className="py-16 bg-white">
+  return <section className="py-16 bg-background">
       <div className="container mx-auto px-4">
         <div className="text-center mb-10">
           <h2 className="text-3xl font-bold mb-3">Rider Covers Offered</h2>
-          <p className="text-gray-600 max-w-3xl mx-auto">
+          <p className="text-muted-foreground max-w-3xl mx-auto">
             Optional add-ons that enhance your base health insurance policy
           </p>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-          {riderCovers.map(rider => <Card key={rider.id} className="border border-gray-200 hover:shadow-md transition-shadow duration-300">
+          {riderCovers.map(rider => <Card key={rider.id} className="border hover:shadow-md transition-shadow duration-300">
               <CardContent className="p-6">
                 <div className="flex gap-4 items-start">
-                  <div className="bg-purple-50 p-3 rounded-full">
-                    <rider.Icon className="h-6 w-6 text-fintech-green" />
+                  <div className="bg-accent p-3 rounded-full">
+                    <rider.Icon className="h-6 w-6 text-primary" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-lg mb-2">{rider.title}</h3>
-                    <p className="text-gray-600 text-sm">{rider.description}</p>
+                    <p className="text-muted-foreground text-sm">{rider.description}</p>
                   </div>
                 </div>
               </CardContent>

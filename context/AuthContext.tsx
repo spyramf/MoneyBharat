@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/router';
 import { supabase } from '@/integrations/supabase/client';
 import type { User, Session } from '@supabase/supabase-js';
 
@@ -27,7 +27,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [user, setUser] = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
   const [isAdmin, setIsAdmin] = useState<boolean>(false);
-  const navigate = useNavigate();
+  const router = useRouter();
 
   useEffect(() => {
     // Set up auth state listener FIRST
@@ -65,8 +65,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       const { data, error } = await supabase
         .from('user_roles')
         .select('role')
-        .eq('user_id', userId)
-        .eq('role', 'admin')
+        .filter('user_id', 'eq', userId)
+        .filter('role', 'eq', 'admin')
         .maybeSingle();
 
       setIsAdmin(!!data && !error);
@@ -94,8 +94,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         const { data: roleData } = await supabase
           .from('user_roles')
           .select('role')
-          .eq('user_id', data.user.id)
-          .eq('role', 'admin')
+          .filter('user_id', 'eq', data.user.id)
+          .filter('role', 'eq', 'admin')
           .maybeSingle();
         
         const hasAdminRole = !!roleData;
@@ -118,7 +118,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const logout = async () => {
     await supabase.auth.signOut();
     setIsAdmin(false);
-    navigate('/admin/login');
+    router.push('/admin/login');
   };
 
   return (

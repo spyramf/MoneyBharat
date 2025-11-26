@@ -1,5 +1,5 @@
-import { useLocation } from "react-router-dom";
-import { Helmet } from "react-helmet-async";
+import Head from "next/head";
+import { useRouter } from "next/router";
 
 interface BreadcrumbItem {
   name: string;
@@ -7,7 +7,8 @@ interface BreadcrumbItem {
 }
 
 const BreadcrumbEnhanced = () => {
-  const location = useLocation();
+  const router = useRouter();
+  const pathname = (router.asPath || router.pathname || "/").split("?")[0];
 
   const generateBreadcrumbs = (pathname: string): BreadcrumbItem[] => {
     const breadcrumbs: BreadcrumbItem[] = [{ name: "Home", url: "https://moneybharatfinance.com" }];
@@ -52,7 +53,7 @@ const BreadcrumbEnhanced = () => {
     return breadcrumbs;
   };
 
-  const breadcrumbs = generateBreadcrumbs(location.pathname);
+  const breadcrumbs = generateBreadcrumbs(pathname);
 
   if (breadcrumbs.length <= 1) return null;
 
@@ -68,9 +69,12 @@ const BreadcrumbEnhanced = () => {
   };
 
   return (
-    <Helmet>
-      <script type="application/ld+json">{JSON.stringify(structuredData)}</script>
-    </Helmet>
+    <Head>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
+    </Head>
   );
 };
 

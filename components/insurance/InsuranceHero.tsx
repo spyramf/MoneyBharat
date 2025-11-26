@@ -1,7 +1,5 @@
 import { motion } from "framer-motion";
-import { Shield, Heart, Car, ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
+import { Shield, Heart, Car } from "lucide-react";
 
 const InsuranceHero = () => {
   return (

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { GetServerSideProps } from 'next';
-import { createServerSupabaseClient } from '@supabase/auth-helpers-nextjs';
+import { createPagesServerClient } from '@supabase/auth-helpers-nextjs';
 import Link from 'next/link';
 import { 
   Plus, 
@@ -28,9 +28,15 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '@/components/ui/alert-dialog';
 import { toast } from 'sonner';
 import AdminLayout from '@/layouts/AdminLayout';
-import { supabaseBlogService } from '@/services/supabaseBlogService';
+import { supabaseBlogService, SupabaseBlogAuthor, SupabaseBlogCategory, SupabaseBlogPost } from '@/services/supabaseBlogService';
 
-const BlogDashboard = ({ blogPosts, categories, authors }) => {
+interface BlogDashboardProps {
+  blogPosts: SupabaseBlogPost[];
+  categories: SupabaseBlogCategory[];
+  authors: SupabaseBlogAuthor[];
+}
+
+const BlogDashboard = ({ blogPosts, categories, authors }: BlogDashboardProps) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [activeTab, setActiveTab] = useState('all');
   const [postToDelete, setPostToDelete] = useState<string | null>(null);
@@ -54,8 +60,7 @@ const BlogDashboard = ({ blogPosts, categories, authors }) => {
     // TODO: Create an API route to handle post deletion
     console.log("Deleting post with ID:", postToDelete);
     setPostToDelete(null);
-    toast({
-      title: "Success",
+    toast.success("Success", {
       description: "Post deleted successfully (placeholder)",
     });
   };
@@ -308,7 +313,7 @@ const BlogDashboard = ({ blogPosts, categories, authors }) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const supabase = createServerSupabaseClient(ctx);
+  const supabase = createPagesServerClient(ctx);
   const {
     data: { session },
   } = await supabase.auth.getSession();

@@ -1,6 +1,6 @@
+import Link from "next/link";
 import { Shield, FileText, Phone, Mail } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Link } from "react-router-dom";
 
 const ContactLegal = () => {
   const legalInfo = [
@@ -93,7 +93,7 @@ const ContactLegal = () => {
         <CardContent>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <Link
-              to="/terms-of-service"
+              href="/terms-of-service"
               className="text-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow border hover:border-fintech-green/30"
             >
               <FileText className="h-8 w-8 text-fintech-green mx-auto mb-2" />
@@ -101,7 +101,7 @@ const ContactLegal = () => {
             </Link>
 
             <Link
-              to="/privacy-policy"
+              href="/privacy-policy"
               className="text-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow border hover:border-fintech-green/30"
             >
               <Shield className="h-8 w-8 text-fintech-green mx-auto mb-2" />
@@ -109,7 +109,7 @@ const ContactLegal = () => {
             </Link>
 
             <Link
-              to="/about"
+              href="/about"
               className="text-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow border hover:border-fintech-green/30"
             >
               <FileText className="h-8 w-8 text-fintech-green mx-auto mb-2" />
@@ -117,7 +117,7 @@ const ContactLegal = () => {
             </Link>
 
             <Link
-              to="/booking"
+              href="/booking"
               className="text-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow border hover:border-fintech-green/30"
             >
               <Phone className="h-8 w-8 text-fintech-green mx-auto mb-2" />

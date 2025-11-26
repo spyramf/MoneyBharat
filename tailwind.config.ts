@@ -4,7 +4,8 @@ export default {
 	darkMode: ["class"],
 	content: [
 		"./{app,pages,components,layouts,data,hooks,integrations,utils}/**/*.{ts,tsx,js,jsx,mdx}",
-		"./public/**/*.svg"
+		"./public/**/*.svg",
+		"./styles/global.css"
 	],
 	prefix: "",
 	theme: {

@@ -1,5 +1,6 @@
 
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { useSessionContext } from '@supabase/auth-helpers-react';
 import { supabaseBlogService, type SupabaseBlogPost, type SupabaseBlogCategory, type SupabaseBlogAuthor } from '@/services/supabaseBlogService';
 
 export interface Category {
@@ -40,6 +41,7 @@ export const BlogProvider: React.FC<BlogProviderProps> = ({ children }) => {
   const [authors, setAuthors] = useState<SupabaseBlogAuthor[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const { supabaseClient } = useSessionContext();
 
   const loadData = async () => {
     try {
@@ -50,9 +52,9 @@ export const BlogProvider: React.FC<BlogProviderProps> = ({ children }) => {
       
       // Load all data with error handling for each
       const [postsData, categoriesData, authorsData] = await Promise.allSettled([
-        supabaseBlogService.getAllPosts(true), // Include all statuses for admin
-        supabaseBlogService.getAllCategories(),
-        supabaseBlogService.getAllAuthors()
+        supabaseBlogService.getAllPosts(true, supabaseClient), // Include all statuses for admin
+        supabaseBlogService.getAllCategories(supabaseClient),
+        supabaseBlogService.getAllAuthors(supabaseClient)
       ]);
 
       // Handle posts result
@@ -96,8 +98,11 @@ export const BlogProvider: React.FC<BlogProviderProps> = ({ children }) => {
   };
 
   useEffect(() => {
-    loadData();
-  }, []);
+    if (supabaseClient) {
+      loadData();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [supabaseClient]);
 
   const featuredPosts = posts.filter(post => post.is_featured && post.status === 'published');
 
@@ -119,7 +124,8 @@ export const BlogProvider: React.FC<BlogProviderProps> = ({ children }) => {
   // Admin methods
   const addPost = async (postData: Omit<SupabaseBlogPost, 'id' | 'created_at' | 'updated_at' | 'category' | 'author'>) => {
     try {
-      const newPost = await supabaseBlogService.createPost(postData);
+      if (!supabaseClient) throw new Error('Supabase client unavailable');
+      const newPost = await supabaseBlogService.createPost(postData, supabaseClient);
       setPosts(prev => [newPost, ...prev]);
     } catch (error) {
       console.error('Error adding post:', error);
@@ -129,7 +135,8 @@ export const BlogProvider: React.FC<BlogProviderProps> = ({ children }) => {
 
   const updatePost = async (id: string, postData: Partial<Omit<SupabaseBlogPost, 'id' | 'created_at' | 'updated_at' | 'category' | 'author'>>) => {
     try {
-      const updatedPost = await supabaseBlogService.updatePost(id, postData);
+      if (!supabaseClient) throw new Error('Supabase client unavailable');
+      const updatedPost = await supabaseBlogService.updatePost(id, postData, supabaseClient);
       if (updatedPost) {
         setPosts(prev => prev.map(post => post.id === id ? updatedPost : post));
       }
@@ -141,7 +148,8 @@ export const BlogProvider: React.FC<BlogProviderProps> = ({ children }) => {
 
   const deletePost = async (id: string) => {
     try {
-      await supabaseBlogService.deletePost(id);
+      if (!supabaseClient) throw new Error('Supabase client unavailable');
+      await supabaseBlogService.deletePost(id, supabaseClient);
       setPosts(prev => prev.filter(post => post.id !== id));
     } catch (error) {
       console.error('Error deleting post:', error);

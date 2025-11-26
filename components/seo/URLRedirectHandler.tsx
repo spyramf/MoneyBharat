@@ -13,7 +13,7 @@ const URLRedirectHandler = ({
 }: URLRedirectHandlerProps) => {
   useEffect(() => {
     // Skip in development or if explicitly disabled
-    if (!enableRedirect || !import.meta.env.PROD || typeof window === 'undefined') {
+    if (!enableRedirect || process.env.NODE_ENV !== 'production' || typeof window === 'undefined') {
       return;
     }
     

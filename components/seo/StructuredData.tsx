@@ -1,5 +1,5 @@
 
-import { Helmet } from 'react-helmet-async';
+import Head from "next/head";
 import SchemaMarkup from './SchemaMarkup';
 
 interface StructuredDataProps {
@@ -107,11 +107,12 @@ const StructuredData = ({
 
       {/* Custom structured data */}
       {structuredData && (
-        <Helmet>
-          <script type="application/ld+json">
-            {JSON.stringify(structuredData)}
-          </script>
-        </Helmet>
+        <Head>
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+          />
+        </Head>
       )}
     </>
   );

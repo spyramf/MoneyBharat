@@ -1,7 +1,7 @@
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight, TrendingUp, Shield, Calculator } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
 const MutualFundHero = () => {
   return <section className="relative overflow-hidden pt-24 pb-16 bg-gradient-to-br from-blue-50 via-white to-green-50">
       {/* Background decorations */}
@@ -36,7 +36,7 @@ const MutualFundHero = () => {
   <TrendingUp className="ml-2 h-5 w-5" />
 </Button>
 
-            <Link to="/booking">
+            <Link href="/booking">
               <Button variant="outline" className="border-fintech-green text-fintech-green hover:bg-fintech-green hover:text-white px-8 py-4 text-lg">
                 Get Expert Advice
                 <ArrowRight className="ml-2 h-5 w-5" />

@@ -1,6 +1,6 @@
+import Link from "next/link";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
 
 const ContactHero = () => {
   return (
@@ -44,7 +44,7 @@ const ContactHero = () => {
           </div>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/booking">
+            <Link href="/booking">
               <Button
                 size="lg"
                 className="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold px-8 py-3 text-lg"

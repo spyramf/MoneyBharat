@@ -1,5 +1,5 @@
-import { Helmet } from "react-helmet-async";
-import { useLocation } from "react-router-dom";
+import Head from "next/head";
+import { useRouter } from "next/router";
 import { getCanonicalUrl, getPageTitle, getPageDescription } from "@/utils/seoUtils";
 
 interface SEOHeadProps {
@@ -25,22 +25,21 @@ const SEOHead = ({
   author,
   noIndex = false,
 }: SEOHeadProps) => {
-  const location = useLocation();
-  const canonicalUrl = getCanonicalUrl(location.pathname);
+  const router = useRouter();
+  const currentPath = (router.asPath || router.pathname || "/").split("?")[0];
+  const canonicalUrl = getCanonicalUrl(currentPath);
 
   // Auto-generate title and description if not provided
-  const pageTitle = title || getPageTitle(getPageNameFromPath(location.pathname));
-  const pageDescription = description || getPageDescription(getPageKeyFromPath(location.pathname));
+  const pageTitle = title || getPageTitle(getPageNameFromPath(currentPath));
+  const pageDescription = description || getPageDescription(getPageKeyFromPath(currentPath));
 
   return (
-    <Helmet>
-      {/* Basic Meta Tags */}
+    <Head>
       <title>{pageTitle}</title>
       <meta name="description" content={pageDescription} />
       <meta name="keywords" content={keywords} />
       <link rel="canonical" href={canonicalUrl} />
 
-      {/* Enhanced Robots and Indexing */}
       <meta
         name="robots"
         content={
@@ -60,7 +59,6 @@ const SEOHead = ({
         }
       />
 
-      {/* Open Graph */}
       <meta property="og:title" content={pageTitle} />
       <meta property="og:description" content={pageDescription} />
       <meta property="og:type" content={type} />
@@ -69,19 +67,16 @@ const SEOHead = ({
       <meta property="og:site_name" content="Money Bharat Finance" />
       <meta property="og:locale" content="en_IN" />
 
-      {/* Twitter Cards */}
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={pageTitle} />
       <meta name="twitter:description" content={pageDescription} />
       <meta name="twitter:image" content={`https://www.moneybharatfinance.com${image}`} />
       <meta name="twitter:site" content="@moneybharatfin" />
 
-      {/* Article specific meta tags */}
       {type === "article" && publishedTime && <meta property="article:published_time" content={publishedTime} />}
       {type === "article" && modifiedTime && <meta property="article:modified_time" content={modifiedTime} />}
       {type === "article" && author && <meta property="article:author" content={author} />}
 
-      {/* Additional SEO tags */}
       <meta name="author" content="Money Bharat Finance" />
       <meta name="copyright" content="Money Bharat Finance" />
       <meta name="language" content="English" />
@@ -89,12 +84,10 @@ const SEOHead = ({
       <meta name="distribution" content="global" />
       <meta name="rating" content="general" />
 
-      {/* Geo targeting */}
       <meta name="geo.region" content="IN" />
       <meta name="geo.country" content="India" />
       <meta name="geo.placename" content="India" />
 
-      {/* Mobile and language optimization */}
       <meta name="format-detection" content="telephone=yes" />
       <meta name="theme-color" content="#10b981" />
       <link
@@ -104,10 +97,9 @@ const SEOHead = ({
         href="https://www.moneybharatfinance.com/rss.xml"
       />
 
-      {/* Hreflang for Indian market */}
       <link rel="alternate" hrefLang="en-in" href={canonicalUrl} />
       <link rel="alternate" hrefLang="hi-in" href={canonicalUrl} />
-    </Helmet>
+    </Head>
   );
 };
 

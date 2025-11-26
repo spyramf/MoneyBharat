@@ -1,6 +1,6 @@
+import Link from "next/link";
 import { ArrowRight, ArrowRightCircle, TrendingUp, Shield, Target, DollarSign } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
 import OptimizedImage from "@/components/ui/optimized-image";
 
 const OptimizedHeroSection = () => {
@@ -32,7 +32,7 @@ const OptimizedHeroSection = () => {
                     Start Investing
                   </Button>
                 </a>
-                <Link to="/booking">
+                <Link href="/booking">
                   <Button variant="outline" className="group border-fintech-green text-fintech-green hover:text-fintech-green transition-colors px-8 py-6 rounded-xl">
                     Book Consultation
                     <ArrowRightCircle className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />

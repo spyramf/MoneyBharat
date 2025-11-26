@@ -45,14 +45,14 @@ const TrustSecuritySection = () => {
   ];
 
   return (
-    <section className="py-16 bg-gradient-to-b from-blue-50 to-white">
+    <section className="py-16 bg-gradient-to-b from-secondary/50 to-background">
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
               Why Money Bharat is India's Most Trusted Financial Platform
             </h2>
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
               Your financial security is our top priority. We've built Money Bharat with robust security measures, 
               regulatory compliance, and transparent operations to earn your trust and protect your investments.
             </p>
@@ -62,29 +62,29 @@ const TrustSecuritySection = () => {
             {trustFactors.map((factor, index) => (
               <Card key={index} className="h-full hover:shadow-lg transition-all duration-200">
                 <CardContent className="p-6">
-                  <div className="w-14 h-14 rounded-lg bg-gradient-to-r from-fintech-green to-fintech-blue text-white flex items-center justify-center mb-4">
+                  <div className="w-14 h-14 rounded-lg bg-gradient-to-r from-primary to-primary/70 text-white flex items-center justify-center mb-4">
                     {factor.icon}
                   </div>
                   <h3 className="text-xl font-semibold mb-3">{factor.title}</h3>
-                  <p className="text-gray-600 leading-relaxed">{factor.description}</p>
+                  <p className="text-muted-foreground leading-relaxed">{factor.description}</p>
                 </CardContent>
               </Card>
             ))}
           </div>
           
-          <div className="bg-white rounded-2xl shadow-lg p-8">
+          <div className="bg-background rounded-2xl shadow-lg p-8">
             <h3 className="text-2xl font-bold text-center mb-8">Money Bharat by the Numbers</h3>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
               {stats.map((stat, index) => (
                 <div key={index} className="text-center">
-                  <div className="text-3xl md:text-4xl font-bold text-fintech-green mb-2">{stat.number}</div>
-                  <div className="text-gray-600">{stat.label}</div>
+                  <div className="text-3xl md:text-4xl font-bold text-primary mb-2">{stat.number}</div>
+                  <div className="text-muted-foreground">{stat.label}</div>
                 </div>
               ))}
             </div>
           </div>
           
-          <div className="mt-12 bg-gradient-to-r from-fintech-green to-fintech-blue rounded-2xl p-8 text-white text-center">
+          <div className="mt-12 bg-gradient-to-r from-primary to-primary/70 rounded-2xl p-8 text-white text-center">
             <h3 className="text-2xl font-bold mb-4">Start Your Secure Investment Journey Today</h3>
             <p className="text-lg mb-6 opacity-90">
               Join thousands of investors who trust Money Bharat for their financial growth. 

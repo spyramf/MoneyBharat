@@ -1,11 +1,16 @@
 import React from 'react';
 import { GetServerSideProps } from 'next';
-import { createServerSupabaseClient } from '@supabase/auth-helpers-nextjs';
+import { createPagesServerClient } from '@supabase/auth-helpers-nextjs';
 import BlogEditor from '@/components/admin/BlogEditor';
-import { supabaseBlogService } from '@/services/supabaseBlogService';
 import AdminLayout from '@/layouts/AdminLayout';
+import { supabaseBlogService, SupabaseBlogAuthor, SupabaseBlogCategory } from '@/services/supabaseBlogService';
 
-const NewBlogPost = ({ categories, authors }) => {
+interface NewBlogPostProps {
+  categories: SupabaseBlogCategory[];
+  authors: SupabaseBlogAuthor[];
+}
+
+const NewBlogPost = ({ categories, authors }: NewBlogPostProps) => {
   return (
     <AdminLayout>
       <BlogEditor categories={categories} authors={authors} />
@@ -14,7 +19,7 @@ const NewBlogPost = ({ categories, authors }) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const supabase = createServerSupabaseClient(ctx);
+  const supabase = createPagesServerClient(ctx);
   const {
     data: { session },
   } = await supabase.auth.getSession();

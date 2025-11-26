@@ -6,11 +6,15 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Plus } from 'lucide-react';
-import { supabaseBlogService } from '@/services/supabaseBlogService';
+import { supabaseBlogService, SupabaseBlogAuthor } from '@/services/supabaseBlogService';
 import { toast } from 'sonner';
 
 interface AddAuthorDialogProps {
   onAuthorCreated: (authorId: string) => void;
+}
+
+function isSupabaseBlogAuthor(obj: any): obj is SupabaseBlogAuthor {
+  return obj && typeof obj.id === 'string' && typeof obj.name === 'string';
 }
 
 export const AddAuthorDialog = ({ onAuthorCreated }: AddAuthorDialogProps) => {
@@ -50,10 +54,14 @@ export const AddAuthorDialog = ({ onAuthorCreated }: AddAuthorDialogProps) => {
         role: formData.role.trim() || 'Content Writer'
       };
 
-      const newAuthor = await supabaseBlogService.createAuthor(authorData);
-      if (newAuthor && newAuthor.id) {
+      const { data, error } = await supabaseBlogService.createAuthor(authorData);
+
+      if (error) {
+        console.error('Error creating author:', error);
+        toast.error('Failed to create author');
+      } else if (isSupabaseBlogAuthor(data)) {
         toast.success('Author created successfully!');
-        onAuthorCreated(newAuthor.id);
+        onAuthorCreated(data.id);
         setOpen(false);
         setFormData({ name: '', email: '', bio: '', role: 'Content Writer' });
       } else {

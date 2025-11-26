@@ -1,6 +1,6 @@
 
-import React from 'react';
-import { Navigate } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { useRouter } from 'next/router';
 import { useAuth } from '@/context/AuthContext';
 import LoadingSpinner from '@/components/common/LoadingSpinner';
 
@@ -9,15 +9,17 @@ interface ProtectedAdminRouteProps {
 }
 
 const ProtectedAdminRoute = ({ children }: ProtectedAdminRouteProps) => {
-  const { isAuthenticated, isAdmin, session } = useAuth();
-  
-  // Show loading while checking session
-  if (session === undefined) {
-    return <LoadingSpinner />;
-  }
-  
+  const router = useRouter();
+  const { isAuthenticated, isAdmin } = useAuth();
+
+  useEffect(() => {
+    if (!isAuthenticated || !isAdmin) {
+      router.replace('/admin/login');
+    }
+  }, [isAuthenticated, isAdmin, router]);
+
   if (!isAuthenticated || !isAdmin) {
-    return <Navigate to="/admin/login" replace />;
+    return <LoadingSpinner />;
   }
 
   return <>{children}</>;

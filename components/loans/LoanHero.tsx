@@ -1,7 +1,7 @@
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
 
 interface LoanHeroProps {
   title: string;
@@ -56,7 +56,7 @@ const LoanHero = ({
           <p className="text-xl text-gray-700 mb-8 max-w-3xl mx-auto leading-relaxed">{subtitle}</p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-            <Link to="/booking">
+            <Link href="/booking">
               <Button
                 className={`bg-gradient-to-r ${gradientFrom} ${gradientTo} hover:opacity-90 text-white px-8 py-4 text-lg`}
               >

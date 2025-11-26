@@ -1,21 +1,21 @@
 import { useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useRouter } from "next/router";
 
 const SEOOptimizations = () => {
-  const location = useLocation();
+  const router = useRouter();
+  const pathname = (router.asPath || router.pathname || "/").split("?")[0];
 
   useEffect(() => {
-    // Add performance optimizations and SEO meta tags dynamically
+    const currentPath = pathname;
 
-    // 1. Preload critical resources
     const preloadCriticalResources = () => {
-      // Preload critical images
       const criticalImages = [
         "/lovable-uploads/92affb7c-7e35-42da-9aff-b0f55a689428.png",
         "/lovable-uploads/91d78f6e-991f-4f65-883d-f9962eb33219.png",
       ];
 
       criticalImages.forEach((src) => {
+        if (document.querySelector(`link[rel="preload"][href="${src}"]`)) return;
         const link = document.createElement("link");
         link.rel = "preload";
         link.as = "image";
@@ -25,7 +25,6 @@ const SEOOptimizations = () => {
       });
     };
 
-    // 2. Add security headers meta tags
     const addSecurityHeaders = () => {
       const securityMeta = [
         { httpEquiv: "X-Content-Type-Options", content: "nosniff" },
@@ -37,16 +36,14 @@ const SEOOptimizations = () => {
 
       securityMeta.forEach((meta) => {
         const existing = document.querySelector(`meta[http-equiv="${meta.httpEquiv}"]`);
-        if (!existing) {
-          const metaTag = document.createElement("meta");
-          metaTag.httpEquiv = meta.httpEquiv;
-          metaTag.content = meta.content;
-          document.head.appendChild(metaTag);
-        }
+        if (existing) return;
+        const metaTag = document.createElement("meta");
+        metaTag.httpEquiv = meta.httpEquiv;
+        metaTag.content = meta.content;
+        document.head.appendChild(metaTag);
       });
     };
 
-    // 3. Add mobile optimization meta tags
     const addMobileOptimization = () => {
       const mobileMeta = [
         { name: "mobile-web-app-capable", content: "yes" },
@@ -59,16 +56,14 @@ const SEOOptimizations = () => {
 
       mobileMeta.forEach((meta) => {
         const existing = document.querySelector(`meta[name="${meta.name}"]`);
-        if (!existing) {
-          const metaTag = document.createElement("meta");
-          metaTag.name = meta.name;
-          metaTag.content = meta.content;
-          document.head.appendChild(metaTag);
-        }
+        if (existing) return;
+        const metaTag = document.createElement("meta");
+        metaTag.name = meta.name;
+        metaTag.content = meta.content;
+        document.head.appendChild(metaTag);
       });
     };
 
-    // 4. Add performance hints
     const addPerformanceHints = () => {
       const hints = [
         { rel: "dns-prefetch", href: "https://fonts.googleapis.com" },
@@ -79,23 +74,20 @@ const SEOOptimizations = () => {
 
       hints.forEach((hint) => {
         const existing = document.querySelector(`link[rel="${hint.rel}"][href="${hint.href}"]`);
-        if (!existing) {
-          const link = document.createElement("link");
-          link.rel = hint.rel;
-          link.href = hint.href;
-          if (hint.crossOrigin) link.crossOrigin = hint.crossOrigin;
-          document.head.appendChild(link);
-        }
+        if (existing) return;
+        const link = document.createElement("link");
+        link.rel = hint.rel;
+        link.href = hint.href;
+        if (hint.crossOrigin) link.crossOrigin = hint.crossOrigin;
+        document.head.appendChild(link);
       });
     };
 
-    // 5. Add structured data for page type
     const addPageStructuredData = () => {
-      const path = location.pathname;
       let schemaType = "WebPage";
-      let additionalProps = {};
+      let additionalProps: Record<string, unknown> = {};
 
-      if (path.includes("/blog/")) {
+      if (currentPath.includes("/blog/")) {
         schemaType = "Article";
         additionalProps = {
           "@type": "Article",
@@ -108,7 +100,7 @@ const SEOOptimizations = () => {
             name: "Money Bharat Finance",
           },
         };
-      } else if (path === "/") {
+      } else if (currentPath === "/") {
         additionalProps = {
           "@type": "WebSite",
           potentialAction: {
@@ -131,7 +123,7 @@ const SEOOptimizations = () => {
       script.textContent = JSON.stringify({
         "@context": "https://schema.org",
         "@type": schemaType,
-        url: `https://moneybharatfinance.com${path}`,
+        url: `https://moneybharatfinance.com${currentPath}`,
         name: document.title,
         description: document.querySelector('meta[name="description"]')?.getAttribute("content") || "",
         isPartOf: {
@@ -144,14 +136,6 @@ const SEOOptimizations = () => {
       document.head.appendChild(script);
     };
 
-    // Execute optimizations
-    preloadCriticalResources();
-    addSecurityHeaders();
-    addMobileOptimization();
-    addPerformanceHints();
-    addPageStructuredData();
-
-    // 6. Optimize images with lazy loading and modern formats
     const optimizeImages = () => {
       const images = document.querySelectorAll("img:not([data-optimized])");
       images.forEach((img) => {
@@ -165,7 +149,13 @@ const SEOOptimizations = () => {
       });
     };
 
-    // Run image optimization after DOM updates
+    preloadCriticalResources();
+    addSecurityHeaders();
+    addMobileOptimization();
+    addPerformanceHints();
+    addPageStructuredData();
+    optimizeImages();
+
     const observer = new MutationObserver(() => {
       optimizeImages();
     });
@@ -175,13 +165,10 @@ const SEOOptimizations = () => {
       subtree: true,
     });
 
-    // Initial optimization
-    optimizeImages();
-
     return () => {
       observer.disconnect();
     };
-  }, [location.pathname]);
+  }, [pathname]);
 
   return null;
 };

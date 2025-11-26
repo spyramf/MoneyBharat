@@ -31,6 +31,7 @@ import { Separator } from '@/components/ui/separator';
 import { useToast } from '@/hooks/use-toast';
 import { Skeleton } from '@/components/ui/skeleton';
 import { supabaseBlogService, SupabaseBlogPost, SupabaseBlogCategory, SupabaseBlogAuthor } from '@/services/supabaseBlogService';
+import { useSessionContext } from '@supabase/auth-helpers-react';
 
 const blogPostSchema = z.object({
   title: z.string().min(1, 'Title is required'),
@@ -38,14 +39,13 @@ const blogPostSchema = z.object({
   excerpt: z.string().min(1, 'Excerpt is required'),
   content: z.string().min(1, 'Content is required'),
   category_id: z.string().min(1, 'Category is required'),
-  author_id: z.string().min(1, 'Author is required'),
   featured_image: z.string().optional(),
-  is_featured: z.boolean().default(false),
-  status: z.enum(['draft', 'published', 'archived']).default('draft'),
+  is_featured: z.boolean(),
+  status: z.enum(['draft', 'published', 'archived']),
   meta_title: z.string().optional(),
   meta_description: z.string().optional(),
-  tags: z.array(z.string()).default([]),
-  read_time: z.number().min(1).default(5),
+  tags: z.array(z.string()),
+  read_time: z.number().min(1),
 });
 
 type BlogPostForm = z.infer<typeof blogPostSchema>;
@@ -63,6 +63,13 @@ const BlogEditor = ({ post: existingPost, categories, authors }: BlogEditorProps
   const { toast } = useToast();
 
   const isEditing = !!existingPost;
+  const { supabaseClient } = useSessionContext();
+
+  const defaultAuthorId = React.useMemo(() => {
+    if (existingPost?.author_id) return existingPost.author_id;
+    const preferred = authors.find((author) => author.name?.toLowerCase() === 'money bharat team');
+    return preferred?.id || authors[0]?.id || '';
+  }, [authors, existingPost]);
 
   const form = useForm<BlogPostForm>({
     resolver: zodResolver(blogPostSchema),
@@ -72,7 +79,6 @@ const BlogEditor = ({ post: existingPost, categories, authors }: BlogEditorProps
       excerpt: '',
       content: '',
       category_id: '',
-      author_id: '',
       featured_image: '',
       is_featured: false,
       status: 'draft',
@@ -91,7 +97,6 @@ const BlogEditor = ({ post: existingPost, categories, authors }: BlogEditorProps
         excerpt: existingPost.excerpt || '',
         content: existingPost.content || '',
         category_id: existingPost.category_id || '',
-        author_id: existingPost.author_id || '',
         featured_image: existingPost.featured_image || '',
         is_featured: existingPost.is_featured,
         status: existingPost.status,
@@ -100,8 +105,15 @@ const BlogEditor = ({ post: existingPost, categories, authors }: BlogEditorProps
         tags: existingPost.tags || [],
         read_time: existingPost.read_time || 5,
       });
+      form.clearErrors('author_id');
     }
   }, [existingPost, form]);
+
+  useEffect(() => {
+    if (!existingPost && categories.length > 0) {
+      form.setValue('category_id', categories[0].id);
+    }
+  }, [categories, existingPost, form]);
 
   const generateSlug = (title: string) => {
     return title
@@ -133,19 +145,34 @@ const BlogEditor = ({ post: existingPost, categories, authors }: BlogEditorProps
   const onSubmit = async (data: BlogPostForm) => {
     setIsSaving(true);
     try {
+      if (!supabaseClient) {
+        throw new Error('Supabase client unavailable. Please refresh and sign in again.');
+      }
+      const resolvedAuthorId = existingPost?.author_id || defaultAuthorId;
+      if (!resolvedAuthorId) {
+        toast({
+          title: "Missing author",
+          description: "No default author found. Please create a Money Bharat Team author in Supabase.",
+          variant: "destructive",
+        });
+        setIsSaving(false);
+        return;
+      }
+
       const postData = {
         ...data,
+        author_id: resolvedAuthorId,
         published_at: data.status === 'published' ? new Date().toISOString() : null,
       };
 
       if (isEditing && existingPost) {
-        await supabaseBlogService.updatePost(existingPost.id, postData);
+        await supabaseBlogService.updatePost(existingPost.id, postData, supabaseClient);
         toast({
           title: "Success",
           description: "Post updated successfully",
         });
       } else {
-        await supabaseBlogService.createPost(postData as any);
+        await supabaseBlogService.createPost(postData as any, supabaseClient);
         toast({
           title: "Success", 
           description: "Post created successfully",
@@ -153,9 +180,10 @@ const BlogEditor = ({ post: existingPost, categories, authors }: BlogEditorProps
       }
       router.push('/admin/blogs');
     } catch (error) {
+      console.error('Failed to save blog post:', error);
       toast({
         title: "Error",
-        description: "Failed to save post",
+        description: error instanceof Error ? error.message : "Failed to save post",
         variant: "destructive",
       });
     } finally {
@@ -351,7 +379,7 @@ const BlogEditor = ({ post: existingPost, categories, authors }: BlogEditorProps
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel>Status</FormLabel>
-                          <Select onValueChange={field.onChange} defaultValue={field.value}>
+                          <Select onValueChange={field.onChange} value={field.value}>
                             <FormControl>
                               <SelectTrigger>
                                 <SelectValue placeholder="Select status" />
@@ -425,7 +453,7 @@ const BlogEditor = ({ post: existingPost, categories, authors }: BlogEditorProps
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel>Category</FormLabel>
-                          <Select onValueChange={field.onChange} defaultValue={field.value}>
+                          <Select onValueChange={field.onChange} value={field.value}>
                             <FormControl>
                               <SelectTrigger>
                                 <SelectValue placeholder="Select category" />
@@ -444,33 +472,13 @@ const BlogEditor = ({ post: existingPost, categories, authors }: BlogEditorProps
                       )}
                     />
 
-                    <FormField
-                      control={form.control}
-                      name="author_id"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel className="flex items-center gap-2">
-                            <User className="h-4 w-4" />
-                            Author
-                          </FormLabel>
-                          <Select onValueChange={field.onChange} defaultValue={field.value}>
-                            <FormControl>
-                              <SelectTrigger>
-                                <SelectValue placeholder="Select author" />
-                              </SelectTrigger>
-                            </FormControl>
-                            <SelectContent>
-                              {authors.map((author) => (
-                                <SelectItem key={author.id} value={author.id}>
-                                  {author.name}
-                                </SelectItem>
-                              ))}
-                            </SelectContent>
-                          </Select>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
+                    <div className="space-y-1">
+                      <FormLabel className="flex items-center gap-2">
+                        <User className="h-4 w-4" />
+                        Author
+                      </FormLabel>
+                      <Input value="Money Bharat Team" disabled readOnly />
+                    </div>
                   </CardContent>
                 </Card>
 

@@ -1,4 +1,3 @@
-import Head from 'next/head';
 import LoanPageTemplate from "@/templates/LoanPageTemplate";
 import {
   businessLoanFeatures,
@@ -10,11 +9,6 @@ import {
 
 const BusinessLoan = () => {
   return (
-    <>
-        <Head>
-            <title>Business Loan - MoneyBharat</title>
-            <meta name="description" content="Get business loans at competitive interest rates with flexible tenure options for your growing business" />
-        </Head>
         <LoanPageTemplate
             pageTitle="Business Loan - MoneyBharat"
             metaDescription="Get business loans at competitive interest rates with flexible tenure options for your growing business"
@@ -52,7 +46,6 @@ const BusinessLoan = () => {
             ctaPrimaryButton="Apply for Business Loan"
             ctaSecondaryButton="Speak to a Specialist"
         />
-    </>
   );
 };
 

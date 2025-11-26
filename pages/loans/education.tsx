@@ -1,4 +1,3 @@
-import Head from 'next/head';
 import LoanPageTemplate from "@/templates/LoanPageTemplate";
 import {
   educationLoanFeatures,
@@ -10,11 +9,6 @@ import {
 
 const EducationLoan = () => {
   return (
-    <>
-        <Head>
-            <title>Education Loan - MoneyBharat</title>
-            <meta name="description" content="Get affordable education loans to fund your higher studies in India or abroad. Compare best education loan offers with lowest interest rates." />
-        </Head>
         <LoanPageTemplate
             pageTitle="Education Loan - MoneyBharat"
             metaDescription="Get affordable education loans to fund your higher studies in India or abroad. Compare best education loan offers with lowest interest rates."
@@ -50,7 +44,6 @@ const EducationLoan = () => {
             ctaPrimaryButton="Apply for Education Loan"
             ctaSecondaryButton="Speak to an Advisor"
         />
-    </>
   );
 };
 

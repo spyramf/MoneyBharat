@@ -1,7 +1,6 @@
-
 import React from 'react';
-import { Link } from 'react-router-dom';
-import AdminLayout from '@/layouts/AdminLayout';
+import Link from 'next/link';
+import MainLayout from '@/layouts/MainLayout';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { 
@@ -21,7 +20,7 @@ const CMSDashboard = () => {
       description: 'Create, edit, and manage blog posts with advanced SEO features',
       icon: FileText,
       link: '/admin/blogs/manage',
-      color: 'bg-blue-500',
+      color: 'bg-secondary',
       features: ['SEO Optimization', 'Content Editor', 'Analytics']
     },
     {
@@ -29,7 +28,7 @@ const CMSDashboard = () => {
       description: 'Monitor and improve your website SEO performance',
       icon: TrendingUp,
       link: '/admin/seo/analytics',
-      color: 'bg-green-500',
+      color: 'bg-primary',
       features: ['Keyword Tracking', 'Performance Metrics', 'Competitor Analysis']
     },
     {
@@ -37,7 +36,7 @@ const CMSDashboard = () => {
       description: 'Optimize your content for better search engine rankings',
       icon: Target,
       link: '/admin/content/optimize',
-      color: 'bg-purple-500',
+      color: 'bg-accent',
       features: ['Content Scoring', 'Keyword Density', 'Readability']
     },
     {
@@ -45,17 +44,17 @@ const CMSDashboard = () => {
       description: 'Configure site-wide SEO settings and meta tags',
       icon: Globe,
       link: '/admin/seo/settings',
-      color: 'bg-orange-500',
+      color: 'bg-destructive',
       features: ['Meta Tags', 'Schema Markup', 'XML Sitemaps']
     }
   ];
 
   return (
-    <AdminLayout>
+    <MainLayout>
       <div className="p-8">
         <div className="mb-8">
           <h1 className="text-3xl font-bold mb-2">SEO-Powered CMS Dashboard</h1>
-          <p className="text-gray-600">
+          <p className="text-muted-foreground">
             Manage your content and boost your website's search engine rankings
           </p>
         </div>
@@ -81,17 +80,17 @@ const CMSDashboard = () => {
                 <CardContent>
                   <div className="mb-4">
                     <h4 className="font-medium mb-2">Key Features:</h4>
-                    <ul className="text-sm text-gray-600 space-y-1">
+                    <ul className="text-sm text-muted-foreground space-y-1">
                       {card.features.map((feature, index) => (
                         <li key={index} className="flex items-center">
-                          <div className="w-1.5 h-1.5 bg-fintech-purple rounded-full mr-2" />
+                          <div className="w-1.5 h-1.5 bg-primary rounded-full mr-2" />
                           {feature}
                         </li>
                       ))}
                     </ul>
                   </div>
                   <Button asChild className="w-full">
-                    <Link to={card.link}>
+                    <Link href={card.link}>
                       Manage {card.title}
                     </Link>
                   </Button>
@@ -106,9 +105,9 @@ const CMSDashboard = () => {
           <Card>
             <CardContent className="p-6">
               <div className="flex items-center">
-                <FileText className="h-8 w-8 text-blue-600" />
+                <FileText className="h-8 w-8 text-secondary-foreground" />
                 <div className="ml-4">
-                  <p className="text-sm font-medium text-gray-600">Total Posts</p>
+                  <p className="text-sm font-medium text-muted-foreground">Total Posts</p>
                   <p className="text-2xl font-bold">24</p>
                 </div>
               </div>
@@ -118,9 +117,9 @@ const CMSDashboard = () => {
           <Card>
             <CardContent className="p-6">
               <div className="flex items-center">
-                <Search className="h-8 w-8 text-green-600" />
+                <Search className="h-8 w-8 text-primary" />
                 <div className="ml-4">
-                  <p className="text-sm font-medium text-gray-600">SEO Score</p>
+                  <p className="text-sm font-medium text-muted-foreground">SEO Score</p>
                   <p className="text-2xl font-bold">85%</p>
                 </div>
               </div>
@@ -130,9 +129,9 @@ const CMSDashboard = () => {
           <Card>
             <CardContent className="p-6">
               <div className="flex items-center">
-                <BarChart3 className="h-8 w-8 text-purple-600" />
+                <BarChart3 className="h-8 w-8 text-accent-foreground" />
                 <div className="ml-4">
-                  <p className="text-sm font-medium text-gray-600">Organic Traffic</p>
+                  <p className="text-sm font-medium text-muted-foreground">Organic Traffic</p>
                   <p className="text-2xl font-bold">+23%</p>
                 </div>
               </div>
@@ -142,9 +141,9 @@ const CMSDashboard = () => {
           <Card>
             <CardContent className="p-6">
               <div className="flex items-center">
-                <TrendingUp className="h-8 w-8 text-orange-600" />
+                <TrendingUp className="h-8 w-8 text-destructive" />
                 <div className="ml-4">
-                  <p className="text-sm font-medium text-gray-600">Keywords</p>
+                  <p className="text-sm font-medium text-muted-foreground">Keywords</p>
                   <p className="text-2xl font-bold">156</p>
                 </div>
               </div>
@@ -152,7 +151,7 @@ const CMSDashboard = () => {
           </Card>
         </div>
       </div>
-    </AdminLayout>
+    </MainLayout>
   );
 };
 

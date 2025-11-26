@@ -1,7 +1,7 @@
+import Link from "next/link";
 import { ArrowRight, ArrowRightCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
 const EnhancedHeroSection = () => {
   return <section className="relative overflow-hidden pt-16 md:pt-24 pb-16 md:pb-20 py-[50px]">
       {/* Background decoration */}
@@ -33,12 +33,12 @@ const EnhancedHeroSection = () => {
                 insurance, and loans for every Indian.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 pt-6">
-                <Link to="/investor/login">
+                <Link href="/investor/login">
                   <Button className="bg-gradient-to-r from-fintech-green to-fintech-green hover:opacity-90 text-white px-8 py-6">
                     Start Investing
                   </Button>
                 </Link>
-                <Link to="/booking">
+                <Link href="/booking">
                   <Button variant="outline" className="group border-fintech-green text-fintech-green hover:text-fintech-green transition-colors px-8 py-6 rounded-xl">
                     Book Consultation
                     <ArrowRightCircle className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />

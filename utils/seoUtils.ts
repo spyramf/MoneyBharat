@@ -15,9 +15,9 @@ export const getPageTitle = (pageName: string, includeCompany: boolean = true): 
 
 export const getPageDescription = (page: string): string => {
   const descriptions: Record<string, string> = {
-    home: "Money Bharat Finance - India's trusted platform for mutual funds, SIP investments, health & life insurance, and instant loans. Money Bharat offers expert financial advisory with ₹5000Cr+ AUM.",
+    home: "Money Bharat Finance - India's trusted platform for mutual funds, SIP investments, health & life insurance, and instant loans. Money Bharat offers expert financial advisory with Rs 15000Cr+ AUM.",
     "mutual-funds":
-      "Money Bharat mutual funds - Invest in top-performing funds with expert guidance. Money Bharat Finance offers professional SIP advisory starting ₹500 with 15%+ returns.",
+      "Money Bharat mutual funds - Invest in top-performing funds with expert guidance. Money Bharat Finance offers professional SIP advisory starting Rs 1500 with 15%+ returns.",
     insurance:
       "Money Bharat insurance solutions - Health, Life, Term, Vehicle insurance with instant quotes. Money Bharat Finance helps you compare plans from top insurers.",
     loans:

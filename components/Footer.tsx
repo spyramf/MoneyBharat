@@ -1,5 +1,5 @@
 import { Facebook, Instagram, Linkedin, Twitter, Mail, Phone, MapPin, Download, ArrowUp } from "lucide-react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
 const Footer = () => {
@@ -61,7 +61,7 @@ const Footer = () => {
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 mb-12">
             {/* Brand & Contact - Enhanced with Schema.org microdata */}
             <div className="lg:col-span-1 space-y-6" itemScope itemType="https://schema.org/FinancialService">
-              <Link to="/" className="flex items-center">
+              <Link href="/" className="flex items-center">
                 <div className="h-12 w-12 mr-3">
                   <img
                     src="/lovable-uploads/92affb7c-7e35-42da-9aff-b0f55a689428.png"
@@ -108,7 +108,7 @@ const Footer = () => {
               <ul className="space-y-3">
                 <li>
                   <Link
-                    to="/mutual-funds"
+                    href="/mutual-funds"
                     className="text-gray-300 hover:text-fintech-green transition-colors duration-200 flex items-center group"
                   >
                     <span className="w-2 h-2 bg-fintech-green rounded-full mr-3 opacity-0 group-hover:opacity-100 transition-opacity"></span>
@@ -117,7 +117,7 @@ const Footer = () => {
                 </li>
                 <li>
                   <Link
-                    to="/health-insurance"
+                    href="/health-insurance"
                     className="text-gray-300 hover:text-fintech-green transition-colors duration-200 flex items-center group"
                   >
                     <span className="w-2 h-2 bg-fintech-green rounded-full mr-3 opacity-0 group-hover:opacity-100 transition-opacity"></span>
@@ -126,7 +126,7 @@ const Footer = () => {
                 </li>
                 <li>
                   <Link
-                    to="/insurance"
+                    href="/insurance"
                     className="text-gray-300 hover:text-fintech-green transition-colors duration-200 flex items-center group"
                   >
                     <span className="w-2 h-2 bg-fintech-green rounded-full mr-3 opacity-0 group-hover:opacity-100 transition-opacity"></span>
@@ -135,7 +135,7 @@ const Footer = () => {
                 </li>
                 <li>
                   <Link
-                    to="/loans/personal"
+                    href="/loans/personal"
                     className="text-gray-300 hover:text-fintech-green transition-colors duration-200 flex items-center group"
                   >
                     <span className="w-2 h-2 bg-fintech-green rounded-full mr-3 opacity-0 group-hover:opacity-100 transition-opacity"></span>
@@ -144,7 +144,7 @@ const Footer = () => {
                 </li>
                 <li>
                   <Link
-                    to="/loans/business"
+                    href="/loans/business"
                     className="text-gray-300 hover:text-fintech-green transition-colors duration-200 flex items-center group"
                   >
                     <span className="w-2 h-2 bg-fintech-green rounded-full mr-3 opacity-0 group-hover:opacity-100 transition-opacity"></span>
@@ -161,7 +161,7 @@ const Footer = () => {
                 {quickTools.map((tool) => (
                   <li key={tool.name}>
                     <Link
-                      to={tool.path}
+                      href={tool.path}
                       className="text-gray-300 hover:text-fintech-green transition-colors duration-200 flex items-center group"
                     >
                       <span className="w-2 h-2 bg-fintech-green rounded-full mr-3 opacity-0 group-hover:opacity-100 transition-opacity"></span>
@@ -178,7 +178,7 @@ const Footer = () => {
               <ul className="space-y-3 mb-8">
                 <li>
                   <Link
-                    to="/contact"
+                    href="/contact"
                     className="text-gray-300 hover:text-fintech-green transition-colors duration-200 flex items-center group"
                   >
                     <span className="w-2 h-2 bg-fintech-green rounded-full mr-3 opacity-0 group-hover:opacity-100 transition-opacity"></span>
@@ -187,7 +187,7 @@ const Footer = () => {
                 </li>
                 <li>
                   <Link
-                    to="/terms-of-service"
+                    href="/terms-of-service"
                     className="text-gray-300 hover:text-fintech-green transition-colors duration-200 flex items-center group"
                   >
                     <span className="w-2 h-2 bg-fintech-green rounded-full mr-3 opacity-0 group-hover:opacity-100 transition-opacity"></span>
@@ -196,7 +196,7 @@ const Footer = () => {
                 </li>
                 <li>
                   <Link
-                    to="/privacy-policy"
+                    href="/privacy-policy"
                     className="text-gray-300 hover:text-fintech-green transition-colors duration-200 flex items-center group"
                   >
                     <span className="w-2 h-2 bg-fintech-green rounded-full mr-3 opacity-0 group-hover:opacity-100 transition-opacity"></span>

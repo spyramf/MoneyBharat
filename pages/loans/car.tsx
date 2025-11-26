@@ -1,4 +1,3 @@
-import Head from 'next/head';
 import LoanPageTemplate from "@/templates/LoanPageTemplate";
 import {
   carLoanFeatures,
@@ -10,11 +9,6 @@ import {
 
 const CarLoan = () => {
   return (
-    <>
-        <Head>
-            <title>Car Loan - Money Bharat Finance</title>
-            <meta name="description" content="Get the best car loan offers with low interest rates, quick approval, and minimal documentation at Money Bharat." />
-        </Head>
         <LoanPageTemplate
             pageTitle="Car Loan - Money Bharat Finance"
             metaDescription="Get the best car loan offers with low interest rates, quick approval, and minimal documentation at Money Bharat."
@@ -48,7 +42,6 @@ const CarLoan = () => {
             ctaPrimaryButton="Apply for Car Loan"
             ctaSecondaryButton="Compare Offers"
         />
-    </>
   );
 };
 

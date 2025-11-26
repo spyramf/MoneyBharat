@@ -1,16 +1,16 @@
 
-import { BlogPost } from '@/content/blog/types';
 import { Booking } from '@/context/BookingContext';
 import { bookingDataService } from '@/services/bookingDataService';
+import { SupabaseBlogPost } from '@/services/supabaseBlogService';
 
 export interface ExportData {
-  blogs: BlogPost[];
+  blogs: SupabaseBlogPost[];
   bookings: Booking[];
   exportDate: string;
   version: string;
 }
 
-export const exportContent = (blogs: BlogPost[], bookings: Booking[]): void => {
+export const exportContent = (blogs: SupabaseBlogPost[], bookings: Booking[]): void => {
   const exportData: ExportData = {
     blogs,
     bookings,
@@ -33,19 +33,27 @@ export const exportContent = (blogs: BlogPost[], bookings: Booking[]): void => {
   URL.revokeObjectURL(url);
 };
 
-export const exportBlogsToCSV = (blogs: BlogPost[]): void => {
+export const exportBlogsToCSV = (blogs: SupabaseBlogPost[]): void => {
   const headers = ['ID', 'Title', 'Category', 'Author', 'Published Date', 'Featured', 'Tags'];
   const csvContent = [
     headers.join(','),
-    ...blogs.map(blog => [
-      blog.id,
-      `"${blog.title.replace(/"/g, '""')}"`,
-      blog.category,
-      blog.author.name,
-      blog.publishedDate,
-      blog.isFeatured,
-      `"${blog.tags.join(', ')}"`
-    ].join(','))
+    ...blogs.map((blog) => {
+      const title = blog.title ? `"${blog.title.replace(/"/g, '""')}"` : '""';
+      const category = blog.category?.name ? `"${blog.category.name.replace(/"/g, '""')}"` : '';
+      const author = blog.author?.name ? `"${blog.author.name.replace(/"/g, '""')}"` : '';
+      const publishedDate = blog.published_at || blog.created_at || '';
+      const tags = blog.tags?.length ? `"${blog.tags.join(', ').replace(/"/g, '""')}"` : '';
+
+      return [
+        blog.id,
+        title,
+        category,
+        author,
+        publishedDate,
+        blog.is_featured,
+        tags,
+      ].join(',');
+    }),
   ].join('\n');
 
   const blob = new Blob([csvContent], { type: 'text/csv' });

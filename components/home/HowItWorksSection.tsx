@@ -34,7 +34,7 @@ const HowItWorksSection = () => {
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
               How Money Bharat Works - Your Journey to Financial Freedom
             </h2>
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
               Experience a seamless financial journey with Money Bharat. From investment planning to loan approval,
               we've simplified every step to help you make smarter financial decisions with confidence.
             </p>
@@ -49,13 +49,13 @@ const HowItWorksSection = () => {
                       {step.icon}
                     </div>
                     <h3 className="text-xl font-semibold mb-3">{step.title}</h3>
-                    <p className="text-gray-600 leading-relaxed">{step.description}</p>
+                    <p className="text-muted-foreground leading-relaxed">{step.description}</p>
                   </CardContent>
                 </Card>
 
                 {index < steps.length - 1 && (
                   <div className="hidden lg:block absolute top-1/2 -right-4 transform -translate-y-1/2">
-                    <ArrowRight className="h-6 w-6 text-gray-400" />
+                    <ArrowRight className="h-6 w-6 text-muted-foreground" />
                   </div>
                 )}
               </div>
@@ -63,23 +63,23 @@ const HowItWorksSection = () => {
           </div>
 
           <div className="mt-12 text-center">
-            <p className="text-lg text-gray-700 mb-6">
+            <p className="text-lg text-foreground mb-6">
               Join over 500,000+ investors who trust Money Bharat for their financial journey
             </p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-              <div className="bg-green-50 p-4 rounded-lg">
-                <h4 className="font-semibold text-fintech-green mb-2">Expert Advisory Services</h4>
-                <p className="text-sm text-gray-600">
+              <div className="bg-primary/5 p-4 rounded-lg">
+                <h4 className="font-semibold text-primary mb-2">Expert Advisory Services</h4>
+                <p className="text-sm text-muted-foreground">
                   Get professional guidance on mutual fund plans and investment strategies
                 </p>
               </div>
-              <div className="bg-blue-50 p-4 rounded-lg">
-                <h4 className="font-semibold text-fintech-blue mb-2">Expert Financial Advice</h4>
-                <p className="text-sm text-gray-600">Get personalized guidance from AMFI-certified advisors</p>
+              <div className="bg-secondary p-4 rounded-lg">
+                <h4 className="font-semibold text-secondary-foreground mb-2">Expert Financial Advice</h4>
+                <p className="text-sm text-muted-foreground">Get personalized guidance from AMFI-certified advisors</p>
               </div>
-              <div className="bg-purple-50 p-4 rounded-lg">
-                <h4 className="font-semibold text-fintech-purple mb-2">Secure & Regulated</h4>
-                <p className="text-sm text-gray-600">Bank-grade security with full regulatory compliance</p>
+              <div className="bg-accent p-4 rounded-lg">
+                <h4 className="font-semibold text-accent-foreground mb-2">Secure & Regulated</h4>
+                <p className="text-sm text-muted-foreground">Bank-grade security with full regulatory compliance</p>
               </div>
             </div>
           </div>

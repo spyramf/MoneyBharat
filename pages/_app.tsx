@@ -8,12 +8,17 @@ import { BookingProvider } from '@/context/BookingContext';
 import ScrollToTop from '@/components/ScrollToTop';
 import PerformanceMonitor from '@/components/PerformanceMonitor';
 import MainLayout from '@/layouts/MainLayout';
+import { useRouter } from 'next/router';
 import '../styles/global.css';
 
 const queryClient = new QueryClient();
 
-function MyApp({ Component, pageProps }) {
+import type { AppProps } from 'next/app';
+
+function MyApp({ Component, pageProps }: AppProps) {
   const [supabaseClient] = React.useState(() => createPagesBrowserClient());
+  const router = useRouter();
+  const isAdminRoute = router.pathname.startsWith('/admin');
 
   return (
     <SessionContextProvider
@@ -25,9 +30,13 @@ function MyApp({ Component, pageProps }) {
             <BookingProvider>
               <ScrollToTop />
               <PerformanceMonitor />
-              <MainLayout>
+              {isAdminRoute ? (
                 <Component {...pageProps} />
-              </MainLayout>
+              ) : (
+                <MainLayout>
+                  <Component {...pageProps} />
+                </MainLayout>
+              )}
               <Toaster 
                 position="top-right"
                 richColors

@@ -1,15 +1,23 @@
 import React from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
+import type { GetStaticPaths, GetStaticProps } from 'next';
 import { ArrowLeft, Calendar, Clock, User, Tag } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { sanitizeHtml } from '@/utils/sanitize';
-import { supabaseBlogService } from '@/services/supabaseBlogService';
+import { supabaseBlogService, SupabaseBlogAuthor, SupabaseBlogCategory, SupabaseBlogPost } from '@/services/supabaseBlogService';
 
-const BlogPost = ({ post, relatedPosts, author, category }) => {
+interface BlogPostProps {
+  post: SupabaseBlogPost;
+  relatedPosts: SupabaseBlogPost[];
+  author: SupabaseBlogAuthor | null;
+  category: SupabaseBlogCategory | null;
+}
+
+const BlogPost = ({ post, relatedPosts, author, category }: BlogPostProps) => {
   if (!post) {
     return (
       <div className="container mx-auto px-4 py-8">
@@ -39,7 +47,7 @@ const BlogPost = ({ post, relatedPosts, author, category }) => {
     <>
       <Head>
         <title>{post.meta_title || post.title}</title>
-        <meta name="description" content={post.meta_description || post.excerpt} />
+        <meta name="description" content={post.meta_description || post.excerpt || ''} />
         <meta property="og:title" content={post.title} />
         <meta property="og:description" content={post.excerpt || ''} />
         <meta property="og:image" content={post.featured_image || ''} />
@@ -173,27 +181,36 @@ const BlogPost = ({ post, relatedPosts, author, category }) => {
   );
 };
 
-export async function getStaticPaths() {
-  const { posts } = await supabaseBlogService.getAllPosts();
+export const getStaticPaths: GetStaticPaths = async () => {
+  const posts = await supabaseBlogService.getAllPosts();
   const paths = posts.map((post) => ({
     params: { slug: post.slug },
   }));
 
   return { paths, fallback: 'blocking' };
-}
+};
 
-export async function getStaticProps({ params }) {
-  const { slug } = params;
-  const { post, author, category, error } = await supabaseBlogService.getPostBySlug(slug);
+export const getStaticProps: GetStaticProps<BlogPostProps> = async ({ params }) => {
+  const slugParam = params?.slug;
+  const slug = Array.isArray(slugParam) ? slugParam[0] : slugParam;
 
-  if (error || !post) {
+  if (!slug) {
+    return { notFound: true };
+  }
+
+  const post = await supabaseBlogService.getPostBySlug(slug);
+
+  if (!post) {
     return {
       notFound: true,
     };
   }
 
-  const { posts: relatedPosts } = await supabaseBlogService.getPostsByCategory(category?.slug || '');
-  const filteredRelatedPosts = relatedPosts.filter(p => p.id !== post.id).slice(0, 3);
+  const author = post.author ?? null;
+  const category = post.category ?? null;
+
+  const relatedPostsList = category?.id ? await supabaseBlogService.getPostsByCategory(category.id) : [];
+  const filteredRelatedPosts = relatedPostsList.filter((p) => p.id !== post.id).slice(0, 3);
 
   return {
     props: {
@@ -204,7 +221,6 @@ export async function getStaticProps({ params }) {
     },
     revalidate: 60,
   };
-}
-
+};
 
 export default BlogPost;

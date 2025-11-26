@@ -1,8 +1,7 @@
-
 import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { PersonStanding, Users, Shield, Hospital, DollarSign } from "lucide-react";
+import { PersonStanding, Users, Shield, Building, DollarSign } from "lucide-react";
 
 interface InsuranceType {
   id: string;
@@ -12,6 +11,7 @@ interface InsuranceType {
   pricing?: string;
   badgeText?: string;
   badgeVariant?: "info" | "pill" | "rate" | "fee";
+  gradient: string;
 }
 
 const insuranceTypes: InsuranceType[] = [
@@ -21,7 +21,8 @@ const insuranceTypes: InsuranceType[] = [
     description: "Tailored coverage for a single person with customizable benefits to suit personal health needs.",
     icon: <PersonStanding className="w-6 h-6 text-white" />,
     pricing: "Starting at ₹499/month",
-    badgeVariant: "rate"
+    badgeVariant: "rate",
+    gradient: "from-primary to-primary/70"
   },
   {
     id: "family",
@@ -29,15 +30,17 @@ const insuranceTypes: InsuranceType[] = [
     description: "Comprehensive coverage for your entire family under a single policy with shared sum insured.",
     icon: <Users className="w-6 h-6 text-white" />,
     pricing: "Starting at ₹1,199/month",
-    badgeVariant: "rate"
+    badgeVariant: "rate",
+    gradient: "from-destructive to-destructive/70"
   },
   {
     id: "critical",
     title: "Critical Illness Cover",
     description: "Financial protection against major illnesses with lump-sum benefits upon diagnosis.",
-    icon: <Hospital className="w-6 h-6 text-white" />,
+    icon: <Building className="w-6 h-6 text-white" />,
     pricing: "Starting at ₹699/month",
-    badgeVariant: "rate"
+    badgeVariant: "rate",
+    gradient: "from-primary to-primary/70"
   },
   {
     id: "group",
@@ -45,7 +48,8 @@ const insuranceTypes: InsuranceType[] = [
     description: "Employer-provided coverage for employees with competitive premiums and extensive benefits.",
     icon: <Users className="w-6 h-6 text-white" />,
     badgeText: "Custom corporate plans",
-    badgeVariant: "pill"
+    badgeVariant: "pill",
+    gradient: "from-secondary to-secondary/70"
   },
   {
     id: "senior",
@@ -53,7 +57,8 @@ const insuranceTypes: InsuranceType[] = [
     description: "Specialized plans for individuals above 60 years with coverage for age-related ailments.",
     icon: <PersonStanding className="w-6 h-6 text-white" />,
     pricing: "Starting at ₹1,999/month",
-    badgeVariant: "rate"
+    badgeVariant: "rate",
+    gradient: "from-primary to-primary/70"
   },
   {
     id: "topup",
@@ -61,40 +66,34 @@ const insuranceTypes: InsuranceType[] = [
     description: "Additional coverage that starts after your base health insurance reaches its limit.",
     icon: <DollarSign className="w-6 h-6 text-white" />,
     pricing: "Starting at ₹299/month",
-    badgeVariant: "rate"
+    badgeVariant: "rate",
+    gradient: "from-accent to-accent/70"
   }
 ];
 
 const HealthInsuranceTypes = () => {
   return (
-    <section className="py-16 bg-white">
+    <section className="py-16 bg-background">
       <div className="container mx-auto px-4">
         <div className="text-center mb-10">
           <h2 className="text-3xl font-bold mb-3">Types of Health Insurance Plans</h2>
-          <p className="text-gray-600 max-w-3xl mx-auto">
+          <p className="text-muted-foreground max-w-3xl mx-auto">
             Find the right health coverage for your specific needs
           </p>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {insuranceTypes.map((type) => (
-            <Card key={type.id} className="shadow-sm hover:shadow-md transition-shadow border border-gray-100 overflow-hidden">
+            <Card key={type.id} className="shadow-sm hover:shadow-md transition-shadow border overflow-hidden">
               <div className="p-6">
                 <div className="mb-5">
-                  <div className={`w-12 h-12 rounded-lg flex items-center justify-center bg-gradient-to-br 
-                    ${type.id === "individual" ? "from-teal-500 to-teal-600" : ""}
-                    ${type.id === "family" ? "from-orange-500 to-purple-400" : ""}
-                    ${type.id === "critical" ? "from-teal-500 to-teal-600" : ""}
-                    ${type.id === "group" ? "from-teal-400 to-blue-500" : ""}
-                    ${type.id === "senior" ? "from-green-500 to-purple-500" : ""}
-                    ${type.id === "topup" ? "from-amber-400 to-amber-500" : ""}
-                  `}>
+                  <div className={`w-12 h-12 rounded-lg flex items-center justify-center bg-gradient-to-br ${type.gradient}`}>
                     {type.icon}
                   </div>
                 </div>
                 
                 <h3 className="text-xl font-bold mb-3">{type.title}</h3>
-                <p className="text-gray-600 mb-6">{type.description}</p>
+                <p className="text-muted-foreground mb-6">{type.description}</p>
                 
                 <CardContent className="p-0">
                   {type.pricing && (
