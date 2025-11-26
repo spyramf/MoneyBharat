@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "postbuild": "node scripts/copy-next-static.js"
+    "copy:next-static": "node scripts/copy-next-static.js",
+    "clean:next-static": "node scripts/clean-next-static.js"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",

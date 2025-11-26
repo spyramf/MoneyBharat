@@ -1,1 +1,0 @@
-(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[6379],{25254:function(n,_,u){(window.__NEXT_P=window.__NEXT_P||[]).push(["/admin/blogs",function(){return u(74920)}])}},function(n){n.O(0,[3050,4413,6457,8895,4920,2888,9774,179],function(){return n(n.s=25254)}),_N_E=n.O()}]);
