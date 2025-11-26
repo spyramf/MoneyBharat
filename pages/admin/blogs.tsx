@@ -36,6 +36,8 @@ interface BlogDashboardProps {
   authors: SupabaseBlogAuthor[];
 }
 
+const normalizeStatus = (status?: string | null) => (status ?? '').trim().toLowerCase();
+
 const BlogDashboard = ({ blogPosts, categories, authors }: BlogDashboardProps) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [activeTab, setActiveTab] = useState('all');
@@ -43,14 +45,15 @@ const BlogDashboard = ({ blogPosts, categories, authors }: BlogDashboardProps) =
 
   const stats = {
     totalPosts: blogPosts.length,
-    publishedPosts: blogPosts.filter(post => post.status === 'published').length,
-    draftPosts: blogPosts.filter(post => post.status === 'draft').length,
+    publishedPosts: blogPosts.filter(post => normalizeStatus(post.status) === 'published').length,
+    draftPosts: blogPosts.filter(post => normalizeStatus(post.status) === 'draft').length,
     featuredPosts: blogPosts.filter(post => post.is_featured).length,
   };
 
   const filteredPosts = blogPosts.filter(post => {
     const matchesSearch = post.title.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesTab = activeTab === 'all' || post.status === activeTab;
+    const postStatus = normalizeStatus(post.status);
+    const matchesTab = activeTab === 'all' || postStatus === activeTab;
     return matchesSearch && matchesTab;
   });
 
@@ -74,6 +77,7 @@ const BlogDashboard = ({ blogPosts, categories, authors }: BlogDashboardProps) =
   };
 
   const getStatusBadge = (status: string) => {
+    const normalizedStatus = normalizeStatus(status);
     const variants = {
       published: "default",
       draft: "secondary",
@@ -81,8 +85,8 @@ const BlogDashboard = ({ blogPosts, categories, authors }: BlogDashboardProps) =
     } as const;
     
     return (
-      <Badge variant={variants[status as keyof typeof variants] || "secondary"}>
-        {status.charAt(0).toUpperCase() + status.slice(1)}
+      <Badge variant={variants[normalizedStatus as keyof typeof variants] || "secondary"}>
+        {normalizedStatus.charAt(0).toUpperCase() + normalizedStatus.slice(1)}
       </Badge>
     );
   };
