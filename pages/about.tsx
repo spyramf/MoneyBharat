@@ -1,17 +1,17 @@
-import Head from 'next/head';
 import { Shield, Users, TrendingUp, Award } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import Home from "@/components/icons/Home";
 import GraduationCap from "@/components/icons/GraduationCap";
 import Car from "@/components/icons/Car";
+import SEOHead from "@/components/seo/SEOHead";
+import { getSeoMetadata } from "@/constants/seoMetadata";
 
 const AboutUs = () => {
+  const seo = getSeoMetadata("about");
+
   return (
     <div className="flex flex-col min-h-screen">
-      <Head>
-        <title>About Us | Money Bharat Finance</title>
-        <meta name="description" content="Learn about Money Bharat's mission to empower Indians with transparent, technology-driven financial solutions. Discover our story, values, and commitment to your financial well-being." />
-      </Head>
+      <SEOHead {...seo} />
 
       {/* Hero Section */}
       <section className="pt-32 pb-16 md:pt-40 md:pb-24 px-4">

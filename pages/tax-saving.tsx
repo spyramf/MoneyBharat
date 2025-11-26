@@ -1,4 +1,3 @@
-import Head from 'next/head';
 import React, { useState, useEffect } from "react";
 import { Calculator, ArrowRight, HelpCircle } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
@@ -19,6 +18,8 @@ import {
   ResponsiveContainer,
   Legend
 } from "recharts";
+import SEOHead from "@/components/seo/SEOHead";
+import { getSeoMetadata } from "@/constants/seoMetadata";
 
 interface FormValues {
   income: number;
@@ -31,6 +32,7 @@ interface FormValues {
 }
 
 const TaxSaving = () => {
+  const seo = getSeoMetadata("taxSaving");
   const form = useForm<FormValues>({
     defaultValues: {
       income: 1000000,
@@ -243,10 +245,7 @@ const TaxSaving = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
-        <Head>
-            <title>Tax Saving Calculator - Money Bharat</title>
-            <meta name="description" content="Compare old and new tax regimes to find which one saves you more tax. Plan your investments for maximum tax benefits." />
-        </Head>
+        <SEOHead {...seo} />
       
       <main className="flex-grow pt-24 pb-8 md:pt-28 md:pb-16 bg-gradient-to-b from-purple-50 to-white">
         <div className="container mx-auto px-4">

@@ -12,6 +12,7 @@ const EducationLoan = () => {
         <LoanPageTemplate
             pageTitle="Education Loan - MoneyBharat"
             metaDescription="Get affordable education loans to fund your higher studies in India or abroad. Compare best education loan offers with lowest interest rates."
+            seoKeywords="education loan India, student loan interest rate, study abroad loan, collateral free education loan, Money Bharat education finance"
             heroTitle="Education Loan"
             heroSubtitle="Fund your dreams with affordable education loans for studies in India and abroad"
             heroGradientFrom="from-fintech-purple"

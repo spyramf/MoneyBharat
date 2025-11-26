@@ -1,4 +1,3 @@
-import Head from 'next/head';
 import { useState, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -12,6 +11,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Card, CardContent } from "@/components/ui/card";
 import { useBooking } from "@/context/BookingContext";
+import SEOHead from '@/components/seo/SEOHead';
+import { getSeoMetadata } from '@/constants/seoMetadata';
 
 const formSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
@@ -39,6 +40,7 @@ const Booking = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
   const { addBooking } = useBooking();
+  const seo = getSeoMetadata('booking');
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -81,20 +83,7 @@ const Booking = () => {
 
   return (
     <>
-      <Head>
-        <title>Book a Consultation | Money Bharat</title>
-        <meta
-          name="description"
-          content="Book a free consultation with Money Bharat's financial experts. Get personalized advice on investments, insurance, tax planning, and more."
-        />
-        <meta property="og:title" content="Book a Consultation | Money Bharat" />
-        <meta
-          property="og:description"
-          content="Book a free consultation with Money Bharat's financial experts. Get personalized advice on investments, insurance, tax planning, and more."
-        />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://moneybharatfinance.com/booking" />
-      </Head>
+      <SEOHead {...seo} />
 
       <main className="pt-24 pb-16">
         <section className="container mx-auto px-4">

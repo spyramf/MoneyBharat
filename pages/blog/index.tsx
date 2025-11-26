@@ -1,5 +1,4 @@
 import React, { useState, useMemo } from 'react';
-import Head from 'next/head';
 import Link from 'next/link';
 import type { GetStaticProps } from 'next';
 import { Search, Filter, Calendar, User, ArrowRight, Star, TrendingUp } from 'lucide-react';
@@ -9,6 +8,8 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { supabaseBlogService, SupabaseBlogCategory, SupabaseBlogPost } from '@/services/supabaseBlogService';
+import SEOHead from '@/components/seo/SEOHead';
+import { getSeoMetadata } from '@/constants/seoMetadata';
 
 interface BlogPageProps {
   posts: SupabaseBlogPost[];
@@ -19,6 +20,7 @@ interface BlogPageProps {
 const Blog = ({ posts, categories, featuredPosts }: BlogPageProps) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
+  const seo = getSeoMetadata('blog');
 
   const filteredPosts = useMemo(() => {
     return posts.filter(post => {
@@ -39,11 +41,7 @@ const Blog = ({ posts, categories, featuredPosts }: BlogPageProps) => {
 
   return (
     <div className="min-h-screen bg-background">
-      <Head>
-        <title>Financial Insights & Expert Advice | MoneyBharat Blog</title>
-        <meta name="description" content="Get expert financial advice, investment tips, and money management strategies from MoneyBharat's financial experts. Stay updated with latest market trends and financial planning insights." />
-        <meta name="keywords" content="financial advice, investment tips, money management, mutual funds, insurance, loans, tax planning" />
-      </Head>
+      <SEOHead {...seo} />
 
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-primary via-primary/90 to-primary/80 text-white py-24">

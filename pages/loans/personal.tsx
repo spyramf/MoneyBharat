@@ -12,6 +12,7 @@ const PersonalLoan = () => {
         <LoanPageTemplate
             pageTitle="Personal Loan - MoneyBharat"
             metaDescription="Quick unsecured loans for your personal needs with competitive interest rates"
+            seoKeywords="personal loan India, instant personal loan, unsecured loan online, low interest personal loan, Money Bharat loan"
             heroTitle="Personal Loan"
             heroSubtitle="Quick unsecured loans for your personal needs with competitive interest rates"
             heroGradientFrom="from-fintech-purple"

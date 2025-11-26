@@ -1,7 +1,7 @@
-import Head from 'next/head';
 import React from "react";
 import SEOHead from "@/components/seo/SEOHead";
 import StructuredData from "@/components/seo/StructuredData";
+import { getSeoMetadata } from "@/constants/seoMetadata";
 
 // Import term insurance components
 import TermInsuranceHero from "@/components/term-insurance/TermInsuranceHero";
@@ -17,6 +17,7 @@ import TermInsuranceFAQs from "@/components/term-insurance/TermInsuranceFAQs";
 import TermCTA from "@/components/term-insurance/TermCTA";
 
 const TermInsurance = () => {
+  const seo = getSeoMetadata("termInsurance");
   const faqData = [
     {
       question: "What is term insurance and how does it work?",
@@ -34,11 +35,7 @@ const TermInsurance = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Head>
-        <title>Best Term Insurance Plans in India 2024 - Online Term Life Insurance | Money Bharat</title>
-        <meta name="description" content="Compare and buy best term insurance online with high coverage at lowest premiums. Get term life insurance from ₹25 Lakhs to ₹2 Crore. Free premium calculator, instant policy issuance. Tax benefits under Section 80C & 10(10D). Protection for your family's future." />
-        <meta name="keywords" content="term insurance calculator, best term insurance India, term life insurance online, term insurance premium calculator, life insurance plans, term insurance policy, online term insurance, term insurance comparison, life cover plans" />
-      </Head>
+      <SEOHead {...seo} />
       
       <StructuredData 
         page="insurance" 

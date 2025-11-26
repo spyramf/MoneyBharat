@@ -1,7 +1,7 @@
-import Head from 'next/head';
 import React from "react";
 import SEOHead from "@/components/seo/SEOHead";
 import StructuredData from "@/components/seo/StructuredData";
+import { getSeoMetadata } from "@/constants/seoMetadata";
 
 // Import refactored components
 import HealthInsuranceHero from "@/components/health-insurance/HealthInsuranceHero";
@@ -25,6 +25,7 @@ import HealthFAQs from "@/components/health-insurance/HealthFAQs";
 import HealthCTA from "@/components/health-insurance/HealthCTA";
 
 const HealthInsurance = () => {
+  const seo = getSeoMetadata("healthInsurance");
   const faqData = [
     {
       question: "What is the best health insurance plan in India?",
@@ -42,11 +43,7 @@ const HealthInsurance = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Head>
-        <title>Best Health Insurance Plans in India 2024 - Compare & Buy Online | Money Bharat</title>
-        <meta name="description" content="Compare and buy best health insurance plans online from top insurers. Get comprehensive family health coverage, cashless hospitalization at 10,000+ network hospitals. Free premium calculator & instant policy issuance. Coverage from ₹5 Lakhs to ₹1 Crore." />
-        <meta name="keywords" content="best health insurance India, health insurance plans, family health insurance, health insurance comparison, medical insurance online, cashless health insurance, health insurance premium calculator, individual health insurance, group health insurance" />
-      </Head>
+      <SEOHead {...seo} />
       
       <StructuredData 
         page="insurance" 

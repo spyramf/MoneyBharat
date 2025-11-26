@@ -28,6 +28,7 @@ const SEOHead = ({
   const router = useRouter();
   const currentPath = (router.asPath || router.pathname || "/").split("?")[0];
   const canonicalUrl = getCanonicalUrl(currentPath);
+  const absoluteImageUrl = image?.startsWith("http") ? image : `https://www.moneybharatfinance.com${image || ""}`;
 
   // Auto-generate title and description if not provided
   const pageTitle = title || getPageTitle(getPageNameFromPath(currentPath));
@@ -63,14 +64,14 @@ const SEOHead = ({
       <meta property="og:description" content={pageDescription} />
       <meta property="og:type" content={type} />
       <meta property="og:url" content={canonicalUrl} />
-      <meta property="og:image" content={`https://www.moneybharatfinance.com${image}`} />
+      <meta property="og:image" content={absoluteImageUrl} />
       <meta property="og:site_name" content="Money Bharat Finance" />
       <meta property="og:locale" content="en_IN" />
 
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={pageTitle} />
       <meta name="twitter:description" content={pageDescription} />
-      <meta name="twitter:image" content={`https://www.moneybharatfinance.com${image}`} />
+      <meta name="twitter:image" content={absoluteImageUrl} />
       <meta name="twitter:site" content="@moneybharatfin" />
 
       {type === "article" && publishedTime && <meta property="article:published_time" content={publishedTime} />}

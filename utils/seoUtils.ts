@@ -29,7 +29,7 @@ export const getPageDescription = (page: string): string => {
     "vehicle-insurance":
       "Money Bharat vehicle insurance - Comprehensive motor insurance with instant quotes and hassle-free claims. Get the best vehicle insurance at Money Bharat Finance.",
     about:
-      "About Money Bharat Finance - India's trusted financial platform serving 50,000+ clients. Learn how Money Bharat delivers expert advisory and innovative solutions.",
+      "About Money Bharat Finance - India's trusted financial platform serving 5000+ clients. Learn how Money Bharat delivers expert advisory and innovative solutions.",
     contact:
       "Contact Money Bharat Finance for personalized financial advice. Call Money Bharat at +91 9970735694 or email for free consultation on mutual funds, insurance, and loans.",
     blog: "Money Bharat Finance blog - Financial insights, investment tips, and market analysis. Stay updated with Money Bharat's expert guidance on mutual funds, insurance, and loans.",

@@ -1,9 +1,10 @@
-import Head from 'next/head';
 import { useState } from "react";
 import { Home, Building, DollarSign, ArrowRight, Calculator } from "lucide-react";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import StructuredData from "@/components/seo/StructuredData";
+import SEOHead from "@/components/seo/SEOHead";
+import { getSeoMetadata } from "@/constants/seoMetadata";
 
 import LoanHero from "@/components/loans/LoanHero";
 import LoanCalculator from "@/components/loans/LoanCalculator";
@@ -25,6 +26,7 @@ import {
 
 const HomeLoan = () => {
   const [propertyValue, setPropertyValue] = useState<number>(4000000);
+  const seo = getSeoMetadata("homeLoans");
 
   const homeLoanBenefits = [
     {
@@ -65,10 +67,7 @@ const HomeLoan = () => {
 
   return (
     <div className="flex min-h-screen flex-col">
-        <Head>
-            <title>Home Loan - MoneyBharat</title>
-            <meta name="description" content="Get the best home loan offers with competitive interest rates from 30+ banks and housing finance companies" />
-        </Head>
+        <SEOHead {...seo} />
       <StructuredData
         page="loans"
         faqData={faqData}

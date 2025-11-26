@@ -1,5 +1,6 @@
-import Head from 'next/head';
 import React from "react";
+import SEOHead from "@/components/seo/SEOHead";
+import { getSeoMetadata } from "@/constants/seoMetadata";
 
 // Import vehicle insurance components
 import VehicleInsuranceHero from "@/components/vehicle-insurance/VehicleInsuranceHero";
@@ -15,12 +16,10 @@ import IDVCalculator from "@/components/vehicle-insurance/IDVCalculator";
 import VehicleCTA from "@/components/vehicle-insurance/VehicleCTA";
 
 const VehicleInsurance = () => {
+  const seo = getSeoMetadata("vehicleInsurance");
   return (
     <div className="min-h-screen flex flex-col">
-        <Head>
-            <title>Vehicle Insurance | Money Bharat</title>
-            <meta name="description" content="Compare and buy vehicle insurance online. Get the best quotes for your car or bike." />
-        </Head>
+        <SEOHead {...seo} />
       <main>
         <VehicleInsuranceHero />
         <VehicleInsuranceTypes />

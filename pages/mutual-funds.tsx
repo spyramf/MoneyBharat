@@ -1,7 +1,8 @@
-import Head from 'next/head';
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import StructuredData from "@/components/seo/StructuredData";
+import SEOHead from "@/components/seo/SEOHead";
+import { getSeoMetadata } from "@/constants/seoMetadata";
 import MutualFundHero from "@/components/mutual-funds/MutualFundHero";
 import SIPFeatures from "@/components/mutual-funds/SIPFeatures";
 import NRIExcellence from "@/components/mutual-funds/NRIExcellence";
@@ -31,6 +32,7 @@ import {
 } from "@/components/mutual-funds/data/mutualFundData";
 
 const MutualFunds = () => {
+  const seo = getSeoMetadata("mutualFunds");
   // Convert FAQ items to structured data format
   const faqData = faqItems.map(faq => ({
     question: faq.question,
@@ -39,11 +41,7 @@ const MutualFunds = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Head>
-        <title>Best Mutual Funds for SIP Investment Online in India 2024 | Money Bharat</title>
-        <meta name="description" content="Invest in top performing mutual funds & start SIP online with expert guidance. Compare 2000+ mutual fund schemes, ELSS tax saving funds, equity & debt funds. Expert advisory with ₹5000Cr+ AUM. Start SIP from ₹500/month." />
-        <meta name="keywords" content="best mutual funds for SIP, SIP investment online, top performing mutual funds India, mutual fund investment, mutual fund distributor, ELSS tax saving funds, equity mutual funds, debt funds India, SIP calculator, mutual fund returns, how to invest in mutual funds" />
-      </Head>
+      <SEOHead {...seo} />
       
       <StructuredData 
         page="mutual-funds" 

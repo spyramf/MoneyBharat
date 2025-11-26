@@ -1,4 +1,5 @@
-import Head from 'next/head';
+import SEOHead from '@/components/seo/SEOHead';
+import { getSeoMetadata } from '@/constants/seoMetadata';
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
@@ -36,6 +37,7 @@ const Loans = () => {
   const [loanTenure, setLoanTenure] = useState<number>(36);
   const [interestRate, setInterestRate] = useState<number>(10.5);
   const [selectedLoanType, setSelectedLoanType] = useState<string>("personal");
+  const seo = getSeoMetadata("loansOverview");
 
   // Calculate EMI
   const calculateEmi = () => {
@@ -259,10 +261,7 @@ const Loans = () => {
   ];
   return (
     <div className="flex min-h-screen flex-col">
-      <Head>
-        <title>Loans | Money Bharat</title>
-        <meta name="description" content="Compare and apply for personal, home, business, and other loans online. Get the best interest rates and flexible repayment options." />
-      </Head>
+      <SEOHead {...seo} />
 
       {/* Hero Section - Enhanced with stronger call-to-action */}
       <section className="bg-gradient-to-r from-fintech-green/10 to-fintech-blue/10 py-16 md:py-[100px] relative overflow-hidden">

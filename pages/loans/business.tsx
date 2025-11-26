@@ -12,6 +12,7 @@ const BusinessLoan = () => {
         <LoanPageTemplate
             pageTitle="Business Loan - MoneyBharat"
             metaDescription="Get business loans at competitive interest rates with flexible tenure options for your growing business"
+            seoKeywords="business loan India, SME funding, MSME working capital, unsecured business loan, Money Bharat business finance"
             heroTitle="Business Loan"
             heroSubtitle="Access quick funding for your business needs with competitive rates and minimal documentation"
             heroGradientFrom="from-fintech-purple"

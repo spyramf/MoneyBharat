@@ -1,4 +1,3 @@
-import Head from 'next/head';
 import StructuredData from '@/components/seo/StructuredData';
 import ContactHero from '@/components/contact/ContactHero';
 import ContactForm from '@/components/contact/ContactForm';
@@ -6,15 +5,15 @@ import ContactInfo from '@/components/contact/ContactInfo';
 import ContactFAQ from '@/components/contact/ContactFAQ';
 import SupportChannels from '@/components/contact/SupportChannels';
 import ContactLegal from '@/components/contact/ContactLegal';
+import SEOHead from '@/components/seo/SEOHead';
+import { getSeoMetadata } from '@/constants/seoMetadata';
 
 const Contact = () => {
+  const seo = getSeoMetadata('contact');
+
   return (
     <div className="min-h-screen bg-white">
-      <Head>
-        <title>Contact Us - Money Bharat Finance | Get Expert Financial Advice</title>
-        <meta name="description" content="Contact Money Bharat Finance for personalized financial advice on mutual funds, insurance, and loans. Call +91 9970735694 or email contact@moneybharatfinance.com. Free consultation available." />
-        <meta name="keywords" content="contact money bharat, financial advisor contact, mutual fund advice, insurance consultation, loan assistance, financial planning help" />
-      </Head>
+      <SEOHead {...seo} />
 
       <StructuredData
         page="about"

@@ -105,7 +105,6 @@ const BlogEditor = ({ post: existingPost, categories, authors }: BlogEditorProps
         tags: existingPost.tags || [],
         read_time: existingPost.read_time || 5,
       });
-      form.clearErrors('author_id');
     }
   }, [existingPost, form]);
 

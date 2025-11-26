@@ -1,8 +1,9 @@
-import Head from 'next/head';
 import { BackgroundPaths } from '@/components/ui/background-paths';
 import StructuredData from '@/components/seo/StructuredData';
 import BreadcrumbSEO from '@/components/seo/BreadcrumbSEO';
 import FAQSchema from '@/components/seo/FAQSchema';
+import SEOHead from '@/components/seo/SEOHead';
+import { getSeoMetadata } from '@/constants/seoMetadata';
 import ServicesTabSection from '@/components/home/ServicesTabSection';
 import HowItWorksSection from '@/components/home/HowItWorksSection';
 import FeaturesSection from '@/components/home/FeaturesSection';
@@ -52,13 +53,11 @@ const Index = () => {
     },
   ];
 
+  const seo = getSeoMetadata('home');
+
   return (
     <div className="min-h-screen">
-      <Head>
-        <title>Best Mutual Funds, Daily SIP in India | Money Bharat Finance</title>
-        <meta name="description" content="Start your wealth journey with Money Bharat Finance — India's trusted platform for mutual fund, Daily SIP, health insurance, and financial planning." />
-        <meta name="keywords" content="best mutual funds for SIP, SIP investment online, money bharat, money bharat finance, top performing mutual funds, financial planning platform, moneybharat, tax saving ELSS funds, moneybharatfinance, home loan interest rates" />
-      </Head>
+      <SEOHead {...seo} />
 
       <StructuredData page="home" faqData={homeFaqData} reviewData={reviewData} />
       <FAQSchema faqs={homeFaqData} />

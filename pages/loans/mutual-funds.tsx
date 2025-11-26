@@ -12,6 +12,7 @@ const LoanAgainstMutualFunds = () => {
         <LoanPageTemplate
             pageTitle="Loan Against Mutual Funds - MoneyBharat"
             metaDescription="Unlock the value of your mutual fund investments without selling them. Get instant funds with lower interest rates."
+            seoKeywords="loan against mutual funds, LAS mutual fund India, overdraft against mutual funds, pledge mutual fund units, Money Bharat LAS"
             heroTitle="Loan Against Mutual Funds"
             heroSubtitle="Unlock the value of your mutual fund investments without selling them"
             heroGradientFrom="from-fintech-purple"

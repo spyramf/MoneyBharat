@@ -12,6 +12,7 @@ const CarLoan = () => {
         <LoanPageTemplate
             pageTitle="Car Loan - Money Bharat Finance"
             metaDescription="Get the best car loan offers with low interest rates, quick approval, and minimal documentation at Money Bharat."
+            seoKeywords="car loan India, vehicle finance, new car loan, used car loan, zero down payment car loan, Money Bharat car loan"
             heroTitle="Car Loan"
             heroSubtitle="Get up to 100% financing on your new car with competitive interest rates starting at 7.5%* p.a."
             heroGradientFrom="from-fintech-blue"

@@ -1,5 +1,4 @@
 import React from 'react';
-import Head from 'next/head';
 import Link from 'next/link';
 import type { GetStaticPaths, GetStaticProps } from 'next';
 import { ArrowLeft, Calendar, Clock, User, Tag } from 'lucide-react';
@@ -9,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { sanitizeHtml } from '@/utils/sanitize';
 import { supabaseBlogService, SupabaseBlogAuthor, SupabaseBlogCategory, SupabaseBlogPost } from '@/services/supabaseBlogService';
+import SEOHead from '@/components/seo/SEOHead';
 
 interface BlogPostProps {
   post: SupabaseBlogPost;
@@ -43,16 +43,25 @@ const BlogPost = ({ post, relatedPosts, author, category }: BlogPostProps) => {
     });
   };
 
+  const seoTitle = post.meta_title || post.title;
+  const seoDescription = post.meta_description || post.excerpt || post.title;
+  const seoKeywords = post.tags?.join(", ");
+  const publishedTime = post.published_at || post.created_at;
+  const modifiedTime = post.updated_at || publishedTime || undefined;
+  const seoImage = post.featured_image || undefined;
+
   return (
     <>
-      <Head>
-        <title>{post.meta_title || post.title}</title>
-        <meta name="description" content={post.meta_description || post.excerpt || ''} />
-        <meta property="og:title" content={post.title} />
-        <meta property="og:description" content={post.excerpt || ''} />
-        <meta property="og:image" content={post.featured_image || ''} />
-        <meta property="og:type" content="article" />
-      </Head>
+      <SEOHead
+        title={seoTitle}
+        description={seoDescription}
+        keywords={seoKeywords}
+        image={seoImage}
+        type="article"
+        publishedTime={publishedTime || undefined}
+        modifiedTime={modifiedTime}
+        author={author?.name || undefined}
+      />
       
       <article className="container mx-auto px-4 py-8">
         <div className="max-w-4xl mx-auto">

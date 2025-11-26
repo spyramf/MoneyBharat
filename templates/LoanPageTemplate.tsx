@@ -1,5 +1,4 @@
 import React, { useMemo, useState } from "react";
-import Head from "next/head";
 import Link from "next/link";
 import LoanHero from "@/components/loans/LoanHero";
 import { Card, CardContent } from "@/components/ui/card";
@@ -9,6 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import SEOHead from "@/components/seo/SEOHead";
 
 interface FeatureItem {
   title: string;
@@ -41,6 +41,10 @@ interface LoanCalculatorConfig {
 interface LoanPageTemplateProps {
   pageTitle: string;
   metaDescription: string;
+  seoKeywords?: string;
+  seoImage?: string;
+  seoType?: "website" | "article";
+  noIndex?: boolean;
   heroTitle: string;
   heroSubtitle: string;
   heroGradientFrom?: string;
@@ -83,6 +87,10 @@ const calculateEMI = (loanAmount: number, annualRate: number, tenureMonths: numb
 const LoanPageTemplate: React.FC<LoanPageTemplateProps> = ({
   pageTitle,
   metaDescription,
+  seoKeywords,
+  seoImage,
+  seoType = "website",
+  noIndex,
   heroTitle,
   heroSubtitle,
   heroGradientFrom = "from-fintech-purple",
@@ -117,10 +125,14 @@ const LoanPageTemplate: React.FC<LoanPageTemplateProps> = ({
 
   return (
     <div className="bg-gray-50">
-      <Head>
-        <title>{pageTitle}</title>
-        <meta name="description" content={metaDescription} />
-      </Head>
+      <SEOHead
+        title={pageTitle}
+        description={metaDescription}
+        keywords={seoKeywords}
+        image={seoImage}
+        type={seoType}
+        noIndex={noIndex}
+      />
       <LoanHero
         title={heroTitle}
         subtitle={heroSubtitle}

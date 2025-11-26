@@ -1,16 +1,12 @@
-import Head from 'next/head';
 import { ArrowRight, FileText, Shield } from "lucide-react";
+import SEOHead from "@/components/seo/SEOHead";
+import { getSeoMetadata } from "@/constants/seoMetadata";
 
 const PrivacyPolicy = () => {
+  const seo = getSeoMetadata("privacyPolicy");
   return (
     <>
-      <Head>
-        <title>Privacy Policy - Money Bharat Finance</title>
-        <meta
-          name="description"
-          content="Privacy Policy for Money Bharat Finance - Learn how we collect, use, and protect your personal information."
-        />
-      </Head>
+      <SEOHead {...seo} />
 
       <div className="pt-24 pb-16 bg-gradient-to-b from-gray-50 to-white">
         <div className="container mx-auto px-4">

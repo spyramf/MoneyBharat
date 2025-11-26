@@ -1,7 +1,7 @@
-import Head from 'next/head';
 import { useState } from "react";
 import SEOHead from "@/components/seo/SEOHead";
 import StructuredData from "@/components/seo/StructuredData";
+import { getSeoMetadata } from "@/constants/seoMetadata";
 import InsuranceHero from "@/components/insurance/InsuranceHero";
 import ComprehensiveInsuranceSolutions from "@/components/insurance/ComprehensiveInsuranceSolutions";
 import InsuranceCategories from "@/components/insurance/InsuranceCategories";
@@ -25,6 +25,7 @@ import {
 } from "@/data/insuranceData";
 
 const InsurancePage = () => {
+  const seo = getSeoMetadata("insurance");
   const [selectedInsuranceType, setSelectedInsuranceType] = useState("health");
   const selectedType = insuranceTypes.find(type => type.id === selectedInsuranceType) || insuranceTypes[0];
 
@@ -35,11 +36,7 @@ const InsurancePage = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <Head>
-        <title>Insurance Plans in India - Health, Life, Term & Vehicle Insurance | Money Bharat</title>
-        <meta name="description" content="Compare and buy insurance online - Health, Life, Term, Vehicle & Travel insurance from 15+ top insurers. Get instant quotes, best premium rates, and hassle-free claims. Protect your family with comprehensive insurance coverage." />
-        <meta name="keywords" content="insurance plans India, health insurance online, term insurance calculator, life insurance plans, vehicle insurance, best insurance companies, insurance comparison, insurance policy online, family insurance plans" />
-      </Head>
+      <SEOHead {...seo} />
       
       <StructuredData 
         page="insurance" 

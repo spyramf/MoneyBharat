@@ -1,17 +1,14 @@
-import Head from 'next/head';
 import Link from 'next/link';
 import { ArrowRight, FileText, Map } from "lucide-react";
+import SEOHead from '@/components/seo/SEOHead';
+import { getSeoMetadata } from '@/constants/seoMetadata';
 
 const Sitemap = () => {
+  const seo = getSeoMetadata('sitemap');
+
   return (
     <>
-      <Head>
-        <title>Sitemap - Money Bharat Finance</title>
-        <meta
-          name="description"
-          content="Sitemap for Money Bharat Finance - Browse all pages and resources available on our website."
-        />
-      </Head>
+      <SEOHead {...seo} />
 
       <div className="pt-24 pb-16 bg-gradient-to-b from-gray-50 to-white">
         <div className="container mx-auto px-4">

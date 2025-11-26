@@ -1,16 +1,12 @@
-import Head from 'next/head';
 import { ArrowRight, FileText, FileCheck } from "lucide-react";
+import SEOHead from "@/components/seo/SEOHead";
+import { getSeoMetadata } from "@/constants/seoMetadata";
 
 const TermsOfService = () => {
+  const seo = getSeoMetadata("termsOfService");
   return (
     <>
-      <Head>
-        <title>Terms of Service - Money Bharat Finance</title>
-        <meta
-          name="description"
-          content="Terms of Service for Money Bharat Finance - Please read these terms carefully before using our services."
-        />
-      </Head>
+      <SEOHead {...seo} />
 
       <div className="pt-24 pb-16 bg-gradient-to-b from-gray-50 to-white">
         <div className="container mx-auto px-4">
