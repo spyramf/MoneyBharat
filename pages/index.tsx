@@ -1,7 +1,6 @@
 import { BackgroundPaths } from '@/components/ui/background-paths';
 import StructuredData from '@/components/seo/StructuredData';
 import BreadcrumbSEO from '@/components/seo/BreadcrumbSEO';
-import FAQSchema from '@/components/seo/FAQSchema';
 import SEOHead from '@/components/seo/SEOHead';
 import { getSeoMetadata } from '@/constants/seoMetadata';
 import ServicesTabSection from '@/components/home/ServicesTabSection';
@@ -60,13 +59,12 @@ const Index = () => {
       <SEOHead {...seo} />
 
       <StructuredData page="home" faqData={homeFaqData} reviewData={reviewData} />
-      <FAQSchema faqs={homeFaqData} />
 
       <BreadcrumbSEO />
 
       <BackgroundPaths
         title="Best Mutual Funds, SIP & Insurance Plans"
-        subtitle="Expert guidance for wealth creation. Start SIP from ₹500, compare top mutual funds & insurance plans. AMFI registered with ₹5000Cr+ AUM."
+        subtitle="Expert guidance for wealth creation. Start SIP from Rs 1,500, compare top mutual funds & insurance plans. AMFI registered with Rs 15,000 Cr+ AUM."
         primaryButtonText="Start SIP Investment Now"
         primaryButtonLink="https://client.moneybharat.co/NewOnBoarding/SignUp"
       />

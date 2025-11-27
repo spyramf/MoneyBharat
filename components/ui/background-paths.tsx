@@ -58,80 +58,48 @@ export function BackgroundPaths({
     <div className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-gradient-to-br from-background via-background to-accent/5">
       <FloatingPaths position={1} />
       <FloatingPaths position={-1} />
-
       <div className="relative z-10 container mx-auto px-4 md:px-6 text-center pt-20">
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 2 }}>
-          {/* Trust Badge */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-8"
-          >
-            <span className="text-sm text-primary font-semibold tracking-wide">
-              ✨ Trusted by 50,000+ Investors Across India
-            </span>
-          </motion.div>
+        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-8 animate-fade-in">
+          <span className="text-sm text-primary font-semibold tracking-wide">
+            Trusted by 50,000+ Investors Across India
+          </span>
+        </div>
 
-          {/* Headline */}
-          <div className="space-y-2">
-            <motion.h1
-              initial={{ y: 80, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.8, type: "spring", stiffness: 120, damping: 20 }}
-              className="text-3xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-orange-400 via-orange-300 to-primary bg-clip-text text-transparent animate-fade-in-up animation-delay-200"
-            >
-              {line1}
-            </motion.h1>
+        <div className="space-y-2">
+          <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-orange-400 via-orange-300 to-primary bg-clip-text text-transparent animate-fade-in">
+            {line1}
+          </h1>
 
-            <motion.h1
-              initial={{ y: 80, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.8, type: "spring", stiffness: 120, damping: 20, delay: 0.3 }}
-              className="text-3xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-primary via-green-400 to-orange-300 bg-clip-text text-transparent animate-fade-in-up animation-delay-400"
-            >
-              {line2}
-            </motion.h1>
-          </div>
+          <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-primary via-green-400 to-orange-300 bg-clip-text text-transparent animate-fade-in [animation-delay:120ms]">
+            {line2}
+          </h1>
+        </div>
 
-          {/* Subtitle */}
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 1.2 }}
-            className="text-base md:text-lg text-muted-foreground mb-12 max-w-2xl mx-auto leading-relaxed"
-          >
-            {subtitle}
-          </motion.p>
+        <p className="text-base md:text-lg text-muted-foreground mb-12 max-w-2xl mx-auto leading-relaxed animate-fade-in [animation-delay:220ms]">
+          {subtitle}
+        </p>
 
-          {/* Buttons */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 1.5 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
-          >
-            <div className="inline-block group relative bg-gradient-to-b from-primary/20 to-primary/5 p-px rounded-2xl backdrop-blur-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
-              <Button
-                onClick={() => (window.location.href = primaryButtonLink)}
-                className="rounded-[1.15rem] px-8 py-6 text-lg font-semibold bg-primary hover:bg-primary/90 text-primary-foreground transition-all duration-300 group-hover:-translate-y-0.5 hover:shadow-lg"
-                size="lg"
-              >
-                <span className="opacity-100 transition-opacity">{primaryButtonText}</span>
-                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-              </Button>
-            </div>
-
+        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in [animation-delay:320ms]">
+          <div className="inline-block group relative bg-gradient-to-b from-primary/20 to-primary/5 p-px rounded-2xl backdrop-blur-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
             <Button
-              onClick={() => window.scrollTo({ top: window.innerHeight, behavior: "smooth" })}
-              variant="outline"
-              className="rounded-2xl px-8 py-6 text-lg font-semibold border-2 hover:bg-accent transition-all duration-300"
+              onClick={() => (window.location.href = primaryButtonLink)}
+              className="rounded-[1.15rem] px-8 py-6 text-lg font-semibold bg-primary hover:bg-primary/90 text-primary-foreground transition-all duration-300 group-hover:-translate-y-0.5 hover:shadow-lg"
               size="lg"
             >
-              Explore Services
+              <span className="opacity-100 transition-opacity">{primaryButtonText}</span>
+              <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
             </Button>
-          </motion.div>
-        </motion.div>
+          </div>
+
+          <Button
+            onClick={() => window.scrollTo({ top: window.innerHeight, behavior: "smooth" })}
+            variant="outline"
+            className="rounded-2xl px-8 py-6 text-lg font-semibold border-2 hover:bg-accent transition-all duration-300"
+            size="lg"
+          >
+            Explore Services
+          </Button>
+        </div>
       </div>
     </div>
   );

@@ -49,7 +49,7 @@ const getOrganizationSchema = () => ({
   alternateName: "Money Bharat",
   description:
     "AI-powered financial platform offering mutual funds, SIP investments, health & life insurance, and instant personal loans with expert advisory services.",
-  url: "https://moneybharatfinance.com",
+  url: "https://www.moneybharatfinance.com",
   logo: {
     "@type": "ImageObject",
     url: BRAND_LOGO_URL,
@@ -170,12 +170,29 @@ const getProductSchema = (product: any) => ({
   },
 });
 
-const getReviewSchema = (reviews: any[]) => ({
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  name: "Money Bharat Finance",
-  review:
-    reviews?.map((review) => ({
+const getReviewSchema = (reviews: any[]) => {
+  if (!reviews || reviews.length === 0) return null;
+
+  const parsedRatings = reviews
+    .map((review) => Number(review.rating || 5))
+    .filter((rating) => !Number.isNaN(rating));
+
+  const averageRating =
+    parsedRatings.reduce((sum, rating) => sum + rating, 0) /
+    (parsedRatings.length || 1);
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "Money Bharat Finance",
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: averageRating.toFixed(1),
+      reviewCount: parsedRatings.length,
+      bestRating: "5",
+      worstRating: "1",
+    },
+    review: reviews.map((review) => ({
       "@type": "Review",
       author: {
         "@type": "Person",
@@ -187,7 +204,8 @@ const getReviewSchema = (reviews: any[]) => ({
         ratingValue: review.rating || "5",
         bestRating: "5",
       },
-    })) || [],
-});
+    })),
+  };
+};
 
 export default SchemaMarkup;
